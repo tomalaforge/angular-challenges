@@ -1,25 +1,22 @@
 {
-  "name": "projection",
+  "name": "ngrx-1",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "apps/projection/src",
-  "prefix": "angular-challenges",
+  "sourceRoot": "apps/ngrx-1/src",
+  "prefix": "app",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/projection",
-        "index": "apps/projection/src/index.html",
-        "main": "apps/projection/src/main.ts",
-        "polyfills": "apps/projection/src/polyfills.ts",
-        "tsConfig": "apps/projection/tsconfig.app.json",
+        "outputPath": "dist/apps/ngrx-1",
+        "index": "apps/ngrx-1/src/index.html",
+        "main": "apps/ngrx-1/src/main.ts",
+        "polyfills": "apps/ngrx-1/src/polyfills.ts",
+        "tsConfig": "apps/ngrx-1/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": [
-          "apps/projection/src/favicon.ico",
-          "apps/projection/src/assets"
-        ],
-        "styles": ["apps/projection/src/styles.scss"],
+        "assets": ["apps/ngrx-1/src/favicon.ico", "apps/ngrx-1/src/assets"],
+        "styles": ["apps/ngrx-1/src/styles.scss"],
         "scripts": [],
         "allowedCommonJsDependencies": ["seedrandom"]
       },
@@ -39,8 +36,8 @@
           ],
           "fileReplacements": [
             {
-              "replace": "apps/projection/src/environments/environment.ts",
-              "with": "apps/projection/src/environments/environment.prod.ts"
+              "replace": "apps/ngrx-1/src/environments/environment.ts",
+              "with": "apps/ngrx-1/src/environments/environment.prod.ts"
             }
           ],
           "outputHashing": "all"
@@ -60,10 +57,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "projection:build:production"
+          "browserTarget": "ngrx-1:build:production"
         },
         "development": {
-          "browserTarget": "projection:build:development"
+          "browserTarget": "ngrx-1:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -71,23 +68,20 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "projection:build"
+        "browserTarget": "ngrx-1:build"
       }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": [
-          "apps/projection/**/*.ts",
-          "apps/projection/**/*.html"
-        ]
+        "lintFilePatterns": ["apps/ngrx-1/**/*.ts", "apps/ngrx-1/**/*.html"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/projection/jest.config.ts",
+        "jestConfig": "apps/ngrx-1/jest.config.ts",
         "passWithNoTests": true
       }
     }
