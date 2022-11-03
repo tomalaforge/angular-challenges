@@ -1,10 +1,4 @@
-# Angular Exercice 2 : NgRx
-
-Second exercice of a series of Angular exercices. The goal is to improve our angular skills all together.
-
----
-
-For this second exercice, we will deep dive inside **NgRx**.
+<h1>NgRx 1</h1>
 
 For this exercice, you will have a dashboard of activities displaying the name, the main teacher and a list of subtitutes.
 
@@ -33,9 +27,11 @@ In NgRx, **selectors** is a very powerful tool often **misused**. You should use
 1. Fork the project
 2. clone it
 3. npm install
-4. ng serve
-5. ...Work On it
+4. **nx serve ngrx-1**
+5. _...work On it_
 6. Commit your work
 7. Submit a PR that I will review and other dev can review.
 
-_You can ask any question on Twitter or on Github_
+<a href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A2+label%3Aanswer" target="_blank"><img src="https://img.shields.io/badge/-Solutions-green" alt="Projection"/></a>
+
+_You can ask any question on_ <a href="https://twitter.com/laforge_toma" target="_blank"><img src="./../../logo/twitter.svg" height=20px alt="Projection"/></a>
