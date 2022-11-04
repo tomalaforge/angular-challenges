@@ -8,7 +8,7 @@
 
 ## Intro
 
-This goal of this project is to help you get better at Angular and NgRx but resolving challenges you might face in your day life.
+This goal of this project is to help you get better at Angular and NgRx buy resolving challenges you might face in your day life.
 
 ## Challenges
 
