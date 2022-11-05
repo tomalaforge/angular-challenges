@@ -21,6 +21,7 @@
     "@angular/router": "~14.2.0",
     "@ngneat/falso": "^6.1.0",
     "@ngrx/effects": "^14.3.2",
+    "@ngrx/router-store": "^14.3.2",
     "@ngrx/store": "^14.3.2",
     "@nrwl/angular": "15.0.7",
     "rxjs": "~7.5.0",
