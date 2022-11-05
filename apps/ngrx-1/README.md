@@ -30,8 +30,8 @@ In NgRx, **selectors** is a very powerful tool often **misused**. You should use
 4. **nx serve ngrx-1**
 5. _...work On it_
 6. Commit your work
-7. Submit a PR that I will review and other dev can review.
+7. Submit a PR with a title beginning with **Answer:2** that I will review and other dev can review.
 
-<a href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A2+label%3Aanswer" target="_blank"><img src="https://img.shields.io/badge/-Solutions-green" alt="Projection"/></a>
+<a href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A2+label%3Aanswer" target="_blank"><img src="https://img.shields.io/badge/-Solutions-green" alt="NgRx Effect vs Selector"/></a>
 
-_You can ask any question on_ <a href="https://twitter.com/laforge_toma" target="_blank"><img src="./../../logo/twitter.svg" height=20px alt="Projection"/></a>
+_You can ask any question on_ <a href="https://twitter.com/laforge_toma" target="_blank"><img src="./../../logo/twitter.svg" height=20px alt="twitter"/></a>

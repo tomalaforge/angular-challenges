@@ -17,6 +17,7 @@ This goal of this project is to help you get better at Angular and NgRx buy reso
 <img src="https://img.shields.io/badge/Angular--red?logo=angular" alt="Angular"/>
 
 <a href="./apps/projection/README.md" target="_blank"><img src="https://img.shields.io/badge/1-Projection-red" alt="Projection"/></a>
+<a href="./apps/ng-for-enhance/README.md" target="_blank"><img src="https://img.shields.io/badge/2-Directive enhance-red" alt="Directive enhance"/></a>
 
 <img src="https://img.shields.io/badge/NgRx--blueviolet" alt="NgRx"/>
 
