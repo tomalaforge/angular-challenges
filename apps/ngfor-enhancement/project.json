@@ -1,25 +1,25 @@
 {
-  "name": "ng-for-enhance",
+  "name": "ngfor-enhancement",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "apps/ng-for-enhance/src",
+  "sourceRoot": "apps/ngfor-enhancement/src",
   "prefix": "app",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/ng-for-enhance",
-        "index": "apps/ng-for-enhance/src/index.html",
-        "main": "apps/ng-for-enhance/src/main.ts",
-        "polyfills": "apps/ng-for-enhance/src/polyfills.ts",
-        "tsConfig": "apps/ng-for-enhance/tsconfig.app.json",
+        "outputPath": "dist/apps/ngfor-enhancement",
+        "index": "apps/ngfor-enhancement/src/index.html",
+        "main": "apps/ngfor-enhancement/src/main.ts",
+        "polyfills": "apps/ngfor-enhancement/src/polyfills.ts",
+        "tsConfig": "apps/ngfor-enhancement/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
-          "apps/ng-for-enhance/src/favicon.ico",
-          "apps/ng-for-enhance/src/assets"
+          "apps/ngfor-enhancement/src/favicon.ico",
+          "apps/ngfor-enhancement/src/assets"
         ],
-        "styles": ["apps/ng-for-enhance/src/styles.scss"],
+        "styles": ["apps/ngfor-enhancement/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
@@ -38,8 +38,8 @@
           ],
           "fileReplacements": [
             {
-              "replace": "apps/ng-for-enhance/src/environments/environment.ts",
-              "with": "apps/ng-for-enhance/src/environments/environment.prod.ts"
+              "replace": "apps/ngfor-enhancement/src/environments/environment.ts",
+              "with": "apps/ngfor-enhancement/src/environments/environment.prod.ts"
             }
           ],
           "outputHashing": "all"
@@ -59,10 +59,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "ng-for-enhance:build:production"
+          "browserTarget": "ngfor-enhancement:build:production"
         },
         "development": {
-          "browserTarget": "ng-for-enhance:build:development"
+          "browserTarget": "ngfor-enhancement:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -70,15 +70,15 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "ng-for-enhance:build"
+        "browserTarget": "ngfor-enhancement:build"
       }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": [
-          "apps/ng-for-enhance/**/*.ts",
-          "apps/ng-for-enhance/**/*.html"
+          "apps/ngfor-enhancement/**/*.ts",
+          "apps/ngfor-enhancement/**/*.html"
         ]
       }
     }

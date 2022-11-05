@@ -1,4 +1,4 @@
-<h1>Directive enhance</h1>
+<h1>Directive enhancement</h1>
 
 ## Information
 
@@ -37,11 +37,11 @@ The goal is to **improve the ngFor directive**
 1. Fork the project
 2. clone it
 3. npm install
-4. **nx serve ng-for-enhance**
+4. **nx serve ngfor-enhancement**
 5. _...work On it_
 6. Commit your work
 7. Submit a PR with a title beginning with **Answer:3** that I will review and other dev can review.
 
-<a href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A3+label%3Aanswer" target="_blank"><img src="https://img.shields.io/badge/-Solutions-green" alt="Directive enhance"/></a>
+<a href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A3+label%3Aanswer" target="_blank"><img src="https://img.shields.io/badge/-Solutions-green" alt="Directive enhancement"/></a>
 
 _You can ask any question on_ <a href="https://twitter.com/laforge_toma" target="_blank"><img src="./../../logo/twitter.svg" height=20px alt="Twitter"/></a>
