@@ -1,5 +1,5 @@
 <p align='center'>
-  <img src='./logo/angular.svg' height="150px"/>
+  <img src='./logo/angular-challenge.png' height="150px"/>
 </p>
 
 <p align='center'>Collection of Angular challenges</p>
