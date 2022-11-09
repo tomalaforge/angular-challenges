@@ -16,12 +16,12 @@ This goal of this project is to help you get better at Angular and NgRx buy reso
 
 <img src="https://img.shields.io/badge/Angular--red?logo=angular" alt="Angular"/>
 
-<a href="./apps/projection/README.md" target="_blank"><img src="https://img.shields.io/badge/1-Projection-red" alt="Projection"/></a>
-<a href="./apps/ngfor-enhancement/README.md" target="_blank"><img src="https://img.shields.io/badge/2-Directive enhancement-red" alt="Directive enhancemen"/></a>
+<a href="./apps/projection/README.md"><img src="https://img.shields.io/badge/1-Projection-red" alt="Projection"/></a>
+<a href="./apps/ngfor-enhancement/README.md"><img src="https://img.shields.io/badge/2-Directive enhancement-red" alt="Directive enhancemen"/></a>
 
 <img src="https://img.shields.io/badge/NgRx--blueviolet" alt="NgRx"/>
 
-<a href="./apps/ngrx-1/README.md" target="_blank"><img src="https://img.shields.io/badge/1-effect vs selector-blueviolet" alt="Effect vs Selector"/></a>
+<a href="./apps/ngrx-1/README.md"><img src="https://img.shields.io/badge/1-effect vs selector-blueviolet" alt="Effect vs Selector"/></a>
 
 ## License
 
