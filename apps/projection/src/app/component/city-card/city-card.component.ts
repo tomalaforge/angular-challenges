@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { map, Observable } from 'rxjs';
 import { CityStore } from '../../data-access/city.store';
 import {
   FakeHttpService,
@@ -11,31 +12,34 @@ import { CardComponent } from '../../ui/card/card.component';
 @Component({
   selector: 'app-city-card',
   template: `<app-card
-    [items]="cityItems"
+    [items]="cityItems$ | async"
     customClass="bg-light-blue"
-    (_addNewItem)="addNewCity()"
-    (_deleteItem)="deleteCity($event)">
-    <img src="assets/img/city.png" width="200px" />
+    [listItemTemplate]="listItemTemplate"
+    (addNewItem)="addNewCity()"
+    (deleteItem)="deleteCity($event)">
+    <ng-container image>
+      <img src="assets/img/city.png" width="200px" />
+    </ng-container>
+    <ng-template #listItemTemplate let-item>{{ item?.name }} (C)</ng-template>
   </app-card>`,
   standalone: true,
-  imports: [CardComponent],
+  imports: [CardComponent, AsyncPipe],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CityCardComponent implements OnInit {
-  cityItems: Item[] = [];
+  cityItems$!: Observable<Item[]>;
   constructor(private http: FakeHttpService, private store: CityStore) {}
 
   ngOnInit(): void {
     this.http.fetchCities$.subscribe((c) => this.store.addAll(c));
 
-    this.store.cities$
-      .pipe(
-        map((cities) =>
-          cities.map(
-            (c) => ({ name: `${c.name}, ${c.country}`, id: c.id } as Item)
-          )
+    this.cityItems$ = this.store.cities$.pipe(
+      map((cities) =>
+        cities.map(
+          (c) => ({ name: `${c.name}, ${c.country}`, id: c.id } as Item)
         )
       )
-      .subscribe((items) => (this.cityItems = items));
+    );
   }
 
   addNewCity(): void {

@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+} from '@angular/core';
+import { map, Observable } from 'rxjs';
 import {
   FakeHttpService,
   randTeacher,
@@ -11,32 +16,35 @@ import { CardComponent } from '../../ui/card/card.component';
 @Component({
   selector: 'app-teacher-card',
   template: `<app-card
-    [items]="teacherItems"
+    [items]="teacherItems$ | async"
     customClass="bg-light-red"
-    (_addNewItem)="addNewTeacher()"
-    (_deleteItem)="deleteTeacher($event)">
-    <img src="assets/img/teacher.png" width="200px" />
+    [listItemTemplate]="listItemTemplate"
+    (addNewItem)="addNewTeacher()"
+    (deleteItem)="deleteTeacher($event)">
+    <ng-container image>
+      <img src="assets/img/teacher.png" width="200px" />
+    </ng-container>
+    <ng-template #listItemTemplate let-item>{{ item?.name }} (T)</ng-template>
   </app-card>`,
   standalone: true,
-  imports: [CardComponent],
+  imports: [CardComponent, AsyncPipe],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TeacherCardComponent implements OnInit {
-  teacherItems: Item[] = [];
+  teacherItems$!: Observable<Item[]>;
 
   constructor(private http: FakeHttpService, private store: TeacherStore) {}
 
   ngOnInit(): void {
     this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
 
-    this.store.teachers$
-      .pipe(
-        map((teachers) =>
-          teachers.map(
-            (t) => ({ name: `${t.lastname} ${t.firstname}`, id: t.id } as Item)
-          )
+    this.teacherItems$ = this.store.teachers$.pipe(
+      map((teachers) =>
+        teachers.map(
+          (t) => ({ name: `${t.lastname} ${t.firstname}`, id: t.id } as Item)
         )
       )
-      .subscribe((items) => (this.teacherItems = items));
+    );
   }
 
   addNewTeacher(): void {

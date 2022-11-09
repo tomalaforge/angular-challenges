@@ -1,5 +1,11 @@
-import { NgFor } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { NgFor, NgTemplateOutlet } from '@angular/common';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  TemplateRef,
+} from '@angular/core';
 import { Item } from '../../model/item.model';
 import { ListItemComponent } from '../list-item/list-item.component';
 
@@ -8,11 +14,12 @@ import { ListItemComponent } from '../list-item/list-item.component';
   templateUrl: './card.component.html',
   standalone: true,
   styleUrls: ['./card.component.scss'],
-  imports: [NgFor, ListItemComponent],
+  imports: [NgFor, ListItemComponent, NgTemplateOutlet],
 })
 export class CardComponent {
-  @Input() items: Item[] = [];
+  @Input() items: Item[] | null = [];
   @Input() customClass = '';
-  @Output() _addNewItem = new EventEmitter();
-  @Output() _deleteItem = new EventEmitter<number>();
+  @Input() listItemTemplate!: TemplateRef<any>;
+  @Output() addNewItem = new EventEmitter();
+  @Output() deleteItem = new EventEmitter<number>();
 }

@@ -1,18 +1,21 @@
 <div
   class="border-2 border-black rounded-md p-4 w-fit flex flex-col gap-3"
   [class]="customClass">
-  <ng-content></ng-content>
+  <ng-content select="[image]"></ng-content>
   <section>
     <app-list-item
       *ngFor="let item of items"
       [name]="item.name"
       [id]="item.id"
-      (_deleteItem)="_deleteItem.emit(item.id)">
+      (deleteItem)="deleteItem.emit(item.id)">
+      <ng-container
+        *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"
+        listItem></ng-container>
     </app-list-item>
   </section>
   <button
     class="border border-blue-500 bg-blue-300 p-2 rounded-sm"
-    (click)="_addNewItem.emit()">
+    (click)="addNewItem.emit()">
     Add
   </button>
 </div>
