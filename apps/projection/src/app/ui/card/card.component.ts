@@ -1,6 +1,7 @@
 import { NgFor, NgTemplateOutlet } from '@angular/common';
 import {
   Component,
+  ContentChild,
   EventEmitter,
   Input,
   Output,
@@ -19,7 +20,9 @@ import { ListItemComponent } from '../list-item/list-item.component';
 export class CardComponent {
   @Input() items: Item[] | null = [];
   @Input() customClass = '';
-  @Input() listItemTemplate!: TemplateRef<any>;
+
   @Output() addNewItem = new EventEmitter();
-  @Output() deleteItem = new EventEmitter<number>();
+
+  @ContentChild('listItemRef', { read: TemplateRef })
+  listItemTemplate!: TemplateRef<ListItemComponent>;
 }

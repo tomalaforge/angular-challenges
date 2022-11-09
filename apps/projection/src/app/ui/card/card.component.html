@@ -3,15 +3,11 @@
   [class]="customClass">
   <ng-content select="[image]"></ng-content>
   <section>
-    <app-list-item
-      *ngFor="let item of items"
-      [name]="item.name"
-      [id]="item.id"
-      (deleteItem)="deleteItem.emit(item.id)">
-      <ng-container
-        *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"
-        listItem></ng-container>
-    </app-list-item>
+    <ng-container *ngFor="let item of items">
+      <ng-template
+        [ngTemplateOutlet]="listItemTemplate"
+        [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
+    </ng-container>
   </section>
   <button
     class="border border-blue-500 bg-blue-300 p-2 rounded-sm"
