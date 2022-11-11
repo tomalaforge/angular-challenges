@@ -28,7 +28,7 @@ Currently we have the following piece of code.
 
 As we can see, student is of type "any". We want to infer the correct type.
 
-But in this part, we can pass to ListComponent, a list of any types. And we still want the correct type to be infered.
+But in this part, we can pass to ListComponent, a list of **any object**. And we still want the correct type to be infered.
 
 ## Submitting your work
 
