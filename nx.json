@@ -42,10 +42,12 @@
     "@nrwl/angular:application": {
       "style": "scss",
       "linter": "eslint",
+      "unitTestRunner": "none",
+      "e2eTestRunner": "none",
       "inlineStyle": "true",
       "inlineTemplate": "true",
       "prefix": "app",
-      "skipTest": "true",
+      "skipTests": "true",
       "standalone": "true"
     },
     "@nrwl/angular:library": {
@@ -57,7 +59,7 @@
       "changeDetection": "OnPush",
       "inlineStyle": "true",
       "inlineTemplate": "true",
-      "skipTest": "true",
+      "skipTests": "true",
       "standalone": "true"
     }
   },
