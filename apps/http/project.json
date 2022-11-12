@@ -1,8 +1,8 @@
 {
-  "name": "ngfor-enhancement",
+  "name": "http",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "apps/ngfor-enhancement/src",
+  "sourceRoot": "apps/http/src",
   "prefix": "app",
   "targets": {
     "build": {
@@ -11,20 +11,24 @@
         "{options.outputPath}"
       ],
       "options": {
-        "outputPath": "dist/apps/ngfor-enhancement",
-        "index": "apps/ngfor-enhancement/src/index.html",
-        "main": "apps/ngfor-enhancement/src/main.ts",
-        "polyfills": "apps/ngfor-enhancement/src/polyfills.ts",
-        "tsConfig": "apps/ngfor-enhancement/tsconfig.app.json",
+        "outputPath": "dist/apps/http",
+        "index": "apps/http/src/index.html",
+        "main": "apps/http/src/main.ts",
+        "polyfills": "apps/http/src/polyfills.ts",
+        "tsConfig": "apps/http/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
-          "apps/ngfor-enhancement/src/favicon.ico",
-          "apps/ngfor-enhancement/src/assets"
+          "apps/http/src/favicon.ico",
+          "apps/http/src/assets"
         ],
         "styles": [
-          "apps/ngfor-enhancement/src/styles.scss"
+          "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+          "apps/http/src/styles.scss"
         ],
-        "scripts": []
+        "scripts": [],
+        "allowedCommonJsDependencies": [
+          "seedrandom"
+        ]
       },
       "configurations": {
         "production": {
@@ -42,8 +46,8 @@
           ],
           "fileReplacements": [
             {
-              "replace": "apps/ngfor-enhancement/src/environments/environment.ts",
-              "with": "apps/ngfor-enhancement/src/environments/environment.prod.ts"
+              "replace": "apps/http/src/environments/environment.ts",
+              "with": "apps/http/src/environments/environment.prod.ts"
             }
           ],
           "outputHashing": "all"
@@ -63,10 +67,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "ngfor-enhancement:build:production"
+          "browserTarget": "http:build:production"
         },
         "development": {
-          "browserTarget": "ngfor-enhancement:build:development"
+          "browserTarget": "http:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -74,15 +78,15 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "ngfor-enhancement:build"
+        "browserTarget": "http:build"
       }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": [
-          "apps/ngfor-enhancement/**/*.ts",
-          "apps/ngfor-enhancement/**/*.html"
+          "apps/http/**/*.ts",
+          "apps/http/**/*.html"
         ]
       }
     }

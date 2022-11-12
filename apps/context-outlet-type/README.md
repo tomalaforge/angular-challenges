@@ -1,5 +1,7 @@
 <h1>NgTemplateOutlet Strongly Typed</h1>
 
+> Author: Thomas Laforge
+
 ## Information
 
 Angular offer the static function **ngTemplateContextGuard** to strongly type structural directive.

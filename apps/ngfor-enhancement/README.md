@@ -1,5 +1,7 @@
 <h1>Directive enhancement</h1>
 
+> Author: Thomas Laforge
+
 ## Information
 
 Directive is a very powerful tool only offered by the Angular framework. You can apply the DRY principal by having shared logic inside a directive and applying it to any component you want.

@@ -1,5 +1,7 @@
 <h1>NgRx Effect vs Selector</h1>
 
+> Author: Thomas Laforge
+
 For this exercice, you will have a dashboard of activities displaying the name, the main teacher and a list of subtitutes.
 
 ## Information

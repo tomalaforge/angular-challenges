@@ -1,5 +1,7 @@
 <h1>Projection</h1>
 
+> Author: Thomas Laforge
+
 ### Statement
 
 Refactor this working exemple of a dasboard containing multiple cards (teachers, students, ...)
