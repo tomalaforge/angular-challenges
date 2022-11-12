@@ -12,7 +12,7 @@ Please follow those step in order to succesfully make your contribution to this 
 2. Install **Nx Console**, this will help you work with this repository
 3. Run `npm ci` to install all dependencies
 4. Generate a new app with Nx Console > Right Click on apps folder > `Nx Generate Application`
-5. Copy/Paste **CONTRIBUTING.README.md** and fill it up.
+5. Copy/Paste **example.README.md** and fill it up.
 6. Link the main **README** with your new challenge
 
 ## Pull Request Process
