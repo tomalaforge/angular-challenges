@@ -14,6 +14,8 @@ Please follow those step in order to succesfully make your contribution to this 
 4. Generate a new app with Nx Console > Right Click on apps folder > `Nx Generate Application`
 5. Copy/Paste **example.README.md** and fill it up.
 6. Link the main **README** with your new challenge
+7. Few days later, create a PR with your answer.
+8. Optional: write a blog post explaining your Challenge and the solution you came up with.
 
 ## Pull Request Process
 
