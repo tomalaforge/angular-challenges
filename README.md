@@ -13,6 +13,7 @@ This goal of this project is to help you get better at Angular and NgRx buy reso
 ## Challenges
 
 > Click the following badges to join your next challenge.
+>
 > <img src="https://img.shields.io/badge/Easy--green" alt="Easy challenge"/>
 > <img src="https://img.shields.io/badge/Intermediate--orange" alt="Easy challenge"/>
 > <img src="https://img.shields.io/badge/Advanced--red" alt="Easy challenge"/>
