@@ -17,7 +17,7 @@ Currently we have a working exemple but filled with lots of bad practices.
 What you will need to do:
 
 - Avoid **any** as a type. Using Interface to leverage Typescript type system prevent errors
-- Use a **separate service** for all your crud calls and use a **BehaviourSubject** for your todoList
+- Use a **separate service** for all your http calls and use a **BehaviourSubject** for your todoList
 - Use **AsyncPipe** to suscribe to your todo list. _(Let you handle subscription, unsuscription and refresh of the page when data has changed)_, avoir manual subscribe when it's not needed
 - Don't **mutate** data
 
@@ -36,7 +36,7 @@ this.todos = [
 
 ### Step 2: Improve
 
-- Add a **Delete** button: _<a href="cruds://jsonplaceholder.typicode.com/" target="_blank">Doc of fake API</a>_
+- Add a **Delete** button: _<a href="https://jsonplaceholder.typicode.com/" target="_blank">Doc of fake API</a>_
 - Handle **errors** correctly. _(Globaly)_
 - Add a Global **loading** indicator. _You can use MatProgressSpinnerModule_
 
@@ -59,6 +59,6 @@ this.todos = [
 6. Commit your work
 7. Submit a PR with a title beginning with **Answer:3** that I will review and other dev can review.
 
-<a href="cruds://github.com/tomalaforge/angular-challenges/pulls?q=label%3A5+label%3Aanswer" target="_blank"><img src="cruds://img.shields.io/badge/-Solutions-green" alt="Http"/></a>
+<a href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A5+label%3Aanswer" target="_blank"><img src="https://img.shields.io/badge/-Solutions-green" alt="Http"/></a>
 
-_You can ask any question on_ <a href="cruds://twitter.com/laforge_toma" target="_blank"><img src="./../../logo/twitter.svg" height=20px alt="Twitter"/></a>
+_You can ask any question on_ <a href="https://twitter.com/laforge_toma" target="_blank"><img src="./../../logo/twitter.svg" height=20px alt="Twitter"/></a>
