@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, OnInit} from '@angular/core';
 import {
   CardComponent,
   CardContentComponent,
@@ -13,6 +13,7 @@ import { ListComponent, ListItemComponent } from '../../ui/list';
   selector: 'app-city-card',
   templateUrl: './city-card.component.html',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styles: [
     `
       img {

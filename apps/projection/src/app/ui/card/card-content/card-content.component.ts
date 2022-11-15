@@ -1,9 +1,10 @@
-import { Component, ContentChild, TemplateRef, ViewChild } from '@angular/core';
+import {ChangeDetectionStrategy, Component, ContentChild, TemplateRef, ViewChild} from '@angular/core';
 import { CardContentDirective } from './card-content.directive';
 
 @Component({
   selector: 'app-card-content',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <ng-template>
       <ng-content></ng-content>

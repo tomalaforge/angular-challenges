@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, OnInit} from '@angular/core';
 import { CardComponent, CardContentComponent } from '../../ui/card';
 import { AsyncPipe, NgForOf } from '@angular/common';
 import { Student } from '../../model';
@@ -9,6 +9,7 @@ import { ListComponent, ListItemComponent } from '../../ui/list';
   selector: 'app-student-card',
   templateUrl: './student-card.component.html',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     CardComponent,
     CardContentComponent,

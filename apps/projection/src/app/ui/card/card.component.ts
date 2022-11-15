@@ -1,10 +1,11 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   ContentChild,
   EventEmitter,
   HostBinding,
   Input,
-  Output,
+  Output
 } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { CardContentComponent } from './card-content';
@@ -13,6 +14,7 @@ import { CardContentComponent } from './card-content';
   selector: 'app-card',
   templateUrl: './card.component.html',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styles: [
     `
       :host {
