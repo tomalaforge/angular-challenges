@@ -5,12 +5,24 @@ import { TeacherCardComponent } from './component/teacher-card/teacher-card.comp
 
 @Component({
   selector: 'app-root',
+  styles: [
+    `
+      :host {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        height: 100vh;
+        max-width: 900px;
+        margin: 0 auto;
+        justify-content: space-evenly;
+        padding: 1rem;
+      }
+    `,
+  ],
   template: `
-    <div class="grid grid-cols-3 gap-3">
-      <app-teacher-card></app-teacher-card>
-      <app-student-card></app-student-card>
-      <app-city-card></app-city-card>
-    </div>
+    <app-teacher-card></app-teacher-card>
+    <app-student-card></app-student-card>
+    <app-city-card></app-city-card>
   `,
   standalone: true,
   imports: [TeacherCardComponent, StudentCardComponent, CityCardComponent],

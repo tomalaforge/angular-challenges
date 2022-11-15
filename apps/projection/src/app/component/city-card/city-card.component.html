@@ -1,0 +1,20 @@
+<app-card
+  image="city.png"
+  [backgroundColor]="lightYellow"
+  (addClick)="add()"
+>
+  <app-card-content>
+    <ng-template
+      appCardContent
+    >
+      <app-list>
+        <app-list-item
+          *ngFor="let city of cities$ | async; trackBy: trackBy"
+          (delete)="delete(city.id)"
+        >
+          {{city.name}} ({{city.country}})
+        </app-list-item>
+      </app-list>
+    </ng-template>
+  </app-card-content>
+</app-card>

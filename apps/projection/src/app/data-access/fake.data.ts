@@ -1,4 +1,3 @@
-import { Injectable } from '@angular/core';
 import {
   incrementalNumber,
   rand,
@@ -9,10 +8,7 @@ import {
   randNumber,
   randWord,
 } from '@ngneat/falso';
-import { map, timer } from 'rxjs';
-import { City } from '../model/city.model';
-import { Student } from '../model/student.model';
-import { subject, Teacher } from '../model/teacher.model';
+import { City, Student, subject, Teacher } from '../model';
 
 const factoryTeacher = incrementalNumber();
 
@@ -23,7 +19,7 @@ export const randTeacher = () => ({
   subject: rand(subject),
 });
 
-const teachers: Teacher[] = [
+export const teachers: Teacher[] = [
   randTeacher(),
   randTeacher(),
   randTeacher(),
@@ -36,11 +32,11 @@ export const randStudent = (): Student => ({
   id: factoryStudent(),
   firstname: randFirstName(),
   lastname: randLastName(),
-  mainTeacher: teachers[randNumber({ max: teachers.length })],
+  mainTeacher: teachers[randNumber({ max: teachers.length - 1 })],
   school: randWord(),
 });
 
-const students: Student[] = [
+export const students: Student[] = [
   randStudent(),
   randStudent(),
   randStudent(),
@@ -56,13 +52,4 @@ export const randomCity = (): City => ({
   country: randCountry(),
 });
 
-const cities = [randomCity(), randomCity(), randomCity()];
-
-@Injectable({
-  providedIn: 'root',
-})
-export class FakeHttpService {
-  fetchTeachers$ = timer(500).pipe(map(() => teachers));
-  fetchStudents$ = timer(500).pipe(map(() => students));
-  fetchCities$ = timer(500).pipe(map(() => cities));
-}
+export const cities = [randomCity(), randomCity(), randomCity()];

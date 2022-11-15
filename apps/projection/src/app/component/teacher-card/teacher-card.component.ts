@@ -1,36 +1,43 @@
-import { Component, OnInit } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
-import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
-import { Teacher } from '../../model/teacher.model';
-import { CardComponent } from '../../ui/card/card.component';
+import { Component, inject, OnInit } from '@angular/core';
+import { CardComponent, CardContentComponent } from '../../ui/card';
+import { AsyncPipe, NgForOf } from '@angular/common';
+import { Teacher } from '../../model';
+import { TeacherService, TeacherStore } from '../../data-access';
+import { ListComponent, ListItemComponent } from '../../ui/list';
 
 @Component({
   selector: 'app-teacher-card',
-  template: `<app-card
-    [list]="teachers"
-    [type]="cardType"
-    customClass="bg-light-red"
-  ></app-card>`,
-  styles: [
-    `
-      ::ng-deep .bg-light-red {
-        background-color: rgba(250, 0, 0, 0.1);
-      }
-    `,
-  ],
+  templateUrl: './teacher-card.component.html',
   standalone: true,
-  imports: [CardComponent],
+  imports: [
+    CardComponent,
+    CardContentComponent,
+    ListComponent,
+    ListItemComponent,
+    NgForOf,
+    AsyncPipe,
+  ],
 })
 export class TeacherCardComponent implements OnInit {
-  teachers: Teacher[] = [];
-  cardType = CardType.TEACHER;
+  private readonly teacherStore = inject(TeacherStore);
+  private readonly teacherService = inject(TeacherService);
 
-  constructor(private http: FakeHttpService, private store: TeacherStore) {}
+  readonly teachers$ = this.teacherStore.teachers$;
+  readonly lightRed = 'rgba(250, 0, 0, 0.1)';
 
-  ngOnInit(): void {
-    this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
+  ngOnInit() {
+    this.teacherService.loadData().subscribe();
+  }
 
-    this.store.teachers$.subscribe((t) => (this.teachers = t));
+  add() {
+    this.teacherService.addTeacher();
+  }
+
+  delete(id: number) {
+    this.teacherService.deleteTeacher(id);
+  }
+
+  trackBy(index: number, teacher: Teacher): number {
+    return teacher.id;
   }
 }

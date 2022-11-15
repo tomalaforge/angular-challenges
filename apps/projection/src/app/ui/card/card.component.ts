@@ -1,34 +1,53 @@
-import { NgFor, NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { randStudent, randTeacher } from '../../data-access/fake-http.service';
-import { StudentStore } from '../../data-access/student.store';
-import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
-import { ListItemComponent } from '../list-item/list-item.component';
+import {
+  Component,
+  ContentChild,
+  EventEmitter,
+  HostBinding,
+  Input,
+  Output,
+} from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
+import { CardContentComponent } from './card-content';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
   standalone: true,
-  imports: [NgIf, NgFor, ListItemComponent],
+  styles: [
+    `
+      :host {
+        width: 240px;
+        height: 550px;
+        display: flex;
+      }
+      img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1 / 1;
+        background: #fff;
+      }
+      .content {
+        flex: 1 1 0;
+        overflow: auto;
+      }
+    `,
+  ],
+  host: {
+    class: 'border-2 border-black rounded-md p-4 w-fit flex flex-col gap-3',
+  },
+  imports: [NgTemplateOutlet],
 })
 export class CardComponent {
-  @Input() list: any[] | null = null;
-  @Input() type!: CardType;
-  @Input() customClass = '';
+  @ContentChild(CardContentComponent)
+  cardContent!: CardContentComponent;
 
-  CardType = CardType;
+  @HostBinding('style.backgroundColor')
+  @Input()
+  backgroundColor!: string;
 
-  constructor(
-    private teacherStore: TeacherStore,
-    private studentStore: StudentStore
-  ) {}
+  @Input()
+  image!: string;
 
-  addNewItem() {
-    if (this.type === CardType.TEACHER) {
-      this.teacherStore.addOne(randTeacher());
-    } else if (this.type === CardType.STUDENT) {
-      this.studentStore.addOne(randStudent());
-    }
-  }
+  @Output()
+  addClick = new EventEmitter<void>();
 }
