@@ -35,5 +35,7 @@ In NgRx, **selectors** is a very powerful tool often **misused**. You should use
 7. Submit a PR with a title beginning with **Answer:2** that I will review and other dev can review.
 
 <a href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A2+label%3Aanswer" target="_blank"><img src="https://img.shields.io/badge/-Solutions-green" alt="NgRx Effect vs Selector"/></a>
+<a href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A2+label%3A"answer+author"'><img src="https://img.shields.io/badge/-Author solution-important" alt="NgRx Effect vs Selector solution author"/></a>
+<a href="https://medium.com/@thomas.laforge/ngrx-effect-vs-reducer-vs-selector-58337ab59043" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/-Blog post explanation-blue" alt="NgRx Effect vs Selector blog article"/></a>
 
 _You can ask any question on_ <a href="https://twitter.com/laforge_toma" target="_blank"><img src="./../../logo/twitter.svg" height=20px alt="twitter"/></a>
