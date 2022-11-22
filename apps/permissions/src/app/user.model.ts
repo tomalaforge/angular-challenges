@@ -41,3 +41,9 @@ export const client: User = {
   isAdmin: false,
   roles: ['CLIENT'],
 };
+
+export const everyone: User = {
+  name: 'client',
+  isAdmin: false,
+  roles: [],
+};

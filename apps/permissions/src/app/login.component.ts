@@ -5,6 +5,7 @@ import { InformationComponent } from './information.component';
 import {
   admin,
   client,
+  everyone,
   manager,
   reader,
   readerAndWriter,
@@ -25,6 +26,7 @@ import { UserStore } from './user.store';
       <button app-button (click)="writer()">Writer</button>
       <button app-button (click)="readerWriter()">Reader and Writer</button>
       <button app-button (click)="client()">Client</button>
+      <button app-button (click)="everyone()">Client</button>
     </header>
 
     <app-information></app-information>
@@ -54,5 +56,8 @@ export class LoginComponent {
   }
   client() {
     this.userStore.add(client);
+  }
+  everyone() {
+    this.userStore.add(everyone);
   }
 }

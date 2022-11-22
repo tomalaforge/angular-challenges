@@ -18,6 +18,7 @@ In LoginComponent, you will find 6 buttons corresponding at 6 differents users.
 - Writer
 - Reader and Writer
 - Client
+- Everyone
 
 ### Step 1
 
@@ -31,12 +32,20 @@ In **InformationComponent**, display the correct piece of information for each r
 You should end up with something like below:
 
 ```html
-<div *hasRole="Manager">Info for Manager</div>
+<div *hasRole="Role1">Info for Role1</div>
+```
+
+```html
+<div *hasRole="['Role1', 'Role2']">Info for Role1 and Role2</div>
+```
+
+```html
+<div *hasRoleSuperAdmin="true">Info Only for superadmin</div>
 ```
 
 ### Step 2
 
-In **Routes.ts**, route all user to the correct DashboardComponent using CanMatch guard.
+In **Routes.ts**, route all user to the correct **DashboardComponent** using **CanMatch** guard.
 
 ### Submitting your work
 
