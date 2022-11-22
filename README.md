@@ -25,8 +25,7 @@ This goal of this project is to help you get better at Angular and NgRx buy reso
 <a href="./apps/ngfor-enhancement/README.md"><img src="https://img.shields.io/badge/3-Directive enhancement-orange" alt="Directive enhancement"/></a>
 <a href="./apps/context-outlet-type/README.md"><img src="https://img.shields.io/badge/4-ContextOutlet Typed-red" alt="Directive enhancement"/></a>
 <a href="./apps/crud/README.md"><img src="https://img.shields.io/badge/5-CRUD-green" alt="crud application"/></a>
-
-<!-- <a href="./apps/permissions/README.md"><img src="https://img.shields.io/badge/6-permissions-orange" alt="permissions"/></a> -->
+<a href="./apps/permissions/README.md"><img src="https://img.shields.io/badge/6-permissions-orange" alt="permissions"/></a>
 
 </br>
 <img src="https://img.shields.io/badge/NgRx--gray" alt="NgRx"/>
