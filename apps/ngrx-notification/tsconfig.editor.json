@@ -1,6 +1,9 @@
 {
   "extends": "./tsconfig.json",
-  "include": ["**/*.ts"],
+  "include": [
+    "**/*.ts",
+    "../../libs/ngrx-notification/backend/src/lib/push.service.ts"
+  ],
   "compilerOptions": {
     "types": []
   }

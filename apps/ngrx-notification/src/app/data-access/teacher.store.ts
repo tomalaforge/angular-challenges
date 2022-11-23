@@ -1,6 +1,6 @@
+import { Teacher } from '@angular-challenges/ngrx-notification/model';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Teacher } from '../model/teacher.model';
 
 @Injectable({
   providedIn: 'root',

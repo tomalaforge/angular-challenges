@@ -24,7 +24,7 @@ export interface Teacher extends Push {
 
 const factoryTeacher = incrementalNumber();
 
-export const randTeacher = () => ({
+export const randTeacher = (): Teacher => ({
   id: factoryTeacher(),
   firstname: randFirstName(),
   lastname: randLastName(),
