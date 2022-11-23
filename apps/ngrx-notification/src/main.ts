@@ -1,7 +1,6 @@
+import { PushService } from '@angular-challenges/ngrx-notification/backend';
 import { APP_INITIALIZER, enableProdMode, inject } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { of } from 'rxjs';
-import { PushService } from '../../../libs/ngrx-notification/backend/src/lib/push.service';
 import { AppComponent } from './app/app.component';
 import { NotificationService } from './app/data-access/notification.service';
 import { environment } from './environments/environment';
@@ -16,16 +15,16 @@ bootstrapApplication(AppComponent, {
       provide: APP_INITIALIZER,
       multi: true,
       useFactory: () => {
-        inject(PushService).init();
-        return () => of(true);
+        const service = inject(PushService);
+        return () => service.init();
       },
     },
     {
       provide: APP_INITIALIZER,
       multi: true,
       useFactory: () => {
-        inject(NotificationService).init();
-        return () => of(true);
+        const service = inject(NotificationService);
+        return () => service.init();
       },
     },
   ],
