@@ -1,6 +1,8 @@
+/* eslint-disable @angular-eslint/component-selector */
 import { AsyncPipe, NgFor } from '@angular/common';
 import { Component } from '@angular/core';
-import { TeacherStore } from './data-access/teacher.store';
+import { Store } from '@ngrx/store';
+import { TeacherSelectors } from './store/teacher.selectors';
 
 @Component({
   standalone: true,
@@ -9,7 +11,7 @@ import { TeacherStore } from './data-access/teacher.store';
   template: `
     <h3>TEACHERS</h3>
     <div *ngFor="let teacher of teacher$ | async">
-      {{ teacher.firstname }}
+      {{ teacher.firstname }} {{ teacher.lastname }} - {{ teacher.version }}
     </div>
   `,
   styles: [
@@ -25,7 +27,7 @@ import { TeacherStore } from './data-access/teacher.store';
   ],
 })
 export class TeacherComponent {
-  teacher$ = this.teacherStore.teachers$;
+  teacher$ = this.store.select(TeacherSelectors.selectTeachers);
 
-  constructor(private teacherStore: TeacherStore) {}
+  constructor(private store: Store) {}
 }

@@ -1,25 +1,11 @@
-import {
-  incrementalNumber,
-  rand,
-  randFirstName,
-  randLastName,
-} from '@ngneat/falso';
+import { incrementalNumber, randFirstName, randLastName } from '@ngneat/falso';
 import { Push } from './push.model';
-
-export const subject = [
-  'Sciences',
-  'History',
-  'English',
-  'Maths',
-  'Sport',
-] as const;
-export type Subject = typeof subject[number];
 
 export interface Teacher extends Push {
   id: number;
   firstname: string;
   lastname: string;
-  subject: Subject;
+  version: number;
 }
 
 const factoryTeacher = incrementalNumber();
@@ -28,7 +14,7 @@ export const randTeacher = (): Teacher => ({
   id: factoryTeacher(),
   firstname: randFirstName(),
   lastname: randLastName(),
-  subject: rand(subject),
+  version: 0,
   type: 'teacher',
 });
 

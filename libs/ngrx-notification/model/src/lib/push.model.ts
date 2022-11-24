@@ -1,4 +1,4 @@
-export type PushType = 'teacher' | 'student';
+export type PushType = 'teacher' | 'student' | 'school';
 
 export interface Push {
   type: PushType;

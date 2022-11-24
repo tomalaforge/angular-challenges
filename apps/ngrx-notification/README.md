@@ -24,8 +24,6 @@
 6. Commit your work
 7. Submit a PR with a title beginning with **Answer:7** that I will review and other dev can review.
 
-<!-- TODO: add challenge number and project Name -->
-
 <a href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A7+label%3Aanswer"><img src="https://img.shields.io/badge/-Solutions-green" alt="Ngrx notification"/></a>
 
 <!-- TODO: uncomment when done late -->
