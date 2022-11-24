@@ -8,11 +8,8 @@ import {
   activityFeatureKey,
   activityReducer,
 } from './app/store/activity/activity.reducer';
-import { StatusEffects } from './app/store/status/status.effects';
-import {
-  statusFeatureKey,
-  statusReducer,
-} from './app/store/status/status.reducer';
+import { AppEffects } from './app/store/app/app.effects';
+
 import { UserEffects } from './app/store/user/user.effects';
 import { userFeatureKey, userReducer } from './app/store/user/user.reducer';
 import { environment } from './environments/environment';
@@ -22,7 +19,6 @@ if (environment.production) {
 }
 
 const reducers = {
-  [statusFeatureKey]: statusReducer,
   [activityFeatureKey]: activityReducer,
   [userFeatureKey]: userReducer,
 };
@@ -30,6 +26,6 @@ const reducers = {
 bootstrapApplication(AppComponent, {
   providers: [
     provideStore(reducers),
-    provideEffects([ActivityEffects, UserEffects, StatusEffects]),
+    provideEffects([AppEffects, ActivityEffects, UserEffects]),
   ],
 });
