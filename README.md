@@ -31,6 +31,7 @@ This goal of this project is to help you get better at Angular and NgRx buy reso
 <img src="https://img.shields.io/badge/NgRx--gray" alt="NgRx"/>
 
 <a href="./apps/ngrx-1/README.md"><img src="https://img.shields.io/badge/2-Effect vs Selector-orange" alt="Effect vs Selector"/></a>
+<a href="./apps/ngrx-notification/README.md"><img src="https://img.shields.io/badge/7-Power of Effects-red" alt="power of Effects"/></a>
 
 ## License
 
