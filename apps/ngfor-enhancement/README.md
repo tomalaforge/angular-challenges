@@ -45,5 +45,7 @@ The goal is to **improve the ngFor directive**
 7. Submit a PR with a title beginning with **Answer:3** that I will review and other dev can review.
 
 <a href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A3+label%3Aanswer" target="_blank"><img src="https://img.shields.io/badge/-Solutions-green" alt="Directive enhancement"/></a>
+<a href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A3+label%3A"answer+author"'><img src="https://img.shields.io/badge/-Author solution-important" alt="Directive enhancement solution author"/></a>
+<a href="https://medium.com/@thomas.laforge/ngfor-enhancement-716b44656a6c" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/-Blog post explanation-blue" alt="Directive enhancement blog article"/></a>
 
 _You can ask any question on_ <a href="https://twitter.com/laforge_toma" target="_blank"><img src="./../../logo/twitter.svg" height=20px alt="Twitter"/></a>
