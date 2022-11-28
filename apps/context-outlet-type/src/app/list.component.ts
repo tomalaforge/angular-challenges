@@ -8,7 +8,7 @@ import {
   TemplateRef,
 } from '@angular/core';
 
-interface ListTemplateContext<TItem extends object> {
+interface ListTemplateContext<TItem> {
   $implicit: TItem;
   appList: TItem;
   index: number;
@@ -18,10 +18,10 @@ interface ListTemplateContext<TItem extends object> {
   selector: 'ng-template[appList]',
   standalone: true,
 })
-export class ListTemplateDirective<TItem extends object> {
+export class ListTemplateDirective<TItem> {
   @Input('appList') data!: TItem[];
 
-  static ngTemplateContextGuard<TContextItem extends object>(
+  static ngTemplateContextGuard<TContextItem>(
     dir: ListTemplateDirective<TContextItem>,
     ctx: unknown
   ): ctx is ListTemplateContext<TContextItem> {
