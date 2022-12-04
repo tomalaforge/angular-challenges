@@ -3,7 +3,7 @@ import { userFeatureKey, UserState } from './user.reducer';
 
 export const selectUserState = createFeatureSelector<UserState>(userFeatureKey);
 
-export const selectUser = createSelector(
+export const isUserAdmin = createSelector(
   selectUserState,
-  (state) => state.user
+  (state) => state.user?.isAdmin
 );

@@ -9,6 +9,5 @@ export const loadActivitiesSuccess = createAction(
 );
 
 export const loadActivitiesFailure = createAction(
-  '[Activity Effect] Load Activities Failure',
-  props<{ error: any }>()
+  '[Activity] Load Activitys Failure'
 );

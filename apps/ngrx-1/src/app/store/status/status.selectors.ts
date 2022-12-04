@@ -1,17 +1,25 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { ActivityType } from '../activity/activity.model';
-import { statusFeatureKey, StatusState } from './status.reducer';
-
-export const selectStatusState =
-  createFeatureSelector<StatusState>(statusFeatureKey);
+import { createSelector } from '@ngrx/store';
+import * as UserSelectors from '../user/user.selectors';
+import * as ActivitySelectors from '../activity/activity.selectors';
+import { Status } from './status.model';
 
 export const selectStatuses = createSelector(
-  selectStatusState,
-  (state) => state.statuses
-);
+  UserSelectors.isUserAdmin,
+  ActivitySelectors.selectActivities,
+  (isAdmin, activities) => {
+    if (!isAdmin) return [];
 
-export const selectAllTeachersByActivityType = (name: ActivityType) =>
-  createSelector(
-    selectStatusState,
-    (state) => state.teachersMap.get(name) ?? []
-  );
+    return activities.reduce((status: Status[], activity): Status[] => {
+      const index = status.findIndex((s) => s.name === activity.type);
+      if (index === -1) {
+        return [
+          ...status,
+          { name: activity.type, teachers: [activity.teacher] },
+        ];
+      } else {
+        status[index].teachers.push(activity.teacher);
+        return status;
+      }
+    }, []);
+  }
+);

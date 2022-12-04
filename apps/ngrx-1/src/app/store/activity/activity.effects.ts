@@ -4,20 +4,19 @@ import { of } from 'rxjs';
 import { catchError, concatMap, map } from 'rxjs/operators';
 import * as ActivityActions from './activity.actions';
 import { ActivityService } from './activity.service';
+import * as AppActions from '../app/app.actions';
 
 @Injectable()
 export class ActivityEffects {
   loadActivities$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ActivityActions.loadActivities),
+      ofType(AppActions.initApp),
       concatMap(() =>
         this.ActivityService.fetchActivities().pipe(
           map((activities) =>
             ActivityActions.loadActivitiesSuccess({ activities })
           ),
-          catchError((error) =>
-            of(ActivityActions.loadActivitiesFailure({ error }))
-          )
+          catchError(() => of(ActivityActions.loadActivitiesFailure()))
         )
       )
     );

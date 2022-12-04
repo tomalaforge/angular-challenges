@@ -8,3 +8,4 @@ export const selectActivities = createSelector(
   selectActivityState,
   (state) => state.activities
 );
+

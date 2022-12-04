@@ -2,7 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import * as ActivityActions from './activity.actions';
 import { Activity } from './activity.model';
 
-export const activityFeatureKey = 'Activity';
+export const activityFeatureKey = 'activity';
 
 export interface ActivityState {
   activities: Activity[];
