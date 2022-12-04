@@ -7,7 +7,9 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/ngfor-enhancement",
         "index": "apps/ngfor-enhancement/src/index.html",
@@ -19,7 +21,9 @@
           "apps/ngfor-enhancement/src/favicon.ico",
           "apps/ngfor-enhancement/src/assets"
         ],
-        "styles": ["apps/ngfor-enhancement/src/styles.scss"],
+        "styles": [
+          "apps/ngfor-enhancement/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {

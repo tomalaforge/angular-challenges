@@ -7,7 +7,9 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/projection",
         "index": "apps/projection/src/index.html",
@@ -19,9 +21,13 @@
           "apps/projection/src/favicon.ico",
           "apps/projection/src/assets"
         ],
-        "styles": ["apps/projection/src/styles.scss"],
+        "styles": [
+          "apps/projection/src/styles.scss"
+        ],
         "scripts": [],
-        "allowedCommonJsDependencies": ["seedrandom"]
+        "allowedCommonJsDependencies": [
+          "seedrandom"
+        ]
       },
       "configurations": {
         "production": {
@@ -85,7 +91,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
         "jestConfig": "apps/projection/jest.config.ts",
         "passWithNoTests": true

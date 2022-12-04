@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { Activity } from './activity.model';
 
-export const loadActivities = createAction('[AppComponent] Load Activitys');
+export const loadActivities = createAction('[AppComponent] Load Activities');
 
 export const loadActivitiesSuccess = createAction(
   '[Activity Effect] Load Activitys Success',
@@ -9,6 +9,6 @@ export const loadActivitiesSuccess = createAction(
 );
 
 export const loadActivitiesFailure = createAction(
-  '[Activity] Load Activitys Failure',
+  '[Activity Effect] Load Activities Failure',
   props<{ error: any }>()
 );

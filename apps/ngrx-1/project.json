@@ -7,7 +7,9 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/ngrx-1",
         "index": "apps/ngrx-1/src/index.html",
@@ -15,10 +17,17 @@
         "polyfills": "apps/ngrx-1/src/polyfills.ts",
         "tsConfig": "apps/ngrx-1/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/ngrx-1/src/favicon.ico", "apps/ngrx-1/src/assets"],
-        "styles": ["apps/ngrx-1/src/styles.scss"],
+        "assets": [
+          "apps/ngrx-1/src/favicon.ico",
+          "apps/ngrx-1/src/assets"
+        ],
+        "styles": [
+          "apps/ngrx-1/src/styles.scss"
+        ],
         "scripts": [],
-        "allowedCommonJsDependencies": ["seedrandom"]
+        "allowedCommonJsDependencies": [
+          "seedrandom"
+        ]
       },
       "configurations": {
         "production": {
@@ -74,12 +83,17 @@
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["apps/ngrx-1/**/*.ts", "apps/ngrx-1/**/*.html"]
+        "lintFilePatterns": [
+          "apps/ngrx-1/**/*.ts",
+          "apps/ngrx-1/**/*.html"
+        ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
         "jestConfig": "apps/ngrx-1/jest.config.ts",
         "passWithNoTests": true

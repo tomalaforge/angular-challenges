@@ -1,0 +1,87 @@
+{
+  "name": "pipe-easy",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/pipe-easy/src",
+  "prefix": "app",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/pipe-easy",
+        "index": "apps/pipe-easy/src/index.html",
+        "main": "apps/pipe-easy/src/main.ts",
+        "polyfills": "apps/pipe-easy/src/polyfills.ts",
+        "tsConfig": "apps/pipe-easy/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/pipe-easy/src/favicon.ico",
+          "apps/pipe-easy/src/assets"
+        ],
+        "styles": ["apps/pipe-easy/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/pipe-easy/src/environments/environment.ts",
+              "with": "apps/pipe-easy/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "pipe-easy:build:production"
+        },
+        "development": {
+          "browserTarget": "pipe-easy:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "pipe-easy:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/pipe-easy/**/*.ts",
+          "apps/pipe-easy/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

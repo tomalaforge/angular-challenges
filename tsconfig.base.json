@@ -14,7 +14,14 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@angular-challenges/ngrx-notification/backend": [
+        "libs/ngrx-notification/backend/src/index.ts"
+      ],
+      "@angular-challenges/ngrx-notification/model": [
+        "libs/ngrx-notification/model/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
