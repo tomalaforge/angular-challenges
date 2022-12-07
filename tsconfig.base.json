@@ -20,6 +20,9 @@
       ],
       "@angular-challenges/ngrx-notification/model": [
         "libs/ngrx-notification/model/src/index.ts"
+      ],
+      "@tomalaforge/ngrx-callstate-store": [
+        "libs/shared/ngrx-callstate-store/src/index.ts"
       ]
     }
   },
