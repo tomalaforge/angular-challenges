@@ -1,52 +1,115 @@
-import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { randText } from '@ngneat/falso';
+import {CommonModule} from '@angular/common';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {Todo, TodosService} from './todos.service';
+import {concatMap, map, startWith, Subject} from 'rxjs';
+import {RxState} from '@rx-angular/state';
+import {ForModule, LetModule} from '@rx-angular/template';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {IfModule} from '@rx-angular/template/experimental/if';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {createErrorHandler} from './error-handler';
+
+type TodoUi = Todo & {
+  isLoading: boolean;
+};
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    ForModule,
+    MatProgressSpinnerModule,
+    IfModule,
+    LetModule,
+  ],
   selector: 'app-root',
   template: `
-    <div *ngFor="let todo of todos">
-      {{ todo.title }}
-      <button (click)="update(todo)">Update</button>
-    </div>
+    <mat-spinner *rxIf="isLoading$; else todosTemplate"></mat-spinner>
+    <ng-template #todosTemplate>
+      <div *rxFor="let todo of todos$; let index = index">
+        {{ todo.title }}
+        <button (click)="updatesSubject.next(todo)" [disabled]="todo.isLoading">
+          Update
+        </button>
+        <button
+          (click)="deleteSubject.next({todo, index})"
+          [disabled]="todo.isLoading">
+          X
+        </button>
+      </div>
+    </ng-template>
   `,
   styles: [],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [RxState, MatSnackBar],
 })
-export class AppComponent implements OnInit {
-  todos!: any[];
+export class AppComponent {
+  todos$ = this.state.select('todos');
+  isLoading$ = this.state.select('isLoading');
+  addSubject = new Subject<{ todo: Todo; index: number }>();
+  updatesSubject = new Subject<Todo>();
+  deleteSubject = new Subject<{ todo: Todo; index: number }>();
 
-  constructor(private http: HttpClient) {}
+  private errorHandler = createErrorHandler();
 
-  ngOnInit(): void {
-    this.http
-      .get<any[]>('https://jsonplaceholder.typicode.com/todos')
-      .subscribe((todos) => {
-        console.log('return', todos);
-        this.todos = todos;
-      });
-  }
+  private initHandler$ = this.todosService.getTodos().pipe(
+    map((todos) => ({
+      todos: todos.map((todo) => ({ ...todo, isLoading: false })),
+      isLoading: false,
+    })),
+    startWith({ todos: [], isLoading: true })
+  );
 
-  update(todo: any) {
-    this.http
-      .put<any>(
-        `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
-        JSON.stringify({
-          todo: todo.id,
-          title: randText(),
-          body: todo.body,
-          userId: todo.userId,
-        }),
-        {
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-          },
-        }
+  private updateHandler$ = this.updatesSubject.pipe(
+    concatMap((todo) =>
+      this.todosService.update(todo).pipe(
+        map((updatedTodo) => ({ ...updatedTodo, isLoading: false })),
+        startWith({ ...todo, isLoading: true }),
+        this.errorHandler()
       )
-      .subscribe((todoUpdated: any) => {
-        this.todos[todoUpdated.id - 1] = todoUpdated;
-      });
+    )
+  );
+
+  private deleteHandler$ = this.deleteSubject.pipe(
+    concatMap(({ todo, index }) => {
+      return this.todosService.delete(todo.id).pipe(
+        startWith(todo),
+        this.errorHandler(),
+        map((value) => {
+          if (!value) {
+            this.addSubject.next({ todo, index });
+          }
+          return value;
+        })
+      );
+    })
+  );
+
+  constructor(
+    private state: RxState<{
+      todos: TodoUi[];
+      isLoading: boolean;
+    }>,
+    private todosService: TodosService
+  ) {
+    this.state.connect(this.initHandler$);
+    this.state.connect('todos', this.addSubject, (state, { todo, index }) => [
+      ...state.todos.slice(0, index),
+      { ...todo, isLoading: false },
+      ...state.todos.slice(index),
+    ]);
+    this.state.connect('todos', this.updateHandler$, (state, updatedTodo) =>
+      updatedTodo
+        ? [
+          ...state.todos.map((t) =>
+            t.id === updatedTodo.id ? updatedTodo : t
+          ),
+        ]
+        : state.todos);
+    this.state.connect('todos', this.deleteHandler$, (state, deletedTodo) =>
+      deletedTodo
+        ? state.todos.filter((todo) => todo.id !== deletedTodo.id)
+        : state.todos
+    );
   }
 }
