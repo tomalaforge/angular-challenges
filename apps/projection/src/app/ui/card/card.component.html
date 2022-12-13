@@ -1,16 +1,17 @@
 <div
   class="border-2 border-black rounded-md p-4 w-fit flex flex-col gap-3"
   [class]="customClass">
-  <ng-content select="[student]"></ng-content>
-  <ng-content select="[teacher]"></ng-content>
-  <ng-content select="[city]"></ng-content>
+  <ng-content select="[cardContent]"></ng-content>
 
   <section>
     <app-list-item
       *ngFor="let item of list"
-      [name]="item.firstname ? item.firstname : item.name"
       [id]="item.id"
-      [type]="type">
+      (deleteItem)="delete(item.id)">
+      <ng-container
+        [ngTemplateOutlet]="optionTemplateRef"
+        [ngTemplateOutletContext]="{ $implicit: item }">
+      </ng-container>
     </app-list-item>
   </section>
 

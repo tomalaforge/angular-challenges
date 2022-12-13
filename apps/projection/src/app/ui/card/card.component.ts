@@ -1,42 +1,36 @@
-import { NgFor } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { CityStore } from '../../data-access/city.store';
+import { CommonModule, NgFor } from '@angular/common';
 import {
-  randStudent,
-  randTeacher,
-  randomCity,
-} from '../../data-access/fake-http.service';
-import { StudentStore } from '../../data-access/student.store';
-import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  TemplateRef,
+} from '@angular/core';
+import { City } from '../../model/city.model';
+import { Student } from '../../model/student.model';
+import { Teacher } from '../../model/teacher.model';
 import { ListItemComponent } from '../list-item/list-item.component';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
   standalone: true,
-  imports: [NgFor, ListItemComponent],
+  imports: [NgFor, ListItemComponent, CommonModule],
 })
 export class CardComponent {
-  @Input() list: any[] | null = null;
-  @Input() type!: CardType;
+  @Input() list!: Array<Teacher | City | Student>;
   @Input() customClass = '';
+  @Input('optionTemplate')
+  optionTemplateRef!: TemplateRef<any>;
+  @Output() addItem: EventEmitter<boolean> = new EventEmitter();
+  @Output() deleteItem: EventEmitter<number> = new EventEmitter();
 
-  CardType = CardType;
-
-  constructor(
-    private teacherStore: TeacherStore,
-    private studentStore: StudentStore,
-    private cityStore: CityStore
-  ) {}
+  constructor() {}
 
   addNewItem() {
-    if (this.type === CardType.TEACHER) {
-      this.teacherStore.addOne(randTeacher());
-    } else if (this.type === CardType.STUDENT) {
-      this.studentStore.addOne(randStudent());
-    } else if (this.type === CardType.CITY) {
-      this.cityStore.addOne(randomCity());
-    }
+    this.addItem.emit(true);
+  }
+  delete(id: number) {
+    this.deleteItem.emit(id);
   }
 }
