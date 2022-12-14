@@ -1,6 +1,22 @@
 {
   "name": "@tomalaforge/ngrx-callstate-store",
-  "version": "0.0.1",
+  "version": "0.0.3",
+  "description": "Enhance NgRx component-store by providing a loading/error state",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tomalaforge/angular-challenges/tree/main/libs/shared/ngrx-callstate-store"
+  },
+  "keywords": [
+    "angular",
+    "state",
+    "ngrx/component-store"
+  ],
+  "author": {
+    "name": "Thomas Laforge"
+  },
   "peerDependencies": {
     "@angular/common": "^15.0.0",
     "@angular/core": "^15.0.0"
