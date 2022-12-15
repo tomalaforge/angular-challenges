@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/member-ordering */
+import { randomError } from '@angular-challenges/shared/utils';
 import { Injectable } from '@angular/core';
-import { randNumber } from '@ngneat/falso';
 import { ComponentStore } from '@ngrx/component-store';
 import { of } from 'rxjs';
 
@@ -47,12 +47,12 @@ export class LocalDBService extends ComponentStore<DBState> {
     })
   );
 
-  deleteOneTopic = (id: number) => {
-    const randomNumber = randNumber({ min: 0.1, max: 1, fraction: 2 });
-    if (randomNumber > 0.5) {
-      this.deleteOne(id);
-      return of(true);
-    }
-    return of(false);
-  };
+  deleteOneTopic = (id: number) =>
+    randomError({
+      success: () => {
+        this.deleteOne(id);
+        return of(true);
+      },
+      error: () => of(false),
+    });
 }

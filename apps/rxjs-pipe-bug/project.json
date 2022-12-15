@@ -20,7 +20,8 @@
           "apps/rxjs-pipe-bug/src/assets"
         ],
         "styles": ["apps/rxjs-pipe-bug/src/styles.scss"],
-        "scripts": []
+        "scripts": [],
+        "allowedCommonJsDependencies": ["seedrandom"]
       },
       "configurations": {
         "production": {
