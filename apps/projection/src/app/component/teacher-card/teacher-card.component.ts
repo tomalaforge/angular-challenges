@@ -23,7 +23,7 @@ import { CardComponent } from '../../ui/card/card.component';
   imports: [CardComponent],
 })
 export class TeacherCardComponent implements OnInit, ICardComponent {
-  @ViewChild(TemplateRef) cardTemplate!: TemplateRef<any>;
+  @ViewChild(TemplateRef) cardTemplate!: TemplateRef<{ item: Teacher }>;
   teachers: Teacher[] = [];
 
   constructor(private http: FakeHttpService, private store: TeacherStore) {}

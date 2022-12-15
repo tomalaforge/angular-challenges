@@ -25,7 +25,7 @@ import { CardComponent } from '../../ui/card/card.component';
   imports: [CardComponent],
 })
 export class CityCardComponent implements OnInit, ICardComponent {
-  @ViewChild(TemplateRef) cardTemplate!: TemplateRef<any>;
+  @ViewChild(TemplateRef) cardTemplate!: TemplateRef<{ item: City }>;
   cities: City[] = [];
   constructor(private http: FakeHttpService, private store: CityStore) {}
 
