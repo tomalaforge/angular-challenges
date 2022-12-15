@@ -17,8 +17,8 @@ import { ListItemComponent } from '../list-item/list-item.component';
   standalone: true,
   imports: [NgFor, ListItemComponent, CommonModule],
 })
-export class CardComponent {
-  @Input() list!: Array<Teacher | City | Student>;
+export class CardComponent<T extends { id: number }> {
+  @Input() list!: Array<T>;
   @Input() customClass = '';
   @Input('optionTemplate')
   optionTemplateRef!: TemplateRef<any>;
