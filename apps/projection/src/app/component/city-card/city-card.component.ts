@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { CityStore } from '../../data-access/city.store';
 import {
   FakeHttpService,
@@ -10,12 +10,12 @@ import { CardComponent } from '../../ui/card/card.component';
 
 @Component({
   selector: 'app-city-card',
-  template: ` <ng-template #cityTemplate let-city>
-      <label>{{ city.name }}</label>
+  template: ` <ng-template let-item>
+      <label>{{ item.name }}</label>
     </ng-template>
     <app-card
       [list]="cities"
-      [optionTemplate]="cityTemplate"
+      [cardTemplateRef]="cardTemplate"
       (addItem)="addNewItem()"
       (deleteItem)="deleteItem($event)"
       customClass="bg-light-blue">
@@ -25,6 +25,7 @@ import { CardComponent } from '../../ui/card/card.component';
   imports: [CardComponent],
 })
 export class CityCardComponent implements OnInit, ICardComponent {
+  @ViewChild(TemplateRef) cardTemplate!: TemplateRef<any>;
   cities: City[] = [];
   constructor(private http: FakeHttpService, private store: CityStore) {}
 

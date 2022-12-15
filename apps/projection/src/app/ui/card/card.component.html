@@ -9,9 +9,8 @@
       [id]="item.id"
       (deleteItem)="delete(item.id)">
       <ng-container
-        [ngTemplateOutlet]="optionTemplateRef"
-        [ngTemplateOutletContext]="{ $implicit: item }">
-      </ng-container>
+        [ngTemplateOutlet]="cardTemplateRef"
+        [ngTemplateOutletContext]="{ $implicit: item }"></ng-container>
     </app-list-item>
   </section>
 

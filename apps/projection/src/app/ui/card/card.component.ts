@@ -6,9 +6,6 @@ import {
   Output,
   TemplateRef,
 } from '@angular/core';
-import { City } from '../../model/city.model';
-import { Student } from '../../model/student.model';
-import { Teacher } from '../../model/teacher.model';
 import { ListItemComponent } from '../list-item/list-item.component';
 
 @Component({
@@ -19,9 +16,9 @@ import { ListItemComponent } from '../list-item/list-item.component';
 })
 export class CardComponent<T extends { id: number }> {
   @Input() list!: Array<T>;
+  @Input()
+  cardTemplateRef!: TemplateRef<any>;
   @Input() customClass = '';
-  @Input('optionTemplate')
-  optionTemplateRef!: TemplateRef<any>;
   @Output() addItem: EventEmitter<boolean> = new EventEmitter();
   @Output() deleteItem: EventEmitter<number> = new EventEmitter();
 

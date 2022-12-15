@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import {
   FakeHttpService,
   randStudent,
@@ -7,15 +7,12 @@ import { StudentStore } from '../../data-access/student.store';
 import { ICardComponent } from '../../model/card-component';
 import { Student } from '../../model/student.model';
 import { CardComponent } from '../../ui/card/card.component';
-
 @Component({
   selector: 'app-student-card',
-  template: ` <ng-template #studentTemplate let-item>{{
-      item.firstname
-    }}</ng-template>
+  template: ` <ng-template let-item>{{ item.firstname }}</ng-template>
     <app-card
       [list]="students"
-      [optionTemplate]="studentTemplate"
+      [cardTemplateRef]="cardTemplate"
       (addItem)="addNewItem()"
       (deleteItem)="deleteItem($event)"
       customClass="bg-light-green">
@@ -25,6 +22,7 @@ import { CardComponent } from '../../ui/card/card.component';
   imports: [CardComponent],
 })
 export class StudentCardComponent implements OnInit, ICardComponent {
+  @ViewChild(TemplateRef) cardTemplate!: TemplateRef<any>;
   students: Student[] = [];
 
   constructor(private http: FakeHttpService, private store: StudentStore) {}
