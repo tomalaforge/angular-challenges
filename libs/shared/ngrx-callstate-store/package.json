@@ -1,6 +1,6 @@
 {
   "name": "@tomalaforge/ngrx-callstate-store",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Enhance NgRx component-store by providing a loading/error state",
   "publishConfig": {
     "access": "public"

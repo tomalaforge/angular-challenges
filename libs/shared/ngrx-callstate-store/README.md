@@ -71,6 +71,16 @@ export type CallState = LoadingState | ErrorState;
 
 ## API
 
+### initialization
+
+##### setInitState
+
+The `setInitState` method lets you initialize your custom state if you are not using the constructor.
+
+```typescript
+setInitState = (state: T): void
+```
+
 ### updater
 
 ##### startLoading

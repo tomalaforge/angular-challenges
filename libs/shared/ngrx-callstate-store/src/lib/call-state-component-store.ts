@@ -1,5 +1,11 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import { inject, Inject, Injectable, InjectionToken } from '@angular/core';
+import {
+  inject,
+  Inject,
+  Injectable,
+  InjectionToken,
+  Optional,
+} from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { Observable, of, switchMap } from 'rxjs';
 import {
@@ -28,7 +34,7 @@ export class CallStateComponentStore<
   private error = inject(ERROR_TOKEN);
   private flickerTime = inject(FLICKER_TIME);
 
-  constructor(@Inject(INITIAL_TOKEN) initialState: U) {
+  constructor(@Inject(INITIAL_TOKEN) @Optional() initialState: U) {
     super({ callState: 'INIT', ...initialState } as T);
   }
 
@@ -91,5 +97,9 @@ export class CallStateComponentStore<
       ...patchedState,
     } as Partial<T>);
     return err;
+  }
+
+  setInitState(initialState: U) {
+    this.setState({ callState: 'INIT', ...initialState } as T);
   }
 }
