@@ -32,7 +32,7 @@ This goal of this project is to help you get better at Angular and NgRx by resol
 <a href="./apps/pipe-intermediate/README.md"><img src="https://img.shields.io/badge/9-wrapFn pipe-orange" alt="wrapFn pipe"/></a>
 <a href="./apps/pipe-hard/README.md"><img src="https://img.shields.io/badge/10-utilities pipe-red" alt="utilities pipe"/></a>
 
-<!-- <a href="./apps/scroll-cd/README.md"><img src="https://img.shields.io/badge/14-change detection -- scroll-orange" alt="change detection with scroll event"/></a> -->
+<!-- <a href="./apps/scroll-cd/README.md"><img src="https://img.shields.io/badge/12-change detection -- scroll-orange" alt="change detection with scroll event"/></a> -->
 
 </br>
 <img src="https://img.shields.io/badge/RxJs--gray?logo=rxjs" alt="RxJs"/>
