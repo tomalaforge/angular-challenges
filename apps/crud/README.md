@@ -59,6 +59,8 @@ this.todos = [
 6. Commit your work
 7. Submit a PR with a title beginning with **Answer:3** that I will review and other dev can review.
 
-<a href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A5+label%3Aanswer" target="_blank"><img src="https://img.shields.io/badge/-Solutions-green" alt="Http"/></a>
+<a href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A5+label%3Aanswer" target="_blank"><img src="https://img.shields.io/badge/-Solutions-green" alt="Crud solution"/></a>
+<a href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A5+label%3A"answer+author"'><img src="https://img.shields.io/badge/-Author solution-important" alt="Crud solution author"/></a>
+<a href="https://medium.com/@thomas.laforge/discover-the-power-of-ngrx-component-store-to-create-a-local-component-state-53e3a0af7970" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/-Blog post explanation-blue" alt="Crud blog article"/></a>
 
 _You can ask any question on_ <a href="https://twitter.com/laforge_toma" target="_blank"><img src="./../../logo/twitter.svg" height=20px alt="Twitter"/></a>
