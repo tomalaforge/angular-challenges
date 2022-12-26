@@ -1,13 +1,13 @@
 import { HttpClientModule } from '@angular/common/http';
 import { enableProdMode, importProvidersFrom } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { AppComponent } from './app/app.component';
+import { TodosComponent } from './app/todos.component';
 import { environment } from './environments/environment';
 
 if (environment.production) {
   enableProdMode();
 }
 
-bootstrapApplication(AppComponent, {
+bootstrapApplication(TodosComponent, {
   providers: [importProvidersFrom(HttpClientModule)],
 }).catch((err) => console.error(err));
