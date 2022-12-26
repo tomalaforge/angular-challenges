@@ -27,7 +27,7 @@ export class TodoService {
   }
 
   deleteTodo(id: number) {
-    return this.http.delete<Todo>(
+    return this.http.delete<object>(
       `https://jsonplaceholder.typicode.com/todos/${id}`
     );
   }
