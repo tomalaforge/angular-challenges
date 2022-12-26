@@ -1,27 +1,28 @@
 /* eslint-disable @angular-eslint/component-selector */
-import { NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  inject,
+  EventEmitter,
   Input,
+  Output,
 } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { RxState } from '@rx-angular/state';
+import { IfModule } from '@rx-angular/template/if';
 import { LetModule } from '@rx-angular/template/let';
-import { TodoItemStateService } from './todo-item.state';
+import { merge } from 'rxjs';
 import { Todo } from './todo.model';
 
 @Component({
   selector: 'todo-item',
   standalone: true,
-  imports: [NgIf, LetModule, MatProgressSpinnerModule],
-  providers: [TodoItemStateService],
+  imports: [IfModule, LetModule, MatProgressSpinnerModule],
   template: `
     <ng-container *rxLet="vm$ as vm">
-      <mat-spinner *ngIf="vm.loading" [diameter]="20"></mat-spinner>
+      <mat-spinner *rxIf="vm.loading" [diameter]="20"></mat-spinner>
       {{ vm.todo.title }}
-      <button (click)="update(vm.todo.id)">Update</button>
-      <button (click)="delete(vm.todo.id)">Delete</button>
+      <button (click)="update.emit(vm.todo.id)">Update</button>
+      <button (click)="delete.emit(vm.todo.id)">Delete</button>
     </ng-container>
   `,
   styles: [
@@ -34,20 +35,21 @@ import { Todo } from './todo.model';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TodoItemComponent {
-  private todoItemState = inject(TodoItemStateService);
-
+export class TodoItemComponent extends RxState<{
+  loading: boolean;
+  todo: Todo;
+}> {
   @Input() set todo(todo: Todo) {
-    this.todoItemState.set({ todo, loading: false });
+    this.set({ todo, loading: false });
   }
 
-  vm$ = this.todoItemState.vm$;
+  @Output() readonly update = new EventEmitter<number>();
+  @Output() readonly delete = new EventEmitter<number>();
 
-  update(id: number) {
-    this.todoItemState.update(id);
-  }
+  vm$ = this.select();
 
-  delete(id: number) {
-    this.todoItemState.delete(id);
+  constructor() {
+    super();
+    this.connect('loading', merge(this.update, this.delete), () => true);
   }
 }
