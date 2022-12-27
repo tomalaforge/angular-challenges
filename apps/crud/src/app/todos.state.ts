@@ -1,13 +1,14 @@
+import { randomErrorHttp } from '@angular-challenges/shared/utils';
 import { inject, Injectable } from '@angular/core';
 import { remove, update } from '@rx-angular/cdk/transformations';
 import { RxState } from '@rx-angular/state';
 import { RxActionFactory } from '@rx-angular/state/actions';
-import { exhaustMap, map } from 'rxjs';
-import { Todo } from './todo.model';
+import { catchError, exhaustMap, map, of } from 'rxjs';
+import { Todo, WithError } from './todo.model';
 import { TodoService } from './todo.service';
 
 interface TodosState {
-  todos: Todo[];
+  todos: WithError<Todo>[];
 }
 
 interface TodosActions {
@@ -29,16 +30,33 @@ export class TodosStateService extends RxState<TodosState> {
     this.connect(
       'todos',
       this.actions.update$.pipe(
-        exhaustMap((id) => this.todoService.updateTodo(id))
+        exhaustMap((id) =>
+          randomErrorHttp({
+            httpRequest: () => this.todoService.updateTodo(id),
+          }).pipe(
+            map((t) => ({ ...t, error: undefined })),
+            catchError((error) => of({ id, error }))
+          )
+        )
       ),
       ({ todos }, todo) => update(todos, todo, 'id')
     );
     this.connect(
       'todos',
       this.actions.delete$.pipe(
-        exhaustMap((id) => this.todoService.deleteTodo(id).pipe(map(() => id)))
+        exhaustMap((id) =>
+          randomErrorHttp({
+            httpRequest: () => this.todoService.deleteTodo(id),
+          }).pipe(
+            map(() => ({ id, error: undefined })),
+            catchError((error) => of({ id, error }))
+          )
+        )
       ),
-      ({ todos }, id) => remove(todos, [{ id }], 'id')
+      ({ todos }, todo) =>
+        todo.error
+          ? update(todos, todo, 'id')
+          : remove(todos, [{ id: todo.id }], 'id')
     );
   }
 

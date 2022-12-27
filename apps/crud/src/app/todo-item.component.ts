@@ -11,7 +11,7 @@ import { RxState } from '@rx-angular/state';
 import { IfModule } from '@rx-angular/template/if';
 import { LetModule } from '@rx-angular/template/let';
 import { merge } from 'rxjs';
-import { Todo } from './todo.model';
+import { Todo, WithError } from './todo.model';
 
 @Component({
   selector: 'todo-item',
@@ -23,6 +23,9 @@ import { Todo } from './todo.model';
       {{ vm.todo.title }}
       <button (click)="update.emit(vm.todo.id)">Update</button>
       <button (click)="delete.emit(vm.todo.id)">Delete</button>
+      <span class="error" *rxIf="vm.todo.error">{{
+        vm.todo.error.message
+      }}</span>
     </ng-container>
   `,
   styles: [
@@ -30,6 +33,10 @@ import { Todo } from './todo.model';
       :host {
         display: flex;
         align-items: center;
+        gap: 5px;
+        .error {
+          color: red;
+        }
       }
     `,
   ],
@@ -37,7 +44,7 @@ import { Todo } from './todo.model';
 })
 export class TodoItemComponent extends RxState<{
   loading: boolean;
-  todo: Todo;
+  todo: WithError<Todo>;
 }> {
   @Input() set todo(todo: Todo) {
     this.set({ todo, loading: false });
