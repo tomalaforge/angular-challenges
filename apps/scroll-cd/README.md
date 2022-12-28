@@ -4,11 +4,13 @@
 
 ### Information
 
-This challenge will teach you how to avoid unnecessary change detection cycles.
+In this challenge, you will need to optimize the change detection cycles run by Angular.
 
 Zone.js will trigger a change detection cycle each time a scroll event is dispatched. However we only want to show or hide a button at a specific scroll position. Therefore, we only want to refresh our application once.
 
 > You can vizualise how many times CD is triggered by installing the [Angular chrome devTool](https://chrome.google.com/webstore/detail/angular-devtools/ienfalfjdbdpebioblfackkekamfmbnh) and starting a new recording on the profiler tab.
+
+The following video will explain what is the goal of this challenge.
 
 ### Statement
 
