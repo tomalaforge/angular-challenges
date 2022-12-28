@@ -11,7 +11,10 @@ Zone.js triggers a change detection cycle each time a scroll event is dispatched
 > You can vizualise how many times CD is triggered by installing the [Angular chrome devTool](https://chrome.google.com/webstore/detail/angular-devtools/ienfalfjdbdpebioblfackkekamfmbnh) and starting a new recording on the profiler tab.
 
 The following video will explain what is the goal of this challenge.
-https://user-images.githubusercontent.com/30832608/209819211-58d9ddcf-e1ad-4a78-8a7a-2be9d729e3f1.mov
+
+<video controls>
+<source src="https://user-images.githubusercontent.com/30832608/209819211-58d9ddcf-e1ad-4a78-8a7a-2be9d729e3f1.mov">
+</video>
 
 ### Statement
 
