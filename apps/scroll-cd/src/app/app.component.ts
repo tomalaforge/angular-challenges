@@ -1,6 +1,13 @@
-import { AsyncPipe, NgIf } from '@angular/common';
-import { Component, HostListener } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { AsyncPipe, DOCUMENT, NgIf } from '@angular/common';
+import { Component, Inject } from '@angular/core';
+import {
+  distinctUntilChanged,
+  fromEvent,
+  map,
+  Subject,
+  takeUntil,
+  tap,
+} from 'rxjs';
 
 @Component({
   standalone: true,
@@ -34,13 +41,26 @@ import { BehaviorSubject } from 'rxjs';
 export class AppComponent {
   title = 'scroll-cd';
 
-  private displayButtonSubject = new BehaviorSubject<boolean>(false);
-  displayButton$ = this.displayButtonSubject.asObservable();
+  destroy = new Subject();
+  destroy$ = this.destroy.asObservable();
 
-  @HostListener('window:scroll', ['$event'])
-  onScroll() {
-    const pos = window.pageYOffset;
-    this.displayButtonSubject.next(pos > 50);
+  displayButton$ = fromEvent(window, 'scroll').pipe(
+    takeUntil(this.destroy$),
+    map(
+      () => window.pageYOffset || this.document.documentElement.pageYOffset || 0
+    ),
+    map((pageYOffset: number) => pageYOffset > 50),
+    tap(console.log),
+    distinctUntilChanged()
+  );
+
+  constructor(
+    @Inject(DOCUMENT)
+    private document: { documentElement: { pageYOffset: number } }
+  ) {}
+
+  ngOnDestroy(): void {
+    this.destroy.next(true);
   }
 
   goToTop() {
