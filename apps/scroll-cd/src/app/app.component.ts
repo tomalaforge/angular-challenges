@@ -50,7 +50,6 @@ export class AppComponent {
       () => window.pageYOffset || this.document.documentElement.pageYOffset || 0
     ),
     map((pageYOffset: number) => pageYOffset > 50),
-    tap(console.log),
     distinctUntilChanged()
   );
 
