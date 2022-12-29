@@ -1,6 +1,23 @@
 import { AsyncPipe, NgIf } from '@angular/common';
-import { Component, HostListener } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Component, NgZone, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import {
+  BehaviorSubject,
+  distinctUntilChanged,
+  Observable,
+  OperatorFunction,
+} from 'rxjs';
+
+function runInZone<T>(zone: NgZone): OperatorFunction<T, T> {
+  return (source) => {
+    return new Observable((observer) => {
+      return source.subscribe({
+        next: (value) => zone.run(() => observer.next(value)),
+        error: (e) => zone.run(() => observer.error(e)),
+        complete: () => zone.run(() => observer.complete()),
+      });
+    });
+  };
+}
 
 @Component({
   standalone: true,
@@ -31,13 +48,34 @@ import { BehaviorSubject } from 'rxjs';
     `,
   ],
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'scroll-cd';
 
-  private displayButtonSubject = new BehaviorSubject<boolean>(false);
-  displayButton$ = this.displayButtonSubject.asObservable();
+  private readonly listeners: (() => void)[] = [];
+  private readonly displayButtonSubject = new BehaviorSubject<boolean>(false);
 
-  @HostListener('window:scroll', ['$event'])
+  displayButton$ = this.displayButtonSubject.pipe(
+    distinctUntilChanged(),
+    runInZone(this.zone)
+  );
+
+  constructor(
+    private readonly zone: NgZone,
+    private readonly renderer: Renderer2
+  ) {}
+
+  ngOnInit(): void {
+    this.zone.runOutsideAngular(() => {
+      this.listeners.push(
+        this.renderer.listen(window, 'scroll', () => this.onScroll())
+      );
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.listeners.forEach((item) => item());
+  }
+
   onScroll() {
     const pos = window.pageYOffset;
     this.displayButtonSubject.next(pos > 50);
