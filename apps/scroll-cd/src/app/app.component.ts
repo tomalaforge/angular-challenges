@@ -1,12 +1,20 @@
 import { AsyncPipe, NgIf } from '@angular/common';
-import { Component, HostListener } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  HostListener,
+  NgZone,
+} from '@angular/core';
+import { BehaviorSubject, distinctUntilChanged, fromEvent, tap } from 'rxjs';
+import { NgxDirtyCheckerModule } from '@code-workers.io/ngx-dirty-checker';
 
 @Component({
   standalone: true,
-  imports: [NgIf, AsyncPipe],
+  imports: [NgIf, AsyncPipe, NgxDirtyCheckerModule],
   selector: 'app-root',
   template: `
+    <ngx-dirty-checker></ngx-dirty-checker>
     <div>Top</div>
     <div>Middle</div>
     <div>Bottom</div>
@@ -35,12 +43,24 @@ export class AppComponent {
   title = 'scroll-cd';
 
   private displayButtonSubject = new BehaviorSubject<boolean>(false);
-  displayButton$ = this.displayButtonSubject.asObservable();
+  displayButton$ = this.displayButtonSubject.asObservable().pipe(
+    distinctUntilChanged(),
+    tap({
+      next: (x) => this.cd.detectChanges(),
+    })
+  );
 
-  @HostListener('window:scroll', ['$event'])
-  onScroll() {
-    const pos = window.pageYOffset;
-    this.displayButtonSubject.next(pos > 50);
+  constructor(
+    private zone: NgZone,
+    private el: ElementRef,
+    private cd: ChangeDetectorRef
+  ) {
+    this.zone.runOutsideAngular(() => {
+      fromEvent(window, 'scroll').subscribe((_) => {
+        const pos = window.pageYOffset;
+        this.displayButtonSubject.next(pos < 50);
+      });
+    });
   }
 
   goToTop() {
