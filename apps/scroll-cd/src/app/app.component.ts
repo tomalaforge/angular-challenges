@@ -2,7 +2,7 @@ import { NgIf } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { PushModule } from '@rx-angular/template/push';
-import { ZoneLessEventListener } from './zone-less-event-listener.service';
+import { listenOutsideZone } from './listen-outside-zone.util';
 @Component({
   standalone: true,
   imports: [NgIf, PushModule],
@@ -38,14 +38,10 @@ export class AppComponent implements OnDestroy {
   private displayButtonSubject = new BehaviorSubject<boolean>(false);
   displayButton$ = this.displayButtonSubject.asObservable();
 
-  scrollListener: () => void;
-
-  constructor(private eventListener: ZoneLessEventListener) {
-    this.scrollListener = this.eventListener.listen(window, 'scroll', () => {
-      const pos = window.pageYOffset;
-      this.displayButtonSubject.next(pos > 50);
-    });
-  }
+  scrollListener = listenOutsideZone(window, 'scroll', () => {
+    const pos = window.pageYOffset;
+    this.displayButtonSubject.next(pos > 50);
+  });
 
   ngOnDestroy(): void {
     this.scrollListener();
