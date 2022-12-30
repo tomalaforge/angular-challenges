@@ -1,21 +1,37 @@
 import { NgFor } from '@angular/common';
-import { Component } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  Pipe,
+  PipeTransform,
+} from '@angular/core';
+
+@Pipe({
+  standalone: true,
+  pure: true,
+  name: 'heavyComputation',
+})
+export class HeavyComputationPipe implements PipeTransform {
+  transform(value: string, index: number) {
+    return `Piped@${new Date()}: ${value} - ${index}`;
+  }
+}
 
 @Component({
   standalone: true,
-  imports: [NgFor],
+  imports: [NgFor, HeavyComputationPipe],
   selector: 'app-root',
   template: `
     <div *ngFor="let person of persons; let index = index">
-      {{ heavyComputation(person, index) }}
+      {{ person | heavyComputation : index }}
     </div>
   `,
 })
 export class AppComponent {
   persons = ['toto', 'jack'];
 
-  heavyComputation(name: string, index: number) {
-    // very heavy computation
-    return `${name} - ${index}`;
+  constructor(cdr: ChangeDetectorRef) {
+    // Test to verify that the date/time in the transform output does not change:
+    setInterval(() => cdr.markForCheck(), 1000);
   }
 }
