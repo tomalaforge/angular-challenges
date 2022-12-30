@@ -20,7 +20,7 @@ export class CallFunctionPipe implements PipeTransform {
 
   transform(functionName: string, ...args: any[]): any {
     const func = this.source[functionName];
-    return func(...args);
+    return `Piped: ${func(...args)}`;
   }
 }
 
@@ -45,7 +45,7 @@ export class AppComponent {
 
   showName(name: string, index: number) {
     // very heavy computation
-    return `Piped: ${name} - ${index}`;
+    return `${name} - ${index}`;
   }
 
   isAllowed(age: number, isFirst: boolean) {
