@@ -1,36 +1,58 @@
-import { Component, OnInit } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
-import { StudentStore } from '../../data-access/student.store';
-import { CardType } from '../../model/card.model';
-import { Student } from '../../model/student.model';
-import { CardComponent } from '../../ui/card/card.component';
+import {Component, OnInit} from '@angular/core';
+import {FakeHttpService, randStudent} from '../../data-access/fake-http.service';
+import {StudentStore} from '../../data-access/student.store';
+import {Student} from '../../model/student.model';
+import {CardComponent} from '../../ui/card/card.component';
+import {ListItemComponent} from '../../ui/list-item/list-item.component';
+import {AsyncPipe} from "@angular/common";
+import {Observable} from 'rxjs';
+import {ListItemTemplateDirective} from "../../directive/list-item-template.directive";
 
 @Component({
   selector: 'app-student-card',
   template: `<app-card
-    [list]="students"
-    [type]="cardType"
-    customClass="bg-light-green"
-  ></app-card>`,
+    [list]="students$ | async"
+    (add)="addStudent()"
+    class="bg-light-green"
+  >
+    <img
+      src="assets/img/student.webp"
+      width="200px"
+    />
+  <ng-template list-item-template let-student>
+      <app-list-item
+        [name]="student.firstname"
+        (delete)="delete(student.id)"
+      ></app-list-item>
+    </ng-template>
+  </app-card>`,
   standalone: true,
   styles: [
     `
-      ::ng-deep .bg-light-green {
+      .bg-light-green {
         background-color: rgba(0, 250, 0, 0.1);
       }
     `,
   ],
-  imports: [CardComponent],
+  imports: [CardComponent, ListItemComponent, AsyncPipe, ListItemTemplateDirective],
 })
 export class StudentCardComponent implements OnInit {
-  students: Student[] = [];
-  cardType = CardType.STUDENT;
 
-  constructor(private http: FakeHttpService, private store: StudentStore) {}
+  readonly students$: Observable<Student[]> = this.store.students$;
+
+  constructor(private readonly http: FakeHttpService, private readonly store: StudentStore) {
+  }
 
   ngOnInit(): void {
     this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
+  }
 
-    this.store.students$.subscribe((s) => (this.students = s));
+  addStudent(): void {
+
+    this.store.addOne(randStudent());
+  }
+
+  delete(id: number): void {
+    this.store.deleteOne(id);
   }
 }
