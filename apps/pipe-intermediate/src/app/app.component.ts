@@ -16,7 +16,6 @@ export class ComputePipe implements PipeTransform {
   }
 
   private showName(name: string, index: number) {
-    // very heavy computation
     return `${name} - ${index}`;
   }
 
@@ -46,17 +45,4 @@ export class AppComponent {
     { name: 'Jack', age: 15 },
     { name: 'John', age: 30 },
   ];
-
-  showName(name: string, index: number) {
-    // very heavy computation
-    return `${name} - ${index}`;
-  }
-
-  isAllowed(age: number, isFirst: boolean) {
-    if (isFirst) {
-      return 'always allowed';
-    } else {
-      return age > 25 ? 'allowed' : 'declined';
-    }
-  }
 }
