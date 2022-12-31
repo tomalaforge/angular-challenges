@@ -1,25 +1,14 @@
 import { NgFor } from '@angular/common';
-import {
-  Component,
-  Inject,
-  InjectionToken,
-  Pipe,
-  PipeTransform,
-} from '@angular/core';
-
-const CallFunctionPipeSource = new InjectionToken('CallFunctionPipeSource');
+import { Component, Pipe, PipeTransform } from '@angular/core';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 @Pipe({
   standalone: true,
   pure: true,
-  name: 'callFunction',
+  name: 'invoke',
 })
 export class CallFunctionPipe implements PipeTransform {
-  constructor(@Inject(CallFunctionPipeSource) private readonly source: any) {}
-
-  transform(functionName: string, ...args: any[]): any {
-    const func = this.source[functionName];
+  transform(func: (...args: any[]) => any, ...args: any[]): any {
     return `Piped: ${func(...args)}`;
   }
 }
@@ -28,11 +17,10 @@ export class CallFunctionPipe implements PipeTransform {
   standalone: true,
   imports: [NgFor, CallFunctionPipe],
   selector: 'app-root',
-  providers: [{ provide: CallFunctionPipeSource, useExisting: AppComponent }],
   template: `
     <div *ngFor="let person of persons; let index = index; let isFirst = first">
-      {{ 'showName' | callFunction : person.name : index }}
-      {{ 'isAllowed' | callFunction : person.age : isFirst }}
+      {{ showName | invoke : person.name : index }}
+      {{ isAllowed | invoke : person.age : isFirst }}
     </div>
   `,
 })
