@@ -8,7 +8,10 @@ import { Component, Pipe, PipeTransform } from '@angular/core';
   name: 'invoke',
 })
 export class CallFunctionPipe implements PipeTransform {
-  transform(func: (...args: any[]) => any, ...args: any[]): any {
+  transform<TFunc extends (...args: any[]) => any>(
+    func: TFunc,
+    ...args: Parameters<TFunc>
+  ): any {
     return `Piped: ${func(...args)}`;
   }
 }
