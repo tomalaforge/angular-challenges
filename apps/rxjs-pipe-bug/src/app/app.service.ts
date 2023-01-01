@@ -8,13 +8,13 @@ export class AppService {
 
   getAll$ = this.dbService.infos$;
 
+  // prettier-ignore
   deleteOldTopics(type: TopicType): Observable<boolean> {
     return this.dbService.searchByType(type).pipe(
       take(1),
-      switchMap((topicsToDelete) =>
-        combineLatest(
-          topicsToDelete.map((t) => this.dbService.deleteOneTopic(t.id))
-        ).pipe(map((results) => !results.some((result) => !result)))
+      switchMap(topicsToDelete =>
+        combineLatest(topicsToDelete.map((t) => this.dbService.deleteOneTopic(t.id))).pipe(
+          map(results => !results.some(result => !result)))
       )
     );
   }
