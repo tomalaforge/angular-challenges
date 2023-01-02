@@ -11,6 +11,16 @@ const isAllowed = (age: number, isFirst: boolean, activityAge: number) => {
   }
 };
 
+export type IsAllowedParams = {
+  age: number;
+  isFirst: boolean;
+  activityAge: number;
+};
+export type ShowNameParams = {
+  name: string;
+  index: number;
+};
+
 export const PersonUtils = {
   showName,
   isAllowed,
