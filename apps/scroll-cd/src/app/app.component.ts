@@ -1,9 +1,11 @@
 import { AsyncPipe, DOCUMENT, NgIf } from '@angular/common';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, NgZone, OnDestroy, OnInit } from '@angular/core';
 import {
+  BehaviorSubject,
   distinctUntilChanged,
   fromEvent,
   map,
+  Observable,
   Subject,
   takeUntil,
   tap,
@@ -17,7 +19,7 @@ import {
     <div>Top</div>
     <div>Middle</div>
     <div>Bottom</div>
-    <button (click)="goToTop()" *ngIf="displayButton$ | async">Top</button>
+    <button (click)="goToTop()" *ngIf="displayButton">Top</button>
   `,
   styles: [
     `
@@ -38,25 +40,39 @@ import {
     `,
   ],
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy, OnInit {
   title = 'scroll-cd';
 
   destroy = new Subject();
   destroy$ = this.destroy.asObservable();
-
-  displayButton$ = fromEvent(window, 'scroll').pipe(
-    takeUntil(this.destroy$),
-    map(
-      () => window.pageYOffset || this.document.documentElement.pageYOffset || 0
-    ),
-    map((pageYOffset: number) => pageYOffset > 50),
-    distinctUntilChanged()
-  );
+  displayButton = false;
 
   constructor(
     @Inject(DOCUMENT)
-    private document: { documentElement: { pageYOffset: number } }
+    private document: { documentElement: { pageYOffset: number } },
+    private readonly zone: NgZone
   ) {}
+
+  ngOnInit(): void {
+    this.zone.runOutsideAngular(() => {
+      fromEvent(window, 'scroll')
+        .pipe(
+          map(
+            () =>
+              window.pageYOffset ||
+              this.document.documentElement.pageYOffset ||
+              0
+          ),
+          map((pageYOffset: number) => pageYOffset > 50),
+          distinctUntilChanged(),
+          takeUntil(this.destroy$),
+          map((value: boolean) =>
+            this.zone.run(() => (this.displayButton = value))
+          )
+        )
+        .subscribe();
+    });
+  }
 
   ngOnDestroy(): void {
     this.destroy.next(true);
