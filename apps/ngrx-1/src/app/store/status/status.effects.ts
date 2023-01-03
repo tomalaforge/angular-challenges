@@ -5,13 +5,14 @@ import { combineLatest, concatMap, map } from 'rxjs';
 import { selectActivities } from '../activity/activity.selectors';
 import { selectUser } from '../user/user.selectors';
 import * as StatusActions from './status.actions';
+import * as AppActions from '../app.actions';
 import { Status } from './status.model';
 
 @Injectable()
 export class StatusEffects {
   loadStatuses$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(StatusActions.loadStatuses),
+      ofType(StatusActions.loadStatuses, AppActions.initStore),
       concatMap(() =>
         combineLatest([
           this.store.select(selectUser),
