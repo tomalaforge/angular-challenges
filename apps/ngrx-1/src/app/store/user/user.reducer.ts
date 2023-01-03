@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import * as UserActions from './user.actions';
+import { UserActions } from './user.actions';
 import { User } from './user.model';
 
 export const userFeatureKey = 'user';
