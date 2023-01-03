@@ -1,5 +1,5 @@
-import { NxWelcomeComponent } from './nx-welcome.component';
 import { Component } from '@angular/core';
+import { NxWelcomeComponent } from './nx-welcome.component';
 
 @Component({
   standalone: true,
@@ -11,3 +11,5 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'rxjs-race-condition';
 }
+
+// faire une app qui fonctionne mais pas dans les tests e2e à cause du délai de la requete http.
