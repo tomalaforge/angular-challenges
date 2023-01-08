@@ -14,7 +14,7 @@ export class AppService {
       take(1),
       switchMap(topicsToDelete =>
         forkJoin(topicsToDelete.map((t) => this.dbService.deleteOneTopic(t.id))).pipe(
-          map(results => !results.some(result => !result)))
+          map(results => results.every(result => result)))
       )
     );
   }
