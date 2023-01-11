@@ -1,34 +1,42 @@
 import { NgFor, NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { randStudent, randTeacher } from '../../data-access/fake-http.service';
-import { StudentStore } from '../../data-access/student.store';
-import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewEncapsulation,
+} from '@angular/core';
+import { Item } from '../list-item/item';
 import { ListItemComponent } from '../list-item/list-item.component';
 
 @Component({
   selector: 'app-card',
-  templateUrl: './card.component.html',
+  template: `
+    <div class="border-2 border-black rounded-md p-4 w-fit flex flex-col gap-3">
+      <img [src]="image" width="200px" />
+
+      <section>
+        <app-list-item
+          *ngFor="let item of list"
+          [item]="item"
+          (delete)="delete.emit(item.id)">
+        </app-list-item>
+      </section>
+
+      <button
+        class="border border-blue-500 bg-blue-300 p-2 rounded-sm"
+        (click)="add.emit()">
+        Add
+      </button>
+    </div>
+  `,
   standalone: true,
   imports: [NgIf, NgFor, ListItemComponent],
 })
 export class CardComponent {
-  @Input() list: any[] | null = null;
-  @Input() type!: CardType;
+  @Input() list: Item[] = [];
   @Input() customClass = '';
-
-  CardType = CardType;
-
-  constructor(
-    private teacherStore: TeacherStore,
-    private studentStore: StudentStore
-  ) {}
-
-  addNewItem() {
-    if (this.type === CardType.TEACHER) {
-      this.teacherStore.addOne(randTeacher());
-    } else if (this.type === CardType.STUDENT) {
-      this.studentStore.addOne(randStudent());
-    }
-  }
+  @Input() image = '';
+  @Output() delete = new EventEmitter<number>();
+  @Output() add = new EventEmitter();
 }
