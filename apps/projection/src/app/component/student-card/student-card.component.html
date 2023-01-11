@@ -1,0 +1,16 @@
+<app-card
+  [backgroundColor]="lightGreen"
+  image="student.webp"
+  (addClick)="add()"
+>
+  <app-card-content>
+    <app-list>
+      <app-list-item
+        *ngFor="let student of students$ | async; trackBy: trackBy"
+        (delete)="delete(student.id)"
+      >
+        {{student.firstname}} ({{student.mainTeacher.lastname}})
+      </app-list-item>
+    </app-list>
+  </app-card-content>
+</app-card>
