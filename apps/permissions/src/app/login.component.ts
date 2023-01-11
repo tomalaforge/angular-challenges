@@ -26,7 +26,7 @@ import { UserStore } from './user.store';
       <button app-button (click)="writer()">Writer</button>
       <button app-button (click)="readerWriter()">Reader and Writer</button>
       <button app-button (click)="client()">Client</button>
-      <button app-button (click)="everyone()">Client</button>
+      <button app-button (click)="everyone()">No Role</button>
     </header>
 
     <app-information></app-information>

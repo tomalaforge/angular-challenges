@@ -3,7 +3,6 @@ import { RouterLink } from '@angular/router';
 import { ButtonComponent } from '../button.component';
 
 @Component({
-  selector: 'app-dashboard',
   standalone: true,
   imports: [RouterLink, ButtonComponent],
   template: `
@@ -12,4 +11,4 @@ import { ButtonComponent } from '../button.component';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ManagerDashboardComponent {}
+export default class ManagerDashboardComponent {}

@@ -6,9 +6,9 @@ import { ButtonComponent } from '../button.component';
   standalone: true,
   imports: [RouterLink, ButtonComponent],
   template: `
-    <p>dashboard for Admin works!</p>
+    <p>User is not Logged In</p>
     <button app-button routerLink="/">Logout</button>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class AdminDashboardComponent {}
+export default class NoUserDashboardComponent {}

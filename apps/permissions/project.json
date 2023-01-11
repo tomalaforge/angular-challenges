@@ -20,7 +20,8 @@
           "apps/permissions/src/assets"
         ],
         "styles": ["apps/permissions/src/styles.scss"],
-        "scripts": []
+        "scripts": [],
+        "allowedCommonJsDependencies": ["seedrandom"]
       },
       "configurations": {
         "production": {
