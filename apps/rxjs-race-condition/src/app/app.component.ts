@@ -1,15 +1,40 @@
-import { Component } from '@angular/core';
-import { NxWelcomeComponent } from './nx-welcome.component';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { take } from 'rxjs';
+import { TopicModalComponent } from './topic-dialog.component';
+import { TopicService, TopicType } from './topic.service';
 
 @Component({
   standalone: true,
-  imports: [NxWelcomeComponent],
   selector: 'app-root',
-  template: ` <app-nx-welcome></app-nx-welcome> `,
-  styles: [],
+  template: ` <button (click)="openTopicModal()">Open Topic</button> `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'rxjs-race-condition';
+  dialog = inject(MatDialog);
+  topicService = inject(TopicService);
+  topics: TopicType[] = [];
+
+  ngOnInit(): void {
+    this.topicService
+      .fakeGetHttpTopic()
+      .pipe(take(1))
+      .subscribe((topics) => (this.topics = topics));
+  }
+
+  openTopicModal() {
+    this.dialog.open(TopicModalComponent, {
+      data: {
+        topics: this.topics,
+      },
+    });
+  }
 }
 
 // faire une app qui fonctionne mais pas dans les tests e2e à cause du délai de la requete http.

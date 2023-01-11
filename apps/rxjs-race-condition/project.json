@@ -84,6 +84,15 @@
         "jestConfig": "apps/rxjs-race-condition/jest.config.ts",
         "passWithNoTests": true
       }
+    },
+    "component-test": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/rxjs-race-condition/cypress.config.ts",
+        "testingType": "component",
+        "skipServe": true,
+        "devServerTarget": "rxjs-race-condition:build"
+      }
     }
   },
   "tags": []

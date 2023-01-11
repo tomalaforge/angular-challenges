@@ -38,9 +38,9 @@ This goal of this project is to help you get better at Angular and NgRx by resol
 <img src="https://img.shields.io/badge/RxJs--gray?logo=rxjs" alt="RxJs"/>
 
 <a href="./apps/rxjs-pipe-bug/README.md"><img src="https://img.shields.io/badge/11-BUG: chaining operators-orange" alt="Bug rxjs chaining operators"/></a>
+<a href="./apps/rxjs-race-condition/README.md"><img src="https://img.shields.io/badge/14-race condition-green" alt="Rxjs race condition"/></a>
 
-<!-- <a href="./apps/rxjs-race-condition/README.md"><img src="https://img.shields.io/badge/12-race condition-green" alt="Rxjs race condition"/></a>
-<a href="./apps/declarative-to-reactive/README.md"><img src="https://img.shields.io/badge/13-declarative to reactive-green" alt="Declarative to reactive programming"/></a> -->
+<!-- <a href="./apps/declarative-to-reactive/README.md"><img src="https://img.shields.io/badge/13-declarative to reactive-green" alt="Declarative to reactive programming"/></a> -->
 
 </br>
 <img src="https://img.shields.io/badge/NgRx--gray" alt="NgRx"/>
