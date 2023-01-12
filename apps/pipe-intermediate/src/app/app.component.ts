@@ -1,14 +1,29 @@
 import { NgFor } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Pipe, PipeTransform } from '@angular/core';
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+@Pipe({
+  standalone: true,
+  pure: true,
+  name: 'invoke',
+})
+export class CallFunctionPipe implements PipeTransform {
+  transform<TFunc extends (...args: any[]) => any>(
+    func: TFunc,
+    ...args: Parameters<TFunc>
+  ): any {
+    return `Piped: ${func(...args)}`;
+  }
+}
 
 @Component({
   standalone: true,
-  imports: [NgFor],
+  imports: [NgFor, CallFunctionPipe],
   selector: 'app-root',
   template: `
     <div *ngFor="let person of persons; let index = index; let isFirst = first">
-      {{ showName(person.name, index) }}
-      {{ isAllowed(person.age, isFirst) }}
+      {{ showName | invoke : person.name : index }}
+      {{ isAllowed | invoke : person.age : isFirst }}
     </div>
   `,
 })
