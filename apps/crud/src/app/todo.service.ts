@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { randText } from '@ngneat/falso';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
-import { delay, Observable, switchMap, tap } from 'rxjs';
+import { catchError, delay, switchMap, tap, throwError } from 'rxjs';
 
 export type Todo = {
   userId: number;
@@ -11,13 +11,18 @@ export type Todo = {
   title: string;
   completed: boolean;
   body: string;
-  meta: { loading: boolean; error: Error | null };
 };
 
-type TodoState = {
-  todos?: Todo[];
-  loading: boolean;
+export type LoadingState = 'INIT' | 'LOADING' | 'LOADED';
+export interface ErrorState {
   error: Error | null;
+}
+
+export type CallState = LoadingState | ErrorState;
+
+export type TodoState = {
+  todos: Todo[];
+  callState: CallState;
 };
 
 @Injectable({ providedIn: 'root' })
@@ -25,15 +30,19 @@ export class TodoService extends ComponentStore<TodoState> {
   constructor(private httpClient: HttpClient) {
     super({
       todos: [],
-      loading: false,
-      error: null,
+      callState: 'INIT',
     });
   }
 
   readonly vm$ = this.select({
     todos: this.select((state) => state.todos),
-    error: this.select((state) => state.error),
-    loading: this.select((state) => state.loading),
+    callState: this.select((state) => state.callState),
+    error: this.select(({ callState }) => {
+      if ((callState as ErrorState).error !== undefined) {
+        return (callState as ErrorState).error;
+      }
+      return null;
+    }),
   });
 
   readonly getTodos$ = this.effect((params$) => {
@@ -48,8 +57,7 @@ export class TodoService extends ComponentStore<TodoState> {
         (todos) => {
           this.patchState({
             todos: todos,
-            loading: false,
-            error: null,
+            callState: 'LOADED',
           });
         },
         (error: Error) => {
@@ -59,7 +67,7 @@ export class TodoService extends ComponentStore<TodoState> {
     );
   });
 
-  readonly updateTodo = (todo: Todo) =>
+  readonly updateTodo$ = (todo: Todo) =>
     this.httpClient
       .put<Todo>(
         `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
@@ -75,42 +83,49 @@ export class TodoService extends ComponentStore<TodoState> {
           },
         }
       )
-      .pipe(delay(2000));
+      .pipe(
+        delay(2000),
+        tap((todo) => {
+          this.updateTodo(todo);
+        }),
+        catchError((err) => throwError(err))
+      );
 
-  readonly deleteTodo$ = this.effect((todo: Observable<Todo>) => {
-    return todo.pipe(
-      switchMap((todo) =>
-        this.httpClient
-          .delete<void>(`https://jsonplaceholder.typicode.com/todos/${todo.id}`)
-          .pipe(
-            tapResponse(
-              () => {
-                this.patchState({
-                  todos: [
-                    ...(this.get()?.todos as Todo[]).filter(
-                      (eachTodo) => eachTodo?.id !== todo?.id
-                    ),
-                  ],
-                  loading: false,
-                  error: null,
-                });
-              },
-              (error: Error) => {
-                this.handleError(error);
-              }
-            )
-          )
-      )
-    );
+  readonly deleteTodo$ = (todo: Todo) => {
+    return this.httpClient
+      .delete<void>(`https://jsonplaceholder.typicode.com/todos/${todo.id}`)
+      .pipe(
+        tap(() => {
+          this.patchState({
+            todos: [
+              ...(this.get()?.todos as Todo[]).filter(
+                (eachTodo) => eachTodo?.id !== todo?.id
+              ),
+            ],
+            callState: 'LOADED',
+          });
+        }),
+        catchError((err) => throwError(err))
+      );
+  };
+
+  private updateTodo = this.updater((state, todo: Todo) => {
+    return {
+      ...state,
+      todos: state.todos?.map((eachTodo) => {
+        return eachTodo?.id === todo?.id ? todo : eachTodo;
+      }),
+      callState: 'LOADED',
+    };
   });
 
-  private showLoading = this.updater(() => ({
-    loading: true,
-    error: null,
-  }));
+  private showLoading = () => {
+    this.patchState({ callState: 'LOADING' });
+  };
 
-  private handleError = this.updater((state, error: Error) => ({
-    error,
-    loading: false,
-  }));
+  private handleError = (error: Error) => {
+    this.patchState({
+      callState: { error },
+    });
+  };
 }

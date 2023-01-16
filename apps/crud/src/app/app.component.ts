@@ -1,30 +1,42 @@
 /* eslint-disable @angular-eslint/component-selector */
 import { AsyncPipe, CommonModule, NgFor, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { LetModule } from '@ngrx/component';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { Observable, switchMap, tap } from 'rxjs';
-import { Todo, TodoService } from './todo.service';
+import { CallState, ErrorState, Todo, TodoService } from './todo.service';
 
-type IodoItem = {
+type TodoItem = {
   todo: Todo;
-  loading: boolean;
-  error: Error | null;
+  callState: CallState;
 };
 
 @Component({
   selector: 'todo-item',
-  imports: [CommonModule, LetModule, MatProgressSpinnerModule, MatButtonModule],
+  imports: [
+    CommonModule,
+    LetModule,
+    MatProgressSpinnerModule,
+    MatButtonModule,
+    MatSnackBarModule,
+  ],
   standalone: true,
   template: `
     <ng-container *ngIf="vm$ | async as vm">
-      <p *ngIf="vm?.error">{{ vm?.error?.message }}</p>
+      <div *ngIf="vm?.error">
+        <p>{{ vm?.error?.message }}</p>
+        <button mat-button color="warn" (click)="deleteTodo$(vm?.todo)">
+          Retry
+        </button>
+      </div>
 
-      <mat-spinner *ngIf="vm?.loading" [diameter]="40"> </mat-spinner>
+      <mat-spinner *ngIf="vm?.callState === 'LOADING'" [diameter]="40">
+      </mat-spinner>
 
-      <ng-container *ngIf="!vm?.error && !vm?.loading">
+      <ng-container *ngIf="vm?.callState === 'LOADED'">
         <div *ngrxLet="vm.todo as todo">
           {{ todo.title }}
           <button
@@ -33,10 +45,7 @@ type IodoItem = {
             (click)="updateTodo$(todo)">
             Update
           </button>
-          <button
-            mat-stroked-button
-            color="warn"
-            (click)="todoService.deleteTodo$(todo)">
+          <button mat-stroked-button color="warn" (click)="deleteTodo$(todo)">
             Delete
           </button>
         </div>
@@ -44,6 +53,7 @@ type IodoItem = {
     </ng-container>
   `,
   providers: [ComponentStore],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styles: [
     `
       :host {
@@ -54,18 +64,22 @@ type IodoItem = {
     `,
   ],
 })
-export class TodoItemComponent extends ComponentStore<IodoItem> {
+export class TodoItemComponent extends ComponentStore<TodoItem> {
   readonly vm$ = this.select({
     todo: this.select((state) => state.todo),
-    loading: this.select((state) => state.loading),
-    error: this.select((state) => state.error),
-  });
+    callState: this.select((state) => state.callState),
+    error: this.select(({ callState }) => {
+      if ((callState as ErrorState).error !== undefined) {
+        return (callState as ErrorState).error;
+      }
+      return null;
+    }),
+  }).pipe(tap(console.log));
 
-  constructor(public todoService: TodoService) {
+  constructor(private todoService: TodoService, private snackBar: MatSnackBar) {
     super({
       todo: {} as Todo,
-      loading: false,
-      error: null,
+      callState: 'INIT',
     });
   }
 
@@ -73,41 +87,58 @@ export class TodoItemComponent extends ComponentStore<IodoItem> {
   set todoItem(todo: Todo) {
     this.patchState({
       todo,
-      loading: false,
-      error: null,
+      callState: 'LOADED',
     });
   }
 
   readonly updateTodo$ = this.effect((todo: Observable<Todo>) => {
     return todo.pipe(
       tap(() => this.showLoading()),
-      switchMap((todo) => this.todoService.updateTodo(todo)),
-      tapResponse(
-        (todo) => {
-          this.setState({
-            todo,
-            loading: false,
-            error: null,
-          });
-        },
-        (error: Error) => {
-          this.handleError(error);
-        }
+      switchMap((todo) =>
+        this.todoService.updateTodo$(todo).pipe(
+          tapResponse(
+            () => {
+              // no need update the state,
+              // because its already updated and we listen via input
+            },
+            (error: Error) => {
+              this.handleError(error);
+            }
+          )
+        )
       )
     );
   });
 
-  private showLoading = this.updater((state) => ({
-    todo: state.todo,
-    loading: true,
-    error: null,
-  }));
+  readonly deleteTodo$ = this.effect((todo: Observable<Todo>) => {
+    return todo.pipe(
+      tap(() => this.showLoading()),
+      switchMap((todo) =>
+        this.todoService.deleteTodo$(todo).pipe(
+          tapResponse(
+            () => {
+              // no need remove todo,
+              // because its already removed and we listen via input
+              // if we want to show popup to user
+              // we can do it here
+              this.snackBar.open('Successfully Deleted', 'ok');
+            },
+            (error: Error) => {
+              this.handleError(error);
+            }
+          )
+        )
+      )
+    );
+  });
 
-  private handleError = this.updater((state, error: Error) => ({
-    todo: state.todo,
-    error,
-    loading: false,
-  }));
+  private handleError = (error: Error) => {
+    this.patchState({ callState: { error } });
+  };
+
+  private showLoading = () => {
+    this.patchState({ callState: 'LOADING' });
+  };
 }
 @Component({
   imports: [
@@ -126,9 +157,10 @@ export class TodoItemComponent extends ComponentStore<IodoItem> {
       <p *ngIf="vm?.error">{{ vm?.error?.message }}</p>
 
       <!-- Global Spinner -->
-      <mat-spinner *ngIf="vm?.loading" [diameter]="40"> </mat-spinner>
+      <mat-spinner *ngIf="vm?.callState === 'LOADING'" [diameter]="40">
+      </mat-spinner>
 
-      <ng-container *ngIf="!vm?.error && !vm?.loading">
+      <ng-container *ngIf="vm?.callState === 'LOADED'">
         <ng-container *ngFor="let todo of vm?.todos">
           <todo-item [todoItem]="todo"></todo-item>
         </ng-container>
