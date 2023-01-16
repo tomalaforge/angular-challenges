@@ -11,16 +11,16 @@ import { TextComponent } from './text.component';
     <static-text></static-text>
     <static-text class="error"></static-text>
     <static-text class="warning"></static-text>
-    <text class="blue font-s-15">This a a blue text</text>
+    <text class="text-blue text-size">This a a blue text</text>
   `,
   styles: [
     `
-      .blue {
+      .text-blue {
         color: var(--text-blue);
       }
 
-      .font-s-15 {
-        font-size: 15px;
+      .text-size {
+        font-size: var(--text-size);
       }
     `,
   ],
