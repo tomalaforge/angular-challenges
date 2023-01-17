@@ -43,8 +43,7 @@ export class CardComponent implements OnInit {
   ngOnInit() {
     this.data$ = this.http.fetch(this.cardType).pipe(
       tap((data) => this.store.set(data)),
-      switchMap(() => this.store.getState()),
-      tap((da) => console.log('da', da))
+      switchMap(() => this.store.getState())
     );
   }
 
