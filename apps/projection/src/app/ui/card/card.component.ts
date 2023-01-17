@@ -1,34 +1,59 @@
-import { NgFor, NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { randStudent, randTeacher } from '../../data-access/fake-http.service';
-import { StudentStore } from '../../data-access/student.store';
-import { TeacherStore } from '../../data-access/teacher.store';
+import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import {
+  Component,
+  ContentChild,
+  Input,
+  OnInit,
+  TemplateRef,
+  inject,
+} from '@angular/core';
+import { Observable } from 'rxjs';
+import { switchMap, tap } from 'rxjs/operators';
+import { FakeHttpService } from '../../data-access/fake-http.service';
+import { BaseCardItem, LocalStore } from '../../data-access/local-store';
 import { CardType } from '../../model/card.model';
 import { ListItemComponent } from '../list-item/list-item.component';
+import { randomizer } from './../../data-access/fake-http.service';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
+  styles: [
+    `
+      .card-inner {
+        background-color: var(--bg-color);
+      }
+    `,
+  ],
   standalone: true,
-  imports: [NgIf, NgFor, ListItemComponent],
+  imports: [NgIf, NgFor, NgTemplateOutlet, AsyncPipe, ListItemComponent],
+  providers: [LocalStore],
 })
-export class CardComponent {
-  @Input() list: any[] | null = null;
+export class CardComponent implements OnInit {
+  @Input() cardType!: CardType;
   @Input() type!: CardType;
-  @Input() customClass = '';
+  @Input() labelKey!: string;
 
-  CardType = CardType;
+  @ContentChild('image') template!: TemplateRef<HTMLImageElement>;
 
-  constructor(
-    private teacherStore: TeacherStore,
-    private studentStore: StudentStore
-  ) {}
+  private http = inject(FakeHttpService);
+  private store = inject(LocalStore);
+  data$!: Observable<BaseCardItem[]>;
+
+  ngOnInit() {
+    this.data$ = this.http.fetch(this.cardType).pipe(
+      tap((data) => this.store.set(data)),
+      switchMap(() => this.store.getState()),
+      tap((da) => console.log('da', da))
+    );
+  }
 
   addNewItem() {
-    if (this.type === CardType.TEACHER) {
-      this.teacherStore.addOne(randTeacher());
-    } else if (this.type === CardType.STUDENT) {
-      this.studentStore.addOne(randStudent());
-    }
+    const item = randomizer[this.cardType]();
+    this.store.add(item);
+  }
+
+  onItemRemove(id: number) {
+    this.store.remove(id);
   }
 }

@@ -13,6 +13,7 @@ import { map, timer } from 'rxjs';
 import { City } from '../model/city.model';
 import { Student } from '../model/student.model';
 import { subject, Teacher } from '../model/teacher.model';
+import { CardType } from '../model/card.model';
 
 const factoryTeacher = incrementalNumber();
 
@@ -56,13 +57,25 @@ export const randomCity = (): City => ({
   country: randCountry(),
 });
 
+export const randomizer = {
+  [CardType.TEACHER]: randTeacher,
+  [CardType.STUDENT]: randStudent,
+  [CardType.CITY]: randomCity,
+};
+
 const cities = [randomCity(), randomCity(), randomCity()];
 
 @Injectable({
   providedIn: 'root',
 })
 export class FakeHttpService {
-  fetchTeachers$ = timer(500).pipe(map(() => teachers));
-  fetchStudents$ = timer(500).pipe(map(() => students));
-  fetchCities$ = timer(500).pipe(map(() => cities));
+  private streams = {
+    [CardType.TEACHER]: teachers,
+    [CardType.STUDENT]: students,
+    [CardType.CITY]: cities,
+  };
+
+  fetch(type: CardType) {
+    return timer(500).pipe(map(() => this.streams[type]));
+  }
 }

@@ -1,21 +1,12 @@
-<div class="border-2 border-black rounded-md p-4 w-fit flex flex-col gap-3" [class]="customClass">
-  <img
-    *ngIf="type === CardType.TEACHER"
-    src="assets/img/teacher.png"
-    width="200px"
-  />
-  <img
-    *ngIf="type === CardType.STUDENT"
-    src="assets/img/student.webp"
-    width="200px"
-  />
+<div class="card-inner border-2 border-black rounded-md p-4 w-fit flex flex-col gap-3">
+  <ng-container *ngTemplateOutlet="template"></ng-container>
 
   <section>
     <app-list-item
-      *ngFor="let item of list"
-      [name]="item.firstname"
+      *ngFor="let item of (data$ | async)"
       [id]="item.id"
-      [type]="type"
+      [name]="item[labelKey]"
+      (remove)="onItemRemove($event)"
     >
     </app-list-item>
   </section>
