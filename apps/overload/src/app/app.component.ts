@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { createVehicle } from './teacher.utils';
+import { createVehicle } from './vehicle.utils';
 
 @Component({
   standalone: true,
@@ -8,6 +8,7 @@ import { createVehicle } from './teacher.utils';
 })
 export class AppComponent {
   car = createVehicle('car', 'diesel');
+  moto = createVehicle('moto', 'diesel');
   bus = createVehicle('bus', undefined, 20);
   boat = createVehicle('boat', undefined, 300, true);
   bicycle = createVehicle('bicycle');

@@ -4,13 +4,16 @@
 
 ### Information
 
+Angular is using Typescript and mastering Typescript can help you avoid runtime errors at compile time. In this challenge, we have a function to create a vehicle.
+But each vehicle type needs different type of property. Right now we are throwing an error at runtime which is less than ideal since we can catch this error at compile time.
+
+One easy way would be to create a function per vehicle type but for this challenge I want to use the same fonction and depending on the type passed as first parameter , Typescript should autocomplete for you.
+To archieve this, we will use function overload.
+
 ### Statement
 
-### Step 1
-
-### Step 2
-
-### Constraints:
+- Use function overload
+- Delete all `throw new Error`
 
 ### Submitting your work
 
