@@ -28,10 +28,19 @@ interface Boat {
 
 type Vehicle = Bicycle | Car | Moto | Bus | Boat;
 
+export function createVehicle(type: 'bicycle'): Bicycle;
+export function createVehicle(type: 'car', fuel: Fuel): Car;
+export function createVehicle(type: 'moto', fuel: Fuel): Moto;
+export function createVehicle(
+  type: 'boat',
+  capacity: number,
+  isPublicTransport: boolean
+): Boat;
+export function createVehicle(type: 'bus', capacity: number): Bus;
+
 export function createVehicle(
   type: VehicleType,
-  fuel?: Fuel,
-  capacity?: number,
+  fuelOrCapacity?: Fuel | number,
   isPublicTransport?: boolean
 ): Vehicle {
   switch (type) {
@@ -39,17 +48,20 @@ export function createVehicle(
       return { type };
     case 'car':
     case 'moto':
-      if (!fuel) throw new Error(`fuel property is missing for type ${type}`);
-      return { fuel, type };
+      if (!fuelOrCapacity || !isFuel(fuelOrCapacity))
+        throw new Error(`fuel property is missing for type ${type}`);
+      return { fuel: fuelOrCapacity, type };
     case 'boat':
-      if (!capacity)
+      if (!fuelOrCapacity || isFuel(fuelOrCapacity))
         throw new Error(`capacity property is missing for type boat`);
-      return { capacity, type };
+      return { capacity: fuelOrCapacity, type };
     case 'bus':
-      if (!capacity)
+      if (!fuelOrCapacity || isFuel(fuelOrCapacity))
         throw new Error(`capacity property is missing for type bus`);
       if (!isPublicTransport)
         throw new Error(`isPublicTransport property is missing for type bus`);
-      return { capacity, isPublicTransport, type };
+      return { capacity: fuelOrCapacity, isPublicTransport, type };
   }
 }
+
+const isFuel = (fuel: Fuel | number): fuel is Fuel => typeof fuel !== 'number';

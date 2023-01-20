@@ -7,9 +7,9 @@ import { createVehicle } from './vehicle.utils';
   template: ``,
 })
 export class AppComponent {
-  car = createVehicle('car', 'diesel');
+  car = createVehicle('car', 'petrol');
   moto = createVehicle('moto', 'diesel');
-  bus = createVehicle('bus', undefined, 20);
-  boat = createVehicle('boat', undefined, 300, true);
+  bus = createVehicle('bus', 20);
+  boat = createVehicle('boat', 300, true);
   bicycle = createVehicle('bicycle');
 }
