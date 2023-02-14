@@ -27,7 +27,7 @@ The goal is to create a `wrapFn` pipe to wrap your callback function though a pi
 
 <a href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A9+label%3Aanswer"><img src="https://img.shields.io/badge/-Solutions-green" alt="WrapFn pipe"/></a>
 
-<a href='https://github.co m/tomalaforge/angular-challenges/pulls?q=label%3A{challenge number}+label%3A"answer+author"'><img src="https://img.shields.io/badge/-Author solution-important" alt="WrapFn pipe solution author"/></a>
+<a href='https://github.co m/tomalaforge/angular-challenges/pulls?q=label%3A9+label%3A"answer+author"'><img src="https://img.shields.io/badge/-Author solution-important" alt="WrapFn pipe solution author"/></a>
 
 <!-- <a href="{Blog post url}" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/-Blog post explanation-blue" alt="WrapFn pipe blog article"/></a> -->
 
