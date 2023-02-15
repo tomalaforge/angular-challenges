@@ -19,7 +19,7 @@ import { UserStore } from './user.store';
   selector: 'app-login',
   template: `
     <header class="flex gap-3 items-center">
-      Log as :
+      Log in as :
       <button app-button (click)="admin()">Admin</button>
       <button app-button (click)="manager()">Manager</button>
       <button app-button (click)="reader()">Reader</button>
@@ -31,7 +31,7 @@ import { UserStore } from './user.store';
 
     <app-information></app-information>
 
-    <button app-button class="mt-10" routerLink="enter">
+    <button app-button class="mt-10" routerLink="dashboard">
       Enter application
     </button>
   `,

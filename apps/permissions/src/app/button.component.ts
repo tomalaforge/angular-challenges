@@ -6,7 +6,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'button[app-button]',
   template: `<ng-content></ng-content>`,
   host: {
-    class: 'border border-blue-700 bg-blue-400 p-2 rounded-sm text-white',
+    class:
+      'bg-blue-400 py-1.5 px-2.5 rounded-md text-white shadow-md leading-relaxed',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
