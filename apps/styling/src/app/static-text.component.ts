@@ -2,8 +2,6 @@
 import { Component } from '@angular/core';
 import { TextComponent } from './text.component';
 
-export type StaticTextType = 'normal' | 'warning' | 'error';
-
 @Component({
   selector: 'static-text',
   standalone: true,
