@@ -1,0 +1,33 @@
+import { AsyncPipe, JsonPipe, NgFor } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { map } from 'rxjs';
+import { availableBooks } from './book.model';
+
+@Component({
+  selector: 'app-shelf',
+  standalone: true,
+  imports: [AsyncPipe, JsonPipe, RouterLink, NgFor],
+  template: `
+    <ul>
+      <li *ngFor="let book of books | async">
+        Book: {{ book.name }} by {{ book.author }}
+      </li>
+    </ul>
+    <button routerLink="/">Go Back</button>
+  `,
+  styles: [],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export default class ShelfComponent {
+  readonly books = inject(ActivatedRoute).queryParams.pipe(
+    map((params) => params?.['book'].toLowerCase()),
+    map((param) =>
+      availableBooks.filter(
+        (b) =>
+          b.name.toLowerCase().includes(param) ||
+          b.author.toLowerCase().includes(param)
+      )
+    )
+  );
+}

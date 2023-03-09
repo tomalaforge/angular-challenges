@@ -54,6 +54,11 @@ This goal of this project is to help you get better at Angular and NgRx by resol
 <a href="./apps/ngrx-1/README.md"><img src="https://img.shields.io/badge/2-Effect vs Selector-orange" alt="Effect vs Selector"/></a>
 <a href="./apps/ngrx-notification/README.md"><img src="https://img.shields.io/badge/7-Power of Effects-red" alt="power of Effects"/></a>
 
+</br>
+<img src="https://img.shields.io/badge/Testing--gray" alt="testing"/>
+
+<a href="./apps/router-testing/README.md"><img src="https://img.shields.io/badge/17-Router Testing-orange" alt="router Testing"/></a>
+
 ## Contributors ✨
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
@@ -62,7 +67,7 @@ This goal of this project is to help you get better at Angular and NgRx by resol
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://medium.com/@thomas.laforge"><img src="https://avatars.githubusercontent.com/u/30832608?s…00&u=6f0ad9676792f29fd7fe6e113df06213d384a813&v=4" width="100px;" alt="Thomas Laforge"/><br /><sub><b>Thomas Laforge</b></sub></a><br />16 🧩</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://medium.com/@thomas.laforge"><img src="https://avatars.githubusercontent.com/u/30832608?s…00&u=6f0ad9676792f29fd7fe6e113df06213d384a813&v=4" width="100px;" alt="Thomas Laforge"/><br /><sub><b>Thomas Laforge</b></sub></a><br />17 🧩</a></td>
     </tr>
   </tbody>
 </table>
