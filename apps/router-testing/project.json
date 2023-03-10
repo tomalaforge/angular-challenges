@@ -84,6 +84,15 @@
         "jestConfig": "apps/router-testing/jest.config.ts",
         "passWithNoTests": true
       }
+    },
+    "component-test": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/router-testing/cypress.config.ts",
+        "testingType": "component",
+        "skipServe": true,
+        "devServerTarget": "router-testing:build"
+      }
     }
   },
   "tags": []

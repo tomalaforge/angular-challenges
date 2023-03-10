@@ -20,6 +20,9 @@
     },
     {
       "path": "./tsconfig.editor.json"
+    },
+    {
+      "path": "./cypress/tsconfig.cy.json"
     }
   ],
   "extends": "../../tsconfig.base.json",

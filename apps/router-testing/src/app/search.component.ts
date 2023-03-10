@@ -44,6 +44,7 @@ import { availableBooks } from './book.model';
       </div>
     </div>
     <button
+      data-cy="borrow-btn"
       routerLink="/shelf"
       [queryParams]="{ book: searchBook.value }"
       [disabled]="searchBook.errors"
