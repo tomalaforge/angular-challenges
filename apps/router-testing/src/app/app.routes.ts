@@ -3,7 +3,7 @@ import { bookGuard } from './book.guard';
 
 export const appRoutes: Route[] = [
   {
-    path: '',
+    path: 'search',
     loadComponent: () => import('./search.component'),
   },
   {

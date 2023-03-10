@@ -7,28 +7,55 @@ import { availableBooks } from './book.model';
 @Component({
   standalone: true,
   imports: [ReactiveFormsModule, RouterLink, NgFor, NgIf],
+  styles: [
+    `
+      :host {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .error {
+        color: red;
+      }
+
+      button {
+        width: 300px;
+        padding: 5px;
+        border-radius: 5px;
+      }
+
+      .search label {
+        margin-right: 15px;
+      }
+    `,
+  ],
   template: `
-    <div>
-      <label for="bookName">Choose Book by author or title</label>
+    <div class="search">
+      <label for="bookName">Search Book by author or title</label>
       <input
         type="text"
         id="bookName"
         name="bookName"
         [formControl]="searchBook"
         required />
+      <div class="error" *ngIf="searchBook.errors">
+        Search criteria is required!
+      </div>
     </div>
-    <div *ngIf="searchBook.errors">Search criteria is required!</div>
     <button
       routerLink="/shelf"
       [queryParams]="{ book: searchBook.value }"
       [disabled]="searchBook.errors"
       routerLinkActive="router-link-active">
-      Get book
+      Borrow
     </button>
-    <div>List of books available:</div>
-    <ul>
-      <li *ngFor="let book of books">{{ book.name }} by {{ book.author }}</li>
-    </ul>
+    <div>
+      <h3>List of books available:</h3>
+      <ul>
+        <li *ngFor="let book of books">{{ book.name }} by {{ book.author }}</li>
+      </ul>
+    </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

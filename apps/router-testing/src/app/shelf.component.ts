@@ -1,20 +1,19 @@
 import { AsyncPipe, JsonPipe, NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs';
 import { availableBooks } from './book.model';
 
 @Component({
   selector: 'app-shelf',
   standalone: true,
-  imports: [AsyncPipe, JsonPipe, RouterLink, NgFor],
+  imports: [AsyncPipe, JsonPipe, NgFor],
   template: `
     <ul>
       <li *ngFor="let book of books | async">
-        Book: {{ book.name }} by {{ book.author }}
+        Borrowed Book: {{ book.name }} by {{ book.author }}
       </li>
     </ul>
-    <button routerLink="/">Go Back</button>
   `,
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
