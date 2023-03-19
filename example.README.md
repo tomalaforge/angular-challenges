@@ -19,11 +19,15 @@
 
 ### Submitting your work
 
+<!-- To replace
+{Project name} by your project name
+{challenge number} by the following number (To be find inside the main readme) -->
+
 1. Fork the project
 2. clone it
 3. npm install
 <!-- TODO: add you project app name directory -->
-4. **nx serve {{project app name}}**
+4. `npx nx serve {project app name}`
 5. _...work on it_
 6. Commit your work
 <!-- TODO: add your challenge number -->
