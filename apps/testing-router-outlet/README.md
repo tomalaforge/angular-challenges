@@ -16,9 +16,9 @@ We have a functional application that lists available books for borrowing inside
 
 The goal is to test this behavior with Testing library and Cypress
 
-The file named `app.component.spec.ts` will let test your application using Testing Library. To run the test suits, you need to run `npx nx test router-testing`. You can also install [Jest Runner](https://marketplace.visualstudio.com/items?itemName=firsttris.vscode-jest-runner) to execute your test by clicking on the `Run` button above each `describe` or `it` blocks.
+The file named `app.component.spec.ts` will let test your application using Testing Library. To run the test suits, you need to run `npx nx test testing-router-outlet`. You can also install [Jest Runner](https://marketplace.visualstudio.com/items?itemName=firsttris.vscode-jest-runner) to execute your test by clicking on the `Run` button above each `describe` or `it` blocks.
 
-For testing cypress, you will execute your test inside the `app.component.cy.ts` and run `npx nx component-test router-testing` to execute your test suits. You can add the `--watch` flag to execute your test in watch mode.
+For testing cypress, you will execute your test inside the `app.component.cy.ts` and run `npx nx component-test testing-router-outlet` to execute your test suits. You can add the `--watch` flag to execute your test in watch mode.
 
 I created some `it` blocks but feel free to add more test if you like to.
 
@@ -27,9 +27,9 @@ I created some `it` blocks but feel free to add more test if you like to.
 1. Fork the project
 2. clone it
 3. npm install
-4. `npx nx serve router-testing` to play with the application
-5. `npx nx test router-testing` to test your application with Testing Library
-6. `npx nx component-test router-testing --watch` to test your application with Cypress
+4. `npx nx serve testing-router-outlet` to play with the application
+5. `npx nx test testing-router-outlet` to test your application with Testing Library
+6. `npx nx component-test testing-router-outlet --watch` to test your application with Cypress
 7. _...work on it_
 8. Commit your work
 9. Submit a PR with a title beginning with **Answer:17** that I will review and other dev can review.

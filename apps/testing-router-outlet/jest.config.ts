@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'router-testing',
+  displayName: 'testing-router-outlet',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {},

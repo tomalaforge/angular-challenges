@@ -1,25 +1,25 @@
 {
-  "name": "router-testing",
+  "name": "testing-router-outlet",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "apps/router-testing/src",
+  "sourceRoot": "apps/testing-router-outlet/src",
   "prefix": "app",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/router-testing",
-        "index": "apps/router-testing/src/index.html",
-        "main": "apps/router-testing/src/main.ts",
+        "outputPath": "dist/apps/testing-router-outlet",
+        "index": "apps/testing-router-outlet/src/index.html",
+        "main": "apps/testing-router-outlet/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/router-testing/tsconfig.app.json",
+        "tsConfig": "apps/testing-router-outlet/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
-          "apps/router-testing/src/favicon.ico",
-          "apps/router-testing/src/assets"
+          "apps/testing-router-outlet/src/favicon.ico",
+          "apps/testing-router-outlet/src/assets"
         ],
-        "styles": ["apps/router-testing/src/styles.scss"],
+        "styles": ["apps/testing-router-outlet/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
@@ -53,10 +53,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "router-testing:build:production"
+          "browserTarget": "testing-router-outlet:build:production"
         },
         "development": {
-          "browserTarget": "router-testing:build:development"
+          "browserTarget": "testing-router-outlet:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -64,7 +64,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "router-testing:build"
+        "browserTarget": "testing-router-outlet:build"
       }
     },
     "lint": {
@@ -72,8 +72,8 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "apps/router-testing/**/*.ts",
-          "apps/router-testing/**/*.html"
+          "apps/testing-router-outlet/**/*.ts",
+          "apps/testing-router-outlet/**/*.html"
         ]
       }
     },
@@ -81,17 +81,17 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/router-testing/jest.config.ts",
+        "jestConfig": "apps/testing-router-outlet/jest.config.ts",
         "passWithNoTests": true
       }
     },
     "component-test": {
       "executor": "@nrwl/cypress:cypress",
       "options": {
-        "cypressConfig": "apps/router-testing/cypress.config.ts",
+        "cypressConfig": "apps/testing-router-outlet/cypress.config.ts",
         "testingType": "component",
         "skipServe": true,
-        "devServerTarget": "router-testing:build"
+        "devServerTarget": "testing-router-outlet:build"
       }
     }
   },

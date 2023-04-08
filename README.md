@@ -57,7 +57,7 @@ This goal of this project is to help you get better at Angular and NgRx by resol
 </br>
 <img src="https://img.shields.io/badge/Testing--gray" alt="testing"/>
 
-<a href="./apps/router-testing/README.md"><img src="https://img.shields.io/badge/17-Router Testing-orange" alt="router Testing"/></a>
+<a href="./apps/testing-router-outlet/README.md"><img src="https://img.shields.io/badge/17-Router Testing-orange" alt="router outlet Testing"/></a>
 
 ## Contributors ✨
 
