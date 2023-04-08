@@ -60,6 +60,7 @@
     "@nrwl/devkit": "15.8.5",
     "@nrwl/eslint-plugin-nx": "15.8.5",
     "@nrwl/jest": "15.8.5",
+    "@nrwl/js": "15.8.5",
     "@nrwl/linter": "15.8.5",
     "@nrwl/workspace": "15.8.5",
     "@schematics/angular": "15.2.1",
