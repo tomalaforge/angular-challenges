@@ -25,8 +25,7 @@ In this third exercice, you want to access utils functions. Currently we cannot 
 7. Submit a PR with a title beginning with **Answer:10** that I will review and other dev can review.
 
 <a href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A10+label%3Aanswer"><img src="https://img.shields.io/badge/-Solutions-green" alt="Strongly Typed pipe"/></a>
-
-<a href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A{challenge number}+label%3A"answer+author"'><img src="https://img.shields.io/badge/-Author solution-important" alt="Strongly Typed pipe solution author"/></a>
+<a href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A10+label%3A"answer+author"'><img src="https://img.shields.io/badge/-Author solution-important" alt="Strongly Typed pipe solution author"/></a>
 
 <!-- <a href="{Blog post url}" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/-Blog post explanation-blue" alt="Strongly Typed pipe blog article"/></a> -->
 
