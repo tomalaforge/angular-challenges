@@ -27,7 +27,6 @@ To achieve this, we will use overload functions.
 7. Submit a PR with a title beginning with **Answer:15** that I will review and other dev can review.
 
 <a href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A15+label%3Aanswer"><img src="https://img.shields.io/badge/-Solutions-green" alt="overload"/></a>
-
 <a href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A15+label%3A"answer+author"'><img src="https://img.shields.io/badge/-Author solution-important" alt="overload solution author"/></a>
 <a href="https://medium.com/ngconf/function-overloading-in-typescript-8236706b2c05" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/-Blog post explanation-blue" alt="overload blog article"/></a>
 
