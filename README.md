@@ -59,6 +59,7 @@ This goal of this project is to help you get better at Angular and NgRx by resol
 
 <a href="./apps/testing-router-outlet/README.md"><img src="https://img.shields.io/badge/17-Router Testing-orange" alt="router outlet Testing"/></a>
 <a href="./apps/testing-nested/README.md"><img src="https://img.shields.io/badge/18-Nested Comp Testing-orange" alt="nested component Testing"/></a>
+<a href="./apps/testing-input-output/README.md"><img src="https://img.shields.io/badge/19-Input Output Testing-orange" alt="input output Testing"/></a>
 
 ## Contributors ✨
 
@@ -68,7 +69,7 @@ This goal of this project is to help you get better at Angular and NgRx by resol
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://medium.com/@thomas.laforge"><img src="https://avatars.githubusercontent.com/u/30832608?s…00&u=6f0ad9676792f29fd7fe6e113df06213d384a813&v=4" width="100px;" alt="Thomas Laforge"/><br /><sub><b>Thomas Laforge</b></sub></a><br />18 🧩</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://medium.com/@thomas.laforge"><img src="https://avatars.githubusercontent.com/u/30832608?s…00&u=6f0ad9676792f29fd7fe6e113df06213d384a813&v=4" width="100px;" alt="Thomas Laforge"/><br /><sub><b>Thomas Laforge</b></sub></a><br />19 🧩</a></td>
     </tr>
   </tbody>
 </table>

@@ -1,13 +1,16 @@
-import { NxWelcomeComponent } from './nx-welcome.component';
 import { Component } from '@angular/core';
+import { CounterComponent } from './counter.component';
 
 @Component({
   standalone: true,
-  imports: [NxWelcomeComponent],
+  imports: [CounterComponent],
   selector: 'app-root',
-  template: ` <app-nx-welcome></app-nx-welcome> `,
-  styles: [],
+  template: `
+    <app-counter [initialValue]="10" (send)="log($event)"></app-counter>
+  `,
 })
 export class AppComponent {
-  title = 'testing-input-output';
+  log(counter: number) {
+    console.log('output log', counter);
+  }
 }

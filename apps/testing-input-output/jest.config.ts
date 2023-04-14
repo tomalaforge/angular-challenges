@@ -3,7 +3,6 @@ export default {
   displayName: 'testing-input-output',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../coverage/apps/testing-input-output',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',
