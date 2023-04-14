@@ -15,7 +15,7 @@ import { ComponentStore } from '@ngrx/component-store';
   imports: [AsyncPipe, LetDirective],
   template: `
     <ng-container *ngrxLet="counter$ as counter">
-      <p data-testid="counter">Counter: {{ counter }}</p>
+      <p>Counter: {{ counter }}</p>
       <button (click)="increment()">Increment</button>
       <button (click)="decrement()">Decrement</button>
       <button (click)="send.emit(counter)">Send</button>
