@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'testing-nested',
+  displayName: 'testing-todos-list',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   transform: {
