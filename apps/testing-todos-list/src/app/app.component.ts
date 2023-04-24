@@ -1,13 +1,10 @@
-import { NxWelcomeComponent } from './nx-welcome.component';
 import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
-  standalone: true,
-  imports: [NxWelcomeComponent],
   selector: 'app-root',
-  template: ` <app-nx-welcome></app-nx-welcome> `,
-  styles: [],
+  standalone: true,
+  imports: [RouterOutlet],
+  template: `<router-outlet></router-outlet>`,
 })
-export class AppComponent {
-  title = 'testing-todos-list';
-}
+export class AppComponent {}
