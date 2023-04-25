@@ -41,7 +41,7 @@ This goal of this project is to help you get better at Angular and NgRx by resol
 <a href="./apps/overload/README.md"><img src="https://img.shields.io/badge/15-overload function-orange" alt="Overload function"/></a>
 
 </br>
-<img src="https://img.shields.io/badge/RxJs--gray?logo=rxjs" alt="RxJs"/>
+<img src="https://img.shields.io/badge/RxJs--gray?logo=reactivex" alt="RxJs"/>
 
 <a href="./apps/rxjs-pipe-bug/README.md"><img src="https://img.shields.io/badge/11-BUG: chaining operators-orange" alt="Bug rxjs chaining operators"/></a>
 <a href="./apps/rxjs-race-condition/README.md"><img src="https://img.shields.io/badge/14-race condition-green" alt="Rxjs race condition"/></a>
@@ -49,13 +49,13 @@ This goal of this project is to help you get better at Angular and NgRx by resol
 <!-- <a href="./apps/declarative-to-reactive/README.md"><img src="https://img.shields.io/badge/13-declarative to reactive-green" alt="Declarative to reactive programming"/></a> -->
 
 </br>
-<img src="https://img.shields.io/badge/NgRx--gray" alt="NgRx"/>
+<img src="https://img.shields.io/badge/NgRx--gray?logo=reactivex" alt="NgRx"/>
 
 <a href="./apps/ngrx-1/README.md"><img src="https://img.shields.io/badge/2-Effect vs Selector-orange" alt="Effect vs Selector"/></a>
 <a href="./apps/ngrx-notification/README.md"><img src="https://img.shields.io/badge/7-Power of Effects-red" alt="power of Effects"/></a>
 
 </br>
-<img src="https://img.shields.io/badge/Testing--gray" alt="testing"/>
+<img src="https://img.shields.io/badge/Testing--gray?logo=cypress" alt="testing"/>
 
 <a href="./apps/testing-router-outlet/README.md"><img src="https://img.shields.io/badge/17-Router Testing-orange" alt="router outlet Testing"/></a>
 <a href="./apps/testing-nested/README.md"><img src="https://img.shields.io/badge/18-Nested Comp Testing-orange" alt="nested component Testing"/></a>
