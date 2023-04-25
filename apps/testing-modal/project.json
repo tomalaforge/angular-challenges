@@ -19,7 +19,10 @@
           "apps/testing-modal/src/favicon.ico",
           "apps/testing-modal/src/assets"
         ],
-        "styles": ["apps/testing-modal/src/styles.scss"],
+        "styles": [
+          "apps/testing-modal/src/styles.scss",
+          "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+        ],
         "scripts": []
       },
       "configurations": {

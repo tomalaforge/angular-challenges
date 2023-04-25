@@ -28,10 +28,10 @@ I created some `it` blocks but feel free to add more test if you like to. -->
 6. `npx nx component-test testing-modal --watch` to test your application with Cypress
 7. _...work on it_
 8. Commit your work
-9. Submit a PR with a title beginning with **Answer:21** that I will review and other dev can review.
+9. Submit a PR with a title beginning with **Answer:20** that I will review and other dev can review.
 
-<a href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A21+label%3Aanswer"><img src="https://img.shields.io/badge/-Solutions-green" alt="modal testing"/></a>
-<a href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A21+label%3A"answer+author"'><img src="https://img.shields.io/badge/-Author solution-important" alt="modal testing solution author"/></a>
+<a href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A20+label%3Aanswer"><img src="https://img.shields.io/badge/-Solutions-green" alt="modal testing"/></a>
+<a href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A20+label%3A"answer+author"'><img src="https://img.shields.io/badge/-Author solution-important" alt="modal testing solution author"/></a>
 
 <!-- <a href="{Blog post url}" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/-Blog post explanation-blue" alt="nested testing blog article"/></a> -->
 
