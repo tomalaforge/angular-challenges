@@ -65,6 +65,7 @@
     "@nrwl/workspace": "15.8.5",
     "@schematics/angular": "15.2.1",
     "@testing-library/angular": "^13.3.0",
+    "@testing-library/cypress": "^9.0.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/user-event": "^14.4.3",
     "@types/jest": "29.4.0",

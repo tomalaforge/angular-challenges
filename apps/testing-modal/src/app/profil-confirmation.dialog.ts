@@ -11,9 +11,7 @@ import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
     <div mat-dialog-content>Name: {{ data.name }}</div>
     <div mat-dialog-actions>
       <button mat-button [mat-dialog-close]="false">Cancel</button>
-      <button mat-button [mat-dialog-close]="true" cdkFocusInitial>
-        Confirmation
-      </button>
+      <button mat-button [mat-dialog-close]="true">Confirmation</button>
     </div>
   `,
 })
