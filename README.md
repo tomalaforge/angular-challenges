@@ -34,6 +34,7 @@ This goal of this project is to help you get better at Angular and NgRx by resol
 <a href="./apps/scroll-cd/README.md"><img src="https://img.shields.io/badge/12-change detection -- scroll-orange" alt="change detection with scroll event"/></a>
 <a href="./apps/styling/README.md"><img src="https://img.shields.io/badge/13-styling-orange" alt="styling"/></a>
 <a href="./apps/di/README.md"><img src="https://img.shields.io/badge/16-di-red" alt="di"/></a>
+<a href="./apps/anchor-scrolling/README.md"><img src="https://img.shields.io/badge/21-anchor-scrolling-green" alt="anchor-scrolling"/></a>
 
 </br>
 <img src="https://img.shields.io/badge/Typescript--gray?logo=typescript" alt="Typescript"/>
@@ -70,7 +71,7 @@ This goal of this project is to help you get better at Angular and NgRx by resol
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://medium.com/@thomas.laforge"><img src="https://avatars.githubusercontent.com/u/30832608?s…00&u=6f0ad9676792f29fd7fe6e113df06213d384a813&v=4" width="100px;" alt="Thomas Laforge"/><br /><sub><b>Thomas Laforge</b></sub></a><br />20 🧩</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://medium.com/@thomas.laforge"><img src="https://avatars.githubusercontent.com/u/30832608?s…00&u=6f0ad9676792f29fd7fe6e113df06213d384a813&v=4" width="100px;" alt="Thomas Laforge"/><br /><sub><b>Thomas Laforge</b></sub></a><br />21 🧩</a></td>
     </tr>
   </tbody>
 </table>
