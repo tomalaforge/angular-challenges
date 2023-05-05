@@ -1,20 +1,32 @@
 import { Component } from '@angular/core';
 import { NavButtonComponent } from './nav-button.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   standalone: true,
-  imports: [NavButtonComponent],
+  imports: [NavButtonComponent, RouterLink],
   selector: 'app-home',
   template: `
-    <nav-button href="/foo" class="fixed top-3 left-1/2">Foo Page</nav-button>
-    <div id="top" class="h-screen bg-gray-500">
+    <a routerLink="/foo"
+      ><nav-button class="fixed top-3 left-1/2"> Foo Page </nav-button></a
+    >
+    <div #top id="top" class="h-screen bg-gray-500">
       Empty
-      <nav-button href="#bottom">Scroll Bottom</nav-button>
+      <div style="cursor: pointer;" (click)="scrollToAnchor(bottom)">
+        <nav-button>Scroll Bottom</nav-button>
+      </div>
     </div>
-    <div id="bottom" class="h-screen bg-blue-300">
+    <div #bottom id="bottom" class="h-screen bg-blue-300">
       I want to scroll each
-      <nav-button href="#top">Scroll Top</nav-button>
+      <div (click)="scrollToAnchor(top)" style="cursor: pointer;">
+        <nav-button>Scroll Top</nav-button>
+      </div>
     </div>
   `,
 })
-export class HomeComponent {}
+export class HomeComponent {
+  constructor() {}
+  scrollToAnchor(anchor: HTMLElement): void {
+    anchor.scrollIntoView({ behavior: 'smooth' });
+  }
+}
