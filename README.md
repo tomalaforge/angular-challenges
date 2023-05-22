@@ -35,6 +35,7 @@ This goal of this project is to help you get better at Angular and NgRx by resol
 <a href="./apps/styling/README.md"><img src="https://img.shields.io/badge/13-styling-orange" alt="styling"/></a>
 <a href="./apps/di/README.md"><img src="https://img.shields.io/badge/16-di-red" alt="di"/></a>
 <a href="./apps/anchor-scrolling/README.md"><img src="https://img.shields.io/badge/21-anchor--scrolling-green" alt="anchor-scrolling"/></a>
+<a href="./apps/router-input/README.md"><img src="https://img.shields.io/badge/22-router--input-green" alt="router-input"/></a>
 
 </br>
 <img src="https://img.shields.io/badge/Typescript--gray?logo=typescript" alt="Typescript"/>
