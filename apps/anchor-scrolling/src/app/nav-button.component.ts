@@ -1,17 +1,15 @@
-/* eslint-disable @angular-eslint/component-selector */
-import { Component, Input } from '@angular/core';
-@Component({
-  selector: 'nav-button',
+/* eslint-disable @angular-eslint/no-inputs-metadata-property */
+import { Directive } from '@angular/core';
+import { RouterLink } from '@angular/router';
+
+@Directive({
+  selector: '[appNavButton]',
   standalone: true,
-  template: `
-    <a [href]="href">
-      <ng-content></ng-content>
-    </a>
-  `,
+  hostDirectives: [
+    { directive: RouterLink, inputs: ['routerLink:appNavButton'] },
+  ],
   host: {
     class: 'block w-fit border border-red-500 rounded-md p-4 m-2',
   },
 })
-export class NavButtonComponent {
-  @Input() href = '';
-}
+export class NavButtonDirective {}
