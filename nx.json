@@ -51,7 +51,7 @@
     "packageManager": "npm"
   },
   "generators": {
-    "@nrwl/angular:application": {
+    "@nx/angular:application": {
       "style": "scss",
       "linter": "eslint",
       "unitTestRunner": "none",
@@ -62,11 +62,11 @@
       "skipTests": "true",
       "standalone": "true"
     },
-    "@nrwl/angular:library": {
+    "@nx/angular:library": {
       "linter": "eslint",
       "unitTestRunner": "jest"
     },
-    "@nrwl/angular:component": {
+    "@nx/angular:component": {
       "style": "scss",
       "changeDetection": "OnPush",
       "inlineStyle": "true",

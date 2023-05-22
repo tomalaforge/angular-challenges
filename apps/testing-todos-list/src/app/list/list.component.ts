@@ -4,7 +4,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { LetModule } from '@ngrx/component';
+import { LetDirective } from '@ngrx/component';
 import { provideComponentStore } from '@ngrx/component-store';
 import { TicketStore } from './ticket.store';
 import { AddComponent } from './ui/add.component';
@@ -22,7 +22,7 @@ import { RowComponent } from './ui/row.component';
     NgIf,
     NgFor,
     MatInputModule,
-    LetModule,
+    LetDirective,
   ],
   template: `
     <h2 class="text-xl mb-2">Tickets</h2>

@@ -6,13 +6,13 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { LetModule } from '@ngrx/component';
+import { LetDirective } from '@ngrx/component';
 import { ComponentStore } from '@ngrx/component-store';
 
 @Component({
   selector: 'app-counter',
   standalone: true,
-  imports: [AsyncPipe, LetModule],
+  imports: [AsyncPipe, LetDirective],
   template: `
     <ng-container *ngrxLet="counter$ as counter">
       <p data-testid="counter">Counter: {{ counter }}</p>

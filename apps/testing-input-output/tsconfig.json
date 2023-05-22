@@ -22,7 +22,7 @@
       "path": "./tsconfig.editor.json"
     },
     {
-      "path": "./cypress/tsconfig.cy.json"
+      "path": "./cypress/tsconfig.json"
     }
   ],
   "extends": "../../tsconfig.base.json",

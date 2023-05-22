@@ -3,7 +3,7 @@ import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { RouterLink } from '@angular/router';
-import { LetModule } from '@ngrx/component';
+import { LetDirective } from '@ngrx/component';
 import { provideComponentStore } from '@ngrx/component-store';
 import { DetailStore } from './detail.store';
 
@@ -16,7 +16,7 @@ import { DetailStore } from './detail.store';
     NgIf,
     AsyncPipe,
     MatProgressBarModule,
-    LetModule,
+    LetDirective,
   ],
   template: `
     <h2 class="text-xl mb-2">Ticket Detail:</h2>
