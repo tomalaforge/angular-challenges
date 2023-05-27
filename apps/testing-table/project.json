@@ -20,7 +20,8 @@
           "apps/testing-table/src/assets"
         ],
         "styles": ["apps/testing-table/src/styles.scss"],
-        "scripts": []
+        "scripts": [],
+        "allowedCommonJsDependencies": ["seedrandom"]
       },
       "configurations": {
         "production": {

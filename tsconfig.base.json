@@ -22,6 +22,12 @@
         "libs/ngrx-notification/model/src/index.ts"
       ],
       "@angular-challenges/shared/utils": ["libs/shared/utils/src/index.ts"],
+      "@angular-challenges/testing-table/backend": [
+        "libs/testing-table/backend/src/index.ts"
+      ],
+      "@angular-challenges/testing-table/model": [
+        "libs/testing-table/model/src/index.ts"
+      ],
       "@tomalaforge/ngrx-callstate-store": [
         "libs/shared/ngrx-callstate-store/src/index.ts"
       ]

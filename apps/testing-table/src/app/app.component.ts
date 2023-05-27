@@ -1,13 +1,10 @@
-import { NxWelcomeComponent } from './nx-welcome.component';
 import { Component } from '@angular/core';
+import { TableComponent } from './table.component';
 
 @Component({
   standalone: true,
-  imports: [NxWelcomeComponent],
+  imports: [TableComponent],
   selector: 'app-root',
-  template: ` <app-nx-welcome></app-nx-welcome> `,
-  styles: [],
+  template: ` <app-table /> `,
 })
-export class AppComponent {
-  title = 'testing-table';
-}
+export class AppComponent {}

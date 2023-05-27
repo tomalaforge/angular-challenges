@@ -1,0 +1,20 @@
+{
+  "name": "testing-table-backend",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/testing-table/backend/src",
+  "prefix": "angular-challenges",
+  "tags": [],
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/testing-table/backend/**/*.ts",
+          "libs/testing-table/backend/**/*.html"
+        ]
+      }
+    }
+  }
+}
