@@ -19,8 +19,6 @@ In this small application, you can pass data though routing to `TestComponent`. 
 <a href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A22+label%3Aanswer"><img src="https://img.shields.io/badge/-Solutions-green" alt="router-input"/></a>
 <a href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A22+label%3A"answer+author"'><img src="https://img.shields.io/badge/-Author solution-important" alt="router-input solution author"/></a>
 
-<!-- <a href="{Blog post url}" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/-Blog post explanation-blue" alt="router-input blog article"/></a> -->
-
-<!-- TODO: you can add your twitter or anything else if you wish -->
+<a href="https://medium.com/ngconf/accessing-route-params-in-angular-1f8e12770617" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/-Blog post explanation-blue" alt="router-input blog article"/></a>
 
 _You can ask any question on_ <a href="https://twitter.com/laforge_toma" target="_blank" rel="noopener noreferrer"><img src="./../../logo/twitter.svg" height=20px alt="twitter"/></a>
