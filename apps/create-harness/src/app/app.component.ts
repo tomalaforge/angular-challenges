@@ -13,14 +13,16 @@ import { SliderComponent } from './slider.component';
       [maxValue]="30"
       (valueChange)="slider1Value.set($event)" />
     <h2>Slider 2: {{ slider2Value() }}</h2>
+    <p>Enabled only if Slider 1 > 20</p>
     <app-slider
       [step]="10"
       [maxValue]="1000"
+      [disabled]="slider1Value() < 20"
       (valueChange)="slider2Value.set($event)" />
   `,
   styles: [''],
 })
 export class AppComponent {
-  slider1Value = signal(0);
+  slider1Value = signal(10);
   slider2Value = signal(0);
 }

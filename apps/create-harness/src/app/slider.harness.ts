@@ -1,5 +1,5 @@
 import { ComponentHarness } from '@angular/cdk/testing';
 
-class MySliderHarness extends ComponentHarness {
+export class MySliderHarness extends ComponentHarness {
   static hostSelector = 'app-slider';
 }

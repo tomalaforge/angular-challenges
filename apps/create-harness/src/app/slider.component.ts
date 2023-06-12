@@ -4,14 +4,15 @@ import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSliderModule } from '@angular/material/slider';
+import { skip } from 'rxjs';
 
 @Component({
   selector: 'app-slider',
   template: `
-    <mat-card class="flex">
+    <mat-card class="items-center">
       <mat-card-content>
         <div class="flex gap-10 items-center">
-          <button mat-mini-fab (click)="back()">
+          <button id="minusButton" mat-mini-fab (click)="back()">
             <mat-icon>arrow_back_ios</mat-icon>
           </button>
           {{ minValue }}
@@ -19,11 +20,15 @@ import { MatSliderModule } from '@angular/material/slider';
             class="m-4"
             [max]="maxValue"
             [min]="minValue"
+            [disabled]="disabled"
             [step]="step">
-            <input matSliderThumb [value]="value()" />
+            <input
+              matSliderThumb
+              [value]="value()"
+              (valueChange)="value.set($event)" />
           </mat-slider>
           {{ maxValue }}
-          <button mat-mini-fab (click)="forward()">
+          <button id="plusButton" mat-mini-fab (click)="forward()">
             <mat-icon>arrow_forward_ios</mat-icon>
           </button>
         </div>
@@ -37,21 +42,23 @@ import { MatSliderModule } from '@angular/material/slider';
         width: 100%;
       }
 
-      .mat-mdc-card + .mat-mdc-card {
+      .mat-mdc-card {
         margin-top: 8px;
+        flex-direction: row;
       }
     `,
   ],
   standalone: true,
-  imports: [MatCardModule, FormsModule, MatSliderModule, MatIconModule],
+  imports: [MatCardModule, MatSliderModule, MatIconModule, FormsModule],
 })
 export class SliderComponent implements OnInit {
   @Input() step = 1;
   @Input() minValue = 0;
   @Input() maxValue = 100;
+  @Input() disabled = false;
 
   value = signal(0);
-  @Output() valueChange = toObservable(this.value);
+  @Output() valueChange = toObservable(this.value).pipe(skip(1));
 
   ngOnInit(): void {
     this.value.set(this.minValue);
