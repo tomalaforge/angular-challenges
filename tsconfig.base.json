@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@angular-challenges/cli": ["libs/cli/src/index.ts"],
       "@angular-challenges/ngrx-notification/backend": [
         "libs/ngrx-notification/backend/src/index.ts"
       ],

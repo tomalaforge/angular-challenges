@@ -1,0 +1,48 @@
+{
+  "name": "cli",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/cli/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/cli",
+        "main": "libs/cli/src/index.ts",
+        "tsConfig": "libs/cli/tsconfig.lib.json",
+        "assets": [
+          "libs/cli/*.md",
+          {
+            "input": "./libs/cli/src",
+            "glob": "**/!(*.ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./libs/cli/src",
+            "glob": "**/*.d.ts",
+            "output": "./src"
+          },
+          {
+            "input": "./libs/cli",
+            "glob": "generators.json",
+            "output": "."
+          },
+          {
+            "input": "./libs/cli",
+            "glob": "executors.json",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/cli/**/*.ts", "libs/cli/package.json"]
+      }
+    }
+  },
+  "tags": []
+}

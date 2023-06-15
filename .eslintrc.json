@@ -21,7 +21,9 @@
         ],
         "@angular-eslint/no-host-metadata-property": [
           "error",
-          { "allowStatic": true }
+          {
+            "allowStatic": true
+          }
         ]
       }
     },
@@ -40,6 +42,11 @@
       "env": {
         "jest": true
       },
+      "rules": {}
+    },
+    {
+      "files": "*.json",
+      "parser": "jsonc-eslint-parser",
       "rules": {}
     }
   ]
