@@ -8,7 +8,16 @@
 
 ## Intro
 
-This goal of this project is to help you get better at Angular and NgRx by resolving challenges you might face in your day life.
+This project has been created with two purposes:
+
+- The first purpose is to assist you in becoming better at Angular and its ecosystem. 💪
+- The second purpose is to share best practices and different implementations of the same problem to gain diverse perspectives. 📖
+
+**Sharing knowledge can benefit everyone.**
+
+Furthermore, if you are struggling with a concept, please open an issue. I will attempt to create a challenge based on that idea.
+
+If you would like to propose a challenge, this project is open source, so feel free to share your ideas. They are more than welcome.
 
 > **Learning by reading is good but learning by doing is better.**
 
@@ -65,6 +74,9 @@ This goal of this project is to help you get better at Angular and NgRx by resol
 <a href="./apps/testing-modal/README.md"><img src="https://img.shields.io/badge/20-Modal Testing-orange" alt="modal Testing"/></a>
 <a href="./apps/testing-harness/README.md"><img src="https://img.shields.io/badge/23-Harness Testing-green" alt="harness Testing"/></a>
 <a href="./apps/create-harness/README.md"><img src="https://img.shields.io/badge/24-Create Harness-orange" alt="Create harness"/></a>
+
+</br>
+<img src="https://img.shields.io/badge/Nx--gray?logo=nx" alt="nx"/>
 
 ## Contributors ✨
 
