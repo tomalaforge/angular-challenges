@@ -1,4 +1,4 @@
-<h1>Create a generator to extends @nx/angular-lib</h1>
+<h1>Create a generator to extend @nx/angular-lib</h1>
 
 > Author: Thomas Laforge
 
