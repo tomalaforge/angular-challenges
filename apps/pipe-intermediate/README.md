@@ -19,7 +19,7 @@ The goal is to create a `wrapFn` pipe to wrap your callback function though a pi
 
 1. Fork the project
 2. clone it
-3. npm install
+3. npm ci
 4. `npx nx serve pipe-intermediate`
 5. _...work on it_
 6. Commit your work

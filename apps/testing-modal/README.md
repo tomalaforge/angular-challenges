@@ -22,7 +22,7 @@ I created some `it` blocks but feel free to add more test if you like to.
 
 1. Fork the project
 2. clone it
-3. npm install
+3. npm ci
 4. `npx nx serve testing-modal` to play with the application
 5. `npx nx test testing-modal` to test your application with Testing Library
 6. `npx nx component-test testing-modal --watch` to test your application with Cypress

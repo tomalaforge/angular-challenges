@@ -24,7 +24,7 @@ WATCH MODE : `npx nx component-test rxjs-race-condition --watch`
 
 1. Fork the project
 2. clone it
-3. npm install
+3. npm ci
 4. `npx nx serve rxjs-race-condition`
 5. _...work on it_
 6. Commit your work

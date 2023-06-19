@@ -17,7 +17,7 @@ Documentation for Angular Material component is [here](https://material.angular.
 
 1. Fork the project
 2. clone it
-3. npm install
+3. npm ci
 4. `npx nx serve testing-harness` to play with the application
 5. `npx nx test testing-harness` to test your application with Testing Library
 6. _...work on it_

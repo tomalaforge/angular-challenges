@@ -1,0 +1,9 @@
+{
+  "generators": {
+    "lib": {
+      "factory": "./src/generators/custom-library/generator",
+      "schema": "./src/generators/custom-library/schema.json",
+      "description": "extends library from nx/cli"
+    }
+  }
+}
