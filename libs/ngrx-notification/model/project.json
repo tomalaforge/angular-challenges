@@ -3,7 +3,7 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/ngrx-notification/model/src",
-  "prefix": "angular-challenges",
+  "prefix": "lib",
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",

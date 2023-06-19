@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   standalone: true,
   imports: [],
-  selector: 'app-root',
+  selector: 'lib-root',
   template: ``,
   styles: [''],
 })

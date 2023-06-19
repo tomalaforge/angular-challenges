@@ -16,6 +16,39 @@
     "baseUrl": ".",
     "paths": {
       "@angular-challenges/cli": ["libs/cli/src/index.ts"],
+      "@angular-challenges/module-to-standalone/admin/feature": [
+        "libs/module-to-standalone/admin/feature/src/index.ts"
+      ],
+      "@angular-challenges/module-to-standalone/admin/shared": [
+        "libs/module-to-standalone/admin/shared/src/index.ts"
+      ],
+      "@angular-challenges/module-to-standalone/core/providers": [
+        "libs/module-to-standalone/core/providers/src/index.ts"
+      ],
+      "@angular-challenges/module-to-standalone/core/service": [
+        "libs/module-to-standalone/core/service/src/index.ts"
+      ],
+      "@angular-challenges/module-to-standalone/forbidden": [
+        "libs/module-to-standalone/forbidden/src/index.ts"
+      ],
+      "@angular-challenges/module-to-standalone/home": [
+        "libs/module-to-standalone/home/src/index.ts"
+      ],
+      "@angular-challenges/module-to-standalone/shell": [
+        "libs/module-to-standalone/shell/src/index.ts"
+      ],
+      "@angular-challenges/module-to-standalone/user/contact": [
+        "libs/module-to-standalone/user/contact/src/index.ts"
+      ],
+      "@angular-challenges/module-to-standalone/user/feature": [
+        "libs/module-to-standalone/user/feature/src/index.ts"
+      ],
+      "@angular-challenges/module-to-standalone/user/home": [
+        "libs/module-to-standalone/user/home/src/index.ts"
+      ],
+      "@angular-challenges/module-to-standalone/user/shell": [
+        "libs/module-to-standalone/user/shell/src/index.ts"
+      ],
       "@angular-challenges/ngrx-notification/backend": [
         "libs/ngrx-notification/backend/src/index.ts"
       ],

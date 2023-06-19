@@ -3,7 +3,7 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/shared/ngrx-callstate-store/src",
-  "prefix": "angular-challenges",
+  "prefix": "lib",
   "targets": {
     "build": {
       "executor": "@nx/angular:package",

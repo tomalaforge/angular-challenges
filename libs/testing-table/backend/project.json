@@ -2,7 +2,7 @@
   "name": "testing-table-backend",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/testing-table/backend/src",
-  "prefix": "angular-challenges",
+  "prefix": "lib",
   "tags": [],
   "projectType": "library",
   "targets": {

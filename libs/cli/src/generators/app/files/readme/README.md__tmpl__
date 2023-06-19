@@ -25,7 +25,6 @@
 7. Submit a PR with a title beginning with **Answer:<%= challengeNumber %>** that I will review and other dev can review.
 
 <a href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A<%= challengeNumber %>+label%3Aanswer"><img src="https://img.shields.io/badge/-Solutions-green" alt="<%= projectName %>"/></a>
-
 <a href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A<%= challengeNumber %>+label%3A"answer+author"'><img src="https://img.shields.io/badge/-Author solution-important" alt="<%= projectName %> solution author"/></a>
 
 <!-- <a href="{Blog post url}" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/-Blog post explanation-blue" alt="<%= projectName %> blog article"/></a>  -->
