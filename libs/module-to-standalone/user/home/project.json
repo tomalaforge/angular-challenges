@@ -2,10 +2,26 @@
   "name": "module-to-standalone-user-home",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/module-to-standalone/user/home/src",
-  "prefix": "angular-challenges",
+  "prefix": "lib",
   "tags": [],
   "projectType": "library",
   "targets": {
+    "build": {
+      "executor": "@nx/angular:ng-packagr-lite",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "project": "libs/module-to-standalone/user/home/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/module-to-standalone/user/home/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/module-to-standalone/user/home/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],

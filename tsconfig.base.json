@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@angular-challenges/cli": ["libs/cli/src/index.ts"],
+      "@angular-challenges/custom-plugin": ["libs/custom-plugin/src/index.ts"],
       "@angular-challenges/module-to-standalone/admin/feature": [
         "libs/module-to-standalone/admin/feature/src/index.ts"
       ],
@@ -49,7 +50,6 @@
       "@angular-challenges/module-to-standalone/user/shell": [
         "libs/module-to-standalone/user/shell/src/index.ts"
       ],
-      "@angular-challenges/custom-plugin": ["libs/custom-plugin/src/index.ts"],
       "@angular-challenges/ngrx-notification/backend": [
         "libs/ngrx-notification/backend/src/index.ts"
       ],
