@@ -26,10 +26,7 @@ What you will need to do:
 this.todos[todoUpdated.id - 1] = todoUpdated;
 
 // Prefer something like this, but need to be improved because we still want the same order
-this.todos = [
-  ...this.todos.filter((t) => t.id !== todoUpdated.id),
-  todoUpdated,
-];
+this.todos = [...this.todos.filter((t) => t.id !== todoUpdated.id), todoUpdated];
 ```
 
 - Use **ChangeDectection.OnPush**
@@ -53,7 +50,7 @@ this.todos = [
 
 1. Fork the project
 2. clone it
-3. npm install
+3. npm ci
 4. **nx serve crud**
 5. _...work On it_
 6. Commit your work

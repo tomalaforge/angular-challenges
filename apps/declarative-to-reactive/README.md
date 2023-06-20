@@ -18,7 +18,7 @@
 
 1. Fork the project
 2. clone it
-3. npm install
+3. npm ci
 4. **nx serve declarative-to-reactive**
 5. _...work on it_
 6. Commit your work

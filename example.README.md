@@ -25,7 +25,7 @@
 
 1. Fork the project
 2. clone it
-3. npm install
+3. npm ci
 <!-- TODO: add you project app name directory -->
 4. `npx nx serve {project app name}`
 5. _...work on it_

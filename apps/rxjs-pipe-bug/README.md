@@ -26,7 +26,7 @@ The QA team reports a **bug**. The UI shows **All [topic] have been deleted** al
 
 1. Fork the project
 2. clone it
-3. npm install
+3. npm ci
 4. `npx nx serve rxjs-pipe-bug`
 5. _...work on it_
 6. Commit your work

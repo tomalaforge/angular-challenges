@@ -18,7 +18,7 @@ In this first exercice, you add calling a simple function inside your template. 
 
 1. Fork the project
 2. clone it
-3. npm install
+3. npm ci
 4. `npx nx serve pipe-easy`
 5. _...work on it_
 6. Commit your work
