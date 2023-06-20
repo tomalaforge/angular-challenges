@@ -41,9 +41,6 @@
       "@angular-challenges/module-to-standalone/user/contact": [
         "libs/module-to-standalone/user/contact/src/index.ts"
       ],
-      "@angular-challenges/module-to-standalone/user/feature": [
-        "libs/module-to-standalone/user/feature/src/index.ts"
-      ],
       "@angular-challenges/module-to-standalone/user/home": [
         "libs/module-to-standalone/user/home/src/index.ts"
       ],

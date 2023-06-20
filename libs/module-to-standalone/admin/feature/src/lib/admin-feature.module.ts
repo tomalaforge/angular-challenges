@@ -1,4 +1,3 @@
-import { IsAuthorizedGuard } from '@angular-challenges/module-to-standalone/admin/shared';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -10,23 +9,17 @@ import { RouterModule } from '@angular/router';
     RouterModule.forChild([
       {
         path: '',
-        canActivate: [IsAuthorizedGuard],
-        children: [
-          {
-            path: '',
-            loadChildren: () =>
-              import('./dashboard/dashboard.component').then(
-                (m) => m.DashboardModule
-              ),
-          },
-          {
-            path: 'create-user',
-            loadChildren: () =>
-              import('./create-user/create-user.component').then(
-                (m) => m.CreateUserModule
-              ),
-          },
-        ],
+        loadChildren: () =>
+          import('./dashboard/dashboard.component').then(
+            (m) => m.DashboardModule
+          ),
+      },
+      {
+        path: 'create-user',
+        loadChildren: () =>
+          import('./create-user/create-user.component').then(
+            (m) => m.CreateUserModule
+          ),
       },
     ]),
   ],
