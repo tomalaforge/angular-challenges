@@ -1,9 +1,12 @@
 import { TOKEN } from '@angular-challenges/module-to-standalone/core/providers';
 import { AuthorizationService } from '@angular-challenges/module-to-standalone/core/service';
-import { Component, Inject } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { Component, inject } from '@angular/core';
 
 @Component({
   selector: 'lib-home',
+  standalone: true,
+  imports: [AsyncPipe],
   template: `Home component
 
     <section class="flex gap-5 items-center">
@@ -19,9 +22,7 @@ import { Component, Inject } from '@angular/core';
 
     <section>LoadedToken {{ token }}</section> `,
 })
-export class HomeComponent {
-  constructor(
-    public authorizeService: AuthorizationService,
-    @Inject(TOKEN) public token: string
-  ) {}
+export default class HomeComponent {
+  authorizeService = inject(AuthorizationService);
+  token = inject(TOKEN);
 }
