@@ -78,7 +78,8 @@ If you would like to propose a challenge, this project is open source, so feel f
 </br>
 <img src="https://img.shields.io/badge/Nx--gray?logo=nx" alt="nx"/>
 
-<a href="./libs/custom-plugin/src/generators/custom-library/README.md"><img src="https://img.shields.io/badge/25-Extends Nx Library generator-red" alt="Create harness"/></a>
+<a href="./libs/custom-plugin/src/generators/custom-library/README.md"><img src="https://img.shields.io/badge/25-Extends Nx Library generator-red" alt="extends lib generator"/></a>
+<a href="./libs/custom-plugin/src/generators/feature-component/README.md"><img src="https://img.shields.io/badge/25-Component generator-orange" alt="Custom component generator"/></a>
 
 ## Contributors ✨
 

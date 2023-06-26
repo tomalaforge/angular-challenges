@@ -1,0 +1,36 @@
+{
+  "name": "fake-utils",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/fake-utils/src",
+  "prefix": "lib",
+  "tags": [],
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:ng-packagr-lite",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "project": "libs/fake-utils/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/fake-utils/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/fake-utils/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/fake-utils/**/*.ts",
+          "libs/fake-utils/**/*.html"
+        ]
+      }
+    }
+  }
+}

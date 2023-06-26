@@ -17,6 +17,7 @@
     "paths": {
       "@angular-challenges/cli": ["libs/cli/src/index.ts"],
       "@angular-challenges/custom-plugin": ["libs/custom-plugin/src/index.ts"],
+      "@angular-challenges/fake-utils": ["libs/fake-utils/src/index.ts"],
       "@angular-challenges/module-to-standalone/admin/feature": [
         "libs/module-to-standalone/admin/feature/src/index.ts"
       ],

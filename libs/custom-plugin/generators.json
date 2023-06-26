@@ -4,6 +4,11 @@
       "factory": "./src/generators/custom-library/generator",
       "schema": "./src/generators/custom-library/schema.json",
       "description": "extends library from nx/cli"
+    },
+    "feature-component": {
+      "factory": "./src/generators/feature-component/generator",
+      "schema": "./src/generators/feature-component/schema.json",
+      "description": "feature-component generator"
     }
   }
 }
