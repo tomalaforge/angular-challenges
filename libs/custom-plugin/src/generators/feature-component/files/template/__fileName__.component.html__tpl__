@@ -1,0 +1,1 @@
+<ng-container *ngrxLet="vm$ as vm"> // do things </ng-container>

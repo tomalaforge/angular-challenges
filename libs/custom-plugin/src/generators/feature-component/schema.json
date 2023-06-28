@@ -4,15 +4,41 @@
   "title": "",
   "type": "object",
   "properties": {
+    "path": {
+      "type": "string",
+      "format": "path",
+      "description": "The path at which to create the component file, relative to the current workspace. Default is a folder with the same name as the component in the project root.",
+      "visible": false
+    },
     "name": {
       "type": "string",
-      "description": "",
+      "description": "The name of the component. DON'T suffix it with '-dialog'",
       "$default": {
         "$source": "argv",
         "index": 0
       },
-      "x-prompt": "What name would you like to use?"
+      "x-prompt": "What name would you like to use for the component?"
+    },
+    "project": {
+      "type": "string",
+      "description": "The name of the project.",
+      "$default": {
+        "$source": "projectName"
+      },
+      "x-dropdown": "projects"
+    },
+    "inlineTemplate": {
+      "description": "Include template inline in the component.ts file. By default, an external template file is created and referenced in the component.ts file.",
+      "type": "boolean",
+      "default": true,
+      "alias": "t"
+    },
+    "createService": {
+      "description": "Create a http service associated with the store",
+      "type": "boolean",
+      "default": true,
+      "alias": "s"
     }
   },
-  "required": ["name"]
+  "required": ["name", "project"]
 }
