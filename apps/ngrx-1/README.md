@@ -28,7 +28,7 @@ In NgRx, **selectors** is a very powerful tool often **misused**. You should use
 
 1. Fork the project
 2. clone it
-3. npm install
+3. npm ci
 4. **nx serve ngrx-1**
 5. _...work On it_
 6. Commit your work

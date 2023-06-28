@@ -38,7 +38,7 @@ The goal is to **improve the ngFor directive**
 
 1. Fork the project
 2. clone it
-3. npm install
+3. npm ci
 4. **nx serve ngfor-enhancement**
 5. _...work On it_
 6. Commit your work
