@@ -2,16 +2,11 @@ import { AsyncPipe, NgFor } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  inject,
   OnInit,
+  inject,
 } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { loadActivities } from './store/activity/activity.actions';
-import { ActivityType } from './store/activity/activity.model';
-import { selectActivities } from './store/activity/activity.selectors';
-import { loadStatuses } from './store/status/status.actions';
-import { selectAllTeachersByActivityType } from './store/status/status.selectors';
-import { loadUsers } from './store/user/user.actions';
+import { Store, createAction } from '@ngrx/store';
+import { selectVm } from './app.selectors';
 
 @Component({
   selector: 'app-root',
@@ -25,12 +20,7 @@ import { loadUsers } from './store/user/user.actions';
         <p>Main teacher: {{ activity.teacher.name }}</p>
         <span>All teachers available for : {{ activity.type }} are</span>
         <ul>
-          <li
-            *ngFor="
-              let teacher of getAllTeachersForActivityType$(activity.type)
-                | async
-            "
-          >
+          <li *ngFor="let teacher of activity.teachers">
             {{ teacher.name }}
           </li>
         </ul>
@@ -60,14 +50,11 @@ import { loadUsers } from './store/user/user.actions';
 export class AppComponent implements OnInit {
   private store = inject(Store);
 
-  activities$ = this.store.select(selectActivities);
+  activities$ = this.store.select(selectVm);
 
   ngOnInit(): void {
-    this.store.dispatch(loadActivities());
-    this.store.dispatch(loadUsers());
-    this.store.dispatch(loadStatuses());
+    this.store.dispatch(appLoaded());
   }
-
-  getAllTeachersForActivityType$ = (type: ActivityType) =>
-    this.store.select(selectAllTeachersByActivityType(type));
 }
+
+export const appLoaded = createAction('[AppComponent] Loaded');
