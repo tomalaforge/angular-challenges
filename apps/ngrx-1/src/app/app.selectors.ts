@@ -7,18 +7,17 @@ const selectTeachersByActivityMap = createSelector(
   selectUserIsAdmin,
   selectActivities,
   (isAdmin, activities) => {
-    if (isAdmin) {
-      return activities.reduce((statusMap, activity) => {
-        const status = statusMap[activity.type];
-        if (status) {
-          status.push(activity.teacher);
-        } else {
-          statusMap[activity.type] = [activity.teacher];
-        }
-        return statusMap;
-      }, {} as Record<ActivityType, Person[]>);
-    }
-    return {} as Record<ActivityType, Person[]>;
+    if (!isAdmin) return {} as Record<ActivityType, Person[]>;
+
+    return activities.reduce((statusMap, activity) => {
+      const status = statusMap[activity.type];
+      if (status) {
+        status.push(activity.teacher);
+      } else {
+        statusMap[activity.type] = [activity.teacher];
+      }
+      return statusMap;
+    }, {} as Record<ActivityType, Person[]>);
   }
 );
 
