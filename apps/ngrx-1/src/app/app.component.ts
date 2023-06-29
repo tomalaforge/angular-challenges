@@ -5,8 +5,9 @@ import {
   OnInit,
   inject,
 } from '@angular/core';
-import { Store, createAction } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { selectVm } from './app.selectors';
+import * as AppActions from './app.actions';
 
 @Component({
   selector: 'app-root',
@@ -53,8 +54,6 @@ export class AppComponent implements OnInit {
   activities$ = this.store.select(selectVm);
 
   ngOnInit(): void {
-    this.store.dispatch(appLoaded());
+    this.store.dispatch(AppActions.appLoaded());
   }
 }
-
-export const appLoaded = createAction('[AppComponent] Loaded');
