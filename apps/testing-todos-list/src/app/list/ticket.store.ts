@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import {
   ComponentStore,
   OnStateInit,
+  OnStoreInit,
   tapResponse,
 } from '@ngrx/component-store';
 import { pipe } from 'rxjs';
@@ -27,7 +28,7 @@ const initialState: TicketState = {
 @Injectable()
 export class TicketStore
   extends ComponentStore<TicketState>
-  implements OnStateInit
+  implements OnStoreInit, OnStateInit
 {
   readonly users$ = this.select((state) => state.users);
   readonly error$ = this.select((state) => state.error);
@@ -35,15 +36,11 @@ export class TicketStore
   private readonly ticketsInput$ = this.select((state) => state.tickets);
   private readonly search$ = this.select((state) => state.search);
 
-  constructor(private backend: BackendService) {
-    super(initialState);
-  }
-
   private readonly ticketsUsers$ = this.select(
     this.users$,
     this.ticketsInput$,
     (users, tickets) =>
-      users
+      users && users.length > 0
         ? tickets.map((ticket) => ({
             ...ticket,
             assignee:
@@ -77,6 +74,17 @@ export class TicketStore
     ...state,
     search,
   }));
+
+  private backend = inject(BackendService);
+
+  ngrxOnStoreInit() {
+    this.setState(initialState);
+  }
+
+  ngrxOnStateInit() {
+    this.loadTickets();
+    this.loadUsers();
+  }
 
   readonly loadTickets = this.effect<void>(
     pipe(
@@ -159,9 +167,4 @@ export class TicketStore
       )
     )
   );
-
-  ngrxOnStateInit() {
-    this.loadTickets();
-    this.loadUsers();
-  }
 }
