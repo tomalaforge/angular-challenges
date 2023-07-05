@@ -1,5 +1,5 @@
-import { AsyncPipe, NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { NgIf } from '@angular/common';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -9,7 +9,6 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { TicketStore } from '../ticket.store';
 
 @Component({
   selector: 'app-add',
@@ -19,7 +18,6 @@ import { TicketStore } from '../ticket.store';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    AsyncPipe,
     NgIf,
   ],
   template: ` <form [formGroup]="form" #ngForm="ngForm" (ngSubmit)="submit()">
@@ -39,23 +37,23 @@ import { TicketStore } from '../ticket.store';
       mat-flat-button
       color="primary"
       type="submit"
-      [disabled]="loading$ | async">
+      [disabled]="loading">
       Add new Ticket
     </button>
   </form>`,
 })
 export class AddComponent {
+  @Input() loading = false;
+
+  @Output() addTicket = new EventEmitter<string>();
+
   form = new FormGroup({
     description: new FormControl(null, Validators.required),
   });
 
-  loading$ = this.ticketStore.loading$;
-
-  constructor(private ticketStore: TicketStore) {}
-
   submit() {
     if (this.form.valid) {
-      this.ticketStore.addTicket(this.form.value.description ?? '');
+      this.addTicket.emit(this.form.value.description ?? '');
     }
   }
 }

@@ -59,6 +59,16 @@ export class TicketStore
       )
   );
 
+  readonly vm$ = this.select(
+    {
+      tickets: this.tickets$,
+      users: this.users$,
+      loading: this.loading$,
+      error: this.error$,
+    },
+    { debounce: true }
+  );
+
   readonly updateAssignee = this.updater((state, ticket: Ticket) => {
     const newTickets = [...state.tickets];
     const index = newTickets.findIndex((t) => t.id === ticket.id);

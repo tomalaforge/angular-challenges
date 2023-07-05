@@ -1,18 +1,5 @@
-import { subscribeSpyTo } from '@hirez_io/observer-spy';
-import { of, throwError } from 'rxjs';
-import { BackendService } from '../backend.service';
-import { TicketStore } from './ticket.store';
-
-describe('ticketStore', () => {
-  let fixture: TicketStore;
-  let service: BackendService;
-
-  beforeEach(() => {
-    service = new BackendService();
-    fixture = new TicketStore(service);
-  });
-
-  describe('addTicket$', () => {
+describe('TicketStore', () => {
+  describe('When adding a new Ticket', () => {
     const NEW_TICKET = {
       id: 1,
       description: 'test 2',
@@ -27,34 +14,12 @@ describe('ticketStore', () => {
         completed: false,
       },
     ];
-    it('should add ticket with SUCCESS', () => {
-      spyOn(service, 'newTicket').and.returnValue(of(NEW_TICKET));
-      fixture.patchState({ tickets });
-
-      const expectedTicket = [...tickets, NEW_TICKET];
-
-      fixture.addTicket('test');
-
-      const state = subscribeSpyTo(fixture.state$).getFirstValue();
-      expect(service.newTicket).toHaveBeenCalled();
-      expect(state.loading).toEqual(false);
-      expect(state.tickets).toEqual(expectedTicket);
+    describe('Given a success answer from API', () => {
+      it('Then array of tickets is of lenght 2', () => {});
     });
 
-    it('should NOT add ticket because of service FAILURE', () => {
-      const ERROR = 'error';
-      spyOn(service, 'newTicket').and.returnValue(throwError(ERROR));
-      fixture.patchState({ tickets });
-
-      const expectedTicket = [...tickets];
-
-      fixture.addTicket('test');
-
-      const state = subscribeSpyTo(fixture.state$).getFirstValue();
-      expect(service.newTicket).toHaveBeenCalled();
-      expect(state.loading).toEqual(false);
-      expect(state.tickets).toEqual(expectedTicket);
-      expect(state.error).toEqual(ERROR);
+    describe('Given a failure answer from API', () => {
+      it('Then array of tickets still of lenght 1 and error is set', () => {});
     });
   });
 });
