@@ -4,19 +4,14 @@
 
 ### Statement:
 
-NOT IMPLEMENTED YET
+I built this more real life application to create more real life test cases.
+In this application, you can search for tickets, you can assign or finish them. You can also create new tickets.
 
-<!-- We have a small application that send a title to a fake backend that you type inside a input.
-If the title is correctly typed, you can send the request otherwise you get a nice error and the request is not sent.
-You can play with it by running : `npx nx serve testing-todos-list`.
+This is a very simple application, but it will let you deal with asynchronous task and mocks
 
-The goal is to test this behavior with Testing library and Cypress
+The goal of this challenge is to write all test cases of `ticket.store` , `list.component` and `row.component` with Testing Library.
 
-The file named `child.component.spec.ts` will let test your application using Testing Library. To run the test suits, you need to run `npx nx test testing-todos-list`. You can also install [Jest Runner](https://marketplace.visualstudio.com/items?itemName=firsttris.vscode-jest-runner) to execute your test by clicking on the `Run` button above each `describe` or `it` blocks.
-
-For testing cypress, you will execute your test inside the `child.component.cy.ts` and run `npx nx component-test testing-todos-list` to execute your test suits. You can add the `--watch` flag to execute your test in watch mode.
-
-I created some `it` blocks but feel free to add more test if you like to. -->
+You can also do it with cypress.
 
 ### Submitting your work
 
@@ -28,10 +23,10 @@ I created some `it` blocks but feel free to add more test if you like to. -->
 6. `npx nx component-test testing-todos-list --watch` to test your application with Cypress
 7. _...work on it_
 8. Commit your work
-9. Submit a PR with a title beginning with **Answer:23** that I will review and other dev can review.
+9. Submit a PR with a title beginning with **Answer:28** that I will review and other dev can review.
 
-<a href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A23+label%3Aanswer"><img src="https://img.shields.io/badge/-Solutions-green" alt="todo list app testing"/></a>
-<a href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A23+label%3A"answer+author"'><img src="https://img.shields.io/badge/-Author solution-important" alt="todo list app testing solution author"/></a>
+<a href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A28+label%3Aanswer"><img src="https://img.shields.io/badge/-Solutions-green" alt="todo list app testing"/></a>
+<a href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A285+label%3A"answer+author"'><img src="https://img.shields.io/badge/-Author solution-important" alt="todo list app testing solution author"/></a>
 
 <!-- <a href="{Blog post url}" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/-Blog post explanation-blue" alt="nested testing blog article"/></a> -->
 

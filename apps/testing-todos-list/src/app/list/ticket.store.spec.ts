@@ -1,25 +1,29 @@
 describe('TicketStore', () => {
-  describe('When adding a new Ticket', () => {
-    const NEW_TICKET = {
-      id: 1,
-      description: 'test 2',
-      assigneeId: 888,
-      completed: false,
-    };
-    const tickets = [
-      {
-        id: 0,
-        description: 'test',
-        assigneeId: 888,
-        completed: false,
-      },
-    ];
-    describe('Given a success answer from API', () => {
-      it('Then array of tickets is of lenght 2', () => {});
+  describe('When init', () => {
+    it('Then calls backend.users', async () => {
+      //
     });
 
-    describe('Given a failure answer from API', () => {
-      it('Then array of tickets still of lenght 1 and error is set', () => {});
+    it('Then calls backend.tickets', async () => {
+      //
+    });
+
+    describe('Given all api returns success response', () => {
+      it('Then tickets and users should be merged ', async () => {
+        //
+      });
+    });
+
+    describe('Given users api returns failure response', () => {
+      it('Then tickets should not have any assignee', () => {
+        //
+      });
+    });
+
+    describe('When adding a new ticket with success', () => {
+      it('Then ticket is added to the list', async () => {
+        //
+      });
     });
   });
 });
