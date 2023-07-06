@@ -10,10 +10,16 @@
     width="200px"
   />
 
+  <img
+    *ngIf="type === CardType.CITY"
+    src="assets/img/city.jpg"
+    width="200px"
+  />
+
   <section>
     <app-list-item
       *ngFor="let item of list"
-      [name]="item.firstname"
+      [name]="type === CardType.CITY? item.name: item.firstname"
       [id]="item.id"
       [type]="type"
     >

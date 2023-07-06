@@ -4,14 +4,15 @@ import { TeacherStore } from '../../data-access/teacher.store';
 import { CardType } from '../../model/card.model';
 import { Teacher } from '../../model/teacher.model';
 import { CardComponent } from '../../ui/card/card.component';
+import { CommonModule } from '@angular/common';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-teacher-card',
   template: `<app-card
-    [list]="teachers"
+    [list]="teachers$ | async"
     [type]="cardType"
-    customClass="bg-light-red"
-  ></app-card>`,
+    customClass="bg-light-red"></app-card>`,
   styles: [
     `
       ::ng-deep .bg-light-red {
@@ -20,17 +21,16 @@ import { CardComponent } from '../../ui/card/card.component';
     `,
   ],
   standalone: true,
-  imports: [CardComponent],
+  imports: [CommonModule, CardComponent],
 })
 export class TeacherCardComponent implements OnInit {
-  teachers: Teacher[] = [];
+  teachers$!: Observable<Teacher[]>;
   cardType = CardType.TEACHER;
 
   constructor(private http: FakeHttpService, private store: TeacherStore) {}
 
   ngOnInit(): void {
     this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
-
-    this.store.teachers$.subscribe((t) => (this.teachers = t));
+    this.teachers$ = this.store.teachers$;
   }
 }
