@@ -24,7 +24,6 @@ export class AppComponent implements OnInit {
     this.http
       .get<any[]>('https://jsonplaceholder.typicode.com/todos')
       .subscribe((todos) => {
-        console.log('return', todos);
         this.todos = todos;
       });
   }

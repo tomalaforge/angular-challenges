@@ -1,9 +1,9 @@
 /* eslint-disable */
 export default {
-  displayName: 'rxjs-to-signal',
+  displayName: 'interop-rxjs-signal',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../coverage/apps/rxjs-to-signal',
+  coverageDirectory: '../../coverage/apps/interop-rxjs-signal',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

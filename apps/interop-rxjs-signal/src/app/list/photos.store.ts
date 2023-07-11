@@ -10,6 +10,8 @@ import { filter, mergeMap, tap } from 'rxjs/operators';
 import { Photo } from '../photo.model';
 import { PhotoService } from '../photos.service';
 
+const PHOTO_STATE_KEY = 'photo_search';
+
 export interface PhotoState {
   photos: Photo[];
   search: string;
@@ -51,6 +53,7 @@ export class PhotoStore
   readonly vm$ = this.select(
     {
       photos: this.photos$,
+      search: this.search$,
       page: this.page$,
       pages: this.pages$,
       endOfPage: this.endOfPage$,
@@ -61,7 +64,17 @@ export class PhotoStore
   );
 
   ngrxOnStoreInit() {
-    this.setState(initialState);
+    const savedJSONState = localStorage.getItem(PHOTO_STATE_KEY);
+    if (savedJSONState === null) {
+      this.setState(initialState);
+    } else {
+      const savedState = JSON.parse(savedJSONState);
+      this.setState({
+        ...initialState,
+        search: savedState.search,
+        page: savedState.page,
+      });
+    }
   }
 
   ngrxOnStateInit() {
@@ -108,6 +121,10 @@ export class PhotoStore
                 photos: photo,
                 pages,
               });
+              localStorage.setItem(
+                PHOTO_STATE_KEY,
+                JSON.stringify({ search, page })
+              );
             },
             (error: unknown) => this.patchState({ error, loading: false })
           )

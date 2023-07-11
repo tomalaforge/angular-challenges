@@ -7,7 +7,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { RouterLinkWithHref } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
 import { provideComponentStore } from '@ngrx/component-store';
-import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { debounceTime, distinctUntilChanged, skipWhile, tap } from 'rxjs';
 import { Photo } from '../photo.model';
 import { PhotoStore } from './photos.store';
 
@@ -38,10 +38,6 @@ import { PhotoStore } from './photos.store';
 
     <ng-container *ngrxLet="vm$ as vm">
       <section class="flex flex-col">
-        <mat-progress-bar
-          mode="query"
-          *ngIf="vm.loading"
-          class="mt-5"></mat-progress-bar>
         <section class="flex gap-3 items-center">
           <button
             [disabled]="vm.page === 1"
@@ -59,6 +55,10 @@ import { PhotoStore } from './photos.store';
           </button>
           Page :{{ vm.page }} / {{ vm.pages }}
         </section>
+        <mat-progress-bar
+          mode="query"
+          *ngIf="vm.loading"
+          class="mt-5"></mat-progress-bar>
         <ul
           class="flex flex-wrap gap-4"
           *ngIf="vm.photos && vm.photos.length > 0; else noPhoto">
@@ -87,13 +87,25 @@ import { PhotoStore } from './photos.store';
 })
 export default class PhotosComponent implements OnInit {
   store = inject(PhotoStore);
-  readonly vm$ = this.store.vm$;
+  readonly vm$ = this.store.vm$.pipe(
+    tap(({ search }) => {
+      if (!this.formInit) {
+        this.search.setValue(search);
+        this.formInit = true;
+      }
+    })
+  );
 
+  private formInit = false;
   search = new FormControl();
 
   ngOnInit(): void {
     this.store.search(
-      this.search.valueChanges.pipe(debounceTime(300), distinctUntilChanged())
+      this.search.valueChanges.pipe(
+        skipWhile(() => !this.formInit),
+        debounceTime(300),
+        distinctUntilChanged()
+      )
     );
   }
 

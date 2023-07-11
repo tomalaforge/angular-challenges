@@ -45,6 +45,7 @@ If you would like to propose a challenge, this project is open source, so feel f
 <a href="./apps/di/README.md"><img src="https://img.shields.io/badge/16-di-red" alt="di"/></a>
 <a href="./apps/anchor-scrolling/README.md"><img src="https://img.shields.io/badge/21-anchor--scrolling-green" alt="anchor-scrolling"/></a>
 <a href="./apps/router-input/README.md"><img src="https://img.shields.io/badge/22-router--input-green" alt="router-input"/></a>
+<a href="./apps/interop-rxjs-signal/README.md"><img src="https://img.shields.io/badge/22-interop rxjs signal-red" alt="interop signal rxjs"/></a>
 
 </br>
 <img src="https://img.shields.io/badge/Typescript--gray?logo=typescript" alt="Typescript"/>
@@ -92,7 +93,7 @@ If you would like to propose a challenge, this project is open source, so feel f
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://medium.com/@thomas.laforge"><img src="https://avatars.githubusercontent.com/u/30832608?s…00&u=6f0ad9676792f29fd7fe6e113df06213d384a813&v=4" width="100px;" alt="Thomas Laforge"/><br /><sub><b>Thomas Laforge</b></sub></a><br />29 🧩</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://medium.com/@thomas.laforge"><img src="https://avatars.githubusercontent.com/u/30832608?s…00&u=6f0ad9676792f29fd7fe6e113df06213d384a813&v=4" width="100px;" alt="Thomas Laforge"/><br /><sub><b>Thomas Laforge</b></sub></a><br />30 🧩</a></td>
     </tr>
   </tbody>
 </table>
