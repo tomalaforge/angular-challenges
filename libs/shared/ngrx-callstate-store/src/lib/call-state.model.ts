@@ -29,10 +29,6 @@ export class CallStateErrorHandler implements ErrorHandler<CallStateError> {
   };
 }
 
-export interface EsuiteError {
-  code: string;
-}
-
 export interface ErrorState {
   error: CustomError;
 }

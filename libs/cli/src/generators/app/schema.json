@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "GeneratorNxApp",
+  "title": "Creates an Angular application.",
+  "description": "Creates an Angular application.",
+  "type": "object",
+  "cli": "nx",
+  "properties": {
+    "name": {
+      "description": "The name of the application.",
+      "type": "string",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What name would you like to use for the application?",
+      "pattern": "^[a-zA-Z].*$"
+    },
+    "title": {
+      "description": "Title of your challenge.",
+      "type": "string",
+      "$default": {
+        "$source": "argv",
+        "index": 1
+      },
+      "x-priority": "important"
+    },
+    "challengeNumber": {
+      "description": "The number of your challenge.",
+      "type": "number",
+      "$default": {
+        "$source": "argv",
+        "index": 2
+      },
+      "x-priority": "important"
+    },
+    "directory": {
+      "description": "The directory of the new application.",
+      "type": "string",
+      "x-priority": "important"
+    },
+    "addTest": {
+      "description": "add spec files.",
+      "type": "boolean",
+      "default": true,
+      "alias": "S"
+    },
+    "skipPackageJson": {
+      "type": "boolean",
+      "default": false,
+      "description": "Do not add dependencies to `package.json`.",
+      "x-priority": "internal"
+    },
+    "rootProject": {
+      "description": "Create an application at the root of the workspace.",
+      "type": "boolean",
+      "default": false,
+      "hidden": true,
+      "x-priority": "internal"
+    }
+  },
+  "additionalProperties": false,
+  "required": ["name", "title", "challengeNumber"]
+}

@@ -20,7 +20,8 @@
           "apps/rxjs-pipe-bug/src/assets"
         ],
         "styles": ["apps/rxjs-pipe-bug/src/styles.scss"],
-        "scripts": []
+        "scripts": [],
+        "allowedCommonJsDependencies": ["seedrandom"]
       },
       "configurations": {
         "production": {
@@ -68,7 +69,7 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": [
           "apps/rxjs-pipe-bug/**/*.ts",

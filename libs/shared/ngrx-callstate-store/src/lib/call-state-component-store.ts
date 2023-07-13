@@ -1,5 +1,11 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import { inject, Inject, Injectable, InjectionToken } from '@angular/core';
+import {
+  inject,
+  Inject,
+  Injectable,
+  InjectionToken,
+  Optional,
+} from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { Observable, of, switchMap } from 'rxjs';
 import {
@@ -7,7 +13,7 @@ import {
   CallStateError,
   getErrorCallState,
 } from './call-state.model';
-import { ERROR_TOKEN } from './external.model';
+import { ERROR_TOKEN, FLICKER_TIME } from './external.model';
 import { nonFlickerLoader } from './non-flicker-loader';
 
 export const INITIAL_TOKEN = new InjectionToken('initial data');
@@ -26,8 +32,9 @@ export class CallStateComponentStore<
     : U & CallStateComponentState
 > extends ComponentStore<T> {
   private error = inject(ERROR_TOKEN);
+  private flickerTime = inject(FLICKER_TIME);
 
-  constructor(@Inject(INITIAL_TOKEN) initialState: U) {
+  constructor(@Inject(INITIAL_TOKEN) @Optional() initialState: U) {
     super({ callState: 'INIT', ...initialState } as T);
   }
 
@@ -37,7 +44,9 @@ export class CallStateComponentStore<
 
   readonly isLoadingWithFlicker$: Observable<boolean> = this.select(
     (state) => state.callState === 'LOADING'
-  ).pipe(switchMap((loading) => nonFlickerLoader(of(loading))));
+  ).pipe(
+    switchMap((loading) => nonFlickerLoader(of(loading), this.flickerTime))
+  );
 
   readonly isLoaded$: Observable<boolean> = this.select(
     (state) => state.callState === 'LOADED'
@@ -88,5 +97,9 @@ export class CallStateComponentStore<
       ...patchedState,
     } as Partial<T>);
     return err;
+  }
+
+  setInitState(initialState: U) {
+    this.setState({ callState: 'INIT', ...initialState } as T);
   }
 }

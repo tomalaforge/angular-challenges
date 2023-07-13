@@ -36,7 +36,7 @@ But in this part, we can pass to ListComponent, a list of **any object**. And we
 
 1. Fork the project
 2. clone it
-3. npm install
+3. npm ci
 4. **nx serve context-outlet-type**
 5. _...work On it_
 6. Commit your work

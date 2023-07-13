@@ -15,11 +15,51 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@angular-challenges/cli": ["libs/cli/src/index.ts"],
+      "@angular-challenges/custom-plugin": ["libs/custom-plugin/src/index.ts"],
+      "@angular-challenges/fake-utils": ["libs/fake-utils/src/index.ts"],
+      "@angular-challenges/module-to-standalone/admin/feature": [
+        "libs/module-to-standalone/admin/feature/src/index.ts"
+      ],
+      "@angular-challenges/module-to-standalone/admin/shared": [
+        "libs/module-to-standalone/admin/shared/src/index.ts"
+      ],
+      "@angular-challenges/module-to-standalone/core/providers": [
+        "libs/module-to-standalone/core/providers/src/index.ts"
+      ],
+      "@angular-challenges/module-to-standalone/core/service": [
+        "libs/module-to-standalone/core/service/src/index.ts"
+      ],
+      "@angular-challenges/module-to-standalone/forbidden": [
+        "libs/module-to-standalone/forbidden/src/index.ts"
+      ],
+      "@angular-challenges/module-to-standalone/home": [
+        "libs/module-to-standalone/home/src/index.ts"
+      ],
+      "@angular-challenges/module-to-standalone/shell": [
+        "libs/module-to-standalone/shell/src/index.ts"
+      ],
+      "@angular-challenges/module-to-standalone/user/contact": [
+        "libs/module-to-standalone/user/contact/src/index.ts"
+      ],
+      "@angular-challenges/module-to-standalone/user/home": [
+        "libs/module-to-standalone/user/home/src/index.ts"
+      ],
+      "@angular-challenges/module-to-standalone/user/shell": [
+        "libs/module-to-standalone/user/shell/src/index.ts"
+      ],
       "@angular-challenges/ngrx-notification/backend": [
         "libs/ngrx-notification/backend/src/index.ts"
       ],
       "@angular-challenges/ngrx-notification/model": [
         "libs/ngrx-notification/model/src/index.ts"
+      ],
+      "@angular-challenges/shared/utils": ["libs/shared/utils/src/index.ts"],
+      "@angular-challenges/testing-table/backend": [
+        "libs/testing-table/backend/src/index.ts"
+      ],
+      "@angular-challenges/testing-table/model": [
+        "libs/testing-table/model/src/index.ts"
       ],
       "@tomalaforge/ngrx-callstate-store": [
         "libs/shared/ngrx-callstate-store/src/index.ts"
