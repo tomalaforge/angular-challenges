@@ -1,11 +1,13 @@
 import { CounterComponent } from './counter.component';
 
 describe(CounterComponent.name, () => {
-  it('using createOutputSpy', () => {
-    cy.mount(CounterComponent);
-  });
+  describe('Given an initualValue of 10', async () => {
+    it('listen to output using createOutputSpy', () => {
+      cy.mount(CounterComponent);
+    });
 
-  it('using autoSpyOutputs', () => {
-    cy.mount(CounterComponent);
+    it('listen to output  using autoSpyOutputs', () => {
+      cy.mount(CounterComponent);
+    });
   });
 });
