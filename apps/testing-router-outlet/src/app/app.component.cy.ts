@@ -1,23 +1,33 @@
 import { AppComponent } from './app.component';
 
 describe(AppComponent.name, () => {
-  it('shows error message and disabled button because no search criteria are typed', () => {
-    //todo
+  describe('Given no search criteria', () => {
+    it('Then shows error message and disabled button', () => {
+      //todo
+    });
   });
 
-  it('shows No book found because no book match the search', () => {
-    //todo
+  describe('Given a search criteria with no book match', () => {
+    it('Then shows No book found', () => {
+      //todo
+    });
   });
 
-  it('shows One book because the search matches one book', () => {
-    //todo
+  describe('Given a search criteria with one book match', () => {
+    it('Then shows One book and no error', () => {
+      //todo
+    });
   });
 
-  it('shows One book because the search matches one book even with different cases', () => {
-    //todo
+  describe('Given a search criteria in Uppercase with one book match', () => {
+    it('Then shows One book and no error', () => {
+      //todo
+    });
   });
 
-  it('shows a list of books because the search matches multiples books', () => {
-    //todo
+  describe('Given a search criteria with multple books matches', () => {
+    it('Then shows a list of books', () => {
+      //todo
+    });
   });
 });
