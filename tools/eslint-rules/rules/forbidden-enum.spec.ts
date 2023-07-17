@@ -6,6 +6,11 @@ const ruleTester = new TSESLint.RuleTester({
 });
 
 ruleTester.run(RULE_NAME, rule, {
-  valid: [`const example = true;`],
-  invalid: [],
+  valid: [`const toto = 'TOTO'`],
+  invalid: [
+    {
+      code: `const enum Toto { TOTO = 'Toto'};`,
+      errors: [{ messageId: 'forbiddenEnum' }],
+    },
+  ],
 });
