@@ -9,16 +9,13 @@ import { RouterModule } from '@angular/router';
     RouterModule.forChild([
       {
         path: '',
-        loadChildren: () =>
-          import('./dashboard/dashboard.component').then(
-            (m) => m.ContactDashboardModule
-          ),
+        loadComponent: () => import('./dashboard/dashboard.component'),
       },
       {
         path: 'create-contact',
-        loadChildren: () =>
+        loadComponent: () =>
           import('./create-contact/create-contact.component').then(
-            (m) => m.CreateContactModule
+            (mod) => mod.CreateContactComponent
           ),
       },
     ]),

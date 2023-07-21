@@ -10,13 +10,6 @@ import { RouterModule } from '@angular/router';
       class="border bg-gray-700 rounded-lg p-2 text-white ml-5">
       Back
     </button> `,
+  standalone: true,
 })
 export class CreateContactComponent {}
-
-@NgModule({
-  imports: [
-    RouterModule.forChild([{ path: '', component: CreateContactComponent }]),
-  ],
-  declarations: [CreateContactComponent],
-})
-export class CreateContactModule {}

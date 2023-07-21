@@ -24,6 +24,7 @@ import { Component, Inject } from '@angular/core';
       {{ token }}
     </section>
   `,
+  standalone: true,
   host: {
     class: 'flex flex-col p-4 gap-3 border border-blue',
   },

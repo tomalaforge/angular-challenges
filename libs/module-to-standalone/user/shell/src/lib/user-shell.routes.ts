@@ -9,9 +9,9 @@ export const userShellRoutes: Route[] = [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       {
         path: 'home',
-        loadChildren: () =>
+        loadComponent: () =>
           import('@angular-challenges/module-to-standalone/user/home').then(
-            (m) => m.UserHomeModule
+            (mod) => mod.UserHomeComponent
           ),
       },
       {
