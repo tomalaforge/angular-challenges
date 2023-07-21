@@ -1,3 +1,23 @@
 {
-  "eslint.validate": ["json"]
+  "eslint.validate": ["json"],
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#bdd0ad",
+    "activityBar.background": "#bdd0ad",
+    "activityBar.foreground": "#15202b",
+    "activityBar.inactiveForeground": "#15202b99",
+    "activityBarBadge.background": "#718dae",
+    "activityBarBadge.foreground": "#15202b",
+    "commandCenter.border": "#15202b99",
+    "sash.hoverBorder": "#bdd0ad",
+    "statusBar.background": "#a3be8c",
+    "statusBar.foreground": "#15202b",
+    "statusBarItem.hoverBackground": "#89ac6b",
+    "statusBarItem.remoteBackground": "#a3be8c",
+    "statusBarItem.remoteForeground": "#15202b",
+    "titleBar.activeBackground": "#a3be8c",
+    "titleBar.activeForeground": "#15202b",
+    "titleBar.inactiveBackground": "#a3be8c99",
+    "titleBar.inactiveForeground": "#15202b99"
+  },
+  "peacock.color": "#a3be8c"
 }
