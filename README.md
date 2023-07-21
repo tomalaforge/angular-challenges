@@ -46,6 +46,7 @@ If you would like to propose a challenge, this project is open source, so feel f
 <a href="./apps/anchor-scrolling/README.md"><img src="https://img.shields.io/badge/21-anchor--scrolling-green" alt="anchor-scrolling"/></a>
 <a href="./apps/router-input/README.md"><img src="https://img.shields.io/badge/22-router--input-green" alt="router-input"/></a>
 <a href="./apps/interop-rxjs-signal/README.md"><img src="https://img.shields.io/badge/30-interop rxjs signal-red" alt="interop signal rxjs"/></a>
+<a href="./apps/module-to-standalone/README.md"><img src="https://img.shields.io/badge/31-module to standalone-green" alt="module to standalone"/></a>
 
 </br>
 <img src="https://img.shields.io/badge/Typescript--gray?logo=typescript" alt="Typescript"/>
