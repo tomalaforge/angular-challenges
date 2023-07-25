@@ -2,6 +2,7 @@ import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { Component, Input, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FakeServiceService } from './fake.service';
+import { tap } from 'rxjs';
 
 interface MenuItem {
   path: string;
@@ -34,7 +35,7 @@ interface MenuItem {
   },
 })
 export class NavigationComponent {
-  @Input() menus!: MenuItem[];
+  @Input() menus: MenuItem[] | undefined;
 }
 
 @Component({
@@ -43,20 +44,34 @@ export class NavigationComponent {
   template: `
     <ng-container *ngIf="info$ | async as info">
       <ng-container *ngIf="info !== null; else noInfo">
-        <app-nav [menus]="getMenu(info)" />
+        <!-- Switching to a variable, instead of calling a function everytime a CD hits -->
+        <app-nav [menus]="menus" />
       </ng-container>
     </ng-container>
 
     <ng-template #noInfo>
-      <app-nav [menus]="getMenu('')" />
+      <!-- Switching to a variable, instead of calling a function everytime a CD hits -->
+      <app-nav [menus]="menus" />
     </ng-template>
   `,
   host: {},
 })
 export class MainNavigationComponent {
   private fakeBackend = inject(FakeServiceService);
-
-  readonly info$ = this.fakeBackend.getInfoFromBackend();
+  info$: any;
+  menus: MenuItem[] = [];
+  constructor() {
+    this.info$ = this.fakeBackend.getInfoFromBackend().pipe(
+      // Using tap operator to update menus via the function every time info$ changes
+      tap((info) => {
+        if (info !== null) {
+          this.menus = this.getMenu(info);
+        } else {
+          this.menus = this.getMenu('');
+        }
+      })
+    );
+  }
 
   getMenu(prop: string) {
     return [
