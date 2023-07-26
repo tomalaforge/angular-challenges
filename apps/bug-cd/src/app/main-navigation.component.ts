@@ -2,7 +2,7 @@ import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { Component, Input, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FakeServiceService } from './fake.service';
-import { Observable, map, of } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 interface MenuItem {
   path: string;
@@ -35,34 +35,22 @@ interface MenuItem {
   },
 })
 export class NavigationComponent {
-  @Input() menus: MenuItem[] | undefined | null;
+  @Input() menus!: MenuItem[];
 }
 
 @Component({
   standalone: true,
   imports: [NavigationComponent, NgIf, AsyncPipe],
-  template: `
-    <ng-container *ngIf="menus$ | async as menus; else noInfo">
-      <!-- Switching to Observable, instead of calling a function everytime a CD hits -->
-      <app-nav [menus]="menus" />
-    </ng-container>
-
-    <ng-template #noInfo>
-      <!-- Switching to Observable, instead of calling a function everytime a CD hits -->
-      <app-nav [menus]="emptyMenu$ | async" />
-    </ng-template>
-  `,
+  template: ` <app-nav [menus]="(menus$ | async)!" /> `,
   host: {},
 })
 export class MainNavigationComponent {
   private fakeBackend = inject(FakeServiceService);
   menus$!: Observable<MenuItem[]>;
-  emptyMenu$!: Observable<MenuItem[]>;
   constructor() {
     this.menus$ = this.fakeBackend
       .getInfoFromBackend()
       .pipe(map((info) => this.getMenu(info || '')));
-    this.emptyMenu$ = of(this.getMenu(''));
   }
 
   getMenu(prop: string): MenuItem[] {
