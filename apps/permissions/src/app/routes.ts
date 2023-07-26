@@ -2,13 +2,13 @@ export const APP_ROUTES = [
   {
     path: '',
     loadComponent: () =>
-      import('./login.component').then((m) => m.LoginComponent),
+      import('./login.component').then((c) => c.LoginComponent),
   },
   {
     path: 'enter',
     loadComponent: () =>
       import('./dashboard/admin.component').then(
-        (m) => m.AdminDashboardComponent
+        (c) => c.AdminDashboardComponent
       ),
   },
 ];

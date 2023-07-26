@@ -5,16 +5,16 @@ export const ROUTES: Route[] = [
   {
     path: 'teacher',
     loadComponent: () =>
-      import('./teacher/teacher.component').then((m) => m.TeacherComponent),
+      import('./teacher/teacher.component').then((c) => c.TeacherComponent),
   },
   {
     path: 'student',
     loadComponent: () =>
-      import('./student/student.component').then((m) => m.StudentComponent),
+      import('./student/student.component').then((c) => c.StudentComponent),
   },
   {
     path: 'school',
     loadComponent: () =>
-      import('./school/school.component').then((m) => m.SchoolComponent),
+      import('./school/school.component').then((c) => c.SchoolComponent),
   },
 ];

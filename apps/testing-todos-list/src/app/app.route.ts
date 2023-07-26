@@ -11,12 +11,12 @@ export const APP_ROUTES: Routes = [
   {
     path: 'list',
     loadComponent: () =>
-      import('./list/list.component').then((m) => m.ListComponent),
+      import('./list/list.component').then((c) => c.ListComponent),
   },
   {
     path: `detail/:${PARAM_TICKET_ID}`,
     loadComponent: () =>
-      import('./detail/detail.component').then((m) => m.DetailComponent),
+      import('./detail/detail.component').then((c) => c.DetailComponent),
   },
   {
     path: '**',

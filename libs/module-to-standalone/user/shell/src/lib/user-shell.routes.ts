@@ -11,14 +11,14 @@ export const userShellRoutes: Route[] = [
         path: 'home',
         loadComponent: () =>
           import('@angular-challenges/module-to-standalone/user/home').then(
-            (mod) => mod.UserHomeComponent
+            (c) => c.UserHomeComponent
           ),
       },
       {
         path: 'contact',
         loadChildren: () =>
           import('@angular-challenges/module-to-standalone/user/contact').then(
-            (m) => m.ContactFeatureModule
+            (c) => c.ContactRoute
           ),
       },
     ],
