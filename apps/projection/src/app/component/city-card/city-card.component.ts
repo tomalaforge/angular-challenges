@@ -41,10 +41,7 @@ export class CityCardComponent implements OnInit {
     this.store.deleteOne;
     this.http.fetchCities$.subscribe((c) => {
       this.store.addAll(c);
-      this.store.citys$.subscribe((c) => {
-        console.log(c);
-        this.cities = c;
-      });
+      this.store.citys$.subscribe((c) => (this.cities = c));
     });
   }
 }
