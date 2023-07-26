@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+import { Component, OnInit, ViewEncapsulation, inject } from '@angular/core';
+import {
+  FakeHttpService,
+  randTeacher,
+} from '../../data-access/fake-http.service';
 import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
 import { Teacher } from '../../model/teacher.model';
 import { CardComponent } from '../../ui/card/card.component';
 
@@ -9,24 +11,31 @@ import { CardComponent } from '../../ui/card/card.component';
   selector: 'app-teacher-card',
   template: `<app-card
     [list]="teachers"
-    [type]="cardType"
-    customClass="bg-light-red"
-  ></app-card>`,
+    [addOneStore]="store.addOne.bind(store)"
+    [removeStore]="store.deleteOne.bind(store)"
+    [addRandom]="addRandom"
+    label="firstname"
+    customClass="bg-light-red"></app-card>`,
   styles: [
     `
-      ::ng-deep .bg-light-red {
+      .bg-light-red {
         background-color: rgba(250, 0, 0, 0.1);
+      }
+      .bg-light-red > .imgHolder {
+        content: url('./../../../assets/img/teacher.png');
       }
     `,
   ],
   standalone: true,
+  encapsulation: ViewEncapsulation.None,
   imports: [CardComponent],
 })
 export class TeacherCardComponent implements OnInit {
   teachers: Teacher[] = [];
-  cardType = CardType.TEACHER;
 
-  constructor(private http: FakeHttpService, private store: TeacherStore) {}
+  http: FakeHttpService = inject(FakeHttpService);
+  store: TeacherStore = inject(TeacherStore);
+  addRandom: () => Teacher = randTeacher;
 
   ngOnInit(): void {
     this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));

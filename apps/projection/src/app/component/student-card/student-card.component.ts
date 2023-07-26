@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+import { Component, OnInit, ViewEncapsulation, inject } from '@angular/core';
+import {
+  FakeHttpService,
+  randStudent,
+} from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
-import { CardType } from '../../model/card.model';
 import { Student } from '../../model/student.model';
 import { CardComponent } from '../../ui/card/card.component';
 
@@ -9,24 +11,31 @@ import { CardComponent } from '../../ui/card/card.component';
   selector: 'app-student-card',
   template: `<app-card
     [list]="students"
-    [type]="cardType"
-    customClass="bg-light-green"
-  ></app-card>`,
+    [addOneStore]="store.addOne.bind(store)"
+    [removeStore]="store.deleteOne.bind(store)"
+    [addRandom]="addRandom"
+    label="firstname"
+    customClass="bg-light-green"></app-card>`,
   standalone: true,
   styles: [
     `
-      ::ng-deep .bg-light-green {
+      .bg-light-green {
         background-color: rgba(0, 250, 0, 0.1);
+      }
+      .bg-light-green > .imgHolder {
+        content: url('./../../../assets/img/student.webp');
       }
     `,
   ],
+  encapsulation: ViewEncapsulation.None,
   imports: [CardComponent],
 })
 export class StudentCardComponent implements OnInit {
   students: Student[] = [];
-  cardType = CardType.STUDENT;
 
-  constructor(private http: FakeHttpService, private store: StudentStore) {}
+  http: FakeHttpService = inject(FakeHttpService);
+  store: StudentStore = inject(StudentStore);
+  addRandom: () => Student = randStudent;
 
   ngOnInit(): void {
     this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
