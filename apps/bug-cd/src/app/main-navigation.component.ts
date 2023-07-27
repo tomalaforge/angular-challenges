@@ -2,7 +2,7 @@ import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { Component, Input, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FakeServiceService } from './fake.service';
-import { Observable, map } from 'rxjs';
+import { map } from 'rxjs';
 
 interface MenuItem {
   path: string;
@@ -46,12 +46,9 @@ export class NavigationComponent {
 })
 export class MainNavigationComponent {
   private fakeBackend = inject(FakeServiceService);
-  menus$!: Observable<MenuItem[]>;
-  constructor() {
-    this.menus$ = this.fakeBackend
-      .getInfoFromBackend()
-      .pipe(map((info) => this.getMenu(info || '')));
-  }
+  menus$ = this.fakeBackend
+    .getInfoFromBackend()
+    .pipe(map((info) => this.getMenu(info || '')));
 
   getMenu(prop: string): MenuItem[] {
     return [
