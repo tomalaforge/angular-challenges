@@ -1,1 +1,1 @@
-export * from './lib/admin-feature.route';
+export { default } from './lib/admin-feature.route';

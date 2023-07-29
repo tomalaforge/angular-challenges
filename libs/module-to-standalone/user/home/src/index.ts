@@ -1,1 +1,1 @@
-export * from './lib/home.component';
+export { default } from './lib/home.component';

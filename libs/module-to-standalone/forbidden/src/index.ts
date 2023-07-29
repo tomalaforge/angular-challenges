@@ -1,1 +1,1 @@
-export * from './lib/forbidden.component';
+export { default } from './lib/forbidden.component';

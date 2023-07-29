@@ -1,5 +1,4 @@
-import { Component, NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'lib-create-contact',
@@ -12,4 +11,4 @@ import { RouterModule } from '@angular/router';
     </button> `,
   standalone: true,
 })
-export class CreateContactComponent {}
+export default class CreateContactComponent {}

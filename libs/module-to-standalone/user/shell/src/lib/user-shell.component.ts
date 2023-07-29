@@ -1,5 +1,6 @@
 import { TOKEN } from '@angular-challenges/module-to-standalone/core/providers';
 import { Component, Inject } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'lib-user-shell',
@@ -25,6 +26,7 @@ import { Component, Inject } from '@angular/core';
     </section>
   `,
   standalone: true,
+  imports: [RouterOutlet],
   host: {
     class: 'flex flex-col p-4 gap-3 border border-blue',
   },

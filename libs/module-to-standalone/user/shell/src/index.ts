@@ -1,1 +1,1 @@
-export * from './lib/user-shell.module';
+export { default } from './lib/user-shell.routes';

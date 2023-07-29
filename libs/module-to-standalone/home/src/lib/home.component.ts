@@ -22,9 +22,10 @@ import { Component, Inject } from '@angular/core';
   standalone: true,
   imports: [AsyncPipe],
 })
-export class HomeComponent {
+class HomeComponent {
   constructor(
     public authorizeService: AuthorizationService,
     @Inject(TOKEN) public token: string
   ) {}
 }
+export default HomeComponent;

@@ -5,4 +5,4 @@ import { Component } from '@angular/core';
   template: `User Home component`,
   standalone: true,
 })
-export class UserHomeComponent {}
+export default class UserHomeComponent {}

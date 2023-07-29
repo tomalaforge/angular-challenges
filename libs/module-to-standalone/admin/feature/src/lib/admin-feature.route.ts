@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
 
-export const adminRoute: Route[] = [
+const adminRoute: Route[] = [
   {
     path: '',
     loadComponent: () => import('./dashboard/dashboard.component'),
@@ -10,3 +10,4 @@ export const adminRoute: Route[] = [
     loadComponent: () => import('./create-user/create-user.component'),
   },
 ];
+export default adminRoute;

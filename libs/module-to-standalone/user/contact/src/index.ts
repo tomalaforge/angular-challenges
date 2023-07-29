@@ -1,1 +1,1 @@
-export * from './lib/contact-feature.routes';
+export { default } from './lib/contact-feature.routes';

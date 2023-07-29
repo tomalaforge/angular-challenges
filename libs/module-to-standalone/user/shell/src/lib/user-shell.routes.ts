@@ -1,7 +1,7 @@
 import { Route } from '@angular/router';
 import { UserShellComponent } from './user-shell.component';
 
-export const userShellRoutes: Route[] = [
+const userShellRoutes: Route[] = [
   {
     path: '',
     component: UserShellComponent,
@@ -10,17 +10,14 @@ export const userShellRoutes: Route[] = [
       {
         path: 'home',
         loadComponent: () =>
-          import('@angular-challenges/module-to-standalone/user/home').then(
-            (c) => c.UserHomeComponent
-          ),
+          import('@angular-challenges/module-to-standalone/user/home'),
       },
       {
         path: 'contact',
         loadChildren: () =>
-          import('@angular-challenges/module-to-standalone/user/contact').then(
-            (c) => c.ContactRoute
-          ),
+          import('@angular-challenges/module-to-standalone/user/contact'),
       },
     ],
   },
 ];
+export default userShellRoutes;
