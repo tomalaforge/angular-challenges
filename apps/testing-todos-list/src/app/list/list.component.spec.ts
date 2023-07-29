@@ -103,4 +103,10 @@ describe('ListComponent', () => {
       });
     });
   });
+
+  describe('When clicking on first ticket', () => {
+    it('Then we navigate to detail/0', async () => {
+      //
+    });
+  });
 });
