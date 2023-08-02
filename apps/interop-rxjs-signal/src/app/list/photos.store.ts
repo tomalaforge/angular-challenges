@@ -1,4 +1,5 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
 import { Subject, defer, merge, of } from 'rxjs';
 import {
   catchError,
@@ -6,8 +7,6 @@ import {
   distinctUntilChanged,
   filter,
   map,
-  share,
-  startWith,
   switchMap,
   tap,
 } from 'rxjs/operators';
@@ -51,6 +50,7 @@ export class PhotoStore {
   // Signals
   readonly state = signal(getSavedState());
   readonly photos = computed(() => this.state().photos);
+  readonly search = computed(() => this.state().search);
   readonly page = computed(() => this.state().page);
   readonly pages = computed(() => this.state().pages);
   readonly error = computed(() => this.state().error);
@@ -63,16 +63,21 @@ export class PhotoStore {
     disabled: false,
   });
 
-  readonly search$ = this.searchControl.valueChanges.pipe(
-    startWith(this.searchControl.value),
+  readonly searchChange$ = this.searchControl.valueChanges.pipe(
     filter((a) => !!a && a.length >= 3),
     debounceTime(300),
-    distinctUntilChanged()
+    distinctUntilChanged(),
+    map((search) => ({
+      ...this.state(),
+      search,
+      page: 1,
+      loading: true,
+    }))
   );
 
-  readonly searchResults$ = this.search$.pipe(
-    map((search) => ({ search: search || '', page: 1 })), // TypeScript thinks it's string | null
-    switchMap(({ search, page }) =>
+  searchPayload = computed(() => [this.search(), this.page()] as const);
+  readonly searchResultsChange$ = toObservable(this.searchPayload).pipe(
+    switchMap(([search, page]) =>
       this.photoService.searchPublicPhotos(search, page).pipe(
         tap(() => {
           localStorage.setItem(
@@ -83,25 +88,21 @@ export class PhotoStore {
         catchError((error: unknown) => of({ error }))
       )
     ),
-    share()
-  );
-
-  loadingChange$ = merge(
-    this.search$.pipe(map(() => true)),
-    this.searchResults$.pipe(map(() => false))
-  ).pipe(map((loading) => ({ ...this.state(), loading })));
-
-  resultsChange$ = this.searchResults$.pipe(
     map((result: { error: unknown } | FlickrAPIResponse) => {
       const state = this.state();
       if ('error' in result) {
-        return { ...state, error: JSON.stringify(result.error) };
+        return {
+          ...state,
+          error: JSON.stringify(result.error),
+          loading: false,
+        };
       } else {
         return {
           ...state,
           photos: result.photos.photo,
           pages: result.photos.pages,
           error: '',
+          loading: false,
         };
       }
     })
@@ -112,12 +113,18 @@ export class PhotoStore {
   pageChange$ = merge(
     this.nextPage$.pipe(map(() => 1)),
     this.previousPage$.pipe(map(() => -1))
-  ).pipe(map((change) => ({ ...this.state(), page: this.page() + change })));
+  ).pipe(
+    map((change) => ({
+      ...this.state(),
+      page: this.page() + change,
+      loading: true,
+    }))
+  );
 
   newState$ = merge(
     defer(() => of(getSavedState())),
-    this.loadingChange$,
-    this.resultsChange$,
+    this.searchChange$,
+    this.searchResultsChange$,
     this.pageChange$
   );
 
