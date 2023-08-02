@@ -40,14 +40,14 @@ import { injectAutoSignal } from '../inject-auto-signal';
             [disabled]="store.page() === 1"
             [class.bg-gray-400]="store.page() === 1"
             class="text-xl border rounded-md p-3"
-            (click)="store.previousPage()">
+            (click)="store.previousPage$.next()">
             <
           </button>
           <button
             [disabled]="store.endOfPage()"
             [class.bg-gray-400]="store.endOfPage()"
             class="text-xl border rounded-md p-3"
-            (click)="store.nextPage()">
+            (click)="store.nextPage$.next()">
             >
           </button>
           Page :{{ store.page() }} / {{ store.pages() }}

@@ -1,5 +1,5 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
-import { defer, merge, of } from 'rxjs';
+import { Subject, defer, merge, of } from 'rxjs';
 import {
   catchError,
   debounceTime,
@@ -107,23 +107,19 @@ export class PhotoStore {
     })
   );
 
+  nextPage$ = new Subject<void>();
+  previousPage$ = new Subject<void>();
+  pageChange$ = merge(
+    this.nextPage$.pipe(map(() => 1)),
+    this.previousPage$.pipe(map(() => -1))
+  ).pipe(map((change) => ({ ...this.state(), page: this.page() + change })));
+
   newState$ = merge(
     defer(() => of(getSavedState())),
     this.loadingChange$,
-    this.resultsChange$
+    this.resultsChange$,
+    this.pageChange$
   );
 
   connection$ = connectSource(this.state, this.newState$);
-
-  setLoading(loading: boolean) {
-    this.state.set({ ...this.state(), loading });
-  }
-
-  nextPage() {
-    this.state.set({ ...this.state(), page: this.state().page + 1 });
-  }
-
-  previousPage() {
-    this.state.set({ ...this.state(), page: this.state().page - 1 });
-  }
 }
