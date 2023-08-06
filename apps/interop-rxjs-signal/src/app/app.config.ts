@@ -12,11 +12,11 @@ export const appConfig: ApplicationConfig = {
         {
           path: '',
           pathMatch: 'full',
-          loadComponent: () => import('./list/photos.component'),
+          loadComponent: () => import('./photos/list/photos.component'),
         },
         {
           path: 'detail',
-          loadComponent: () => import('./detail/detail.component'),
+          loadComponent: () => import('./photos/detail/detail.component'),
         },
         {
           path: '**',

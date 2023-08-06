@@ -1,4 +1,4 @@
-export interface Photo {
+export type Photo = {
   id: string;
   title: string;
   tags: string;
@@ -7,4 +7,4 @@ export interface Photo {
   datetaken: string;
   url_q: string;
   url_m: string;
-}
+};

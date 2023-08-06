@@ -61,6 +61,12 @@
       "@angular-challenges/testing-table/model": [
         "libs/testing-table/model/src/index.ts"
       ],
+      "@ngrx/signals": ["libs/ngrx-signals/src/index.ts"],
+      "@ngrx/signals/immer": ["libs/ngrx-signals/immer/src/index.ts"],
+      "@ngrx/signals/rxjs-interop": [
+        "libs/ngrx-signals/rxjs-interop/src/index.ts"
+      ],
+      "@ngrx/signals/storage": ["libs/ngrx-signals/storage/src/index.ts"],
       "@tomalaforge/ngrx-callstate-store": [
         "libs/shared/ngrx-callstate-store/src/index.ts"
       ]
