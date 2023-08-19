@@ -5,7 +5,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 @Component({
   selector: 'lib-user-shell',
   standalone: true,
-  imports: [RouterLink, RouterOutlet],
+ 
   template: `
     -- User Panel --
     <div class="flex gap-2 items-center">

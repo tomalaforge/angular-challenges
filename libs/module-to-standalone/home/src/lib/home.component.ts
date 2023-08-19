@@ -1,7 +1,6 @@
 import { TOKEN } from '@angular-challenges/module-to-standalone/core/providers';
 import { AuthorizationService } from '@angular-challenges/module-to-standalone/core/service';
-import { Component, inject } from '@angular/core';
-import { AsyncPipe } from '@angular/common';
+ 
 
 @Component({
   selector: 'lib-home',
