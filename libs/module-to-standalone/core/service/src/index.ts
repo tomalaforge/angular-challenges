@@ -1,1 +1,1 @@
-export * from './lib/authorization.service';
+export { AuthorizationService } from './lib/authorization.service';
