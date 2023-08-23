@@ -9,19 +9,14 @@ import { TextComponent } from './text.component';
   template: ` <text>This is a static text</text> `,
   styles: [
     `
-      :host text {
-        color: black;
-        font-size: 10px;
-      }
-
       :host-context([type='error']) text {
-        color: red;
-        font-size: 30px;
+        --text-color: red;
+        --text-font-size: 30px;
       }
 
       :host-context([type='warning']) text {
-        color: orange;
-        font-size: 25px;
+        --text-color: orange;
+        --text-font-size: 25px;
       }
     `,
   ],

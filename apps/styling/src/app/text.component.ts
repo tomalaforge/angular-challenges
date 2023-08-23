@@ -12,8 +12,8 @@ import { Component } from '@angular/core';
   styles: [
     `
       :host {
-        font-size: 15px;
-        color: blue;
+        color: var(--text-color, black);
+        font-size: var(--text-font-size, 10px);
       }
     `,
   ],
