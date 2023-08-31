@@ -1,3 +1,4 @@
 {
-  "eslint.validate": ["json"]
+  "eslint.validate": ["json"],
+  "editor.acceptSuggestionOnEnter": "on"
 }

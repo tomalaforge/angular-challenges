@@ -24,7 +24,7 @@
     "@angular/router": "16.1.4",
     "@ngneat/falso": "^6.4.0",
     "@ngrx/component": "16.0.0",
-    "@ngrx/component-store": "16.0.0",
+    "@ngrx/component-store": "^16.0.0",
     "@ngrx/effects": "16.0.0",
     "@ngrx/entity": "16.0.0",
     "@ngrx/router-store": "16.0.0",

@@ -1,51 +1,58 @@
-import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { NgFor, NgIf } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+} from '@angular/core';
+import { LetDirective } from '@ngrx/component';
+import { provideComponentStore } from '@ngrx/component-store';
+import { TodoStore } from './todos/todo.store';
+import { TodoItem } from './todos/todo-item.component';
 import { randText } from '@ngneat/falso';
+import { Todo } from './todos/todo.model';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [NgFor, NgIf, LetDirective, TodoItem, MatProgressSpinnerModule],
   selector: 'app-root',
+  providers: [provideComponentStore(TodoStore)],
   template: `
-    <div *ngFor="let todo of todos">
-      {{ todo.title }}
-      <button (click)="update(todo)">Update</button>
-    </div>
+    <ng-container *ngrxLet="vm$ as vm">
+      <mat-spinner [diameter]="40" color="accent" *ngIf="vm.loading">
+      </mat-spinner>
+
+      <mat-spinner *ngIf="vm.error; else noerror">
+        Something went wrong!
+      </mat-spinner>
+
+      <ng-template #noerror>
+        <app-todo-item
+          [todo]="todo"
+          [laoding]="vm.loading"
+          (update)="updateTodo($event)"
+          (delete)="deleteToDo($event)"
+          *ngFor="let todo of vm.todos" />
+      </ng-template>
+    </ng-container>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styles: [],
 })
 export class AppComponent implements OnInit {
-  todos!: any[];
+  #store = inject(TodoStore);
+  vm$ = this.#store.vm$;
 
-  constructor(private http: HttpClient) {}
-
-  ngOnInit(): void {
-    this.http
-      .get<any[]>('https://jsonplaceholder.typicode.com/todos')
-      .subscribe((todos) => {
-        this.todos = todos;
-      });
+  updateTodo(todo: Todo) {
+    //const radomText = randText();
+    todo.title = randText();
+    this.#store.updateToDo(todo);
   }
 
-  update(todo: any) {
-    this.http
-      .put<any>(
-        `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
-        JSON.stringify({
-          todo: todo.id,
-          title: randText(),
-          body: todo.body,
-          userId: todo.userId,
-        }),
-        {
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-          },
-        }
-      )
-      .subscribe((todoUpdated: any) => {
-        this.todos[todoUpdated.id - 1] = todoUpdated;
-      });
+  deleteToDo(id: number) {
+    this.#store.deleteTodo(id);
   }
+
+  ngOnInit(): void {}
 }
