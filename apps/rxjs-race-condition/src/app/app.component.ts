@@ -36,5 +36,3 @@ export class AppComponent implements OnInit {
     });
   }
 }
-
-// faire une app qui fonctionne mais pas dans les tests e2e à cause du délai de la requete http.
