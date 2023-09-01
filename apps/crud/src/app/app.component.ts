@@ -1,10 +1,5 @@
-import { NgFor, NgIf } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit,
-  inject,
-} from '@angular/core';
+import { JsonPipe, NgFor, NgIf } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { LetDirective } from '@ngrx/component';
 import { provideComponentStore } from '@ngrx/component-store';
 import { TodoStore } from './todos/todo.store';
@@ -15,7 +10,14 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   standalone: true,
-  imports: [NgFor, NgIf, LetDirective, TodoItem, MatProgressSpinnerModule],
+  imports: [
+    NgFor,
+    NgIf,
+    LetDirective,
+    TodoItem,
+    MatProgressSpinnerModule,
+    JsonPipe,
+  ],
   selector: 'app-root',
   providers: [provideComponentStore(TodoStore)],
   template: `
@@ -23,9 +25,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
       <mat-spinner [diameter]="40" color="accent" *ngIf="vm.loading">
       </mat-spinner>
 
-      <mat-spinner *ngIf="vm.error; else noerror">
+      <ng-container *ngIf="vm.error; else noerror">
         Something went wrong!
-      </mat-spinner>
+      </ng-container>
 
       <ng-template #noerror>
         <app-todo-item
@@ -40,12 +42,11 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   changeDetection: ChangeDetectionStrategy.OnPush,
   styles: [],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   #store = inject(TodoStore);
   vm$ = this.#store.vm$;
 
   updateTodo(todo: Todo) {
-    //const radomText = randText();
     todo.title = randText();
     this.#store.updateToDo(todo);
   }
@@ -53,6 +54,4 @@ export class AppComponent implements OnInit {
   deleteToDo(id: number) {
     this.#store.deleteTodo(id);
   }
-
-  ngOnInit(): void {}
 }
