@@ -17,6 +17,15 @@
     "paths": {
       "@angular-challenges/cli": ["libs/cli/src/index.ts"],
       "@angular-challenges/custom-plugin": ["libs/custom-plugin/src/index.ts"],
+      "@angular-challenges/decoupling/brain": [
+        "libs/decoupling/brain/src/index.ts"
+      ],
+      "@angular-challenges/decoupling/core": [
+        "libs/decoupling/core/src/index.ts"
+      ],
+      "@angular-challenges/decoupling/helmet": [
+        "libs/decoupling/helmet/src/index.ts"
+      ],
       "@angular-challenges/fake-utils": ["libs/fake-utils/src/index.ts"],
       "@angular-challenges/module-to-standalone/admin/feature": [
         "libs/module-to-standalone/admin/feature/src/index.ts"

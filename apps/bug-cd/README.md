@@ -12,13 +12,20 @@ In this small application, we have a navigation menu to route our application to
 
 The goal of the challenge is to debug this application and make it work.
 
-#### Hint 1
+#### Hints
 
-If you comment out `routerLinkActive="isSelected"` inside `NavigationComponent`: the application loads correctly.
+<details>
+  <summary>Hint 1</summary>
+  
+  If you comment out `routerLinkActive="isSelected"` inside `NavigationComponent`: the application loads correctly.
+</details>
 
-#### Hint 2
+<details>
+  <summary>Hint 2</summary>
 
 If you open the [`RouterLinkActive` source code](https://github.com/angular/angular/blob/main/packages/router/src/directives/router_link_active.ts) and go to **line 196**, Angular is calling `this.cdr.markForCheck` inside a microTask which triggers a new CD cycle. If you comment out this line, the application loads again, however the bug is not inside the Angular Framework. 😅😯
+
+</details>
 
 ### Submitting your work
 

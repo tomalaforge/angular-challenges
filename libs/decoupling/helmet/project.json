@@ -1,0 +1,50 @@
+{
+  "name": "decoupling-helmet",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/decoupling/helmet/src",
+  "prefix": "lib",
+  "tags": ["type:hlm"],
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:ng-packagr-lite",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "project": "libs/decoupling/helmet/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/decoupling/helmet/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/decoupling/helmet/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/decoupling/helmet/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/decoupling/helmet/**/*.ts",
+          "libs/decoupling/helmet/**/*.html"
+        ]
+      }
+    }
+  }
+}
