@@ -2,27 +2,37 @@ import { render } from '@testing-library/angular';
 import { ChildComponent } from './child.component';
 
 describe('ChildComponent', () => {
-  test('should have 1 slider, 3 checkboxes, 4 inputs, 2 buttons', async () => {
-    await render(ChildComponent);
+  describe('When init', () => {
+    test('Then show 1 slider, 3 checkboxes, 4 inputs, 2 buttons', async () => {
+      await render(ChildComponent);
+    });
+
+    test('Then initial value of slider thumb is 0', async () => {
+      await render(ChildComponent);
+    });
   });
 
-  test('should get initial value of slider thumb', async () => {
-    await render(ChildComponent);
+  describe('Given maxValue set to 109', () => {
+    test('Then slider max value is 109', async () => {
+      await render(ChildComponent);
+    });
   });
 
-  test('set maxValue to 109 and slider max value should be 109', async () => {
-    await render(ChildComponent);
+  describe('When disabled chebkbox is toggle', () => {
+    test('Then slider is disabled', async () => {
+      await render(ChildComponent);
+    });
   });
 
-  test('toggle disabled checkbox and slider should be disabled', async () => {
-    await render(ChildComponent);
+  describe('Given step value set to 5, and When clicking on forward button two times', () => {
+    test('Then thumb value is 10', async () => {
+      await render(ChildComponent);
+    });
   });
 
-  test('set step value to 5 and click to forward button two times, thumb value should be 10', async () => {
-    await render(ChildComponent);
-  });
-
-  test('slider value is 5, set step value to 6, click on back button, slider value should still be 5', async () => {
-    await render(ChildComponent);
+  describe('Given slider value set to 5, and step value to 6 and When clicking on back button', () => {
+    test('Then slider value is still 5', async () => {
+      await render(ChildComponent);
+    });
   });
 });

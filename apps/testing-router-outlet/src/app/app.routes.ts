@@ -3,6 +3,11 @@ import { bookGuard } from './book.guard';
 
 export const appRoutes: Route[] = [
   {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'search',
+  },
+  {
     path: 'search',
     loadComponent: () => import('./search.component'),
   },
@@ -14,5 +19,10 @@ export const appRoutes: Route[] = [
   {
     path: 'no-result',
     loadComponent: () => import('./no-book-search.component'),
+  },
+  {
+    path: '**',
+    pathMatch: 'full',
+    redirectTo: 'search',
   },
 ];

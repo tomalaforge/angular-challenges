@@ -36,15 +36,23 @@ import { RowComponent } from './ui/row.component';
         placeholder="write an article" />
     </mat-form-field>
 
-    <app-add></app-add>
-
     <ng-container *ngrxLet="vm$ as vm">
+      <app-add
+        [loading]="vm.loading"
+        (addTicket)="ticketStore.addTicket($event)"></app-add>
+
       <mat-progress-bar
         mode="query"
         *ngIf="vm.loading"
         class="mt-5"></mat-progress-bar>
       <ul class="flex flex-col gap-4 max-w-3xl">
-        <app-row *ngFor="let t of vm.tickets" [ticket]="t"> </app-row>
+        <app-row
+          *ngFor="let t of vm.tickets"
+          [ticket]="t"
+          [users]="vm.users"
+          (assign)="ticketStore.assignTicket($event)"
+          (closeTicket)="ticketStore.done($event)">
+        </app-row>
       </ul>
       <footer class="text-red-500">
         {{ vm.error }}
@@ -57,13 +65,8 @@ import { RowComponent } from './ui/row.component';
   },
 })
 export class ListComponent implements OnInit {
-  private ticketStore = inject(TicketStore);
-
-  vm$ = this.ticketStore.select({
-    tickets: this.ticketStore.tickets$,
-    loading: this.ticketStore.loading$,
-    error: this.ticketStore.error$,
-  });
+  ticketStore = inject(TicketStore);
+  readonly vm$ = this.ticketStore.vm$;
 
   search = new FormControl();
 

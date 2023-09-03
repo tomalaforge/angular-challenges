@@ -45,6 +45,9 @@ If you would like to propose a challenge, this project is open source, so feel f
 <a href="./apps/di/README.md"><img src="https://img.shields.io/badge/16-di-red" alt="di"/></a>
 <a href="./apps/anchor-scrolling/README.md"><img src="https://img.shields.io/badge/21-anchor--scrolling-green" alt="anchor-scrolling"/></a>
 <a href="./apps/router-input/README.md"><img src="https://img.shields.io/badge/22-router--input-green" alt="router-input"/></a>
+<a href="./apps/interop-rxjs-signal/README.md"><img src="https://img.shields.io/badge/30-interop rxjs signal-red" alt="interop signal rxjs"/></a>
+<a href="./apps/module-to-standalone/README.md"><img src="https://img.shields.io/badge/31-module to standalone-green" alt="module to standalone"/></a>
+<a href="./apps/bug-cd/README.md"><img src="https://img.shields.io/badge/32-bug CD-orange" alt="bug CD"/></a>
 
 </br>
 <img src="https://img.shields.io/badge/Typescript--gray?logo=typescript" alt="Typescript"/>
@@ -74,12 +77,15 @@ If you would like to propose a challenge, this project is open source, so feel f
 <a href="./apps/testing-modal/README.md"><img src="https://img.shields.io/badge/20-Modal Testing-orange" alt="modal Testing"/></a>
 <a href="./apps/testing-harness/README.md"><img src="https://img.shields.io/badge/23-Harness Testing-green" alt="harness Testing"/></a>
 <a href="./apps/create-harness/README.md"><img src="https://img.shields.io/badge/24-Create Harness-orange" alt="Create harness"/></a>
+<a href="./apps/testing-checkbox/README.md"><img src="https://img.shields.io/badge/28-Checkbox Testing-green" alt="Test a simple checkbox"/></a>
+<a href="./apps/testing-todos-list/README.md"><img src="https://img.shields.io/badge/29-Real application Testing-red" alt="Test a real application"/></a>
 
 </br>
 <img src="https://img.shields.io/badge/Nx--gray?logo=nx" alt="nx"/>
 
 <a href="./libs/custom-plugin/src/generators/custom-library/README.md"><img src="https://img.shields.io/badge/25-Extends Nx Library generator-red" alt="extends lib generator"/></a>
-<a href="./libs/custom-plugin/src/generators/feature-component/README.md"><img src="https://img.shields.io/badge/25-Component generator-orange" alt="Custom component generator"/></a>
+<a href="./libs/custom-plugin/src/generators/feature-component/README.md"><img src="https://img.shields.io/badge/26-Component generator-orange" alt="Custom component generator"/></a>
+<a href="./tools/eslint-rules/rules/forbidden-enum.README.md"><img src="https://img.shields.io/badge/27-Forbid enum Rule-green" alt="Forbid enum rules"/></a>
 
 ## Contributors ✨
 
@@ -89,7 +95,7 @@ If you would like to propose a challenge, this project is open source, so feel f
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://medium.com/@thomas.laforge"><img src="https://avatars.githubusercontent.com/u/30832608?s…00&u=6f0ad9676792f29fd7fe6e113df06213d384a813&v=4" width="100px;" alt="Thomas Laforge"/><br /><sub><b>Thomas Laforge</b></sub></a><br />25 🧩</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://medium.com/@thomas.laforge"><img src="https://avatars.githubusercontent.com/u/30832608?s…00&u=6f0ad9676792f29fd7fe6e113df06213d384a813&v=4" width="100px;" alt="Thomas Laforge"/><br /><sub><b>Thomas Laforge</b></sub></a><br />32 🧩</a></td>
     </tr>
   </tbody>
 </table>

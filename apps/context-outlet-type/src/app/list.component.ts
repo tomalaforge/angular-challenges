@@ -29,5 +29,5 @@ export class ListComponent<TItem extends object> {
   @Input() list!: TItem[];
 
   @ContentChild('listRef', { read: TemplateRef })
-  listTemplateRef!: TemplateRef<TItem[]>;
+  listTemplateRef!: TemplateRef<unknown>;
 }

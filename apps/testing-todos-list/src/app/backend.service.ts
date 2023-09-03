@@ -6,19 +6,19 @@ export type User = {
   name: string;
 };
 
-export type Ticket = {
+export interface BaseTicket {
   id: number;
   description: string;
-  assigneeId: number | null;
   completed: boolean;
-};
+}
 
-export type TicketUser = {
-  id: number;
-  description: string;
+export interface Ticket extends BaseTicket {
+  assigneeId: number | null;
+}
+
+export interface TicketUser extends BaseTicket {
   assignee: string;
-  completed: boolean;
-};
+}
 
 function randomDelay() {
   return Math.random() * 1000;

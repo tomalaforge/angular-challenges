@@ -1,21 +1,31 @@
 describe('AppComponent', () => {
-  it('shows error message and disabled button because no search criteria are typed', async () => {
-    //todo
+  describe('Given no search criteria', () => {
+    it('Then shows error message and disabled button', async () => {
+      //todo
+    });
   });
 
-  it('shows No book found because no book match the search', async () => {
-    //todo
+  describe('Given a search criteria with no book match', () => {
+    it('Then shows No book found', async () => {
+      //todo
+    });
   });
 
-  it('shows One book because the search matches one book', async () => {
-    //todo
+  describe('Given a search criteria with one book match', () => {
+    it('Then shows One book and no error', async () => {
+      //todo
+    });
   });
 
-  it('shows One book because the search matches one book even with different cases', async () => {
-    //todo
+  describe('Given a search criteria in Uppercase with one book match', () => {
+    it('Then shows One book and no error', async () => {
+      //todo
+    });
   });
 
-  it('shows a list of books because the search matches multiples books', async () => {
-    //todo
+  describe('Given a search criteria with multple books matches', () => {
+    it('Then shows a list of books', async () => {
+      //todo
+    });
   });
 });

@@ -16,7 +16,7 @@ In NgRx, **selectors** is a very powerful tool often **misused**. You should use
 
 ##### You will have to
 
-1.  Refactor this working exemple of a dashboard of activities.
+1.  Refactor this working example of a dashboard of activities.
 
 ##### Rules:
 
