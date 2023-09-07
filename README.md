@@ -51,6 +51,11 @@ If you would like to propose a challenge, this project is open source, so feel f
 <a href="./apps/decoupling/README.md"><img src="https://img.shields.io/badge/33-decoupling-orange" alt="decoupling"/></a>
 
 </br>
+<img src="https://img.shields.io/badge/Angular performance--gray?logo=angular" alt="Angular performance"/>
+
+<a href="./apps/performance/default-onpush/README.md"><img src="https://img.shields.io/badge/34-Default vs OnPush-green" alt="default onPush"/></a>
+
+</br>
 <img src="https://img.shields.io/badge/Typescript--gray?logo=typescript" alt="Typescript"/>
 
 <a href="./apps/overload/README.md"><img src="https://img.shields.io/badge/15-overload function-orange" alt="Overload function"/></a>
@@ -96,7 +101,7 @@ If you would like to propose a challenge, this project is open source, so feel f
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://medium.com/@thomas.laforge"><img src="https://avatars.githubusercontent.com/u/30832608?s…00&u=6f0ad9676792f29fd7fe6e113df06213d384a813&v=4" width="100px;" alt="Thomas Laforge"/><br /><sub><b>Thomas Laforge</b></sub></a><br />33 🧩</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://medium.com/@thomas.laforge"><img src="https://avatars.githubusercontent.com/u/30832608?s…00&u=6f0ad9676792f29fd7fe6e113df06213d384a813&v=4" width="100px;" alt="Thomas Laforge"/><br /><sub><b>Thomas Laforge</b></sub></a><br />34 🧩</a></td>
     </tr>
   </tbody>
 </table>

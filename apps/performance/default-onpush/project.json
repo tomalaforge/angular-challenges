@@ -1,0 +1,84 @@
+{
+  "name": "performance-default-onpush",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "app",
+  "sourceRoot": "apps/performance/default-onpush/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/performance/default-onpush",
+        "index": "apps/performance/default-onpush/src/index.html",
+        "main": "apps/performance/default-onpush/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/performance/default-onpush/tsconfig.app.json",
+        "assets": [
+          "apps/performance/default-onpush/src/favicon.ico",
+          "apps/performance/default-onpush/src/assets"
+        ],
+        "styles": [
+          "apps/performance/default-onpush/src/styles.scss",
+          "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+        ],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "performance-default-onpush:build:production"
+        },
+        "development": {
+          "browserTarget": "performance-default-onpush:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "performance-default-onpush:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/performance/default-onpush/**/*.ts",
+          "apps/performance/default-onpush/**/*.html"
+        ]
+      }
+    }
+  }
+}
