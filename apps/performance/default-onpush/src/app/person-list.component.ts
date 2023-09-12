@@ -25,7 +25,7 @@ import { MatListModule } from '@angular/material/list';
       {{ title | titlecase }}
     </h1>
 
-    <mat-form-field class="w-4/5">
+    <mat-form-field class="w-4/5" cd-flash>
       <input
         placeholder="Add one member to the list"
         matInput
