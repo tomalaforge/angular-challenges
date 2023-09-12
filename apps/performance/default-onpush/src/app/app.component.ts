@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
+import { randFirstName } from '@ngneat/falso';
 import { PersonListComponent } from './person-list.component';
-import { Persons } from './persons';
 import { RandomComponent } from './random.component';
 
 @Component({
@@ -11,12 +11,12 @@ import { RandomComponent } from './random.component';
     <app-random />
 
     <div class="flex">
-      <app-person-list [data]="personList" title="List 1" />
-      <app-person-list [data]="person2List" title="List 2" />
+      <app-person-list [names]="girlList" title="Female" />
+      <app-person-list [names]="boyList" title="Male" />
     </div>
   `,
 })
 export class AppComponent {
-  personList = [...Persons];
-  person2List = [...Persons];
+  girlList = randFirstName({ gender: 'female', length: 10 });
+  boyList = randFirstName({ gender: 'male', length: 10 });
 }

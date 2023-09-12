@@ -8,13 +8,13 @@ In this series of challenges, you will learn how to optimize and enhance the per
 
 The first step is to download the [Angular DevTools Chrome extention](https://chrome.google.com/webstore/detail/angular-devtools/ienfalfjdbdpebioblfackkekamfmbnh) if you haven't already done so. This extension allows you to profile your application and detect performance issues.
 
-In this challenge, we will explore the differences and impacts of using `ChangeDetectionStrategy.Default` versus `ChangeDetectionStrategy.OnPush`. To provide a clearer demonstration, I have added counters to each component and each row in our application. However, in real-world scenarios, you may not have such counters. This is where the Angular DevTool profiler comes to the rescue.
+In this challenge, we will explore the differences and impacts of using `ChangeDetectionStrategy.Default` versus `ChangeDetectionStrategy.OnPush`. To provide a clearer demonstration, I have added color enlightment to each component and each row in our application. However, in real-world scenarios, you will not have such visualization. This is where the Angular DevTool profiler comes to the rescue.
 
 Start by serving this application by running: `npx nx serve performance-default-onpush` inside your terminal. Then open Chrome DevTool by pressing **F12** and switch to the Angular Tab. From there you can select the Profiler tab as shown below.
 
 ![profiler tab](./img/profiler-tab.png 'Profiler tab')
 
-Start profiling your application and type some letters inside the input field. You will notice that each number is increasing and the profiler will show you a lot of change detection cycle.
+Start profiling your application and type some letters inside the input field. You will notice that each element of your application will flash at each change detection cycle and the profiler will show you a bar for each change detection cycle.
 
 If you click on one of the bars (indicated by the yellow arrow on the picture below), you can see that `PersonListComponent`, `RandomComponent` and all the `MatListItem` are impacted by the change detection cycle, even when we only interact with the input field.
 

@@ -63,6 +63,9 @@
       "@angular-challenges/ngrx-notification/model": [
         "libs/ngrx-notification/model/src/index.ts"
       ],
+      "@angular-challenges/shared/directives": [
+        "libs/shared/directives/src/index.ts"
+      ],
       "@angular-challenges/shared/utils": ["libs/shared/utils/src/index.ts"],
       "@angular-challenges/testing-table/backend": [
         "libs/testing-table/backend/src/index.ts"
