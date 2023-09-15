@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "src/**/*.ts",
+    "../../../libs/shared/directives/src/lib/cd-flashing.directive.ts"
+  ],
+  "compilerOptions": {
+    "types": []
+  }
+}
