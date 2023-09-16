@@ -1,0 +1,85 @@
+{
+  "name": "performance-memoized",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "app",
+  "sourceRoot": "apps/performance/memoized/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/performance/memoized",
+        "index": "apps/performance/memoized/src/index.html",
+        "main": "apps/performance/memoized/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/performance/memoized/tsconfig.app.json",
+        "assets": [
+          "apps/performance/memoized/src/favicon.ico",
+          "apps/performance/memoized/src/assets"
+        ],
+        "styles": [
+          "apps/performance/memoized/src/styles.scss",
+          "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+        ],
+        "scripts": [],
+        "allowedCommonJsDependencies": ["seedrandom"]
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "performance-memoized:build:production"
+        },
+        "development": {
+          "browserTarget": "performance-memoized:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "performance-memoized:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/performance/memoized/**/*.ts",
+          "apps/performance/memoized/**/*.html"
+        ]
+      }
+    }
+  }
+}
