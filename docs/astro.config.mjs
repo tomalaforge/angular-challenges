@@ -10,7 +10,7 @@ export default defineConfig({
         src: './public/angular-challenge.webp',
         alt: 'angular challenges logo',
       },
-      favicon: './public/angular-challenge.ico',
+      favicon: './angular-challenge.ico',
       social: {
         github: 'https://github.com/withastro/starlight',
         linkedin: 'https://www.linkedin.com/in/thomas-laforge-2b05a945/',

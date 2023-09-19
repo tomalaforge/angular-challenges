@@ -22,7 +22,7 @@ git clone https://github.com/[YOUR_GITHUB_NAME]/angular-challenges.git
 ```
 
 :::note
-Your can find the url to clone on the button labeled <span class="code-btn"><> Code</span> on your **OWN INSTANCE** of the Angular Challenge repository.
+Your can find the url to clone on the button labeled <span class="github-success-btn"><> Code</span> on your **OWN INSTANCE** of the Angular Challenge repository.
 
 ![Header of github workpspace](../../../assets/header-github.png)
 
