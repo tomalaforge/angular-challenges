@@ -1,0 +1,19 @@
+:root {
+  --sl-color-black: #1b1b1d;
+  --sl-color-gray-6: #242526;
+  --sl-color-accent-high: #f10023;
+  --sl-icon-color: #fff;
+  --sl-color-text-invert: #fff;
+  --primary-color: var(--sl-color-bg-nav) !important;
+  /* --sl-color-text-invert: #212121; */
+  --cardBgColor: #242526;
+  /* --sl-font: 'IBM Plex Serif', serif; */
+}
+
+.code-btn {
+  border: 2px solid rgba(240, 246, 252, 0.1);
+  border-radius: 6px;
+  padding: 2px 8px;
+  background-color: rgb(35, 134, 54);
+  color: white;
+}

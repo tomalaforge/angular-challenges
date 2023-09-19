@@ -1,9 +1,9 @@
 ---
-title: Projection
+title: 🟢 Projection
 description: angular-challenge-1/projection
 ---
 
-#1 - <span class="sl-badge success astro-vohx2lp7">Easy</span>
+> Challenge #1
 
 ## Statement
 
