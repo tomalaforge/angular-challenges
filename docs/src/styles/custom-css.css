@@ -2,6 +2,7 @@
   --sl-color-black: #1b1b1d;
   --sl-color-gray-6: #242526;
   --sl-color-accent-high: #f10023;
+  /* --sl-color-black: white; */
   --sl-icon-color: #fff;
   --sl-color-text-invert: #fff;
   --primary-color: var(--sl-color-bg-nav) !important;
@@ -16,4 +17,8 @@
   padding: 2px 8px;
   background-color: rgb(35, 134, 54);
   color: white;
+}
+
+a.primary {
+  color: #fff !important;
 }

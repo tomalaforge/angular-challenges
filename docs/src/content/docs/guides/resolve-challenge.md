@@ -1,6 +1,8 @@
 ---
 title: Resolve a Challenge
 description: Guide to resolve a challenge
+sidebar:
+  order: 2
 ---
 
 In this guide, you will learn how to resolve a challenge and submit an answer to the main Github repository.

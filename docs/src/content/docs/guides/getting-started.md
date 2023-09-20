@@ -1,6 +1,8 @@
 ---
 title: Getting Started
 description: A guide on how to get started with Angular Challenges.
+sidebar:
+  order: 1
 ---
 
 To get started with **Angular Challenges**, follow the step:
