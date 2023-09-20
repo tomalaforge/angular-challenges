@@ -22,3 +22,7 @@
 a.primary {
   color: #fff !important;
 }
+
+b {
+  color: var(--sl-color-accent-high);
+}
