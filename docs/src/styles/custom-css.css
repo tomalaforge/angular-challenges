@@ -19,6 +19,19 @@
   color: white;
 }
 
+.github-neutral-btn {
+  border: 1px solid rgba(240, 246, 252, 0.1);
+  border-radius: 6px;
+  padding: 2px 8px;
+  background-color: rgb(33, 38, 45);
+  color: rgb(201, 209, 217);
+  fill: rgb(201, 209, 217);
+  display: inline-flex;
+  width: fit-content;
+  gap: 6px;
+  margin: 0px 2px;
+}
+
 a.primary {
   color: #fff !important;
 }

@@ -40,3 +40,5 @@ If you don't remember the command, click on the Code button on the right side of
 ![PR code modal](../../../assets/PR-code-btn-modal.png)
 
 🔥 You can now navigate through the solution locally and serve it to test it. 🔥
+
+<!-- gh repo set-default -->
