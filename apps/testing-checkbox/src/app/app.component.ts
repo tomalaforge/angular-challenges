@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
     <input
       class="ml-2"
       id="agree"
+      data-testid="checkbox"
       type="checkbox"
       [value]="check"
       (input)="toggleCheck()" />
