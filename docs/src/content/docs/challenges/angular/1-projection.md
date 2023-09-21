@@ -1,7 +1,11 @@
 ---
 title: 🟢 Projection
-description: angular-challenge-1/projection
+description: Challenge 1 is about learning how to project DOM element through components
 ---
+
+:::note
+WIP: go [here]() if you want to do this challenge
+:::
 
 > Challenge #1
 

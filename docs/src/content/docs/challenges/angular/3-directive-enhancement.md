@@ -1,4 +1,8 @@
 ---
 title: 🟠 Directive Enhancement
-description: Guide to submit an answer
+description: Challenge 3 is about enhancing a built-in directive
 ---
+
+:::note
+WIP: go [here](https://github.com/tomalaforge/angular-challenges/blob/main/apps/ngfor-enhancement/README.md) if you want to do this challenge
+:::
