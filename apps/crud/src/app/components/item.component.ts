@@ -36,22 +36,16 @@ export class ItemComponent {
   ) {}
 
   update(todo: Todo) {
+    const updatedTodo = this.todosService.updateTodo(todo);
     this.loadingText = 'Updating...';
     this.todosStore.startProcessing(todo.id);
-    this.todosService.updateTodo(todo).subscribe((updatedTodo) => {
-      this.loadingText = '';
-      this.todosStore.stopProcessing();
-      this.todosStore.updateTodoInList(updatedTodo);
-    });
+    this.todosStore.updateTodoInList(updatedTodo);
   }
 
   delete(todo: Todo) {
     this.loadingText = 'Deleting...';
     this.todosStore.startProcessing(todo.id);
-    this.todosService.deleteTodo(todo).subscribe(() => {
-      this.loadingText = '';
-      this.todosStore.stopProcessing();
-      this.todosStore.removeTodoFromList(todo.id);
-    });
+    this.todosService.deleteTodo(todo);
+    this.todosStore.removeTodoFromList(todo.id);
   }
 }

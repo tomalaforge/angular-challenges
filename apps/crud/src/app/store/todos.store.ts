@@ -42,11 +42,15 @@ export class TodosStore extends ComponentStore<todosState> {
     const updatedTodos = state.todos.map((todo) =>
       todo.id === updatedTodo.id ? updatedTodo : todo
     );
+    this.stopProcessing();
     return { ...state, todos: updatedTodos };
   });
 
-  readonly removeTodoFromList = this.updater((state, todoId: number) => ({
-    ...state,
-    todos: state.todos.filter((todo) => todo.id !== todoId),
-  }));
+  readonly removeTodoFromList = this.updater((state, todoId: number) => {
+    this.stopProcessing();
+    return {
+      ...state,
+      todos: state.todos.filter((todo) => todo.id !== todoId),
+    };
+  });
 }

@@ -9,7 +9,6 @@ import {
   throwError,
 } from 'rxjs';
 import { randText } from '@ngneat/falso';
-import { TodosStore } from '../store/todos.store';
 
 @Injectable({
   providedIn: 'root',

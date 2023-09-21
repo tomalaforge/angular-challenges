@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Todo } from './models/interface.todo';
 import { TodosService } from './services/todos.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ComponentStore } from '@ngrx/component-store';
@@ -28,18 +27,15 @@ import { ItemComponent } from './components/item.component';
 })
 export class AppComponent implements OnInit {
   todos$ = this.todosStore.todos$;
-  processingItemId$ = this.todosStore.processingItemId$; // Get processingItemId from TodosStore
+  processingItemId$ = this.todosStore.processingItemId$;
+  loadTodos$ = this.todosService.initTodos();
 
   constructor(
-    public todosService: TodosService,
+    private todosService: TodosService,
     private readonly todosStore: TodosStore
   ) {}
 
   ngOnInit(): void {
-    this.todosService.initTodos().subscribe({
-      next: (todos: Todo[] | null) => {
-        this.todosStore.loadTodos(todos);
-      },
-    });
+    this.todosStore.loadTodos(this.loadTodos$);
   }
 }

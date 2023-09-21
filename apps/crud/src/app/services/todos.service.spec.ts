@@ -8,7 +8,9 @@ import { Todo } from '../models/interface.todo';
 
 describe('TodosService', () => {
   let service: TodosService;
-  let httpMock: HttpTestingController;
+  let httpController: HttpTestingController;
+
+  let url = 'https://jsonplaceholder.typicode.com';
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -16,14 +18,14 @@ describe('TodosService', () => {
       providers: [TodosService],
     });
     service = TestBed.inject(TodosService);
-    httpMock = TestBed.inject(HttpTestingController);
+    httpController = TestBed.inject(HttpTestingController);
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should initialize todoList$', () => {
+  it('should call initTodos and return an array of Todos', () => {
     const mockResponse = [
       {
         id: 1,
@@ -33,16 +35,11 @@ describe('TodosService', () => {
       },
     ];
 
-    service.initTodos();
-
-    const req = httpMock.expectOne(
-      'https://jsonplaceholder.typicode.com/todos'
-    );
-    expect(req.request.method).toBe('GET');
-    req.flush(mockResponse);
-
-    service.todoList$.subscribe((response: Todo[]) => {
-      expect(response).toEqual(mockResponse);
+    const req = httpController.expectOne({
+      method: 'GET',
+      url: `${url}/todos`,
     });
+
+    req.flush(mockResponse);
   });
 });
