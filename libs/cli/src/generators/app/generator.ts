@@ -3,7 +3,14 @@ import {
   E2eTestRunner,
   UnitTestRunner,
 } from '@nx/angular/generators';
-import { formatFiles, generateFiles, names, Tree } from '@nx/devkit';
+import {
+  formatFiles,
+  generateFiles,
+  names,
+  readJsonFile,
+  Tree,
+  updateJson,
+} from '@nx/devkit';
 import { Linter } from '@nx/linter';
 import { join } from 'path';
 import { getProjectDir } from '../../utils/normalize';
@@ -11,6 +18,9 @@ import { Schema } from './schema';
 
 export async function appGenerator(tree: Tree, options: Schema) {
   const { appDirectory } = getProjectDir(options.name, options.directory);
+
+  const challengeNumberPath = 'challenge-number.json';
+  const challengeNumber = readJsonFile(challengeNumberPath).total;
 
   await applicationGenerator(tree, {
     ...options,
@@ -36,7 +46,7 @@ export async function appGenerator(tree: Tree, options: Schema) {
     tmpl: '',
     projectName: names(options.name).name,
     title: options.title,
-    challengeNumber: options.challengeNumber,
+    challengeNumber,
     docRepository: options.docRepository,
   });
 
@@ -48,7 +58,7 @@ export async function appGenerator(tree: Tree, options: Schema) {
       tmpl: '',
       projectName: names(options.name).name,
       title: options.title,
-      challengeNumber: options.challengeNumber,
+      challengeNumber,
       difficulty: options.challengeDifficulty,
     }
   );
@@ -58,6 +68,11 @@ export async function appGenerator(tree: Tree, options: Schema) {
       tmpl: '',
     });
   }
+
+  updateJson(tree, challengeNumberPath, (json) => {
+    json.total = json.total + 1;
+    return json;
+  });
 
   await formatFiles(tree);
 }

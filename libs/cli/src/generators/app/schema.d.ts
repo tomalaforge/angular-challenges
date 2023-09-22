@@ -1,6 +1,5 @@
 export interface Schema {
   title: string;
-  challengeNumber: number;
   challengeDifficulty: string;
   docRepository: string;
   name: string;

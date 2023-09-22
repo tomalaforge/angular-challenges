@@ -25,15 +25,6 @@
       },
       "x-priority": "important"
     },
-    "challengeNumber": {
-      "description": "The number of your challenge.",
-      "type": "number",
-      "$default": {
-        "$source": "argv",
-        "index": 2
-      },
-      "x-priority": "important"
-    },
     "challengeDifficulty": {
       "description": "The difficulty of the challenge.",
       "type": "string",
