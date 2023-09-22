@@ -22,9 +22,7 @@ describe('AppComponent', () => {
       expect(checkbox).not.toBeChecked();
       expect(btn).toBeDisabled();
 
-      screen.debug(checkbox);
       await user.click(checkbox);
-      screen.debug(checkbox);
 
       expect(checkbox).toBeChecked();
       expect(btn).toBeEnabled();
