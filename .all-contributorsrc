@@ -1,0 +1,31 @@
+{
+  "projectName": "angular-challenges",
+  "projectOwner": "tomalaforge",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "tomalaforge",
+      "name": "Laforge Thomas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/30832608?v=4",
+      "profile": "https://thomaslaforge.dev/home",
+      "contributions": [
+        "code",
+        "blog",
+        "content",
+        "doc",
+        "design",
+        "ideas"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "linkToUsage": true,
+  "commitType": "docs"
+}
