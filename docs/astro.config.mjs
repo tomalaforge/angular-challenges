@@ -31,6 +31,16 @@ export default defineConfig({
           autogenerate: { directory: 'challenges' },
         },
       ],
+      head: [
+        {
+          tag: 'script',
+          attrs: {
+            src: 'https://buttons.github.io/buttons.js',
+            defer: true,
+            async: true,
+          },
+        },
+      ],
     }),
   ],
 });
