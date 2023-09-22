@@ -3,9 +3,7 @@
   "projectOwner": "tomalaforge",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "files": [
-    "README.md"
-  ],
+  "files": ["README.md"],
   "imageSize": 100,
   "commit": true,
   "commitConvention": "angular",
@@ -15,17 +13,10 @@
       "name": "Laforge Thomas",
       "avatar_url": "https://avatars.githubusercontent.com/u/30832608?v=4",
       "profile": "https://thomaslaforge.dev/home",
-      "contributions": [
-        "code",
-        "blog",
-        "content",
-        "doc",
-        "design",
-        "ideas"
-      ]
+      "contributions": ["code", "doc", "content", "ideas", "design"]
     }
   ],
   "contributorsPerLine": 7,
-  "linkToUsage": true,
-  "commitType": "docs"
+  "linkToUsage": true
 }
+
