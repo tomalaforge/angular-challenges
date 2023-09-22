@@ -19,14 +19,14 @@ With this two tools in hand, you are now ready to take on the challenge.
 
 You will start with an fully functional application that includes a dashboard containing a teacher card and a student card. The goal is to implement the city card.
 
-While the application works, the developer experience is far from being optimal. Every time you need to implement a new card, you have to modify the `card.component.ts`. In real-life projects, this component can be shared among many applications. The goal of the challenge is to create a <b>CardComponent</b> that can be customized without any modifications. Once you've created this component, you can begin implementing the <b>CityCardComponent</b> and ensure you are not touching the <b>CardComponent</b>.
+While the application works, the developer experience is far from being optimal. Every time you need to implement a new card, you have to modify the `card.component.ts`. In real-life projects, this component can be shared among many applications. The goal of the challenge is to create a `CardComponent` that can be customized without any modifications. Once you've created this component, you can begin implementing the `CityCardComponent` and ensure you are not touching the `CardComponent`.
 
 ## Constraints
 
-- You <b>must</b> refactor the <b>CardComponent</b> and <b>ListItemComponent</b>.
-- The <b>NgFor</b> directive must be declared and remain inside the <b>CardComponent</b>. You might be tempted to move it to the <b>CardComponent</b> but avoid doing so.
-- <b>CardComponent</b> should not contain any <b>NgIf</b> or <b>NgSwitch</b>.
-- CSS: try to avoid using <b>::ng-deep</b>. Find a better way to handle CSS styling.
+- You <b>must</b> refactor the `CardComponent` and `ListItemComponent`.
+- The `NgFor` directive must be declared and remain inside the `CardComponent`. You might be tempted to move it to the `CardComponent` but avoid doing so.
+- `CardComponent` should not contain any `NgIf` or `NgSwitch`.
+- CSS: try to avoid using `::ng-deep`. Find a better way to handle CSS styling.
 
 ---
 
