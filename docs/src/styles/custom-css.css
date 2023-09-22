@@ -16,7 +16,7 @@
   border-radius: 6px;
   padding: 2px 8px;
   background-color: rgb(35, 134, 54);
-  color: white;
+  color: var(--sl-color-white);
 }
 
 .github-neutral-btn {
@@ -45,23 +45,30 @@
 .article-footer {
   margin-top: 3rem !important;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   flex-wrap: wrap;
+  gap: 1.5rem;
 }
 .article-footer > a {
-  border: 1px solid var(--sl-color-gray-5);
+  border: 1px solid var(--sl-color-accent-high);
   border-radius: 0.5rem;
   padding: 1rem;
   text-decoration: none;
   color: var(--sl-color-gray-2);
   box-shadow: var(--sl-shadow-md);
   color: var(--sl-color-white);
-  font-size: var(--sl-text-2xl);
+  font-size: var(--sl-text-lg);
   line-height: var(--sl-line-height-headings);
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0;
+  background-color: var(--sl-color-accent-high);
 }
 
 a.primary {
-  color: #fff !important;
+  color: var(--sl-color-white) !important;
 }
 
 b {
