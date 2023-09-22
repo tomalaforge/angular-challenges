@@ -21,7 +21,7 @@ If you would like to propose a challenge, this project is open source, so feel f
 
 > **Learning by reading is good but learning by doing is better.**
 
-## Challanges
+## Challenges
 
 Check [all challenges](https://angular-challenges.vercel.app/)
 
