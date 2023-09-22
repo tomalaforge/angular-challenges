@@ -12,6 +12,7 @@ import {
   updateJson,
 } from '@nx/devkit';
 import { Linter } from '@nx/linter';
+import { readFile, writeFile } from 'fs';
 import { join } from 'path';
 import { getProjectDir } from '../../utils/normalize';
 import { Schema } from './schema';
@@ -68,6 +69,39 @@ export async function appGenerator(tree: Tree, options: Schema) {
       tmpl: '',
     });
   }
+
+  readFile('./README.md', 'utf-8', function (err, contents) {
+    const regex = new RegExp(`all ${challengeNumber} challenges`);
+    const replaced = contents.replace(
+      regex,
+      `all ${challengeNumber + 1} challenges`
+    );
+
+    writeFile('./README.md', replaced, 'utf-8', function (err) {
+      console.log(err);
+    });
+  });
+
+  readFile(
+    './docs/src/content/docs/index.mdx',
+    'utf-8',
+    function (err, contents) {
+      const regex = new RegExp(`${challengeNumber} Challenges`, 'gi');
+      const replaced = contents.replace(
+        regex,
+        `${challengeNumber + 1} Challenges`
+      );
+
+      writeFile(
+        './docs/src/content/docs/index.mdx',
+        replaced,
+        'utf-8',
+        function (err) {
+          console.log(err);
+        }
+      );
+    }
+  );
 
   updateJson(tree, challengeNumberPath, (json) => {
     json.total = json.total + 1;
