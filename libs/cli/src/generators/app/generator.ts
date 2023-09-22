@@ -37,7 +37,21 @@ export async function appGenerator(tree: Tree, options: Schema) {
     projectName: names(options.name).name,
     title: options.title,
     challengeNumber: options.challengeNumber,
+    docRepository: options.docRepository,
   });
+
+  generateFiles(
+    tree,
+    join(__dirname, 'files', 'docs'),
+    `./docs/src/content/docs/challenges/${options.docRepository}`,
+    {
+      tmpl: '',
+      projectName: names(options.name).name,
+      title: options.title,
+      challengeNumber: options.challengeNumber,
+      difficulty: options.challengeDifficulty,
+    }
+  );
 
   if (options.addTest) {
     generateFiles(tree, join(__dirname, 'files', 'test'), appDirectory, {

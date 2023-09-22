@@ -7,7 +7,7 @@
   "cli": "nx",
   "properties": {
     "name": {
-      "description": "The name of the application.",
+      "description": "The name of the application. (should be in camel case)",
       "type": "string",
       "$default": {
         "$source": "argv",
@@ -17,7 +17,7 @@
       "pattern": "^[a-zA-Z].*$"
     },
     "title": {
-      "description": "Title of your challenge.",
+      "description": "Title of your challenge. (use quote to add spaces)",
       "type": "string",
       "$default": {
         "$source": "argv",
@@ -33,6 +33,68 @@
         "index": 2
       },
       "x-priority": "important"
+    },
+    "challengeDifficulty": {
+      "description": "The difficulty of the challenge.",
+      "type": "string",
+      "x-priority": "important",
+      "x-prompt": {
+        "message": "Which category would you like?",
+        "type": "list",
+        "items": [
+          {
+            "value": "🟢",
+            "label": "Easy"
+          },
+          {
+            "value": "🟠",
+            "label": "Medium"
+          },
+          {
+            "value": "🔴",
+            "label": "Hard"
+          }
+        ]
+      }
+    },
+    "docRepository": {
+      "type": "string",
+      "description": "The category of your challenge.",
+      "x-priority": "important",
+      "x-prompt": {
+        "message": "Which category would you like?",
+        "type": "list",
+        "items": [
+          {
+            "value": "angular",
+            "label": "Angular"
+          },
+          {
+            "value": "angular-performance",
+            "label": "Angular Performance"
+          },
+          {
+            "value": "ngrx",
+            "label": "NgRx"
+          },
+          {
+            "value": "rxjs",
+            "label": "RxJs"
+          },
+          {
+            "value": "nx",
+            "label": "Nx"
+          },
+          {
+            "value": "testing",
+            "label": "Testing"
+          },
+          {
+            "value": "typescript",
+            "label": "Typescript"
+          }
+        ]
+      }
     },
     "directory": {
       "description": "The directory of the new application.",
