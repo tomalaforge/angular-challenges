@@ -14,9 +14,9 @@ describe('AppComponent', () => {
       const { user } = await setup();
 
       const checkbox = screen.getByLabelText('Agreed');
-      user.click(checkbox);
+      await user.click(checkbox);
       const button = screen.getByRole('button', { name: 'Submit' });
-      expect(button).toBeDisabled();
+      expect(button).toBeEnabled();
     });
   });
 });
