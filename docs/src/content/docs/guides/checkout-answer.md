@@ -1,5 +1,5 @@
 ---
-title: Checkout Answer
+title: Checkout Somebody Answer
 description: Guide to checkout the answer of someone else
 sidebar:
   order: 3
@@ -38,6 +38,10 @@ gh pr checkout <ID>
 If you don't remember the command, click on the Code button on the right side of the header, and you can easily copy/paste the command.
 
 ![PR code modal](../../../assets/PR-code-btn-modal.png)
+
+:::note
+If the command doesn't work or fails, Github CLI will guide you through the process.
+:::
 
 🔥 You can now navigate through the solution locally and serve it to test it. 🔥
 

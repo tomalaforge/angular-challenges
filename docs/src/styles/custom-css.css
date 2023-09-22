@@ -32,6 +32,34 @@
   margin: 0px 2px;
 }
 
+.chip {
+  border: 1px solid rgba(240, 246, 252, 0.1);
+  border-radius: 6px;
+  padding: 2px 8px;
+  background-color: rgb(33, 38, 45);
+  color: rgb(201, 209, 217);
+  fill: rgb(201, 209, 217);
+  width: fit-content;
+}
+
+.article-footer {
+  margin-top: 3rem !important;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.article-footer > a {
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  text-decoration: none;
+  color: var(--sl-color-gray-2);
+  box-shadow: var(--sl-shadow-md);
+  color: var(--sl-color-white);
+  font-size: var(--sl-text-2xl);
+  line-height: var(--sl-line-height-headings);
+}
+
 a.primary {
   color: #fff !important;
 }
