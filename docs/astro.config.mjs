@@ -16,11 +16,7 @@ export default defineConfig({
         linkedin: 'https://www.linkedin.com/in/thomas-laforge-2b05a945/',
         twitter: 'https://twitter.com/laforge_toma',
       },
-      customCss: [
-        '@fontsource/ibm-plex-serif/400.css',
-        '@fontsource/ibm-plex-serif/600.css',
-        './src/styles/custom-css.css',
-      ],
+      customCss: ['./src/styles/custom-css.css'],
       sidebar: [
         {
           label: 'Guides',
@@ -29,16 +25,6 @@ export default defineConfig({
         {
           label: 'Challenges',
           autogenerate: { directory: 'challenges' },
-        },
-      ],
-      head: [
-        {
-          tag: 'script',
-          attrs: {
-            src: 'https://buttons.github.io/buttons.js',
-            defer: true,
-            async: true,
-          },
         },
       ],
     }),
