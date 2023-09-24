@@ -19,13 +19,13 @@ In this challenge, we will explore the differences and impacts of using `ChangeD
 
 Start by serving this application by running: `npx nx serve performance-default-onpush` inside your terminal. Then open Chrome DevTool by pressing **F12** and switch to the Angular Tab. From there you can select the Profiler tab as shown below.
 
-![profiler tab](./img/profiler-tab.png 'Profiler tab')
+![profiler tab](../../../../assets/34/profiler-tab.png 'Profiler tab')
 
 Start profiling your application and type some letters inside the input field. You will notice that each element of your application will flash at each change detection cycle and the profiler will show you a bar for each change detection cycle.
 
 If you click on one of the bars (indicated by the yellow arrow on the picture below), you can see that `PersonListComponent`, `RandomComponent` and all the `MatListItem` are impacted by the change detection cycle, even when we only interact with the input field.
 
-![profiler record](./img/profiler-record.png 'Profiler Record')
+![profiler record](../../../../assets/34/profiler-record.png 'Profiler Record')
 
 ### Statement
 

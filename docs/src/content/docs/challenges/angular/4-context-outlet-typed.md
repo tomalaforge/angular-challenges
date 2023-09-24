@@ -25,7 +25,7 @@ This exercice has two level of complexity.
 
 Currently we have the following piece of code.
 
-<img src="./img/unknown-person.png" height=120px alt="Unkown Person"/>
+![Unkown Person](../../../../assets/4/unknown-person.png 'Unkown Person')
 
 As we can see, name is of type "any". We want to infer the correct type.
 
@@ -33,7 +33,7 @@ As we can see, name is of type "any". We want to infer the correct type.
 
 Currently we have the following piece of code.
 
-<img src="./img/unknown-student.png" height=120px alt="Unkown Person"/>
+![Unkown Student](../../../../assets/4/unknown-student.png 'Unkown Student')
 
 As we can see, student is of type "any". We want to infer the correct type.
 
