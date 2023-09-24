@@ -1,51 +1,13 @@
-<h1>Directive enhancement</h1>
+# Directive Enhancement
 
 > Author: Thomas Laforge
 
-## Information
+### Run Application
 
-Directive is a very powerful tool only offered by the Angular framework. You can apply the DRY principal by having shared logic inside a directive and applying it to any component you want.
-
-But the real power is that you can enhance an already existing directive which moreover doesn't **belong** to you.
-
-## Statement
-
-In this exercice, we have a want to display a list of persons. If the list is empty, you must display _" the list is empty !! "_.
-
-Currently we have :
-
-```typescript
-    <ng-container *ngIf="persons.length > 0; else emptyList">
-      <div *ngFor="let person of persons">
-        {{ person.name }}
-      </div>
-    </ng-container>
-    <ng-template #emptyList>The list is empty !!</ng-template>
+```bash
+npx nx serve ngfor-enhancement
 ```
 
-We want to get rid of the ng-container by writing :
+### Documentation and Instruction
 
-```typescript
-    <div *ngFor="let person of persons; empty: emptyList">
-    {{ person.name }}
-    </div>
-    <ng-template #emptyList>The list is empty !!</ng-template>
-```
-
-The goal is to **improve the ngFor directive**
-
-## Submitting your work
-
-1. Fork the project
-2. clone it
-3. npm ci
-4. **nx serve ngfor-enhancement**
-5. _...work On it_
-6. Commit your work
-7. Submit a PR with a title beginning with **Answer:3** that I will review and other dev can review.
-
-<a href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A3+label%3Aanswer" target="_blank"><img src="https://img.shields.io/badge/-Solutions-green" alt="Directive enhancement"/></a>
-<a href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A3+label%3A"answer+author"'><img src="https://img.shields.io/badge/-Author solution-important" alt="Directive enhancement solution author"/></a>
-<a href="https://medium.com/@thomas.laforge/ngfor-enhancement-716b44656a6c" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/-Blog post explanation-blue" alt="Directive enhancement blog article"/></a>
-
-_You can ask any question on_ <a href="https://twitter.com/laforge_toma" target="_blank"><img src="./../../logo/twitter.svg" height=20px alt="Twitter"/></a>
+Challenge documentation is [here](https://angular-challenges.vercel.app/challenges/angular/3-directive-enhancement.md/).
