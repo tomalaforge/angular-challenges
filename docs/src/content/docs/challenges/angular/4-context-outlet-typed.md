@@ -1,6 +1,8 @@
 ---
 title: 🔴 Typed ContextOutlet
 description: Challenge 4 is about strongly typing ngContextOutlet directives
+sidebar:
+  order: 4
 ---
 
 :::note

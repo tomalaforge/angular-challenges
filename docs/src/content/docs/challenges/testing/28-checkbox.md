@@ -1,6 +1,8 @@
 ---
 title: 🟢 Checkbox
 description: Challenge 28 is about testing a simple checkbox
+sidebar:
+  order: 28
 ---
 
 :::note

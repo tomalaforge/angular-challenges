@@ -1,6 +1,8 @@
 ---
 title: 🟠 Change Detection Bug
 description: Challenge 32 is about debugging an application that has issue when change detection is triggered
+sidebar:
+  order: 32
 ---
 
 :::note

@@ -1,6 +1,8 @@
 ---
 title: 🟠 Nested Components
 description: Challenge 18 is about testing nested components
+sidebar:
+  order: 18
 ---
 
 :::note

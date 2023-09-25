@@ -1,6 +1,8 @@
 ---
 title: 🔴 Real-life Application
 description: Challenge 29 is about testing a real-life application
+sidebar:
+  order: 29
 ---
 
 :::note

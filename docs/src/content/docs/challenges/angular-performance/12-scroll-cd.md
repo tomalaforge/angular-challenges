@@ -1,6 +1,8 @@
 ---
 title: 🟠 Optimize Change Detection
 description: Challenge 12 about optimizing the number of change detection cycle while scrolling
+sidebar:
+  order: 12
 ---
 
 :::note

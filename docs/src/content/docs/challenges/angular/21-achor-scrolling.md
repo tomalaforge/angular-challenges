@@ -1,6 +1,8 @@
 ---
 title: 🟢 Anchor Navigation
 description: Challenge 21 is about navigating inside the page with anchor
+sidebar:
+  order: 21
 ---
 
 :::note

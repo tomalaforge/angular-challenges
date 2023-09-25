@@ -1,6 +1,8 @@
 ---
 title: 🟠 Harness Creation
 description: Challenge 24 is about creating a component harness.
+sidebar:
+  order: 24
 ---
 
 :::note

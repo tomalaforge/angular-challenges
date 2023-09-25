@@ -1,6 +1,8 @@
 ---
 title: 🟢 Pure Pipe
 description: Challenge 8 is about creating a pure pipe
+sidebar:
+  order: 8
 ---
 
 :::note

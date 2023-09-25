@@ -1,6 +1,8 @@
 ---
 title: 🟠 Router
 description: Challenge 17 is about testing the router
+sidebar:
+  order: 17
 ---
 
 :::note

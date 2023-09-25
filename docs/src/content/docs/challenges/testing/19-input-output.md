@@ -1,6 +1,8 @@
 ---
 title: 🟠 Input Output
 description: Challenge 19 is about testing inputs and ouputs
+sidebar:
+  order: 19
 ---
 
 :::note

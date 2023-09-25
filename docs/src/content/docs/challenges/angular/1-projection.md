@@ -1,6 +1,8 @@
 ---
 title: 🟢 Projection
 description: Challenge 1 is about learning how to project DOM element through components
+sidebar:
+  order: 1
 ---
 
 <div class="chip">Challenge #1</div>

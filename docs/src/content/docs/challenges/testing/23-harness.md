@@ -1,6 +1,8 @@
 ---
 title: 🟢 Harness
 description: Challenge 23 is about testing with component harnesses
+sidebar:
+  order: 23
 ---
 
 :::note

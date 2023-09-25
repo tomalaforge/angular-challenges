@@ -1,6 +1,8 @@
 ---
 title: 🟢 Race Condition
 description: Challenge 14 is about race condition in Rxjs
+sidebar:
+  order: 14
 ---
 
 :::note

@@ -1,6 +1,8 @@
 ---
 title: 🟠 Modal
 description: Challenge 20 is about testing modals
+sidebar:
+  order: 20
 ---
 
 :::note
