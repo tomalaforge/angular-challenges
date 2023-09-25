@@ -47,6 +47,6 @@ To ease the process, I created a Nx generator that will create all the boilerpla
 
 The only thing left to do is to create your challenge. 🚀
 
-:::warning
-Don't forget to update the docs to introduice your challenge and give your instructions.
+:::danger
+Don't forget to update the docs to introduce your challenge and give your instructions.
 :::
