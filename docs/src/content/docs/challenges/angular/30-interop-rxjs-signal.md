@@ -9,7 +9,7 @@ WIP
 
 <div class="chip">Challenge #30</div>
 
-### Information
+## Information
 
 In this challenge, we have a small reactive application using RxJS and NgRx/Component-Store.
 

@@ -9,20 +9,20 @@ WIP
 
 <div class="chip">Challenge #14</div>
 
-### Information
+## Information
 
 The goal of this application is to display a list of topics in a modal when a button is clicked. The application functions correctly. However, your tech lead has asked you to add tests and they are failing.
 
-### Statement
+## Statement
 
 Correct your application to pass the test
 
-### Constraints:
+## Constraints:
 
 - I can see you coming 🤣 => You CANNOT change the test (Test is working fine) 😳
 - You CANNOT change the `fakeGetHttpTopic` method. A delay has been added to fake a slow network.
 
-### Run the test
+## Run the test
 
 HEADLESS : `npx nx component-test rxjs-race-condition`
 WATCH MODE : `npx nx component-test rxjs-race-condition --watch`

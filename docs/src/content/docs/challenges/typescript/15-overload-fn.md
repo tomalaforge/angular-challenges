@@ -9,7 +9,7 @@ WIP
 
 <div class="chip">Challenge #15</div>
 
-### Information
+## Information
 
 Angular uses TypeScript, and mastering TypeScript can help you avoid runtime errors by catching them at compile time.
 
@@ -19,7 +19,7 @@ One solution would be to create a separate function for each vehicle type, but f
 
 To achieve this, we will use overload functions.
 
-### Statement
+## Statement
 
 - Use function overload
 

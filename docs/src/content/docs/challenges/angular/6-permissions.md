@@ -9,13 +9,13 @@ WIP
 
 <div class="chip">Challenge #6</div>
 
-### Information
+## Information
 
 Structural directive is an important concept you will need to master to improve your angular skills and knowledge. This will be the first part of this challenge.
 
 Guard is also very important since you will always need it in every application you build.
 
-### Statement
+## Statement
 
 In LoginComponent, you will find 6 buttons corresponding at 6 differents users.
 
@@ -27,11 +27,11 @@ In LoginComponent, you will find 6 buttons corresponding at 6 differents users.
 - Client
 - Everyone
 
-### Step 1
+## Step 1
 
 In **InformationComponent**, display the correct piece of information for each roles.
 
-#### Constraints:
+### Constraints:
 
 - no ngIf directive inside **InformationComponent**
 - importing the store inside **InformationComponent** is not allowed.
@@ -50,7 +50,7 @@ You should end up with something like below:
 <div *hasRoleSuperAdmin="true">Info Only for superadmin</div>
 ```
 
-### Step 2
+## Step 2
 
 In **Routes.ts**, route all user to the correct **DashboardComponent** using **CanMatch** guard.
 

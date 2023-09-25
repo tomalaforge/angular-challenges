@@ -9,7 +9,7 @@ WIP
 
 <div class="chip">Challenge #34</div>
 
-### Information
+## Information
 
 In this series of challenges, you will learn how to optimize and enhance the performance of your Angular Application.
 
@@ -27,11 +27,11 @@ If you click on one of the bars (indicated by the yellow arrow on the picture be
 
 ![profiler record](../../../../assets/34/profiler-record.png 'Profiler Record')
 
-### Statement
+## Statement
 
 The goal of this challenge is to improve the clustering of change detection within the application.
 
-### Hints:
+## Hints:
 
 <details>
   <summary>Hint 1</summary>

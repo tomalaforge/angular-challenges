@@ -11,15 +11,15 @@ WIP
 
 This challenge is inspired by a real-life example that I simplified to create this nice challenge.
 
-### Information
+## Information
 
 In this small application, we have a navigation menu to route our application to either `barComponent` or `FooComponent`. However our application is not loading and no errors are displayed inside the console.
 
-### Statement
+## Statement
 
 The goal of the challenge is to debug this application and make it work.
 
-#### Hints
+## Hints
 
 <details>
   <summary>Hint 1</summary>

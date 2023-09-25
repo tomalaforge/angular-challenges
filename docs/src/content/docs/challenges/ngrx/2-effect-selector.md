@@ -21,11 +21,9 @@ In NgRx, **selectors** is a very powerful tool often **misused**. You should use
 
 ## Statement
 
-##### You will have to
+You will have to Refactor this working example of a dashboard of activities.
 
-1.  Refactor this working example of a dashboard of activities.
-
-##### Rules:
+## Contraints:
 
 - Only **one action** should be dispatched from a component
 - Status effect is useless. Using **combineLatest** should be a red flag. And Effect are made for side effect, not transforming data. That's a selector role

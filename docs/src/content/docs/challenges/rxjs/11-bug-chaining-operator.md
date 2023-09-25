@@ -13,13 +13,13 @@ Let's dive inside the wonderful word of RxJs.
 
 This challenge is inspired by a real-life example.
 
-### Presentation of the challenge
+## Presentation of the challenge
 
-#### User Story
+### User Story
 
 We need a button for each `Topic`. When we click on it, we delete all objects with this `Topic` in our database _(Fake DB in our case)_. Finally we display **All [topic] have been deleted** is everything was deleted successfully or **Error: deletion of some [topic] failed** if some deletions failed
 
-#### Constraints:
+### Constraints:
 
 We can only pass one object to our DB for deletion at the time. The DB will respond true if the data was successfully deleted and false otherwise.
 

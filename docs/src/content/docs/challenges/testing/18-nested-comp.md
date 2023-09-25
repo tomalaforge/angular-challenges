@@ -9,7 +9,7 @@ WIP
 
 <div class="chip">Challenge #18</div>
 
-### Statement:
+## Statement:
 
 We have a small application that send a title to a fake backend that you type inside a input.
 If the title is correctly typed, you can send the request otherwise you get a nice error and the request is not sent.

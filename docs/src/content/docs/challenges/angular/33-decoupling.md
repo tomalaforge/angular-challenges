@@ -12,7 +12,7 @@ WIP
 > Big thanks to **Robin Goetz** and his [Spartan Project](https://github.com/goetzrobin/spartan).
 > This challenge was proposed by Robin and is strongly inspired by his project.
 
-### Information
+## Information
 
 The goal of this challenge is to separate the behavior of a component from its style. For the purpose of this challenge, we will be working on a button element. When we click on it, we will toggle a _disabled_ property which will change the style of the element. This is quite useless in real life but the challenge aims to demonstate a useful concept.
 
@@ -20,7 +20,7 @@ The behavior of the component (referred to as the _brain_ in the Spartan stack) 
 
 However the button's helmet needs to access the state of the component to style the button differently based on its state. As mention above, we cannot import the `BtnDisabledDirective` directly into the helmet library as done currently. If you go to [`BtnHelmetDirective`](../../libs/decoupling/helmet/src/lib/btn-style.directive.ts), you will encounter a linting error. **A project tagged with "type:hlm" can only depend on libs tagged with "type:core"**.
 
-### Statement
+## Statement
 
 The goal of this challenge is to find a way to decouple both Directives.
 

@@ -9,7 +9,7 @@ WIP
 
 <div class="chip">Challenge #31</div>
 
-### Information
+## Information
 
 In v14, standalone components were released and made stable in v15. If you haven't played with them, it's never too late. You can try them out in this challenge.
 
@@ -19,7 +19,7 @@ Finally, standalone components are very simple to understand, but routing/lazy-l
 
 After completing this challenge, standalone components will no longer hold any secrets for you.
 
-### Statement
+## Statement
 
 The goal of this challenge is to migrate your application from module based components to standalone components.
 

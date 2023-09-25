@@ -9,11 +9,11 @@ WIP
 
 <div class="chip">Challenge #21</div>
 
-### Information
+## Information
 
 You begin with an application that has basic navigation and anchor navigation in the `HomeComponent`. However, using `href` recreates the path each time and refreshes the page.
 
-### Statement
+## Statement
 
 - Your task is to refactor this application to use the built-in navigation tool to better fit within the Angular Framework. You can explore the router, but it's better to stay within the template and use the `RouterLink` directive.
 - To improve the user experience, add smooth scrolling.

@@ -9,7 +9,7 @@ WIP
 
 <div class="chip">Challenge #20</div>
 
-### Statement:
+## Statement:
 
 The goal of this challenge is to test dialogs inside your application.
 Within this program, you will get an error modal if the user doesn't input a name, while a confirmation modal will appear in all other cases.

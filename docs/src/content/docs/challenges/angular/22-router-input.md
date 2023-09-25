@@ -9,7 +9,7 @@ WIP
 
 <div class="chip">Challenge #22</div>
 
-### Statement
+## Statement
 
 In this small application, you can pass data though routing to `TestComponent`. v16 of Angular introduiced `RouterInput`. The goal of this exercice is to refactor the code to use the new `RouterInput` strategy.
 

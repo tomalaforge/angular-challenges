@@ -13,11 +13,11 @@ The goal of this serie of 3 pipe challenges is to master PIPES in Angular.
 
 Pure pipe are a very useful way to transform data from your template. The difference between calling a function and a pipe is that pure pire are memoized. So they won't be recalculated every change detection cycle if the inputs hasn't changed.
 
-### Information:
+## Information:
 
 In this third exercice, you want to access utils functions. Currently we cannot access them directly from your template. The goal is to create a specific pipe for this utils file where you will need to pass the name of the function you want to call and the needed arguments.
 
-### Constraints:
+## Constraints:
 
 - must be strongly typed
 

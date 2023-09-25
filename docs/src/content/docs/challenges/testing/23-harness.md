@@ -9,7 +9,7 @@ WIP
 
 <div class="chip">Challenge #23</div>
 
-### Statement:
+## Statement:
 
 The objective of this challenge is to have a better understanding of the CDK test harness API. In this initial challenge, we will only use Angular Material's built-in harnesses.
 

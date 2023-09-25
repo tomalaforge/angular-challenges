@@ -9,7 +9,7 @@ WIP
 
 <div class="chip">Challenge #12</div>
 
-### Information
+## Information
 
 In this challenge, you will need to optimize the change detection cycles run by Angular.
 
@@ -22,11 +22,11 @@ The following video will explain what is the goal of this challenge.
 <video controls src="https://user-images.githubusercontent.com/30832608/209819211-58d9ddcf-e1ad-4a78-8a7a-2be9d729e3f1.mov">
 </video>
 
-### Statement
+## Statement
 
 Your goal for this challenge is to avoid all unnecessary change detection cycles and trigger a CD only when needed.
 
-#### Constraint:
+## Constraint:
 
 You cannot opt-out of zone.js. If this code is part of a large project and you opt out of zone.js, you will break many things within your application.
 

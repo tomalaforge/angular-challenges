@@ -9,7 +9,7 @@ WIP
 
 <div class="chip">Challenge #24</div>
 
-### Information
+## Information
 
 The goal of this challenge is to create a test harness for `slider.component.ts`. The harness file, `slider.harness.ts`, has already been created.
 

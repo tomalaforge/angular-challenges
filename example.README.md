@@ -7,9 +7,9 @@
 
 <!-- TODO: add Information/Statement/Rules/Constraint/Steps -->
 
-### Information
+## Information
 
-### Statement
+## Statement
 
 ### Step 1
 

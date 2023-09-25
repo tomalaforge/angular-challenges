@@ -9,7 +9,7 @@ WIP
 
 <div class="chip">Challenge #28</div>
 
-### Information
+## Information
 
 This is the perfect example to get started with `Testing Library`.
 

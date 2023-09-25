@@ -9,7 +9,7 @@ WIP
 
 <div class="chip">Challenge #17</div>
 
-### Information
+## Information
 
 Testing is a crucial step in building scalable, maintainable, and trustworthy applications.
 Testing should never be avoided, even in the face of short deadlines or strong pressure from the product team.
@@ -17,7 +17,7 @@ Nowadays, there are numerous awesome tools available that make it easy to test y
 
 In this series of testing exercises, we will learn and master [Testing Library](https://testing-library.com/docs/) and [Cypress Component Testing](https://docs.cypress.io/guides/component-testing/angular/overview) that simplifies DOM manipulation for testing any Angular component.
 
-### Statement:
+## Statement:
 
 We have a functional application that lists available books for borrowing inside a library. If the book you searched is available, you will be directed to the corresponding book(s), otherwise, you will end up on an error page.
 

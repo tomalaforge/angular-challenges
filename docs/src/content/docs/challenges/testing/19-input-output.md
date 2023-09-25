@@ -9,7 +9,7 @@ WIP
 
 <div class="chip">Challenge #19</div>
 
-### Statement:
+## Statement:
 
 We have a small counter application that increment or decrement a number.
 You can play with it by running : `npx nx serve testing-input-output`.

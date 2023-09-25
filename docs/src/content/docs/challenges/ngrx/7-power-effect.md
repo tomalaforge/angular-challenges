@@ -9,7 +9,7 @@ WIP
 
 <div class="chip">Challenge #7</div>
 
-### Information
+## Information
 
 NgRx Effect is a very powerful library develop by the NgRx team. Effects subscribe to a HOT Observable and listen to any event dispatch from any place inside the application.
 
@@ -49,7 +49,7 @@ Your PR title must start with <b>Answer:7</b>.
     ❖ Community Answers
   </a>
   <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A{challenge number}+label%3A'
+    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A7+label%3A'
     alt="Power of Effect solution author">
     ▶︎ Author Answer
   </a>
