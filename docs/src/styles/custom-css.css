@@ -92,3 +92,7 @@ b {
     font-size: var(--sl-text-xs);
   }
 }
+
+starlight-menu-button svg {
+  color: #1c1a1d;
+}

@@ -12,12 +12,12 @@ import {
   updateJson,
 } from '@nx/devkit';
 import { Linter } from '@nx/linter';
-import { readFile, writeFile } from 'fs';
+import { readFile, writeFile } from 'fs/promises';
 import { join } from 'path';
 import { getProjectDir } from '../../utils/normalize';
 import { Schema } from './schema';
 
-export async function appGenerator(tree: Tree, options: Schema) {
+export async function challengeGenerator(tree: Tree, options: Schema) {
   const { appDirectory } = getProjectDir(options.name, options.directory);
 
   const challengeNumberPath = 'challenge-number.json';
@@ -70,38 +70,24 @@ export async function appGenerator(tree: Tree, options: Schema) {
     });
   }
 
-  readFile('./README.md', 'utf-8', function (err, contents) {
-    const regex = new RegExp(`all ${challengeNumber} challenges`);
-    const replaced = contents.replace(
-      regex,
-      `all ${challengeNumber + 1} challenges`
-    );
+  const readme = await readFile('./README.md', { encoding: 'utf-8' });
 
-    writeFile('./README.md', replaced, 'utf-8', function (err) {
-      console.log(err);
-    });
+  const readmeRegex = new RegExp(`all ${challengeNumber} challenges`);
+  const readmeReplace = readme.replace(
+    readmeRegex,
+    `all ${challengeNumber + 1} challenges`
+  );
+
+  await writeFile('./README.md', readmeReplace, 'utf-8');
+
+  const docs = await readFile('./docs/src/content/docs/index.mdx', {
+    encoding: 'utf-8',
   });
 
-  readFile(
-    './docs/src/content/docs/index.mdx',
-    'utf-8',
-    function (err, contents) {
-      const regex = new RegExp(`${challengeNumber} Challenges`, 'gi');
-      const replaced = contents.replace(
-        regex,
-        `${challengeNumber + 1} Challenges`
-      );
+  const regex = new RegExp(`${challengeNumber} Challenges`, 'gi');
+  const replaced = docs.replace(regex, `${challengeNumber + 1} Challenges`);
 
-      writeFile(
-        './docs/src/content/docs/index.mdx',
-        replaced,
-        'utf-8',
-        function (err) {
-          console.log(err);
-        }
-      );
-    }
-  );
+  await writeFile('./docs/src/content/docs/index.mdx', replaced, 'utf-8');
 
   updateJson(tree, challengeNumberPath, (json) => {
     json.total = json.total + 1;
@@ -111,4 +97,4 @@ export async function appGenerator(tree: Tree, options: Schema) {
   await formatFiles(tree);
 }
 
-export default appGenerator;
+export default challengeGenerator;

@@ -1,10 +1,12 @@
 ---
 title: <%= difficulty %> <%= title %>
 description: Challenge <%= challengeNumber %> is about ...
+sidebar:
+  order: <%= challengeNumber %>
 ---
 
 :::note
-WIP
+WIP: The following documentation need to be written.
 :::
 
 <div class="chip">Challenge #<%= challengeNumber %></div>

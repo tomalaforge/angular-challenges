@@ -1,13 +1,13 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "$id": "GeneratorNxApp",
-  "title": "Creates an Angular application.",
-  "description": "Creates an Angular application.",
+  "$id": "GeneratorNxChallenge",
+  "title": "Creates the setup for a new Angular Challenge.",
+  "description": "Creates the boilerplate for an Angular Challenge.",
   "type": "object",
   "cli": "nx",
   "properties": {
     "name": {
-      "description": "The name of the application. (should be in camel case)",
+      "description": "The name of the application. (should be in kebab case)",
       "type": "string",
       "$default": {
         "$source": "argv",
@@ -19,6 +19,7 @@
     "title": {
       "description": "Title of your challenge. (use quote to add spaces)",
       "type": "string",
+      "maxLength": "25",
       "$default": {
         "$source": "argv",
         "index": 1
