@@ -10,4 +10,4 @@ npx nx serve crud
 
 ### Documentation and Instruction
 
-Challenge documentation is [here](https://angular-challenges.vercel.app/challenges/angular/5-crud.md/).
+Challenge documentation is [here](https://angular-challenges.vercel.app/challenges/angular/5-crud/).

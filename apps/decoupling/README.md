@@ -10,4 +10,4 @@ npx nx serve decoupling
 
 ### Documentation and Instruction
 
-Challenge documentation is [here](https://angular-challenges.vercel.app/challenges/angular/33-decoupling.md/).
+Challenge documentation is [here](https://angular-challenges.vercel.app/challenges/angular/33-decoupling/).

@@ -10,4 +10,4 @@ npx nx serve testing-todos-list
 
 ### Documentation and Instruction
 
-Challenge documentation is [here](https://angular-challenges.vercel.app/challenges/testing/29-real-application.md/).
+Challenge documentation is [here](https://angular-challenges.vercel.app/challenges/testing/29-real-application/).

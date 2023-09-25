@@ -10,4 +10,4 @@ npx nx serve testing-nested
 
 ### Documentation and Instruction
 
-Challenge documentation is [here](https://angular-challenges.vercel.app/challenges/testing/18-nested-comp.md/).
+Challenge documentation is [here](https://angular-challenges.vercel.app/challenges/testing/18-nested-comp/).

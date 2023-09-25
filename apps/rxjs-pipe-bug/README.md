@@ -10,4 +10,4 @@ npx nx serve rxjs-pipe-bug
 
 ### Documentation and Instruction
 
-Challenge documentation is [here](https://angular-challenges.vercel.app/challenges/rxjs/11-bug-chaining-operator.md/).
+Challenge documentation is [here](https://angular-challenges.vercel.app/challenges/rxjs/11-bug-chaining-operator/).
