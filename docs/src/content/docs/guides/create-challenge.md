@@ -19,11 +19,34 @@ To ease the process, I created a Nx generator that will create all the boilerpla
 
 ### Parameters
 
-title: string;
-challengeDifficulty: string;
-docRepository: string;
-name: string;
-directory?: string;
-addTest?: boolean;
+#### mandatory parameters
 
-This generator will create a new application inside the `apps` directory and a Markdown file inside the `docs` folder.
+- <b>title</b>: The title you want to give to your challenge.
+  :::note
+  Title length must be 25 characters maximum
+  :::
+
+- <b>challengeDifficulty</b>: The difficulty you think your challenge is. There is 3 difficulties : 🟢 easy / 🟠 medium / 🔴 hard
+- <b>name</b>: name of the `apps` repository
+  :::note
+  It must be written in **Kebab-Case**
+  :::
+- <b>docRepository</b>: The category of your Challenge: Nx, Angular, Angular Performance, Rxjs, NgRx, Typescript.
+
+#### optinal parameters
+
+- <b>directory</b>: If you want your application to be located in a specific folder inside `apps`.
+- <b>addTest</b>: If you want to add test configuration.
+
+### What is created
+
+- The generator will create all files needed to have a new working application. All these files will be created inside `apps/${directory}/${name}`
+- A Markdown file with the minimal setup will be created inside `docs/src/content/docs/challenges/${docRepository}`
+
+## Challenge Creation
+
+The only thing left to do is to create your challenge. 🚀
+
+:::warning
+Don't forget to update the docs to introduice your challenge and give your instructions.
+:::
