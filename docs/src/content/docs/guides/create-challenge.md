@@ -5,17 +5,13 @@ sidebar:
   order: 5
 ---
 
-:::note
-WIP: doc in writting
-:::
+You have an idea you want to share, an interesting bug you are struggling with in one or your private or side project, or an Angular trick you discovered. All of these possibilities are a good starting point to create a challenge and share the solution with others.
 
-You have an idea you want to share, an interesting bug you struggling on in your private organization or in your side project, an Angular trick you discovered,... All those possibilities are a good start to create a challenge and share the solution with others.
-
-But how to start creating that challenges ?
+But how do you start creating these challenges?
 
 ## Boilerplate Setup
 
-To ease the process, I created a Nx generator that will create all the boilerplate for you and get you ready faster. The easiest way to run it is by using the Nx console > generate > @angular-challenges/cli - challenge
+To streamline the process, I have created an Nx generator that will set up all the boilerplate for you and get you ready faster. The easiest way to run it is by using the Nx console: go to the <b>Nx Console > generate > @angular-challenges/cli - challenge</b>
 
 ### Parameters
 
@@ -23,11 +19,11 @@ To ease the process, I created a Nx generator that will create all the boilerpla
 
 - <b>title</b>: The title you want to give to your challenge.
   :::note
-  Title length must be 25 characters maximum
+  The title must be a maximum of 25 characters.
   :::
 
-- <b>challengeDifficulty</b>: The difficulty you think your challenge is. There is 3 difficulties : 🟢 easy / 🟠 medium / 🔴 hard
-- <b>name</b>: name of the `apps` repository
+- <b>challengeDifficulty</b>: The difficulty you think your challenge has. There are three difficulty level : 🟢 easy / 🟠 medium / 🔴 hard
+- <b>name</b>: name of the Nx application.
   :::note
   It must be written in **Kebab-Case**
   :::
@@ -40,7 +36,7 @@ To ease the process, I created a Nx generator that will create all the boilerpla
 
 ### What is created
 
-- The generator will create all files needed to have a new working application. All these files will be created inside `apps/${directory}/${name}`
+- The generator will create all the files needed to have a new working application. All these files will be created inside `apps/${directory}/${name}`
 - A Markdown file with the minimal setup will be created inside `docs/src/content/docs/challenges/${docRepository}`
 
 ## Challenge Creation
@@ -48,5 +44,7 @@ To ease the process, I created a Nx generator that will create all the boilerpla
 The only thing left to do is to create your challenge. 🚀
 
 :::danger
-Don't forget to update the docs to introduce your challenge and give your instructions.
+Don't forget to update the docs to introduce your challenge and provide your instructions.
 :::
+
+It's your turn to act!!! 💪
