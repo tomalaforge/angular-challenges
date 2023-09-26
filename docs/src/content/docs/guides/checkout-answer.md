@@ -1,13 +1,13 @@
 ---
-title: Checkout Somebody Answer
-description: Guide to checkout the answer of someone else
+title: Check out Somebody's Answer
+description: Guide to checking out someone else's answer.
 sidebar:
   order: 3
 ---
 
 All Angular Challenges answers will be presented in the form of a Pull Request (PR). To view and follow them, navigate through the **Files Changes** page on GitHub. However, understanding and following this process may not be straightforward if you are not familiar with the interface. In many cases, you may prefer to check out the branch and review the solution in your preferred IDE.
 
-This guide has been created to help you in archieving this.
+This guide has been created to help you in achieving this.
 
 ## Checkout a PR locally from someone else
 

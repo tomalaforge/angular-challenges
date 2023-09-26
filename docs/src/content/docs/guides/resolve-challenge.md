@@ -9,7 +9,7 @@ In this guide, you will learn how to resolve a challenge and submit an answer to
 
 ## Introduction
 
-This repository is powered by [Nx](https://nx.dev/getting-started/intro). <b>Nx</b> is a monorepository that allows you to store multiple applications inside the same workspace. Each challenge is a separate application. If you open the `apps` directory, you will found multiple directories, each related to a specific challenge. Each directory represents a complete standalone `Nx` application. To run and start with one, open your terminal and run:
+This repository is powered by [Nx](https://nx.dev/getting-started/intro). <b>Nx</b> is a monorepository that allows you to store multiple applications inside the same workspace. Each challenge is a separate application. If you open the `apps` directory, you will find multiple directories, each related to a specific challenge. Each directory represents a complete standalone `Nx` application. To run and start with one, open your terminal and run:
 
 ```bash
 npx nx serve <APPLICATION_NAME>
@@ -46,7 +46,7 @@ Follow the instructions to resolve the challenge.
 
 The last step is to commit your work following the [Conventional Guidelines](https://www.conventionalcommits.org/en/v1.0.0/).
 
-Finally, push your work to the remote reposository with the following command
+Finally, push your work to the remote repository with the following command
 
 ```bash
     git push --set-upstream origin <BRANCH_NAME>
@@ -58,9 +58,9 @@ You don't have to remember the command precisely. You just need to remember `git
 
 ## Submit your Work to the Main Repository
 
-Now, all your work is located insite your local instance of the Angular Challenge repository.
+Now, all your work is located insite your local instance of the Angular Challenges repository.
 
-The next step is to go to the main [Angular Challenge page](https://github.com/tomalaforge/angular-challenges) and create a new Pull Request.
+The next step is to go to the main [Angular Challenges page](https://github.com/tomalaforge/angular-challenges) and create a new Pull Request.
 
 Github should display a notification header to help you create the pull request.
 
