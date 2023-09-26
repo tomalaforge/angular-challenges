@@ -35,6 +35,9 @@ Check [all 35 challenges](https://angular-challenges.vercel.app/)
   <tbody>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://thomaslaforge.dev/home"><img src="https://avatars.githubusercontent.com/u/30832608?v=4?s=100" width="100px;" alt="Laforge Thomas"/><br /><sub><b>Laforge Thomas</b></sub></a><br /><a href="https://github.com/tomalaforge/angular-challenges/commits?author=tomalaforge" title="Code">💻</a> <a href="https://github.com/tomalaforge/angular-challenges/commits?author=tomalaforge" title="Documentation">📖</a> <a href="#content-tomalaforge" title="Content">🖋</a> <a href="#ideas-tomalaforge" title="Ideas, Planning, & Feedback">🤔</a> <a href="#design-tomalaforge" title="Design">🎨</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/alan-bio"><img src="https://avatars.githubusercontent.com/u/31838230?v=4?s=100" width="100px;" alt="Alan Dragicevich"/><br /><sub><b>Alan Dragicevich</b></sub></a><br /><a href="https://github.com/tomalaforge/angular-challenges/commits?author=alan-bio" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/edimitchel"><img src="https://avatars.githubusercontent.com/u/2922851?v=4?s=100" width="100px;" alt="Michel EDIGHOFFER"/><br /><sub><b>Michel EDIGHOFFER</b></sub></a><br /><a href="https://github.com/tomalaforge/angular-challenges/commits?author=edimitchel" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/gsgonzalez88"><img src="https://avatars.githubusercontent.com/u/39884678?v=4?s=100" width="100px;" alt="Gerardo Sebastian Gonzalez"/><br /><sub><b>Gerardo Sebastian Gonzalez</b></sub></a><br /><a href="https://github.com/tomalaforge/angular-challenges/commits?author=gsgonzalez88" title="Documentation">📖</a></td>
     </tr>
   </tbody>
   <tfoot>
@@ -50,6 +53,8 @@ Check [all 35 challenges](https://angular-challenges.vercel.app/)
 
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 
 Contributions of any kind are welcome.
 
