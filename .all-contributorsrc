@@ -14,6 +14,13 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/30832608?v=4",
       "profile": "https://thomaslaforge.dev/home",
       "contributions": ["code", "doc", "content", "ideas", "design"]
+    },
+    {
+      "login": "alan-bio",
+      "name": "Alan Dragicevich",
+      "avatar_url": "https://avatars.githubusercontent.com/u/31838230?v=4",
+      "profile": "https://github.com/alan-bio",
+      "contributions": ["doc"]
     }
   ],
   "contributorsPerLine": 7,
