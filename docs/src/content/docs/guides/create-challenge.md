@@ -5,7 +5,7 @@ sidebar:
   order: 5
 ---
 
-You have an idea you want to share, an interesting bug you are struggling with in one or your private or side project, or an Angular trick you discovered. All of these possibilities are a good starting point to create a challenge and share the solution with others.
+You have an idea you want to share, an interesting bug you are struggling with in one of your private or side project, or an Angular trick you discovered. All of these possibilities are a good starting point to create a challenge and share the solution with others.
 
 But how do you start creating these challenges?
 
@@ -22,14 +22,14 @@ To streamline the process, I have created an Nx generator that will set up all t
   The title must be a maximum of 25 characters.
   :::
 
-- <b>challengeDifficulty</b>: The difficulty you think your challenge has. There are three difficulty level : 🟢 easy / 🟠 medium / 🔴 hard
+- <b>challengeDifficulty</b>: The difficulty you think your challenge has. There are three difficulty levels : 🟢 easy / 🟠 medium / 🔴 hard
 - <b>name</b>: name of the Nx application.
   :::note
   It must be written in **Kebab-Case**
   :::
 - <b>docRepository</b>: The category of your Challenge: Nx, Angular, Angular Performance, Rxjs, NgRx, Typescript.
 
-#### optinal parameters
+#### optional parameters
 
 - <b>directory</b>: If you want your application to be located in a specific folder inside `apps`.
 - <b>addTest</b>: If you want to add test configuration.
