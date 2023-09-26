@@ -34,6 +34,25 @@ export default defineConfig({
           autogenerate: { directory: 'challenges' },
         },
       ],
+      head: [
+        {
+          tag: 'script',
+          attrs: {
+            src: 'https://www.googletagmanager.com/gtag/js?id=G-6BXJ62W6G5',
+            async: true,
+          },
+        },
+        {
+          tag: 'script',
+          content: `
+            window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-6BXJ62W6G5');
+          `,
+        },
+      ],
     }),
   ],
 });
