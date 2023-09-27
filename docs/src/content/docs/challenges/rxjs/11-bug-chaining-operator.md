@@ -48,7 +48,7 @@ Your PR title must start with <b>Answer:11</b>.
     ❖ Community Answers
   </a>
   <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A11+label%3A'
+    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A11+label%3A"answer+author"'
     alt="High  Order Operator Bug solution author">
     ▶︎ Author Answer
   </a>

@@ -155,7 +155,7 @@ Your PR title must start with <b>Answer:26</b>.
     ❖ Community Answers
   </a>
   <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A26+label%3A'
+    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A26+label%3A"answer+author"'
     alt="Component Generator solution author">
     ▶︎ Author Answer
   </a>

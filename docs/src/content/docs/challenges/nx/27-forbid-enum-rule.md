@@ -36,7 +36,7 @@ Your PR title must start with <b>Answer:27</b>.
     ❖ Community Answers
   </a>
   <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A27+label%3A'
+    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A27+label%3A"answer+author"'
     alt="Custom Eslint Rule solution author">
     ▶︎ Author Answer
   </a>

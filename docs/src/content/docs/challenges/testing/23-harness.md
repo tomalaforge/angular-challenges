@@ -39,7 +39,7 @@ Your PR title must start with <b>Answer:23</b>.
     ❖ Community Answers
   </a>
   <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A23+label%3A'
+    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A23+label%3A"answer+author"'
     alt="Harness solution author">
     ▶︎ Author Answer
   </a>

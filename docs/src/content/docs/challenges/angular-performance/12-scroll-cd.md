@@ -49,7 +49,7 @@ Your PR title must start with <b>Answer:12</b>.
     ❖ Community Answers
   </a>
   <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A{challenge number}+label%3A'
+    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A{challenge number}+label%3A"answer+author"'
     alt="Optimize Change Detection solution author">
     ▶︎ Author Answer
   </a>

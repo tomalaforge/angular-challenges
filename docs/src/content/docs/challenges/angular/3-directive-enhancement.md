@@ -60,7 +60,7 @@ Your PR title must start with <b>Answer:3</b>.
     ❖ Community Answers
   </a>
   <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A3+label%3A'
+    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A3+label%3A"answer+author"'
     alt="Directive Enhancement solution author">
     ▶︎ Author Answer
   </a>

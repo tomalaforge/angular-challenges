@@ -42,7 +42,7 @@ Your PR title must start with <b>Answer:18</b>.
     ❖ Community Answers
   </a>
   <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A18+label%3A'
+    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A18+label%3A"answer+author"'
     alt="Nested Components solution author">
     ▶︎ Author Answer
   </a>

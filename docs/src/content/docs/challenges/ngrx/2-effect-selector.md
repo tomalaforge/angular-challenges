@@ -48,7 +48,7 @@ Your PR title must start with <b>Answer:2</b>.
     ❖ Community Answers
   </a>
   <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A2+label%3A'
+    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A2+label%3A"answer+author"'
     alt="Effect vs Selector solution author">
     ▶︎ Author Answer
   </a>
