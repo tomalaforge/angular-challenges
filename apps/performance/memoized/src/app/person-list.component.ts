@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
+import { Pipe, PipeTransform } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -15,6 +16,16 @@ const fibonacci = (num: number): number => {
   return fibonacci(num - 1) + fibonacci(num - 2);
 };
 
+@Pipe({
+  name: 'fibonacci',
+  standalone: true,
+})
+export class FibonnaciPipe implements PipeTransform {
+  transform(num: number): number {
+    return fibonacci(num);
+  }
+}
+
 @Component({
   selector: 'app-person-list',
   standalone: true,
@@ -25,6 +36,7 @@ const fibonacci = (num: number): number => {
     MatFormFieldModule,
     MatInputModule,
     MatChipsModule,
+    FibonnaciPipe,
   ],
   template: `
     <h1 class="font-semibold text-center" title="Title">
@@ -43,7 +55,7 @@ const fibonacci = (num: number): number => {
       <mat-list-item *ngFor="let person of persons">
         <div MatListItemLine class="flex justify-between">
           <h3>{{ person.name }}</h3>
-          <mat-chip> {{ calculate(person.fib) }} </mat-chip>
+          <mat-chip> {{ person.fib | fibonacci }} </mat-chip>
         </div>
       </mat-list-item>
     </mat-list>
@@ -57,8 +69,4 @@ export class PersonListComponent {
   @Input() title = '';
 
   label = '';
-
-  calculate(num: number) {
-    return fibonacci(num);
-  }
 }
