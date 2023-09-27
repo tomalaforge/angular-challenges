@@ -94,6 +94,10 @@ b {
   color: var(--sl-color-accent-high);
 }
 
+.starlight-aside--tip b {
+  color: var(--sl-color-asides-text-accent);
+}
+
 .main-page-footer {
   margin-top: 2rem !important;
   font-size: var(--sl-text-sm);

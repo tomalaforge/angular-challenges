@@ -8,7 +8,8 @@
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "doc:dev": "cd docs && npm run dev"
   },
   "private": true,
   "dependencies": {

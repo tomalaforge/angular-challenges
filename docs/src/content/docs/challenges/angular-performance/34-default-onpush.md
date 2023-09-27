@@ -5,33 +5,37 @@ sidebar:
   order: 34
 ---
 
-:::note
-WIP: The following documentation will be reviewed and improved. However, you can still take on the challenge. If you don't understand a certain part, please feel free to reach out or create an issue.
-:::
-
 <div class="chip">Challenge #34</div>
 
 ## Information
 
-In this series of challenges, you will learn how to optimize and enhance the performance of your Angular Application.
+In this challenge, we will explore the differences and impacts of using `ChangeDetectionStrategy.Default` versus `ChangeDetectionStrategy.OnPush`.
 
-The first step is to download the [Angular DevTools Chrome extention](https://chrome.google.com/webstore/detail/angular-devtools/ienfalfjdbdpebioblfackkekamfmbnh) if you haven't already done so. This extension allows you to profile your application and detect performance issues.
+You can read the [Angular documentation](https://angular.io/guide/change-detection-skipping-subtrees) to learn more about the differences between these strategies.
 
-In this challenge, we will explore the differences and impacts of using `ChangeDetectionStrategy.Default` versus `ChangeDetectionStrategy.OnPush`. To provide a clearer demonstration, I have added color enlightment to each component and each row in our application. However, in real-world scenarios, you will not have such visualization. This is where the Angular DevTool profiler comes to the rescue.
+In this challenge, all components start with the `Default` strategy. When you type letters inside the input field, you will notice that all components are highlighted in orange.
 
-Start by serving this application by running: `npx nx serve performance-default-onpush` inside your terminal. Then open Chrome DevTool by pressing **F12** and switch to the Angular Tab. From there you can select the Profiler tab as shown below.
+:::note
+I added color highlighting to each component and each row to provide a better visualization of when a component is rerendered.
+:::
 
-![profiler tab](../../../../assets/34/profiler-tab.png 'Profiler tab')
+As you can see, each letter triggers a new change detection cycle, and all components are rerendered, causing performance issues.
 
-Start profiling your application and type some letters inside the input field. You will notice that each element of your application will flash at each change detection cycle and the profiler will show you a bar for each change detection cycle.
+Let's use the <b>Angular DevTool</b> to profile our application and understand how this tool can help us understand what is happening inside our application.
 
-If you click on one of the bars (indicated by the yellow arrow on the picture below), you can see that `PersonListComponent`, `RandomComponent` and all the `MatListItem` are impacted by the change detection cycle, even when we only interact with the input field.
+:::note
+If you don't know how to use it, read [the performance introduction page](/challenges/angular-performance/) first and come back after.
+:::
 
-![profiler record](../../../../assets/34/profiler-record.png 'Profiler Record')
+Now, start profiling your application and type some letters inside the input field to trigger some change detection cycles.
+
+If you click on one of the bars (indicated by the yellow arrow in the picture below), you can see that `PersonListComponent`, `RandomComponent`, and all the `MatListItem` are impacted by the change detection cycle, even when we only interact with the input field.
+
+![profiler record](../../../../assets/angular-performance/34/profiler-record.png 'Profiler Record')
 
 ## Statement
 
-The goal of this challenge is to improve the clustering of change detection within the application.
+The goal of this challenge is to improve the clustering of change detection within the application using the `OnPush` change detection strategy, but not only...
 
 ## Hints:
 

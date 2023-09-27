@@ -11,11 +11,13 @@ WIP: The following documentation will be reviewed and improved. However, you can
 
 <div class="chip">Challenge #32</div>
 
+:::note
 This challenge is inspired by a real-life example that I simplified to create this nice challenge.
+:::
 
 ## Information
 
-In this small application, we have a navigation menu to route our application to either `barComponent` or `FooComponent`. However our application is not loading and no errors are displayed inside the console.
+In this small application, we have a navigation menu to route our application to either `BarComponent` or `FooComponent`. However our application is not loading and no errors are displayed inside the console.
 
 ## Statement
 
