@@ -2,18 +2,30 @@
   --sl-color-black: #1b1b1d;
   --sl-color-gray-6: #242526;
   --sl-color-accent-high: #f10023;
-  /* --sl-color-black: white; */
   --sl-icon-color: #fff;
   --sl-color-text-invert: #fff;
   --primary-color: var(--sl-color-bg-nav) !important;
-  /* --sl-color-text-invert: #212121; */
   --cardBgColor: #242526;
-  /* --sl-font: 'IBM Plex Serif', serif; */
 
   --sl-hue-purple: 41;
   --sl-color-purple-low: hsl(var(--sl-hue-orange), 39%, 22%);
   --sl-color-purple: hsl(var(--sl-hue-orange), 82%, 63%);
   --sl-color-purple-high: hsl(var(--sl-hue-orange), 82%, 87%);
+
+  --color-btn: var(--sl-color-white);
+  --color-chip: rgb(35, 38, 47);
+  --color-chip-border: rgba(240, 246, 252, 0.1);
+}
+
+:root[data-theme='light'],
+[data-theme='light'] {
+  --sl-color-accent: #f10023;
+  --sl-color-accent-high: #f10023;
+  --sl-icon-color: rgb(35, 38, 47);
+
+  --color-btn: white;
+  --color-chip: white;
+  --color-chip-border: rgb(33, 38, 45);
 }
 
 .github-success-btn {
@@ -21,7 +33,7 @@
   border-radius: 6px;
   padding: 2px 8px;
   background-color: rgb(35, 134, 54);
-  color: var(--sl-color-white);
+  color: var(-color-btn);
 }
 
 .github-neutral-btn {
@@ -38,12 +50,13 @@
 }
 
 .chip {
-  border: 1px solid rgba(240, 246, 252, 0.1);
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--color-chip-border);
   border-radius: 6px;
   padding: 2px 8px;
-  background-color: rgb(33, 38, 45);
-  color: rgb(201, 209, 217);
-  fill: rgb(201, 209, 217);
+  background-color: var(--color-chip);
+  color: var(--sl-color-text);
   width: fit-content;
 }
 
@@ -54,14 +67,14 @@
   flex-wrap: wrap;
   gap: 1.5rem;
 }
+
 .article-footer > a {
   border: 1px solid var(--sl-color-accent-high);
   border-radius: 999rem;
   padding: 1rem;
   text-decoration: none;
-  color: var(--sl-color-gray-2);
+  color: var(--color-btn);
   box-shadow: var(--sl-shadow-md);
-  color: var(--sl-color-white);
   font-size: var(--sl-text-lg);
   line-height: var(--sl-line-height-headings);
   display: flex;
@@ -72,8 +85,9 @@
   background-color: var(--sl-color-accent-high);
 }
 
-a.primary {
-  color: var(--sl-color-white) !important;
+a.primary,
+a.primary > svg {
+  color: var(--color-btn) !important;
 }
 
 b {
