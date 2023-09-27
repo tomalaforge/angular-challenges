@@ -1,11 +1,8 @@
-import { Component, Input } from '@angular/core';
-
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CDFlashingDirective } from '@angular-challenges/shared/directives';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatChipsModule } from '@angular/material/chips';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 
 @Component({
@@ -15,8 +12,6 @@ import { MatListModule } from '@angular/material/list';
     CommonModule,
     FormsModule,
     MatListModule,
-    MatFormFieldModule,
-    MatInputModule,
     MatChipsModule,
     CDFlashingDirective,
   ],
@@ -24,15 +19,6 @@ import { MatListModule } from '@angular/material/list';
     <h1 cd-flash class="font-semibold text-center" title="Title">
       {{ title | titlecase }}
     </h1>
-
-    <mat-form-field class="w-4/5" cd-flash>
-      <input
-        placeholder="Add one member to the list"
-        matInput
-        type="text"
-        [(ngModel)]="label"
-        (keydown)="handleKey($event)" />
-    </mat-form-field>
 
     <mat-list class="flex w-full">
       <div *ngIf="names?.length === 0" class="empty-list-label">Empty list</div>
@@ -52,17 +38,9 @@ import { MatListModule } from '@angular/material/list';
   host: {
     class: 'w-full flex flex-col items-center',
   },
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PersonListComponent {
   @Input() names: string[] = [];
   @Input() title = '';
-
-  label = '';
-
-  handleKey(event: any) {
-    if (event.keyCode === 13) {
-      this.names?.unshift(this.label);
-      this.label = '';
-    }
-  }
 }
