@@ -16,9 +16,8 @@
         "@angular-eslint/component-selector": [
           "error",
           {
-            "type": "element",
-            "prefix": "app",
-            "style": "kebab-case"
+            "type": "element", 
+            "style": "any" // Esto permite cualquier nombre de selector
           }
         ]
       },
