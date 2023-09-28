@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { Person } from './person.model';
+import { FibonacciPipe } from './memoized.pipe';
 
 const fibonacci = (num: number): number => {
   if (num === 1 || num === 2) {
@@ -25,6 +26,7 @@ const fibonacci = (num: number): number => {
     MatFormFieldModule,
     MatInputModule,
     MatChipsModule,
+    FibonacciPipe,
   ],
   template: `
     <h1 class="font-semibold text-center" title="Title">
@@ -43,7 +45,7 @@ const fibonacci = (num: number): number => {
       <mat-list-item *ngFor="let person of persons">
         <div MatListItemLine class="flex justify-between">
           <h3>{{ person.name }}</h3>
-          <mat-chip> {{ calculate(person.fib) }} </mat-chip>
+          <mat-chip> {{ person.fib | fib }} </mat-chip>
         </div>
       </mat-list-item>
     </mat-list>
