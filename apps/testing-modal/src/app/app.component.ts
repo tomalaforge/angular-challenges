@@ -33,7 +33,7 @@ import { ProfilConfirmationDialog } from './profil-confirmation.dialog';
     </mat-form-field>
     <button (click)="confirm()" mat-flat-button color="primary">Confirm</button>
 
-    <div>{{ result$ | async }}</div>
+    <div data-cy="result">{{ result$ | async }}</div>
   `,
 })
 export class AppComponent {

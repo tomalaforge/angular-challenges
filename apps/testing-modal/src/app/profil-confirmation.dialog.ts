@@ -10,8 +10,12 @@ import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
     <h1 mat-dialog-title>Profil</h1>
     <div mat-dialog-content>Name: {{ data.name }}</div>
     <div mat-dialog-actions>
-      <button mat-button [mat-dialog-close]="false">Cancel</button>
-      <button mat-button [mat-dialog-close]="true">Confirmation</button>
+      <button data-cy="cancel" mat-button [mat-dialog-close]="false">
+        Cancel
+      </button>
+      <button data-cy="confirmation" mat-button [mat-dialog-close]="true">
+        Confirmation
+      </button>
     </div>
   `,
 })
