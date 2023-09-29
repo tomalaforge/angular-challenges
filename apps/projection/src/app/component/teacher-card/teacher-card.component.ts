@@ -1,36 +1,59 @@
-import { Component, OnInit } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+import { Component, inject, OnInit } from '@angular/core';
+import {
+  FakeHttpService,
+  randTeacher,
+} from '../../data-access/fake-http.service';
 import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
 import { Teacher } from '../../model/teacher.model';
 import { CardComponent } from '../../ui/card/card.component';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { takeUntil } from 'rxjs';
+import { DestroyService } from '../../service/destroy.service';
+import { CardRowDirective } from '../../directive/card-row/card-row.directive';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-teacher-card',
-  template: `<app-card
-    [list]="teachers"
-    [type]="cardType"
-    customClass="bg-light-red"
-  ></app-card>`,
+  template: ` <app-card [list]="teachers()" (addItem)="onAddItem()">
+    <img card-img src="assets/img/teacher.png" alt="" width="200px" />
+    <ng-template [appCardRow]="teachers()" let-teacher>
+      <app-list-item (delete)="onDeleteItem(teacher.id)">
+        <div>{{ teacher.firstname }} {{ teacher.lastname }}</div>
+        <div>{{ teacher.subject }}</div>
+      </app-list-item>
+    </ng-template>
+  </app-card>`,
   styles: [
     `
-      ::ng-deep .bg-light-red {
+      :host {
         background-color: rgba(250, 0, 0, 0.1);
       }
     `,
   ],
   standalone: true,
-  imports: [CardComponent],
+  providers: [DestroyService],
+  imports: [CardComponent, CardRowDirective, ListItemComponent],
 })
 export class TeacherCardComponent implements OnInit {
-  teachers: Teacher[] = [];
-  cardType = CardType.TEACHER;
+  private http = inject(FakeHttpService);
+  private store = inject(TeacherStore);
+  private destroy$ = inject(DestroyService);
 
-  constructor(private http: FakeHttpService, private store: TeacherStore) {}
+  teachers = toSignal<Teacher[], Teacher[]>(this.store.teachers$, {
+    initialValue: [],
+  });
 
   ngOnInit(): void {
-    this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
+    this.http.fetchTeachers$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((t) => this.store.addAll(t));
+  }
 
-    this.store.teachers$.subscribe((t) => (this.teachers = t));
+  onAddItem(): void {
+    this.store.addOne(randTeacher());
+  }
+
+  onDeleteItem(id: number): void {
+    this.store.deleteOne(id);
   }
 }
