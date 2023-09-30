@@ -1,4 +1,3 @@
-type VehicleType = 'bus' | 'car' | 'moto' | 'bicycle' | 'boat';
 type Fuel = 'diesel' | 'petrol' | 'electric';
 
 interface Bicycle {
@@ -28,10 +27,21 @@ interface Boat {
 
 type Vehicle = Bicycle | Car | Moto | Bus | Boat;
 
+// Overloads
+export function createVehicle(type: 'bicycle'): Bicycle;
+export function createVehicle(type: 'car', fuel: Fuel): Car;
+export function createVehicle(type: 'moto', fuel: Fuel): Moto;
 export function createVehicle(
-  type: VehicleType,
-  fuel?: Fuel,
-  capacity?: number,
+  type: 'bus',
+  capacity: number,
+  isPublicTransport: boolean
+): Bus;
+export function createVehicle(type: 'boat', capacity: number): Boat;
+
+// Implementation
+export function createVehicle(
+  type: string,
+  fuelOrCapacity?: Fuel | number,
   isPublicTransport?: boolean
 ): Vehicle {
   switch (type) {
@@ -39,17 +49,21 @@ export function createVehicle(
       return { type };
     case 'car':
     case 'moto':
-      if (!fuel) throw new Error(`fuel property is missing for type ${type}`);
-      return { fuel, type };
+      if (typeof fuelOrCapacity !== 'string')
+        throw new Error(`fuel property is missing for type ${type}`);
+      return { type, fuel: fuelOrCapacity };
     case 'boat':
-      if (!capacity)
-        throw new Error(`capacity property is missing for type boat`);
-      return { capacity, type };
+      if (typeof fuelOrCapacity !== 'number')
+        throw new Error(`capacity property is missing for type ${type}`);
+      return { type, capacity: fuelOrCapacity };
     case 'bus':
-      if (!capacity)
-        throw new Error(`capacity property is missing for type bus`);
-      if (!isPublicTransport)
-        throw new Error(`isPublicTransport property is missing for type bus`);
-      return { capacity, isPublicTransport, type };
+      if (
+        typeof fuelOrCapacity !== 'number' ||
+        typeof isPublicTransport !== 'boolean'
+      )
+        throw new Error(`Properties are missing for type ${type}`);
+      return { type, capacity: fuelOrCapacity, isPublicTransport };
+    default:
+      throw new Error(`Invalid vehicle type: ${type}`);
   }
 }
