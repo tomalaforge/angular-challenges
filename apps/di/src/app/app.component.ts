@@ -1,6 +1,6 @@
 /* eslint-disable @angular-eslint/directive-selector */
 import { AsyncPipe, NgFor } from '@angular/common';
-import { Component, Directive } from '@angular/core';
+import { Component, Directive, Input, OnInit } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { CurrencyPipe } from './currency.pipe';
 import { CurrencyService } from './currency.service';
@@ -23,10 +23,31 @@ export class ProductDirective {
   }
 }
 
+@Directive({
+  selector: 'tr[currencyCode]',
+  standalone: true,
+  providers: [{ provide: CurrencyService }],
+})
+export class CurrencyCodeDirective implements OnInit {
+  @Input({ required: true }) currencyCode!: string;
+
+  constructor(private readonly _currencyService: CurrencyService) {}
+
+  ngOnInit(): void {
+    this._currencyService.setCode(this.currencyCode);
+  }
+}
+
 @Component({
   standalone: true,
-  imports: [TableModule, CurrencyPipe, AsyncPipe, NgFor, ProductDirective],
-  providers: [CurrencyService],
+  imports: [
+    TableModule,
+    CurrencyPipe,
+    AsyncPipe,
+    NgFor,
+    ProductDirective,
+    CurrencyCodeDirective,
+  ],
   selector: 'app-root',
   template: `
     <p-table [value]="products">
@@ -38,7 +59,7 @@ export class ProductDirective {
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-product>
-        <tr>
+        <tr [currencyCode]="product.currencyCode">
           <td>{{ product.name }}</td>
           <td>{{ product.priceA | currency | async }}</td>
           <td>{{ product.priceB | currency | async }}</td>
