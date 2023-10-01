@@ -1,7 +1,13 @@
 import { Component, inject } from '@angular/core';
-import { FakeHttpService, randStudent, } from '../../data-access/fake-http.service';
+import {
+  FakeHttpService,
+  randStudent,
+} from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
-import { CardComponent } from '../../ui/card/card.component';
+import {
+  CardComponent,
+  CardListItemDirective,
+} from '../../ui/card/card.component';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { JsonPipe } from '@angular/common';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
@@ -9,17 +15,18 @@ import { switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-student-card',
-  template: `
-      <app-card
-          [list]="students() ?? []"
-          label="firstname"
-          (added)="addStudent()">
-          <img card-header src="assets/img/student.webp" width="200px"/>
+  template: ` <app-card
+    [list]="students() ?? []"
+    label="firstname"
+    (added)="addStudent()">
+    <img card-header src="assets/img/student.webp" width="200px" />
 
-          <ng-template #row let-student>
-              <app-list-item (deleted)="deleteStudent(student.id)">{{student.firstname}}</app-list-item>
-          </ng-template>
-      </app-card>`,
+    <ng-template card-list-item let-student>
+      <app-list-item (deleted)="deleteStudent(student.id)">{{
+        student.firstname
+      }}</app-list-item>
+    </ng-template>
+  </app-card>`,
   standalone: true,
   styles: [
     `
@@ -28,7 +35,7 @@ import { switchMap, tap } from 'rxjs';
       }
     `,
   ],
-  imports: [CardComponent, JsonPipe, ListItemComponent],
+  imports: [CardComponent, JsonPipe, ListItemComponent, CardListItemDirective],
 })
 export class StudentCardComponent {
   readonly #http = inject(FakeHttpService);

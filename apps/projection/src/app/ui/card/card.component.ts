@@ -2,11 +2,18 @@ import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   ContentChild,
+  Directive,
   EventEmitter,
   Input,
   Output,
   TemplateRef,
 } from '@angular/core';
+
+@Directive({
+  selector: 'ng-template [card-list-item]',
+  standalone: true,
+})
+export class CardListItemDirective {}
 
 @Component({
   selector: 'app-card',
@@ -37,6 +44,8 @@ import {
 })
 export class CardComponent<T> {
   @Input({ required: true }) list: T[] = [];
-  @ContentChild('row', { read: TemplateRef }) row: TemplateRef<any>;
+  @ContentChild(CardListItemDirective, { read: TemplateRef }) row: TemplateRef<{
+    $implicit: T;
+  }>;
   @Output() added = new EventEmitter<void>();
 }
