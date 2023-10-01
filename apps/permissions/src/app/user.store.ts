@@ -9,16 +9,17 @@ export class UserStore {
     this.user.set(user);
   }
 
-  hasAnyRole(user: User, role: Role | Role[] | undefined) {
+  hasAnyRole(role: Role | Role[] | undefined) {
     if (!role) {
       return false;
     }
-    if (user.isAdmin) {
+    if (this.user().isAdmin) {
       return true;
     }
     const roles: Role[] = Array.isArray(role) ? role : [role];
     return (
-      roles.length === 0 || user.roles.some((r) => roles.indexOf(r) !== -1)
+      roles.length === 0 ||
+      this.user().roles.some((r) => roles.indexOf(r) !== -1)
     );
   }
 }

@@ -27,7 +27,7 @@ export class HasRoleDirective {
     if (this._isAdmin()) {
       return this.store.user().isAdmin;
     } else {
-      return this.store.hasAnyRole(this.store.user(), this._role());
+      return this.store.hasAnyRole(this._role());
     }
   });
 
