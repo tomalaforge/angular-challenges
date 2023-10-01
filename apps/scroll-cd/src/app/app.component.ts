@@ -1,11 +1,18 @@
 import { AsyncPipe, NgIf } from '@angular/common';
-import { Component, HostListener } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  NgZone,
+  inject,
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { BehaviorSubject, distinctUntilChanged, fromEvent, map } from 'rxjs';
 
 @Component({
   standalone: true,
   imports: [NgIf, AsyncPipe],
   selector: 'app-root',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div>Top</div>
     <div>Middle</div>
@@ -33,14 +40,22 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AppComponent {
   title = 'scroll-cd';
-
+  ngZone = inject(NgZone);
   private displayButtonSubject = new BehaviorSubject<boolean>(false);
   displayButton$ = this.displayButtonSubject.asObservable();
 
-  @HostListener('window:scroll', ['$event'])
-  onScroll() {
-    const pos = window.pageYOffset;
-    this.displayButtonSubject.next(pos > 50);
+  constructor() {
+    this.ngZone.runOutsideAngular(() => {
+      fromEvent(window, 'scroll')
+        .pipe(
+          map(() => window.scrollY > 50),
+          distinctUntilChanged(),
+          takeUntilDestroyed()
+        )
+        .subscribe((shouldDisplay) =>
+          this.ngZone.run(() => this.displayButtonSubject.next(shouldDisplay))
+        );
+    });
   }
 
   goToTop() {
