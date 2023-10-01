@@ -23,6 +23,10 @@ export class CurrencyService extends ComponentStore<{ code: string }> {
     map((code) => currency.find((c) => c.code === code)?.symbol ?? code)
   );
 
+  setCode(code: string) {
+    this.patchState({ code });
+  }
+
   constructor() {
     super({ code: 'EUR' });
   }
