@@ -1,14 +1,26 @@
-import { NgFor } from '@angular/common';
-import { Component } from '@angular/core';
+import { NgFor, NgIf } from '@angular/common';
+import { Component, Pipe, PipeTransform } from '@angular/core';
 
+@Pipe({
+  name: 'wrapFn',
+  standalone: true,
+})
+class WrapFnPipe implements PipeTransform {
+  transform<Fn extends (...args: Parameters<Fn>) => ReturnType<Fn>>(
+    fn: Fn,
+    ...args: Parameters<Fn>
+  ): ReturnType<Fn> {
+    return fn(...args);
+  }
+}
 @Component({
   standalone: true,
-  imports: [NgFor],
+  imports: [NgFor, WrapFnPipe, NgIf],
   selector: 'app-root',
   template: `
     <div *ngFor="let person of persons; let index = index; let isFirst = first">
-      {{ showName(person.name, index) }}
-      {{ isAllowed(person.age, isFirst) }}
+      {{ showName | wrapFn : person.name : index }}
+      {{ isAllowed | wrapFn : person.age : isFirst }}
     </div>
   `,
 })
