@@ -1,68 +1,47 @@
 /* eslint-disable @angular-eslint/directive-selector */
-import { NgIfContext } from '@angular/common';
+import { NgIf } from '@angular/common';
 import {
   Directive,
   Input,
-  OnDestroy,
-  OnInit,
-  TemplateRef,
-  ViewContainerRef,
+  computed,
+  effect,
+  inject,
+  signal,
 } from '@angular/core';
 import { Role } from './user.model';
 import { UserStore } from './user.store';
 
 @Directive({
-  selector: '[hasRole], [hasRoleIsAdmin]',
+  selector: '[hasRole], [hasRoleSuperAdmin]',
   standalone: true,
-  providers: [provideDestroyService()],
+  hostDirectives: [NgIf],
 })
-export class HasRoleDirective implements OnInit, OnDestroy {
-  @Input('hasRole') role: Role | Role[] | undefined = undefined;
+export class HasRoleDirective {
+  private store = inject(UserStore);
+  private ngIf = inject(NgIf, { host: true });
 
-  @Input('hasRoleIsAdmin') isAdmin = false;
+  private readonly _isAdmin = signal<boolean>(false);
+  private readonly _role = signal<Role | Role[] | undefined>(undefined);
 
-  @Input('hasRoleIsAdminElseTemplate')
-  elseTemplate?: TemplateRef<NgIfContext> | null;
-
-  constructor(
-    private templateRef: TemplateRef<unknown>,
-    private viewContainer: ViewContainerRef,
-    private store: UserStore
-  ) {}
-
-  ngOnDestroy(): void {
-    console.log('on destroy');
-  }
-
-  ngOnInit(): void {
-    console.log(this.role, this.isAdmin, this.elseTemplate);
-    if (this.isAdmin) {
-      this.store.isAdmin$.subscribe((isAdmin) => {
-        console.log(isAdmin);
-        isAdmin ? this.addTemplate() : this.addElseTemplate();
-      });
+  private readonly showTemplate = computed(() => {
+    if (this._isAdmin()) {
+      return this.store.user().isAdmin;
+    } else {
+      return this.store.hasAnyRole(this.store.user(), this._role());
     }
-    // else if (this.role) {
-    //   this.store
-    //     .hasAnyRole(this.role)
-    //     .subscribe((hasPermission) =>
-    //       hasPermission ? this.addTemplate() : this.addElseTemplate()
-    //     );
-    // } else {
-    //   this.addTemplate();
-    // }
+  });
+
+  @Input('hasRole') set role(role: Role | Role[] | undefined) {
+    this._role.set(role);
   }
 
-  private addTemplate() {
-    console.log('Add');
-    this.viewContainer.clear();
-    this.viewContainer.createEmbeddedView(this.templateRef);
+  @Input('hasRoleSuperAdmin') set isAdmin(isAdmin: boolean) {
+    this._isAdmin.set(isAdmin);
   }
 
-  private addElseTemplate() {
-    console.log('ici');
-    this.viewContainer.clear();
-    this.elseTemplate &&
-      this.viewContainer.createEmbeddedView(this.elseTemplate);
+  constructor() {
+    effect(() => {
+      this.ngIf.ngIf = this.showTemplate();
+    });
   }
 }
