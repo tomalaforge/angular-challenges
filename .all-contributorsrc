@@ -3,7 +3,9 @@
   "projectOwner": "tomalaforge",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "files": ["README.md"],
+  "files": [
+    "README.md"
+  ],
   "imageSize": 100,
   "commit": true,
   "commitConvention": "angular",
@@ -13,31 +15,52 @@
       "name": "Laforge Thomas",
       "avatar_url": "https://avatars.githubusercontent.com/u/30832608?v=4",
       "profile": "https://thomaslaforge.dev/home",
-      "contributions": ["code", "doc", "content", "ideas", "design"]
+      "contributions": [
+        "code",
+        "doc",
+        "content",
+        "ideas",
+        "design"
+      ]
     },
     {
       "login": "alan-bio",
       "name": "Alan Dragicevich",
       "avatar_url": "https://avatars.githubusercontent.com/u/31838230?v=4",
       "profile": "https://github.com/alan-bio",
-      "contributions": ["doc"]
+      "contributions": [
+        "doc"
+      ]
     },
     {
       "login": "edimitchel",
       "name": "Michel EDIGHOFFER",
       "avatar_url": "https://avatars.githubusercontent.com/u/2922851?v=4",
       "profile": "https://github.com/edimitchel",
-      "contributions": ["doc"]
+      "contributions": [
+        "doc"
+      ]
     },
     {
       "login": "gsgonzalez88",
       "name": "Gerardo Sebastian Gonzalez",
       "avatar_url": "https://avatars.githubusercontent.com/u/39884678?v=4",
       "profile": "https://github.com/gsgonzalez88",
-      "contributions": ["doc"]
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "marryday",
+      "name": "Evseev Yuriy",
+      "avatar_url": "https://avatars.githubusercontent.com/u/57489315?v=4",
+      "profile": "https://github.com/marryday",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
-  "linkToUsage": true
+  "linkToUsage": true,
+  "commitType": "docs"
 }
-
