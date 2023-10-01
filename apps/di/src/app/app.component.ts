@@ -26,7 +26,7 @@ export class ProductDirective {
 @Directive({
   selector: 'tr[currencyCode]',
   standalone: true,
-  providers: [{ provide: CurrencyService }],
+  providers: [CurrencyService],
 })
 export class CurrencyCodeDirective implements OnInit {
   @Input({ required: true }) currencyCode!: string;
