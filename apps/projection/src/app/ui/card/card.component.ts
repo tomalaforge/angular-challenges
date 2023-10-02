@@ -1,34 +1,41 @@
-import { NgFor, NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { randStudent, randTeacher } from '../../data-access/fake-http.service';
-import { StudentStore } from '../../data-access/student.store';
-import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
-import { ListItemComponent } from '../list-item/list-item.component';
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import {
+  Component,
+  ContentChild,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
+import { ListItemTemplateDirective } from '../../directives/list-item-template.directive';
+import { BaseItem } from '../../types/base-item';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
   standalone: true,
-  imports: [NgIf, NgFor, ListItemComponent],
+  imports: [NgIf, NgFor, NgTemplateOutlet],
+  styles: [
+    `
+      .card {
+        background-color: var(--card-background-color, transparent);
+      }
+    `,
+  ],
 })
 export class CardComponent {
-  @Input() list: any[] | null = null;
-  @Input() type!: CardType;
-  @Input() customClass = '';
+  @Input() list: BaseItem[] = [];
+  @Input() imageUrl!: string;
 
-  CardType = CardType;
+  @ContentChild(ListItemTemplateDirective)
+  itemTemplate?: ListItemTemplateDirective;
 
-  constructor(
-    private teacherStore: TeacherStore,
-    private studentStore: StudentStore
-  ) {}
+  @Output()
+  addNewItem: EventEmitter<void> = new EventEmitter<void>();
 
-  addNewItem() {
-    if (this.type === CardType.TEACHER) {
-      this.teacherStore.addOne(randTeacher());
-    } else if (this.type === CardType.STUDENT) {
-      this.studentStore.addOne(randStudent());
-    }
+  @Output()
+  deleteItem: EventEmitter<number> = new EventEmitter<number>();
+
+  trackById(index: number, item: BaseItem) {
+    return item.id;
   }
 }
