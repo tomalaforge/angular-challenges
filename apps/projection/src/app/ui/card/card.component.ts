@@ -1,26 +1,32 @@
 import { NgFor, NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
 import {
-  randStudent,
-  randTeacher,
-  randomCity,
-} from '../../data-access/fake-http.service';
+  Component,
+  Input,
+  TemplateRef,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { StudentStore } from '../../data-access/student.store';
 import { TeacherStore } from '../../data-access/teacher.store';
 import { CityStore } from '../../data-access/city.store';
 import { CardType } from '../../model/card.model';
 import { ListItemComponent } from '../list-item/list-item.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
   standalone: true,
-  imports: [NgIf, NgFor, ListItemComponent],
+  imports: [NgIf, NgFor, ListItemComponent, CommonModule],
+  //providers: [TemplateRef],
 })
 export class CardComponent {
   @Input() list: any[] | null = null;
   @Input() type!: CardType;
   @Input() customClass = '';
+  @Input() templateView: TemplateRef<any>;
+  @Output() deleteEvent = new EventEmitter<number>();
+  @Output() addEvent = new EventEmitter();
 
   CardType = CardType;
 
@@ -29,14 +35,10 @@ export class CardComponent {
     private studentStore: StudentStore,
     private cityStore: CityStore
   ) {}
-
+  deleteItem(id: number) {
+    this.deleteEvent.emit(id);
+  }
   addNewItem() {
-    if (this.type === CardType.TEACHER) {
-      this.teacherStore.addOne(randTeacher());
-    } else if (this.type === CardType.STUDENT) {
-      this.studentStore.addOne(randStudent());
-    } else if (this.type === CardType.CITY) {
-      this.cityStore.addOne(randomCity());
-    }
+    this.addEvent.emit();
   }
 }

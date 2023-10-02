@@ -1,7 +1,4 @@
-import { Component, Input } from '@angular/core';
-import { StudentStore } from '../../data-access/student.store';
-import { TeacherStore } from '../../data-access/teacher.store';
-import { CityStore } from '../../data-access/city.store';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CardType } from '../../model/card.model';
 
 @Component({
@@ -20,20 +17,9 @@ export class ListItemComponent {
   @Input() id!: number;
   @Input() name!: string;
   @Input() type!: CardType;
-
-  constructor(
-    private teacherStore: TeacherStore,
-    private studentStore: StudentStore,
-    private cityStore: CityStore
-  ) {}
+  @Output() deleteEvent = new EventEmitter<number>();
 
   delete(id: number) {
-    if (this.type === CardType.TEACHER) {
-      this.teacherStore.deleteOne(id);
-    } else if (this.type === CardType.STUDENT) {
-      this.studentStore.deleteOne(id);
-    } else if (this.type === CardType.CITY) {
-      this.cityStore.deleteOne(id);
-    }
+    this.deleteEvent.emit(id);
   }
 }
