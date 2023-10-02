@@ -7,11 +7,10 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
 @Component({
   selector: 'app-city-card',
   template: `<app-card [list]="cities" class="bg-light-green">
-    <ng-template card-list let-item="item">
-      <app-list-item
-        [id]="item.id"
-        [name]="item.name"
-        (deleteEvent)="deleteCity($event)"></app-list-item>
+    <ng-template card-list let-item>
+      <app-list-item (deleteEvent)="deleteCity(item.id)">
+        {{ item.name }}
+      </app-list-item>
     </ng-template>
   </app-card>`,
 

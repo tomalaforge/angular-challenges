@@ -17,7 +17,7 @@
     <ng-container *ngFor="let item of list">
       <ng-template
         [ngTemplateOutlet]="cardList"
-        [ngTemplateOutletContext]="{ item }">
+        [ngTemplateOutletContext]="{ $implicit: item }">
       </ng-template>
     </ng-container>
   </section>

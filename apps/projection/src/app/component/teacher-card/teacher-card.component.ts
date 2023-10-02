@@ -9,12 +9,10 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
 @Component({
   selector: 'app-teacher-card',
   template: `<app-card [list]="teachers" [type]="cardType" [isTeacher]="true">
-    <ng-template card-list let-item="item">
-      <app-list-item
-        [id]="item.id"
-        [type]="item.type"
-        [name]="item.firstname"
-        (deleteEvent)="deleteTeacher($event)"></app-list-item>
+    <ng-template card-list let-item>
+      <app-list-item (deleteEvent)="deleteTeacher(item.id)">
+        {{ item.firstname }}
+      </app-list-item>
     </ng-template>
   </app-card>`,
 
@@ -37,7 +35,6 @@ export class TeacherCardComponent implements OnInit {
   }
 
   deleteTeacher(id: number) {
-    console.log(id);
     this.store.deleteOne(id);
   }
 }

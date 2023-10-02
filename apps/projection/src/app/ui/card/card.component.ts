@@ -11,6 +11,9 @@ import { randStudent, randTeacher } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
 import { TeacherStore } from '../../data-access/teacher.store';
 import { CardType } from '../../model/card.model';
+import { Student } from '../../model/student.model';
+import { Teacher } from '../../model/teacher.model';
+import { City } from '../../model/city.model';
 
 @Directive({ selector: 'ng-template[card-list]', standalone: true })
 export class CardListDirective {}
@@ -32,14 +35,14 @@ export class CardListDirective {}
     `,
   ],
 })
-export class CardComponent {
+export class CardComponent<T> {
   @Input() isTeacher = false;
   @Input() isStudent = false;
 
   @ContentChild(CardListDirective, { read: TemplateRef })
-  cardList!: TemplateRef<any>;
+  cardList!: TemplateRef<{ $implicit: T }>;
 
-  @Input() list: any[] | null = null;
+  @Input() list: T[] | null = null;
   @Input() type!: CardType;
 
   CardType = CardType;
