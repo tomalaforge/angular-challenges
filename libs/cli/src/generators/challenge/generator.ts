@@ -20,8 +20,13 @@ import { Schema } from './schema';
 export async function challengeGenerator(tree: Tree, options: Schema) {
   const { appDirectory } = getProjectDir(options.name, options.directory);
 
+  const difficulty = options.challengeDifficulty;
+
+  // read json file with the total challanges and display order
   const challengeNumberPath = 'challenge-number.json';
-  const challengeNumber = readJsonFile(challengeNumberPath).total;
+  const challangeNumberJson = readJsonFile(challengeNumberPath);
+  const challengeNumber = challangeNumberJson.total;
+  const order = challangeNumberJson[difficulty] + 1;
 
   await applicationGenerator(tree, {
     ...options,
@@ -60,7 +65,8 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
       projectName: names(options.name).name,
       title: options.title,
       challengeNumber,
-      difficulty: options.challengeDifficulty,
+      difficulty,
+      order,
     }
   );
 
@@ -90,7 +96,8 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
   await writeFile('./docs/src/content/docs/index.mdx', replaced, 'utf-8');
 
   updateJson(tree, challengeNumberPath, (json) => {
-    json.total = json.total + 1;
+    json.total += 1;
+    json[difficulty] += 1;
     return json;
   });
 
