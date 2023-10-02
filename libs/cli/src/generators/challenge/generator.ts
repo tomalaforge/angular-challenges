@@ -12,7 +12,6 @@ import {
   updateJson,
 } from '@nx/devkit';
 import { Linter } from '@nx/linter';
-import { readFile, writeFile } from 'fs/promises';
 import { join } from 'path';
 import { getProjectDir } from '../../utils/normalize';
 import { Schema } from './schema';
@@ -76,7 +75,7 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
     });
   }
 
-  const readme = await readFile('./README.md', { encoding: 'utf-8' });
+  const readme = tree.read('./README.md').toString();
 
   const readmeRegex = new RegExp(`all ${challengeNumber - 1} challenges`);
   const readmeReplace = readme.replace(
@@ -84,16 +83,14 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
     `all ${challengeNumber} challenges`
   );
 
-  await writeFile('./README.md', readmeReplace, 'utf-8');
+  tree.write('./README.md', readmeReplace);
 
-  const docs = await readFile('./docs/src/content/docs/index.mdx', {
-    encoding: 'utf-8',
-  });
+  const docs = tree.read('./docs/src/content/docs/index.mdx').toString();
 
   const regex = new RegExp(`${challengeNumber - 1} Challenges`, 'gi');
   const replaced = docs.replace(regex, `${challengeNumber} Challenges`);
 
-  await writeFile('./docs/src/content/docs/index.mdx', replaced, 'utf-8');
+  tree.write('./docs/src/content/docs/index.mdx', replaced);
 
   updateJson(tree, challengeNumberPath, (json) => {
     json.total += 1;
