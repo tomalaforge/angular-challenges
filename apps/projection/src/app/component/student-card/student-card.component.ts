@@ -10,8 +10,7 @@ import { CardComponent } from '../../ui/card/card.component';
   template: `<app-card
     [list]="students"
     [type]="cardType"
-    customClass="bg-light-green"
-  ></app-card>`,
+    customClass="bg-light-green"></app-card>`,
   standalone: true,
   styles: [
     `
@@ -29,7 +28,10 @@ export class StudentCardComponent implements OnInit {
   constructor(private http: FakeHttpService, private store: StudentStore) {}
 
   ngOnInit(): void {
-    this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
+    this.http.fetchStudents$.subscribe((s) => {
+      console.log(s);
+      this.store.addAll(s);
+    });
 
     this.store.students$.subscribe((s) => (this.students = s));
   }
