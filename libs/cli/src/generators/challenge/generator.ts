@@ -25,7 +25,7 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
   // read json file with the total challanges and display order
   const challengeNumberPath = 'challenge-number.json';
   const challangeNumberJson = readJsonFile(challengeNumberPath);
-  const challengeNumber = challangeNumberJson.total;
+  const challengeNumber = challangeNumberJson.total + 1;
   const order = challangeNumberJson[difficulty] + 1;
 
   await applicationGenerator(tree, {
@@ -78,10 +78,10 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
 
   const readme = await readFile('./README.md', { encoding: 'utf-8' });
 
-  const readmeRegex = new RegExp(`all ${challengeNumber} challenges`);
+  const readmeRegex = new RegExp(`all ${challengeNumber - 1} challenges`);
   const readmeReplace = readme.replace(
     readmeRegex,
-    `all ${challengeNumber + 1} challenges`
+    `all ${challengeNumber} challenges`
   );
 
   await writeFile('./README.md', readmeReplace, 'utf-8');
@@ -90,8 +90,8 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
     encoding: 'utf-8',
   });
 
-  const regex = new RegExp(`${challengeNumber} Challenges`, 'gi');
-  const replaced = docs.replace(regex, `${challengeNumber + 1} Challenges`);
+  const regex = new RegExp(`${challengeNumber - 1} Challenges`, 'gi');
+  const replaced = docs.replace(regex, `${challengeNumber} Challenges`);
 
   await writeFile('./docs/src/content/docs/index.mdx', replaced, 'utf-8');
 
