@@ -12,7 +12,6 @@ import {
   updateJson,
 } from '@nx/devkit';
 import { Linter } from '@nx/linter';
-import { readFile, writeFile } from 'fs/promises';
 import { join } from 'path';
 import { getProjectDir } from '../../utils/normalize';
 import { Schema } from './schema';
@@ -20,8 +19,13 @@ import { Schema } from './schema';
 export async function challengeGenerator(tree: Tree, options: Schema) {
   const { appDirectory } = getProjectDir(options.name, options.directory);
 
+  const difficulty = options.challengeDifficulty;
+
+  // read json file with the total challanges and display order
   const challengeNumberPath = 'challenge-number.json';
-  const challengeNumber = readJsonFile(challengeNumberPath).total;
+  const challangeNumberJson = readJsonFile(challengeNumberPath);
+  const challengeNumber = challangeNumberJson.total + 1;
+  const order = challangeNumberJson[difficulty] + 1;
 
   await applicationGenerator(tree, {
     ...options,
@@ -60,7 +64,8 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
       projectName: names(options.name).name,
       title: options.title,
       challengeNumber,
-      difficulty: options.challengeDifficulty,
+      difficulty,
+      order,
     }
   );
 
@@ -70,27 +75,26 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
     });
   }
 
-  const readme = await readFile('./README.md', { encoding: 'utf-8' });
+  const readme = tree.read('./README.md').toString();
 
-  const readmeRegex = new RegExp(`all ${challengeNumber} challenges`);
+  const readmeRegex = new RegExp(`all ${challengeNumber - 1} challenges`);
   const readmeReplace = readme.replace(
     readmeRegex,
-    `all ${challengeNumber + 1} challenges`
+    `all ${challengeNumber} challenges`
   );
 
-  await writeFile('./README.md', readmeReplace, 'utf-8');
+  tree.write('./README.md', readmeReplace);
 
-  const docs = await readFile('./docs/src/content/docs/index.mdx', {
-    encoding: 'utf-8',
-  });
+  const docs = tree.read('./docs/src/content/docs/index.mdx').toString();
 
-  const regex = new RegExp(`${challengeNumber} Challenges`, 'gi');
-  const replaced = docs.replace(regex, `${challengeNumber + 1} Challenges`);
+  const regex = new RegExp(`${challengeNumber - 1} Challenges`, 'gi');
+  const replaced = docs.replace(regex, `${challengeNumber} Challenges`);
 
-  await writeFile('./docs/src/content/docs/index.mdx', replaced, 'utf-8');
+  tree.write('./docs/src/content/docs/index.mdx', replaced);
 
   updateJson(tree, challengeNumberPath, (json) => {
-    json.total = json.total + 1;
+    json.total += 1;
+    json[difficulty] += 1;
     return json;
   });
 

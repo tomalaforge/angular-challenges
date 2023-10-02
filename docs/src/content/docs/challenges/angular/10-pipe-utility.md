@@ -2,7 +2,7 @@
 title: 🔴 Utility Wrapper Pipe
 description: Challenge 10 is about creating a pipe to wrap utilities
 sidebar:
-  order: 10
+  order: 202
 ---
 
 :::note

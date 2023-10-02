@@ -2,7 +2,7 @@
 title: 🟢 Default vs OnPush
 description: Challenge 34 is about learning the difference between Default and OnPush Change Detection Strategy.
 sidebar:
-  order: 34
+  order: 7
 ---
 
 <div class="chip">Challenge #34</div>
