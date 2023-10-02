@@ -2,7 +2,7 @@
 title: 🟠 Structural Directive
 description: Challenge 6 is about creating a structural directive to handle permissions
 sidebar:
-  order: 6
+  order: 102
 ---
 
 :::note

@@ -2,7 +2,7 @@
 title: 🟢 Custom Eslint Rule
 description: Challenge 27 is about creating a custom Eslint Rule to forbid enums
 sidebar:
-  order: 27
+  order: 12
 ---
 
 :::note

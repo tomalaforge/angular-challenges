@@ -2,7 +2,7 @@
 title: 🟢 Crud application
 description: Challenge 5 is about refactoring a crud application
 sidebar:
-  order: 5
+  order: 2
 ---
 
 :::note

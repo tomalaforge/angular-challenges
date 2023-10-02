@@ -2,7 +2,7 @@
 title: 🟢 Memoization
 description: Challenge 35 is about learning
 sidebar:
-  order: 35
+  order: 8
 ---
 
 <div class="chip">Challenge #35</div>

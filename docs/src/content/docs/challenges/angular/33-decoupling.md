@@ -2,7 +2,7 @@
 title: 🟠 Decoupling Components
 description: Challenge 33 is about decoupling two strongly coupled components using Injection Token
 sidebar:
-  order: 33
+  order: 106
 ---
 
 :::note

@@ -2,7 +2,7 @@
 title: 🟠 High  Order Operator Bug
 description: Challenge 11 is about resolving a Rxjs bug because of high order operators
 sidebar:
-  order: 11
+  order: 114
 ---
 
 :::note
