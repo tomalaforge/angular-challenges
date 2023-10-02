@@ -1,25 +1,11 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { CardType } from '../../model/card.model';
-
+import { Component, TemplateRef, ContentChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-list-item',
-  template: `
-    <div class="border border-grey-300 py-1 px-2 flex justify-between">
-      {{ name }}
-      <button (click)="delete(id)">
-        <img class="h-5" src="assets/svg/trash.svg" />
-      </button>
-    </div>
-  `,
+  template: ` <ng-container [ngTemplateOutlet]="listTemplate"></ng-container> `,
   standalone: true,
+  imports: [CommonModule],
 })
 export class ListItemComponent {
-  @Input() id!: number;
-  @Input() name!: string;
-  @Input() type!: CardType;
-  @Output() deleteEvent = new EventEmitter<number>();
-
-  delete(id: number) {
-    this.deleteEvent.emit(id);
-  }
+  @ContentChild('listTemplate') listTemplate: TemplateRef<any>;
 }

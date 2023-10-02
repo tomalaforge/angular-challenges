@@ -7,16 +7,14 @@ import { CardComponent } from '../../ui/card/card.component';
 import { randTeacher } from '../../data-access/fake-http.service';
 @Component({
   selector: 'app-teacher-card',
-  template: ` <ng-template #teacher>
-      <img src="assets/img/teacher.png" width="200px" />
-    </ng-template>
-    <app-card
-      [templateView]="teacher"
-      [list]="teachers"
-      [type]="cardType"
-      (deleteEvent)="deleteItem($event)"
-      (addEvent)="addItem()"
-      customClass="bg-light-red"></app-card>`,
+  template: ` <app-card
+    [list]="teachers"
+    [type]="cardType"
+    (deleteEvent)="deleteItem($event)"
+    (addEvent)="addItem()"
+    customClass="bg-light-red">
+    <img src="assets/img/teacher.png" width="200px" />
+  </app-card>`,
   styles: [
     `
       ::ng-deep .bg-light-red {

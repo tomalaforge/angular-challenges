@@ -7,16 +7,14 @@ import { CardComponent } from '../../ui/card/card.component';
 import { randStudent } from '../../data-access/fake-http.service';
 @Component({
   selector: 'app-student-card',
-  template: ` <ng-template #student>
-      <img src="assets/img/teacher.png" width="200px" />
-    </ng-template>
-    <app-card
-      [list]="students"
-      [type]="cardType"
-      [templateView]="student"
-      (deleteEvent)="deleteItem($event)"
-      (addEvent)="addItem()"
-      customClass="bg-light-green"></app-card>`,
+  template: ` <app-card
+    [list]="students"
+    [type]="cardType"
+    (deleteEvent)="deleteItem($event)"
+    (addEvent)="addItem()"
+    customClass="bg-light-green">
+    <img src="assets/img/student.webp" width="200px"
+  /></app-card>`,
   standalone: true,
   styles: [
     `
