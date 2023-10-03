@@ -2,7 +2,7 @@
 title: 🔴 Utility Wrapper Pipe
 description: Challenge 10 is about creating a pipe to wrap utilities
 sidebar:
-  order: 10
+  order: 202
 ---
 
 :::note
@@ -40,7 +40,7 @@ Your PR title must start with <b>Answer:10</b>.
     ❖ Community Answers
   </a>
   <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A10+label%3A'
+    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A10+label%3A"answer+author"'
     alt="Utility Wrapper Pipe solution author">
     ▶︎ Author Answer
   </a>

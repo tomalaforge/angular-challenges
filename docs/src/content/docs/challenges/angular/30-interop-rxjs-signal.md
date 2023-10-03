@@ -2,7 +2,7 @@
 title: 🔴 Interoperability Rxjs/Signal
 description: Challenge 30 is about learning how to mix signal with Rxjs
 sidebar:
-  order: 30
+  order: 204
 ---
 
 :::note
@@ -34,7 +34,7 @@ Your PR title must start with <b>Answer:30</b>.
     ❖ Community Answers
   </a>
   <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A30+label%3A'
+    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A30+label%3A"answer+author"'
     alt="Interoperability Rxjs/Signal solution author">
     ▶︎ Author Answer
   </a>

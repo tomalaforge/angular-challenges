@@ -2,7 +2,7 @@
 title: 🟢 Crud application
 description: Challenge 5 is about refactoring a crud application
 sidebar:
-  order: 5
+  order: 2
 ---
 
 :::note
@@ -67,12 +67,12 @@ Your PR title must start with <b>Answer:5</b>.
 
 <div class="article-footer">
   <a
-    href="https://jsonplaceholder.typicode.com/"
+    href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A5+label%3Aanswer"
     alt="Crud application community solutions">
     ❖ Community Answers
   </a>
   <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A5+label%3Aanswer'
+    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A5+label%3A"answer+author"'
     alt="Crud application solution author">
     ▶︎ Author Answer
   </a>

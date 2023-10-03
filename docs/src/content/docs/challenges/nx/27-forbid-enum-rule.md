@@ -2,7 +2,7 @@
 title: 🟢 Custom Eslint Rule
 description: Challenge 27 is about creating a custom Eslint Rule to forbid enums
 sidebar:
-  order: 27
+  order: 12
 ---
 
 :::note
@@ -36,7 +36,7 @@ Your PR title must start with <b>Answer:27</b>.
     ❖ Community Answers
   </a>
   <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A27+label%3A'
+    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A27+label%3A"answer+author"'
     alt="Custom Eslint Rule solution author">
     ▶︎ Author Answer
   </a>

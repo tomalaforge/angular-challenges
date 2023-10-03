@@ -2,7 +2,7 @@
 title: 🟢 Module to Standalone
 description: Challenge 31 is about migrating a module based application to a standalone application.
 sidebar:
-  order: 31
+  order: 6
 ---
 
 :::note
@@ -42,7 +42,7 @@ Your PR title must start with <b>Answer:31</b>.
     ❖ Community Answers
   </a>
   <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A31+label%3A'
+    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A31+label%3A"answer+author"'
     alt="Module to Standalone solution author">
     ▶︎ Author Answer
   </a>

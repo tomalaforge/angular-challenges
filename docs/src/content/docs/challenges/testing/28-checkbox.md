@@ -2,26 +2,26 @@
 title: 🟢 Checkbox
 description: Challenge 28 is about testing a simple checkbox
 sidebar:
-  order: 28
+  order: 10
 ---
-
-:::note
-WIP: The following documentation will be reviewed and improved. However, you can still take on the challenge. If you don't understand a certain part, please feel free to reach out or create an issue.
-:::
 
 <div class="chip">Challenge #28</div>
 
 ## Information
 
-This is the perfect example to get started with `Testing Library`.
+This application is very simple. It consists of a checkbox that enables or disables a button. The primary goal of this application is to become familiar with the debug API of Testing Library. Knowing how to debug your tests is a crucial tool you need to have in your toolkit.
 
-You will need to only check if the button gets enabled when clicking on the checkbox
+You can find the documentation about debugging in Testing Library [here](https://testing-library.com/docs/dom-testing-library/api-debugging#screenlogtestingplaygroundurl).
 
-You can look into debug function to get full power of `Testing Library` like:
+The main functions to remember are as follows:
 
-- logRoles(...);
-- screen.debug(); // you can pass a element as input
-- screen.logTestingPlaygroundURL(); // you can pass a element as input
+- `logRoles(myDOMElement)`: prints out all ARIA roles within the tree of the given DOM element. ARIA roles are the primary selectors you should reach for in the first place.
+- `screen.debug()` or `screen.debug(myDOMElement)`: prints the DOM inside the console.
+- `screen.logTestingPlaygroundURL()` or `screen.logTestingPlaygroundURL(myDOMElement)`: this function is very powerful. It will create a playground to expose all elements, and you can interact with it to see the selectors you should choose for a DOM element.
+
+## Statement
+
+The goal of this challenge is not to submit an answer, but you can if you want. It's more about using the debugging API to play around. These tools will be of great help for the upcoming testing challenges.
 
 ---
 
@@ -40,7 +40,7 @@ Your PR title must start with <b>Answer:28</b>.
     ❖ Community Answers
   </a>
   <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A28+label%3A'
+    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A28+label%3A"answer+author"'
     alt="Checkbox solution author">
     ▶︎ Author Answer
   </a>

@@ -2,7 +2,7 @@
 title: 🟢 Race Condition
 description: Challenge 14 is about race condition in Rxjs
 sidebar:
-  order: 14
+  order: 11
 ---
 
 :::note
@@ -46,7 +46,7 @@ Your PR title must start with <b>Answer:14</b>.
     ❖ Community Answers
   </a>
   <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A14+label%3A'
+    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A14+label%3A"answer+author"'
     alt="Race Condition solution author">
     ▶︎ Author Answer
   </a>

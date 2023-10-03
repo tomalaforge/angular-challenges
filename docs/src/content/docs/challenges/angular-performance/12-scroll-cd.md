@@ -2,35 +2,39 @@
 title: 🟠 Optimize Change Detection
 description: Challenge 12 about optimizing the number of change detection cycle while scrolling
 sidebar:
-  order: 12
+  order: 107
 ---
-
-:::note
-WIP: The following documentation will be reviewed and improved. However, you can still take on the challenge. If you don't understand a certain part, please feel free to reach out or create an issue.
-:::
 
 <div class="chip">Challenge #12</div>
 
 ## Information
 
-In this challenge, you will need to optimize the change detection cycles run by Angular.
+In Angular, there is a library called <b>Zone.js</b> that performs a lot of magic to simplify a developer's life. Zone.js monkey patches all DOM events so that it will recheck and rerender the view when something has changed inside the application. The developer doesn't have to manually trigger change detection.
 
-Zone.js triggers a change detection cycle each time a scroll event is dispatched. However we only want to show or hide a button at a specific scroll position. Therefore, we only want to refresh our application once.
+However, sometimes Zone.js triggers a lot more change detection than needed. For example, when you are listening to a scroll event, each scroll event will dispatch a new change detection cycle.
 
-> You can vizualise how many times CD is triggered by installing the [Angular chrome devTool](https://chrome.google.com/webstore/detail/angular-devtools/ienfalfjdbdpebioblfackkekamfmbnh) and starting a new recording on the profiler tab.
+In this challenge, we only need to refresh the view at a specific scroll position to display or hide a button. All other cycles are unnecessary.
 
-The following video will explain what is the goal of this challenge.
+To have a better visualization of the problem, profile your application with Angular Dev Tools.
+
+:::note
+If you don't know how to use it, read [the performance introduction page](/challenges/angular-performance/) first and come back after.
+:::
+
+You can learn more details about zone pollution and how to resolve it [here](https://angular.io/guide/change-detection-zone-pollution).
+
+The following video will explain more in-depth the issue of this application.
 
 <video controls src="https://user-images.githubusercontent.com/30832608/209819211-58d9ddcf-e1ad-4a78-8a7a-2be9d729e3f1.mov">
 </video>
 
 ## Statement
 
-Your goal for this challenge is to avoid all unnecessary change detection cycles and trigger a CD only when needed.
+Your goal for this challenge is to avoid all unnecessary change detection cycles and trigger a change detection only when needed.
 
 ## Constraint:
 
-You cannot opt-out of zone.js. If this code is part of a large project and you opt out of zone.js, you will break many things within your application.
+You cannot opt-out of Zone.js globally. If this code is part of a large project and you opt out of Zone.js, you will break your application without any doubt.
 
 ---
 
@@ -49,7 +53,7 @@ Your PR title must start with <b>Answer:12</b>.
     ❖ Community Answers
   </a>
   <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A{challenge number}+label%3A'
+    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A{challenge number}+label%3A"answer+author"'
     alt="Optimize Change Detection solution author">
     ▶︎ Author Answer
   </a>

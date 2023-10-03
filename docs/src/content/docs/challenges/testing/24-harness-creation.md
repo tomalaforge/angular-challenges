@@ -2,7 +2,7 @@
 title: 🟠 Harness Creation
 description: Challenge 24 is about creating a component harness.
 sidebar:
-  order: 24
+  order: 112
 ---
 
 :::note
@@ -63,7 +63,7 @@ Your PR title must start with <b>Answer:24</b>.
     ❖ Community Answers
   </a>
   <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A24+label%3A'
+    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A24+label%3A"answer+author"'
     alt="Harness Creation solution author">
     ▶︎ Author Answer
   </a>

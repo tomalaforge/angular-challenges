@@ -2,7 +2,7 @@
 title: 🟠 Change Detection Bug
 description: Challenge 32 is about debugging an application that has issue when change detection is triggered
 sidebar:
-  order: 32
+  order: 105
 ---
 
 :::note
@@ -11,11 +11,13 @@ WIP: The following documentation will be reviewed and improved. However, you can
 
 <div class="chip">Challenge #32</div>
 
+:::note
 This challenge is inspired by a real-life example that I simplified to create this nice challenge.
+:::
 
 ## Information
 
-In this small application, we have a navigation menu to route our application to either `barComponent` or `FooComponent`. However our application is not loading and no errors are displayed inside the console.
+In this small application, we have a navigation menu to route our application to either `BarComponent` or `FooComponent`. However our application is not loading and no errors are displayed inside the console.
 
 ## Statement
 
@@ -53,7 +55,7 @@ Your PR title must start with <b>Answer:32</b>.
     ❖ Community Answers
   </a>
   <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A32+label%3A'
+    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A32+label%3A"answer+author"'
     alt="Change Detection Bug solution author">
     ▶︎ Author Answer
   </a>

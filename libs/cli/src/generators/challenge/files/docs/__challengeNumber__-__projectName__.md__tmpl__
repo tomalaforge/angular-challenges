@@ -2,7 +2,8 @@
 title: <%= difficulty %> <%= title %>
 description: Challenge <%= challengeNumber %> is about ...
 sidebar:
-  order: <%= challengeNumber %>
+  order: <%= order %>
+  badge: New
 ---
 
 :::note

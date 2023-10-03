@@ -2,7 +2,7 @@
 title: 🟢 Anchor Navigation
 description: Challenge 21 is about navigating inside the page with anchor
 sidebar:
-  order: 21
+  order: 4
 ---
 
 :::note
@@ -37,7 +37,7 @@ Your PR title must start with <b>Answer:21</b>.
     ❖ Community Answers
   </a>
   <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A21+label%3A'
+    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A21+label%3A"answer+author"'
     alt="Anchor Navigation solution author">
     ▶︎ Author Answer
   </a>
