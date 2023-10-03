@@ -38,11 +38,15 @@ describe('AppComponent', () => {
 
     await userEvent.click(button);
 
+    /*
     const cancelButton = document.querySelectorAll(
       'button'
     )[1] as HTMLButtonElement;
+    */
 
-    expect(cancelButton.textContent).toEqual('Cancel');
+    const cancelButton = screen.getByRole('button', { name: /cancel/i });
+
+    expect(cancelButton.textContent).toContain('Cancel');
 
     await userEvent.click(cancelButton);
 
@@ -62,11 +66,14 @@ describe('AppComponent', () => {
 
     await userEvent.click(button);
 
+    const confirmButton = screen.getByRole('button', { name: /confirm/i });
+    /*
     const confirmButton = document.querySelectorAll(
       'button'
     )[2] as HTMLButtonElement;
+    */
 
-    expect(confirmButton.textContent).toEqual('Confirmation');
+    expect(confirmButton.textContent).toContain('Confirmation');
 
     await userEvent.click(confirmButton);
 

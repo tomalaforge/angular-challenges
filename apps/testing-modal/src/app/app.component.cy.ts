@@ -32,9 +32,11 @@ describe(AppComponent.name, () => {
 
     cy.get('#mat-input-1').clear();
     cy.get('#mat-input-1').type('Bill');
-    cy.get('.mdc-button__label').click();
+    //cy.get('.mdc-button__label').click(); // this worked in this test
+    cy.contains('button', 'Confirm').click();
 
-    cy.get(`[data-cy="cancel"]`).click();
+    //cy.get(`[data-cy="cancel"]`).click();
+    cy.contains('button', 'Cancel').click();
 
     cy.get(`[data-cy="result"`).contains('Name is invalid !!');
   });
@@ -44,9 +46,12 @@ describe(AppComponent.name, () => {
 
     cy.get('#mat-input-2').clear();
     cy.get('#mat-input-2').type('Bill');
-    cy.get('.mdc-button__label').click();
+    //cy.get('.mdc-button__label').click(); // this wasn't working in this test
+    cy.contains('button', 'Confirm').click();
 
-    cy.get(`[data-cy="confirmation"]`).click();
+    // data-cy works even if button is hidden ?
+    //cy.get(`[data-cy="confirmation"]`).click();
+    cy.contains('button', 'Confirmation').click();
 
     cy.get(`[data-cy="result"`).contains('Name has been submitted');
   });
