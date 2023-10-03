@@ -69,6 +69,15 @@
         "doc",
         "code"
       ]
+    },
+    {
+      "login": "jdegand",
+      "name": "J. Degand",
+      "avatar_url": "https://avatars.githubusercontent.com/u/70610011?v=4",
+      "profile": "https://github.com/jdegand",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
