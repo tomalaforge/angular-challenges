@@ -29,10 +29,12 @@ import { Ticket, TicketUser, User } from '../../backend.service';
         <div>
           <span class="font-bold">Description:</span> {{ ticket.description }}
         </div>
-        <div>
+        <div data-testid="assigneeDiv">
           <span class="font-bold">Assignee:</span> {{ $any(ticket).assignee }}
         </div>
-        <div><span class="font-bold">Done:</span> {{ ticket.completed }}</div>
+        <div data-testid="doneDiv">
+          <span class="font-bold">Done:</span> {{ ticket.completed }}
+        </div>
       </button>
       <div class="flex flex-col">
         <form
@@ -43,14 +45,21 @@ import { Ticket, TicketUser, User } from '../../backend.service';
           <mat-form-field appearance="fill">
             <mat-label>Assign to</mat-label>
             <mat-select formControlName="assignee">
-              <mat-option *ngFor="let user of users" [value]="user.id">{{
-                user.name
-              }}</mat-option>
+              <mat-option *ngFor="let user of users" [value]="user.id">
+                {{ user.name }}
+              </mat-option>
             </mat-select>
           </mat-form-field>
-          <button mat-flat-button color="primary" type="submit">Assign</button>
+          <button
+            data-testid="assignBtn"
+            mat-flat-button
+            color="primary"
+            type="submit">
+            Assign
+          </button>
         </form>
         <button
+          data-testid="doneBtn"
           (click)="closeTicket.emit(ticket.id)"
           mat-flat-button
           color="primary"

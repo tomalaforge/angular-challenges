@@ -29,7 +29,9 @@ import { MatInputModule } from '@angular/material/input';
         formControlName="description"
         placeholder="My new task" />
       <mat-error *ngIf="form.controls.description.hasError('required')">
-        Description is <strong>required</strong>
+        <span data-testid="error"
+          >Description is <strong>required</strong></span
+        >
       </mat-error>
     </mat-form-field>
     <button
