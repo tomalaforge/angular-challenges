@@ -1,0 +1,66 @@
+---
+title: Testing
+prev: false
+next: false
+description: Introduction to testing challenges.
+sidebar:
+  order: 1
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+In this series of challenges about testing, you will learn how to write <b>Integration tests</b> using [Testing Library](https://testing-library.com/) and [Cypress Component Testing](https://docs.cypress.io/guides/component-testing/overview).
+
+The benefits of using Testing Library or Cypress Component Testing are to test your component as a black box. You will only interact with what the user can do on the UI. However, the difference with end-to-end tests is that the backend is mocked, which makes the tests faster and more maintainable.
+The goal is to mock as little as possible to test your component at a higher level than unit testing, which will make refactoring easier.
+Within a real application, integration tests are the tests you will write the most. Learning how to write them will make your application more robust and more maintainable.
+
+Here is a series of 8 challenges that you can take in any order.
+
+<LinkCard
+  title="🟠 Router"
+  description="Learn how to test the routed components"
+  href="/challenges/testing/17-router/"
+/>
+
+<LinkCard
+  title="🟠 Nested Components"
+  description="Learn how to test nested components"
+  href="/challenges/testing/18-nested-comp/"
+/>
+
+<LinkCard
+  title="🟠 Input Output"
+  description="Learn how to test inputs and outputs"
+  href="/challenges/testing/19-input-output/"
+/>
+
+<LinkCard
+  title="🟠 Modal"
+  description="Learn how to test a modal component"
+  href="/challenges/testing/20-modal/"
+/>
+
+<LinkCard
+  title="🟢 Harness"
+  description="Learn how to test using Angular CDK Component harnesses"
+  href="/challenges/testing/23-harness/"
+/>
+
+<LinkCard
+  title="🟠 Harness Creation"
+  description="Learn how to create harness on your own components"
+  href="/challenges/testing/24-harness-creation/"
+/>
+
+<LinkCard
+  title="🟢 Checkbox"
+  description="Learn how to test a basic checkbox"
+  href="/challenges/testing/28-checkbox/"
+/>
+
+<LinkCard
+  title="🔴 Real-life Application"
+  description="Learn how to write a series of test for a real-life applications"
+  href="/challenges/testing/29-real-application/"
+/>

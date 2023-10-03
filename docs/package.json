@@ -1,0 +1,18 @@
+{
+  "name": "angular-challenges-docs",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "^0.10.0",
+    "@fontsource/ibm-plex-serif": "^5.0.8",
+    "astro": "^3.0.6",
+    "sharp": "^0.32.5"
+  }
+}

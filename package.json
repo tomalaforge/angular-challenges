@@ -8,7 +8,8 @@
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "doc:dev": "cd docs && npm run dev"
   },
   "private": true,
   "dependencies": {
@@ -76,6 +77,7 @@
     "@types/node": "18.7.1",
     "@typescript-eslint/eslint-plugin": "5.62.0",
     "@typescript-eslint/parser": "5.62.0",
+    "all-contributors-cli": "^6.26.1",
     "cypress": "12.17.1",
     "eslint": "~8.15.0",
     "eslint-config-prettier": "8.1.0",
