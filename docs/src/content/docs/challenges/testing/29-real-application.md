@@ -34,12 +34,12 @@ Your PR title must start with <b>Answer:29</b>.
 
 <div class="article-footer">
   <a
-    href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A28+label%3Aanswer"
+    href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A29+label%3Aanswer"
     alt="Real-life Application community solutions">
     ❖ Community Answers
   </a>
   <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A285+label%3A'
+    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A29+label%3A%22answer+author%22'
     alt="Real-life Application solution author">
     ▶︎ Author Answer
   </a>
