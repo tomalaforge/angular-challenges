@@ -114,3 +114,9 @@ b {
 starlight-menu-button svg {
   color: #1c1a1d;
 }
+
+.flag {
+  background-color: white;
+  padding: 1px 2px;
+  border-radius: 999px;
+}
