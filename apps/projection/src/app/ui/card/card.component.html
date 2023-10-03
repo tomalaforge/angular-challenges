@@ -3,17 +3,11 @@
   [class]="customClass">
   <ng-content select="img"></ng-content>
   <section>
-    <!-- <ng-container [ngTemplateOutlet]="childTemplate"></ng-container> -->
-    <app-list-item *ngFor="let item of list">
-      <ng-template #listTemplate>
-        <div class="border border-grey-300 py-1 px-2 flex justify-between">
-          {{ item.firstname ? item.firstname : item.name }}
-          <button (click)="deleteItem(item.id)">
-            <img class="h-5" src="assets/svg/trash.svg" />
-          </button>
-        </div>
-      </ng-template>
-    </app-list-item>
+    <ng-container
+      *ngFor="let item of list"
+      [ngTemplateOutlet]="listView"
+      [ngTemplateOutletContext]="{ $implicit: item }">
+    </ng-container>
   </section>
 
   <button

@@ -1,11 +1,20 @@
-import { Component, TemplateRef, ContentChild } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-list-item',
-  template: ` <ng-container [ngTemplateOutlet]="listTemplate"></ng-container> `,
+  template: ` <div
+    class="border border-grey-300 py-1 px-2 flex justify-between">
+    <ng-content></ng-content>
+    <button (click)="deleteItem()">
+      <img class="h-5" src="assets/svg/trash.svg" />
+    </button>
+  </div>`,
   standalone: true,
   imports: [CommonModule],
 })
 export class ListItemComponent {
-  @ContentChild('listTemplate') listTemplate: TemplateRef<any>;
+  @Output() deleteEvent = new EventEmitter<void>();
+  deleteItem() {
+    this.deleteEvent.emit();
+  }
 }

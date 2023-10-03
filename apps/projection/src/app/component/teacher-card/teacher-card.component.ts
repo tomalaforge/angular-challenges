@@ -5,15 +5,20 @@ import { CardType } from '../../model/card.model';
 import { Teacher } from '../../model/teacher.model';
 import { CardComponent } from '../../ui/card/card.component';
 import { randTeacher } from '../../data-access/fake-http.service';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 @Component({
   selector: 'app-teacher-card',
   template: ` <app-card
     [list]="teachers"
     [type]="cardType"
-    (deleteEvent)="deleteItem($event)"
     (addEvent)="addItem()"
     customClass="bg-light-red">
     <img src="assets/img/teacher.png" width="200px" />
+    <ng-template #listView let-item>
+      <app-list-item (deleteEvent)="deleteItem(item.id)">
+        {{ item.firstname }}
+      </app-list-item>
+    </ng-template>
   </app-card>`,
   styles: [
     `
@@ -23,7 +28,7 @@ import { randTeacher } from '../../data-access/fake-http.service';
     `,
   ],
   standalone: true,
-  imports: [CardComponent],
+  imports: [CardComponent, ListItemComponent],
 })
 export class TeacherCardComponent implements OnInit {
   teachers: Teacher[] = [];

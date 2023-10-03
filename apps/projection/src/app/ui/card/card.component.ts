@@ -5,6 +5,8 @@ import {
   Output,
   EventEmitter,
   ViewChild,
+  TemplateRef,
+  ContentChild,
 } from '@angular/core';
 import { CardType } from '../../model/card.model';
 import { ListItemComponent } from '../list-item/list-item.component';
@@ -22,12 +24,12 @@ export class CardComponent {
   @Input() list: any[] | null = null;
   @Input() type!: CardType;
   @Input() customClass = '';
-  @Output() deleteEvent = new EventEmitter<number>();
+  @Output() deleteEvent = new EventEmitter<void>();
   @Output() addEvent = new EventEmitter();
-
+  @ContentChild('listView') listView: TemplateRef<any>;
   CardType = CardType;
-  deleteItem(id: number) {
-    this.deleteEvent.emit(id);
+  deleteItem() {
+    this.deleteEvent.emit();
   }
   addNewItem() {
     this.addEvent.emit();

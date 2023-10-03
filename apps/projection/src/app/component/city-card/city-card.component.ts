@@ -5,16 +5,23 @@ import { CityStore } from '../../data-access/city.store';
 import { CardType } from '../../model/card.model';
 import { FakeHttpService } from '../../data-access/fake-http.service';
 import { randomCity } from '../../data-access/fake-http.service';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
+import { NgFor } from '@angular/common';
 @Component({
   selector: 'app-city-card',
   template: `<app-card
     [list]="cities"
     [type]="cardType"
-    (deleteEvent)="deleteItem($event)"
     (addEvent)="addItem()"
-    customClass="bg-light-green"></app-card>`,
+    customClass="bg-light-green">
+    <ng-template #listView let-item>
+      <app-list-item (deleteEvent)="deleteItem(item.id)">
+        {{ item.name }}
+      </app-list-item>
+    </ng-template>
+  </app-card>`,
   standalone: true,
-  imports: [CardComponent],
+  imports: [NgFor, CardComponent, ListItemComponent],
 })
 export class CityCardComponent implements OnInit {
   cities: City[] = [];
@@ -27,6 +34,7 @@ export class CityCardComponent implements OnInit {
     });
     this.store.cities$.subscribe((c) => {
       this.cities = c;
+      console.log(this.cities);
     });
   }
   deleteItem(id: number) {

@@ -5,16 +5,21 @@ import { CardType } from '../../model/card.model';
 import { Student } from '../../model/student.model';
 import { CardComponent } from '../../ui/card/card.component';
 import { randStudent } from '../../data-access/fake-http.service';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 @Component({
   selector: 'app-student-card',
   template: ` <app-card
     [list]="students"
     [type]="cardType"
-    (deleteEvent)="deleteItem($event)"
     (addEvent)="addItem()"
     customClass="bg-light-green">
-    <img src="assets/img/student.webp" width="200px"
-  /></app-card>`,
+    <img src="assets/img/student.webp" width="200px" />
+    <ng-template #listView let-item>
+      <app-list-item (deleteEvent)="deleteItem(item.id)">
+        {{ item.firstname }}
+      </app-list-item>
+    </ng-template></app-card
+  >`,
   standalone: true,
   styles: [
     `
@@ -23,7 +28,7 @@ import { randStudent } from '../../data-access/fake-http.service';
       }
     `,
   ],
-  imports: [CardComponent],
+  imports: [CardComponent, ListItemComponent],
 })
 export class StudentCardComponent implements OnInit {
   students: Student[] = [];
