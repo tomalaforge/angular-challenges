@@ -34,7 +34,6 @@ export class CityCardComponent implements OnInit {
     });
     this.store.cities$.subscribe((c) => {
       this.cities = c;
-      console.log(this.cities);
     });
   }
   deleteItem(id: number) {
