@@ -2,7 +2,7 @@
 title: 🟢 @RouterInput()
 description: Challenge 22 is about using the @Input decorator to retreive router params.
 sidebar:
-  order: 22
+  order: 5
 ---
 
 :::note

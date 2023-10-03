@@ -2,7 +2,7 @@
 title: 🟠 Directive Enhancement
 description: Challenge 3 is about enhancing a built-in directive
 sidebar:
-  order: 3
+  order: 101
 ---
 
 :::note

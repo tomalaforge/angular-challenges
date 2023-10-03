@@ -2,7 +2,7 @@
 title: 🟠 Wrap Function Pipe
 description: Challenge 9 is about creating a pipe to wrap component fonctions
 sidebar:
-  order: 9
+  order: 103
 ---
 
 :::note

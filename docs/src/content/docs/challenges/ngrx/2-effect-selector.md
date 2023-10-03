@@ -2,7 +2,7 @@
 title: 🟠 Effect vs Selector
 description: Challenge 2 is about learning the difference between effects and selectors in NgRx
 sidebar:
-  order: 2
+  order: 113
 ---
 
 :::note

@@ -65,7 +65,9 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/1807493?v=4",
       "profile": "https://github.com/tomer953",
       "contributions": [
-        "bug"
+        "bug",
+        "doc",
+        "code"
       ]
     }
   ],
