@@ -16,6 +16,30 @@ import { join } from 'path';
 import { getProjectDir } from '../../utils/normalize';
 import { Schema } from './schema';
 
+function findPreviousChallengeFilePath(tree, path, number) {
+  if (tree.isFile(path) && path.startsWith(`${number}-`)) {
+    return path;
+  }
+
+  const matchingChild = tree
+    .children(path)
+    .find((child) => child.startsWith(`${number}-`));
+
+  if (matchingChild) {
+    const fullPath = path + '/' + matchingChild;
+    return fullPath;
+  }
+
+  for (const child of tree.children(path)) {
+    const childPath = path + '/' + child;
+    const result = findPreviousChallengeFilePath(tree, childPath, number);
+    if (result) {
+      return result;
+    }
+  }
+  return null;
+}
+
 export async function challengeGenerator(tree: Tree, options: Schema) {
   const { appDirectory } = getProjectDir(options.name, options.directory);
 
@@ -51,7 +75,7 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
     tmpl: '',
     projectName: names(options.name).name,
     title: options.title,
-    challengeNumber: challengeNumber + 1,
+    challengeNumber,
     docRepository: options.docRepository,
   });
 
@@ -91,6 +115,20 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
   const replaced = docs.replace(regex, `${challengeNumber} Challenges`);
 
   tree.write('./docs/src/content/docs/index.mdx', replaced);
+
+  const previousChallengeFilePath = findPreviousChallengeFilePath(
+    tree,
+    `./docs/src/content/docs/challenges`,
+    String(challengeNumber - 1)
+  );
+  console.log(`restul`, previousChallengeFilePath);
+
+  const previousChallenge = tree.read(previousChallengeFilePath).toString();
+
+  tree.write(
+    previousChallengeFilePath,
+    previousChallenge.replace(`badge: New`, ``)
+  );
 
   updateJson(tree, challengeNumberPath, (json) => {
     json.total += 1;
