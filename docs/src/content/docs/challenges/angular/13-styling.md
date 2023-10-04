@@ -2,7 +2,7 @@
 title: 🟠 Highly Customizable CSS
 description: Challenge 13 is about creating highly customizable CSS styles
 sidebar:
-  order: 13
+  order: 104
 ---
 
 :::note

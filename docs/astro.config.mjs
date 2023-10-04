@@ -12,7 +12,7 @@ export default defineConfig({
       },
       favicon: './angular-challenge.ico',
       social: {
-        github: 'https://github.com/withastro/starlight',
+        github: 'https://github.com/tomalaforge/angular-challenges',
         linkedin: 'https://www.linkedin.com/in/thomas-laforge-2b05a945/',
         twitter: 'https://twitter.com/laforge_toma',
       },

@@ -2,7 +2,7 @@
 title: 🔴 Extend Lib Generator
 description: Challenge 25 is about creating a Nx generator to extend the built-in Library Generator
 sidebar:
-  order: 25
+  order: 207
 ---
 
 :::note

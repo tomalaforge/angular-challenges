@@ -2,7 +2,7 @@
 title: 🟠 Optimize Change Detection
 description: Challenge 12 about optimizing the number of change detection cycle while scrolling
 sidebar:
-  order: 12
+  order: 107
 ---
 
 <div class="chip">Challenge #12</div>

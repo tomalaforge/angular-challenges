@@ -2,7 +2,7 @@
 title: 🔴 Interoperability Rxjs/Signal
 description: Challenge 30 is about learning how to mix signal with Rxjs
 sidebar:
-  order: 30
+  order: 204
 ---
 
 :::note

@@ -1,8 +1,8 @@
 ---
-title: 🟠 High  Order Operator Bug
+title: 🟠 High Order Operator Bug
 description: Challenge 11 is about resolving a Rxjs bug because of high order operators
 sidebar:
-  order: 11
+  order: 114
 ---
 
 :::note
@@ -44,12 +44,12 @@ Your PR title must start with <b>Answer:11</b>.
 <div class="article-footer">
   <a
     href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A11+label%3Aanswer"
-    alt="High  Order Operator Bug community solutions">
+    alt="High Order Operator Bug community solutions">
     ❖ Community Answers
   </a>
   <a
     href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A11+label%3A"answer+author"'
-    alt="High  Order Operator Bug solution author">
+    alt="High Order Operator Bug solution author">
     ▶︎ Author Answer
   </a>
   </div>
