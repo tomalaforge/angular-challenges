@@ -1,5 +1,5 @@
 import { AsyncPipe, NgIf } from '@angular/common';
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, NgZone, inject } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -33,14 +33,21 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AppComponent {
   title = 'scroll-cd';
-
+  ngZone: NgZone = inject(NgZone);
   private displayButtonSubject = new BehaviorSubject<boolean>(false);
   displayButton$ = this.displayButtonSubject.asObservable();
 
+  ngOnInit() {
+    this.ngZone.runOutsideAngular(() => {
+      window.addEventListener('scroll', this.onScroll.bind(this));
+    });
+  }
   @HostListener('window:scroll', ['$event'])
   onScroll() {
     const pos = window.pageYOffset;
-    this.displayButtonSubject.next(pos > 50);
+    this.ngZone.run(() => {
+      this.displayButtonSubject.next(pos > 50);
+    });
   }
 
   goToTop() {
