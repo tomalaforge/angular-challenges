@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 import { CDFlashingDirective } from '@angular-challenges/shared/directives';
 import { CommonModule } from '@angular/common';
@@ -7,6 +7,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
+import { PersonItemComponent } from './person-item.component';
+import { SearchComponent } from './search.component';
 
 @Component({
   selector: 'app-person-list',
@@ -19,36 +21,23 @@ import { MatListModule } from '@angular/material/list';
     MatInputModule,
     MatChipsModule,
     CDFlashingDirective,
+    PersonItemComponent,
+    SearchComponent,
   ],
   template: `
     <h1 cd-flash class="font-semibold text-center" title="Title">
       {{ title | titlecase }}
     </h1>
-
-    <mat-form-field class="w-4/5" cd-flash>
-      <input
-        placeholder="Add one member to the list"
-        matInput
-        type="text"
-        [(ngModel)]="label"
-        (keydown)="handleKey($event)" />
-    </mat-form-field>
-
+    <app-search (search)="addPerson($event)"></app-search>
     <mat-list class="flex w-full">
       <div *ngIf="names?.length === 0" class="empty-list-label">Empty list</div>
-      <mat-list-item
+      <app-person-item
         *ngFor="let name of names"
-        cd-flash
-        class="text-orange-500">
-        <div MatListItemLine class="flex justify-between">
-          <h3 title="Name">
-            {{ name }}
-          </h3>
-        </div>
-      </mat-list-item>
+        [name]="name"></app-person-item>
       <mat-divider *ngIf="names?.length !== 0"></mat-divider>
     </mat-list>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     class: 'w-full flex flex-col items-center',
   },
@@ -59,10 +48,8 @@ export class PersonListComponent {
 
   label = '';
 
-  handleKey(event: any) {
-    if (event.keyCode === 13) {
-      this.names?.unshift(this.label);
-      this.label = '';
-    }
+  addPerson(name: string) {
+    console.log(name);
+    this.names?.unshift(name);
   }
 }

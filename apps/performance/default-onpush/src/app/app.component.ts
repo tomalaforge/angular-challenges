@@ -9,7 +9,6 @@ import { RandomComponent } from './random.component';
   selector: 'app-root',
   template: `
     <app-random />
-
     <div class="flex">
       <app-person-list [names]="girlList" title="Female" />
       <app-person-list [names]="boyList" title="Male" />
