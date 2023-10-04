@@ -2,6 +2,7 @@ import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { Component, Input, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FakeServiceService } from './fake.service';
+import { memo } from './memo';
 
 interface MenuItem {
   path: string;
@@ -58,10 +59,8 @@ export class MainNavigationComponent {
 
   readonly info$ = this.fakeBackend.getInfoFromBackend();
 
-  getMenu(prop: string) {
-    return [
-      { path: '/foo', name: `Foo ${prop}` },
-      { path: '/bar', name: `Bar ${prop}` },
-    ];
-  }
+  getMenu = memo((prop: string) => [
+    { path: '/foo', name: `Foo ${prop}` },
+    { path: '/bar', name: `Bar ${prop}` },
+  ]);
 }
