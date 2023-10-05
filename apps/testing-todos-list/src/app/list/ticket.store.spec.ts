@@ -1,6 +1,6 @@
 import { render } from '@testing-library/angular';
 import { createMockWithValues } from '@testing-library/angular/jest-utils';
-import { of } from 'rxjs';
+import { of, take, throwError } from 'rxjs';
 import { APP_ROUTES } from '../app.route';
 import { BackendService } from '../backend.service';
 import { ListComponent } from './list.component';
@@ -40,6 +40,9 @@ describe('TicketStore', () => {
 
       const { mockBackendService } = await setup();
 
+      mockBackendService.users.mockReturnValue(of(USERS));
+      mockBackendService.tickets.mockReturnValue(of(TICKETS));
+
       expect(mockBackendService.users).toHaveBeenCalled();
       expect(mockBackendService.tickets).toHaveBeenCalled();
     });
@@ -51,11 +54,36 @@ describe('TicketStore', () => {
     });
 
     describe('Given users api returns failure response', () => {
-      it('Then tickets should not have any assignee', () => {
-        // I think this is the test that will help with line 50
-        // Not really sure how I would test this as Thomas' solution has a more involved setup function
-        // mockBackendService.users.and.returnValue(of(throwError()=> new Error("Blah blah blah"))) or something close
-        // then check tickets are the same as TICKETS
+      it('Then tickets should not have any assignee', async () => {
+        // This is the test that will help with line 50 of ticket.store
+        // increases branch coverage
+
+        const { mockBackendService, store } = await setup();
+
+        // already have store in the setup function
+        // however, you could delete that and just use fixture
+
+        // const store = fixture.debugElement.injector.get(TicketStore);
+
+        // had to change my setup function since it was always mocked with users and tickets
+        // each test would need mockBackendService.users & mockBackendService.tickets to be set manually
+
+        mockBackendService.users.mockReturnValue(throwError(() => 'Error'));
+
+        mockBackendService.tickets.mockReturnValue(of(TICKETS));
+
+        // has async issues because of awaiting the setup so can't add done to the async function
+        store.tickets$.pipe(take(1)).subscribe((tickets) => {
+          expect(tickets[0]).toEqual({
+            id: 0,
+            description: 'Install a monitor arm',
+            assigneeId: 1,
+            completed: false,
+          });
+        });
+
+        // store.tickets$ will return whatever you pass as the mockReturnValue
+        // if the users api were to fail, I believe tickets would be an empty array
       });
     });
 
@@ -77,8 +105,8 @@ const setup = async () => {
     complete: jest.fn(),
   });
 
-  mockBackendService.users.mockReturnValue(of(USERS));
-  mockBackendService.tickets.mockReturnValue(of(TICKETS));
+  //mockBackendService.users.mockReturnValue(of(USERS));
+  //mockBackendService.tickets.mockReturnValue(of(TICKETS));
 
   const fixture = await render(ListComponent, {
     routes: APP_ROUTES,
