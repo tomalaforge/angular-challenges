@@ -129,3 +129,5 @@ export function getFakeTodos(): Todo[] {
 }
 
 */
+
+describe('AppStore', () => {});
