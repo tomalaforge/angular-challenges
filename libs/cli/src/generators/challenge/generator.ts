@@ -77,7 +77,7 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
   generateFiles(tree, join(__dirname, 'files', 'readme'), appDirectory, {
     tmpl: '',
     projectName: names(options.name).name,
-    appProjectName: appProjectName,
+    appProjectName,
     title: options.title,
     challengeNumber,
     docRepository: options.docRepository,
@@ -90,7 +90,7 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
     {
       tmpl: '',
       projectName: names(options.name).name,
-      appProjectName: appProjectName,
+      appProjectName,
       title: options.title,
       challengeNumber,
       difficulty,
