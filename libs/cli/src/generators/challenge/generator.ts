@@ -41,7 +41,10 @@ function findPreviousChallengeFilePath(tree, path, number) {
 }
 
 export async function challengeGenerator(tree: Tree, options: Schema) {
-  const { appDirectory } = getProjectDir(options.name, options.directory);
+  const { appProjectName, appDirectory } = getProjectDir(
+    options.name,
+    options.directory
+  );
 
   const difficulty = options.challengeDifficulty;
 
@@ -74,6 +77,7 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
   generateFiles(tree, join(__dirname, 'files', 'readme'), appDirectory, {
     tmpl: '',
     projectName: names(options.name).name,
+    appProjectName: appProjectName,
     title: options.title,
     challengeNumber,
     docRepository: options.docRepository,
@@ -86,6 +90,7 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
     {
       tmpl: '',
       projectName: names(options.name).name,
+      appProjectName: appProjectName,
       title: options.title,
       challengeNumber,
       difficulty,

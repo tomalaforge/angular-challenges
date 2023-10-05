@@ -33,7 +33,7 @@ The goal of this challenge is to understand what is causing this DOM refresh and
 ---
 
 :::note
-Start the project by running: `npx nx serve ngfor-optimize`.
+Start the project by running: `npx nx serve performance-ngfor-optimize`.
 :::
 
 :::tip[Reminder]
