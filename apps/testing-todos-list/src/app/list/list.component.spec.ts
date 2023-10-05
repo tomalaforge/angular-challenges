@@ -78,7 +78,7 @@ describe('ListComponent', () => {
         const items = getAllByRole('listitem');
         expect(items.length).toBe(3);
 
-        expect(screen.getByText('asdfasdfasdf')).toBeInTheDocument();
+        screen.getByText('asdfasdfasdf');
         // need to check for unassigned status
         // tough to grab the assignee text
         // added a testId in the row component for it
@@ -110,7 +110,7 @@ describe('ListComponent', () => {
 
         await user.click(button);
 
-        expect(screen.getByText('795fsnfksdnfjsndf')).toBeInTheDocument();
+        screen.getByText('795fsnfksdnfjsndf');
       });
     });
   });
@@ -223,7 +223,7 @@ describe('ListComponent', () => {
         // you don't have to be precise with your selector
         // however, using screen.getByText is less performant as it scans the whole document
         // So if you have many tests or tests that need to be done often, this would need to be refined
-        expect(screen.getByText('qwertyqwertyqwerty')).toBeInTheDocument();
+        screen.getByText('qwertyqwertyqwerty');
       });
     });
   });
@@ -277,7 +277,7 @@ describe('ListComponent', () => {
           'false'
         );
 
-        expect(screen.getByText('qwertyqwertyqwerty')).toBeInTheDocument();
+        screen.getByText('qwertyqwertyqwerty');
       });
     });
   });

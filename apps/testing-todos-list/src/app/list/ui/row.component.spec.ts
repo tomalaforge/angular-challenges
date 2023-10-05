@@ -51,9 +51,9 @@ describe('RowComponent', () => {
 
         // options don't appear until you click the select
 
-        expect(screen.getByText('titi')).toBeInTheDocument();
+        screen.getByText('titi');
 
-        expect(screen.getByText('George')).toBeInTheDocument();
+        screen.getByText('George');
 
         const assignBtn = screen.getByRole('button', { name: 'Assign' });
 
