@@ -1,51 +1,34 @@
-import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { randText } from '@ngneat/falso';
+import { CommonModule, NgIf } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { AppStore } from './app.store';
+import { provideComponentStore } from '@ngrx/component-store';
+import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+import { TodoItemComponent } from './components/todo-item/todo-item.component';
+
+// can render vm without ngrxLet
+// is ngrxLet really necessary?
+// Todos are not gonna be zero / have to delete 200 todos to get to zero
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, LoadingSpinnerComponent, NgIf, TodoItemComponent],
+  providers: [provideComponentStore(AppStore)],
   selector: 'app-root',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <div *ngFor="let todo of todos">
-      {{ todo.title }}
-      <button (click)="update(todo)">Update</button>
-    </div>
+    <ng-container *ngIf="vm$ | async as vm">
+      <div *ngIf="vm.callState.toLowerCase() === 'loading'">
+        <app-loading-spinner></app-loading-spinner>
+      </div>
+      <app-todo-item
+        *ngFor="let todo of vm.todos"
+        [todo]="todo"></app-todo-item>
+    </ng-container>
   `,
   styles: [],
 })
-export class AppComponent implements OnInit {
-  todos!: any[];
+export class AppComponent {
+  private appStore = inject(AppStore);
 
-  constructor(private http: HttpClient) {}
-
-  ngOnInit(): void {
-    this.http
-      .get<any[]>('https://jsonplaceholder.typicode.com/todos')
-      .subscribe((todos) => {
-        this.todos = todos;
-      });
-  }
-
-  update(todo: any) {
-    this.http
-      .put<any>(
-        `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
-        JSON.stringify({
-          todo: todo.id,
-          title: randText(),
-          body: todo.body,
-          userId: todo.userId,
-        }),
-        {
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-          },
-        }
-      )
-      .subscribe((todoUpdated: any) => {
-        this.todos[todoUpdated.id - 1] = todoUpdated;
-      });
-  }
+  vm$ = this.appStore.vm$;
 }

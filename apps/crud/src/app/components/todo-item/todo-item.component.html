@@ -1,0 +1,15 @@
+<div *ngIf="vm$ | async  as vm">
+    <div>
+        <span>{{ vm.todo?.title }}</span>
+        <button (click)="update(vm.todo?.id)" [disabled]="vm.callState === 'Deleting'">Update</button>
+        <button (click)="delete(vm.todo?.id)" [disabled]="vm.callState === 'Updating'">Delete</button>
+    </div>
+
+    <span *ngIf="vm.callState === 'Updating'">
+        Updating...
+    </span>
+
+    <span *ngIf="vm.callState === 'Deleting'">
+        Deleting...
+    </span>
+</div>
