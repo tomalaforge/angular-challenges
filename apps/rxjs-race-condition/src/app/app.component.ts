@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable, take } from 'rxjs';
+import { Observable } from 'rxjs';
 import { TopicModalComponent } from './topic-dialog.component';
 import { TopicService, TopicType } from './topic.service';
 import { AsyncPipe, NgIf } from '@angular/common';
@@ -20,14 +20,12 @@ export class AppComponent {
   title = 'rxjs-race-condition';
   dialog = inject(MatDialog);
   topicService = inject(TopicService);
-  topics$: Observable<TopicType[]> = this.topicService
-    .fakeGetHttpTopic()
-    .pipe(take(1));
+  topics$: Observable<TopicType[]> = this.topicService.fakeGetHttpTopic();
 
   openTopicModal(topics: TopicType[]) {
     this.dialog.open(TopicModalComponent, {
       data: {
-        topics: topics,
+        topics,
       },
     });
   }
