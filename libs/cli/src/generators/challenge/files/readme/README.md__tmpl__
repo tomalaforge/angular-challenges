@@ -5,7 +5,7 @@
 ### Run Application
 
 ```bash
-npx nx serve <%= projectName %>
+npx nx serve <%= appProjectName %>
 ```
 
 ### Documentation and Instruction
