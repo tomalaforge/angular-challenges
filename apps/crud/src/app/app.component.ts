@@ -11,7 +11,7 @@ import { TodoItemComponent } from './components/todo-item/todo-item.component';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, LoadingSpinnerComponent, NgIf, TodoItemComponent],
+  imports: [CommonModule, NgIf, TodoItemComponent, LoadingSpinnerComponent],
   providers: [provideComponentStore(AppStore)],
   selector: 'app-root',
   changeDetection: ChangeDetectionStrategy.OnPush,

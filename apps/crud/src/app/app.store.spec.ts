@@ -1,9 +1,12 @@
 import { TestBed } from '@angular/core/testing';
-import { of, skip, take, throwError } from 'rxjs';
+import { render } from '@testing-library/angular';
 
-import { AppState, AppStore } from './app.store';
+import { AppStore } from './app.store';
 import { TodoService } from './service/todo.service';
-import { Todo } from './interfaces/Todo';
+import { createMockWithValues } from '@testing-library/angular/jest-utils';
+import { AppComponent } from './app.component';
+import { provideComponentStore } from '@ngrx/component-store';
+
 /*
 describe('AppStore', () => {
   let appStore: AppStore;
@@ -130,4 +133,31 @@ export function getFakeTodos(): Todo[] {
 
 */
 
-describe('AppStore', () => {});
+describe('AppStore', () => {
+  it('truthy', async () => {
+    const { store } = await setup();
+
+    store.setState({ todos: [], callState: 'Loading' });
+
+    expect(store).toBeTruthy();
+  });
+});
+
+const setup = async () => {
+  const mockTodoService = createMockWithValues(TodoService, {
+    getTodos: jest.fn(),
+    updateTodo: jest.fn(),
+    deleteTodo: jest.fn(),
+  });
+
+  const fixture = await render(AppComponent, {
+    providers: [
+      provideComponentStore(AppStore),
+      { provide: TodoService, useValue: mockTodoService },
+    ],
+  });
+
+  const store = TestBed.inject(AppStore);
+
+  return { fixture, store, mockTodoService };
+};
