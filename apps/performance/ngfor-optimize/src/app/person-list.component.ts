@@ -1,15 +1,15 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { CommonModule } from '@angular/common';
+import { NgForTrackByModule } from '@angular-challenges/shared/directives';
 import { Person } from './person.model';
 
 @Component({
   selector: 'app-person-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [NgForTrackByModule],
   template: `
     <div
-      *ngFor="let person of persons"
+      *ngFor="let person of persons; trackByProp: 'email'"
       class="flex justify-between items-center border-b">
       <h3>{{ person.name }}</h3>
       <div class="flex gap-10 py-1">
