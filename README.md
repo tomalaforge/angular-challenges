@@ -42,6 +42,9 @@ Check [all 36 challenges](https://angular-challenges.vercel.app/)
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/tomer953"><img src="https://avatars.githubusercontent.com/u/1807493?v=4?s=100" width="100px;" alt="Tomer953"/><br /><sub><b>Tomer953</b></sub></a><br /><a href="https://github.com/tomalaforge/angular-challenges/issues?q=author%3Atomer953" title="Bug reports">🐛</a> <a href="https://github.com/tomalaforge/angular-challenges/commits?author=tomer953" title="Documentation">📖</a> <a href="https://github.com/tomalaforge/angular-challenges/commits?author=tomer953" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/jdegand"><img src="https://avatars.githubusercontent.com/u/70610011?v=4?s=100" width="100px;" alt="J. Degand"/><br /><sub><b>J. Degand</b></sub></a><br /><a href="https://github.com/tomalaforge/angular-challenges/commits?author=jdegand" title="Documentation">📖</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/DeveshChau"><img src="https://avatars.githubusercontent.com/u/9509673?v=4?s=100" width="100px;" alt="Devesh Chaudhari"/><br /><sub><b>Devesh Chaudhari</b></sub></a><br /><a href="https://github.com/tomalaforge/angular-challenges/commits?author=DeveshChau" title="Code">💻</a> <a href="https://github.com/tomalaforge/angular-challenges/issues?q=author%3ADeveshChau" title="Bug reports">🐛</a></td>
+    </tr>
   </tbody>
   <tfoot>
     <tr>
