@@ -1,0 +1,81 @@
+{
+  "name": "performance-ngfor-biglist",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "app",
+  "sourceRoot": "apps/performance/ngfor-biglist/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/performance/ngfor-biglist",
+        "index": "apps/performance/ngfor-biglist/src/index.html",
+        "main": "apps/performance/ngfor-biglist/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/performance/ngfor-biglist/tsconfig.app.json",
+        "assets": [
+          "apps/performance/ngfor-biglist/src/favicon.ico",
+          "apps/performance/ngfor-biglist/src/assets"
+        ],
+        "styles": ["apps/performance/ngfor-biglist/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "performance-ngfor-biglist:build:production"
+        },
+        "development": {
+          "browserTarget": "performance-ngfor-biglist:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "performance-ngfor-biglist:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/performance/ngfor-biglist/**/*.ts",
+          "apps/performance/ngfor-biglist/**/*.html"
+        ]
+      }
+    }
+  }
+}

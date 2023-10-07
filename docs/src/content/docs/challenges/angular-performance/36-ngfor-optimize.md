@@ -1,9 +1,8 @@
 ---
 title: 🟢 NgFor Optimization
-description: Challenge 36 is about ...
+description: Challenge 36 is about learning how trackby works
 sidebar:
   order: 13
-  badge: New
 ---
 
 <div class="chip">Challenge #36</div>
