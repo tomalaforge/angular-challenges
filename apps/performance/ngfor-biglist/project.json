@@ -72,11 +72,7 @@
       }
     },
     "lint": {
-<<<<<<< HEAD
       "executor": "@nx/eslint:lint",
-=======
-      "executor": "@nx/linter:eslint",
->>>>>>> 4eb4e7b (feat(challenge37): ngfor optimize big list)
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
