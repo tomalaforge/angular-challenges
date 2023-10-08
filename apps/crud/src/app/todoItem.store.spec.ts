@@ -15,7 +15,7 @@ describe('TodoItemStore', () => {
   });
 
   // can't use a done function inside an async function anymore with jest v27+
-  // change setup function to not be an async function by having an inner async function inside ?
+  // change setup function to not be an async function but have an async function inside?
   // probably bad idea
   // use rxjs
 
@@ -37,10 +37,9 @@ describe('TodoItemStore', () => {
   });
 
   /*
-  // async issues?
-  // issues with callState ? 
-  // caused by tapReponse ?
-  // getTodos may need mocked value?
+  // test doesn't work
+  // problem caused by the tap or tapResponse ?
+  // the callState is updating
 
   it('updateTodo', async () => {
     const { store } = await setup('success');
@@ -56,6 +55,10 @@ describe('TodoItemStore', () => {
     })
 
     store.update(1);
+
+    const callState = await lastValueFrom(store.callState$.pipe(take(1)));
+
+    expect(callState).toEqual('LOADED'); // Updating
 
     const todo = await lastValueFrom(store.todo$.pipe(take(1))); //undefined
 

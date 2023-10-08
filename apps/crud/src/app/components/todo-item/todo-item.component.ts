@@ -12,7 +12,7 @@ import { Todo } from '../../interfaces/Todo';
   providers: [provideComponentStore(TodoItemStore)],
   templateUrl: './todo-item.component.html',
   styleUrls: [],
-  // might not need changeDetection: ChangeDetectionStrategy.OnPush, as @Input() will cause the component to be updated
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodoItemComponent {
   @Input() set todo(todo: Todo) {
@@ -21,7 +21,7 @@ export class TodoItemComponent {
 
   // can't use patchState - when there is no initial state -> Thomas' solution uses patchState
   // His setInitState function -> calls setState and adds a callState property as well
-  // Wouldn't recommend using his library -> always better to have less dependencies
+  // Didn't use his library -> always better to have less dependencies
 
   private todoItemStore = inject(TodoItemStore);
 
