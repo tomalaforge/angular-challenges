@@ -17,7 +17,7 @@ import { ItemComponent } from './shared/item.component';
         <mat-spinner></mat-spinner>
       </div>
       <ng-template #showData>
-        <div class="show-view" *ngFor="let todo of todos | async">
+        <div class="show-view" *ngFor="let todo of viewData$ | async">
           <app-item
             [config]="todo"
             [spinnerState]="isShowSpinner"
@@ -73,22 +73,22 @@ import { ItemComponent } from './shared/item.component';
   ],
 })
 export class AppComponent implements OnInit {
-  todos!: Observable<TodoConfig[]>;
+  viewData$ = this.getTodoService.data$;
   isShowSpinner: Observable<boolean> = of(false);
   globalLoader: Observable<boolean> = of(false);
   isFirstTimeLoading = false;
   constructor(private getTodoService: GetToDoService) {}
 
   ngOnInit(): void {
-    this.isShowSpinner = this.getTodoService.isDataFetchRunning;
-    this.globalLoader = this.getTodoService.globalLoaderFlag;
-    this.todos = this.getTodoService.getTodoData();
+    this.getTodoService.getTodoData();
+    this.globalLoader = this.getTodoService.globalLoader$;
+    this.isShowSpinner = this.getTodoService.localLoader$;
   }
 
   update(todo: TodoConfig) {
-    this.todos = this.getTodoService.updateTodo(todo);
+    this.getTodoService.updateTodo(todo);
   }
   delete(id: number) {
-    this.todos = this.getTodoService.deleteTodo(id);
+    this.getTodoService.deleteTodo(id);
   }
 }

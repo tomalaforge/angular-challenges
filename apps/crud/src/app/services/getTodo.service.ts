@@ -2,27 +2,37 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TodoConfig } from '../core/Interface/todo';
 import { randText } from '@ngneat/falso';
-import { BehaviorSubject } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { ToDoStore } from '../store/todo.store';
 @Injectable({
   providedIn: 'root',
 })
 export class GetToDoService {
   private commonUrl = 'https://jsonplaceholder.typicode.com/todos';
-  private dataObservable = new BehaviorSubject<TodoConfig[]>([]);
-  public globalLoaderFlag = new BehaviorSubject<boolean>(false);
-  public isDataFetchRunning = new BehaviorSubject<boolean>(false);
+  public data$: Observable<TodoConfig[]>;
+  public globalLoader$: Observable<boolean> = of(false);
+  public localLoader$: Observable<boolean> = of(false);
   public errorValue = '';
+
   private headers = {
     'Content-type': 'application/json; charset=UTF-8',
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private toDoStore: ToDoStore) {
+    this.data$ = this.toDoStore.select((state) => state.todos); //this.select((state) => state.todos);
+    this.globalLoader$ = this.toDoStore.select(
+      (state) => state.globalSpinnerState
+    );
+    this.localLoader$ = this.toDoStore.select(
+      (state) => state.localSpinnerState
+    );
+  }
   getTodoData() {
-    this.globalLoaderFlag.next(true);
+    this.toDoStore.setGlobalLoaderFlag(true);
     this.http.get<TodoConfig[]>(this.commonUrl).subscribe({
       next: (data: TodoConfig[]) => {
-        this.dataObservable.next(data);
-        this.globalLoaderFlag.next(false);
+        this.toDoStore.loadToDos(data);
+        this.toDoStore.setGlobalLoaderFlag(false);
       },
       error: (err) => {
         console.log(err);
@@ -31,16 +41,9 @@ export class GetToDoService {
         console.info('complete');
       },
     });
-    return this.dataObservable;
-  }
-  turnOnSpinner() {
-    this.isDataFetchRunning.next(true);
-  }
-  turnOffSpinner() {
-    this.isDataFetchRunning.next(false);
   }
   updateTodo(todo: TodoConfig) {
-    this.turnOnSpinner();
+    this.toDoStore.setLocalSpinnerFlag(true);
     this.http
       .put<TodoConfig>(
         `${this.commonUrl}/${todo.id}`,
@@ -56,16 +59,8 @@ export class GetToDoService {
       )
       .subscribe({
         next: (todoUpdated) => {
-          const newData = this.dataObservable.value.map(
-            (toDoObj: TodoConfig) => {
-              if (toDoObj.id === todoUpdated.id) {
-                return { ...toDoObj, title: todoUpdated.title };
-              }
-              return toDoObj;
-            }
-          );
-          this.turnOffSpinner();
-          this.dataObservable.next(newData);
+          this.toDoStore.updateTodoState(todoUpdated);
+          this.toDoStore.setLocalSpinnerFlag(false);
         },
         error: (err) => {
           console.error(err);
@@ -74,23 +69,18 @@ export class GetToDoService {
           console.info('complete');
         },
       });
-    return this.dataObservable;
   }
   deleteTodo(id: number) {
-    this.turnOnSpinner();
+    this.toDoStore.setLocalSpinnerFlag(true);
     this.http.delete(`${this.commonUrl}/${id}`).subscribe({
       next: () => {
-        const newData = this.dataObservable.value.filter((item: TodoConfig) => {
-          return id !== item.id;
-        });
-        this.turnOffSpinner();
-        this.dataObservable.next(newData);
+        this.toDoStore.deleteOneTodoState(id);
+        this.toDoStore.setLocalSpinnerFlag(false);
       },
       error: (e) => {
         console.error(e);
       },
       complete: () => console.info('complete'),
     });
-    return this.dataObservable;
   }
 }
