@@ -16,6 +16,7 @@ export class TodoItemStore extends ComponentStore<TodoItemState> {
   private appStore = inject(AppStore);
 
   // replace with ngrxOnInit ? or constructor with super?
+  // probably should use ngrxOnInit but I'll leave this
   ngOnInit() {
     this.setState({ todo: undefined, callState: '' });
   }

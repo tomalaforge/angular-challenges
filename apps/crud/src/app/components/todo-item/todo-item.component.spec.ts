@@ -71,6 +71,8 @@ const setup = async () => {
   });
 
   /*
+  // doesn't work to set todo directly
+
   fixture.fixture.componentInstance.todo = {
     userId: 2,
     id: 2,

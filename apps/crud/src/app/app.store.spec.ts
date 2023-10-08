@@ -50,37 +50,29 @@ describe('AppStore', () => {
     expect(callState).toEqual('An error occurred');
   });
 
-  /*
   it('updateTodo', async () => {
     const { store } = await setup();
 
-    store.patchState({todos: getFakeTodos(), callState: 'LOADED'});
+    store.patchState({ todos: getFakeTodos() });
 
     store.updateTodo({
       userId: 1,
       id: 1,
-      title: 'Test todo 1',
+      title: 'updated 1',
       completed: false,
-      body: 'Test todo 1'
+      body: 'Test todo 1',
     });
 
     const todos = await lastValueFrom(store.todos$.pipe(take(1)));
 
-    expect(todos).toEqual([
-      {
-        id: 1,
-        title: 'UPDATED todo 1',
-      },
-      {
-        userId: 2,
-        id: 2,
-        title: 'Test todo 2',
-        completed: true,
-        body: 'Test todo 2'
-      }
-    ]);
-  })
-  */
+    expect(todos[0]).toEqual({
+      userId: 1,
+      id: 1,
+      title: 'updated 1',
+      completed: false,
+      body: 'Test todo 1',
+    });
+  });
 
   it('deleteTodo', async () => {
     const { store } = await setup();
