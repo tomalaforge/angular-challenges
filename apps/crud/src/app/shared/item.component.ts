@@ -22,7 +22,7 @@ import { Observable, of } from 'rxjs';
             {{ todo?.title }}
           </div>
           <div class="button-view">
-            <button (click)="update(todo)">Update</button>
+            <button class="update" (click)="update(todo)">Update</button>
             <button class="delete" (click)="delete(todo?.id)">Delete</button>
           </div>
         </div>
