@@ -7,10 +7,9 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class GetToDoService {
-  private getUrl = 'https://jsonplaceholder.typicode.com/todos';
-  private updateUrl = 'https://jsonplaceholder.typicode.com/todos/';
-  private deleteUrl = 'https://jsonplaceholder.typicode.com/todos/';
+  private commonUrl = 'https://jsonplaceholder.typicode.com/todos';
   private dataObservable = new BehaviorSubject<TodoConfig[]>([]);
+  public globalLoaderFlag = new BehaviorSubject<boolean>(false);
   public isDataFetchRunning = new BehaviorSubject<boolean>(false);
   private headers = {
     'Content-type': 'application/json; charset=UTF-8',
@@ -18,11 +17,13 @@ export class GetToDoService {
 
   constructor(private http: HttpClient) {}
   getTodoData() {
-    this.turnOnSpinner();
-    this.http.get<TodoConfig[]>(this.getUrl).subscribe((data: TodoConfig[]) => {
-      this.dataObservable.next(data);
-      this.turnOffSpinner();
-    });
+    this.globalLoaderFlag.next(true);
+    this.http
+      .get<TodoConfig[]>(this.commonUrl)
+      .subscribe((data: TodoConfig[]) => {
+        this.dataObservable.next(data);
+        this.globalLoaderFlag.next(false);
+      });
     return this.dataObservable;
   }
   turnOnSpinner() {
@@ -35,7 +36,7 @@ export class GetToDoService {
     this.turnOnSpinner();
     this.http
       .put<TodoConfig>(
-        `${this.updateUrl}${todo.id}`,
+        `${this.commonUrl}/${todo.id}`,
         JSON.stringify({
           todo: todo.id,
           title: randText(),
@@ -60,7 +61,7 @@ export class GetToDoService {
   }
   deleteTodo(id: number) {
     this.turnOnSpinner();
-    this.http.delete(`${this.deleteUrl}${id}`).subscribe(() => {
+    this.http.delete(`${this.commonUrl}/${id}`).subscribe(() => {
       const newData = this.dataObservable.value.filter((item: TodoConfig) => {
         return id !== item.id;
       });

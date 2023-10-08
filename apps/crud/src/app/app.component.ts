@@ -4,26 +4,26 @@ import { TodoConfig } from './core/Interface/todo';
 import { GetToDoService } from './services/getTodo.service';
 import { Observable, of } from 'rxjs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ItemComponent } from './shared/item.component';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, MatProgressSpinnerModule],
+  imports: [CommonModule, MatProgressSpinnerModule, ItemComponent],
   selector: 'app-root',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="container">
-      <div class="spinner" *ngIf="isShowSpinner | async; else showData">
+      <div class="spinner" *ngIf="globalLoader | async; else showData">
         <mat-spinner></mat-spinner>
       </div>
       <ng-template #showData>
         <div class="show-view" *ngFor="let todo of todos | async">
-          <div class="title-view">
-            {{ todo.title }}
-          </div>
-          <div class="button-view">
-            <button (click)="update(todo)">Update</button>
-            <button class="delete" (click)="delete(todo.id)">Delete</button>
-          </div>
+          <app-item
+            [config]="todo"
+            [spinnerState]="isShowSpinner"
+            (deleteTodo)="delete($event)"
+            (updateTodo)="update($event)">
+          </app-item>
         </div>
       </ng-template>
     </div>
@@ -75,11 +75,13 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 export class AppComponent implements OnInit {
   todos!: Observable<TodoConfig[]>;
   isShowSpinner: Observable<boolean> = of(false);
-
+  globalLoader: Observable<boolean> = of(false);
+  isFirstTimeLoading = false;
   constructor(private getTodoService: GetToDoService) {}
 
   ngOnInit(): void {
     this.isShowSpinner = this.getTodoService.isDataFetchRunning;
+    this.globalLoader = this.getTodoService.globalLoaderFlag;
     this.todos = this.getTodoService.getTodoData();
   }
 
