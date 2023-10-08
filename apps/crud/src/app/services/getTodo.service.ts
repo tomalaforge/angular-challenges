@@ -11,6 +11,7 @@ export class GetToDoService {
   private dataObservable = new BehaviorSubject<TodoConfig[]>([]);
   public globalLoaderFlag = new BehaviorSubject<boolean>(false);
   public isDataFetchRunning = new BehaviorSubject<boolean>(false);
+  public errorValue = '';
   private headers = {
     'Content-type': 'application/json; charset=UTF-8',
   };
@@ -18,12 +19,18 @@ export class GetToDoService {
   constructor(private http: HttpClient) {}
   getTodoData() {
     this.globalLoaderFlag.next(true);
-    this.http
-      .get<TodoConfig[]>(this.commonUrl)
-      .subscribe((data: TodoConfig[]) => {
+    this.http.get<TodoConfig[]>(this.commonUrl).subscribe({
+      next: (data: TodoConfig[]) => {
         this.dataObservable.next(data);
         this.globalLoaderFlag.next(false);
-      });
+      },
+      error: (err) => {
+        console.log(err);
+      },
+      complete: () => {
+        console.info('complete');
+      },
+    });
     return this.dataObservable;
   }
   turnOnSpinner() {
@@ -47,26 +54,42 @@ export class GetToDoService {
           headers: this.headers,
         }
       )
-      .subscribe((todoUpdated: TodoConfig) => {
-        const newData = this.dataObservable.value.map((toDoObj: TodoConfig) => {
-          if (toDoObj.id === todoUpdated.id) {
-            return { ...toDoObj, title: todoUpdated.title };
-          }
-          return toDoObj;
-        });
-        this.turnOffSpinner();
-        this.dataObservable.next(newData);
+      .subscribe({
+        next: (todoUpdated) => {
+          const newData = this.dataObservable.value.map(
+            (toDoObj: TodoConfig) => {
+              if (toDoObj.id === todoUpdated.id) {
+                return { ...toDoObj, title: todoUpdated.title };
+              }
+              return toDoObj;
+            }
+          );
+          this.turnOffSpinner();
+          this.dataObservable.next(newData);
+        },
+        error: (err) => {
+          console.error(err);
+        },
+        complete: () => {
+          console.info('complete');
+        },
       });
     return this.dataObservable;
   }
   deleteTodo(id: number) {
     this.turnOnSpinner();
-    this.http.delete(`${this.commonUrl}/${id}`).subscribe(() => {
-      const newData = this.dataObservable.value.filter((item: TodoConfig) => {
-        return id !== item.id;
-      });
-      this.turnOffSpinner();
-      this.dataObservable.next(newData);
+    this.http.delete(`${this.commonUrl}/${id}`).subscribe({
+      next: () => {
+        const newData = this.dataObservable.value.filter((item: TodoConfig) => {
+          return id !== item.id;
+        });
+        this.turnOffSpinner();
+        this.dataObservable.next(newData);
+      },
+      error: (e) => {
+        console.error(e);
+      },
+      complete: () => console.info('complete'),
     });
     return this.dataObservable;
   }
