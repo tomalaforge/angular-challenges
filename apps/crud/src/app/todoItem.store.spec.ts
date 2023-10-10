@@ -22,8 +22,6 @@ describe('TodoItemStore', () => {
   it('ngOnInit', async () => {
     const { store } = await setup('success');
 
-    store.ngOnInit();
-
     /*
     store.todo$.subscribe(data => {
       expect(data).toBeUndefined();

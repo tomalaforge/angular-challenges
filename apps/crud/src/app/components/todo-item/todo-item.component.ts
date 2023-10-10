@@ -16,12 +16,8 @@ import { Todo } from '../../interfaces/Todo';
 })
 export class TodoItemComponent {
   @Input() set todo(todo: Todo) {
-    this.todoItemStore.setState({ todo: todo, callState: 'LOADED' }); // patchState doesn't work
+    this.todoItemStore.patchState({ todo: todo, callState: 'LOADED' });
   }
-
-  // can't use patchState - when there is no initial state -> Thomas' solution uses patchState
-  // His setInitState function -> calls setState and adds a callState property as well
-  // Didn't use his library -> always better to have less dependencies
 
   private todoItemStore = inject(TodoItemStore);
 
