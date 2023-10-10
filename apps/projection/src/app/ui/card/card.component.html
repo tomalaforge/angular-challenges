@@ -1,25 +1,29 @@
-<div
-  class="border-2 border-black rounded-md p-4 w-fit flex flex-col gap-3"
-  [class]="customClass">
-  <ng-container
-    [ngTemplateOutlet]="
-      templateView ? templateView : defaultView
-    "></ng-container>
+<div class="border-2 border-black rounded-md p-4 w-fit flex flex-col gap-3" [class]="customClass">
+  <img
+    *ngIf="type === CardType.TEACHER"
+    src="assets/img/teacher.png"
+    width="200px"
+  />
+  <img
+    *ngIf="type === CardType.STUDENT"
+    src="assets/img/student.webp"
+    width="200px"
+  />
+
   <section>
     <app-list-item
       *ngFor="let item of list"
-      [name]="item.firstname ? item.firstname : item.name"
+      [name]="item.firstname"
       [id]="item.id"
       [type]="type"
-      (deleteEvent)="deleteItem($event)">
+    >
     </app-list-item>
   </section>
 
   <button
     class="border border-blue-500 bg-blue-300 p-2 rounded-sm"
-    (click)="addNewItem()">
+    (click)="addNewItem()"
+  >
     Add
   </button>
-
-  <ng-template #defaultView> </ng-template>
 </div>
