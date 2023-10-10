@@ -1,38 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { CardComponent } from '../../ui/card/card.component';
-import { City } from '../../model/city.model';
-import { CityStore } from '../../data-access/city.store';
-import { CardType } from '../../model/card.model';
-import { FakeHttpService } from '../../data-access/fake-http.service';
-import { randomCity } from '../../data-access/fake-http.service';
+
 @Component({
   selector: 'app-city-card',
-  template: `<app-card
-    [list]="cities"
-    [type]="cardType"
-    (deleteEvent)="deleteItem($event)"
-    (addEvent)="addItem()"
-    customClass="bg-light-green"></app-card>`,
+  template: 'TODO City',
   standalone: true,
-  imports: [CardComponent],
+  imports: [],
 })
 export class CityCardComponent implements OnInit {
-  cities: City[] = [];
-  cardType = CardType.CITY;
-  constructor(private http: FakeHttpService, private store: CityStore) {}
+  constructor() {}
 
-  ngOnInit(): void {
-    this.http.fetchCities$.subscribe((c) => {
-      this.store.addAll(c);
-    });
-    this.store.cities$.subscribe((c) => {
-      this.cities = c;
-    });
-  }
-  deleteItem(id: number) {
-    this.store.deleteOne(id);
-  }
-  addItem() {
-    this.store.addOne(randomCity());
-  }
+  ngOnInit(): void {}
 }
