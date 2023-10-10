@@ -1,5 +1,4 @@
 import { Tree, formatFiles } from '@nx/devkit';
-import { readFile, writeFile } from 'fs/promises';
 
 const README_FILENAME = 'README.md';
 const OMIT = ['memoized', 'projection', 'testing-table', 'testing-forms'];
@@ -46,10 +45,10 @@ function findHref(href) {
 
 async function rewriteFile(tree: Tree, file: string) {
   console.log('Current file', file);
-  const buffer = await readFile(file, { encoding: 'utf-8' });
+  const buffer = tree.read(file);
 
   const regex = new RegExp(/Answer:(\d+)/);
-  const match = buffer.match(regex);
+  const match = buffer.toString().match(regex);
 
   if (!match) throw new Error('NO MATCH');
 
@@ -69,19 +68,19 @@ async function rewriteFile(tree: Tree, file: string) {
     -2
   )}/${pathElts.at(-1)}/`;
 
-  const doc = await readFile(docFile, { encoding: 'utf-8' });
+  const doc = tree.read(docFile);
 
   const regexTitle = new RegExp(/title:\s(🟢|🟠|🔴)\s(.+?)\n/);
-  const matchTitle = doc.match(regexTitle);
+  const matchTitle = doc.toString().match(regexTitle);
   const title = matchTitle[2];
 
   const regexCommand = new RegExp(/npx nx serve\s(.+?)`\s/);
-  const matchCommand = buffer.match(regexCommand);
+  const matchCommand = buffer.toString().match(regexCommand);
 
   let command = '';
   if (!matchCommand) {
     const regexOldCommand = new RegExp(/nx serve\s(.+?)\*/);
-    command = buffer.match(regexOldCommand)[1];
+    command = buffer.toString().match(regexOldCommand)[1];
   } else {
     command = matchCommand[1];
   }
@@ -103,12 +102,12 @@ npx nx serve ${command}
 Challenge documentation is [here](${link}).
 `;
 
-  await writeFile(file, finalText, { encoding: 'utf-8' });
+  tree.write(file, finalText);
 
   ///**** */
 
   const regexHref = new RegExp(/<a href=("|')(.+?)("|')/, 'g');
-  const href = buffer.match(regexHref).map(findHref);
+  const href = buffer.toString().match(regexHref).map(findHref);
 
   console.log('HREF', href);
 
@@ -139,7 +138,7 @@ Your PR title must start with <b>Answer:${number}</b>.
     target="_blank"
     rel="noopener noreferrer"
     alt="${title} blog article">
-    <svg aria-hidden="true" class="astro-yzt5nm4y astro-lq7oo3uf" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M9 10h1a1 1 0 1 0 0-2H9a1 1 0 0 0 0 2Zm0 2a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2H9Zm11-3.06a1.3 1.3 0 0 0-.06-.27v-.09c-.05-.1-.11-.2-.19-.28l-6-6a1.07 1.07 0 0 0-.28-.19h-.09a.88.88 0 0 0-.33-.11H7a3 3 0 0 0-3 3v14a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V8.94Zm-6-3.53L16.59 8H15a1 1 0 0 1-1-1V5.41ZM18 19a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h5v3a3 3 0 0 0 3 3h3v9Zm-3-3H9a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2Z"></path></svg>
+    <svg aria-hidden="true" class="astro-yzt5nm4y astro-lq7oo3uf" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M9 10h1a1 1 0 1 0 0-2H9a1 1 0 0 0 0 2Zm0 2a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2H9Zm11-3.06a1.3 1.3 0 0 0-.06-.27v-.09c-.05-.1-.11-.2-.19-.28l-6-6a1.07 1.07 0 0 0-.28-.19h-.09a.88.88 0 0 0-.33-.11H7a3 3 0 0 0-3 3v14a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V8.94Zm-6-3.53L16.59 8H15a1 1 0 0 1-1-1V5.41ZM18 19a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h5v3a3 3 0 0 0 3 3h3v9Zm-3-3H9a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2Z"></path></svg>
      Blog Post
   </a>
 </div>
@@ -150,21 +149,21 @@ Your PR title must start with <b>Answer:${number}</b>.
   }
 
   const regexHeader = new RegExp(/([\s\S]*?)\s:::note/);
-  const header = doc.match(regexHeader)[1];
+  const header = doc.toString().match(regexHeader)[1];
 
   console.log('header', header);
 
   const regexContent = new RegExp(
     /Author: Thomas Laforge([\s\S]*?)### Submitting your work/
   );
-  const matchContent = buffer.match(regexContent);
+  const matchContent = buffer.toString().match(regexContent);
 
   let content = '';
   if (!matchContent) {
     const regexOldContent = new RegExp(
       /Author: Thomas Laforge([\s\S]*?)## Submitting your work/
     );
-    content = buffer.match(regexOldContent)[1];
+    content = buffer.toString().match(regexOldContent)[1];
   } else {
     content = matchContent[1];
   }
@@ -184,7 +183,7 @@ ${content}
 ${footerText}
   `;
 
-  await writeFile(docFile, fullDocText, { encoding: 'utf-8' });
+  tree.write(docFile, fullDocText);
 }
 
 export async function readmeGenerator(tree: Tree) {

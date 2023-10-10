@@ -3,6 +3,7 @@ title: <%= difficulty %> <%= title %>
 description: Challenge <%= challengeNumber %> is about ...
 sidebar:
   order: <%= order %>
+  badge: New
 ---
 
 :::note
@@ -20,7 +21,7 @@ WIP: The following documentation need to be written.
 ---
 
 :::note
-Start the project by running: `npx nx serve <%= projectName %>`.
+Start the project by running: `npx nx serve <%= appProjectName %>`.
 :::
 
 :::tip[Reminder]
