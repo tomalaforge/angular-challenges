@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { randText } from '@ngneat/falso';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, pipe } from 'rxjs';
 import { Todo } from './todo.model';
 
 @Injectable({ providedIn: 'root' })
@@ -45,6 +45,18 @@ export class TodoService {
           t.id === todoUpdated.id ? { ...t, ...todoUpdated } : t
         );
         this.todoSubject.next(updatedTodos);
+      });
+  }
+
+  delete(todo: Todo) {
+    this.http
+      .delete(`https://jsonplaceholder.typicode.com/posts/${todo.id}/45`)
+      .subscribe({
+        next: () => {
+          const currentTodos = this.todoSubject.value;
+          const updatedTodos = currentTodos.filter((t) => t.id !== todo.id);
+          this.todoSubject.next(updatedTodos);
+        },
       });
   }
 }
