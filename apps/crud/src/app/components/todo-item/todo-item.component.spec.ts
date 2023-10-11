@@ -17,11 +17,9 @@ describe('TodoItemComponent', () => {
   });
 
   test('update', async () => {
-    const { mockTodoService, fixture } = await setup();
+    const { mockTodoService } = await setup();
 
-    fixture.detectChanges();
-
-    const button = screen.getAllByRole('button')[0];
+    const button = await screen.findByRole('button', { name: /update/i });
 
     fireEvent.click(button);
 
@@ -29,11 +27,9 @@ describe('TodoItemComponent', () => {
   });
 
   test('delete', async () => {
-    const { mockTodoService, fixture } = await setup();
+    const { mockTodoService } = await setup();
 
-    fixture.detectChanges();
-
-    const button = screen.getAllByRole('button')[1];
+    const button = await screen.findByRole('button', { name: /delete/i });
 
     fireEvent.click(button);
 
