@@ -1,17 +1,26 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Todo } from './todo.model';
-import { ComponentStore, OnStateInit } from '@ngrx/component-store';
+import {
+  ComponentStore,
+  OnStateInit,
+  tapResponse,
+} from '@ngrx/component-store';
+import { finalize, pipe, switchMap, tap } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
+import { TodoService } from './todo.service';
 
 interface TodoState {
   todos: Todo[];
   loadingAllTodos: boolean;
   loadingSingleTodo: boolean;
+  error: string;
 }
 
 const initialTodoState: TodoState = {
   todos: [],
   loadingAllTodos: false,
   loadingSingleTodo: false,
+  error: '',
 };
 
 @Injectable({
@@ -25,7 +34,9 @@ export class TodoStore
     super(initialTodoState);
   }
 
-  getTodos = this.updater((state, todos: Todo[]) => ({
+  private todoService = inject(TodoService);
+
+  addTodos = this.updater((state, todos: Todo[]) => ({
     ...state,
     todos,
   }));
@@ -50,7 +61,27 @@ export class TodoStore
     loadingSingleTodo: value,
   }));
 
+  setErrorState = this.updater((state, error: string) => ({
+    ...state,
+    error,
+  }));
+
+  readonly fetchTodos = this.effect<void>(
+    pipe(
+      tap(() => this.setLoadingAllTodos(true)),
+      switchMap(() =>
+        this.todoService.getTodos().pipe(
+          tapResponse(
+            (todos) => this.addTodos(todos),
+            (error: HttpErrorResponse) => this.setErrorState(error.message)
+          )
+        )
+      ),
+      finalize(() => this.setLoadingAllTodos(false))
+    )
+  );
+
   ngrxOnStateInit() {
-    // this.fetchTodo();
+    this.fetchTodos();
   }
 }

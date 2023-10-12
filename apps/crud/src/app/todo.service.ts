@@ -7,7 +7,7 @@ import { Todo } from './todo.model';
 @Injectable({
   providedIn: 'root',
 })
-export class CrudService {
+export class TodoService {
   private http = inject(HttpClient);
 
   getTodos(): Observable<Todo[]> {
