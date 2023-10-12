@@ -20,7 +20,8 @@
           "apps/performance/ngfor-biglist/src/assets"
         ],
         "styles": ["apps/performance/ngfor-biglist/src/styles.scss"],
-        "scripts": []
+        "scripts": [],
+        "allowedCommonJsDependencies": ["seedrandom"]
       },
       "configurations": {
         "production": {
