@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Todo } from './todo.model';
-import { ComponentStore } from '@ngrx/component-store';
+import { ComponentStore, OnStateInit } from '@ngrx/component-store';
 
 interface TodoState {
   todos: Todo[];
@@ -17,7 +17,10 @@ const initialTodoState: TodoState = {
 @Injectable({
   providedIn: 'root',
 })
-export class TodoStore extends ComponentStore<TodoState> {
+export class TodoStore
+  extends ComponentStore<TodoState>
+  implements OnStateInit
+{
   constructor() {
     super(initialTodoState);
   }
@@ -46,4 +49,8 @@ export class TodoStore extends ComponentStore<TodoState> {
     ...state,
     loadingSingleTodo: value,
   }));
+
+  ngrxOnStateInit() {
+    // this.fetchTodo();
+  }
 }
