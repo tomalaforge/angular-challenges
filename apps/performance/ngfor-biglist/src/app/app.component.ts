@@ -6,7 +6,6 @@ import { MatInputModule } from '@angular/material/input';
 import { generateList } from './generateList';
 import { PersonService } from './list.service';
 import { PersonListComponent } from './person-list.component';
-import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @Component({
   standalone: true,
@@ -17,7 +16,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     MatFormFieldModule,
     MatInputModule,
   ],
-  providers: [PersonService, ScrollingModule],
+  providers: [PersonService],
   selector: 'app-root',
   template: `
     <button

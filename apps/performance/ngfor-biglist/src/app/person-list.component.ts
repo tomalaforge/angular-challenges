@@ -36,23 +36,3 @@ export class PersonListComponent {
     return person ? person.email : undefined;
   }
 }
-
-/*
-<cdk-virtual-scroll-viewport itemSize="50" class="example-viewport">
-  <div *cdkVirtualFor="let item of items" class="example-item">{{item}}</div>
-</cdk-virtual-scroll-viewport>
-*/
-
-/*
-    <div class="h-[300px] relative overflow-hidden">
-      <div class="absolute inset-0 overflow-scroll">
-        <div
-          *ngFor="let person of persons; trackByProp: 'email'"
-          class="flex justify-between items-center border-b h-9">
-          
-          <h3>{{ person.name }}</h3>
-          <p>{{ person.email }}</p>
-        </div>
-      </div>
-    </div>
-*/
