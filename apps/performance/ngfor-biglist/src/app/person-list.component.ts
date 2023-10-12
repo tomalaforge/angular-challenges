@@ -33,6 +33,6 @@ export class PersonListComponent {
   @Input() persons: Person[] = [];
 
   trackPerson(index: number, person: Person) {
-    return person ? person.email : undefined;
+    return person.email;
   }
 }
