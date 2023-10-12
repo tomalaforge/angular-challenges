@@ -23,7 +23,8 @@
           "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
           "apps/performance/ngfor-biglist/src/styles.scss"
         ],
-        "scripts": []
+        "scripts": [],
+        "allowedCommonJsDependencies": ["seedrandom"]
       },
       "configurations": {
         "production": {
