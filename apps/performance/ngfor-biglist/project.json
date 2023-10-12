@@ -19,7 +19,10 @@
           "apps/performance/ngfor-biglist/src/favicon.ico",
           "apps/performance/ngfor-biglist/src/assets"
         ],
-        "styles": ["apps/performance/ngfor-biglist/src/styles.scss"],
+        "styles": [
+          "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+          "apps/performance/ngfor-biglist/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {
