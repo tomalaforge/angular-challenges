@@ -2,13 +2,15 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { TodoConfig } from './core/Interface/todo';
 import { GetToDoService } from './services/getTodo.service';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ItemComponent } from './shared/item.component';
+import { ToDoStore } from './store/todo.store';
 
 @Component({
   standalone: true,
   imports: [CommonModule, MatProgressSpinnerModule, ItemComponent],
+  providers: [ToDoStore],
   selector: 'app-root',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
@@ -20,7 +22,6 @@ import { ItemComponent } from './shared/item.component';
         <div class="show-view" *ngFor="let todo of viewData$ | async">
           <app-item
             [config]="todo"
-            [spinnerState]="isShowSpinner"
             (deleteTodo)="delete($event)"
             (updateTodo)="update($event)">
           </app-item>
@@ -74,15 +75,13 @@ import { ItemComponent } from './shared/item.component';
 })
 export class AppComponent implements OnInit {
   viewData$ = this.getTodoService.data$;
-  isShowSpinner: Observable<boolean> = of(false);
-  globalLoader: Observable<boolean> = of(false);
+  isShowSpinner: Observable<boolean> = this.getTodoService.localLoader$;
+  globalLoader: Observable<boolean> = this.getTodoService.globalLoader$;
   isFirstTimeLoading = false;
   constructor(private getTodoService: GetToDoService) {}
 
   ngOnInit(): void {
     this.getTodoService.getTodoData();
-    this.globalLoader = this.getTodoService.globalLoader$;
-    this.isShowSpinner = this.getTodoService.localLoader$;
   }
 
   update(todo: TodoConfig) {

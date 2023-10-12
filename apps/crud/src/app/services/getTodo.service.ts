@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TodoConfig } from '../core/Interface/todo';
 import { randText } from '@ngneat/falso';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ToDoStore } from '../store/todo.store';
 @Injectable({
   providedIn: 'root',
@@ -10,8 +10,10 @@ import { ToDoStore } from '../store/todo.store';
 export class GetToDoService {
   private commonUrl = 'https://jsonplaceholder.typicode.com/todos';
   public data$: Observable<TodoConfig[]>;
-  public globalLoader$: Observable<boolean> = of(false);
-  public localLoader$: Observable<boolean> = of(false);
+  public globalLoader$: Observable<boolean> =
+    this.toDoStore.getGlobalLoaderFlag$;
+  public localLoader$: Observable<boolean> =
+    this.toDoStore.getLocalSpinnerFlag$;
   public errorValue = '';
 
   private headers = {
@@ -19,13 +21,7 @@ export class GetToDoService {
   };
 
   constructor(private http: HttpClient, private toDoStore: ToDoStore) {
-    this.data$ = this.toDoStore.select((state) => state.todos); //this.select((state) => state.todos);
-    this.globalLoader$ = this.toDoStore.select(
-      (state) => state.globalSpinnerState
-    );
-    this.localLoader$ = this.toDoStore.select(
-      (state) => state.localSpinnerState
-    );
+    this.data$ = this.toDoStore.select((state) => state.todos);
   }
   getTodoData() {
     this.toDoStore.setGlobalLoaderFlag(true);
@@ -35,10 +31,10 @@ export class GetToDoService {
         this.toDoStore.setGlobalLoaderFlag(false);
       },
       error: (err) => {
-        console.log(err);
+        this.toDoStore.setError('error occurred in operation');
       },
       complete: () => {
-        console.info('complete');
+        this.toDoStore.setComplete('operation completed');
       },
     });
   }
@@ -63,10 +59,10 @@ export class GetToDoService {
           this.toDoStore.setLocalSpinnerFlag(false);
         },
         error: (err) => {
-          console.error(err);
+          this.toDoStore.setError('error occurred in operation');
         },
         complete: () => {
-          console.info('complete');
+          this.toDoStore.setComplete('operation completed');
         },
       });
   }
@@ -78,9 +74,11 @@ export class GetToDoService {
         this.toDoStore.setLocalSpinnerFlag(false);
       },
       error: (e) => {
-        console.error(e);
+        this.toDoStore.setError('error occurred in operation');
       },
-      complete: () => console.info('complete'),
+      complete: () => {
+        this.toDoStore.setComplete('operation completed');
+      },
     });
   }
 }

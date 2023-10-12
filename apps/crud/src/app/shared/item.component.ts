@@ -2,14 +2,14 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { TodoConfig } from '../core/Interface/todo';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
+import { GetToDoService } from '../services/getTodo.service';
 
 @Component({
   standalone: true,
   imports: [CommonModule, MatProgressSpinnerModule],
   selector: 'app-item',
   template: `
-    <!-- <ng-template #showData> -->
     <div class="show-view">
       <div
         class="spinner"
@@ -28,7 +28,6 @@ import { Observable, of } from 'rxjs';
         </div>
       </ng-template>
     </div>
-    <!-- </ng-template> -->
   `,
   styles: [
     `
@@ -60,13 +59,11 @@ import { Observable, of } from 'rxjs';
 })
 export class ItemComponent {
   todo: TodoConfig | undefined = undefined;
-  isShowSpinner: Observable<boolean> = of(false);
+  isShowSpinner: Observable<boolean> = this.getTodoService.localLoader$;
   updatedId: number | undefined = undefined;
+  constructor(private getTodoService: GetToDoService) {}
   @Input() set config(todo: TodoConfig) {
     this.todo = todo;
-  }
-  @Input() set spinnerState(spinner: Observable<boolean>) {
-    this.isShowSpinner = spinner;
   }
   @Output() updateTodo = new EventEmitter<TodoConfig>();
   @Output() deleteTodo = new EventEmitter<number>();

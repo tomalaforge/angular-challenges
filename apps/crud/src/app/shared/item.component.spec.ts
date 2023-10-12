@@ -2,7 +2,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { ItemComponent } from './item.component';
 import { TodoConfig } from '../core/Interface/todo';
-import { By } from '@angular/platform-browser';
+import { BrowserModule, By } from '@angular/platform-browser';
+import { GetToDoService } from '../services/getTodo.service';
+import { HttpClientModule } from '@angular/common/http';
 
 const mockData: TodoConfig = {
   userId: 1,
@@ -17,7 +19,8 @@ describe('ItemComponent - ', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ItemComponent],
+      imports: [ItemComponent, BrowserModule, HttpClientModule],
+      providers: [GetToDoService],
     }).compileComponents();
   });
   beforeEach(() => {
@@ -29,7 +32,6 @@ describe('ItemComponent - ', () => {
   describe('Component input and out testing', () => {
     it('should set config and spinner state ', () => {
       component.config = mockData;
-      component.spinnerState = of(true);
       fixture.detectChanges();
       expect(component.todo).toEqual(mockData);
       component.isShowSpinner.subscribe((data) => {
@@ -38,21 +40,21 @@ describe('ItemComponent - ', () => {
     });
 
     it('should emit update output event on click', () => {
+      component.config = mockData;
+      const spy = jest.spyOn(component.updateTodo, 'emit');
       const updateEl = fixture.debugElement.query(By.css('.update'));
       updateEl.triggerEventHandler('click', null);
       fixture.detectChanges();
-      component.updateTodo.subscribe((data) => {
-        expect(data).toEqual(mockData);
-      });
+      expect(spy).toHaveBeenCalledWith(mockData);
     });
 
     it('should emit delete output event on click', () => {
+      component.config = mockData;
+      const spy = jest.spyOn(component.deleteTodo, 'emit');
       const deleteEl = fixture.debugElement.query(By.css('.delete'));
       deleteEl.triggerEventHandler('click', null);
       fixture.detectChanges();
-      component.deleteTodo.subscribe((data) => {
-        expect(data).toEqual(mockData);
-      });
+      expect(spy).toHaveBeenCalledWith(1);
     });
   });
 });
