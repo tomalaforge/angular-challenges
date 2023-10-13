@@ -3,7 +3,6 @@ title: 🟠 Optimize Big List
 description: Challenge 37 is about learning how virtualization optimize big list rendering
 sidebar:
   order: 117
-  badge: New
 ---
 
 <div class="chip">Challenge #37</div>
