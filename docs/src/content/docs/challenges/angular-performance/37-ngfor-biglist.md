@@ -1,7 +1,6 @@
 ---
 title: 🟠 Optimize Big List
 description: Challenge 37 is about learning how virtualization optimize big list rendering
-toto: skldfjklsdlfkj
 sidebar:
   order: 117
   badge: New
