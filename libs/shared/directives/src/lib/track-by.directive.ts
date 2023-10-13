@@ -9,6 +9,7 @@ import {
   inject,
 } from '@angular/core';
 
+import { CdkVirtualForOf } from '@angular/cdk/scrolling';
 @Directive({
   selector: '[ngForTrackByProp]',
   standalone: true,
@@ -26,6 +27,23 @@ export class NgForTrackByPropDirective<T> {
 }
 
 @Directive({
+  selector: '[cdkVirtualForTrackByProp]',
+  standalone: true,
+})
+export class CdkVirtualForTrackByPropDirective<T> {
+  @Input() cdkVirtualForOf!: NgIterable<T>;
+
+  @Input()
+  set cdkVirtualForTrackByProp(cdkVirtualForTrackBy: keyof T) {
+    // setter
+    this.cdkVirtualFor.cdkVirtualForTrackBy = (index: number, item: T) =>
+      item[cdkVirtualForTrackBy];
+  }
+
+  private cdkVirtualFor = inject(CdkVirtualForOf<T>, { self: true });
+}
+
+@Directive({
   selector: '[ngForTrackById]',
   standalone: true,
 })
@@ -39,9 +57,28 @@ export class NgForTrackByIdDirective<T extends { id: string | number }> {
   }
 }
 
+@Directive({
+  selector: '[cdkVirtualForTrackById]',
+  standalone: true,
+})
+export class CdkVirtualForTrackByIdDirective<
+  T extends { id: string | number }
+> {
+  @Input() cdkVirtualForOf!: NgIterable<T>;
+
+  private cdkVirtualFor = inject(CdkVirtualForOf<T>, { self: true });
+
+  constructor() {
+    this.cdkVirtualFor.cdkVirtualForTrackBy = (index: number, item: T) =>
+      item.id;
+  }
+}
+
 export const NgForTrackByDirective: Provider[] = [
   NgForTrackByIdDirective,
   NgForTrackByPropDirective,
+  CdkVirtualForTrackByPropDirective,
+  CdkVirtualForTrackByIdDirective,
 ];
 
 @NgModule({
