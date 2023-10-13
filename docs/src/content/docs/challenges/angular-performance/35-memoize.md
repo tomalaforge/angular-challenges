@@ -1,6 +1,6 @@
 ---
 title: 🟢 Memoization
-description: Challenge 35 is about learning
+description: Challenge 35 is about learning how pure pipe works
 sidebar:
   order: 8
 ---
