@@ -3,7 +3,7 @@ import type { Props } from '@astrojs/starlight/props';
 import Default from '@astrojs/starlight/components/MarkdownContent.astro';
 
 const slug = Astro.props.slug;
-const renderCommentSection = !(['', 'challenges/testing', 'challenges/angular-performance']).includes(slug)
+const renderCommentSection = !Astro.props.entry.data.noCommentSection;
 ---
 
 
@@ -11,6 +11,8 @@ const renderCommentSection = !(['', 'challenges/testing', 'challenges/angular-pe
 
 
 <div class="border-t"></div>
+
+{Astro.props.entry.data.custom}
 
 { renderCommentSection
  ?
