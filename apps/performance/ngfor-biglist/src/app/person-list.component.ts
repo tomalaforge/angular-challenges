@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NgForTrackByModule } from '@angular-challenges/shared/directives';
 import { CommonModule } from '@angular/common';
 import { Person } from './person.model';
@@ -7,18 +7,18 @@ import { Person } from './person.model';
 @Component({
   selector: 'app-person-list',
   standalone: true,
-  imports: [CommonModule, NgForTrackByModule],
+  imports: [CommonModule, NgForTrackByModule, ScrollingModule],
   template: `
-    <div class="h-[300px] relative overflow-hidden">
-      <div class="absolute inset-0 overflow-scroll">
+    <cdk-virtual-scroll-viewport itemSize="40" style="height: 300px;">
+      <div>
         <div
-          *ngFor="let person of persons; trackByProp: 'email'"
+          *cdkVirtualFor="let person of persons; trackBy: trackByEmail"
           class="flex justify-between items-center border-b h-9">
           <h3>{{ person.name }}</h3>
           <p>{{ person.email }}</p>
         </div>
       </div>
-    </div>
+    </cdk-virtual-scroll-viewport>
   `,
   host: {
     class: 'w-full flex flex-col',
@@ -27,4 +27,7 @@ import { Person } from './person.model';
 })
 export class PersonListComponent {
   @Input() persons: Person[] = [];
+  trackByEmail(index: number, item: Person): string {
+    return item.email;
+  }
 }
