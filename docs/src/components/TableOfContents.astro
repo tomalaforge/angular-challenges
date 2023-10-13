@@ -1,0 +1,31 @@
+---
+import Default from '@astrojs/starlight/components/TableOfContents.astro';
+import { Icon } from '@astrojs/starlight/components';
+
+---
+
+<Default {...Astro.props}><slot /></Default>
+
+
+<a class="action-button" href='https://github.com/tomalaforge/angular-challenges'>
+	<div>Give a star</div>
+	<Icon name='github' size="1.5rem" />
+</a>
+
+<style>
+    .action-button {
+        display: flex!important;
+        justify-content: center;
+        width: fit-content;
+        gap: 0.5em;
+        align-items: center;
+        border-radius: 999rem;
+        color: var(--sl-color-white)!important;
+        line-height: 1.1875;
+        text-decoration: none;
+        font-size: var(--sl-text-sm)!important;
+        border: 1px solid;
+        font-size: var(--sl-text-base);
+        padding: 0.5rem 0.8rem;
+    }
+</style>
