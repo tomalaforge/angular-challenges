@@ -1,11 +1,12 @@
 ---
 title: 🔴 Real-life Application
 description: Challenge 29 is about testing a real-life application
+author: Thomas Laforge
+challengeNumber: 29
+command: testing-todos-list
 sidebar:
   order: 205
 ---
-
-<div class="chip">Challenge #29</div>
 
 ## Information:
 
@@ -30,26 +31,3 @@ The goal is to test multiple behaviors of the application describe inside each t
 :::note
 I have created some `it` blocks but feel free to add more tests if you want.
 :::
-
----
-
-:::note
-Start the project by running: `npx nx serve testing-todos-list`.
-:::
-
-:::tip[Reminder]
-Your PR title must start with <b>Answer:29</b>.
-:::
-
-<div class="article-footer">
-  <a
-    href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A29+label%3Aanswer"
-    alt="Real-life Application community solutions">
-    ❖ Community Answers
-  </a>
-  <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A29+label%3A"answer+author"'
-    alt="Real-life Application solution author">
-    ▶︎ Author Answer
-  </a>
-  </div>

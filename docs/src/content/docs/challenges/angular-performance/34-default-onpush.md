@@ -1,11 +1,12 @@
 ---
 title: 🟢 Default vs OnPush
 description: Challenge 34 is about learning the difference between Default and OnPush Change Detection Strategy.
+author: Thomas Laforge
+challengeNumber: 34
+command: performance-default-onpush
 sidebar:
   order: 7
 ---
-
-<div class="chip">Challenge #34</div>
 
 ## Information
 
@@ -52,26 +53,3 @@ Use `ChangeDetectionStrategy.OnPush` but this will not be enough.
 Create smaller components to better separate the input field from the list.
 
 </details>
-
----
-
-:::note
-Start the project by running: `npx nx serve performance-default-onpush`.
-:::
-
-:::tip[Reminder]
-Your PR title must start with <b>Answer:34</b>.
-:::
-
-<div class="article-footer">
-  <a
-    href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A34+label%3Aanswer"
-    alt="Default vs OnPush community solutions">
-    ❖ Community Answers
-  </a>
-  <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A34+label%3A"answer+author"'
-    alt="Default vs OnPush solution author">
-    ▶︎ Author Answer
-  </a>
-  </div>

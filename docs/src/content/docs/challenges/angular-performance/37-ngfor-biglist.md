@@ -1,12 +1,13 @@
 ---
 title: 🟠 Optimize Big List
 description: Challenge 37 is about learning how virtualization optimize big list rendering
+author: Thomas Laforge
+challengeNumber: 37
+command: performance-ngfor-biglist
 sidebar:
   order: 117
   badge: New
 ---
-
-<div class="chip">Challenge #37</div>
 
 ## Information
 
@@ -33,26 +34,3 @@ The goal of this challenge is to implement a better alternative to display big l
 If you're unsure where to begin, I recommend reading the [Angular CDK virtualization documentation](https://material.angular.io/cdk/scrolling/overview)
 
 </details>
-
----
-
-:::note
-Start the project by running: `npx nx serve performance-ngfor-biglist`.
-:::
-
-:::tip[Reminder]
-Your PR title must start with <b>Answer:37</b>.
-:::
-
-<div class="article-footer">
-  <a
-    href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A37+label%3Aanswer"
-    alt="NgFor optimize big list community solutions">
-    ❖ Community Answers
-  </a>
-  <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A37+label%3A"answer+author"'
-    alt="NgFor optimize big list solution author">
-    ▶︎ Author Answer
-  </a>
-</div>

@@ -1,11 +1,12 @@
 ---
 title: 🟠 Input Output
 description: Challenge 19 is about testing inputs and ouputs
+author: Thomas Laforge
+challengeNumber: 19
+command: testing-input-output
 sidebar:
   order: 110
 ---
-
-<div class="chip">Challenge #19</div>
 
 ## Information:
 
@@ -24,26 +25,3 @@ The goal is to test multiple behaviors of the application describe inside each t
 :::note
 I have created some `it` blocks but feel free to add more tests if you want.
 :::
-
----
-
-:::note
-Start the project by running: `npx nx serve testing-input-output`.
-:::
-
-:::tip[Reminder]
-Your PR title must start with <b>Answer:19</b>.
-:::
-
-<div class="article-footer">
-  <a
-    href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A19+label%3Aanswer"
-    alt="Input Output community solutions">
-    ❖ Community Answers
-  </a>
-  <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A19+label%3A"answer+author"'
-    alt="Input Output solution author">
-    ▶︎ Author Answer
-  </a>
-  </div>

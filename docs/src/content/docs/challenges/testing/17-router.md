@@ -1,11 +1,12 @@
 ---
 title: 🟠 Router
 description: Challenge 17 is about testing the router
+author: Thomas Laforge
+challengeNumber: 17
+command: testing-router-outlet
 sidebar:
   order: 108
 ---
-
-<div class="chip">Challenge #17</div>
 
 ## Information
 
@@ -22,26 +23,3 @@ The goal is to test multiple behaviors of the application described in each test
 :::note
 I have created some `it` blocks but feel free to add more tests if you want.
 :::
-
----
-
-:::note
-Start the project by running: `npx nx serve testing-router-outlet`.
-:::
-
-:::tip[Reminder]
-Your PR title must start with <b>Answer:17</b>.
-:::
-
-<div class="article-footer">
-  <a
-    href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A17+label%3Aanswer"
-    alt="Router community solutions">
-    ❖ Community Answers
-  </a>
-  <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A17+label%3A"answer+author"'
-    alt="Router solution author">
-    ▶︎ Author Answer
-  </a>
-  </div>

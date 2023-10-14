@@ -1,41 +1,26 @@
 ---
+import ChallengeFooter from './ChallengeFooter.astro'
+import CommentSection from './CommentSection.astro'
 import type { Props } from '@astrojs/starlight/props';
 import Default from '@astrojs/starlight/components/MarkdownContent.astro';
 
-const slug = Astro.props.slug;
+const {challengeNumber, author} = Astro.props.entry.data;
 const renderCommentSection = !Astro.props.entry.data.noCommentSection;
+
 ---
 
+{ challengeNumber && author && <p class="author">Created by {author}</p> }
 
 <Default {...Astro.props}><slot /></Default>
 
+{challengeNumber && <ChallengeFooter {...Astro.props} />}
 
-<div class="border-t"></div>
-
-{ renderCommentSection
- ?
-   <script src="https://giscus.app/client.js"
-            data-repo="tomalaforge/angular-challenges"
-            data-repo-id="R_kgDOIXXIfw"
-            data-category="Announcements"
-            data-category-id="DIC_kwDOIXXIf84CSZF_"
-            data-mapping="title"
-            data-strict="0"
-            data-reactions-enabled="1"
-            data-emit-metadata="0"
-            data-input-position="bottom"
-            data-theme="preferred_color_scheme"
-            data-lang="en"
-            data-loading="lazy"
-            crossorigin="anonymous"
-            async>
-</script>
-: ``}
+{ renderCommentSection && <CommentSection /> }
 
 <style>
-    .border-t {
-        border-top: solid 1px rgb(36, 37, 38);
-        margin: 3rem 0px;
+    .author {
+        margin-top: -1rem;
+        font-size: var(--sl-text-xs);
+        color: var(--sl-color-gray-3);
     }
-
 </style>

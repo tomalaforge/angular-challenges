@@ -1,6 +1,8 @@
 ---
 title: 🟢 Custom Eslint Rule
 description: Challenge 27 is about creating a custom Eslint Rule to forbid enums
+author: Thomas Laforge
+challengeNumber: 27
 sidebar:
   order: 12
 ---
@@ -22,22 +24,3 @@ To test the rule inside your project, add `"@nrwl/nx/workspace/forbidden-enum": 
 To assist you with AST (Abstract Syntax Tree) definitions, you can visit the [AST explorer](https://astexplorer.net/) and use JavaScript, @typescript-eslint/parser, and Eslint-v8 as the transformation method. However, please note that you will only get the type information there. The transformation function may not work for TypeScript types since the editor is in JavaScript.
 
 You can also check this [repo](https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin/src/rules) for eslint rule examples.
-
----
-
-:::tip[Reminder]
-Your PR title must start with <b>Answer:27</b>.
-:::
-
-<div class="article-footer">
-  <a
-    href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A27+label%3Aanswer"
-    alt="Custom Eslint Rule community solutions">
-    ❖ Community Answers
-  </a>
-  <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A27+label%3A"answer+author"'
-    alt="Custom Eslint Rule solution author">
-    ▶︎ Author Answer
-  </a>
-  </div>

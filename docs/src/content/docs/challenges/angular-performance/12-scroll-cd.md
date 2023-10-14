@@ -1,11 +1,12 @@
 ---
 title: 🟠 Optimize Change Detection
 description: Challenge 12 about optimizing the number of change detection cycle while scrolling
+author: Thomas Laforge
+challengeNumber: 12
+command: scroll-cd
 sidebar:
   order: 107
 ---
-
-<div class="chip">Challenge #12</div>
 
 ## Information
 
@@ -35,26 +36,3 @@ Your goal for this challenge is to avoid all unnecessary change detection cycles
 ## Constraint:
 
 You cannot opt-out of Zone.js globally. If this code is part of a large project and you opt out of Zone.js, you will break your application without any doubt.
-
----
-
-:::note
-Start the project by running: `npx nx serve scroll-cd`.
-:::
-
-:::tip[Reminder]
-Your PR title must start with <b>Answer:12</b>.
-:::
-
-<div class="article-footer">
-  <a
-    href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A12+label%3Aanswer"
-    alt="Optimize Change Detection community solutions">
-    ❖ Community Answers
-  </a>
-  <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A{challenge number}+label%3A"answer+author"'
-    alt="Optimize Change Detection solution author">
-    ▶︎ Author Answer
-  </a>
-  </div>

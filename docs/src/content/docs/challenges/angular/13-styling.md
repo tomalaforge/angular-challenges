@@ -1,6 +1,9 @@
 ---
 title: 🟠 Highly Customizable CSS
 description: Challenge 13 is about creating highly customizable CSS styles
+author: Thomas Laforge
+challengeNumber: 13
+command: styling
 sidebar:
   order: 104
 ---
@@ -24,26 +27,3 @@ In this challenge, you will need to use both CSS variables and :host-context to 
 ## Constraints:
 
 - In your final submission, your component should not contain any lines of code. All styling should be handled within the decorator _(or external css files if you prefer)_
-
----
-
-:::note
-Start the project by running: `npx nx serve styling`.
-:::
-
-:::tip[Reminder]
-Your PR title must start with <b>Answer:13</b>.
-:::
-
-<div class="article-footer">
-  <a
-    href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A13+label%3Aanswer"
-    alt="Highly Customizable CSS community solutions">
-    ❖ Community Answers
-  </a>
-  <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A13+label%3A"answer+author"'
-    alt="Highly Customizable CSS solution author">
-    ▶︎ Author Answer
-  </a>
-  </div>

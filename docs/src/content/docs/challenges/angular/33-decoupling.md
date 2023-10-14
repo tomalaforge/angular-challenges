@@ -1,6 +1,9 @@
 ---
 title: 🟠 Decoupling Components
 description: Challenge 33 is about decoupling two strongly coupled components using Injection Token
+author: Thomas Laforge
+challengeNumber: 33
+command: decoupling
 sidebar:
   order: 106
 ---
@@ -8,8 +11,6 @@ sidebar:
 :::note
 WIP: The following documentation will be reviewed and improved. However, you can still take on the challenge. If you don't understand a certain part, please feel free to reach out or create an issue.
 :::
-
-<div class="chip">Challenge #33</div>
 
 > Big thanks to **Robin Goetz** and his [Spartan Project](https://github.com/goetzrobin/spartan).
 > This challenge was proposed by Robin and is strongly inspired by his project.
@@ -32,26 +33,3 @@ The goal of this challenge is to find a way to decouple both Directives.
   <summary>Hint 1</summary>
   Carefully read the title of the challenge 😇
 </details>
-
----
-
-:::note
-Start the project by running: `npx nx serve decoupling`.
-:::
-
-:::tip[Reminder]
-Your PR title must start with <b>Answer:33</b>.
-:::
-
-<div class="article-footer">
-  <a
-    href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A33+label%3Aanswer"
-    alt="Decoupling Components community solutions">
-    ❖ Community Answers
-  </a>
-  <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A33+label%3A"answer+author"'
-    alt="Decoupling Components solution author">
-    ▶︎ Author Answer
-  </a>
-  </div>
