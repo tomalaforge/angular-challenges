@@ -1,6 +1,9 @@
 ---
 title: <%= difficulty %> <%= title %>
 description: Challenge <%= challengeNumber %> is about ...
+author: <%= author %>
+challengeNumber: <%= challengeNumber %>
+command: <%= appProjectName %>
 sidebar:
   order: <%= order %>
   badge: New
@@ -10,33 +13,9 @@ sidebar:
 WIP: The following documentation need to be written.
 :::
 
-<div class="chip">Challenge #<%= challengeNumber %></div>
-
 ## Information
 
 ## Statement
 
 ## Constraints
 
----
-
-:::note
-Start the project by running: `npx nx serve <%= appProjectName %>`.
-:::
-
-:::tip[Reminder]
-Your PR title must start with <b>Answer:<%= challengeNumber %></b>.
-:::
-
-<div class="article-footer">
-  <a
-    href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A<%= challengeNumber %>+label%3Aanswer"
-    alt="<%= title %> community solutions">
-    ❖ Community Answers
-  </a>
-  <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A<%= challengeNumber %>+label%3A"answer+author"'
-    alt="<%= title %> solution author">
-    ▶︎ Author Answer
-  </a>
-</div>
