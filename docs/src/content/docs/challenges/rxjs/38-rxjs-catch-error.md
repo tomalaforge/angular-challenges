@@ -19,7 +19,7 @@ Handle the error without completion of the subscription.
 
 ## Constraints
 
-## Users should be able to console log value/error each time clicks on the fetch button.
+Users should be able to console log value/error each time clicks on the fetch button.
 
 :::note
 Start the project by running: `npx nx serve rxjs-catch-error`.
