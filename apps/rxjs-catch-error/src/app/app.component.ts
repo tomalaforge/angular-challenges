@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { concatMap, fromEvent, map } from 'rxjs';
+import { Observable, Subscription, concatMap, fromEvent, map } from 'rxjs';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -9,13 +9,15 @@ import { CommonModule } from '@angular/common';
   selector: 'app-root',
   template: `
     <div class="form-container">
-      <span>Posible values: posts, comments, albums, photos, todos, users</span>
+      <span
+        >possible values: posts, comments, albums, photos, todos, users</span
+      >
     </div>
     <div class="form-container">
       <input #inputRef type="text" placeholder="Enter text" />
       <button #buttonRef>Fetch</button>
     </div>
-    <div class="form-container">
+    <div class="response">
       {{ response | json }}
     </div>
   `,
@@ -45,6 +47,13 @@ import { CommonModule } from '@angular/common';
         border: none;
         border-radius: 4px;
         cursor: pointer;
+      }
+      .response {
+        margin-left: 25%;
+        margin-top: 2%;
+        width: 50%;
+        text-align: center;
+        border: 1px solid #ccc;
       }
     `,
   ],
