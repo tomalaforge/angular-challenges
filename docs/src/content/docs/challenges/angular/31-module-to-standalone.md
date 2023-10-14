@@ -1,6 +1,9 @@
 ---
 title: 🟢 Module to Standalone
 description: Challenge 31 is about migrating a module based application to a standalone application.
+author: Thomas Laforge
+challengeNumber: 31
+command: module-to-standalone
 sidebar:
   order: 6
 ---
@@ -8,8 +11,6 @@ sidebar:
 :::note
 WIP: The following documentation will be reviewed and improved. However, you can still take on the challenge. If you don't understand a certain part, please feel free to reach out or create an issue.
 :::
-
-<div class="chip">Challenge #31</div>
 
 ## Information
 
@@ -24,26 +25,3 @@ After completing this challenge, standalone components will no longer hold any s
 ## Statement
 
 The goal of this challenge is to migrate your application from module based components to standalone components.
-
----
-
-:::note
-Start the project by running: `npx nx serve module-to-standalone`.
-:::
-
-:::tip[Reminder]
-Your PR title must start with <b>Answer:31</b>.
-:::
-
-<div class="article-footer">
-  <a
-    href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A31+label%3Aanswer"
-    alt="Module to Standalone community solutions">
-    ❖ Community Answers
-  </a>
-  <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A31+label%3A"answer+author"'
-    alt="Module to Standalone solution author">
-    ▶︎ Author Answer
-  </a>
-  </div>

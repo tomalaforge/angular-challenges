@@ -49,6 +49,7 @@ export default defineConfig({
       components: {
         MarkdownContent: './src/components/Content.astro',
         TableOfContents: './src/components/TableOfContents.astro',
+        PageTitle: './src/components/PageTitle.astro',
       },
     }),
   ],

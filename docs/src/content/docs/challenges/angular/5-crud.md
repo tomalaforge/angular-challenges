@@ -1,6 +1,9 @@
 ---
 title: 🟢 Crud application
 description: Challenge 5 is about refactoring a crud application
+author: Thomas Laforge
+challengeNumber: 5
+command: crud
 sidebar:
   order: 2
 ---
@@ -8,8 +11,6 @@ sidebar:
 :::note
 WIP: The following documentation will be reviewed and improved. However, you can still take on the challenge. If you don't understand a certain part, please feel free to reach out or create an issue.
 :::
-
-<div class="chip">Challenge #5</div>
 
 ## Information
 
@@ -54,26 +55,3 @@ this.todos = [...this.todos.filter((t) => t.id !== todoUpdated.id), todoUpdated]
 
 - Use the **component store of ngrx** as a local state of your component. _(or any other 3rd Party lib)_
 - Have a **localize** Loading/Error indicator, e.g. only on the Todo being processed and **disable** all buttons of the processed Todo. _(Hint: you will need to create an ItemComponent)_
-
----
-
-:::note
-Start the project by running: `npx nx serve crud`.
-:::
-
-:::tip[Reminder]
-Your PR title must start with <b>Answer:5</b>.
-:::
-
-<div class="article-footer">
-  <a
-    href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A5+label%3Aanswer"
-    alt="Crud application community solutions">
-    ❖ Community Answers
-  </a>
-  <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A5+label%3A"answer+author"'
-    alt="Crud application solution author">
-    ▶︎ Author Answer
-  </a>
-  </div>

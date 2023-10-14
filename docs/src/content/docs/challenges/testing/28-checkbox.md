@@ -1,11 +1,12 @@
 ---
 title: 🟢 Checkbox
 description: Challenge 28 is about testing a simple checkbox
+author: Thomas Laforge
+challengeNumber: 10
+command: testing-checkbox
 sidebar:
   order: 10
 ---
-
-<div class="chip">Challenge #28</div>
 
 ## Information
 
@@ -22,26 +23,3 @@ The main functions to remember are as follows:
 ## Statement
 
 The goal of this challenge is not to submit an answer, but you can if you want. It's more about using the debugging API to play around. These tools will be of great help for the upcoming testing challenges.
-
----
-
-:::note
-Start the project by running: `npx nx serve testing-checkbox`.
-:::
-
-:::tip[Reminder]
-Your PR title must start with <b>Answer:28</b>.
-:::
-
-<div class="article-footer">
-  <a
-    href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A28+label%3Aanswer"
-    alt="Checkbox community solutions">
-    ❖ Community Answers
-  </a>
-  <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A28+label%3A"answer+author"'
-    alt="Checkbox solution author">
-    ▶︎ Author Answer
-  </a>
-  </div>

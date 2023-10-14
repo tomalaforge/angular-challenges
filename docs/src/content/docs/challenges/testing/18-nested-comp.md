@@ -1,11 +1,12 @@
 ---
 title: 🟠 Nested Components
 description: Challenge 18 is about testing nested components
+author: Thomas Laforge
+challengeNumber: 18
+command: testing-nested
 sidebar:
   order: 109
 ---
-
-<div class="chip">Challenge #18</div>
 
 ## Information
 
@@ -26,26 +27,3 @@ The goal is to test multiple behaviors of the application describe inside each t
 :::note
 I have created some `it` blocks but feel free to add more tests if you want.
 :::
-
----
-
-:::note
-Start the project by running: `npx nx serve testing-nested`.
-:::
-
-:::tip[Reminder]
-Your PR title must start with <b>Answer:18</b>.
-:::
-
-<div class="article-footer">
-  <a
-    href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A18+label%3Aanswer"
-    alt="Nested Components community solutions">
-    ❖ Community Answers
-  </a>
-  <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A18+label%3A"answer+author"'
-    alt="Nested Components solution author">
-    ▶︎ Author Answer
-  </a>
-  </div>

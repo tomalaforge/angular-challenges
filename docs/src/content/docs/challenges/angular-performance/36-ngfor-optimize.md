@@ -1,11 +1,12 @@
 ---
 title: 🟢 NgFor Optimization
 description: Challenge 36 is about learning how trackby works
+author: Thomas Laforge
+challengeNumber: 36
+command: performance-ngfor-optimize
 sidebar:
   order: 13
 ---
-
-<div class="chip">Challenge #36</div>
 
 ## Information
 
@@ -28,26 +29,3 @@ If you need more information about `NgFor`, I invite you to read the [documentat
 ## Statement
 
 The goal of this challenge is to understand what is causing this DOM refresh and to solve it.
-
----
-
-:::note
-Start the project by running: `npx nx serve performance-ngfor-optimize`.
-:::
-
-:::tip[Reminder]
-Your PR title must start with <b>Answer:36</b>.
-:::
-
-<div class="article-footer">
-  <a
-    href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A36+label%3Aanswer"
-    alt="NgFor Optimization community solutions">
-    ❖ Community Answers
-  </a>
-  <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A36+label%3A"answer+author"'
-    alt="NgFor Optimization solution author">
-    ▶︎ Author Answer
-  </a>
-</div>

@@ -1,6 +1,9 @@
 ---
 title: 🟢 Anchor Navigation
 description: Challenge 21 is about navigating inside the page with anchor
+author: Thomas Laforge
+challengeNumber: 21
+command: anchor-scrolling
 sidebar:
   order: 4
 ---
@@ -8,8 +11,6 @@ sidebar:
 :::note
 WIP: The following documentation will be reviewed and improved. However, you can still take on the challenge. If you don't understand a certain part, please feel free to reach out or create an issue.
 :::
-
-<div class="chip">Challenge #21</div>
 
 ## Information
 
@@ -19,26 +20,3 @@ You begin with an application that has basic navigation and anchor navigation in
 
 - Your task is to refactor this application to use the built-in navigation tool to better fit within the Angular Framework. You can explore the router, but it's better to stay within the template and use the `RouterLink` directive.
 - To improve the user experience, add smooth scrolling.
-
----
-
-:::note
-Start the project by running: `npx nx serve anchor-scrolling`.
-:::
-
-:::tip[Reminder]
-Your PR title must start with <b>Answer:21</b>.
-:::
-
-<div class="article-footer">
-  <a
-    href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A21+label%3Aanswer"
-    alt="Anchor Navigation community solutions">
-    ❖ Community Answers
-  </a>
-  <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A21+label%3A"answer+author"'
-    alt="Anchor Navigation solution author">
-    ▶︎ Author Answer
-  </a>
-  </div>
