@@ -1,9 +1,14 @@
 import { Route } from '@angular/router';
-import { FooComponent } from './foo.component';
-import { HomeComponent } from './home.component';
 
 export const appRoutes: Route[] = [
-  { path: 'home', component: HomeComponent },
-  { path: 'foo', component: FooComponent },
+  {
+    path: 'home',
+    loadComponent: () =>
+      import('./home.component').then((c) => c.HomeComponent),
+  },
+  {
+    path: 'foo',
+    loadComponent: () => import('./foo.component').then((c) => c.FooComponent),
+  },
   { path: '**', redirectTo: 'home' },
 ];
