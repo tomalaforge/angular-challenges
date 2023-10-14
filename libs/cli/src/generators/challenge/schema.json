@@ -17,13 +17,19 @@
       "pattern": "^[a-zA-Z].*$"
     },
     "title": {
-      "description": "Title of your challenge. (use quote to add spaces)",
+      "description": "Title of your challenge.",
       "type": "string",
       "maxLength": "25",
       "$default": {
         "$source": "argv",
         "index": 1
       },
+      "x-priority": "important"
+    },
+    "author": {
+      "description": "Your full name",
+      "type": "string",
+      "maxLength": "25",
       "x-priority": "important"
     },
     "challengeDifficulty": {
@@ -114,5 +120,11 @@
     }
   },
   "additionalProperties": false,
-  "required": ["name", "title", "challengeDifficulty", "docRepository"]
+  "required": [
+    "name",
+    "title",
+    "author",
+    "challengeDifficulty",
+    "docRepository"
+  ]
 }

@@ -91,6 +91,7 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
       tmpl: '',
       projectName: names(options.name).name,
       appProjectName,
+      author: options.author,
       title: options.title,
       challengeNumber,
       difficulty,
