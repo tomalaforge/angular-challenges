@@ -66,7 +66,7 @@ export class TodoStore
     error,
   }));
 
-  readonly fetchTodos = this.effect<void>(
+  fetchTodos = this.effect<void>(
     pipe(
       tap(() => this.setLoadingAllTodos(true)),
       switchMap(() =>
@@ -78,6 +78,21 @@ export class TodoStore
         )
       ),
       finalize(() => this.setLoadingAllTodos(false))
+    )
+  );
+
+  updateTodo = this.effect<Todo>(
+    pipe(
+      tap(() => this.setLoadingSingleTodo(true)),
+      switchMap((todo) =>
+        this.todoService.updateTodos(todo).pipe(
+          tapResponse(
+            (todos) => this.updateTodos(todos),
+            (error: HttpErrorResponse) => this.setErrorState(error.message)
+          )
+        )
+      ),
+      finalize(() => this.setLoadingSingleTodo(false))
     )
   );
 
