@@ -1,12 +1,13 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { Todo } from './todo.model';
 import { TodoStore } from './todo-store';
+import { LetDirective } from '@ngrx/component';
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, LetDirective, NgIf],
   selector: 'app-root',
   template: `
     <!-- <div *ngFor="let todo of todos">
@@ -15,7 +16,7 @@ import { TodoStore } from './todo-store';
     </div> -->
 
     <ng-container *ngrxLet="vm$ as vm">
-      <div *ngIf="vm.loading">loading</div>
+      <div *ngIf="vm.loadingAllTodos">loading</div>
 
       <ng-container *ngIf="vm.error; else noerror">
         Something went wrong!
