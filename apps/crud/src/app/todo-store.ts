@@ -29,7 +29,7 @@ const initialTodoState: TodoState = {
 })
 export class TodoStore
   extends ComponentStore<TodoState>
-  implements OnStoreInit
+  implements OnStateInit
 {
   constructor() {
     super(initialTodoState);
@@ -87,13 +87,13 @@ export class TodoStore
       tap(() => this.setLoadingAllTodos(true)),
       switchMap(() =>
         this.todoService.getTodos().pipe(
+          tap(() => this.setLoadingAllTodos(false)),
           tapResponse(
             (todos) => this.addTodos(todos),
             (error: HttpErrorResponse) => this.setErrorState(error.message)
           )
         )
-      ),
-      finalize(() => this.setLoadingAllTodos(false))
+      )
     )
   );
 
@@ -102,17 +102,17 @@ export class TodoStore
       tap(() => this.setLoadingSingleTodo(true)),
       switchMap((todo) =>
         this.todoService.updateTodos(todo).pipe(
+          tap(() => this.setLoadingAllTodos(false)),
           tapResponse(
             (todos) => this.updateTodos(todos),
             (error: HttpErrorResponse) => this.setErrorState(error.message)
           )
         )
-      ),
-      finalize(() => this.setLoadingSingleTodo(false))
+      )
     )
   );
 
-  ngrxOnStoreInit() {
+  ngrxOnStateInit() {
     console.log('aer you bein gclae');
     this.fetchTodos();
   }

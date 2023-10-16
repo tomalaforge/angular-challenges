@@ -1,8 +1,9 @@
 import { CommonModule, NgFor, NgIf } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Todo } from './todo.model';
 import { TodoStore } from './todo-store';
 import { LetDirective } from '@ngrx/component';
+import { provideComponentStore } from '@ngrx/component-store';
 
 @Component({
   standalone: true,
@@ -29,10 +30,10 @@ import { LetDirective } from '@ngrx/component';
     </ng-container>
   `,
   styles: [],
+  providers: [provideComponentStore(TodoStore)],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-  todos!: Todo[];
-
   todoStore = inject(TodoStore);
 
   vm$ = this.todoStore.vm$;
