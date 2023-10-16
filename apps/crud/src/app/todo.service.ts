@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, delay } from 'rxjs';
 import { randText } from '@ngneat/falso';
 import { Todo } from './todo.model';
 
@@ -15,6 +15,8 @@ export class TodoService {
   }
 
   updateTodos(todo: Todo): Observable<Todo> {
+    console.log('updateTodo', todo.id);
+
     return this.http.put<Todo>(
       `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
       JSON.stringify({
@@ -28,6 +30,12 @@ export class TodoService {
           'Content-type': 'application/json; charset=UTF-8',
         },
       }
+    );
+  }
+  deleteTodos(id: number): Observable<Todo> {
+    console.log('deleteTodos', id);
+    return this.http.delete<Todo>(
+      `https://jsonplaceholder.typicode.com/todos/${id}`
     );
   }
 }

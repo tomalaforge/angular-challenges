@@ -62,9 +62,9 @@ export class TodoStore
     todos: state.todos.map((t) => (t.id === todo.id ? todo : t)),
   }));
 
-  deleteTodos = this.updater((state, todo: Todo) => ({
+  deleteTodos = this.updater((state, id: number) => ({
     ...state,
-    todos: state.todos.filter((t) => t.id !== todo.id),
+    todos: state.todos.filter((t) => t.id !== id),
   }));
 
   setLoadingAllTodos = this.updater((state, value: boolean) => ({
@@ -102,10 +102,31 @@ export class TodoStore
       tap(() => this.setLoadingSingleTodo(true)),
       switchMap((todo) =>
         this.todoService.updateTodos(todo).pipe(
-          tap(() => this.setLoadingAllTodos(false)),
+          tap(() => this.setLoadingSingleTodo(false)),
           tapResponse(
             (todos) => this.updateTodos(todos),
-            (error: HttpErrorResponse) => this.setErrorState(error.message)
+            (error: HttpErrorResponse) => {
+              console.log(error);
+              this.setErrorState(error.message);
+            }
+          )
+        )
+      )
+    )
+  );
+
+  deleteTodo = this.effect<number>(
+    pipe(
+      tap(() => this.setLoadingSingleTodo(true)),
+      switchMap((todo) =>
+        this.todoService.deleteTodos(todo).pipe(
+          tap(() => this.setLoadingSingleTodo(false)),
+          tapResponse(
+            () => this.deleteTodos(todo),
+            (error: HttpErrorResponse) => {
+              console.log(error);
+              this.setErrorState(error.message);
+            }
           )
         )
       )
@@ -113,7 +134,6 @@ export class TodoStore
   );
 
   ngrxOnStateInit() {
-    console.log('aer you bein gclae');
     this.fetchTodos();
   }
 }

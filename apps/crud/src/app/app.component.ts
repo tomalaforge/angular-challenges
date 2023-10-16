@@ -4,17 +4,13 @@ import { Todo } from './todo.model';
 import { TodoStore } from './todo-store';
 import { LetDirective } from '@ngrx/component';
 import { provideComponentStore } from '@ngrx/component-store';
+import { TodoItemComponent } from './todo-item.component';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, LetDirective, NgIf, NgFor],
+  imports: [CommonModule, LetDirective, NgIf, NgFor, TodoItemComponent],
   selector: 'app-root',
   template: `
-    <!-- <div *ngFor="let todo of todos">
-      {{ todo.title }}
-      <button (click)="update(todo)">Update</button>
-    </div> -->
-
     <ng-container *ngrxLet="vm$ as vm">
       <div *ngIf="vm.loadingAllTodos">loading</div>
 
@@ -23,9 +19,12 @@ import { provideComponentStore } from '@ngrx/component-store';
       </ng-container>
 
       <ng-template #noerror>
-        <div *ngFor="let todo of vm.todos">
-          {{ todo.title }}
-        </div>
+        <app-todo-item
+          *ngFor="let todo of vm.todos"
+          [todo]="todo"
+          [loading]="vm.loadingSingleTodo"
+          (deleteTodoEvent)="removeTodo(todo.id)"
+          (updateTodoEvent)="updateTodo(todo)"></app-todo-item>
       </ng-template>
     </ng-container>
   `,
@@ -38,7 +37,11 @@ export class AppComponent {
 
   vm$ = this.todoStore.vm$;
 
-  update(todo: Todo) {
-    return todo;
+  updateTodo(todo: Todo) {
+    this.todoStore.updateTodo(todo);
+  }
+
+  removeTodo(id: number) {
+    this.todoStore.deleteTodo(id);
   }
 }
