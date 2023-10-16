@@ -1,5 +1,4 @@
-import { CommonModule, NgIf } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Todo } from './todo.model';
 import { TodoStore } from './todo-store';
@@ -7,7 +6,7 @@ import { LetDirective } from '@ngrx/component';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, LetDirective, NgIf],
+  imports: [CommonModule, LetDirective, NgIf, NgFor],
   selector: 'app-root',
   template: `
     <!-- <div *ngFor="let todo of todos">
@@ -22,7 +21,11 @@ import { LetDirective } from '@ngrx/component';
         Something went wrong!
       </ng-container>
 
-      <ng-template #noerror> data </ng-template>
+      <ng-template #noerror>
+        <div *ngFor="let todo of vm.todos">
+          {{ todo.title }}
+        </div>
+      </ng-template>
     </ng-container>
   `,
   styles: [],

@@ -3,6 +3,7 @@ import { Todo } from './todo.model';
 import {
   ComponentStore,
   OnStateInit,
+  OnStoreInit,
   tapResponse,
 } from '@ngrx/component-store';
 import { finalize, pipe, switchMap, tap } from 'rxjs';
@@ -28,7 +29,7 @@ const initialTodoState: TodoState = {
 })
 export class TodoStore
   extends ComponentStore<TodoState>
-  implements OnStateInit
+  implements OnStoreInit
 {
   constructor() {
     super(initialTodoState);
@@ -111,7 +112,8 @@ export class TodoStore
     )
   );
 
-  ngrxOnStateInit() {
+  ngrxOnStoreInit() {
+    console.log('aer you bein gclae');
     this.fetchTodos();
   }
 }
