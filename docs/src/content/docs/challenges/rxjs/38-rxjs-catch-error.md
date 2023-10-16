@@ -1,6 +1,6 @@
 ---
 title: 🟢 catchError
-description: Challenge 38 is about learning error handling with catchError rxjs operator
+description: Challenge 38 is about learning obervable completion.
 sidebar:
   order: 14
   badge: New
@@ -8,18 +8,23 @@ sidebar:
 
 <div class="chip">Challenge #38</div>
 
-## Information
+## How to Use the Application
 
-In this application, we will learn the correct placement of a catchError operator. If wrongly placed, the overall subscription will get completed. And we will not be able to send more requests. Aim is to preserve overall subscription, by taking care of error notification from inner observables.
-Possible correct values for which we should get a success response are posts, comments, albums, photos, todos, users
+Our application features a form with a text input box and a "Fetch" button. Upon clicking the "Fetch" button, data is retrieved from a [free API](https://jsonplaceholder.typicode.com/){:target="\_blank"}.
 
-## Statement
+The correct values for a successful response are limited to: posts, comments, albums, photos, todos, and users. Any other values will result in an error response.
 
-Handle the error without completion of the subscription.
+## Bug
+
+A bug has been identified in our application. Users are only able to successfully fetch data until an invalid request is sent. Once an error response is received, users are unable to send additional requests.
+
+## Learnings
+
+This application provides an opportunity to understand the correct placement of a `catchError` operator. If placed incorrectly, the overall subscription will be completed, preventing users from sending more requests. The goal is to preserve the overall subscription by handling error notifications from inner observables appropriately.
 
 ## Constraints
 
-Users should be able to console log value/error each time clicks on the fetch button.
+Users should be able to log the value/error each time they click the "Fetch" button.
 
 :::note
 Start the project by running: `npx nx serve rxjs-catch-error`.
