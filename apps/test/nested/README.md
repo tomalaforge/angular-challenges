@@ -5,7 +5,7 @@
 ### Run Application
 
 ```bash
-npx nx serve testing-nested
+npx nx serve test-nested
 ```
 
 ### Documentation and Instruction
