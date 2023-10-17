@@ -1,7 +1,6 @@
 ---
 title: 🟢 catchError
-description: Challenge 38 is about learning obervable
-completion.
+description: Challenge 38 is about learning obervable completion.
 Author: Devesh Chaudhari
 command: rxjs-catch-error
 challengeNumber: 38
@@ -10,27 +9,21 @@ sidebar:
   badge: New
 ---
 
-:::note
-WIP: The following documentation will be reviewed and improved. However, you can still take on the challenge. If you don't understand a certain part, please feel free to reach out or create an issue.
-:::
-
 ## Information
 
----
-
-## How to Use the Application
+### How to Use the Application
 
 Our application features a form with a text input box and a "Fetch" button. Upon clicking the "Fetch" button, data is retrieved from a [free API](https://jsonplaceholder.typicode.com/){:target="\_blank"}.
 
 The correct values for a successful response are limited to: posts, comments, albums, photos, todos, and users. Any other values will result in an error response.
 
-## Bug
+### Bug
 
 A bug has been identified in our application. Users are only able to successfully fetch data until an invalid request is sent. Once an error response is received, users are unable to send additional requests.
 
-## Learnings
+### Learnings
 
-This application provides an opportunity to understand the correct placement of a `catchError` operator. If placed incorrectly, the overall subscription will be completed, preventing users from sending more requests. The goal is to preserve the overall subscription by handling error notifications from inner observables appropriately.
+This application provides an opportunity to understand the correct placement of a [`catchError`](https://rxjs.dev/api/operators/catchError) operator. If placed incorrectly, the overall subscription will be completed, preventing users from sending more requests. The goal is to preserve the overall subscription by handling error notifications from inner observables appropriately.
 
 ## Statement
 
