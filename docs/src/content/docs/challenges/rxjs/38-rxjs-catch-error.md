@@ -1,12 +1,22 @@
 ---
 title: 🟢 catchError
-description: Challenge 38 is about learning obervable completion.
+description: Challenge 38 is about learning obervable
+completion.
+Author: Devesh Chaudhari
+command: rxjs-catch-error
+challengeNumber: 38
 sidebar:
   order: 14
   badge: New
 ---
 
-<div class="chip">Challenge #38</div>
+:::note
+WIP: The following documentation will be reviewed and improved. However, you can still take on the challenge. If you don't understand a certain part, please feel free to reach out or create an issue.
+:::
+
+## Information
+
+---
 
 ## How to Use the Application
 
@@ -22,27 +32,10 @@ A bug has been identified in our application. Users are only able to successfull
 
 This application provides an opportunity to understand the correct placement of a `catchError` operator. If placed incorrectly, the overall subscription will be completed, preventing users from sending more requests. The goal is to preserve the overall subscription by handling error notifications from inner observables appropriately.
 
+## Statement
+
+The goal is to use the catchError operator to handle error management inside your Rxjs stream.
+
 ## Constraints
 
 Users should be able to log the value/error each time they click the "Fetch" button.
-
-:::note
-Start the project by running: `npx nx serve rxjs-catch-error`.
-:::
-
-:::tip[Reminder]
-Your PR title must start with <b>Answer:38</b>.
-:::
-
-<div class="article-footer">
-  <a
-    href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A38+label%3Aanswer"
-    alt="catchError community solutions">
-    ❖ Community Answers
-  </a>
-  <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A38+label%3A"answer+author"'
-    alt="catchError solution author">
-    ▶︎ Author Answer
-  </a>
-</div>
