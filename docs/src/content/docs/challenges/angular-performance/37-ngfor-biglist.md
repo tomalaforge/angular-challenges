@@ -6,7 +6,6 @@ challengeNumber: 37
 command: performance-ngfor-biglist
 sidebar:
   order: 117
-  badge: New
 ---
 
 ## Information
