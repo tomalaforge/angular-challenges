@@ -1,25 +1,25 @@
 {
-  "name": "testing-nested",
-  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "name": "test-nested",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "apps/testing-nested/src",
+  "sourceRoot": "apps/test/nested/src",
   "prefix": "app",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/testing-nested",
-        "index": "apps/testing-nested/src/index.html",
-        "main": "apps/testing-nested/src/main.ts",
+        "outputPath": "dist/apps/test/nested",
+        "index": "apps/test/nested/src/index.html",
+        "main": "apps/test/nested/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/testing-nested/tsconfig.app.json",
+        "tsConfig": "apps/test/nested/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
-          "apps/testing-nested/src/favicon.ico",
-          "apps/testing-nested/src/assets"
+          "apps/test/nested/src/favicon.ico",
+          "apps/test/nested/src/assets"
         ],
-        "styles": ["apps/testing-nested/src/styles.scss"],
+        "styles": ["apps/test/nested/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
@@ -53,10 +53,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "testing-nested:build:production"
+          "browserTarget": "test-nested:build:production"
         },
         "development": {
-          "browserTarget": "testing-nested:build:development"
+          "browserTarget": "test-nested:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -64,7 +64,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "testing-nested:build"
+        "browserTarget": "test-nested:build"
       }
     },
     "lint": {
@@ -72,8 +72,8 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "apps/testing-nested/**/*.ts",
-          "apps/testing-nested/**/*.html"
+          "apps/test/nested/**/*.ts",
+          "apps/test/nested/**/*.html"
         ]
       }
     },
@@ -81,7 +81,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/testing-nested/jest.config.ts",
+        "jestConfig": "apps/test/nested/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {
@@ -94,10 +94,10 @@
     "component-test": {
       "executor": "@nx/cypress:cypress",
       "options": {
-        "cypressConfig": "apps/testing-nested/cypress.config.ts",
+        "cypressConfig": "apps/test/nested/cypress.config.ts",
         "testingType": "component",
         "skipServe": true,
-        "devServerTarget": "testing-nested:build"
+        "devServerTarget": "test-nested:build"
       }
     }
   },
