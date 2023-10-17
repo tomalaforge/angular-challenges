@@ -1,25 +1,25 @@
 {
-  "name": "testing-input-output",
-  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "name": "test-input-output",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "apps/testing-input-output/src",
+  "sourceRoot": "apps/test/input-output/src",
   "prefix": "app",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/testing-input-output",
-        "index": "apps/testing-input-output/src/index.html",
-        "main": "apps/testing-input-output/src/main.ts",
+        "outputPath": "dist/apps/test/input-output",
+        "index": "apps/test/input-output/src/index.html",
+        "main": "apps/test/input-output/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/testing-input-output/tsconfig.app.json",
+        "tsConfig": "apps/test/input-output/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
-          "apps/testing-input-output/src/favicon.ico",
-          "apps/testing-input-output/src/assets"
+          "apps/test/input-output/src/favicon.ico",
+          "apps/test/input-output/src/assets"
         ],
-        "styles": ["apps/testing-input-output/src/styles.scss"],
+        "styles": ["apps/test/input-output/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
@@ -53,10 +53,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "testing-input-output:build:production"
+          "browserTarget": "test-input-output:build:production"
         },
         "development": {
-          "browserTarget": "testing-input-output:build:development"
+          "browserTarget": "test-input-output:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -64,7 +64,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "testing-input-output:build"
+        "browserTarget": "test-input-output:build"
       }
     },
     "lint": {
@@ -72,8 +72,8 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "apps/testing-input-output/**/*.ts",
-          "apps/testing-input-output/**/*.html"
+          "apps/test/input-output/**/*.ts",
+          "apps/test/input-output/**/*.html"
         ]
       }
     },
@@ -81,7 +81,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/testing-input-output/jest.config.ts",
+        "jestConfig": "apps/test/input-output/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {
@@ -94,10 +94,10 @@
     "component-test": {
       "executor": "@nx/cypress:cypress",
       "options": {
-        "cypressConfig": "apps/testing-input-output/cypress.config.ts",
+        "cypressConfig": "apps/test/input-output/cypress.config.ts",
         "testingType": "component",
         "skipServe": true,
-        "devServerTarget": "testing-input-output:build"
+        "devServerTarget": "test-input-output:build"
       }
     }
   },
