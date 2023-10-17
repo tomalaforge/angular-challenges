@@ -5,7 +5,7 @@
 ### Run Application
 
 ```bash
-npx nx serve testing-todos-list
+npx nx serve test-todos-list
 ```
 
 ### Documentation and Instruction
