@@ -5,7 +5,7 @@
 ### Run Application
 
 ```bash
-npx nx serve testing-harness
+npx nx serve test-harness
 ```
 
 ### Documentation and Instruction

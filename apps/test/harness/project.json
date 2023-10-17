@@ -1,25 +1,25 @@
 {
-  "name": "testing-harness",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "test-harness",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "app",
-  "sourceRoot": "apps/testing-harness/src",
+  "sourceRoot": "apps/test/harness/src",
   "tags": [],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/testing-harness",
-        "index": "apps/testing-harness/src/index.html",
-        "main": "apps/testing-harness/src/main.ts",
+        "outputPath": "dist/apps/test/harness",
+        "index": "apps/test/harness/src/index.html",
+        "main": "apps/test/harness/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/testing-harness/tsconfig.app.json",
+        "tsConfig": "apps/test/harness/tsconfig.app.json",
         "assets": [
-          "apps/testing-harness/src/favicon.ico",
-          "apps/testing-harness/src/assets"
+          "apps/test/harness/src/favicon.ico",
+          "apps/test/harness/src/assets"
         ],
-        "styles": ["apps/testing-harness/src/styles.scss"],
+        "styles": ["apps/test/harness/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
@@ -53,10 +53,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "testing-harness:build:production"
+          "browserTarget": "test-harness:build:production"
         },
         "development": {
-          "browserTarget": "testing-harness:build:development"
+          "browserTarget": "test-harness:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -64,14 +64,14 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "testing-harness:build"
+        "browserTarget": "test-harness:build"
       }
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/testing-harness/jest.config.ts",
+        "jestConfig": "apps/test/harness/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {
@@ -86,8 +86,8 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "apps/testing-harness/**/*.ts",
-          "apps/testing-harness/**/*.html"
+          "apps/test/harness/**/*.ts",
+          "apps/test/harness/**/*.html"
         ]
       }
     }
