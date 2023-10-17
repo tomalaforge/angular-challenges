@@ -5,7 +5,7 @@
 ### Run Application
 
 ```bash
-npx nx serve pipe-hard
+npx nx serve angular-pipe-hard
 ```
 
 ### Documentation and Instruction
