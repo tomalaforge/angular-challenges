@@ -87,10 +87,16 @@ export class TodoStore
       tap(() => this.setLoadingAllTodos(true)),
       switchMap(() =>
         this.todoService.getTodos().pipe(
-          tap(() => this.setLoadingAllTodos(false)),
+          finalize(() => {
+            this.setLoadingAllTodos(false), console.log('hey you wll');
+          }),
+
           tapResponse(
             (todos) => this.addTodos(todos),
-            (error: HttpErrorResponse) => this.setErrorState(error.message)
+            (error: HttpErrorResponse) => {
+              this.setErrorState(error.message);
+              console.log(error, 'fromeorr');
+            }
           )
         )
       )
@@ -102,7 +108,9 @@ export class TodoStore
       tap(() => this.setLoadingSingleTodo(true)),
       switchMap((todo) =>
         this.todoService.updateTodos(todo).pipe(
-          tap(() => this.setLoadingSingleTodo(false)),
+          finalize(() => {
+            this.setLoadingSingleTodo(false);
+          }),
           tapResponse(
             (todos) => this.updateTodos(todos),
             (error: HttpErrorResponse) => {
@@ -120,7 +128,9 @@ export class TodoStore
       tap(() => this.setLoadingSingleTodo(true)),
       switchMap((todo) =>
         this.todoService.deleteTodos(todo).pipe(
-          tap(() => this.setLoadingSingleTodo(false)),
+          finalize(() => {
+            this.setLoadingSingleTodo(false);
+          }),
           tapResponse(
             () => this.deleteTodos(todo),
             (error: HttpErrorResponse) => {
@@ -137,26 +147,3 @@ export class TodoStore
     this.fetchTodos();
   }
 }
-
-/*
- <ng-container *ngrxLet="vm$ as vm">
-      <mat-spinner [diameter]="40" color="accent" *ngIf="vm.loading">
-      </mat-spinner>
-
-      <ng-container *ngIf="vm.error; else noerror">
-        Something went wrong!
-      </ng-container>
-
-      <ng-template #noerror>
-        <app-todo-item
-          [todo]="todo"
-          [laoding]="vm.loading"
-          (update)="updateTodo($event)"
-          (delete)="deleteToDo($event)"
-          *ngFor="let todo of vm.todos" />
-      </ng-template>
-    </ng-container>
-
-
-
-*/

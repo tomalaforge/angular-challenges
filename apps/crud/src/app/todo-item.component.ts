@@ -41,8 +41,6 @@ export class TodoItemComponent {
 
   status = '';
 
-  private store = inject(TodoStore);
-
   update(todo: Todo) {
     this.selectedId = todo.id;
     this.status = 'updating Todo';
