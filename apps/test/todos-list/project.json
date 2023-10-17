@@ -1,26 +1,26 @@
 {
-  "name": "testing-todos-list",
-  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "name": "test-todos-list",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "apps/testing-todos-list/src",
+  "sourceRoot": "apps/test/todos-list/src",
   "prefix": "app",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/testing-todos-list",
-        "index": "apps/testing-todos-list/src/index.html",
-        "main": "apps/testing-todos-list/src/main.ts",
+        "outputPath": "dist/apps/test/todos-list",
+        "index": "apps/test/todos-list/src/index.html",
+        "main": "apps/test/todos-list/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/testing-todos-list/tsconfig.app.json",
+        "tsConfig": "apps/test/todos-list/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
-          "apps/testing-todos-list/src/favicon.ico",
-          "apps/testing-todos-list/src/assets"
+          "apps/test/todos-list/src/favicon.ico",
+          "apps/test/todos-list/src/assets"
         ],
         "styles": [
-          "apps/testing-todos-list/src/styles.scss",
+          "apps/test/todos-list/src/styles.scss",
           "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
         ],
         "scripts": []
@@ -56,10 +56,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "testing-todos-list:build:production"
+          "browserTarget": "test-todos-list:build:production"
         },
         "development": {
-          "browserTarget": "testing-todos-list:build:development"
+          "browserTarget": "test-todos-list:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -67,7 +67,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "testing-todos-list:build"
+        "browserTarget": "test-todos-list:build"
       }
     },
     "lint": {
@@ -75,8 +75,8 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "apps/testing-todos-list/**/*.ts",
-          "apps/testing-todos-list/**/*.html"
+          "apps/test/todos-list/**/*.ts",
+          "apps/test/todos-list/**/*.html"
         ]
       }
     },
@@ -84,7 +84,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/testing-todos-list/jest.config.ts",
+        "jestConfig": "apps/test/todos-list/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {
@@ -97,10 +97,10 @@
     "component-test": {
       "executor": "@nx/cypress:cypress",
       "options": {
-        "cypressConfig": "apps/testing-todos-list/cypress.config.ts",
+        "cypressConfig": "apps/test/todos-list/cypress.config.ts",
         "testingType": "component",
         "skipServe": true,
-        "devServerTarget": "testing-todos-list:build"
+        "devServerTarget": "test-todos-list:build"
       }
     }
   },
