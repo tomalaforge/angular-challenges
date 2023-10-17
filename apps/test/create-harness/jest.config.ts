@@ -1,7 +1,7 @@
 /* eslint-disable */
 export default {
-  displayName: 'create-harness',
-  preset: '../../jest.preset.js',
+  displayName: 'test-create-harness',
+  preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [

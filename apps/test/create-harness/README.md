@@ -5,7 +5,7 @@
 ### Run Application
 
 ```bash
-npx nx serve create-harness
+npx nx serve test-create-harness
 ```
 
 ### Documentation and Instruction

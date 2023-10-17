@@ -1,25 +1,25 @@
 {
-  "name": "create-harness",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "test-create-harness",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "app",
-  "sourceRoot": "apps/create-harness/src",
+  "sourceRoot": "apps/test/create-harness/src",
   "tags": [],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/create-harness",
-        "index": "apps/create-harness/src/index.html",
-        "main": "apps/create-harness/src/main.ts",
+        "outputPath": "dist/apps/test/create-harness",
+        "index": "apps/test/create-harness/src/index.html",
+        "main": "apps/test/create-harness/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/create-harness/tsconfig.app.json",
+        "tsConfig": "apps/test/create-harness/tsconfig.app.json",
         "assets": [
-          "apps/create-harness/src/favicon.ico",
-          "apps/create-harness/src/assets"
+          "apps/test/create-harness/src/favicon.ico",
+          "apps/test/create-harness/src/assets"
         ],
-        "styles": ["apps/create-harness/src/styles.scss"],
+        "styles": ["apps/test/create-harness/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
@@ -53,10 +53,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "create-harness:build:production"
+          "browserTarget": "test-create-harness:build:production"
         },
         "development": {
-          "browserTarget": "create-harness:build:development"
+          "browserTarget": "test-create-harness:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -64,14 +64,14 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "create-harness:build"
+        "browserTarget": "test-create-harness:build"
       }
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/create-harness/jest.config.ts",
+        "jestConfig": "apps/test/create-harness/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {
@@ -86,8 +86,8 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "apps/create-harness/**/*.ts",
-          "apps/create-harness/**/*.html"
+          "apps/test/create-harness/**/*.ts",
+          "apps/test/create-harness/**/*.html"
         ]
       }
     }
