@@ -1,25 +1,25 @@
 {
-  "name": "testing-router-outlet",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "test-router-outlet",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "apps/testing-router-outlet/src",
+  "sourceRoot": "apps/test/router-outlet/src",
   "prefix": "app",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/testing-router-outlet",
-        "index": "apps/testing-router-outlet/src/index.html",
-        "main": "apps/testing-router-outlet/src/main.ts",
+        "outputPath": "dist/apps/test/router-outlet",
+        "index": "apps/test/router-outlet/src/index.html",
+        "main": "apps/test/router-outlet/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/testing-router-outlet/tsconfig.app.json",
+        "tsConfig": "apps/test/router-outlet/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
-          "apps/testing-router-outlet/src/favicon.ico",
-          "apps/testing-router-outlet/src/assets"
+          "apps/test/router-outlet/src/favicon.ico",
+          "apps/test/router-outlet/src/assets"
         ],
-        "styles": ["apps/testing-router-outlet/src/styles.scss"],
+        "styles": ["apps/test/router-outlet/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
@@ -53,10 +53,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "testing-router-outlet:build:production"
+          "browserTarget": "test-router-outlet:build:production"
         },
         "development": {
-          "browserTarget": "testing-router-outlet:build:development"
+          "browserTarget": "test-router-outlet:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -64,7 +64,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "testing-router-outlet:build"
+        "browserTarget": "test-router-outlet:build"
       }
     },
     "lint": {
@@ -72,8 +72,8 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "apps/testing-router-outlet/**/*.ts",
-          "apps/testing-router-outlet/**/*.html"
+          "apps/test/router-outlet/**/*.ts",
+          "apps/test/router-outlet/**/*.html"
         ]
       }
     },
@@ -81,17 +81,17 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/testing-router-outlet/jest.config.ts",
+        "jestConfig": "apps/test/router-outlet/jest.config.ts",
         "passWithNoTests": true
       }
     },
     "component-test": {
       "executor": "@nx/cypress:cypress",
       "options": {
-        "cypressConfig": "apps/testing-router-outlet/cypress.config.ts",
+        "cypressConfig": "apps/test/router-outlet/cypress.config.ts",
         "testingType": "component",
         "skipServe": true,
-        "devServerTarget": "testing-router-outlet:build"
+        "devServerTarget": "test-router-outlet:build"
       }
     }
   },

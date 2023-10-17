@@ -5,7 +5,7 @@
 ### Run Application
 
 ```bash
-npx nx serve testing-router-outlet
+npx nx serve test-router-outlet
 ```
 
 ### Documentation and Instruction
