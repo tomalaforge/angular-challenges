@@ -4,11 +4,9 @@ import {
   EventEmitter,
   Input,
   Output,
-  inject,
 } from '@angular/core';
 import { CommonModule, NgIf } from '@angular/common';
 import { Todo } from './todo.model';
-import { TodoStore } from './todo-store';
 
 @Component({
   selector: 'app-todo-item',

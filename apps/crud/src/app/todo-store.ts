@@ -88,14 +88,13 @@ export class TodoStore
       switchMap(() =>
         this.todoService.getTodos().pipe(
           finalize(() => {
-            this.setLoadingAllTodos(false), console.log('hey you wll');
+            this.setLoadingAllTodos(false);
           }),
 
           tapResponse(
             (todos) => this.addTodos(todos),
             (error: HttpErrorResponse) => {
               this.setErrorState(error.message);
-              console.log(error, 'fromeorr');
             }
           )
         )
@@ -114,7 +113,6 @@ export class TodoStore
           tapResponse(
             (todos) => this.updateTodos(todos),
             (error: HttpErrorResponse) => {
-              console.log(error);
               this.setErrorState(error.message);
             }
           )
@@ -134,7 +132,6 @@ export class TodoStore
           tapResponse(
             () => this.deleteTodos(todo),
             (error: HttpErrorResponse) => {
-              console.log(error);
               this.setErrorState(error.message);
             }
           )

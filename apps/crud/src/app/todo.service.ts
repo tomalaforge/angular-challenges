@@ -15,8 +15,6 @@ export class TodoService {
   }
 
   updateTodos(todo: Todo): Observable<Todo> {
-    console.log('updateTodo', todo.id);
-
     return this.http.put<Todo>(
       `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
       JSON.stringify({
@@ -33,7 +31,6 @@ export class TodoService {
     );
   }
   deleteTodos(id: number): Observable<Todo> {
-    console.log('deleteTodos', id);
     return this.http.delete<Todo>(
       `https://jsonplaceholder.typicode.com/todos/${id}`
     );
