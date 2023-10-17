@@ -1,6 +1,9 @@
 ---
 title: 🟢 Memoization
 description: Challenge 35 is about learning how pure pipe works
+author: Thomas Laforge
+challengeNumber: 35
+command: performance-memoized
 sidebar:
   order: 8
 ---
@@ -45,26 +48,3 @@ The goal of this challenge is to understand what is causing this latency and to 
 Use `Pipes` to memoize the Fibonnaci computation.
 
 </details>
-
----
-
-:::note
-Start the project by running: `npx nx serve performance-memoized`.
-:::
-
-:::tip[Reminder]
-Your PR title must start with <b>Answer:35</b>.
-:::
-
-<div class="article-footer">
-  <a
-    href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A35+label%3Aanswer"
-    alt="Memoization community solutions">
-    ❖ Community Answers
-  </a>
-  <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A35+label%3A"answer+author"'
-    alt="Memoization solution author">
-    ▶︎ Author Answer
-  </a>
-  </div>

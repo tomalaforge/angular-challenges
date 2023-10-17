@@ -1,0 +1,26 @@
+---
+import ChallengeFooter from './ChallengeFooter.astro'
+import CommentSection from './CommentSection.astro'
+import type { Props } from '@astrojs/starlight/props';
+import Default from '@astrojs/starlight/components/MarkdownContent.astro';
+
+const {challengeNumber, author} = Astro.props.entry.data;
+const renderCommentSection = !Astro.props.entry.data.noCommentSection;
+
+---
+
+{ challengeNumber && author && <p class="author">Created by {author}</p> }
+
+<Default {...Astro.props}><slot /></Default>
+
+{challengeNumber && <ChallengeFooter {...Astro.props} />}
+
+{ renderCommentSection && <CommentSection /> }
+
+<style>
+    .author {
+        margin-top: -1rem;
+        font-size: var(--sl-text-xs);
+        color: var(--sl-color-gray-3);
+    }
+</style>

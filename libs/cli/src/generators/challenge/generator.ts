@@ -91,6 +91,7 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
       tmpl: '',
       projectName: names(options.name).name,
       appProjectName,
+      author: options.author,
       title: options.title,
       challengeNumber,
       difficulty,
@@ -119,14 +120,21 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
   const regex = new RegExp(`${challengeNumber - 1} Challenges`, 'gi');
   const replaced = docs.replace(regex, `${challengeNumber} Challenges`);
 
-  tree.write('./docs/src/content/docs/index.mdx', replaced);
+  const linkRegex = new RegExp(`link: \\/challenges\\/(.*?)\n`, 'gi');
+  const replacedLink = replaced.replace(
+    linkRegex,
+    `link: /challenges/${options.docRepository}/${challengeNumber}-${
+      names(options.name).name
+    }/\n`
+  );
+
+  tree.write('./docs/src/content/docs/index.mdx', replacedLink);
 
   const previousChallengeFilePath = findPreviousChallengeFilePath(
     tree,
     `./docs/src/content/docs/challenges`,
     String(challengeNumber - 1)
   );
-  console.log(`restul`, previousChallengeFilePath);
 
   const previousChallenge = tree.read(previousChallengeFilePath).toString();
 

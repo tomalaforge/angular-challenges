@@ -1,6 +1,9 @@
 ---
 title: 🟠 High Order Operator Bug
 description: Challenge 11 is about resolving a Rxjs bug because of high order operators
+author: Thomas Laforge
+challengeNumber: 11
+command: rxjs-pipe-bu
 sidebar:
   order: 114
 ---
@@ -8,8 +11,6 @@ sidebar:
 :::note
 WIP: The following documentation will be reviewed and improved. However, you can still take on the challenge. If you don't understand a certain part, please feel free to reach out or create an issue.
 :::
-
-<div class="chip">Challenge #11</div>
 
 Let's dive inside the wonderful word of RxJs.
 
@@ -30,26 +31,3 @@ We can only pass one object to our DB for deletion at the time. The DB will resp
 The QA team reports a **bug**. The UI shows **All [topic] have been deleted** all the time, even if some deletions fail.
 
 👉 Spot the bug and correct it.
-
----
-
-:::note
-Start the project by running: `npx nx serve rxjs-pipe-bug`.
-:::
-
-:::tip[Reminder]
-Your PR title must start with <b>Answer:11</b>.
-:::
-
-<div class="article-footer">
-  <a
-    href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A11+label%3Aanswer"
-    alt="High Order Operator Bug community solutions">
-    ❖ Community Answers
-  </a>
-  <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A11+label%3A"answer+author"'
-    alt="High Order Operator Bug solution author">
-    ▶︎ Author Answer
-  </a>
-  </div>

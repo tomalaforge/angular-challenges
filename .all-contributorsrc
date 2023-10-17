@@ -9,6 +9,12 @@
   "imageSize": 100,
   "commit": true,
   "commitConvention": "angular",
+  "types": {
+    "challenge": {
+      "symbol": "🧩",
+      "description": "Created a challenge"
+    }
+  },
   "contributors": [
     {
       "login": "tomalaforge",
@@ -16,6 +22,7 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/30832608?v=4",
       "profile": "https://thomaslaforge.dev/home",
       "contributions": [
+        "challenge",
         "code",
         "doc",
         "content",

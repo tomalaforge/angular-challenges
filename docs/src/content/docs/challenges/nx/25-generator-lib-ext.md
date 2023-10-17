@@ -1,6 +1,8 @@
 ---
 title: 🔴 Extend Lib Generator
 description: Challenge 25 is about creating a Nx generator to extend the built-in Library Generator
+author: Thomas Laforge
+challengeNumber: 25
 sidebar:
   order: 207
 ---
@@ -53,22 +55,3 @@ export default {
 `eslintrc.json`
 
 add this rule `"@typescript-eslint/member-ordering": "off"` inside the rules properties of ts files.
-
----
-
-:::tip[Reminder]
-Your PR title must start with <b>Answer:25</b>.
-:::
-
-<div class="article-footer">
-  <a
-    href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A25+label%3Aanswer"
-    alt="Extend Lib Generator community solutions">
-    ❖ Community Answers
-  </a>
-  <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A25+label%3A"answer+author"'
-    alt="Extend Lib Generator solution author">
-    ▶︎ Author Answer
-  </a>
-  </div>
