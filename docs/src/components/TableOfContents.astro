@@ -1,22 +1,29 @@
 ---
-import Default from '@astrojs/starlight/components/TableOfContents.astro';
 import { Icon } from '@astrojs/starlight/components';
+import Default from '@astrojs/starlight/components/TableOfContents.astro';
+import MyIcon from './MyIcon.astro';
 
 ---
 
 <Default {...Astro.props}><slot /></Default>
 
 
-<a class="action-button" href='https://github.com/tomalaforge/angular-challenges'>
-	<div>Give a star</div>
-	<Icon name='github' size="1.5rem" />
-</a>
+<div class="action-footer">
+    <a class="action-button" href='https://github.com/tomalaforge/angular-challenges'>
+        <div>Give a star</div>
+        <Icon name='github' size="1rem" />
+    </a>
+    
+    <a class="action-button" href='https://github.com/sponsors/tomalaforge'>
+        <div>Sponsor</div>
+        <MyIcon name='heart' size="1rem" color="white" />
+    </a>
+</div>
 
 <style>
     .action-button {
         display: flex!important;
         justify-content: center;
-        width: fit-content;
         gap: 0.5em;
         align-items: center;
         border-radius: 999rem;
@@ -26,6 +33,13 @@ import { Icon } from '@astrojs/starlight/components';
         font-size: var(--sl-text-sm)!important;
         border: 1px solid;
         font-size: var(--sl-text-base);
-        padding: 0.5rem 0.8rem;
+        padding: 0.4rem 0.8rem;
     }
+
+    .action-footer {
+        display: flex;
+        flex-direction: column;
+        gap: 0.7rem;
+    }
+
 </style>

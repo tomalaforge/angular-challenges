@@ -74,6 +74,10 @@
   background-color: var(--sl-color-accent-high);
 }
 
+.article-footer > a > p {
+  margin: 0px !important;
+}
+
 a.primary,
 a.primary > svg {
   color: var(--color-btn) !important;
@@ -120,7 +124,3 @@ starlight-menu-button svg {
   flex-direction: column;
   justify-content: space-between;
 }
-
-/* .content-panel {
-  padding-top: 2px;
-} */
