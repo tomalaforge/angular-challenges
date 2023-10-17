@@ -5,7 +5,7 @@
 ### Run Application
 
 ```bash
-npx nx serve testing-modal
+npx nx serve test-modal
 ```
 
 ### Documentation and Instruction

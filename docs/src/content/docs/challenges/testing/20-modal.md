@@ -3,7 +3,7 @@ title: 🟠 Modal
 description: Challenge 20 is about testing modals
 author: Thomas Laforge
 challengeNumber: 20
-command: testing-modal
+command: test-modal
 sidebar:
   order: 111
 ---
@@ -16,11 +16,11 @@ In the confirmation modal, if you click the **Confirm** button, a message confir
 
 The goal of this challenge is to test the dialogs inside your application. To do so, we will test the full application like an end-to-end test will do. This means, we will test the `AppComponent` as a black box and react to events on the page. <b>No internal details should be tested</b>. The difference between an e2e test and integration test is that we will mock all API calls. _(All http requests are faked inside this application, but this would not be the case in a real entreprice application.)_
 
-You can play with it by running : `npx nx serve testing-modal`.
+You can play with it by running : `npx nx serve test-modal`.
 
-The file named `app.component.spec.ts` will let test your application using Testing Library. To run the test suits, you need to run `npx nx test testing-modal`. You can also install [Jest Runner](https://marketplace.visualstudio.com/items?itemName=firsttris.vscode-jest-runner) to execute your test by clicking on the `Run` button above each `describe` or `it` blocks.
+The file named `app.component.spec.ts` will let test your application using Testing Library. To run the test suits, you need to run `npx nx test test-modal`. You can also install [Jest Runner](https://marketplace.visualstudio.com/items?itemName=firsttris.vscode-jest-runner) to execute your test by clicking on the `Run` button above each `describe` or `it` blocks.
 
-For testing cypress, you will execute your test inside the `app.component.cy.ts` and run `npx nx component-test testing-modal` to execute your test suits. You can add the `--watch` flag to execute your test in watch mode.
+For testing cypress, you will execute your test inside the `app.component.cy.ts` and run `npx nx component-test test-modal` to execute your test suits. You can add the `--watch` flag to execute your test in watch mode.
 
 # Statement
 
