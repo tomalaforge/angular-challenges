@@ -1,25 +1,25 @@
 {
-  "name": "testing-table",
-  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "name": "test-table",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "apps/testing-table/src",
+  "sourceRoot": "apps/test/table/src",
   "prefix": "app",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/testing-table",
-        "index": "apps/testing-table/src/index.html",
-        "main": "apps/testing-table/src/main.ts",
+        "outputPath": "dist/apps/test/table",
+        "index": "apps/test/table/src/index.html",
+        "main": "apps/test/table/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/testing-table/tsconfig.app.json",
+        "tsConfig": "apps/test/table/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
-          "apps/testing-table/src/favicon.ico",
-          "apps/testing-table/src/assets"
+          "apps/test/table/src/favicon.ico",
+          "apps/test/table/src/assets"
         ],
-        "styles": ["apps/testing-table/src/styles.scss"],
+        "styles": ["apps/test/table/src/styles.scss"],
         "scripts": [],
         "allowedCommonJsDependencies": ["seedrandom"]
       },
@@ -54,10 +54,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "testing-table:build:production"
+          "browserTarget": "test-table:build:production"
         },
         "development": {
-          "browserTarget": "testing-table:build:development"
+          "browserTarget": "test-table:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -65,7 +65,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "testing-table:build"
+        "browserTarget": "test-table:build"
       }
     },
     "lint": {
@@ -73,8 +73,8 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "apps/testing-table/**/*.ts",
-          "apps/testing-table/**/*.html"
+          "apps/test/table/**/*.ts",
+          "apps/test/table/**/*.html"
         ]
       }
     },
@@ -82,7 +82,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/testing-table/jest.config.ts",
+        "jestConfig": "apps/test/table/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {
@@ -95,10 +95,10 @@
     "component-test": {
       "executor": "@nx/cypress:cypress",
       "options": {
-        "cypressConfig": "apps/testing-table/cypress.config.ts",
+        "cypressConfig": "apps/test/table/cypress.config.ts",
         "testingType": "component",
         "skipServe": true,
-        "devServerTarget": "testing-table:build"
+        "devServerTarget": "test-table:build"
       }
     }
   },
