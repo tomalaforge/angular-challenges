@@ -1,25 +1,25 @@
 {
-  "name": "pipe-hard",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "angular-pipe-hard",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "apps/pipe-hard/src",
+  "sourceRoot": "apps/angular/pipe-hard/src",
   "prefix": "app",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/pipe-hard",
-        "index": "apps/pipe-hard/src/index.html",
-        "main": "apps/pipe-hard/src/main.ts",
-        "polyfills": "apps/pipe-hard/src/polyfills.ts",
-        "tsConfig": "apps/pipe-hard/tsconfig.app.json",
+        "outputPath": "dist/apps/angular/pipe-hard",
+        "index": "apps/angular/pipe-hard/src/index.html",
+        "main": "apps/angular/pipe-hard/src/main.ts",
+        "polyfills": "apps/angular/pipe-hard/src/polyfills.ts",
+        "tsConfig": "apps/angular/pipe-hard/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
-          "apps/pipe-hard/src/favicon.ico",
-          "apps/pipe-hard/src/assets"
+          "apps/angular/pipe-hard/src/favicon.ico",
+          "apps/angular/pipe-hard/src/assets"
         ],
-        "styles": ["apps/pipe-hard/src/styles.scss"],
+        "styles": ["apps/angular/pipe-hard/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
@@ -38,8 +38,8 @@
           ],
           "fileReplacements": [
             {
-              "replace": "apps/pipe-hard/src/environments/environment.ts",
-              "with": "apps/pipe-hard/src/environments/environment.prod.ts"
+              "replace": "apps/angular/pipe-hard/src/environments/environment.ts",
+              "with": "apps/angular/pipe-hard/src/environments/environment.prod.ts"
             }
           ],
           "outputHashing": "all"
@@ -59,10 +59,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "pipe-hard:build:production"
+          "browserTarget": "angular-pipe-hard:build:production"
         },
         "development": {
-          "browserTarget": "pipe-hard:build:development"
+          "browserTarget": "angular-pipe-hard:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -70,15 +70,15 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "pipe-hard:build"
+        "browserTarget": "angular-pipe-hard:build"
       }
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": [
-          "apps/pipe-hard/**/*.ts",
-          "apps/pipe-hard/**/*.html"
+          "apps/angular/pipe-hard/**/*.ts",
+          "apps/angular/pipe-hard/**/*.html"
         ]
       }
     }
