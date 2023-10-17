@@ -22,6 +22,7 @@ hero:
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
+import MyIcon from '../../components/MyIcon.astro';
 
 <CardGrid>
 <Card title="38 Challenges">
@@ -57,11 +58,9 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 ---
 
 <div class="article-footer">
-  <a
-    href="https://github.com/sponsors/tomalaforge"
-    alt="Sponsor link"
-    class="primary action astro-yjy4zhro">
-    🤍 Sponsor the Project
+  <a href="https://github.com/sponsors/tomalaforge" alt="Sponsor link">
+    <MyIcon name="fillHeart" size="1.2rem" color="white" />
+    Sponsor the Project
   </a>
 </div>
 
