@@ -13,7 +13,7 @@ sidebar:
 
 ### How to Use the Application
 
-Our application features a form with a text input box and a "Fetch" button. Upon clicking the "Fetch" button, data is retrieved from a [free API](https://jsonplaceholder.typicode.com/){:target="\_blank"}.
+Our application features a form with a text input box and a "Fetch" button. Upon clicking the "Fetch" button, data is retrieved from a [free API](https://jsonplaceholder.typicode.com/).
 
 The correct values for a successful response are limited to: posts, comments, albums, photos, todos, and users. Any other values will result in an error response.
 
