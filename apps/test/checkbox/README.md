@@ -5,7 +5,7 @@
 ### Run Application
 
 ```bash
-npx nx serve testing-checkbox
+npx nx serve test-checkbox
 ```
 
 ### Documentation and Instruction

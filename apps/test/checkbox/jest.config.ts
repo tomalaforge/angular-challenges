@@ -1,9 +1,9 @@
 /* eslint-disable */
 export default {
-  displayName: 'testing-checkbox',
-  preset: '../../jest.preset.js',
+  displayName: 'test-checkbox',
+  preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../coverage/apps/testing-checkbox',
+  coverageDirectory: '../../../coverage/apps/test/checkbox',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',
