@@ -38,11 +38,11 @@ export class AppComponent {
   ngOnInit() {
     this.submit$$
       .pipe(
-        takeUntilDestroyed(this.destroyRef),
         map(() => this.input),
         concatMap((value) =>
           this.http.get(`https://jsonplaceholder.typicode.com/${value}/1`)
-        )
+        ),
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe({
         next: (value) => {
