@@ -5,7 +5,7 @@
 ### Run Application
 
 ```bash
-npx nx serve testing-input-output
+npx nx serve test-input-output
 ```
 
 ### Documentation and Instruction
