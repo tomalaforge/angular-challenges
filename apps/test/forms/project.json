@@ -1,25 +1,25 @@
 {
-  "name": "testing-forms",
-  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "name": "test-forms",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "apps/testing-forms/src",
+  "sourceRoot": "apps/test/forms/src",
   "prefix": "app",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/testing-forms",
-        "index": "apps/testing-forms/src/index.html",
-        "main": "apps/testing-forms/src/main.ts",
+        "outputPath": "dist/apps/test/forms",
+        "index": "apps/test/forms/src/index.html",
+        "main": "apps/test/forms/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/testing-forms/tsconfig.app.json",
+        "tsConfig": "apps/test/forms/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
-          "apps/testing-forms/src/favicon.ico",
-          "apps/testing-forms/src/assets"
+          "apps/test/forms/src/favicon.ico",
+          "apps/test/forms/src/assets"
         ],
-        "styles": ["apps/testing-forms/src/styles.scss"],
+        "styles": ["apps/test/forms/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
@@ -53,10 +53,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "testing-forms:build:production"
+          "browserTarget": "test-forms:build:production"
         },
         "development": {
-          "browserTarget": "testing-forms:build:development"
+          "browserTarget": "test-forms:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -64,7 +64,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "testing-forms:build"
+        "browserTarget": "test-forms:build"
       }
     },
     "lint": {
@@ -72,8 +72,8 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "apps/testing-forms/**/*.ts",
-          "apps/testing-forms/**/*.html"
+          "apps/test/forms/**/*.ts",
+          "apps/test/forms/**/*.html"
         ]
       }
     },
@@ -81,7 +81,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/testing-forms/jest.config.ts",
+        "jestConfig": "apps/test/forms/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {
@@ -94,10 +94,10 @@
     "component-test": {
       "executor": "@nx/cypress:cypress",
       "options": {
-        "cypressConfig": "apps/testing-forms/cypress.config.ts",
+        "cypressConfig": "apps/test/forms/cypress.config.ts",
         "testingType": "component",
         "skipServe": true,
-        "devServerTarget": "testing-forms:build"
+        "devServerTarget": "test-forms:build"
       }
     }
   },
