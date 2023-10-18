@@ -5,7 +5,7 @@
 ### Run Application
 
 ```bash
-npx nx serve anchor-scrolling
+npx nx serve angular-anchor-scrolling
 ```
 
 ### Documentation and Instruction
