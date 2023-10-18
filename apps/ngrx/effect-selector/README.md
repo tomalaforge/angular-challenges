@@ -5,7 +5,7 @@
 ### Run Application
 
 ```bash
-npx nx serve ngrx-1
+npx nx serve ngrx-effect-selector
 ```
 
 ### Documentation and Instruction

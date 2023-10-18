@@ -1,22 +1,25 @@
 {
-  "name": "ngrx-1",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "ngrx-effect-selector",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "apps/ngrx-1/src",
+  "sourceRoot": "apps/ngrx/effect-selector/src",
   "prefix": "app",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/ngrx-1",
-        "index": "apps/ngrx-1/src/index.html",
-        "main": "apps/ngrx-1/src/main.ts",
-        "polyfills": "apps/ngrx-1/src/polyfills.ts",
-        "tsConfig": "apps/ngrx-1/tsconfig.app.json",
+        "outputPath": "dist/apps/ngrx/effect-selector",
+        "index": "apps/ngrx/effect-selector/src/index.html",
+        "main": "apps/ngrx/effect-selector/src/main.ts",
+        "polyfills": "apps/ngrx/effect-selector/src/polyfills.ts",
+        "tsConfig": "apps/ngrx/effect-selector/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/ngrx-1/src/favicon.ico", "apps/ngrx-1/src/assets"],
-        "styles": ["apps/ngrx-1/src/styles.scss"],
+        "assets": [
+          "apps/ngrx/effect-selector/src/favicon.ico",
+          "apps/ngrx/effect-selector/src/assets"
+        ],
+        "styles": ["apps/ngrx/effect-selector/src/styles.scss"],
         "scripts": [],
         "allowedCommonJsDependencies": ["seedrandom"]
       },
@@ -36,8 +39,8 @@
           ],
           "fileReplacements": [
             {
-              "replace": "apps/ngrx-1/src/environments/environment.ts",
-              "with": "apps/ngrx-1/src/environments/environment.prod.ts"
+              "replace": "apps/ngrx/effect-selector/src/environments/environment.ts",
+              "with": "apps/ngrx/effect-selector/src/environments/environment.prod.ts"
             }
           ],
           "outputHashing": "all"
@@ -57,10 +60,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "ngrx-1:build:production"
+          "browserTarget": "ngrx-effect-selector:build:production"
         },
         "development": {
-          "browserTarget": "ngrx-1:build:development"
+          "browserTarget": "ngrx-effect-selector:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -68,20 +71,23 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "ngrx-1:build"
+        "browserTarget": "ngrx-effect-selector:build"
       }
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
-        "lintFilePatterns": ["apps/ngrx-1/**/*.ts", "apps/ngrx-1/**/*.html"]
+        "lintFilePatterns": [
+          "apps/ngrx/effect-selector/**/*.ts",
+          "apps/ngrx/effect-selector/**/*.html"
+        ]
       }
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/ngrx-1/jest.config.ts",
+        "jestConfig": "apps/ngrx/effect-selector/jest.config.ts",
         "passWithNoTests": true
       }
     }
