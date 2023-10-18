@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "src/**/*.ts",
+    "../../../libs/decoupling/brain/src/lib/button-disabled.directive.ts",
+    "../../../libs/decoupling/helmet/src/lib/btn-style.directive.ts"
+  ],
+  "compilerOptions": {
+    "types": []
+  }
+}
