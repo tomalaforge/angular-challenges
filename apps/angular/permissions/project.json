@@ -1,25 +1,25 @@
 {
-  "name": "permissions",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "angular-permissions",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "apps/permissions/src",
+  "sourceRoot": "apps/angular/permissions/src",
   "prefix": "app",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/permissions",
-        "index": "apps/permissions/src/index.html",
-        "main": "apps/permissions/src/main.ts",
-        "polyfills": "apps/permissions/src/polyfills.ts",
-        "tsConfig": "apps/permissions/tsconfig.app.json",
+        "outputPath": "dist/apps/angular/permissions",
+        "index": "apps/angular/permissions/src/index.html",
+        "main": "apps/angular/permissions/src/main.ts",
+        "polyfills": "apps/angular/permissions/src/polyfills.ts",
+        "tsConfig": "apps/angular/permissions/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
-          "apps/permissions/src/favicon.ico",
-          "apps/permissions/src/assets"
+          "apps/angular/permissions/src/favicon.ico",
+          "apps/angular/permissions/src/assets"
         ],
-        "styles": ["apps/permissions/src/styles.scss"],
+        "styles": ["apps/angular/permissions/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
@@ -38,8 +38,8 @@
           ],
           "fileReplacements": [
             {
-              "replace": "apps/permissions/src/environments/environment.ts",
-              "with": "apps/permissions/src/environments/environment.prod.ts"
+              "replace": "apps/angular/permissions/src/environments/environment.ts",
+              "with": "apps/angular/permissions/src/environments/environment.prod.ts"
             }
           ],
           "outputHashing": "all"
@@ -59,10 +59,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "permissions:build:production"
+          "browserTarget": "angular-permissions:build:production"
         },
         "development": {
-          "browserTarget": "permissions:build:development"
+          "browserTarget": "angular-permissions:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -70,15 +70,15 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "permissions:build"
+        "browserTarget": "angular-permissions:build"
       }
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": [
-          "apps/permissions/**/*.ts",
-          "apps/permissions/**/*.html"
+          "apps/angular/permissions/**/*.ts",
+          "apps/angular/permissions/**/*.html"
         ]
       }
     }
