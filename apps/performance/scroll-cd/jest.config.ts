@@ -1,10 +1,10 @@
 /* eslint-disable */
 export default {
-  displayName: 'scroll-cd',
-  preset: '../../jest.preset.js',
+  displayName: 'performance-scroll-cd',
+  preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {},
-  coverageDirectory: '../../coverage/apps/scroll-cd',
+  coverageDirectory: '../../../coverage/apps/performance/scroll-cd',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',
