@@ -3,7 +3,7 @@ title: 🟠 Directive Enhancement
 description: Challenge 3 is about enhancing a built-in directive
 author: Thomas Laforge
 challengeNumber: 3
-command: ngfor-enhancement
+command: angular-ngfor-enhancement
 blogLink: https://medium.com/@thomas.laforge/ngfor-enhancement-716b44656a6c
 sidebar:
   order: 101

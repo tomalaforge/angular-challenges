@@ -3,7 +3,7 @@ title: 🟢 Pure Pipe
 description: Challenge 8 is about creating a pure pipe
 author: Thomas Laforge
 challengeNumber: 8
-command: pipe-easy
+command: angular-pipe-easy
 blogLink: https://medium.com/ngconf/deep-dive-into-angular-pipes-c040588cd15d
 sidebar:
   order: 3

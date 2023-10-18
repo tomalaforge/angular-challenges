@@ -3,7 +3,7 @@ title: 🟢 Crud application
 description: Challenge 5 is about refactoring a crud application
 author: Thomas Laforge
 challengeNumber: 5
-command: crud
+command: angular-crud
 sidebar:
   order: 2
 ---

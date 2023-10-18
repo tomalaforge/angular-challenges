@@ -3,7 +3,7 @@ title: 🟠 Change Detection Bug
 description: Challenge 32 is about debugging an application that has issue when change detection is triggered
 author: Thomas Laforge
 challengeNumber: 32
-command: bug-cd
+command: angular-bug-cd
 blogLink: https://medium.com/ngconf/function-calls-inside-template-are-dangerous-15f9822a6629
 sidebar:
   order: 105

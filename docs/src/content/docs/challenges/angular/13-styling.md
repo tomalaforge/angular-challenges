@@ -3,7 +3,7 @@ title: 🟠 Highly Customizable CSS
 description: Challenge 13 is about creating highly customizable CSS styles
 author: Thomas Laforge
 challengeNumber: 13
-command: styling
+command: angular-styling
 sidebar:
   order: 104
 ---
@@ -11,8 +11,6 @@ sidebar:
 :::note
 WIP: The following documentation will be reviewed and improved. However, you can still take on the challenge. If you don't understand a certain part, please feel free to reach out or create an issue.
 :::
-
-<div class="chip">Challenge #13</div>
 
 ## Information
 

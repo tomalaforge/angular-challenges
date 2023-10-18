@@ -3,7 +3,7 @@ title: 🟢 Projection
 description: Challenge 1 is about learning how to project DOM element through components
 author: Thomas Laforge
 challengeNumber: 1
-command: projection
+command: angular-projection
 blogLink: https://medium.com/@thomas.laforge/create-a-highly-customizable-component-cc3a9805e4c5
 videoLink:
   link: https://www.youtube.com/watch?v=npyEyUZxoIw&ab_channel=ArthurLannelucq
