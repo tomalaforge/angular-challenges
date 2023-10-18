@@ -82,5 +82,5 @@
       "standalone": "true"
     }
   },
-  "defaultProject": "projection"
+  "defaultProject": "angular-projection"
 }

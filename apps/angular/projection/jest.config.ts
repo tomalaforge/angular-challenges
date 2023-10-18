@@ -1,10 +1,10 @@
 /* eslint-disable */
 export default {
-  displayName: 'projection',
-  preset: '../../jest.preset.js',
+  displayName: 'angular-projection',
+  preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {},
-  coverageDirectory: '../../coverage/apps/projection',
+  coverageDirectory: '../../../coverage/apps/angular/projection',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',
