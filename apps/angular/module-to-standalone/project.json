@@ -1,25 +1,25 @@
 {
-  "name": "module-to-standalone",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "angular-module-to-standalone",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "app",
-  "sourceRoot": "apps/module-to-standalone/src",
+  "sourceRoot": "apps/angular/module-to-standalone/src",
   "tags": [],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/module-to-standalone",
-        "index": "apps/module-to-standalone/src/index.html",
-        "main": "apps/module-to-standalone/src/main.ts",
+        "outputPath": "dist/apps/angular/module-to-standalone",
+        "index": "apps/angular/module-to-standalone/src/index.html",
+        "main": "apps/angular/module-to-standalone/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/module-to-standalone/tsconfig.app.json",
+        "tsConfig": "apps/angular/module-to-standalone/tsconfig.app.json",
         "assets": [
-          "apps/module-to-standalone/src/favicon.ico",
-          "apps/module-to-standalone/src/assets"
+          "apps/angular/module-to-standalone/src/favicon.ico",
+          "apps/angular/module-to-standalone/src/assets"
         ],
-        "styles": ["apps/module-to-standalone/src/styles.scss"],
+        "styles": ["apps/angular/module-to-standalone/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
@@ -53,10 +53,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "module-to-standalone:build:production"
+          "browserTarget": "angular-module-to-standalone:build:production"
         },
         "development": {
-          "browserTarget": "module-to-standalone:build:development"
+          "browserTarget": "angular-module-to-standalone:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -64,7 +64,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "module-to-standalone:build"
+        "browserTarget": "angular-module-to-standalone:build"
       }
     },
     "lint": {
@@ -72,8 +72,8 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "apps/module-to-standalone/**/*.ts",
-          "apps/module-to-standalone/**/*.html"
+          "apps/angular/module-to-standalone/**/*.ts",
+          "apps/angular/module-to-standalone/**/*.html"
         ]
       }
     }
