@@ -1,9 +1,9 @@
 /* eslint-disable */
 export default {
   displayName: 'rxjs-catch-error',
-  preset: '../../jest.preset.js',
+  preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../coverage/apps/rxjs-catch-error',
+  coverageDirectory: '../../../coverage/apps/rxjs/catch-error',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',
