@@ -1,9 +1,9 @@
 /* eslint-disable */
 export default {
-  displayName: 'bug-cd',
-  preset: '../../jest.preset.js',
+  displayName: 'angular-bug-cd',
+  preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../coverage/apps/bug-cd',
+  coverageDirectory: '../../../coverage/apps/angular/bug-cd',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

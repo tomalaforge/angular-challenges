@@ -3,7 +3,7 @@ title: 🟠 Wrap Function Pipe
 description: Challenge 9 is about creating a pipe to wrap component fonctions
 author: Thomas Laforge
 challengeNumber: 9
-command: pipe-intermediate
+command: angular-pipe-intermediate
 blogLink: https://medium.com/ngconf/boost-your-apps-performance-by-wrapping-your-functions-inside-a-pipe-7e889a901d1d
 sidebar:
   order: 103

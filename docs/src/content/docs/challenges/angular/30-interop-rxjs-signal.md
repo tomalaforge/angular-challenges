@@ -3,7 +3,7 @@ title: 🔴 Interoperability Rxjs/Signal
 description: Challenge 30 is about learning how to mix signal with Rxjs
 author: Thomas Laforge
 challengeNumber: 30
-command: interop-rxjs-signal
+command: angular-interop-rxjs-signal
 sidebar:
   order: 204
 ---

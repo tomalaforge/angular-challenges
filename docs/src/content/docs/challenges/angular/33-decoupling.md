@@ -3,7 +3,7 @@ title: 🟠 Decoupling Components
 description: Challenge 33 is about decoupling two strongly coupled components using Injection Token
 author: Thomas Laforge
 challengeNumber: 33
-command: decoupling
+command: angular-decoupling
 sidebar:
   order: 106
 ---
