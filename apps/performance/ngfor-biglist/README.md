@@ -10,4 +10,4 @@ npx nx serve performance-ngfor-biglist
 
 ### Documentation and Instruction
 
-Challenge documentation is [here](https://angular-challenges.vercel.app/challenges/angular-performance/37-ngfor-biglist/).
+Challenge documentation is [here](https://angular-challenges.vercel.app/challenges/performance/37-ngfor-biglist/).

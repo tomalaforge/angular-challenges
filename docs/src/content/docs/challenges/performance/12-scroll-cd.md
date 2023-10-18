@@ -19,7 +19,7 @@ In this challenge, we only need to refresh the view at a specific scroll positio
 To have a better visualization of the problem, profile your application with Angular Dev Tools.
 
 :::note
-If you don't know how to use it, read [the performance introduction page](/challenges/angular-performance/) first and come back after.
+If you don't know how to use it, read [the performance introduction page](/challenges/performance/) first and come back after.
 :::
 
 You can learn more details about zone pollution and how to resolve it [here](https://angular.io/guide/change-detection-zone-pollution).
