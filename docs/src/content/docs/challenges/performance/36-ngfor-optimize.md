@@ -21,7 +21,7 @@ We can also use the <b>Angular DevTool</b> to profile our application and unders
 </video>
 
 :::note
-If you don't know how to use it, read [the performance introduction page](/challenges/angular-performance/) first and come back after.
+If you don't know how to use it, read [the performance introduction page](/challenges/performance/) first and come back after.
 :::
 
 If you need more information about `NgFor`, I invite you to read the [documentation](https://angular.io/api/common/NgFor) first.

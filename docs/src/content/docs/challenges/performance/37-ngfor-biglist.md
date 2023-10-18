@@ -18,7 +18,7 @@ We can use the <b>Angular DevTool</b> to profile our application and understand 
 </video>
 
 :::note
-If you don't know how to use it, read [the performance introduction page](/challenges/angular-performance/) first and come back after.
+If you don't know how to use it, read [the performance introduction page](/challenges/performance/) first and come back after.
 :::
 
 ## Statement

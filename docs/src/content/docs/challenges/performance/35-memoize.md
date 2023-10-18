@@ -27,14 +27,14 @@ We will not focus on the initial loading of the list in this challenge.
 Let's use the <b>Angular DevTool</b> to profile our application and understand how this tool can help us understand what is happening inside our application.
 
 :::note
-If you don't know how to use it, read [the performance introduction page](/challenges/angular-performance/) first and come back after.
+If you don't know how to use it, read [the performance introduction page](/challenges/performance/) first and come back after.
 :::
 
 Now, start profiling your application and type some letters inside the input field. You will see some red bars showing up inside the profiler panel.
 
 If you click on one of the bars (indicated by the yellow arrow in the picture below), you will see that the change detection cycle is taking more than 3s in `PersonListComponent`.
 
-![profiler record](../../../../assets/angular-performance/35/memoize-profiler.png 'Profiler Record')
+![profiler record](../../../../assets/performance/35/memoize-profiler.png 'Profiler Record')
 
 ## Statement
 

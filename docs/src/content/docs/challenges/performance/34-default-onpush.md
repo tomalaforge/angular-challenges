@@ -25,14 +25,14 @@ As you can see, each letter triggers a new change detection cycle, and all compo
 Let's use the <b>Angular DevTool</b> to profile our application and understand how this tool can help us understand what is happening inside our application.
 
 :::note
-If you don't know how to use it, read [the performance introduction page](/challenges/angular-performance/) first and come back after.
+If you don't know how to use it, read [the performance introduction page](/challenges/performance/) first and come back after.
 :::
 
 Now, start profiling your application and type some letters inside the input field to trigger some change detection cycles.
 
 If you click on one of the bars (indicated by the yellow arrow in the picture below), you can see that `PersonListComponent`, `RandomComponent`, and all the `MatListItem` are impacted by the change detection cycle, even when we only interact with the input field.
 
-![profiler record](../../../../assets/angular-performance/34/profiler-record.png 'Profiler Record')
+![profiler record](../../../../assets/performance/34/profiler-record.png 'Profiler Record')
 
 ## Statement
 
