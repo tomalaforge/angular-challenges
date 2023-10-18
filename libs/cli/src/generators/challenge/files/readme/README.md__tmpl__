@@ -10,4 +10,4 @@ npx nx serve <%= appProjectName %>
 
 ### Documentation and Instruction
 
-Challenge documentation is [here](https://angular-challenges.vercel.app/challenges/<%= docRepository %>/<%= challengeNumber %>-<%= projectName %>/).
+Challenge documentation is [here](https://angular-challenges.vercel.app/challenges/<%= category %>/<%= challengeNumber %>-<%= projectName %>/).
