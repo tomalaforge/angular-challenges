@@ -5,7 +5,7 @@ export const subject = [
   'Maths',
   'Sport',
 ] as const;
-export type Subject = typeof subject[number];
+export type Subject = (typeof subject)[number];
 
 export interface Teacher {
   id: number;

@@ -10,8 +10,7 @@ import { CardComponent } from '../../ui/card/card.component';
   template: `<app-card
     [list]="students"
     [type]="cardType"
-    customClass="bg-light-green"
-  ></app-card>`,
+    customClass="bg-light-green"></app-card>`,
   standalone: true,
   styles: [
     `

@@ -10,8 +10,7 @@ import { CardComponent } from '../../ui/card/card.component';
   template: `<app-card
     [list]="teachers"
     [type]="cardType"
-    customClass="bg-light-red"
-  ></app-card>`,
+    customClass="bg-light-red"></app-card>`,
   styles: [
     `
       ::ng-deep .bg-light-red {
