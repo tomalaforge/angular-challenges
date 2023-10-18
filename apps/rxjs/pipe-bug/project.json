@@ -1,25 +1,25 @@
 {
   "name": "rxjs-pipe-bug",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "apps/rxjs-pipe-bug/src",
+  "sourceRoot": "apps/rxjs/pipe-bug/src",
   "prefix": "app",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/rxjs-pipe-bug",
-        "index": "apps/rxjs-pipe-bug/src/index.html",
-        "main": "apps/rxjs-pipe-bug/src/main.ts",
+        "outputPath": "dist/apps/rxjs/pipe-bug",
+        "index": "apps/rxjs/pipe-bug/src/index.html",
+        "main": "apps/rxjs/pipe-bug/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/rxjs-pipe-bug/tsconfig.app.json",
+        "tsConfig": "apps/rxjs/pipe-bug/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
-          "apps/rxjs-pipe-bug/src/favicon.ico",
-          "apps/rxjs-pipe-bug/src/assets"
+          "apps/rxjs/pipe-bug/src/favicon.ico",
+          "apps/rxjs/pipe-bug/src/assets"
         ],
-        "styles": ["apps/rxjs-pipe-bug/src/styles.scss"],
+        "styles": ["apps/rxjs/pipe-bug/src/styles.scss"],
         "scripts": [],
         "allowedCommonJsDependencies": ["seedrandom"]
       },
@@ -72,8 +72,8 @@
       "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": [
-          "apps/rxjs-pipe-bug/**/*.ts",
-          "apps/rxjs-pipe-bug/**/*.html"
+          "apps/rxjs/pipe-bug/**/*.ts",
+          "apps/rxjs/pipe-bug/**/*.html"
         ]
       }
     }
