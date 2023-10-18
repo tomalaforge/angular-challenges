@@ -1,25 +1,25 @@
 {
   "name": "ngrx-notification",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "apps/ngrx-notification/src",
+  "sourceRoot": "apps/ngrx/notification/src",
   "prefix": "app",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/ngrx-notification",
-        "index": "apps/ngrx-notification/src/index.html",
-        "main": "apps/ngrx-notification/src/main.ts",
-        "polyfills": "apps/ngrx-notification/src/polyfills.ts",
-        "tsConfig": "apps/ngrx-notification/tsconfig.app.json",
+        "outputPath": "dist/apps/ngrx/notification",
+        "index": "apps/ngrx/notification/src/index.html",
+        "main": "apps/ngrx/notification/src/main.ts",
+        "polyfills": "apps/ngrx/notification/src/polyfills.ts",
+        "tsConfig": "apps/ngrx/notification/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
-          "apps/ngrx-notification/src/favicon.ico",
-          "apps/ngrx-notification/src/assets"
+          "apps/ngrx/notification/src/favicon.ico",
+          "apps/ngrx/notification/src/assets"
         ],
-        "styles": ["apps/ngrx-notification/src/styles.scss"],
+        "styles": ["apps/ngrx/notification/src/styles.scss"],
         "scripts": [],
         "allowedCommonJsDependencies": ["seedrandom"]
       },
@@ -39,8 +39,8 @@
           ],
           "fileReplacements": [
             {
-              "replace": "apps/ngrx-notification/src/environments/environment.ts",
-              "with": "apps/ngrx-notification/src/environments/environment.prod.ts"
+              "replace": "apps/ngrx/notification/src/environments/environment.ts",
+              "with": "apps/ngrx/notification/src/environments/environment.prod.ts"
             }
           ],
           "outputHashing": "all"
@@ -78,8 +78,8 @@
       "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": [
-          "apps/ngrx-notification/**/*.ts",
-          "apps/ngrx-notification/**/*.html"
+          "apps/ngrx/notification/**/*.ts",
+          "apps/ngrx/notification/**/*.html"
         ]
       }
     }
