@@ -55,7 +55,7 @@
         ]
       }
     },
-    "docRepository": {
+    "category": {
       "type": "string",
       "description": "The category of your challenge.",
       "x-priority": "important",
@@ -94,11 +94,6 @@
         ]
       }
     },
-    "directory": {
-      "description": "The directory of the new application.",
-      "type": "string",
-      "x-priority": "important"
-    },
     "addTest": {
       "description": "add spec files.",
       "type": "boolean",
@@ -120,11 +115,5 @@
     }
   },
   "additionalProperties": false,
-  "required": [
-    "name",
-    "title",
-    "author",
-    "challengeDifficulty",
-    "docRepository"
-  ]
+  "required": ["name", "title", "author", "challengeDifficulty", "category"]
 }
