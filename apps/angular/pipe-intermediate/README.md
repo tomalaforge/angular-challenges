@@ -5,7 +5,7 @@
 ### Run Application
 
 ```bash
-npx nx serve pipe-intermediate
+npx nx serve angular-pipe-intermediate
 ```
 
 ### Documentation and Instruction
