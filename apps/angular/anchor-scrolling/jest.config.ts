@@ -1,9 +1,9 @@
 /* eslint-disable */
 export default {
-  displayName: 'anchor-scrolling',
-  preset: '../../jest.preset.js',
+  displayName: 'angular-anchor-scrolling',
+  preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../coverage/apps/anchor-scrolling',
+  coverageDirectory: '../../../coverage/apps/angular/anchor-scrolling',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',
