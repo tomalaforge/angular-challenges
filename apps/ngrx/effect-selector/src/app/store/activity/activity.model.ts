@@ -12,7 +12,7 @@ export const activityType = [
   'Maths',
   'Physics',
 ] as const;
-export type ActivityType = typeof activityType[number];
+export type ActivityType = (typeof activityType)[number];
 
 export interface Person {
   id: number;

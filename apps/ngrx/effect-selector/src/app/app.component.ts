@@ -29,8 +29,7 @@ import { loadUsers } from './store/user/user.actions';
             *ngFor="
               let teacher of getAllTeachersForActivityType$(activity.type)
                 | async
-            "
-          >
+            ">
             {{ teacher.name }}
           </li>
         </ul>

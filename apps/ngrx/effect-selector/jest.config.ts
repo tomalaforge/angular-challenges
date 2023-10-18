@@ -1,10 +1,10 @@
 /* eslint-disable */
 export default {
-  displayName: 'ngrx-1',
-  preset: '../../jest.preset.js',
+  displayName: 'ngrx-effect-selector',
+  preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {},
-  coverageDirectory: '../../coverage/apps/ngrx-1',
+  coverageDirectory: '../../../coverage/apps/ngrx/effect-selector',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',
