@@ -1,25 +1,25 @@
 {
-  "name": "context-outlet-type",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "angular-context-outlet-type",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "apps/context-outlet-type/src",
+  "sourceRoot": "apps/angular/context-outlet-type/src",
   "prefix": "app",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/context-outlet-type",
-        "index": "apps/context-outlet-type/src/index.html",
-        "main": "apps/context-outlet-type/src/main.ts",
-        "polyfills": "apps/context-outlet-type/src/polyfills.ts",
-        "tsConfig": "apps/context-outlet-type/tsconfig.app.json",
+        "outputPath": "dist/apps/angular/context-outlet-type",
+        "index": "apps/angular/context-outlet-type/src/index.html",
+        "main": "apps/angular/context-outlet-type/src/main.ts",
+        "polyfills": "apps/angular/context-outlet-type/src/polyfills.ts",
+        "tsConfig": "apps/angular/context-outlet-type/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
-          "apps/context-outlet-type/src/favicon.ico",
-          "apps/context-outlet-type/src/assets"
+          "apps/angular/context-outlet-type/src/favicon.ico",
+          "apps/angular/context-outlet-type/src/assets"
         ],
-        "styles": ["apps/context-outlet-type/src/styles.scss"],
+        "styles": ["apps/angular/context-outlet-type/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
@@ -38,8 +38,8 @@
           ],
           "fileReplacements": [
             {
-              "replace": "apps/context-outlet-type/src/environments/environment.ts",
-              "with": "apps/context-outlet-type/src/environments/environment.prod.ts"
+              "replace": "apps/angular/context-outlet-type/src/environments/environment.ts",
+              "with": "apps/angular/context-outlet-type/src/environments/environment.prod.ts"
             }
           ],
           "outputHashing": "all"
@@ -59,10 +59,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "context-outlet-type:build:production"
+          "browserTarget": "angular-context-outlet-type:build:production"
         },
         "development": {
-          "browserTarget": "context-outlet-type:build:development"
+          "browserTarget": "angular-context-outlet-type:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -70,15 +70,15 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "context-outlet-type:build"
+        "browserTarget": "angular-context-outlet-type:build"
       }
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": [
-          "apps/context-outlet-type/**/*.ts",
-          "apps/context-outlet-type/**/*.html"
+          "apps/angular/context-outlet-type/**/*.ts",
+          "apps/angular/context-outlet-type/**/*.html"
         ]
       }
     }
