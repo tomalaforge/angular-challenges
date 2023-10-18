@@ -1,10 +1,10 @@
 /* eslint-disable */
 export default {
-  displayName: 'crud',
-  preset: '../../jest.preset.js',
+  displayName: 'angular-crud',
+  preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {},
-  coverageDirectory: '../../coverage/apps/crud',
+  coverageDirectory: '../../../coverage/apps/angular/crud',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',
