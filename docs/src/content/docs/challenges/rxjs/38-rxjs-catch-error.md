@@ -6,7 +6,6 @@ command: rxjs-catch-error
 challengeNumber: 38
 sidebar:
   order: 14
-  badge: New
 ---
 
 ## Information
