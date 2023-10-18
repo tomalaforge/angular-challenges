@@ -5,7 +5,7 @@
 ### Run Application
 
 ```bash
-npx nx serve ngfor-enhancement
+npx nx serve angular-ngfor-enhancement
 ```
 
 ### Documentation and Instruction
