@@ -1,22 +1,25 @@
 {
-  "name": "overload",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "typescript-overload",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "apps/overload/src",
+  "sourceRoot": "apps/typescript/overload/src",
   "prefix": "app",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/overload",
-        "index": "apps/overload/src/index.html",
-        "main": "apps/overload/src/main.ts",
+        "outputPath": "dist/apps/typescript/overload",
+        "index": "apps/typescript/overload/src/index.html",
+        "main": "apps/typescript/overload/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/overload/tsconfig.app.json",
+        "tsConfig": "apps/typescript/overload/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/overload/src/favicon.ico", "apps/overload/src/assets"],
-        "styles": ["apps/overload/src/styles.scss"],
+        "assets": [
+          "apps/typescript/overload/src/favicon.ico",
+          "apps/typescript/overload/src/assets"
+        ],
+        "styles": ["apps/typescript/overload/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
@@ -50,10 +53,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "overload:build:production"
+          "browserTarget": "typescript-overload:build:production"
         },
         "development": {
-          "browserTarget": "overload:build:development"
+          "browserTarget": "typescript-overload:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -61,14 +64,17 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "overload:build"
+        "browserTarget": "typescript-overload:build"
       }
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/overload/**/*.ts", "apps/overload/**/*.html"]
+        "lintFilePatterns": [
+          "apps/typescript/overload/**/*.ts",
+          "apps/typescript/overload/**/*.html"
+        ]
       }
     }
   },
