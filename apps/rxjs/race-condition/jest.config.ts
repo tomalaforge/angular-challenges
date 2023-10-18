@@ -1,10 +1,10 @@
 /* eslint-disable */
 export default {
   displayName: 'rxjs-race-condition',
-  preset: '../../jest.preset.js',
+  preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {},
-  coverageDirectory: '../../coverage/apps/rxjs-race-condition',
+  coverageDirectory: '../../../coverage/apps/rxjs/race-condition',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',
