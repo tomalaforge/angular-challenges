@@ -5,7 +5,7 @@
 ### Run Application
 
 ```bash
-npx nx serve pipe-easy
+npx nx serve angular-pipe-easy
 ```
 
 ### Documentation and Instruction
