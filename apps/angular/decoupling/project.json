@@ -1,25 +1,25 @@
 {
-  "name": "declarative-to-reactive",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "angular-decoupling",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "apps/declarative-to-reactive/src",
   "prefix": "app",
+  "sourceRoot": "apps/angular/decoupling/src",
+  "tags": [],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/declarative-to-reactive",
-        "index": "apps/declarative-to-reactive/src/index.html",
-        "main": "apps/declarative-to-reactive/src/main.ts",
+        "outputPath": "dist/apps/angular/decoupling",
+        "index": "apps/angular/decoupling/src/index.html",
+        "main": "apps/angular/decoupling/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/declarative-to-reactive/tsconfig.app.json",
-        "inlineStyleLanguage": "scss",
+        "tsConfig": "apps/angular/decoupling/tsconfig.app.json",
         "assets": [
-          "apps/declarative-to-reactive/src/favicon.ico",
-          "apps/declarative-to-reactive/src/assets"
+          "apps/angular/decoupling/src/favicon.ico",
+          "apps/angular/decoupling/src/assets"
         ],
-        "styles": ["apps/declarative-to-reactive/src/styles.scss"],
+        "styles": ["apps/angular/decoupling/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
@@ -53,10 +53,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "declarative-to-reactive:build:production"
+          "browserTarget": "angular-decoupling:build:production"
         },
         "development": {
-          "browserTarget": "declarative-to-reactive:build:development"
+          "browserTarget": "angular-decoupling:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -64,7 +64,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "declarative-to-reactive:build"
+        "browserTarget": "angular-decoupling:build"
       }
     },
     "lint": {
@@ -72,19 +72,10 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "apps/declarative-to-reactive/**/*.ts",
-          "apps/declarative-to-reactive/**/*.html"
+          "apps/angular/decoupling/**/*.ts",
+          "apps/angular/decoupling/**/*.html"
         ]
       }
-    },
-    "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
-      "options": {
-        "jestConfig": "apps/declarative-to-reactive/jest.config.ts",
-        "passWithNoTests": true
-      }
     }
-  },
-  "tags": []
+  }
 }
