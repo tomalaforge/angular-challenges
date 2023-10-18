@@ -1,25 +1,25 @@
 {
-  "name": "scroll-cd",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "performance-scroll-cd",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "apps/scroll-cd/src",
+  "sourceRoot": "apps/performance/scroll-cd/src",
   "prefix": "app",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/scroll-cd",
-        "index": "apps/scroll-cd/src/index.html",
-        "main": "apps/scroll-cd/src/main.ts",
+        "outputPath": "dist/apps/performance/scroll-cd",
+        "index": "apps/performance/scroll-cd/src/index.html",
+        "main": "apps/performance/scroll-cd/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/scroll-cd/tsconfig.app.json",
+        "tsConfig": "apps/performance/scroll-cd/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
-          "apps/scroll-cd/src/favicon.ico",
-          "apps/scroll-cd/src/assets"
+          "apps/performance/scroll-cd/src/favicon.ico",
+          "apps/performance/scroll-cd/src/assets"
         ],
-        "styles": ["apps/scroll-cd/src/styles.scss"],
+        "styles": ["apps/performance/scroll-cd/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
@@ -53,10 +53,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "scroll-cd:build:production"
+          "browserTarget": "performance-scroll-cd:build:production"
         },
         "development": {
-          "browserTarget": "scroll-cd:build:development"
+          "browserTarget": "performance-scroll-cd:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -64,7 +64,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "scroll-cd:build"
+        "browserTarget": "performance-scroll-cd:build"
       }
     },
     "lint": {
@@ -72,8 +72,8 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "apps/scroll-cd/**/*.ts",
-          "apps/scroll-cd/**/*.html"
+          "apps/performance/scroll-cd/**/*.ts",
+          "apps/performance/scroll-cd/**/*.html"
         ]
       }
     },
@@ -81,7 +81,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/scroll-cd/jest.config.ts",
+        "jestConfig": "apps/performance/scroll-cd/jest.config.ts",
         "passWithNoTests": true
       }
     }
