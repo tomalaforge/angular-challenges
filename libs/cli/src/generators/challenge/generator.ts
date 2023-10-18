@@ -7,7 +7,6 @@ import {
   formatFiles,
   generateFiles,
   names,
-  readJsonFile,
   Tree,
   updateJson,
 } from '@nx/devkit';
@@ -48,11 +47,6 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
 
   const difficulty = options.challengeDifficulty;
 
-  const challengeNumberPath = 'challenge-number.json';
-  const challangeNumberJson = readJsonFile(challengeNumberPath);
-  const challengeNumber = challangeNumberJson.total + 1;
-  const order = challangeNumberJson[difficulty] + 1;
-
   await applicationGenerator(tree, {
     ...options,
     directory: `apps/${options.category}`,
@@ -68,6 +62,13 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
     standalone: true,
     skipTests: true,
   });
+
+  const challengeNumberPath = 'challenge-number.json';
+  const challangeNumberJson = JSON.parse(
+    tree.read(challengeNumberPath).toString()
+  );
+  const challengeNumber = challangeNumberJson.total + 1;
+  const order = challangeNumberJson[difficulty] + 1;
 
   generateFiles(tree, join(__dirname, 'files', 'app'), appDirectory, {
     tmpl: '',
