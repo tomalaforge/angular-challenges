@@ -1,23 +1,26 @@
 {
-  "name": "di",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "angular-di",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "apps/di/src",
+  "sourceRoot": "apps/angular/di/src",
   "prefix": "app",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/di",
-        "index": "apps/di/src/index.html",
-        "main": "apps/di/src/main.ts",
+        "outputPath": "dist/apps/angular/di",
+        "index": "apps/angular/di/src/index.html",
+        "main": "apps/angular/di/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/di/tsconfig.app.json",
+        "tsConfig": "apps/angular/di/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/di/src/favicon.ico", "apps/di/src/assets"],
+        "assets": [
+          "apps/angular/di/src/favicon.ico",
+          "apps/angular/di/src/assets"
+        ],
         "styles": [
-          "apps/di/src/styles.scss",
+          "apps/angular/di/src/styles.scss",
           "node_modules/primeicons/primeicons.css",
           "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
           "node_modules/primeng/resources/primeng.min.css"
@@ -55,10 +58,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "di:build:production"
+          "browserTarget": "angular-di:build:production"
         },
         "development": {
-          "browserTarget": "di:build:development"
+          "browserTarget": "angular-di:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -66,14 +69,17 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "di:build"
+        "browserTarget": "angular-di:build"
       }
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/di/**/*.ts", "apps/di/**/*.html"]
+        "lintFilePatterns": [
+          "apps/angular/di/**/*.ts",
+          "apps/angular/di/**/*.html"
+        ]
       }
     }
   },
