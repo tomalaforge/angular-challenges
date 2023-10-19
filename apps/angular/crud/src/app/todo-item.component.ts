@@ -23,7 +23,7 @@ import { Todo } from './todo.model';
       (click)="remove(todo)">
       Delete
     </button>
-    <ng-container *ngIf="loading && todo.id === selectedId">{{
+    <ng-container *ngIf="loading && this.selectedId">{{
       status
     }}</ng-container> `,
   styles: [],
