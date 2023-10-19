@@ -1,0 +1,14 @@
+<app-card
+  [list]="cities"
+  customClass="bg-light-green"
+  (delete)="onDelete($event)"
+  (create)="onCreate()">
+  <div image>
+    <img src="assets/img/city.webp" width="200px" />
+  </div>
+  <ng-template #rowRef let-city>
+    <app-list-item (delete)="onDelete(city.id)">
+      {{ city.name }}
+    </app-list-item>
+  </ng-template>
+</app-card>

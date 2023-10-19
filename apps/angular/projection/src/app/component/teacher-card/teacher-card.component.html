@@ -1,0 +1,14 @@
+<app-card
+  [list]="teachers"
+  customClass="bg-light-red"
+  (create)="onCreate()"
+  (delete)="onDelete($event)">
+  <div image>
+    <img src="assets/img/teacher.png" width="200px" />
+  </div>
+  <ng-template #rowRef let-teacher>
+    <app-list-item (delete)="onDelete(teacher.id)">
+      {{ teacher.firstname }}
+    </app-list-item>
+  </ng-template>
+</app-card>
