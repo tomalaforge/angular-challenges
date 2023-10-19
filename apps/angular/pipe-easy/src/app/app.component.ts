@@ -8,16 +8,10 @@ import { HeavyComputationPipe } from '../helpers/heaveyComputation.pipe';
   selector: 'app-root',
   template: `
     <div *ngFor="let person of persons; let index = index">
-      <!-- {{ heavyComputation(person, index) }} -->
       {{ person | heavyComputation : index }}
     </div>
   `,
 })
 export class AppComponent {
   persons = ['toto', 'jack', 'jill', 'john', 'jane'];
-
-  // heavyComputation(name: string, index: number) {
-  //   // very heavy computation
-  //   return `${name} - ${index}`;
-  // }
 }
