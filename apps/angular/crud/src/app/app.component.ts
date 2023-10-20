@@ -1,51 +1,50 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { TodoService } from './services/todo.service';
+import { Todo } from './models/todo.model';
+import { Subscription } from 'rxjs';
 import { randText } from '@ngneat/falso';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatProgressSpinnerModule],
   selector: 'app-root',
-  template: `
-    <div *ngFor="let todo of todos">
-      {{ todo.title }}
-      <button (click)="update(todo)">Update</button>
-    </div>
-  `,
+  templateUrl: './app.component.html',
   styles: [],
 })
-export class AppComponent implements OnInit {
-  todos!: any[];
+export class AppComponent implements OnInit, OnDestroy {
+  todos!: Todo[];
+  isLoading!: boolean;
+  private todosSubscription!: Subscription;
+  private isLoadingSubscription!: Subscription;
 
-  constructor(private http: HttpClient) {}
+  constructor(private todoService: TodoService) {}
 
   ngOnInit(): void {
-    this.http
-      .get<any[]>('https://jsonplaceholder.typicode.com/todos')
-      .subscribe((todos) => {
-        this.todos = todos;
-      });
+    this.isLoadingSubscription = this.todoService.isLoading.subscribe(
+      (loading) => {
+        this.isLoading = loading;
+      }
+    );
+
+    this.todoService.getTodos();
+
+    this.todosSubscription = this.todoService.todos.subscribe((todos) => {
+      this.todos = todos;
+    });
   }
 
-  update(todo: any) {
-    this.http
-      .put<any>(
-        `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
-        JSON.stringify({
-          todo: todo.id,
-          title: randText(),
-          body: todo.body,
-          userId: todo.userId,
-        }),
-        {
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-          },
-        }
-      )
-      .subscribe((todoUpdated: any) => {
-        this.todos[todoUpdated.id - 1] = todoUpdated;
-      });
+  updateTodo(todo: Todo): void {
+    this.todoService.updateTodoById(todo.id, { ...todo, title: randText() });
+  }
+
+  deleteTodo(id: number): void {
+    this.todoService.deleteTodoById(id);
+  }
+
+  ngOnDestroy(): void {
+    this.todosSubscription.unsubscribe();
+    this.isLoadingSubscription.unsubscribe();
   }
 }

@@ -1,10 +1,53 @@
-/* You can add global styles to this file, and also import other style files */
-html,
 body {
-  height: 100%;
+  padding: 20px;
 }
 
-body {
-  margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
+.spinner-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.todo-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+
+  @media screen and (max-width: 767px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media screen and (max-width: 567px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.todo-item {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+
+  footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+
+    button {
+      outline: none;
+      border: 1px solid transparent;
+      background: #09439b;
+      padding: 8px 16px;
+      color: white;
+      border-radius: 8px;
+
+      &:nth-child(2) {
+        background: rgb(145, 4, 4);
+      }
+    }
+  }
 }

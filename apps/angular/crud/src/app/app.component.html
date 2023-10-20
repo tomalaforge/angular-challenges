@@ -1,0 +1,13 @@
+<div class="spinner-wrapper" *ngIf="isLoading">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div class="todo-wrapper" *ngIf="!isLoading">
+  <div *ngFor="let todo of todos; let i = index" class="todo-item">
+    <header>{{ todo.title }}</header>
+    <footer>
+      <button (click)="updateTodo(todo)">Update</button>
+      <button (click)="deleteTodo(todo.id)">Delete</button>
+    </footer>
+  </div>
+</div>
