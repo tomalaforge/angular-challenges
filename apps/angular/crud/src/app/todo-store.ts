@@ -12,14 +12,12 @@ import { TodoService } from './todo.service';
 interface TodoState {
   todos: Todo[];
   loadingAllTodos: boolean;
-  loadingSingleTodo: boolean;
   error: string;
 }
 
 const initialTodoState: TodoState = {
   todos: [],
   loadingAllTodos: false,
-  loadingSingleTodo: false,
   error: '',
 };
 
@@ -36,14 +34,12 @@ export class TodoStore
 
   todos$ = this.select((s) => s.todos);
   loadingAllTodos$ = this.select((s) => s.loadingAllTodos);
-  loadingSingleTodo$ = this.select((s) => s.loadingSingleTodo);
   error$ = this.select((s) => s.error);
 
   readonly vm$ = this.select(
     {
       todos: this.todos$,
       loadingAllTodos: this.loadingAllTodos$,
-      loadingSingleTodo: this.loadingSingleTodo$,
       error: this.error$,
     },
     { debounce: true }
@@ -71,11 +67,6 @@ export class TodoStore
     loadingAllTodos: value,
   }));
 
-  setLoadingSingleTodo = this.updater((state, value: boolean) => ({
-    ...state,
-    loadingSingleTodo: value,
-  }));
-
   setErrorState = this.updater((state, error: string) => ({
     ...state,
     error,
@@ -92,44 +83,6 @@ export class TodoStore
 
           tapResponse(
             (todos) => this.addTodos(todos),
-            (error: HttpErrorResponse) => {
-              this.setErrorState(error.message);
-            }
-          )
-        )
-      )
-    )
-  );
-
-  updateTodo = this.effect<Todo>(
-    pipe(
-      tap(() => this.setLoadingSingleTodo(true)),
-      switchMap((todo) =>
-        this.todoService.updateTodos(todo).pipe(
-          finalize(() => {
-            this.setLoadingSingleTodo(false);
-          }),
-          tapResponse(
-            (todos) => this.updateTodos(todos),
-            (error: HttpErrorResponse) => {
-              this.setErrorState(error.message);
-            }
-          )
-        )
-      )
-    )
-  );
-
-  deleteTodo = this.effect<number>(
-    pipe(
-      tap(() => this.setLoadingSingleTodo(true)),
-      switchMap((todo) =>
-        this.todoService.deleteTodos(todo).pipe(
-          finalize(() => {
-            this.setLoadingSingleTodo(false);
-          }),
-          tapResponse(
-            () => this.deleteTodos(todo),
             (error: HttpErrorResponse) => {
               this.setErrorState(error.message);
             }

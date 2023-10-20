@@ -4,50 +4,54 @@ import {
   EventEmitter,
   Input,
   Output,
+  inject,
 } from '@angular/core';
-import { CommonModule, NgIf } from '@angular/common';
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Todo } from './todo.model';
+import { TodoItemStore } from './todo-item.store';
+import { provideComponentStore } from '@ngrx/component-store';
 
 @Component({
   selector: 'app-todo-item',
   standalone: true,
-  imports: [CommonModule, NgIf],
-  template: `<p>{{ todo.title }}</p>
-    <button
-      [disabled]="loading && todo.id !== selectedId"
-      (click)="update(todo)">
-      Update
-    </button>
-    <button
-      [disabled]="loading && todo.id !== selectedId"
-      (click)="remove(todo)">
-      Delete
-    </button>
-    <ng-container *ngIf="loading && this.selectedId">{{
-      status
-    }}</ng-container> `,
+  imports: [AsyncPipe, NgIf],
+  template: `
+    <ng-container *ngIf="vm$ | async as vm">
+      <div>
+        {{ vm.todo?.title }}
+      </div>
+
+      <div *ngIf="vm.loading">
+        {{ vm.status }}
+      </div>
+
+      <div>
+        <button [disabled]="vm.loading" (click)="update(vm.todo!)">
+          Update
+        </button>
+        <button [disabled]="vm.loading" (click)="remove(vm.todo!)">
+          Delete
+        </button>
+      </div>
+    </ng-container>
+  `,
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [provideComponentStore(TodoItemStore)],
 })
 export class TodoItemComponent {
-  @Input() todo!: Todo;
-  @Input() loading!: boolean;
-  @Output() deleteTodoEvent = new EventEmitter<number>();
-  @Output() updateTodoEvent = new EventEmitter<Todo>();
+  private todoItemStore = inject(TodoItemStore);
+  @Input() set todo(todo: Todo) {
+    this.todoItemStore.patchState({ todo: todo });
+  }
 
-  selectedId = 0;
-
-  status = '';
+  vm$ = this.todoItemStore.vm$;
 
   update(todo: Todo) {
-    this.selectedId = todo.id;
-    this.status = 'updating Todo';
-    this.updateTodoEvent.emit();
+    this.todoItemStore.updateTodo(todo);
   }
 
   remove(todo: Todo) {
-    this.selectedId = todo.id;
-    this.status = 'deleting Todo';
-    this.deleteTodoEvent.emit();
+    this.todoItemStore.deleteTodo(todo.id);
   }
 }

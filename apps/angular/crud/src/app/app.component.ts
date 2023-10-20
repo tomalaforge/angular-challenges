@@ -21,10 +21,7 @@ import { TodoItemComponent } from './todo-item.component';
       <ng-template #noerror>
         <app-todo-item
           *ngFor="let todo of vm.todos"
-          [todo]="todo"
-          [loading]="vm.loadingSingleTodo"
-          (deleteTodoEvent)="removeTodo(todo.id)"
-          (updateTodoEvent)="updateTodo(todo)"></app-todo-item>
+          [todo]="todo"></app-todo-item>
       </ng-template>
     </ng-container>
   `,
@@ -36,12 +33,4 @@ export class AppComponent {
   todoStore = inject(TodoStore);
 
   vm$ = this.todoStore.vm$;
-
-  updateTodo(todo: Todo) {
-    this.todoStore.updateTodo(todo);
-  }
-
-  removeTodo(id: number) {
-    this.todoStore.deleteTodo(id);
-  }
 }
