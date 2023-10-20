@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Todo } from './todo.model';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
-import { finalize, pipe, switchMap, tap } from 'rxjs';
+import { pipe, switchMap, tap } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { TodoService } from './todo.service';
 import { TodoStore } from './todo-store';

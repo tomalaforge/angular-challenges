@@ -1,9 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
   Input,
-  Output,
   inject,
 } from '@angular/core';
 import { AsyncPipe, NgIf } from '@angular/common';

@@ -1,6 +1,5 @@
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { Todo } from './todo.model';
 import { TodoStore } from './todo-store';
 import { LetDirective } from '@ngrx/component';
 import { provideComponentStore } from '@ngrx/component-store';
