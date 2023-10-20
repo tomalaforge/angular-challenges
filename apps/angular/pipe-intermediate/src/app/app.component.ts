@@ -1,14 +1,15 @@
 import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
+import { FuncWrapper } from './funcWrapper.pipe';
 
 @Component({
   standalone: true,
-  imports: [NgFor],
+  imports: [NgFor, FuncWrapper],
   selector: 'app-root',
   template: `
     <div *ngFor="let person of persons; let index = index; let isFirst = first">
-      {{ showName(person.name, index) }}
-      {{ isAllowed(person.age, isFirst) }}
+      {{ showName | funcWrapper : person.name : index }}
+      {{ isAllowed | funcWrapper : person.age : isFirst }}
     </div>
   `,
 })
