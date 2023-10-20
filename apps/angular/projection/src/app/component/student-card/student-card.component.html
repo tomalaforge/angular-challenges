@@ -3,9 +3,7 @@
   customClass="bg-light-green"
   (create)="onCreate()"
   (delete)="onDelete($event)">
-  <div image>
-    <img src="assets/img/student.webp" width="200px" />
-  </div>
+  <img image src="assets/img/student.webp" width="200px" />
   <ng-template #rowRef let-student>
     <app-list-item (delete)="onDelete(student.id)">
       {{ student.firstname }}
