@@ -1,0 +1,39 @@
+---
+import type { Props } from '@astrojs/starlight/props';
+import Default from '@astrojs/starlight/components/PageTitle.astro';
+
+const challengeNumber = Astro.props.entry.data.challengeNumber;
+---
+
+<div class="page-title-content">
+    <Default {...Astro.props}><slot /></Default>
+    {challengeNumber && <div class="chip">Challenge #{challengeNumber}</div> }
+</div>
+
+<style>
+    .page-title-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    @media (max-width: 1010px) {
+        .page-title-content {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    } 
+
+    .chip {
+        border-width: 1px;
+        border-style: solid;
+        border-color: var(--color-chip-border);
+        border-radius: 6px;
+        padding: 2px 8px;
+        background-color: var(--color-chip);
+        color: var(--sl-color-text);
+        width: fit-content;
+        height: fit-content;
+        margin-top: 1rem;
+    }
+</style>

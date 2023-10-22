@@ -49,17 +49,6 @@
   margin: 0px 2px;
 }
 
-.chip {
-  border-width: 1px;
-  border-style: solid;
-  border-color: var(--color-chip-border);
-  border-radius: 6px;
-  padding: 2px 8px;
-  background-color: var(--color-chip);
-  color: var(--sl-color-text);
-  width: fit-content;
-}
-
 .article-footer {
   margin-top: 3rem !important;
   display: flex;
@@ -83,6 +72,10 @@
   align-items: center;
   margin-top: 0;
   background-color: var(--sl-color-accent-high);
+}
+
+.article-footer > a > p {
+  margin: 0px !important;
 }
 
 a.primary,
@@ -119,4 +112,15 @@ starlight-menu-button svg {
   background-color: white;
   padding: 1px 2px;
   border-radius: 999px;
+}
+
+.right-sidebar-panel {
+  height: 100%;
+}
+
+.right-sidebar-panel > div {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }

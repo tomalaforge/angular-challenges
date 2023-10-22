@@ -24,7 +24,7 @@ If you would like to propose a challenge, this project is open source, so feel f
 
 ## Challenges
 
-Check [all 36 challenges](https://angular-challenges.vercel.app/)
+Check [all 38 challenges](https://angular-challenges.vercel.app/)
 
 ## Contributors ✨
 
@@ -34,7 +34,7 @@ Check [all 36 challenges](https://angular-challenges.vercel.app/)
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://thomaslaforge.dev/home"><img src="https://avatars.githubusercontent.com/u/30832608?v=4?s=100" width="100px;" alt="Laforge Thomas"/><br /><sub><b>Laforge Thomas</b></sub></a><br /><a href="https://github.com/tomalaforge/angular-challenges/commits?author=tomalaforge" title="Code">💻</a> <a href="https://github.com/tomalaforge/angular-challenges/commits?author=tomalaforge" title="Documentation">📖</a> <a href="#content-tomalaforge" title="Content">🖋</a> <a href="#ideas-tomalaforge" title="Ideas, Planning, & Feedback">🤔</a> <a href="#design-tomalaforge" title="Design">🎨</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://thomaslaforge.dev/home"><img src="https://avatars.githubusercontent.com/u/30832608?v=4?s=100" width="100px;" alt="Laforge Thomas"/><br /><sub><b>Laforge Thomas</b></sub></a><br /><a href="#challenge-tomalaforge" title="Created a challenge">🧩</a> <a href="https://github.com/tomalaforge/angular-challenges/commits?author=tomalaforge" title="Code">💻</a> <a href="https://github.com/tomalaforge/angular-challenges/commits?author=tomalaforge" title="Documentation">📖</a> <a href="#content-tomalaforge" title="Content">🖋</a> <a href="#ideas-tomalaforge" title="Ideas, Planning, & Feedback">🤔</a> <a href="#design-tomalaforge" title="Design">🎨</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/alan-bio"><img src="https://avatars.githubusercontent.com/u/31838230?v=4?s=100" width="100px;" alt="Alan Dragicevich"/><br /><sub><b>Alan Dragicevich</b></sub></a><br /><a href="https://github.com/tomalaforge/angular-challenges/commits?author=alan-bio" title="Documentation">📖</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/edimitchel"><img src="https://avatars.githubusercontent.com/u/2922851?v=4?s=100" width="100px;" alt="Michel EDIGHOFFER"/><br /><sub><b>Michel EDIGHOFFER</b></sub></a><br /><a href="https://github.com/tomalaforge/angular-challenges/commits?author=edimitchel" title="Documentation">📖</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/gsgonzalez88"><img src="https://avatars.githubusercontent.com/u/39884678?v=4?s=100" width="100px;" alt="Gerardo Sebastian Gonzalez"/><br /><sub><b>Gerardo Sebastian Gonzalez</b></sub></a><br /><a href="https://github.com/tomalaforge/angular-challenges/commits?author=gsgonzalez88" title="Documentation">📖</a></td>
@@ -43,7 +43,7 @@ Check [all 36 challenges](https://angular-challenges.vercel.app/)
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/jdegand"><img src="https://avatars.githubusercontent.com/u/70610011?v=4?s=100" width="100px;" alt="J. Degand"/><br /><sub><b>J. Degand</b></sub></a><br /><a href="https://github.com/tomalaforge/angular-challenges/commits?author=jdegand" title="Documentation">📖</a></td>
     </tr>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/DeveshChau"><img src="https://avatars.githubusercontent.com/u/9509673?v=4?s=100" width="100px;" alt="Devesh Chaudhari"/><br /><sub><b>Devesh Chaudhari</b></sub></a><br /><a href="https://github.com/tomalaforge/angular-challenges/commits?author=DeveshChau" title="Code">💻</a> <a href="https://github.com/tomalaforge/angular-challenges/issues?q=author%3ADeveshChau" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/DeveshChau"><img src="https://avatars.githubusercontent.com/u/9509673?v=4?s=100" width="100px;" alt="Devesh Chaudhari"/><br /><sub><b>Devesh Chaudhari</b></sub></a><br /><a href="https://github.com/tomalaforge/angular-challenges/commits?author=DeveshChau" title="Code">💻</a> <a href="https://github.com/tomalaforge/angular-challenges/issues?q=author%3ADeveshChau" title="Bug reports">🐛</a> <a href="#challenge-DeveshChau" title="Created a challenge">🧩</a></td>
     </tr>
   </tbody>
   <tfoot>
@@ -64,6 +64,6 @@ Check [all 36 challenges](https://angular-challenges.vercel.app/)
 
 Contributions of any kind are welcome.
 
-## License
+## Licensev
 
 MIT

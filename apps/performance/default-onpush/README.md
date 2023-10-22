@@ -10,4 +10,4 @@ npx nx serve performance-default-onpush
 
 ### Documentation and Instruction
 
-Challenge documentation is [here](https://angular-challenges.vercel.app/challenges/angular-performance/34-default-onpush/).
+Challenge documentation is [here](https://angular-challenges.vercel.app/challenges/performance/34-default-onpush/).

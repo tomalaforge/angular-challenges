@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "src/**/*.ts",
+    "../../../libs/module-to-standalone/shell/src/lib/main-shell.routes.ts",
+    "../../../libs/module-to-standalone/shell/src/lib/main-shell.component.ts"
+  ],
+  "compilerOptions": {
+    "types": []
+  }
+}

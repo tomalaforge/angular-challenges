@@ -1,6 +1,9 @@
 ---
 title: 🔴 Power of Effect
 description: Challenge 7 is about creating an Ngrx effect with another Rxjs Hot observable
+author: Thomas Laforge
+challengeNumber: 7
+command: ngrx-notification
 sidebar:
   order: 206
 ---
@@ -8,8 +11,6 @@ sidebar:
 :::note
 WIP: The following documentation will be reviewed and improved. However, you can still take on the challenge. If you don't understand a certain part, please feel free to reach out or create an issue.
 :::
-
-<div class="chip">Challenge #7</div>
 
 ## Information
 
@@ -33,26 +34,3 @@ create one ngrx effect, or component store effect for each push type, and implem
 
 load your effect only when necessary.
 the application contain a root route, a lazy loaded route and a component with a local state (implemented with Component store)
-
----
-
-:::note
-Start the project by running: `npx nx serve ngrx-notification`.
-:::
-
-:::tip[Reminder]
-Your PR title must start with <b>Answer:7</b>.
-:::
-
-<div class="article-footer">
-  <a
-    href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A7+label%3Aanswer"
-    alt="Power of Effect community solutions">
-    ❖ Community Answers
-  </a>
-  <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A7+label%3A"answer+author"'
-    alt="Power of Effect solution author">
-    ▶︎ Author Answer
-  </a>
-  </div>

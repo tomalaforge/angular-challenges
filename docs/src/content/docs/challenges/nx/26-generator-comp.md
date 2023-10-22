@@ -1,6 +1,8 @@
 ---
 title: 🟠 Component Generator
 description: Challenge 26 is about creating a Nx generator to create a custom component
+author: Thomas Laforge
+challengeNumber: 26
 sidebar:
   order: 116
 ---
@@ -141,22 +143,3 @@ export interface User {
   name: string;
 }
 ```
-
----
-
-:::tip[Reminder]
-Your PR title must start with <b>Answer:26</b>.
-:::
-
-<div class="article-footer">
-  <a
-    href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A26+label%3Aanswer"
-    alt="Component Generator community solutions">
-    ❖ Community Answers
-  </a>
-  <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A26+label%3A"answer+author"'
-    alt="Component Generator solution author">
-    ▶︎ Author Answer
-  </a>
-  </div>
