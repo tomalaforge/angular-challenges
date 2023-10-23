@@ -10,13 +10,37 @@ import { TodoService } from './data-access/todo.service';
   selector: 'app-root',
   template: `
   <ng-container *ngIf="this.todoService.todos$ | async as todos">
-    <div *ngFor="let todo of todos">
-      {{ todo.title }}
-      <button (click)="this.todoService.update(todo)">Update</button>
+    <div class="single-todo" *ngFor="let todo of todos">
+      <span> {{ todo.title }} </span>
+      <span class="actions">
+        <button (click)="this.todoService.update(todo)">Update</button>
+        <button (click)="this.todoService.delete(todo)">Delete</button>
+      </span>
     </div>
   </ng-container>
   `,
-  styles: [],
+  styles: [
+    `
+    .single-todo {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 5px;
+        paddiing: 5px;
+      }
+
+      .actions{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .actions button {
+        margin: 5px;
+        padding: 5px 10px;
+      }
+    `
+  ],
 })
 export class AppComponent implements OnInit {
   todos: ITodo[] = [];

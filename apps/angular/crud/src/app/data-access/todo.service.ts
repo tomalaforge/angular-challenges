@@ -26,7 +26,7 @@ export class TodoService {
   update(todo: ITodo) {
     this._http
       .put<ITodo>(
-        `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
+        `${this.httpUrl}/${todo.id}`,
         JSON.stringify({
           todo: todo.id,
           title: randText(),
@@ -42,6 +42,13 @@ export class TodoService {
         const todos = this._todos$$.value;
         this._todos$$.next(todos.map(t => t.id === todoUpdated.id? todoUpdated : t));
       });
+  }
+
+  delete(todo:ITodo){
+    this._http.delete(`${this.httpUrl}/${todo.id}`).subscribe(res =>{
+      const todos = this._todos$$.value;
+      this._todos$$.next(todos.filter(t => t.id!== todo.id));
+    })
   }
 
 
