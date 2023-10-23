@@ -4,8 +4,7 @@
   <ng-content select="[cardImage]"></ng-content>
 
   <section>
-    <app-list-item *ngFor="let item of list"
-                    [id]="item.id">
+    <app-list-item *ngFor="let item of list">
 
       <ng-container name>
         {{item.firstname}}

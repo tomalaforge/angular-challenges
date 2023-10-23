@@ -9,7 +9,6 @@ import { CardComponent } from '../../ui/card/card.component';
   selector: 'app-student-card',
   template: `
   <app-card [list]="students"
-            [type]="cardType"
             (delete)="delete($event)"
             customClass="bg-light-green">
     <img alt="student"
