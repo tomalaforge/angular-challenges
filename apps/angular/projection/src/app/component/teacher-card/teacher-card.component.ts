@@ -1,7 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FakeHttpService, randTeacher } from '../../data-access/fake-http.service';
 import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
 import { Teacher } from '../../model/teacher.model';
 import { CardComponent } from '../../ui/card/card.component';
 
@@ -35,7 +34,6 @@ import { CardComponent } from '../../ui/card/card.component';
 })
 export class TeacherCardComponent implements OnInit {
   teachers: Teacher[] = [];
-  cardType = CardType.TEACHER;
   private store = inject(TeacherStore);
   private http = inject(FakeHttpService);
 

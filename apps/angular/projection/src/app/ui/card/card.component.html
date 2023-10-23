@@ -7,7 +7,7 @@
     <app-list-item *ngFor="let item of list">
 
       <ng-container name>
-        {{item.firstname}}
+        {{item.firstname ?? item.name}}
       </ng-container>
 
       <ng-container deleteBtn *ngTemplateOutlet="deleteBtnTemplate; context:{$implicit: item.id}"></ng-container>
