@@ -1,5 +1,5 @@
-import { NgFor, NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CardType } from '../../model/card.model';
 import { ListItemComponent } from '../list-item/list-item.component';
 
@@ -7,15 +7,12 @@ import { ListItemComponent } from '../list-item/list-item.component';
   selector: 'app-card',
   templateUrl: './card.component.html',
   standalone: true,
-  imports: [NgIf, NgFor, ListItemComponent],
+  imports: [NgIf, NgFor, ListItemComponent, NgTemplateOutlet],
 })
 export class CardComponent {
   @Input() list: any[] | null = null;
   @Input() type!: CardType;
   @Input() customClass = '';
-
+  @Output() delete: EventEmitter<number> = new EventEmitter();
   CardType = CardType;
-
-
-
 }

@@ -5,11 +5,14 @@
 
   <section>
     <app-list-item *ngFor="let item of list"
-                    [id]="item.id"
-                    [type]="type">
+                    [id]="item.id">
+
       <ng-container name>
         {{item.firstname}}
       </ng-container>
+
+      <ng-container deleteBtn *ngTemplateOutlet="deleteBtnTemplate; context:{$implicit: item.id}"></ng-container>
+
     </app-list-item>
 
   </section>
@@ -18,3 +21,9 @@
 
 
 </div>
+
+<ng-template #deleteBtnTemplate let-id>
+  <button (click)="delete.emit(id)">
+    <img alt="delete-icon" class="h-5" src="assets/svg/trash.svg" />
+  </button>
+</ng-template>
