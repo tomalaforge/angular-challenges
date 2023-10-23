@@ -18,13 +18,6 @@ import { CardComponent } from '../../ui/card/card.component';
     customClass="bg-light-red">
     <img src="assets/img/teacher.png" width="200px" />
   </app-card>`,
-  styles: [
-    `
-      ::ng-deep .bg-light-red {
-        background-color: rgba(250, 0, 0, 0.1);
-      }
-    `,
-  ],
   standalone: true,
   imports: [CardComponent],
 })
