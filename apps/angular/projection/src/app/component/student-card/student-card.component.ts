@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FakeHttpService, randStudent } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
 import { CardType } from '../../model/card.model';
@@ -10,6 +10,7 @@ import { CardComponent } from '../../ui/card/card.component';
   template: `
   <app-card [list]="students"
             [type]="cardType"
+            (delete)="delete($event)"
             customClass="bg-light-green">
     <img alt="student"
          cardImage
@@ -35,8 +36,8 @@ import { CardComponent } from '../../ui/card/card.component';
 export class StudentCardComponent implements OnInit {
   students: Student[] = [];
   cardType = CardType.STUDENT;
-
-  constructor(private http: FakeHttpService, private store: StudentStore) {}
+  private store = inject(StudentStore);
+  private http = inject(FakeHttpService);
 
   ngOnInit(): void {
     this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
@@ -46,6 +47,10 @@ export class StudentCardComponent implements OnInit {
 
   addNewItem() {
     this.store.addOne(randStudent());
+  }
+
+  delete(id: number) {
+    this.store.deleteOne(id);
   }
 
   
