@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { ITodo } from './models/todo.model';
 import { TodoService } from './data-access/todo.service';
 
 @Component({
   standalone: true,
   imports: [CommonModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-root',
   template: `
   <ng-container *ngIf="this.todoService.todos$ | async as todos">
