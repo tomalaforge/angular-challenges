@@ -8,13 +8,14 @@
       *ngFor="let item of list"
       [name]="item.firstname"
       [id]="item.id"
-      [type]="type">
+      [type]="type"
+      (onDelete)="onDelete.emit($event)">
     </app-list-item>
   </section>
 
   <button
     class="border border-blue-500 bg-blue-300 p-2 rounded-sm"
-    (click)="addNewItem()">
+    (click)="onAddNewItem.emit()">
     Add
   </button>
 </div>
