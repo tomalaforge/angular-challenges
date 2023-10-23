@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+app-card .bg-light-blue { 
+  background-color: rgba(157, 219, 255, 0.692)
+}
+
+app-card .bg-light-green { 
+  background-color: rgba(0, 250, 0, 0.1);
+}
+
+app-card .bg-light-red {
+  background-color: rgba(250, 0, 0, 0.1);
+}

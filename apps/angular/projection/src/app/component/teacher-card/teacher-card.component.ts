@@ -22,13 +22,6 @@ import { CardComponent } from '../../ui/card/card.component';
     <ng-content select="[deleteBtn]"></ng-content>
   </app-card>
   `,
-
-  styles: [
-    ` ::ng-deep .bg-light-red {
-        background-color: rgba(250, 0, 0, 0.1);
-      }
-    `,
-  ],
   standalone: true,
   imports: [CardComponent],
 })

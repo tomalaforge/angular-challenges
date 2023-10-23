@@ -9,10 +9,10 @@ import { City } from '../../model/city.model';
   template: `
     <app-card [list]="cities"
             (delete)="delete($event)"
-            customClass="bg-light-green">
+            customClass="bg-light-blue">
     <img alt="student"
          cardImage
-         src="assets/img/student.webp"
+         src="assets/img/city.jpg"
          width="200px" />
     <button addNewItemBtn
             class="border border-blue-500 bg-blue-300 p-2 rounded-sm"
