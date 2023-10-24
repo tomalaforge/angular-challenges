@@ -1,6 +1,11 @@
-import { Component } from '@angular/core';
-import { DEFAULT_TIMER } from './data';
+import { Component, Inject } from '@angular/core';
+import { TIMER_TOKEN } from './data';
 import { TimerComponent } from './timer.component';
+
+// https://angular.io/errors/NG0912
+// https://stackoverflow.com/questions/51519360/how-to-use-multiple-instances-of-same-component-in-angular-6
+// https://dontpaniclabs.com/blog/post/2023/03/15/setting-up-injection-tokens-with-dynamic-values/
+
 @Component({
   selector: 'timer-container',
   standalone: true,
@@ -17,5 +22,6 @@ import { TimerComponent } from './timer.component';
   },
 })
 export class TimerContainerComponent {
-  timer = DEFAULT_TIMER;
+  //timer = DEFAULT_TIMER;
+  constructor(@Inject(TIMER_TOKEN) public timer: Number) {}
 }
