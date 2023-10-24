@@ -10,7 +10,7 @@ import {
   Tree,
   updateJson,
 } from '@nx/devkit';
-import { Linter } from '@nx/linter';
+import { Linter } from '@nx/eslint';
 import { join } from 'path';
 import { getProjectDir } from '../../utils/normalize';
 import { Schema } from './schema';
