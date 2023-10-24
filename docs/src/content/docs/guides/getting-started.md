@@ -40,7 +40,7 @@ Open the project in any IDE of your choice.
 ## Install all dependancies
 
 ```bash
-npm install
+npm ci
 ```
 
 ## Choose a challenge
