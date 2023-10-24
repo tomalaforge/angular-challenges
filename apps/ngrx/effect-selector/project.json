@@ -37,12 +37,6 @@
               "maximumError": "4kb"
             }
           ],
-          "fileReplacements": [
-            {
-              "replace": "apps/ngrx/effect-selector/src/environments/environment.ts",
-              "with": "apps/ngrx/effect-selector/src/environments/environment.prod.ts"
-            }
-          ],
           "outputHashing": "all"
         },
         "development": {

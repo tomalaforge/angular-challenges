@@ -36,12 +36,6 @@
               "maximumError": "4kb"
             }
           ],
-          "fileReplacements": [
-            {
-              "replace": "apps/angular/ngfor-enhancement/src/environments/environment.ts",
-              "with": "apps/angular/ngfor-enhancement/src/environments/environment.prod.ts"
-            }
-          ],
           "outputHashing": "all"
         },
         "development": {
