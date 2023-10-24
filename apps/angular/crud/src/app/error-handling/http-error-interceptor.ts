@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import {
   HttpInterceptor,
   HttpRequest,
@@ -8,9 +8,13 @@ import {
 } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { LoadingService } from '../data-access/loading.service';
 
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
+
+  loadingService = inject(LoadingService);
+
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
@@ -21,6 +25,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
           console.error('HTTP Error:', error);
         }
         window.alert("There was an error processing. Please try again")
+        this.loadingService.stopLoading()
         return of(error);
       })
     );
