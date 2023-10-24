@@ -55,7 +55,7 @@ export class TodoService {
     this._http.delete(`${this.httpUrl}/${todo.id}`).subscribe(res =>{
       const todos = this._todos$$.value;
       this._todos$$.next(todos.filter(t => t.id!== todo.id));
-      this.loadingService.startLoading()
+      this.loadingService.stopLoading();
     })
   }
 
