@@ -1,4 +1,6 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { CommonModule, NgIf } from '@angular/common';
+import { Observable, tap } from 'rxjs';
 import { CardComponent } from '../../ui/card/card.component';
 import { CityStore } from '../../data-access/city.store';
 import {
@@ -6,8 +8,6 @@ import {
   randomCity,
 } from '../../data-access/fake-http.service';
 import { City } from '../../model/city.model';
-import { CommonModule, NgIf } from '@angular/common';
-import { Observable, tap } from 'rxjs';
 
 @Component({
   selector: 'app-city-card',
