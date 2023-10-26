@@ -8,16 +8,14 @@ import {
   randomCity,
 } from '../../data-access/fake-http.service';
 import { City } from '../../model/city.model';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-city-card',
   template: `
     <ng-container *ngIf="fetchCities$ | async as fetchedCities">
       <ng-container *ngIf="cities$ | async as cities">
-        <app-card
-          [list]="cities"
-          (delete)="delete($event)"
-          customClass="bg-light-blue">
+        <app-card customClass="bg-light-blue">
           <img
             alt="student"
             cardImage
@@ -29,12 +27,20 @@ import { City } from '../../model/city.model';
             (click)="addNewItem()">
             Add
           </button>
+          <ng-template #listItemTemplate let-city>
+            <app-list-item
+              (delete)="delete($event)"
+              *ngFor="let item of cities"
+              [id]="item.id">
+              <ng-container name>{{ item.name }}</ng-container>
+            </app-list-item>
+          </ng-template>
         </app-card>
       </ng-container>
     </ng-container>
   `,
   standalone: true,
-  imports: [CommonModule, CardComponent, NgIf],
+  imports: [CommonModule, CardComponent, NgIf, ListItemComponent],
 })
 export class CityCardComponent {
   private store = inject(CityStore);

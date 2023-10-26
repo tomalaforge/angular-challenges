@@ -8,16 +8,14 @@ import {
 import { TeacherStore } from '../../data-access/teacher.store';
 import { Teacher } from '../../model/teacher.model';
 import { CardComponent } from '../../ui/card/card.component';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-teacher-card',
   template: `
     <ng-container *ngIf="fetchedTeachers$ | async as fetchedTeachers">
       <ng-container *ngIf="teachers$ | async as teachers">
-        <app-card
-          [list]="teachers"
-          (delete)="delete($event)"
-          customClass="bg-light-red">
+        <app-card customClass="bg-light-red">
           <img
             alt="teacher"
             cardImage
@@ -29,13 +27,20 @@ import { CardComponent } from '../../ui/card/card.component';
             (click)="addNewItem()">
             Add
           </button>
-          <ng-content select="[deleteBtn]"></ng-content>
+          <ng-template #listItemTemplate let-teacher>
+            <app-list-item
+              (delete)="delete($event)"
+              *ngFor="let item of teachers"
+              [id]="item.id">
+              <ng-container name>{{ item.firstname }}</ng-container>
+            </app-list-item>
+          </ng-template>
         </app-card>
       </ng-container>
     </ng-container>
   `,
   standalone: true,
-  imports: [CommonModule, NgIf, CardComponent],
+  imports: [CommonModule, NgIf, CardComponent, ListItemComponent],
 })
 export class TeacherCardComponent {
   private store = inject(TeacherStore);
