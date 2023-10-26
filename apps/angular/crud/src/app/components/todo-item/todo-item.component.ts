@@ -5,12 +5,18 @@ import { ITodo } from '../../models/todo.model';
   selector: 'app-todo-item',
   template: `
     <div class="single-todo">
-      <span> {{ todoItem.title }} </span>
+      <span class="title"> {{ todoItem.title }} </span>
       <div class="actions">
-        <button [disabled]="!!todoItem.disabled" (click)="updateToDo()">
+        <button
+          class="update-btn"
+          [disabled]="!!todoItem.disabled"
+          (click)="updateToDo()">
           Update
         </button>
-        <button [disabled]="!!todoItem.disabled" (click)="deleteTodo()">
+        <button
+          class="delete-btn"
+          [disabled]="!!todoItem.disabled"
+          (click)="deleteTodo()">
           Delete
         </button>
       </div>
@@ -19,6 +25,10 @@ import { ITodo } from '../../models/todo.model';
   standalone: true,
   styles: [
     `
+      .title {
+        font-size: 14px;
+        font-weight: 500;
+      }
       .single-todo {
         display: flex;
         align-items: center;
@@ -35,7 +45,33 @@ import { ITodo } from '../../models/todo.model';
 
       .actions button {
         margin: 5px;
-        padding: 5px 10px;
+        padding: 5px 15px;
+        border: none;
+        border-radius: 3px;
+      }
+
+      .update-btn {
+        background-color: orange;
+        color: white;
+      }
+
+      .update-btn:hover {
+        background-color: white;
+        color: orange;
+        cursor: pointer;
+        outline: 1px solid orange;
+      }
+
+      .delete-btn {
+        background-color: red;
+        color: white;
+      }
+
+      .delete-btn:hover {
+        background-color: white;
+        color: red;
+        cursor: pointer;
+        outline: 1px solid red;
       }
     `,
   ],

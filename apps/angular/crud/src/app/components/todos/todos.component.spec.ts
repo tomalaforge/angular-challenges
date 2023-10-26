@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TodosComponent } from './todos.component';
 import { TodoService } from '../../data-access/todo.service';
@@ -32,6 +31,8 @@ describe('TodoListComponent', () => {
 
     // Trigger ngOnInit to fetch and populate todos
     fixture.detectChanges();
+
+    //used set timeout to wait for rendering after subscription
     setTimeout(() => {
       // Check that the todos are rendered
       const todoElements =
