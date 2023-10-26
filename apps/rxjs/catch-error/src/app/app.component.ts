@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Subject, concatMap, map } from 'rxjs';
+import { Subject, concatMap, map, catchError, of } from 'rxjs';
 
 @Component({
   standalone: true,
@@ -40,7 +40,11 @@ export class AppComponent {
       .pipe(
         map(() => this.input),
         concatMap((value) =>
-          this.http.get(`https://jsonplaceholder.typicode.com/${value}/1`)
+          this.http
+            .get(`https://jsonplaceholder.typicode.com/${value}/1`)
+            .pipe(
+              catchError((err) => of(console.log('Could not fetch api', err)))
+            )
         ),
         takeUntilDestroyed(this.destroyRef)
       )
