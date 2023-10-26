@@ -12,7 +12,6 @@ import { LoadingService } from '../data-access/loading.service';
 
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
-
   loadingService = inject(LoadingService);
 
   intercept(
@@ -24,8 +23,9 @@ export class HttpErrorInterceptor implements HttpInterceptor {
         if (error instanceof HttpErrorResponse) {
           console.error('HTTP Error:', error);
         }
-        window.alert("There was an error processing. Please try again")
-        this.loadingService.stopLoading()
+        window.alert('There was an error processing. Please try again');
+        window.location.reload();
+        this.loadingService.stopLoading();
         return of(error);
       })
     );
