@@ -1,5 +1,10 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { FakeHttpService, randTeacher } from '../../data-access/fake-http.service';
+import { Component, inject } from '@angular/core';
+import { CommonModule, NgIf } from '@angular/common';
+import { Observable, tap } from 'rxjs';
+import {
+  FakeHttpService,
+  randTeacher,
+} from '../../data-access/fake-http.service';
 import { TeacherStore } from '../../data-access/teacher.store';
 import { Teacher } from '../../model/teacher.model';
 import { CardComponent } from '../../ui/card/card.component';
@@ -7,33 +12,39 @@ import { CardComponent } from '../../ui/card/card.component';
 @Component({
   selector: 'app-teacher-card',
   template: `
-  <app-card [list]="teachers"
-            (delete)="delete($event)"
-            customClass="bg-light-red">
-    <img alt="teacher"
-         cardImage
-         src="assets/img/teacher.png"
-         width="200px" />
-    <button addNewItemBtn
+    <ng-container *ngIf="fetchedTeachers$ | async as fetchedTeachers">
+      <ng-container *ngIf="teachers$ | async as teachers">
+        <app-card
+          [list]="teachers"
+          (delete)="delete($event)"
+          customClass="bg-light-red">
+          <img
+            alt="teacher"
+            cardImage
+            src="assets/img/teacher.png"
+            width="200px" />
+          <button
+            addNewItemBtn
             class="border border-blue-500 bg-blue-300 p-2 rounded-sm"
-           (click)="addNewItem()">
-           Add
-    </button>
-    <ng-content select="[deleteBtn]"></ng-content>
-  </app-card>
+            (click)="addNewItem()">
+            Add
+          </button>
+          <ng-content select="[deleteBtn]"></ng-content>
+        </app-card>
+      </ng-container>
+    </ng-container>
   `,
   standalone: true,
-  imports: [CardComponent],
+  imports: [CommonModule, NgIf, CardComponent],
 })
-export class TeacherCardComponent implements OnInit {
-  teachers: Teacher[] = [];
+export class TeacherCardComponent {
   private store = inject(TeacherStore);
   private http = inject(FakeHttpService);
 
-  ngOnInit(): void {
-    this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
-    this.store.teachers$.subscribe((t) => (this.teachers = t));
-  }
+  teachers$: Observable<Teacher[]> = this.store.teachers$;
+  fetchedTeachers$: Observable<Teacher[]> = this.http.fetchTeachers$.pipe(
+    tap((t) => this.store.addAll(t))
+  );
 
   addNewItem() {
     this.store.addOne(randTeacher());
