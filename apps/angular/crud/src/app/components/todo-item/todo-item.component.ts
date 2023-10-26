@@ -1,18 +1,20 @@
-import { Component, Input, OnInit, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ITodo } from '../../models/todo.model';
-import { TodoService } from '../../data-access/todo.service';
 
 @Component({
   selector: 'app-todo-item',
-  template:
-    `
-  <div class="single-todo">
-    <span> {{ todoItem.title }} </span>
-    <span class="actions">
-      <button (click)="this.todoService.update(todoItem)">Update</button>
-      <button (click)="this.todoService.delete(todoItem)">Delete</button>
-    </span>
-  </div>
+  template: `
+    <div class="single-todo">
+      <span> {{ todoItem.title }} </span>
+      <div class="actions">
+        <button [disabled]="!!todoItem.disabled" (click)="updateToDo()">
+          Update
+        </button>
+        <button [disabled]="!!todoItem.disabled" (click)="deleteTodo()">
+          Delete
+        </button>
+      </div>
+    </div>
   `,
   standalone: true,
   styles: [
@@ -25,7 +27,7 @@ import { TodoService } from '../../data-access/todo.service';
         paddiing: 5px;
       }
 
-      .actions{
+      .actions {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -34,15 +36,23 @@ import { TodoService } from '../../data-access/todo.service';
       .actions button {
         margin: 5px;
         padding: 5px 10px;
-      }`
-  ]
+      }
+    `,
+  ],
 })
-
-export class TodoItemComponent implements OnInit {
-  todoService = inject(TodoService);
+export class TodoItemComponent {
   @Input() todoItem!: ITodo;
 
-  constructor() { }
+  @Output() updateToDoEvent: EventEmitter<ITodo> = new EventEmitter();
+  @Output() deleteToDoEvent: EventEmitter<ITodo> = new EventEmitter();
 
-  ngOnInit() { }
+  updateToDo() {
+    this.todoItem.disabled = true;
+    this.updateToDoEvent.emit(this.todoItem);
+  }
+
+  deleteTodo() {
+    this.todoItem.disabled = true;
+    this.deleteToDoEvent.emit(this.todoItem);
+  }
 }
