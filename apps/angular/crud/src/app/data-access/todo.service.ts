@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { randText } from '@ngneat/falso';
 import { ITodo } from '../models/todo.model';
 import { LoadingService } from './loading.service';
 
