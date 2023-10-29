@@ -32,6 +32,6 @@ While the application works, the developer experience is far from being optimal.
 ## Constraints
 
 - You <b>must</b> refactor the `CardComponent` and `ListItemComponent`.
-- The `NgFor` directive must be declared and remain inside the `CardComponent`. You might be tempted to move it to the `CardComponent` but avoid doing so.
+- The `NgFor` directive must be declared and remain inside the `CardComponent`. You might be tempted to move it to the `ListItemComponent` but avoid doing so.
 - `CardComponent` should not contain any `NgIf` or `NgSwitch`.
 - CSS: try to avoid using `::ng-deep`. Find a better way to handle CSS styling.
