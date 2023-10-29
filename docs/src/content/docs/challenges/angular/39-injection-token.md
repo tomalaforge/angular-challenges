@@ -4,6 +4,7 @@ description: Challenge 39 is about learning the power of dependancy injection
 author: Thomas Laforge
 challengeNumber: 39
 command: angular-injection-token
+blogLink: https://itnext.io/stop-being-scared-of-injectiontokens-ab22f72f0fe9
 sidebar:
   order: 118
   badge: New
