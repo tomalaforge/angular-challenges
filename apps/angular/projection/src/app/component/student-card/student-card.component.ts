@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
   FakeHttpService,
@@ -5,14 +6,13 @@ import {
 } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
 import { ListItemTemplateDirective } from '../../directives/list-item-template/list-item-template.directive';
-import { Student } from '../../model/student.model';
-import { CardComponent } from '../../ui/card/card.component';
 import { CardListInterface } from '../../interfaces/card-list.interface';
+import { CardComponent } from '../../ui/card/card.component';
 
 @Component({
   selector: 'app-student-card',
   template: `<app-card
-    [list]="students"
+    [list]="students$ | async"
     customClass="bg-light-green"
     (addButtonClicked)="handleAdd()"
     (deleteButtonClicked)="handleDelete($event)">
@@ -32,17 +32,15 @@ import { CardListInterface } from '../../interfaces/card-list.interface';
       }
     `,
   ],
-  imports: [CardComponent, ListItemTemplateDirective],
+  imports: [CardComponent, ListItemTemplateDirective, CommonModule],
 })
 export class StudentCardComponent implements OnInit, CardListInterface {
-  students: Student[] = [];
+  students$ = this.store.students$;
 
   constructor(private http: FakeHttpService, private store: StudentStore) {}
 
   ngOnInit(): void {
     this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
-
-    this.store.students$.subscribe((s) => (this.students = s));
   }
 
   handleAdd(): void {
