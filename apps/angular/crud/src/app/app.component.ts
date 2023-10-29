@@ -1,51 +1,60 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { randText } from '@ngneat/falso';
-
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { TodosStore } from './data-access/todos.store';
+import { Todo } from './model/todo.interface';
+import { ItemComponent } from './components/item.component';
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatProgressSpinnerModule, ItemComponent],
   selector: 'app-root',
   template: `
-    <div *ngFor="let todo of todos">
-      {{ todo.title }}
-      <button (click)="update(todo)">Update</button>
-    </div>
+    <mat-spinner *ngIf="loading$ | async; else loaded"></mat-spinner>
+    <ng-template #loaded>
+      <ng-container *ngIf="error$ | async as error; else result">
+        {{ error }}
+      </ng-container>
+      <ng-template #result>
+        <app-item
+          *ngFor="let todo of todos$ | async; trackBy: trackByFunc"
+          [item]="todo"
+          [disabledTodosIds]="disabledTodosIds$ | async"
+          [errorTodosIds]="errorTodosIds$ | async"
+          (updateClicked)="handleUpdate($event)"
+          (deleteClicked)="handleDelete($event)">
+        </app-item>
+      </ng-template>
+    </ng-template>
   `,
   styles: [],
+  providers: [TodosStore],
 })
 export class AppComponent implements OnInit {
-  todos!: any[];
+  public todos$ = this.todosStore.select((state) => state.todos);
+  public loading$ = this.todosStore.select((state) => state.loading);
+  public error$ = this.todosStore.select((state) => state.error);
+  public disabledTodosIds$ = this.todosStore.select(
+    (state) => state.disabledTodosIds
+  );
+  public errorTodosIds$ = this.todosStore.select(
+    (state) => state.errorTodosIds
+  );
 
-  constructor(private http: HttpClient) {}
+  constructor(private readonly todosStore: TodosStore) {}
 
   ngOnInit(): void {
-    this.http
-      .get<any[]>('https://jsonplaceholder.typicode.com/todos')
-      .subscribe((todos) => {
-        this.todos = todos;
-      });
+    this.todosStore.load();
   }
 
-  update(todo: any) {
-    this.http
-      .put<any>(
-        `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
-        JSON.stringify({
-          todo: todo.id,
-          title: randText(),
-          body: todo.body,
-          userId: todo.userId,
-        }),
-        {
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-          },
-        }
-      )
-      .subscribe((todoUpdated: any) => {
-        this.todos[todoUpdated.id - 1] = todoUpdated;
-      });
+  trackByFunc(_: number, item: Todo): number {
+    return item.id;
+  }
+
+  handleUpdate(todo: Todo): void {
+    this.todosStore.update(todo);
+  }
+
+  handleDelete(todo: Todo): void {
+    this.todosStore.delete(todo.id);
   }
 }
