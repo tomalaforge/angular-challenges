@@ -1,34 +1,53 @@
-import { NgFor, NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { randStudent, randTeacher } from '../../data-access/fake-http.service';
-import { StudentStore } from '../../data-access/student.store';
-import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
+import {
+  Component,
+  ContentChild,
+  EventEmitter,
+  Input,
+  Output,
+  TemplateRef,
+} from '@angular/core';
 import { ListItemComponent } from '../list-item/list-item.component';
+import { ListItemTemplateDirective } from '../../directives/list-item-template/list-item-template.directive';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
   standalone: true,
-  imports: [NgIf, NgFor, ListItemComponent],
+  imports: [
+    NgIf,
+    NgFor,
+    ListItemComponent,
+    CommonModule,
+    ListItemTemplateDirective,
+  ],
+  styles: [
+    `
+      .bg-light-red {
+        background-color: var(--bg-light-red);
+      }
+      .bg-light-green {
+        background-color: var(--bg-light-green);
+      }
+      .bg-light-blue {
+        background-color: var(--bg-light-blue);
+      }
+    `,
+  ],
 })
 export class CardComponent {
-  @Input() list: any[] | null = null;
-  @Input() type!: CardType;
+  @Input() list: unknown[] | null = null;
   @Input() customClass = '';
+  @Output() addButtonClicked = new EventEmitter<void>();
+  @Output() deleteButtonClicked = new EventEmitter<number>();
+  @ContentChild(ListItemTemplateDirective, { read: TemplateRef })
+  optionTemplate: TemplateRef<unknown> | null = null;
 
-  CardType = CardType;
+  addNewItem(): void {
+    this.addButtonClicked.emit();
+  }
 
-  constructor(
-    private teacherStore: TeacherStore,
-    private studentStore: StudentStore
-  ) {}
-
-  addNewItem() {
-    if (this.type === CardType.TEACHER) {
-      this.teacherStore.addOne(randTeacher());
-    } else if (this.type === CardType.STUDENT) {
-      this.studentStore.addOne(randStudent());
-    }
+  emitDelete(id: number): void {
+    this.deleteButtonClicked.emit(id);
   }
 }
