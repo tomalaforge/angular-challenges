@@ -7,6 +7,7 @@ import { StudentStore } from '../../data-access/student.store';
 import { ListItemTemplateDirective } from '../../directives/list-item-template/list-item-template.directive';
 import { Student } from '../../model/student.model';
 import { CardComponent } from '../../ui/card/card.component';
+import { CardListInterface } from '../../interfaces/card-list.interface';
 
 @Component({
   selector: 'app-student-card',
@@ -33,7 +34,7 @@ import { CardComponent } from '../../ui/card/card.component';
   ],
   imports: [CardComponent, ListItemTemplateDirective],
 })
-export class StudentCardComponent implements OnInit {
+export class StudentCardComponent implements OnInit, CardListInterface {
   students: Student[] = [];
 
   constructor(private http: FakeHttpService, private store: StudentStore) {}

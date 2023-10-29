@@ -6,6 +6,7 @@ import {
 } from '../../data-access/fake-http.service';
 import { City } from '../../model/city.model';
 import { CardComponent } from '../../ui/card/card.component';
+import { CardListInterface } from '../../interfaces/card-list.interface';
 
 @Component({
   selector: 'app-city-card',
@@ -29,7 +30,7 @@ import { CardComponent } from '../../ui/card/card.component';
     `,
   ],
 })
-export class CityCardComponent implements OnInit {
+export class CityCardComponent implements OnInit, CardListInterface {
   cities: City[] = [];
   constructor(private http: FakeHttpService, private store: CityStore) {}
 

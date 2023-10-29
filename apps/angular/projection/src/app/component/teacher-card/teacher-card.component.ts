@@ -7,6 +7,7 @@ import { TeacherStore } from '../../data-access/teacher.store';
 import { Teacher } from '../../model/teacher.model';
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemTemplateDirective } from '../../directives/list-item-template/list-item-template.directive';
+import { CardListInterface } from '../../interfaces/card-list.interface';
 
 @Component({
   selector: 'app-teacher-card',
@@ -34,7 +35,7 @@ import { ListItemTemplateDirective } from '../../directives/list-item-template/l
   standalone: true,
   imports: [CardComponent, ListItemTemplateDirective],
 })
-export class TeacherCardComponent implements OnInit {
+export class TeacherCardComponent implements OnInit, CardListInterface {
   teachers: Teacher[] = [];
 
   constructor(private http: FakeHttpService, private store: TeacherStore) {}
