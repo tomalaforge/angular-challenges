@@ -26,6 +26,6 @@ The use of `@Input` is forbidden. This example is basic, and using `@Input` coul
 <details>
   <summary>Hint 1</summary>
 
-Looking at `InjectionToken` can be of great help.
+Looking at this [blog post](https://itnext.io/stop-being-scared-of-injectiontokens-ab22f72f0fe9) can be of great help.
 
 </details>
