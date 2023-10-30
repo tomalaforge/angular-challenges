@@ -4,7 +4,6 @@ description: Challenge 39 is about learning the power of dependancy injection
 author: Thomas Laforge
 challengeNumber: 39
 command: angular-injection-token
-blogLink: https://itnext.io/stop-being-scared-of-injectiontokens-ab22f72f0fe9
 sidebar:
   order: 118
   badge: New
@@ -27,6 +26,6 @@ The use of `@Input` is forbidden. This example is basic, and using `@Input` coul
 <details>
   <summary>Hint 1</summary>
 
-Looking at `InjectionToken` can be of great help.
+Looking at this [blog post](https://itnext.io/stop-being-scared-of-injectiontokens-ab22f72f0fe9) can be of great help.
 
 </details>
