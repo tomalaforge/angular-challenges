@@ -14,6 +14,7 @@ import { Component, Input } from '@angular/core';
         Who is here?
       </div>
     </div>
+    <div class="text-center text-white text-4xl">Happy Christmas !!!</div>
     <div class="container">
       <div class="santa">
         <div class="hand-l"></div>
