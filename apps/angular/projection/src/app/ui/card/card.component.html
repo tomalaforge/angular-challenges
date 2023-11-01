@@ -1,27 +1,23 @@
-<div
-  class="border-2 border-black rounded-md p-4 w-fit flex flex-col gap-3"
-  [class]="customClass">
-  <img
-    *ngIf="type === CardType.TEACHER"
-    src="assets/img/teacher.png"
-    width="200px" />
-  <img
-    *ngIf="type === CardType.STUDENT"
-    src="assets/img/student.webp"
-    width="200px" />
-
+<div class="border-2 border-black rounded-md p-4 w-fit flex flex-col gap-3" [class]="customClass">
+  <ng-content select="[headerImg]"></ng-content>
   <section>
-    <app-list-item
-      *ngFor="let item of list"
-      [name]="item.firstname"
-      [id]="item.id"
-      [type]="type">
-    </app-list-item>
+    <ng-container *ngFor="let item of list">
+      <ng-container *ngTemplateOutlet="
+          specialTemplate ||  defaultListItemTemplate;
+          context: { $implicit: item }
+        "></ng-container>
+    </ng-container>
   </section>
 
-  <button
-    class="border border-blue-500 bg-blue-300 p-2 rounded-sm"
-    (click)="addNewItem()">
-    Add
-  </button>
+  <ng-template #defaultListItemTemplate let-item>
+    <app-list-item>
+      <div class="border border-grey-300 py-1 px-2 flex justify-between">
+        {{ item.firstname }}
+        <button (click)="deleteItem(item.id)">
+          <img class="h-5" src="assets/svg/trash.svg" />
+        </button>
+      </div>
+    </app-list-item>
+  </ng-template>
+  <ng-content select="[addNewItem]"></ng-content>
 </div>
