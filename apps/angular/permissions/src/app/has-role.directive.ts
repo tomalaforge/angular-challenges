@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { Role } from './user.model';
 import { UserStore } from './user.store';
+import { take } from 'rxjs';
 
 @Directive({
   selector: '[hasRole], [hasRoleIsAdmin]',
@@ -36,15 +37,18 @@ export class HasRoleDirective implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     if (this.isAdmin) {
-      this.store.isAdmin$.subscribe((isAdmin: any) => {
+      this.store.isAdmin$.pipe(take(1)).subscribe((isAdmin: any) => {
         isAdmin ? this.addTemplate() : this.addElseTemplate();
       });
     }
 
     if (this.role) {
-      this.store.hasAnyRole(this.role).subscribe((hasPermission) => {
-        hasPermission ? this.addTemplate() : this.addElseTemplate();
-      });
+      this.store
+        .hasAnyRole(this.role)
+        .pipe(take(1))
+        .subscribe((hasPermission) => {
+          hasPermission ? this.addTemplate() : this.addElseTemplate();
+        });
     }
   }
 
