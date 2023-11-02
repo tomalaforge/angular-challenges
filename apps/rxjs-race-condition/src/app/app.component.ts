@@ -5,9 +5,9 @@ import {
   OnInit,
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { take } from 'rxjs';
 import { TopicModalComponent } from './topic-dialog.component';
 import { TopicService, TopicType } from './topic.service';
+import { startWith, take } from 'rxjs';
 
 @Component({
   standalone: true,
@@ -19,12 +19,12 @@ export class AppComponent implements OnInit {
   title = 'rxjs-race-condition';
   dialog = inject(MatDialog);
   topicService = inject(TopicService);
-  topics: TopicType[] = [];
+  topics: TopicType[] | string[] = [];
 
   ngOnInit(): void {
     this.topicService
       .fakeGetHttpTopic()
-      .pipe(take(1))
+      .pipe(take(1), startWith(['Politic', 'Culture', 'Nature']))
       .subscribe((topics) => (this.topics = topics));
   }
 
