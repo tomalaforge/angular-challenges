@@ -40,11 +40,14 @@ export class AppComponent {
       .pipe(
         map(() => this.input),
         concatMap((value) =>
-          this.http
-            .get(`https://jsonplaceholder.typicode.com/${value}/1`)
-            .pipe(
-              catchError((err) => of(console.log('Could not fetch api', err)))
-            )
+          this.http.get(`https://jsonplaceholder.typicode.com/${value}/1`).pipe(
+            catchError((err) => {
+              console.log('Could not fetch api', err);
+              return of(
+                'Could not fetch api, possible values are posts, comments, albums, photos, todos, users'
+              );
+            })
+          )
         ),
         takeUntilDestroyed(this.destroyRef)
       )
