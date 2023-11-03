@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { PrimeService } from './prime-number.service';
+import { HeavyCalculationService } from './heavy-calculation.service';
 import { UnknownPersonComponent } from './unknown-person/unknown-person.component';
 
 @Component({
   standalone: true,
   imports: [CommonModule, UnknownPersonComponent],
-  providers: [PrimeService],
+  providers: [HeavyCalculationService],
   selector: 'app-root',
   template: `
     <unknown-person [step]="loadingPercentage()" class="relative grow" />
@@ -22,11 +22,11 @@ import { UnknownPersonComponent } from './unknown-person/unknown-person.componen
   },
 })
 export class AppComponent {
-  primeService = inject(PrimeService);
+  private heavyCalculationService = inject(HeavyCalculationService);
 
-  loadingPercentage = this.primeService.loadingPercentage;
+  readonly loadingPercentage = this.heavyCalculationService.loadingPercentage;
 
   discover() {
-    this.primeService.calculatePrimeLength();
+    this.heavyCalculationService.startLoading();
   }
 }
