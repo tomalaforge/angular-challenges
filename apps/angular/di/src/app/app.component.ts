@@ -5,6 +5,7 @@ import { TableModule } from 'primeng/table';
 import { CurrencyPipe } from './currency.pipe';
 import { CurrencyService } from './currency.service';
 import { Product, products } from './product.model';
+import { CurrencyCodePatcherDirective } from './currency-patcher.directive';
 
 interface ProductContext {
   $implicit: Product;
@@ -25,7 +26,14 @@ export class ProductDirective {
 
 @Component({
   standalone: true,
-  imports: [TableModule, CurrencyPipe, AsyncPipe, NgFor, ProductDirective],
+  imports: [
+    TableModule,
+    CurrencyPipe,
+    AsyncPipe,
+    NgFor,
+    ProductDirective,
+    CurrencyCodePatcherDirective,
+  ],
   providers: [CurrencyService],
   selector: 'app-root',
   template: `
@@ -38,7 +46,7 @@ export class ProductDirective {
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-product>
-        <tr>
+        <tr [currencyCode]="product.currencyCode">
           <td>{{ product.name }}</td>
           <td>{{ product.priceA | currency | async }}</td>
           <td>{{ product.priceB | currency | async }}</td>
