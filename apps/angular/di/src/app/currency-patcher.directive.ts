@@ -7,11 +7,11 @@ import { CurrencyService } from './currency.service';
   providers: [CurrencyService],
 })
 export class CurrencyCodePatcherDirective implements OnInit {
-  @Input({ required: true }) currencyCode = 'EUR';
+  @Input({ required: true }) appCurrencyCode = 'EUR';
 
   private readonly currencyService = inject(CurrencyService);
 
   ngOnInit(): void {
-    this.currencyService.patchState({ code: this.currencyCode });
+    this.currencyService.patchState({ code: this.appCurrencyCode });
   }
 }

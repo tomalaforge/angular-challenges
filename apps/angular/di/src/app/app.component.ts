@@ -46,7 +46,7 @@ export class ProductDirective {
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-product>
-        <tr [currencyCode]="product.currencyCode">
+        <tr [appCurrencyCode]="product.currencyCode">
           <td>{{ product.name }}</td>
           <td>{{ product.priceA | currency | async }}</td>
           <td>{{ product.priceB | currency | async }}</td>
