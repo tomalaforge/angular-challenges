@@ -5,7 +5,11 @@ export type TopicType = 'Politic' | 'Sport' | 'Culture' | 'Nature';
 
 @Injectable({ providedIn: 'root' })
 export class TopicService {
-  topics$ = new BehaviorSubject<{ topics: TopicType[] }>({ topics: [] });
+  private topics$$ = new BehaviorSubject<{ topics: TopicType[] }>({
+    topics: [],
+  });
+
+  topics$ = this.topics$$.asObservable();
 
   constructor() {
     this.init();
@@ -17,13 +21,9 @@ export class TopicService {
   init() {
     this.fakeGetHttpTopic().subscribe((topics) => {
       const data = {
-        topics: topics,
+        topics,
       };
-      this.topics$.next(data);
+      this.topics$$.next(data);
     });
-  }
-
-  getTopics() {
-    return this.topics$;
   }
 }

@@ -19,7 +19,7 @@ export class AppComponent {
   title = 'rxjs-race-condition';
   dialog = inject(MatDialog);
   topicService = inject(TopicService);
-  topics$ = this.topicService.getTopics();
+  topics$ = this.topicService.topics$;
 
   openTopicModal(topics: { topics: TopicType[] }) {
     this.dialog.open(TopicModalComponent, { data: topics });
