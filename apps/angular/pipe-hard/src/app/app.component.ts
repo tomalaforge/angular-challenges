@@ -7,10 +7,11 @@ import { UtilsPipe } from './utils.pipe';
   imports: [NgFor, UtilsPipe],
   selector: 'app-root',
   template: `
-    <div style="padding: 10px" *ngFor="let activity of activities">
+    <div *ngFor="let activity of activities">
       {{ activity.name }} :
       <div
         *ngFor="let person of persons; let index = index; let isFirst = first">
+        {{ 'showName' | utils : person.name : index }}
         {{ 'isAllowed' | utils : person.age : isFirst : activity.minimumAge }}
       </div>
     </div>
