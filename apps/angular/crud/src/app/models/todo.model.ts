@@ -4,4 +4,6 @@ export interface ITodo {
   title: string;
   userId: number;
   disabled: boolean;
+  isDeleting: boolean;
+  isUpdating: boolean;
 }

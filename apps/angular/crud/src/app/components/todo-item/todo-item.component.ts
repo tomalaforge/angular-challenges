@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ITodo } from '../../models/todo.model';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-todo-item',
@@ -11,18 +13,29 @@ import { ITodo } from '../../models/todo.model';
           class="update-btn"
           [disabled]="!!todoItem.disabled"
           (click)="updateToDo()">
-          Update
+          <ng-container *ngIf="!todoItem.isUpdating; else loading">
+            Update
+          </ng-container>
         </button>
         <button
           class="delete-btn"
           [disabled]="!!todoItem.disabled"
           (click)="deleteTodo()">
-          Delete
+          <ng-container *ngIf="!todoItem.isDeleting; else loading">
+            Delete
+          </ng-container>
         </button>
       </div>
     </div>
+
+    <ng-template #loading>
+      <div class="spinner-container">
+        <mat-spinner [diameter]="20"></mat-spinner>
+      </div>
+    </ng-template>
   `,
   standalone: true,
+  imports: [MatProgressSpinnerModule, NgIf],
   styles: [
     `
       .title {
@@ -48,6 +61,7 @@ import { ITodo } from '../../models/todo.model';
         padding: 5px 15px;
         border: none;
         border-radius: 3px;
+        min-width: 73px;
       }
 
       .update-btn {
@@ -84,11 +98,13 @@ export class TodoItemComponent {
 
   updateToDo() {
     this.todoItem.disabled = true;
+    this.todoItem.isUpdating = true;
     this.updateToDoEvent.emit(this.todoItem);
   }
 
   deleteTodo() {
     this.todoItem.disabled = true;
+    this.todoItem.isDeleting = true;
     this.deleteToDoEvent.emit(this.todoItem);
   }
 }
