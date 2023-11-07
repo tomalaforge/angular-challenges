@@ -1,4 +1,4 @@
-export interface ITodo {
+export interface Todo {
   id: number;
   completed: boolean;
   title: string;

@@ -12,7 +12,7 @@ import { LoadingService } from '../../data-access/loading.service';
 import { TodoItemComponent } from '../todo-item/todo-item.component';
 import { Subscription, take } from 'rxjs';
 import { TodoStore } from '../../data-access/todo.store';
-import { ITodo } from '../../models/todo.model';
+import { Todo } from '../../models/todo.model';
 import { randText } from '@ngneat/falso';
 
 @Component({
@@ -71,7 +71,7 @@ export class TodosComponent implements OnInit, OnDestroy {
     this._subscriptions.push(todoSub$);
   }
 
-  updateTodo(todo: ITodo) {
+  updateTodo(todo: Todo) {
     const updatedTodo = {
       ...todo,
       todo: todo.id,
@@ -90,7 +90,7 @@ export class TodosComponent implements OnInit, OnDestroy {
     });
   }
 
-  deleteTodo(todo: ITodo) {
+  deleteTodo(todo: Todo) {
     this.todos$.pipe(take(1)).subscribe((todos) => {
       const updatedTodos = todos.filter((t) => t.id !== todo.id);
       this.todoStore.loadTodos(updatedTodos);
@@ -99,7 +99,7 @@ export class TodosComponent implements OnInit, OnDestroy {
     });
   }
 
-  trackTodos(index: number, todo: ITodo) {
+  trackTodos(index: number, todo: Todo) {
     return todo.id;
   }
 

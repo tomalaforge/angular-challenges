@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { ITodo } from '../models/todo.model';
+import { Todo } from '../models/todo.model';
 import { LoadingService } from './loading.service';
 
 @Injectable({ providedIn: 'root' })
 export class TodoService {
   private _http = inject(HttpClient);
-  private _todos$$ = new BehaviorSubject<ITodo[]>([]);
+  private _todos$$ = new BehaviorSubject<Todo[]>([]);
 
   loadingService = inject(LoadingService);
 
@@ -18,15 +18,15 @@ export class TodoService {
 
   get() {
     this.loadingService.startLoading();
-    return this._http.get<ITodo[]>(this.httpUrl).subscribe((todos) => {
+    return this._http.get<Todo[]>(this.httpUrl).subscribe((todos) => {
       this._todos$$.next(todos);
       this.loadingService.stopLoading();
     });
   }
 
-  update(updatedTodo: ITodo) {
+  update(updatedTodo: Todo) {
     return this._http
-      .put<ITodo>(
+      .put<Todo>(
         `${this.httpUrl}/${updatedTodo.id}`,
         JSON.stringify(updatedTodo),
         {
@@ -38,7 +38,7 @@ export class TodoService {
       .subscribe();
   }
 
-  delete(todo: ITodo) {
+  delete(todo: Todo) {
     return this._http.delete(`${this.httpUrl}/${todo.id}`).subscribe();
   }
 }

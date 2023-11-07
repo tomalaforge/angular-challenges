@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
-import { ITodoState } from '../models/todo-state.model';
-import { ITodo } from '../models/todo.model';
+import { TodoState } from '../models/todo-state.model';
+import { Todo } from '../models/todo.model';
 
-const defaultState: ITodoState = {
+const defaultState: TodoState = {
   todos: [],
 };
 
 @Injectable()
-export class TodoStore extends ComponentStore<ITodoState> {
+export class TodoStore extends ComponentStore<TodoState> {
   constructor() {
     super(defaultState);
   }
 
   readonly todos$ = this.select(({ todos }) => todos);
 
-  readonly loadTodos = this.updater((state, todos: ITodo[]) => ({
+  readonly loadTodos = this.updater((state, todos: Todo[]) => ({
     ...state,
     todos: todos || [],
   }));

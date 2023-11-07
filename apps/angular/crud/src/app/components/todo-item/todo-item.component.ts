@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ITodo } from '../../models/todo.model';
+import { Todo } from '../../models/todo.model';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgIf } from '@angular/common';
 
@@ -91,10 +91,10 @@ import { NgIf } from '@angular/common';
   ],
 })
 export class TodoItemComponent {
-  @Input() todoItem!: ITodo;
+  @Input() todoItem!: Todo;
 
-  @Output() updateToDoEvent: EventEmitter<ITodo> = new EventEmitter();
-  @Output() deleteToDoEvent: EventEmitter<ITodo> = new EventEmitter();
+  @Output() updateToDoEvent: EventEmitter<Todo> = new EventEmitter();
+  @Output() deleteToDoEvent: EventEmitter<Todo> = new EventEmitter();
 
   updateToDo() {
     this.todoItem.disabled = true;
