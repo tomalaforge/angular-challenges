@@ -19,12 +19,7 @@
           "apps/angular/di/src/favicon.ico",
           "apps/angular/di/src/assets"
         ],
-        "styles": [
-          "apps/angular/di/src/styles.scss",
-          "node_modules/primeicons/primeicons.css",
-          "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
-          "node_modules/primeng/resources/primeng.min.css"
-        ],
+        "styles": ["apps/angular/di/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
