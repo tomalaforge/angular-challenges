@@ -1,7 +1,6 @@
-/* eslint-disable @angular-eslint/directive-selector */
+import { TableComponent } from '@angular-challenges/angular/di';
 import { AsyncPipe, NgFor } from '@angular/common';
 import { Component, Directive } from '@angular/core';
-import { TableModule } from 'primeng/table';
 import { CurrencyPipe } from './currency.pipe';
 import { CurrencyService } from './currency.service';
 import { Product, products } from './product.model';
@@ -11,7 +10,7 @@ interface ProductContext {
 }
 
 @Directive({
-  selector: 'ng-template[pTemplate="body"]',
+  selector: 'ng-template[product]',
   standalone: true,
 })
 export class ProductDirective {
@@ -25,19 +24,19 @@ export class ProductDirective {
 
 @Component({
   standalone: true,
-  imports: [TableModule, CurrencyPipe, AsyncPipe, NgFor, ProductDirective],
+  imports: [TableComponent, CurrencyPipe, AsyncPipe, NgFor, ProductDirective],
   providers: [CurrencyService],
   selector: 'app-root',
   template: `
-    <p-table [value]="products">
-      <ng-template pTemplate="header">
+    <table [items]="products">
+      <ng-template #header>
         <tr>
           <th *ngFor="let col of displayedColumns">
             {{ col }}
           </th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-product>
+      <ng-template #body product let-product>
         <tr>
           <td>{{ product.name }}</td>
           <td>{{ product.priceA | currency | async }}</td>
@@ -45,7 +44,7 @@ export class ProductDirective {
           <td>{{ product.priceC | currency | async }}</td>
         </tr>
       </ng-template>
-    </p-table>
+    </table>
   `,
 })
 export class AppComponent {
