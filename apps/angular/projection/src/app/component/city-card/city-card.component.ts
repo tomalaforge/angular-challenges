@@ -5,7 +5,7 @@ import { City } from '../../model/city.model';
 import { CardComponent } from '../../ui/card/card.component';
 @Component({
   selector: 'app-city-card',
-  template: `<app-card [store]="store" [getName]="getCityName">
+  template: `<app-card [store]="store" [getName]="getCityName" [list]="cities">
     <img width="200px" src="/assets/img/city.avif" />
   </app-card>`,
   standalone: true,
