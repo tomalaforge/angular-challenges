@@ -75,7 +75,8 @@
       ],
       "@tomalaforge/ngrx-callstate-store": [
         "libs/shared/ngrx-callstate-store/src/index.ts"
-      ]
+      ],
+      "@angular-challenges/angular/di": ["libs/angular/di/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -44,6 +44,7 @@ Check [all 39 challenges](https://angular-challenges.vercel.app/)
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/DeveshChau"><img src="https://avatars.githubusercontent.com/u/9509673?v=4?s=100" width="100px;" alt="Devesh Chaudhari"/><br /><sub><b>Devesh Chaudhari</b></sub></a><br /><a href="https://github.com/tomalaforge/angular-challenges/commits?author=DeveshChau" title="Code">💻</a> <a href="https://github.com/tomalaforge/angular-challenges/issues?q=author%3ADeveshChau" title="Bug reports">🐛</a> <a href="#challenge-DeveshChau" title="Created a challenge">🧩</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/dmmishchenko"><img src="https://avatars.githubusercontent.com/u/51910160?v=4?s=100" width="100px;" alt="Dmitriy Mishchenko"/><br /><sub><b>Dmitriy Mishchenko</b></sub></a><br /><a href="https://github.com/tomalaforge/angular-challenges/commits?author=dmmishchenko" title="Documentation">📖</a></td>
     </tr>
   </tbody>
   <tfoot>
