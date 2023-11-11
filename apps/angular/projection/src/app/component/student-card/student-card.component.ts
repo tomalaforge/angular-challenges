@@ -7,6 +7,7 @@ import { CardComponent } from '../../ui/card/card.component';
 @Component({
   selector: 'app-student-card',
   template: `<app-card
+    [getName]="getStudentName"
     [store]="store"
     [list]="students"
     customClass="bg-light-green">
@@ -32,5 +33,9 @@ export class StudentCardComponent implements OnInit {
     this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
 
     this.store.students$.subscribe((s) => (this.students = s));
+  }
+
+  getStudentName(student: Student) {
+    return student.firstname;
   }
 }

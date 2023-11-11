@@ -2,7 +2,6 @@ import { NgFor } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
 import { Store } from '../../data-access/store';
-import { Person } from '../../model/person.model';
 import { ListItemComponent } from '../list-item/list-item.component';
 
 @Component({
@@ -11,16 +10,17 @@ import { ListItemComponent } from '../list-item/list-item.component';
   standalone: true,
   imports: [NgFor, ListItemComponent],
 })
-export class CardComponent {
+export class CardComponent<T extends { id: number }> {
   @Input({ required: true }) store!: Store;
-  @Input() list: Person[] = [];
+  @Input() list: T[] = [];
   @Input() customClass = '';
+  @Input({ required: true }) getName!: (item: T) => string;
 
   addNewItem() {
     this.store.addRandom();
   }
 
-  delete(person: Person) {
+  delete(person: T) {
     this.store.deleteOne(person.id);
   }
 }
