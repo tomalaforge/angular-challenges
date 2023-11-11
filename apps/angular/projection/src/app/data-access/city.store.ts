@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Teacher } from '../model/teacher.model';
+import { City } from '../model/city.model';
 import { BaseStore } from './base.store';
 
 @Injectable({
   providedIn: 'root',
 })
-export class TeacherStore extends BaseStore<Teacher> {}
+export class CityStore extends BaseStore<City> {}
