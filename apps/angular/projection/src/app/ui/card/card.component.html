@@ -1,13 +1,15 @@
-<ng-content select="[appCardImage]"></ng-content>
+<div class="border-2 border-black rounded-md p-4 w-fit flex flex-col gap-3">
+  <ng-content select="[appCardImage]"></ng-content>
 
-<section>
-  <ng-container *ngFor="let item of list">
-    <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"></ng-container>
-  </ng-container>
-</section>
+  <section>
+    <ng-container *ngFor="let item of list">
+      <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"></ng-container>
+    </ng-container>
+  </section>
 
-<button
-  class="border border-blue-500 bg-blue-300 p-2 rounded-sm"
-  (click)="add.emit()">
-  Add
-</button>
+  <button
+    class="border border-blue-500 bg-blue-300 p-2 rounded-sm"
+    (click)="add.emit()">
+    Add
+  </button>
+</div>

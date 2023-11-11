@@ -13,10 +13,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-student-card',
-  template: `<app-card
-    [list]="students()"
-    (add)="addNewItem()"
-    class="bg-light-green">
+  template: `<app-card [list]="students()" (add)="addNewItem()">
     <img appCardImage src="assets/img/student.webp" width="200px" />
     <ng-template appCardItem let-item>
       <app-list-item (delete)="delete(item.id)">
@@ -25,13 +22,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
     </ng-template>
   </app-card>`,
   standalone: true,
-  styles: [
-    `
-      .bg-light-green {
-        background-color: rgba(0, 250, 0, 0.1);
-      }
-    `,
-  ],
+  styles: [':host { --app-card-background-color: rgba(0, 250, 0, 0.1); }'],
   imports: [CardComponent, NgIf, CardItemDirective, ListItemComponent, NgForOf],
 })
 export class StudentCardComponent implements OnInit {
