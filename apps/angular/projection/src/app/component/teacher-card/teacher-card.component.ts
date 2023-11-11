@@ -6,14 +6,15 @@ import {
 import { TeacherStore } from '../../data-access/teacher.store';
 import { Teacher } from '../../model/teacher.model';
 import { CardComponent } from '../../ui/card/card.component';
-import { NgIf } from '@angular/common';
+import { AsyncPipe, NgIf } from '@angular/common';
 import { CardItemDirective } from '../../ui/card/card-item.directive';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-teacher-card',
   template: `<app-card
-    [list]="teachers"
+    [list]="(teachers$ | async) ?? []"
     (add)="addNewItem()"
     class="bg-light-red">
     <img appCardImage src="assets/img/teacher.png" width="200px" />
@@ -31,17 +32,21 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
     `,
   ],
   standalone: true,
-  imports: [CardComponent, NgIf, CardItemDirective, ListItemComponent],
+  imports: [
+    CardComponent,
+    NgIf,
+    CardItemDirective,
+    ListItemComponent,
+    AsyncPipe,
+  ],
 })
 export class TeacherCardComponent implements OnInit {
-  teachers: Teacher[] = [];
+  teachers$ = this.store.teachers$;
 
   constructor(private http: FakeHttpService, private store: TeacherStore) {}
 
   ngOnInit(): void {
     this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
-
-    this.store.teachers$.subscribe((t) => (this.teachers = t));
   }
 
   addNewItem() {
