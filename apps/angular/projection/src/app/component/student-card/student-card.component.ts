@@ -8,6 +8,7 @@ import { CardComponent } from '../../ui/card/card.component';
 @Component({
   selector: 'app-student-card',
   template: `<app-card
+    [store]="store"
     [list]="students"
     [type]="cardType"
     customClass="bg-light-green">
@@ -27,7 +28,7 @@ export class StudentCardComponent implements OnInit {
   students: Student[] = [];
   cardType = CardType.STUDENT;
 
-  constructor(private http: FakeHttpService, private store: StudentStore) {}
+  constructor(private http: FakeHttpService, public store: StudentStore) {}
 
   ngOnInit(): void {
     this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));

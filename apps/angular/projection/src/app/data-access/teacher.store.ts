@@ -1,13 +1,19 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Teacher } from '../model/teacher.model';
+import { randTeacher } from './fake-http.service';
+import { Store } from './store';
 
 @Injectable({
   providedIn: 'root',
 })
-export class TeacherStore {
+export class TeacherStore implements Store {
   private teachers = new BehaviorSubject<Teacher[]>([]);
   teachers$ = this.teachers.asObservable();
+
+  addRandom(): void {
+    this.addOne(randTeacher());
+  }
 
   addAll(teachers: Teacher[]) {
     this.teachers.next(teachers);
