@@ -46,4 +46,14 @@ export class TodoService {
         );
       });
   }
+
+  public delete(index: number): void {
+    this.http
+      .delete<void>(`https://jsonplaceholder.typicode.com/todos/${index}`)
+      .subscribe((_) =>
+        this.todoListSource.next(
+          this.todoListSource.value.filter((todo) => todo.id !== index)
+        )
+      );
+  }
 }
