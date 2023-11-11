@@ -14,13 +14,17 @@ import { Todo } from '../model/todo.interface';
   imports: [CommonModule],
   template: `
     <div>
-      {{ item.title }}
+      <span aria-label="title">
+        {{ item.title }}
+      </span>
       <button
+        aria-label="update button"
         [disabled]="disabledTodosIds?.includes(item.id)"
         (click)="update(item)">
         Update
       </button>
       <button
+        aria-label="delete button"
         [disabled]="disabledTodosIds?.includes(item.id)"
         (click)="delete(item)">
         Delete
