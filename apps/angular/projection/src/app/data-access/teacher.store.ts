@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Teacher } from '../model/teacher.model';
-import { randTeacher } from './fake-http.service';
+import { randomTeacher } from './fake-http.service';
 import { Store } from './store';
 
 @Injectable({
@@ -12,7 +12,7 @@ export class TeacherStore implements Store {
   teachers$ = this.teachers.asObservable();
 
   addRandom(): void {
-    this.addOne(randTeacher());
+    this.addOne(randomTeacher());
   }
 
   addAll(teachers: Teacher[]) {
