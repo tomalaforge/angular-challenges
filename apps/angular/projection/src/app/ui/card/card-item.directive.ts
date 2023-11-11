@@ -1,9 +1,7 @@
-import { Directive, TemplateRef } from '@angular/core';
+import { Directive } from '@angular/core';
 
 @Directive({
   selector: '[appCardItem]',
   standalone: true,
 })
-export class CardItemDirective {
-  constructor(public readonly templateRef: TemplateRef<unknown>) {}
-}
+export class CardItemDirective {}
