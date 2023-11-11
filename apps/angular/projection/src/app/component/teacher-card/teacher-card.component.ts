@@ -6,7 +6,6 @@ import {
 import { TeacherStore } from '../../data-access/teacher.store';
 import { Teacher } from '../../model/teacher.model';
 import { CardComponent } from '../../ui/card/card.component';
-import { CardImageDirective } from '../../ui/card/card-image.directive';
 import { NgIf } from '@angular/common';
 import { CardItemDirective } from '../../ui/card/card-item.directive';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
@@ -17,9 +16,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
     [list]="teachers"
     (add)="addNewItem()"
     class="bg-light-red">
-    <ng-template appCardImage>
-      <img src="assets/img/teacher.png" width="200px" />
-    </ng-template>
+    <img appCardImage src="assets/img/teacher.png" width="200px" />
     <ng-template appCardItem let-item>
       <app-list-item (delete)="delete(item.id)">
         {{ item.firstname }}
@@ -34,13 +31,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
     `,
   ],
   standalone: true,
-  imports: [
-    CardComponent,
-    CardImageDirective,
-    NgIf,
-    CardItemDirective,
-    ListItemComponent,
-  ],
+  imports: [CardComponent, NgIf, CardItemDirective, ListItemComponent],
 })
 export class TeacherCardComponent implements OnInit {
   teachers: Teacher[] = [];

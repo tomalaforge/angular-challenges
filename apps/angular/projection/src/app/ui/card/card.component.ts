@@ -7,7 +7,6 @@ import {
   Output,
 } from '@angular/core';
 import { ListItemComponent } from '../list-item/list-item.component';
-import { CardImageDirective } from './card-image.directive';
 import { CardItemDirective } from './card-item.directive';
 
 @Component({
@@ -24,6 +23,5 @@ export class CardComponent {
 
   @Output() add = new EventEmitter<void>();
 
-  @ContentChild(CardImageDirective) cardImage!: CardImageDirective;
   @ContentChild(CardItemDirective) cardItem!: CardItemDirective;
 }

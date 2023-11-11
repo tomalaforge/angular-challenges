@@ -7,7 +7,6 @@ import { StudentStore } from '../../data-access/student.store';
 import { Student } from '../../model/student.model';
 import { CardComponent } from '../../ui/card/card.component';
 import { NgForOf, NgIf } from '@angular/common';
-import { CardImageDirective } from '../../ui/card/card-image.directive';
 import { CardItemDirective } from '../../ui/card/card-item.directive';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
@@ -17,9 +16,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
     [list]="students"
     (add)="addNewItem()"
     class="bg-light-green">
-    <ng-template appCardImage>
-      <img src="assets/img/student.webp" width="200px" />
-    </ng-template>
+    <img appCardImage src="assets/img/student.webp" width="200px" />
     <ng-template appCardItem let-item>
       <app-list-item (delete)="delete(item.id)">
         {{ item.firstname }}
@@ -34,14 +31,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
       }
     `,
   ],
-  imports: [
-    CardComponent,
-    NgIf,
-    CardImageDirective,
-    CardItemDirective,
-    ListItemComponent,
-    NgForOf,
-  ],
+  imports: [CardComponent, NgIf, CardItemDirective, ListItemComponent, NgForOf],
 })
 export class StudentCardComponent implements OnInit {
   students: Student[] = [];
