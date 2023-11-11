@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-city-card',
@@ -6,8 +6,4 @@ import { Component, OnInit } from '@angular/core';
   standalone: true,
   imports: [],
 })
-export class CityCardComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
-}
+export class CityCardComponent {}

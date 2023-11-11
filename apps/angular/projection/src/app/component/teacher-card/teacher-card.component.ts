@@ -1,35 +1,43 @@
-import { Component, OnInit } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+import { Component } from '@angular/core';
+import { FakeHttpService, randTeacher } from '../../data-access/fake-http.service';
 import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
 import { Teacher } from '../../model/teacher.model';
 import { CardComponent } from '../../ui/card/card.component';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Observable } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-teacher-card',
-  template: `<app-card
-    [list]="teachers"
-    [type]="cardType"
-    customClass="bg-light-red"></app-card>`,
+  template: `<app-card [list]="teachers$ | async" class="bg-light-red" (addItem)="add()">
+    <img src="assets/img/teacher.png" width="200px" />
+    <ng-template #rowRef let-teacher>
+      <app-list-item [name]="teacher.firstname" [id]="teacher.id" (deleteItem)="delete($event)"> </app-list-item>
+    </ng-template>
+  </app-card>`,
   styles: [
     `
-      ::ng-deep .bg-light-red {
+      .bg-light-red {
         background-color: rgba(250, 0, 0, 0.1);
       }
     `,
   ],
   standalone: true,
-  imports: [CardComponent],
+  imports: [CardComponent, ListItemComponent, AsyncPipe],
 })
-export class TeacherCardComponent implements OnInit {
-  teachers: Teacher[] = [];
-  cardType = CardType.TEACHER;
+export class TeacherCardComponent {
+  readonly teachers$: Observable<Teacher[]> = this.store.teachers$;
 
-  constructor(private http: FakeHttpService, private store: TeacherStore) {}
+  constructor(private http: FakeHttpService, private store: TeacherStore) {
+    this.http.fetchTeachers$.pipe(takeUntilDestroyed()).subscribe((t) => this.store.addAll(t));
+  }
 
-  ngOnInit(): void {
-    this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
+  add() {
+    this.store.addOne(randTeacher());
+  }
 
-    this.store.teachers$.subscribe((t) => (this.teachers = t));
+  delete(id: number) {
+    this.store.deleteOne(id);
   }
 }

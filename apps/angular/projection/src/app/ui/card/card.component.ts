@@ -1,34 +1,33 @@
-import { NgFor, NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { randStudent, randTeacher } from '../../data-access/fake-http.service';
-import { StudentStore } from '../../data-access/student.store';
-import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
+import { NgFor, NgTemplateOutlet } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ContentChild,
+  EventEmitter,
+  Input,
+  Output,
+  TemplateRef,
+} from '@angular/core';
 import { ListItemComponent } from '../list-item/list-item.component';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
   standalone: true,
-  imports: [NgIf, NgFor, ListItemComponent],
+  imports: [NgFor, ListItemComponent, NgTemplateOutlet],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    class: 'border-2 border-black rounded-md p-4 w-fit flex flex-col gap-3',
+  },
 })
-export class CardComponent {
-  @Input() list: any[] | null = null;
-  @Input() type!: CardType;
-  @Input() customClass = '';
+export class CardComponent<T> {
+  @ContentChild('rowRef', { read: TemplateRef }) rowTemplate!: TemplateRef<{ $implicit: T }>;
 
-  CardType = CardType;
+  @Input() list: unknown[] | null = null;
 
-  constructor(
-    private teacherStore: TeacherStore,
-    private studentStore: StudentStore
-  ) {}
+  @Output() addItem: EventEmitter<unknown> = new EventEmitter();
 
   addNewItem() {
-    if (this.type === CardType.TEACHER) {
-      this.teacherStore.addOne(randTeacher());
-    } else if (this.type === CardType.STUDENT) {
-      this.studentStore.addOne(randStudent());
-    }
+    this.addItem.next(null);
   }
 }
