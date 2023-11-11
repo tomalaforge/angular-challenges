@@ -7,7 +7,7 @@ import { Store } from './store';
 @Injectable({
   providedIn: 'root',
 })
-export class TeacherStore implements Store {
+export class CityStore implements Store {
   private cities = new BehaviorSubject<City[]>([]);
   cities$ = this.cities.asObservable();
 

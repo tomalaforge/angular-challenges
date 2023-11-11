@@ -12,9 +12,10 @@ import { ListItemComponent } from '../list-item/list-item.component';
 })
 export class CardComponent<T extends { id: number }> {
   @Input({ required: true }) store!: Store;
+  @Input({ required: true }) getName!: (item: T) => string;
+
   @Input() list: T[] = [];
   @Input() customClass = '';
-  @Input({ required: true }) getName!: (item: T) => string;
 
   addNewItem() {
     this.store.addRandom();
