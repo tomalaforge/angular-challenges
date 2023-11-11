@@ -9,11 +9,12 @@ import { CardComponent } from '../../ui/card/card.component';
 import { NgForOf, NgIf } from '@angular/common';
 import { CardItemDirective } from '../../ui/card/card-item.directive';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-student-card',
   template: `<app-card
-    [list]="students"
+    [list]="students()"
     (add)="addNewItem()"
     class="bg-light-green">
     <img appCardImage src="assets/img/student.webp" width="200px" />
@@ -34,14 +35,12 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   imports: [CardComponent, NgIf, CardItemDirective, ListItemComponent, NgForOf],
 })
 export class StudentCardComponent implements OnInit {
-  students: Student[] = [];
+  students = toSignal(this.store.students$, { initialValue: [] as Student[] });
 
   constructor(private http: FakeHttpService, private store: StudentStore) {}
 
   ngOnInit(): void {
     this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
-
-    this.store.students$.subscribe((s) => (this.students = s));
   }
 
   addNewItem() {
