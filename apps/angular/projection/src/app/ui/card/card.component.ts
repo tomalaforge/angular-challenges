@@ -2,7 +2,6 @@ import { NgFor } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
 import { Store } from '../../data-access/store';
-import { CardType } from '../../model/card.model';
 import { Person } from '../../model/person.model';
 import { ListItemComponent } from '../list-item/list-item.component';
 
@@ -16,8 +15,6 @@ export class CardComponent {
   @Input({ required: true }) store!: Store;
   @Input() list: Person[] = [];
   @Input() customClass = '';
-
-  CardType = CardType;
 
   addNewItem() {
     this.store.addRandom();
