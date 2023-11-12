@@ -9,7 +9,6 @@ import { Store } from '@ngrx/store';
 import { ActivityCardComponent } from './components/activity-card.component';
 import { loadActivities } from './store/activity/activity.actions';
 import { selectActivities } from './store/activity/activity.selectors';
-import { loadStatuses } from './store/status/status.actions';
 import { loadUsers } from './store/user/user.actions';
 
 @Component({
@@ -43,6 +42,5 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(loadActivities());
     this.store.dispatch(loadUsers());
-    this.store.dispatch(loadStatuses());
   }
 }

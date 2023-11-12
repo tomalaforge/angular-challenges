@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Activity, ActivityType } from '../store/activity/activity.model';
-import { selectAllTeachersByActivityType } from '../store/status/status.selectors';
+import { selectAllTeachersByActivityType } from '../store/activity/activity.selectors';
 
 @Component({
   selector: 'app-activity-card',
