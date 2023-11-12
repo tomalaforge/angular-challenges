@@ -1,5 +1,5 @@
 ---
-title: 🟢 Projección
+title: 🟢 Proyección
 description: Desafio 1 trata sobre aprender a proyectar elementos del DOM a través de componentes,
 author: Thomas Laforge
 challengeNumber: 1

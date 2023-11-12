@@ -9,7 +9,7 @@ Tienes una idea que quieres compartir, un error interesante con el que estás lu
 
 Pero, ¿cómo empiezas a crear estos desafíos?
 
-## Configuración de Plantillas (Biolerplate)
+## Configuración de Plantillas (Boilerplate)
 
 Para agilizar el proceso, he creado un generador Nx que configurará todo el boilerplate por ti y te preparará más rápido. La forma más sencilla de ejecutarlo es utilizando la consola Nx: ve a <b>Nx Console > generate > @angular-challenges/cli - challenge</b>
 
@@ -18,14 +18,14 @@ Para agilizar el proceso, he creado un generador Nx que configurará todo el boi
 #### parámetros obligatorios
 
 - <b>title</b>: El título que quieres darle a tu desafío.
-  :::note
+  :::note[Nota]
   El título debe tener un máximo de 25 caracteres.
   :::
 
 - <b>challengeDifficulty</b>: La dificultad que crees que tiene tu desafío. Hay tres niveles de dificultad: 🟢 fácil / 🟠 medio / 🔴 difícil
 
 - <b>name</b>: nombre de la aplicación Nx.
-  :::note
+  :::note[Nota]
   Debe escribirse en **kebab-case**
   :::
 
