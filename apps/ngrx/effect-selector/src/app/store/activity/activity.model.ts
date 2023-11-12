@@ -26,6 +26,8 @@ export interface Activity {
   teacher: Person;
 }
 
+export type ActivityWithSubstitutes = Activity & { substitutes: Person[] };
+
 const factoryPerson = incrementalNumber();
 
 export const randPerson = () => ({

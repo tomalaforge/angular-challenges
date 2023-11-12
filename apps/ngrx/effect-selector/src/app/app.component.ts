@@ -8,7 +8,7 @@ import {
 import { Store } from '@ngrx/store';
 import { ActivityCardComponent } from './components/activity-card.component';
 import { loadActivities } from './store/activity/activity.actions';
-import { selectActivities } from './store/activity/activity.selectors';
+import { selectActivitiesWithSubstituteTeachers } from './store/activity/activity.selectors';
 import { loadUsers } from './store/user/user.actions';
 
 @Component({
@@ -37,7 +37,7 @@ import { loadUsers } from './store/user/user.actions';
 export class AppComponent implements OnInit {
   private store = inject(Store);
 
-  activities$ = this.store.select(selectActivities);
+  activities$ = this.store.select(selectActivitiesWithSubstituteTeachers);
 
   ngOnInit(): void {
     this.store.dispatch(loadActivities());
