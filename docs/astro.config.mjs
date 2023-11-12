@@ -74,6 +74,17 @@ export default defineConfig({
           lang: 'es',
         },
       },
+      defaultLocale: 'root',
+      locales: {
+        root: {
+          label: 'English',
+          lang: 'en',
+        },
+        es: {
+          label: 'Español',
+          lang: 'es',
+        },
+      },
     }),
   ],
 });

@@ -1,7 +1,7 @@
 ---
-title: 🟢 Proyección
+title: 🟢 Projección
 description: Desafio 1 trata sobre aprender a proyectar elementos del DOM a través de componentes,
-author: thomas-laforge
+author: Thomas Laforge
 challengeNumber: 1
 command: angular-projection
 blogLink: https://medium.com/@thomas.laforge/create-a-highly-customizable-component-cc3a9805e4c5
