@@ -1,20 +1,24 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
   FakeHttpService,
   randStudent,
 } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
-import { CardType } from '../../model/card.model';
-import { Student } from '../../model/student.model';
+import { CardContentDirective } from '../../ui/card/card-content.directive';
 import { CardComponent } from '../../ui/card/card.component';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-student-card',
-  template: `<app-card
-    [list]="students"
-    [deleteCallback]="deleteStudent"
-    customClass="bg-light-green">
+  template: `<app-card customClass="bg-light-green">
     <img cardImage src="assets/img/student.webp" width="200px" />
+
+    <ng-template [cardContent]="students$ | async" let-student>
+      <app-list-item (deleteEvent)="deleteStudent(student.id)">
+        {{ student.firstname }}
+      </app-list-item>
+    </ng-template>
 
     <ng-container ngProjectAs="[actions]">
       <button
@@ -32,25 +36,22 @@ import { CardComponent } from '../../ui/card/card.component';
       }
     `,
   ],
-  imports: [CardComponent],
+  imports: [CardComponent, ListItemComponent, AsyncPipe, CardContentDirective],
 })
 export class StudentCardComponent implements OnInit {
-  students: Student[] = [];
-  cardType = CardType.STUDENT;
+  students$ = this.store.students$;
 
   constructor(private http: FakeHttpService, private store: StudentStore) {}
 
   ngOnInit(): void {
     this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
-
-    this.store.students$.subscribe((s) => (this.students = s));
   }
 
-  addNewStudent = () => {
+  addNewStudent(): void {
     this.store.addOne(randStudent());
-  };
+  }
 
-  deleteStudent = (id: number) => {
+  deleteStudent(id: number): void {
     this.store.deleteOne(id);
-  };
+  }
 }

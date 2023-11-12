@@ -4,11 +4,11 @@
   <ng-content select="[cardImage]"></ng-content>
 
   <section>
-    <app-list-item
-      *ngFor="let item of list"
-      [id]="item.id"
-      (deleteEvent)="deleteEvent($event)">
-    </app-list-item>
+    <ng-container
+      *ngFor="let item of cardContentDirective.content"
+      [ngTemplateOutlet]="cardContentDirective.templateRef"
+      [ngTemplateOutletContext]="{ $implicit: item }">
+    </ng-container>
   </section>
 
   <ng-content select="[actions]"></ng-content>

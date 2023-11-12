@@ -1,21 +1,18 @@
-import { NgFor } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { NgFor, NgTemplateOutlet } from '@angular/common';
+import { Component, ContentChild, Input } from '@angular/core';
+import { ModelWithId } from '../../model/model-with-id.model';
 import { ListItemComponent } from '../list-item/list-item.component';
+import { CardContentDirective } from './card-content.directive';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
   standalone: true,
-  imports: [NgFor, ListItemComponent],
+  imports: [NgFor, NgTemplateOutlet, ListItemComponent],
 })
-export class CardComponent {
-  @Input() list: any[] | null = null;
-  @Input() deleteCallback?: (id: number) => void;
-  @Input() customClass = '';
+export class CardComponent<T extends ModelWithId> {
+  @ContentChild(CardContentDirective)
+  cardContentDirective!: CardContentDirective<T>;
 
-  deleteEvent(id: number) {
-    if (this.deleteCallback) {
-      this.deleteCallback(id);
-    }
-  }
+  @Input() customClass = '';
 }
