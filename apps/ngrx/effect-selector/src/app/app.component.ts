@@ -7,9 +7,8 @@ import {
 } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ActivityCardComponent } from './components/activity-card.component';
-import { loadActivities } from './store/activity/activity.actions';
 import { selectActivitiesWithSubstituteTeachers } from './store/activity/activity.selectors';
-import { loadUsers } from './store/user/user.actions';
+import { AppActions } from './store/app.action';
 
 @Component({
   selector: 'app-root',
@@ -40,7 +39,6 @@ export class AppComponent implements OnInit {
   activities$ = this.store.select(selectActivitiesWithSubstituteTeachers);
 
   ngOnInit(): void {
-    this.store.dispatch(loadActivities());
-    this.store.dispatch(loadUsers());
+    this.store.dispatch(AppActions.init());
   }
 }

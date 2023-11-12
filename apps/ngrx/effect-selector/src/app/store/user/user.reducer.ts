@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import * as UserActions from './user.actions';
+import { UserApiActions } from './user.actions';
 import { User } from './user.model';
 
 export const userFeatureKey = 'user';
@@ -14,6 +14,12 @@ export const initialState: UserState = {
 
 export const userReducer = createReducer(
   initialState,
-  on(UserActions.loadUsersSuccess, (state, { user }) => ({ ...state, user })),
-  on(UserActions.loadUsersFailure, (state) => ({ ...state, user: undefined }))
+  on(UserApiActions.loadUsersSuccess, (state, { user }) => ({
+    ...state,
+    user,
+  })),
+  on(UserApiActions.loadUsersFailure, (state) => ({
+    ...state,
+    user: undefined,
+  }))
 );

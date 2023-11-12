@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import * as ActivityActions from './activity.actions';
+import { ActivitiesApiActions } from './activity.actions';
 import { Activity } from './activity.model';
 
 export const activityFeatureKey = 'Activity';
@@ -14,11 +14,11 @@ export const initialState: ActivityState = {
 
 export const activityReducer = createReducer(
   initialState,
-  on(ActivityActions.loadActivitiesSuccess, (state, { activities }) => ({
+  on(ActivitiesApiActions.loadActivitiesSuccess, (state, { activities }) => ({
     ...state,
     activities,
   })),
-  on(ActivityActions.loadActivitiesFailure, (state) => ({
+  on(ActivitiesApiActions.loadActivitiesFailure, (state) => ({
     state,
     activities: [],
   }))
