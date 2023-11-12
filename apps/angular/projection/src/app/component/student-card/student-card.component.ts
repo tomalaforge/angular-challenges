@@ -12,10 +12,17 @@ import { CardComponent } from '../../ui/card/card.component';
   selector: 'app-student-card',
   template: `<app-card
     [list]="students"
-    [type]="cardType"
-    [addCallback]="addNewStudent"
+    [deleteCallback]="deleteStudent"
     customClass="bg-light-green">
     <img cardImage src="assets/img/student.webp" width="200px" />
+
+    <ng-container ngProjectAs="[actions]">
+      <button
+        class="p-2 bg-blue-300 border border-blue-500 rounded-sm"
+        (click)="addNewStudent()">
+        Add
+      </button>
+    </ng-container>
   </app-card>`,
   standalone: true,
   styles: [
@@ -39,7 +46,11 @@ export class StudentCardComponent implements OnInit {
     this.store.students$.subscribe((s) => (this.students = s));
   }
 
-  addNewStudent(): void {
+  addNewStudent = () => {
     this.store.addOne(randStudent());
-  }
+  };
+
+  deleteStudent = (id: number) => {
+    this.store.deleteOne(id);
+  };
 }

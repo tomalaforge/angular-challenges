@@ -6,15 +6,10 @@
   <section>
     <app-list-item
       *ngFor="let item of list"
-      [name]="item.firstname"
       [id]="item.id"
-      [type]="type">
+      (deleteEvent)="deleteEvent($event)">
     </app-list-item>
   </section>
 
-  <button
-    class="p-2 bg-blue-300 border border-blue-500 rounded-sm"
-    (click)="addNewItem()">
-    Add
-  </button>
+  <ng-content select="[actions]"></ng-content>
 </div>

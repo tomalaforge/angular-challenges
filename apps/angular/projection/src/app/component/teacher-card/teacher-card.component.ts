@@ -10,12 +10,15 @@ import { CardComponent } from '../../ui/card/card.component';
 
 @Component({
   selector: 'app-teacher-card',
-  template: `<app-card
-    [list]="teachers"
-    [type]="cardType"
-    [addCallback]="addNewTeacher"
-    customClass="bg-light-red">
+  template: `<app-card [list]="teachers" customClass="bg-light-red">
     <img cardImage src="assets/img/teacher.png" width="200px" />
+    <ng-container ngProjectAs="[actions]">
+      <button
+        class="p-2 bg-blue-300 border border-blue-500 rounded-sm"
+        (click)="addNewTeacher()">
+        Add
+      </button>
+    </ng-container>
   </app-card>`,
   styles: [
     `

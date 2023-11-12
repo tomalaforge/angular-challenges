@@ -1,6 +1,5 @@
 import { NgFor } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { CardType } from '../../model/card.model';
 import { ListItemComponent } from '../list-item/list-item.component';
 
 @Component({
@@ -11,14 +10,12 @@ import { ListItemComponent } from '../list-item/list-item.component';
 })
 export class CardComponent {
   @Input() list: any[] | null = null;
-  @Input() type!: CardType;
+  @Input() deleteCallback?: (id: number) => void;
   @Input() customClass = '';
-  @Input() addCallback?: () => void;
 
-  addNewItem() {
-    console.log(this.addCallback);
-    if (this.addCallback) {
-      this.addCallback();
+  deleteEvent(id: number) {
+    if (this.deleteCallback) {
+      this.deleteCallback(id);
     }
   }
 }
