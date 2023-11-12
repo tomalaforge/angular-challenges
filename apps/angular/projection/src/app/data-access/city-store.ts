@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Teacher } from '../model/teacher.model';
 import { AbstractStore } from './abstract.store';
+import { City } from '../model/city.model';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class TeacherStore extends AbstractStore<Teacher> {
-  public get teachers$(): Observable<Teacher[]> {
+export class CityStore extends AbstractStore<City> {
+  public get cities$(): Observable<City[]> {
     return this.entities$;
   }
 }

@@ -1,3 +1,5 @@
+import { Entity } from './entity.model';
+
 export const subject = [
   'Sciences',
   'History',
@@ -7,8 +9,7 @@ export const subject = [
 ] as const;
 export type Subject = (typeof subject)[number];
 
-export interface Teacher {
-  id: number;
+export interface Teacher extends Entity {
   firstname: string;
   lastname: string;
   subject: Subject;

@@ -1,23 +1,13 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { AbstractStore } from './abstract.store';
 import { Student } from '../model/student.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class StudentStore {
-  private students = new BehaviorSubject<Student[]>([]);
-  students$ = this.students.asObservable();
-
-  addAll(students: Student[]) {
-    this.students.next(students);
-  }
-
-  addOne(student: Student) {
-    this.students.next([...this.students.value, student]);
-  }
-
-  deleteOne(id: number) {
-    this.students.next(this.students.value.filter((s) => s.id !== id));
+export class StudentStore extends AbstractStore<Student> {
+  public get students$(): Observable<Student[]> {
+    return this.entities$;
   }
 }
