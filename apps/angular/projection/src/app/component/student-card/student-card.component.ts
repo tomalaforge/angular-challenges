@@ -7,19 +7,18 @@ import {
 import { StudentStore } from '../../data-access/student.store';
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
+import { ListItemTemplateDirective } from '../../utils/list-item-template.directive';
 
 @Component({
   selector: 'app-student-card',
   template: `<app-card
     class="bg-light-green"
     [list]="students$ | async"
-    (onAdd)="addNewItem()">
+    (added)="addNewItem()">
     <img src="assets/img/student.webp" width="200px" />
-    <ng-template #rowRef let-student>
-      <app-list-item
-        [name]="student.firstname"
-        [id]="student.id"
-        (onDelete)="deleteStudent($event)">
+    <ng-template listItemTemplate #rowRef let-student>
+      <app-list-item (deleted)="deleteStudent(student.id)">
+        {{ student.firstname }}
       </app-list-item>
     </ng-template>
   </app-card>`,
@@ -31,7 +30,12 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
       }
     `,
   ],
-  imports: [CardComponent, ListItemComponent, AsyncPipe],
+  imports: [
+    CardComponent,
+    ListItemComponent,
+    AsyncPipe,
+    ListItemTemplateDirective,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StudentCardComponent implements OnInit {

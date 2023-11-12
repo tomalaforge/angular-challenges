@@ -1,4 +1,4 @@
-<ng-content></ng-content>
+<ng-content select="img"></ng-content>
 <ng-container *ngFor="let item of list">
   <ng-template
     [ngTemplateOutlet]="rowTemplate"
@@ -7,6 +7,6 @@
 </ng-container>
 <button
   class="border border-blue-500 bg-blue-300 p-2 rounded-sm"
-  (click)="onAdd.emit()">
+  (click)="added.emit()">
   Add
 </button>

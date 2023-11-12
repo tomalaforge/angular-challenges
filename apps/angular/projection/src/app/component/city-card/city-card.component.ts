@@ -7,19 +7,18 @@ import {
 } from '../../data-access/fake-http.service';
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
+import { ListItemTemplateDirective } from '../../utils/list-item-template.directive';
 
 @Component({
   selector: 'app-city-card',
   template: `<app-card
     class="bg-light-blue"
-    [list]="cities$ | async"
-    (onAdd)="addNewItem()">
+    [list]="cities()"
+    (added)="addNewItem()">
     <img src="assets/img/teacher.png" width="200px" />
-    <ng-template #rowRef let-city>
-      <app-list-item
-        [name]="city.name"
-        [id]="city.id"
-        (onDelete)="deleteCity($event)">
+    <ng-template listItemTemplate #rowRef let-city>
+      <app-list-item (deleted)="deleteCity(city.id)">
+        {{ city.name }}
       </app-list-item>
     </ng-template>
   </app-card>`,
@@ -31,10 +30,16 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
     `,
   ],
   standalone: true,
-  imports: [CardComponent, ListItemComponent, AsyncPipe],
+  imports: [
+    CardComponent,
+    ListItemComponent,
+    AsyncPipe,
+    ListItemTemplateDirective,
+  ],
 })
 export class CityCardComponent implements OnInit {
-  public cities$ = this.store.cities$;
+  public cities = this.store.cities;
+
   constructor(private http: FakeHttpService, public store: CityStore) {}
 
   ngOnInit(): void {
