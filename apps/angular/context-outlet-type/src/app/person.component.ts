@@ -1,9 +1,32 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, ContentChild, Input, TemplateRef } from '@angular/core';
+import {
+  Component,
+  ContentChild,
+  Directive,
+  Input,
+  TemplateRef,
+} from '@angular/core';
 
 interface Person {
   name: string;
   age: number;
+}
+
+@Directive({
+  standalone: true,
+  selector: '[personTemplate]',
+})
+export class PersonTemplateDirective {
+  static ngTemplateContextGuard(
+    _directive: PersonTemplateDirective,
+    _context: unknown
+  ): _context is PersonContext {
+    return true;
+  }
+}
+
+class PersonContext {
+  constructor(public $implicit: string, public age: number) {}
 }
 
 @Component({
@@ -23,6 +46,6 @@ interface Person {
 export class PersonComponent {
   @Input() person!: Person;
 
-  @ContentChild('#personRef', { read: TemplateRef })
-  personTemplateRef!: TemplateRef<unknown>;
+  @ContentChild(PersonTemplateDirective, { read: TemplateRef })
+  personTemplateRef: TemplateRef<PersonContext> | undefined;
 }
