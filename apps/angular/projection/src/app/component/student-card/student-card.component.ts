@@ -4,6 +4,7 @@ import {
   inject,
   Signal,
   effect,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import {
   FakeHttpService,
@@ -47,6 +48,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
     `,
   ],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CardComponent],
 })
 export class StudentCardComponent {

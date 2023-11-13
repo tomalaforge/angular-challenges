@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   Signal,
   ViewEncapsulation,
@@ -47,6 +48,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
   ],
   standalone: true,
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CardComponent],
 })
 export class TeacherCardComponent {

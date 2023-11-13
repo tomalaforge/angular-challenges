@@ -1,5 +1,12 @@
 import { toSignal } from '@angular/core/rxjs-interop';
-import { Component, Signal, effect, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Signal,
+  ViewEncapsulation,
+  effect,
+  inject,
+} from '@angular/core';
 import { CardComponent } from '../../ui/card/card.component';
 import {
   FakeHttpService,
@@ -31,6 +38,8 @@ import { CityStore } from '../../data-access/city.store';
     </app-card>
   `,
   standalone: true,
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CardComponent],
 })
 export class CityCardComponent {

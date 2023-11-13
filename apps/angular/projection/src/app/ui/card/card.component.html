@@ -4,7 +4,7 @@
   <ng-content select="card-image" />
 
   <section>
-    <app-list-item *ngFor="let item of list">
+    <app-list-item *ngFor="let item of list; trackBy: trackByFn">
       <ng-container *ngTemplateOutlet="listItem; context: { item }" />
     </app-list-item>
   </section>
