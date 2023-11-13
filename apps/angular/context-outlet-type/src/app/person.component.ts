@@ -17,6 +17,8 @@ interface Person {
   selector: '[personTemplate]',
 })
 export class PersonTemplateDirective {
+  @Input() personTemplate!: Person;
+
   static ngTemplateContextGuard(
     _directive: PersonTemplateDirective,
     _context: unknown
@@ -25,8 +27,10 @@ export class PersonTemplateDirective {
   }
 }
 
-class PersonContext {
-  constructor(public $implicit: string, public age: number) {}
+interface PersonContext {
+  $implicit: Person;
+  name: string;
+  age: number;
 }
 
 @Component({
@@ -37,7 +41,11 @@ class PersonContext {
     <ng-container
       *ngTemplateOutlet="
         personTemplateRef || emptyRef;
-        context: { $implicit: person.name, age: person.age }
+        context: {
+          $implicit: person,
+          name: person.name,
+          age: person.age
+        }
       "></ng-container>
 
     <ng-template #emptyRef> No Template </ng-template>
@@ -47,5 +55,5 @@ export class PersonComponent {
   @Input() person!: Person;
 
   @ContentChild(PersonTemplateDirective, { read: TemplateRef })
-  personTemplateRef: TemplateRef<PersonContext> | undefined;
+  personTemplateRef!: TemplateRef<PersonContext>;
 }

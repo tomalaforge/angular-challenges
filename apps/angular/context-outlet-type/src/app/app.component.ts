@@ -15,9 +15,9 @@ import { PersonComponent, PersonTemplateDirective } from './person.component';
   selector: 'app-root',
   template: `
     <person [person]="person">
-      <ng-template personTemplate let-name let-age="age">
+      <ng-container *personTemplate="person; name as name; age as age">
         {{ name }}: {{ age }}
-      </ng-template>
+      </ng-container>
     </person>
 
     <list [list]="students">
