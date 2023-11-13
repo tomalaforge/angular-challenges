@@ -50,6 +50,7 @@ export default defineConfig({
         MarkdownContent: './src/components/Content.astro',
         TableOfContents: './src/components/TableOfContents.astro',
         PageTitle: './src/components/PageTitle.astro',
+        MobileMenuFooter: './src/components/MobileMenuFooter.astro',
       },
     }),
   ],
