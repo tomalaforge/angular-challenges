@@ -1,9 +1,9 @@
 import {
   Component,
-  OnInit,
+  Signal,
   ViewEncapsulation,
-  WritableSignal,
-  signal,
+  effect,
+  inject,
 } from '@angular/core';
 import {
   FakeHttpService,
@@ -12,6 +12,7 @@ import {
 import { TeacherStore } from '../../data-access/teacher.store';
 import { Teacher } from '../../model/teacher.model';
 import { CardComponent } from '../../ui/card/card.component';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-teacher-card',
@@ -20,7 +21,7 @@ import { CardComponent } from '../../ui/card/card.component';
       <img src="assets/img/teacher.png" width="200px" />
     </ng-container>
 
-    <ng-template let-item="item" #nameTemplate>
+    <ng-template let-item="item" #listItem>
       {{ item.firstname }}
       <ng-container ngProjectAs="delete-button">
         <button (click)="delete(item.id)">
@@ -48,15 +49,20 @@ import { CardComponent } from '../../ui/card/card.component';
   encapsulation: ViewEncapsulation.None,
   imports: [CardComponent],
 })
-export class TeacherCardComponent implements OnInit {
-  teachers: WritableSignal<Teacher[]> = signal([]);
+export class TeacherCardComponent {
+  private store = inject(TeacherStore);
+  private fetchTeachers = toSignal(inject(FakeHttpService).fetchTeachers$, {
+    initialValue: [],
+  });
+  teachers: Signal<Teacher[]> = this.store.teachers;
 
-  constructor(private http: FakeHttpService, private store: TeacherStore) {}
-
-  ngOnInit(): void {
-    this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
-
-    this.store.teachers$.subscribe((t) => this.teachers.set(t));
+  constructor() {
+    effect(
+      () => {
+        this.store.addAll(this.fetchTeachers());
+      },
+      { allowSignalWrites: true }
+    );
   }
 
   delete(id: number) {

@@ -11,9 +11,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
 export class CardComponent {
   @Input() list: any[] | null = null;
   @Input() customClass = '';
-  @ContentChild(TemplateRef) nameTemplate: TemplateRef<{
+  @ContentChild('listItem', { read: TemplateRef }) listItem: TemplateRef<{
     item: any;
   }> | null = null;
-
-  constructor() {}
 }

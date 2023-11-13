@@ -1,4 +1,5 @@
-import { Component, OnInit, WritableSignal, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { Component, Signal, effect, inject } from '@angular/core';
 import { CardComponent } from '../../ui/card/card.component';
 import {
   FakeHttpService,
@@ -11,7 +12,7 @@ import { CityStore } from '../../data-access/city.store';
   selector: 'app-city-card',
   template: `
     <app-card [list]="cities()" customClass="bg-light-green">
-      <ng-template let-item="item" #nameTemplate>
+      <ng-template let-item="item" #listItem>
         {{ item.name }}
         <ng-container ngProjectAs="delete-button">
           <button (click)="delete(item.id)">
@@ -32,15 +33,20 @@ import { CityStore } from '../../data-access/city.store';
   standalone: true,
   imports: [CardComponent],
 })
-export class CityCardComponent implements OnInit {
-  cities: WritableSignal<City[]> = signal([]);
+export class CityCardComponent {
+  private store = inject(CityStore);
+  private fetchCities = toSignal(inject(FakeHttpService).fetchCities$, {
+    initialValue: [],
+  });
+  cities: Signal<City[]> = this.store.cities;
 
-  constructor(private http: FakeHttpService, private store: CityStore) {}
-
-  ngOnInit(): void {
-    this.http.fetchCities$.subscribe((t) => this.store.addAll(t));
-
-    this.store.cities$.subscribe((t) => this.cities.set(t));
+  constructor() {
+    effect(
+      () => {
+        this.store.addAll(this.fetchCities());
+      },
+      { allowSignalWrites: true }
+    );
   }
 
   delete(id: number) {
