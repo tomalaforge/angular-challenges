@@ -1,1 +1,1 @@
-export * from './lib/token.provider';
+export { TOKEN, provideToken } from './lib/token.provider';
