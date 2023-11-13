@@ -9,6 +9,7 @@ import {
   TemplateRef,
 } from '@angular/core';
 import { ListItemComponent } from '../list-item/list-item.component';
+import { RowRefDirective } from '../../directives/rowref.directive';
 
 @Component({
   selector: 'app-card',
@@ -21,9 +22,12 @@ import { ListItemComponent } from '../list-item/list-item.component';
   },
 })
 export class CardComponent<T> {
-  @ContentChild('rowRef', { read: TemplateRef }) rowTemplate!: TemplateRef<{ $implicit: T }>;
+  @ContentChild(RowRefDirective, { read: TemplateRef })
+  rowTemplate!: TemplateRef<{
+    $implicit: T;
+  }>;
 
-  @Input() list: unknown[] | null = null;
+  @Input() list: T[] = [];
 
   @Output() addItem: EventEmitter<unknown> = new EventEmitter();
 
