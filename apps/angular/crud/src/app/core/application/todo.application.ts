@@ -12,8 +12,6 @@ export class TodoApplication {
   // }
 
   update(todo: Todo) {
-    // return this.todoStore.update(todo).pipe(
-    //   tap(todoUpdated => this.todoStore.updateTodo(todoUpdated))
-    // );
+    this.todoStore.update(todo);
   }
 }
