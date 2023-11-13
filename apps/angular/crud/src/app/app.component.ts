@@ -1,8 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  Signal,
+} from '@angular/core';
 import { Todo } from './todo.model';
 import { TodoService } from './todo.service';
-import { Observable } from 'rxjs';
 import { LoaderService } from './loader.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
@@ -11,8 +15,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   imports: [CommonModule, MatProgressSpinnerModule],
   selector: 'app-root',
   template: `
-    <mat-spinner *ngIf="loader$ | async"></mat-spinner>
-    <div *ngFor="let todo of todos$ | async">
+    <mat-spinner *ngIf="loader()"></mat-spinner>
+    <div *ngFor="let todo of todos()">
       {{ todo.title }}
       <button (click)="update(todo)">Update</button>
       <button (click)="delete(todo.id)">Delete</button>
@@ -22,8 +26,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
-  public todos$: Observable<Todo[]> = this.todoService.todos$;
-  public loader$: Observable<boolean> = this.loaderService.loader$;
+  public todos: Signal<Todo[]> = this.todoService.todos;
+  public loader: Signal<boolean> = this.loaderService.loader;
 
   constructor(
     private todoService: TodoService,

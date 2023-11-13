@@ -1,5 +1,4 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { computed, Injectable, signal } from '@angular/core';
 import { Todo } from './todo.model';
 import { HttpClient } from '@angular/common/http';
 import { randText } from '@ngneat/falso';
@@ -8,8 +7,8 @@ import { randText } from '@ngneat/falso';
   providedIn: 'root',
 })
 export class TodoService {
-  private todoListSource = new BehaviorSubject<Todo[]>([]);
-  public todos$ = this.todoListSource.asObservable();
+  #todos = signal<Todo[]>([]);
+  todos = computed(this.#todos);
 
   constructor(private http: HttpClient) {}
 
@@ -17,7 +16,7 @@ export class TodoService {
     this.http
       .get<Todo[]>('https://jsonplaceholder.typicode.com/todos')
       .subscribe((todos) => {
-        this.todoListSource.next(todos);
+        this.#todos.set(todos);
       });
   }
 
@@ -38,11 +37,8 @@ export class TodoService {
         }
       )
       .subscribe((todoUpdated: Todo) => {
-        const currentTodos = this.todoListSource.value;
-        this.todoListSource.next(
-          currentTodos.map((todo) =>
-            todo.id === todoUpdated.id ? todoUpdated : todo
-          )
+        this.#todos.update((todos) =>
+          todos.map((todo) => (todo.id === todoUpdated.id ? todoUpdated : todo))
         );
       });
   }
@@ -51,9 +47,7 @@ export class TodoService {
     this.http
       .delete<void>(`https://jsonplaceholder.typicode.com/todos/${index}`)
       .subscribe((_) =>
-        this.todoListSource.next(
-          this.todoListSource.value.filter((todo) => todo.id !== index)
-        )
+        this.#todos.update((todos) => todos.filter((todo) => todo.id !== index))
       );
   }
 }
