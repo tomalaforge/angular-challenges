@@ -9,30 +9,31 @@ import { ItemComponent } from './components/item.component';
   imports: [CommonModule, MatProgressSpinnerModule, ItemComponent],
   selector: 'app-root',
   template: `
-    <mat-spinner *ngIf="loading$ | async; else loaded"></mat-spinner>
-    <ng-template #loaded>
-      <ng-container *ngIf="error$ | async as error; else result">
-        {{ error }}
-      </ng-container>
-      <ng-template #result>
-        <app-item
-          *ngFor="let todo of todos$ | async; trackBy: trackByFunc"
-          [item]="todo"
-          [disabledTodosIds]="disabledTodosIds$ | async"
-          [errorTodosIds]="errorTodosIds$ | async"
-          (updateClicked)="handleUpdate($event)"
-          (deleteClicked)="handleDelete($event)">
-        </app-item>
+    <ng-container *ngIf="callState$ | async as callState">
+      <mat-spinner *ngIf="callState === 'Loading'; else loaded"></mat-spinner>
+      <ng-template #loaded>
+        <ng-container *ngIf="callState === 'Loaded'">
+          <app-item
+            *ngFor="let todo of todos$ | async; trackBy: trackByFunc"
+            [item]="todo"
+            [disabledTodosIds]="disabledTodosIds$ | async"
+            [errorTodosIds]="errorTodosIds$ | async"
+            (updateClicked)="handleUpdate($event)"
+            (deleteClicked)="handleDelete($event)">
+          </app-item>
+        </ng-container>
+        <ng-container *ngIf="callState !== 'Loaded' && callState !== 'Loading'">
+          {{ callState.err }}
+        </ng-container>
       </ng-template>
-    </ng-template>
+    </ng-container>
   `,
   styles: [],
   providers: [TodosStore],
 })
 export class AppComponent implements OnInit {
   public todos$ = this.todosStore.select((state) => state.todos);
-  public loading$ = this.todosStore.select((state) => state.loading);
-  public error$ = this.todosStore.select((state) => state.error);
+  public callState$ = this.todosStore.select((state) => state.callstate);
   public disabledTodosIds$ = this.todosStore.select(
     (state) => state.disabledTodosIds
   );
