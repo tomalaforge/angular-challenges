@@ -5,16 +5,15 @@ import {
   randStudent,
 } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
-import { CardContentDirective } from '../../ui/card/card-content.directive';
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-student-card',
-  template: `<app-card customClass="bg-light-green">
+  template: `<app-card [items]="students$ | async" class="bg-light-green">
     <img cardImage src="assets/img/student.webp" width="200px" />
 
-    <ng-template [cardContent]="students$ | async" let-student>
+    <ng-template #listItemRef let-student>
       <app-list-item (deleteEvent)="deleteStudent(student.id)">
         {{ student.firstname }}
       </app-list-item>
@@ -31,12 +30,12 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   standalone: true,
   styles: [
     `
-      ::ng-deep .bg-light-green {
+      .bg-light-green {
         background-color: rgba(0, 250, 0, 0.1);
       }
     `,
   ],
-  imports: [CardComponent, ListItemComponent, AsyncPipe, CardContentDirective],
+  imports: [CardComponent, ListItemComponent, AsyncPipe],
 })
 export class StudentCardComponent implements OnInit {
   students$ = this.store.students$;

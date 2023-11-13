@@ -5,16 +5,15 @@ import {
   FakeHttpService,
   randomCity,
 } from '../../data-access/fake-http.service';
-import { CardContentDirective } from '../../ui/card/card-content.directive';
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-city-card',
-  template: `<app-card customClass="bg-light-blue">
+  template: `<app-card [items]="cities$ | async" class="bg-light-blue">
     <img cardImage src="assets/img/city.png" width="200px" />
 
-    <ng-template [cardContent]="cities$ | async" let-city>
+    <ng-template #listItemRef let-city>
       <app-list-item (deleteEvent)="deleteCity(city.id)">
         {{ city.name }} - {{ city.country }}
       </app-list-item>
@@ -31,12 +30,12 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   standalone: true,
   styles: [
     `
-      ::ng-deep .bg-light-blue {
+      .bg-light-blue {
         background-color: rgba(3, 128, 255, 1);
       }
     `,
   ],
-  imports: [CardComponent, ListItemComponent, AsyncPipe, CardContentDirective],
+  imports: [CardComponent, ListItemComponent, AsyncPipe],
 })
 export class CityCardComponent implements OnInit {
   cities$ = this.store.cities$;

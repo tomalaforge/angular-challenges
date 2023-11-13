@@ -1,15 +1,12 @@
-<div
-  class="flex flex-col gap-3 p-4 border-2 border-black rounded-md w-fit"
-  [class]="customClass">
-  <ng-content select="[cardImage]"></ng-content>
+<ng-content select="[cardImage]"></ng-content>
 
-  <section>
-    <ng-container
-      *ngFor="let item of cardContentDirective.content"
-      [ngTemplateOutlet]="cardContentDirective.templateRef"
+<section>
+  <ng-container *ngFor="let item of items">
+    <ng-template
+      [ngTemplateOutlet]="listItemRef"
       [ngTemplateOutletContext]="{ $implicit: item }">
-    </ng-container>
-  </section>
+    </ng-template>
+  </ng-container>
+</section>
 
-  <ng-content select="[actions]"></ng-content>
-</div>
+<ng-content select="[actions]"></ng-content>
