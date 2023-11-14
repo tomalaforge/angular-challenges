@@ -1,8 +1,11 @@
 import { TOKEN } from '@angular-challenges/module-to-standalone/core/providers';
 import { Component, Inject } from '@angular/core';
+import { RouterLinkWithHref, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'lib-user-shell',
+  standalone: true,
+  imports: [RouterLinkWithHref, RouterOutlet],
   template: `
     -- User Panel --
     <div class="flex gap-2 items-center">
