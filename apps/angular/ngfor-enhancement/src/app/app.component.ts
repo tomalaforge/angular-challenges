@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { NgForEnhancenedDirective } from './ng-for-enhancened.directive';
 
@@ -8,7 +7,7 @@ interface Person {
 
 @Component({
   standalone: true,
-  imports: [NgForEnhancenedDirective, NgIf],
+  imports: [NgForEnhancenedDirective],
   selector: 'app-root',
   template: `
     <div *ngFor="let person of persons; else: emptyList">
@@ -20,5 +19,5 @@ interface Person {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-  persons: Person[] = [{ name: '1' }];
+  persons: Person[] = [];
 }
