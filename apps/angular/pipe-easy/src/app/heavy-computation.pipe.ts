@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'heavComputation',
+  name: 'heavyComputation',
   standalone: true,
 })
 export class HeavyComputationPipe implements PipeTransform {

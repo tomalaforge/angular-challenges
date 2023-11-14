@@ -8,7 +8,7 @@ import { HeavyComputationPipe } from './heavy-computation.pipe';
   selector: 'app-root',
   template: `
     <div *ngFor="let person of persons; let index = index">
-      {{ person | heavComputation : index }}
+      {{ person | heavyComputation : index }}
     </div>
   `,
 })
