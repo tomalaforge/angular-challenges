@@ -1,0 +1,8 @@
+<div class="todo-item">
+    <input type="checkbox"  />
+    <span>{{ todo.title }}</span>
+    <section class="buttons">
+        <button mat-stroked-button color="primary" (click)="update(todo)">update</button>
+        <button mat-stroked-button color="warn" (click)="delete(todo)">delte</button>
+    </section>
+  </div>

@@ -1,0 +1,16 @@
+.todo-item {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border: 1px solid #ccc;
+    margin-bottom: 8px;
+  }
+  
+  .buttons {
+    margin-left: 20px;
+    
+  }
+
+  button {
+    margin-right: 10px;
+  }
