@@ -11,11 +11,13 @@ import { RouterLink, RouterModule } from '@angular/router';
     <label for="testId">TestId</label>
     <input id="testId" type="number" [formControl]="testId" />
     <button
-      [routerLink]="'test/' + testId.value"
+      [routerLink]="['test/',testId.value]"
       [queryParams]="{ user: userName.value }">
       Test
     </button>
-    <button routerLink="/">HOME</button>
+    <button routerLink="/">
+      HOME
+    </button>
     <router-outlet></router-outlet>`,
 })
 export class AppComponent {
