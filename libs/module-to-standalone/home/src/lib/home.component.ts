@@ -1,9 +1,12 @@
 import { TOKEN } from '@angular-challenges/module-to-standalone/core/providers';
 import { AuthorizationService } from '@angular-challenges/module-to-standalone/core/service';
+import { AsyncPipe } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 
 @Component({
   selector: 'lib-home',
+  standalone: true,
+  imports: [AsyncPipe],
   template: `Home component
 
     <section class="flex gap-5 items-center">
