@@ -7,6 +7,7 @@ import {
   TemplateRef,
 } from '@angular/core';
 import { ListItemComponent } from '../list-item/list-item.component';
+import { RowTemplateDirective } from '../../row-template.directive';
 
 @Component({
   selector: 'app-card',
@@ -20,7 +21,8 @@ import { ListItemComponent } from '../list-item/list-item.component';
 })
 export class CardComponent<T> {
   @Input() list: T[] | null = null;
-  @ContentChild('rowRef', { read: TemplateRef }) template!: TemplateRef<{
+  @ContentChild(RowTemplateDirective, { read: TemplateRef })
+  template!: TemplateRef<{
     $implicit: T;
   }>;
 

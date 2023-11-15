@@ -9,13 +9,14 @@ import {
   randomCity,
 } from '../../data-access/fake-http.service';
 import { CityStore } from '../../data-access/city.store';
+import { RowTemplateDirective } from '../../row-template.directive';
 
 @Component({
   selector: 'app-city-card',
   template: `
     <app-card [list]="cities | async" class="bg-light-orange">
       <img src="assets/img/city.png" width="200px" />
-      <ng-template #rowRef let-city>
+      <ng-template appRowTemplate let-city>
         <app-list-item (delete)="deleteCity(city.id)">
           {{ city.name }}
         </app-list-item>
@@ -28,7 +29,7 @@ import { CityStore } from '../../data-access/city.store';
     </app-card>
   `,
   standalone: true,
-  imports: [CardComponent, AsyncPipe, ListItemComponent],
+  imports: [CardComponent, AsyncPipe, ListItemComponent, RowTemplateDirective],
   styles: [
     `
       .bg-light-orange {

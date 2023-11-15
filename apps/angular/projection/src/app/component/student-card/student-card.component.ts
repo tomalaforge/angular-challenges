@@ -9,12 +9,13 @@ import { CardComponent } from '../../ui/card/card.component';
 import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
+import { RowTemplateDirective } from '../../row-template.directive';
 
 @Component({
   selector: 'app-student-card',
   template: `<app-card [list]="students | async" class="bg-light-green">
     <img src="assets/img/student.webp" width="200px" />
-    <ng-template #rowRef let-student>
+    <ng-template appRowTemplate let-student>
       <app-list-item (delete)="deleteStudent(student.id)">
         {{ student.firstname }}
       </app-list-item>
@@ -34,7 +35,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CardComponent, ListItemComponent, AsyncPipe],
+  imports: [CardComponent, ListItemComponent, AsyncPipe, RowTemplateDirective],
 })
 export class StudentCardComponent implements OnInit {
   students: Observable<Student[]> = this.store.students$;
