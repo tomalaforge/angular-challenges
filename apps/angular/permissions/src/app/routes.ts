@@ -17,7 +17,7 @@ export const APP_ROUTES: TypedRoute[] = [
     path: 'enter',
     canMatch: [HasPermission],
     data: {
-      isAdmin: true 
+      isAdmin: true,
     },
     loadComponent: () =>
       import('./dashboard/admin.component').then(
@@ -28,7 +28,7 @@ export const APP_ROUTES: TypedRoute[] = [
     path: 'enter',
     canMatch: [HasPermission],
     data: {
-      roles: ['MANAGER'] 
+      roles: ['MANAGER'],
     },
     loadComponent: () =>
       import('./dashboard/manager.component').then(
@@ -39,7 +39,7 @@ export const APP_ROUTES: TypedRoute[] = [
     path: 'enter',
     canMatch: [HasPermission],
     data: {
-      roles: ['CLIENT'] 
+      roles: ['CLIENT'],
     },
     loadComponent: () =>
       import('./dashboard/client.component').then(
@@ -50,7 +50,7 @@ export const APP_ROUTES: TypedRoute[] = [
     path: 'enter',
     canMatch: [HasPermission],
     data: {
-      roles: ['READER'] 
+      roles: ['READER'],
     },
     loadComponent: () =>
       import('./dashboard/reader.component').then(
@@ -61,7 +61,7 @@ export const APP_ROUTES: TypedRoute[] = [
     path: 'enter',
     canMatch: [HasPermission],
     data: {
-      roles: ['WRITER'] 
+      roles: ['WRITER'],
     },
     loadComponent: () =>
       import('./dashboard/writer.component').then(
