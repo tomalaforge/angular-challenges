@@ -8,7 +8,7 @@ import { Directive, DoCheck, EmbeddedViewRef, Input, TemplateRef, ViewContainerR
     {
       directive: NgFor,
       inputs: ['ngForOf:ngForEmptyOf', 'ngForTrackBy:ngForEmptyTrackBy'],
-    },
+    }
   ],
 })
 export class NgForEmptyDirective<T> implements DoCheck {
@@ -19,7 +19,6 @@ export class NgForEmptyDirective<T> implements DoCheck {
 
   ngDoCheck(): void {
     this.ref?.destroy();
-
     if (!this.ngForEmptyOf || this.ngForEmptyOf.length === 0) {
       this.ref = this.vcr.createEmbeddedView(this.ngForEmptyElse);
     }

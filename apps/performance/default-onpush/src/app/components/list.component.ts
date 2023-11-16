@@ -12,7 +12,7 @@ import { CDFlashingDirective } from '@angular-challenges/shared/directives';
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [MatListModule, NgForEmpty, CDFlashingDirective], 
+  imports: [MatListModule, NgForEmpty, CDFlashingDirective],
   host: {
     class: 'flex w-full',
   },
@@ -20,7 +20,7 @@ import { CDFlashingDirective } from '@angular-challenges/shared/directives';
     <mat-list class="flex w-full">
       <ng-template #emptyList class="empty-list-label">Empty list</ng-template>
       <mat-list-item
-        *ngForEmpty="let name of names; else: emptyList;"
+        *ngForEmpty="let name of names; else: emptyList; trackBy: trackByFn"
         cd-flash
         class="text-orange-500">
         <div MatListItemLine class="flex justify-between">
