@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { randFirstName } from '@ngneat/falso';
 import { PersonListComponent } from './person-list.component';
 import { RandomComponent } from './random.component';
 
 @Component({
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [PersonListComponent, RandomComponent],
   selector: 'app-root',
   template: `
