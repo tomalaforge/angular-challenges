@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 import { User } from './user.model';
 
 @Injectable({
@@ -12,4 +12,23 @@ export class UserStore {
   add(user: User) {
     this.user.next(user);
   }
+
+  hasRole = (role: string | string[]) => {
+    return this.user$.pipe(
+      map((user) => {
+        if (role?.length === 0) return true;
+        const userRoles = user?.roles;
+        if (!userRoles || userRoles?.length === 0) {
+          return false;
+        }
+        if (Array.isArray(role)) {
+          return userRoles.some((userRole) => role.includes(userRole));
+        }
+        if (typeof role === 'string') {
+          return userRoles.some((userRole) => role === userRole);
+        }
+        return false;
+      })
+    );
+  };
 }
