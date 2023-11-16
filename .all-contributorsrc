@@ -114,6 +114,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "nelsongutidev",
+      "name": "Nelson Gutierrez",
+      "avatar_url": "https://avatars.githubusercontent.com/u/62297014?v=4",
+      "profile": "https://nelsonguti.dev/",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
