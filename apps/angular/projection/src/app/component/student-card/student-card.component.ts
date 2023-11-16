@@ -1,35 +1,61 @@
-import { Component, OnInit } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+import { Component, Signal, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { switchMap, tap } from 'rxjs';
+import {
+  FakeHttpService,
+  randStudent,
+} from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
-import { CardType } from '../../model/card.model';
 import { Student } from '../../model/student.model';
-import { CardComponent } from '../../ui/card/card.component';
+import {
+  CardComponent,
+  CardListItemDirective,
+} from '../../ui/card/card.component';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-student-card',
   template: `<app-card
-    [list]="students"
-    [type]="cardType"
-    customClass="bg-light-green"></app-card>`,
+    [list]="students()"
+    class="bg-light-green"
+    (add)="addStudent()">
+    <img card-header src="assets/img/student.webp" width="200px" />
+
+    <ng-template card-list-item let-student>
+      <app-list-item (deleted)="deleteStudent(student.id)">
+        {{ student.firstname }}
+      </app-list-item>
+    </ng-template>
+  </app-card>`,
   standalone: true,
   styles: [
     `
-      ::ng-deep .bg-light-green {
+      .bg-light-green {
         background-color: rgba(0, 250, 0, 0.1);
       }
     `,
   ],
-  imports: [CardComponent],
+  imports: [CardComponent, ListItemComponent, CardListItemDirective],
 })
-export class StudentCardComponent implements OnInit {
-  students: Student[] = [];
-  cardType = CardType.STUDENT;
+export class StudentCardComponent {
+  http = inject(FakeHttpService);
+  store = inject(StudentStore);
 
-  constructor(private http: FakeHttpService, private store: StudentStore) {}
+  students: Signal<Student[]> = toSignal(
+    this.http.fetchStudents$.pipe(
+      tap((students: Student[]) => this.store.addAll(students)),
+      switchMap(() => this.store.students$)
+    ),
+    {
+      initialValue: [] as Student[],
+    }
+  );
 
-  ngOnInit(): void {
-    this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
+  addStudent() {
+    this.store.addOne(randStudent());
+  }
 
-    this.store.students$.subscribe((s) => (this.students = s));
+  deleteStudent(id: number) {
+    this.store.deleteOne(id);
   }
 }
