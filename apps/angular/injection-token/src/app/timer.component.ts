@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { interval } from 'rxjs';
-import { DEFAULT_TIMER } from './data';
+import { DEFAULT_TIMER_TOKEN } from './data';
 
 @Component({
   selector: 'timer',
@@ -9,5 +9,6 @@ import { DEFAULT_TIMER } from './data';
   template: ` Timer running {{ timer() }} `,
 })
 export class TimerComponent {
-  timer = toSignal(interval(DEFAULT_TIMER));
+  timerData = inject(DEFAULT_TIMER_TOKEN);
+  timer = toSignal(interval(Number(this.timerData)));
 }
