@@ -1,16 +1,13 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { randText } from '@ngneat/falso';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
-import { Observable, exhaustMap, mergeMap, tap } from 'rxjs';
+import { Observable, exhaustMap, mergeMap, of, tap } from 'rxjs';
 import { CallState } from '../model/loading.type';
 import { Todo } from '../model/todo.interface';
 
 export interface TodosState {
   todos: Todo[];
   callstate: CallState;
-  disabledTodosIds: number[];
-  errorTodosIds: number[];
 }
 
 @Injectable()
@@ -19,8 +16,6 @@ export class TodosStore extends ComponentStore<TodosState> {
     super({
       todos: [],
       callstate: 'Loading',
-      disabledTodosIds: [],
-      errorTodosIds: [],
     });
   }
 
@@ -34,10 +29,7 @@ export class TodosStore extends ComponentStore<TodosState> {
     ...state,
     callstate: { err: error.message },
   }));
-  addToLoadingList = this.updater((state, todoId: number) => ({
-    ...state,
-    disabledTodosIds: [...state.disabledTodosIds, todoId],
-  }));
+
   setUpdatedTodo = this.updater((state, updatedItem: Todo) => {
     const updatedTodoIndex = state.todos.findIndex(
       (t) => t.id === updatedItem.id
@@ -48,23 +40,17 @@ export class TodosStore extends ComponentStore<TodosState> {
     }
     return {
       ...state,
-      disabledTodosIds: state.disabledTodosIds.filter(
-        (t) => t !== updatedItem.id
-      ),
       todos: updatedTodos,
     };
   });
   addToErrorList = this.updater((state, todoId: number) => ({
     ...state,
-    disabledTodosIds: state.disabledTodosIds.filter((t) => t !== todoId),
-    errorTodosIds: [...state.errorTodosIds, todoId],
   }));
   deleteItemFromList = this.updater((state, todoId: number) => {
     console.log(todoId);
 
     return {
       ...state,
-      disabledTodosIds: state.disabledTodosIds.filter((t) => t !== todoId),
       todos: state.todos.filter((t) => t.id !== todoId),
     };
   });
@@ -91,54 +77,10 @@ export class TodosStore extends ComponentStore<TodosState> {
     );
   });
 
-  update = this.effect((todo$: Observable<Todo>) => {
-    return todo$.pipe(
-      tap((todo) => {
-        this.addToLoadingList(todo.id);
-      }),
-      mergeMap((todo) => {
-        return this.http
-          .put<Todo>(
-            `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
-            JSON.stringify({
-              todo: todo.id,
-              title: randText(),
-              userId: todo.userId,
-            }),
-            {
-              headers: {
-                'Content-type': 'application/json; charset=UTF-8',
-              },
-            }
-          )
-          .pipe(
-            tapResponse(
-              (updatedTodo) => this.setUpdatedTodo(updatedTodo),
-              (err: HttpErrorResponse) => {
-                this.addToErrorList(todo.id);
-              }
-            )
-          );
-      })
-    );
-  });
-
   delete = this.effect((todoId$: Observable<number>) => {
     return todoId$.pipe(
-      tap((todoId) => {
-        this.addToLoadingList(todoId);
-      }),
       mergeMap((todoId) => {
-        return this.http
-          .delete<Todo>(`https://jsonplaceholder.typicode.com/todos/${todoId}`)
-          .pipe(
-            tapResponse(
-              () => this.deleteItemFromList(todoId),
-              (err: HttpErrorResponse) => {
-                this.addToErrorList(todoId);
-              }
-            )
-          );
+        return of(this.deleteItemFromList(todoId));
       })
     );
   });

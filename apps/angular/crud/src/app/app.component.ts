@@ -16,10 +16,7 @@ import { ItemComponent } from './components/item.component';
           <app-item
             *ngFor="let todo of todos$ | async; trackBy: trackByFunc"
             [item]="todo"
-            [disabledTodosIds]="disabledTodosIds$ | async"
-            [errorTodosIds]="errorTodosIds$ | async"
-            (updateClicked)="handleUpdate($event)"
-            (deleteClicked)="handleDelete($event)">
+            (itemDeleted)="handleDelete($event)">
           </app-item>
         </ng-container>
         <ng-container *ngIf="callState !== 'Loaded' && callState !== 'Loading'">
@@ -28,18 +25,11 @@ import { ItemComponent } from './components/item.component';
       </ng-template>
     </ng-container>
   `,
-  styles: [],
   providers: [TodosStore],
 })
 export class AppComponent implements OnInit {
   public todos$ = this.todosStore.select((state) => state.todos);
   public callState$ = this.todosStore.select((state) => state.callstate);
-  public disabledTodosIds$ = this.todosStore.select(
-    (state) => state.disabledTodosIds
-  );
-  public errorTodosIds$ = this.todosStore.select(
-    (state) => state.errorTodosIds
-  );
 
   constructor(private readonly todosStore: TodosStore) {}
 
@@ -51,11 +41,7 @@ export class AppComponent implements OnInit {
     return item.id;
   }
 
-  handleUpdate(todo: Todo): void {
-    this.todosStore.update(todo);
-  }
-
-  handleDelete(todo: Todo): void {
-    this.todosStore.delete(todo.id);
+  handleDelete(todoId: number): void {
+    this.todosStore.delete(todoId);
   }
 }

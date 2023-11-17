@@ -7,6 +7,8 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Todo } from '../model/todo.interface';
+import { TodoItemService } from './todo-item.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-item',
@@ -19,36 +21,46 @@ import { Todo } from '../model/todo.interface';
       </span>
       <button
         aria-label="update button"
-        [disabled]="disabledTodosIds?.includes(item.id)"
+        [disabled]="loading$ | async"
         (click)="update(item)">
         Update
       </button>
       <button
         aria-label="delete button"
-        [disabled]="disabledTodosIds?.includes(item.id)"
+        [disabled]="loading$ | async"
         (click)="delete(item)">
         Delete
       </button>
-      <ng-container *ngIf="errorTodosIds?.includes(item.id)">
-        Error occuried
-      </ng-container>
+      <ng-container *ngIf="error"> Error occuried </ng-container>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [TodoItemService],
 })
 export class ItemComponent {
   @Input({ required: true }) item!: Todo;
-  @Input({ required: true }) disabledTodosIds!: number[] | null;
-  @Input({ required: true }) errorTodosIds!: number[] | null;
+  @Output() itemDeleted = new EventEmitter<number>();
 
-  @Output() updateClicked = new EventEmitter<Todo>();
-  @Output() deleteClicked = new EventEmitter<Todo>();
+  loading$ = this.todoItemService.loading$;
+  error: string | null = null;
+
+  constructor(private readonly todoItemService: TodoItemService) {}
 
   update(todo: Todo): void {
-    this.updateClicked.emit(todo);
+    this.todoItemService.update(todo).subscribe({
+      next: (res) => {
+        this.item = res;
+      },
+      error: (err: HttpErrorResponse) => (this.error = err.message),
+    });
   }
 
   delete(todo: Todo): void {
-    this.deleteClicked.emit(todo);
+    this.todoItemService.delete(todo.id).subscribe({
+      next: () => {
+        this.itemDeleted.emit(todo.id);
+      },
+      error: (err: HttpErrorResponse) => (this.error = err.message),
+    });
   }
 }
