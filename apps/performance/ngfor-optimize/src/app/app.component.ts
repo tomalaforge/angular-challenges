@@ -1,17 +1,13 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { PersonService } from './list.service';
-import { PersonListComponent } from './person-list.component';
+import { PersonListComponent } from './components/person-list.component';
+import { InputComponent } from './components/input.component';
 
 @Component({
   standalone: true,
   imports: [
     PersonListComponent,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
+    InputComponent
   ],
   providers: [PersonService],
   selector: 'app-root',
@@ -19,15 +15,7 @@ import { PersonListComponent } from './person-list.component';
     <h1 class="font-semibold text-center text-3xl" title="Title">
       List of Persons
     </h1>
-
-    <mat-form-field class="w-3/4">
-      <input
-        placeholder="Add one member to the list"
-        matInput
-        type="text"
-        [(ngModel)]="label"
-        (keydown)="handleKey($event)" />
-    </mat-form-field>
+    <app-input (inputEvent)="this.personService.addPerson($event)" />
 
     <app-person-list
       class="max-w-2xl w-3/4"
@@ -43,16 +31,9 @@ export class AppComponent implements OnInit {
   readonly personService = inject(PersonService);
   readonly persons = this.personService.persons;
 
-  label = '';
 
   ngOnInit(): void {
     this.personService.loadPersons();
   }
 
-  handleKey(event: any) {
-    if (event.keyCode === 13) {
-      this.personService.addPerson(this.label);
-      this.label = '';
-    }
-  }
 }

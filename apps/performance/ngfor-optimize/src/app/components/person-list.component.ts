@@ -1,15 +1,14 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-
-import { CommonModule } from '@angular/common';
-import { Person } from './person.model';
+import { Person } from '../person.model';
+import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-person-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [NgFor],
   template: `
     <div
-      *ngFor="let person of persons"
+      *ngFor="let person of persons; trackBy: trackByFn"
       class="flex justify-between items-center border-b">
       <h3>{{ person.name }}</h3>
       <div class="flex gap-10 py-1">
@@ -34,4 +33,8 @@ export class PersonListComponent {
   @Input() persons: Person[] = [];
   @Output() delete = new EventEmitter<string>();
   @Output() update = new EventEmitter<string>();
+
+  trackByFn(index: number, person: Person) {
+    return person.email;
+  }
 }
