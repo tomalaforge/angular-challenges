@@ -38,6 +38,6 @@ export class AppComponent {
     screen.debug();
     logRoles(submitBtn);
     screen.logTestingPlaygroundURL(container);
-    console.log(prettyDOM(div))
+    console.log(prettyDOM(container))
   }
 }
