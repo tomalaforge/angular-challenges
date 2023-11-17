@@ -1,10 +1,19 @@
 import { AsyncPipe, NgIf } from '@angular/common';
-import { Component, HostListener } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  NgZone,
+  OnDestroy,
+  OnInit,
+  inject,
+} from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
   standalone: true,
   imports: [NgIf, AsyncPipe],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-root',
   template: `
     <div>Top</div>
@@ -31,16 +40,29 @@ import { BehaviorSubject } from 'rxjs';
     `,
   ],
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'scroll-cd';
-
+  private readonly zone = inject(NgZone);
+  private readonly cdr = inject(ChangeDetectorRef);
   private displayButtonSubject = new BehaviorSubject<boolean>(false);
   displayButton$ = this.displayButtonSubject.asObservable();
 
-  @HostListener('window:scroll', ['$event'])
+  ngOnInit() {
+    this.zone.runOutsideAngular(() => {
+      window.addEventListener('scroll', this.onScroll.bind(this));
+    });
+  }
+
+  ngOnDestroy() {
+    window.removeEventListener('scroll', this.onScroll.bind(this));
+  }
+
   onScroll() {
-    const pos = window.pageYOffset;
-    this.displayButtonSubject.next(pos > 50);
+    const pos = window.pageYOffset > 50;
+    const buttonValue = this.displayButtonSubject.value;
+    this.displayButtonSubject.next(pos);
+    if (buttonValue === pos) return;
+    this.cdr.detectChanges();
   }
 
   goToTop() {
