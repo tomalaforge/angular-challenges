@@ -114,6 +114,24 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "nelsongutidev",
+      "name": "Nelson Gutierrez",
+      "avatar_url": "https://avatars.githubusercontent.com/u/62297014?v=4",
+      "profile": "https://nelsonguti.dev/",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "ho-ssain",
+      "name": "Hossain K. M.",
+      "avatar_url": "https://avatars.githubusercontent.com/u/61125174?v=4",
+      "profile": "https://github.com/ho-ssain",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
