@@ -1,11 +1,11 @@
 import { NgIf } from '@angular/common';
-import { Component } from '@angular/core';
-import { generateList } from './generateList';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { PersonListComponent } from './person-list.component';
 
 @Component({
   standalone: true,
   imports: [PersonListComponent, NgIf],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-root',
   template: `
     <p>Performance is key!!</p>
@@ -18,11 +18,9 @@ import { PersonListComponent } from './person-list.component';
     <app-person-list
       *ngIf="loadList"
       class="max-w-2xl"
-      [persons]="persons"
       title="Persons" />
   `,
 })
 export class AppComponent {
-  persons = generateList();
   loadList = false;
 }
