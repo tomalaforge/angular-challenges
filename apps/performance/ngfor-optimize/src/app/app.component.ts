@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { PersonService } from './list.service';
 import { PersonListComponent } from './components/person-list.component';
 import { InputComponent } from './components/input.component';
@@ -11,6 +11,7 @@ import { InputComponent } from './components/input.component';
   ],
   providers: [PersonService],
   selector: 'app-root',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <h1 class="font-semibold text-center text-3xl" title="Title">
       List of Persons

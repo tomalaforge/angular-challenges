@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 @Component({
   selector: 'app-input',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [MatFormFieldModule, MatInputModule, CDFlashingDirective],
   host: {
     class: 'w-3/4',
@@ -27,7 +28,6 @@ import { MatInputModule } from '@angular/material/input';
     </mat-form-field>
   `,
   styles: [],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputComponent {
   label = signal('');
