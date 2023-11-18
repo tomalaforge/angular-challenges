@@ -1,35 +1,59 @@
-import { Component, OnInit } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+} from '@angular/core';
+import {
+  FakeHttpService,
+  randTeacher,
+} from '../../data-access/fake-http.service';
 import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
 import { Teacher } from '../../model/teacher.model';
 import { CardComponent } from '../../ui/card/card.component';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
+import { Observable } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-teacher-card',
-  template: `<app-card
-    [list]="teachers"
-    [type]="cardType"
-    customClass="bg-light-red"></app-card>`,
+  standalone: true,
+  imports: [CardComponent, ListItemComponent, AsyncPipe],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styles: [
     `
-      ::ng-deep .bg-light-red {
+      .bg-light-red {
         background-color: rgba(250, 0, 0, 0.1);
       }
     `,
   ],
-  standalone: true,
-  imports: [CardComponent],
+  template: `<app-card
+    class="bg-light-red"
+    [list]="teachers$ | async"
+    (add)="onAddNewItem()">
+    <img src="assets/img/teacher.png" width="200px" />
+    <ng-template #tmplRow let-teacher>
+      <app-list-item (delete)="onDeleteAnItem(teacher.id)">
+        {{ teacher.firstname }}
+      </app-list-item>
+    </ng-template>
+  </app-card>`,
 })
 export class TeacherCardComponent implements OnInit {
-  teachers: Teacher[] = [];
-  cardType = CardType.TEACHER;
-
-  constructor(private http: FakeHttpService, private store: TeacherStore) {}
+  teachers$!: Observable<Teacher[]>;
+  private http: FakeHttpService = inject(FakeHttpService);
+  private store: TeacherStore = inject(TeacherStore);
 
   ngOnInit(): void {
-    this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
+    this.http.fetchTeachers$.subscribe(this.store.addAll);
+    this.teachers$ = this.store.teachers$;
+  }
 
-    this.store.teachers$.subscribe((t) => (this.teachers = t));
+  public onAddNewItem(): void {
+    this.store.addOne(randTeacher());
+  }
+
+  public onDeleteAnItem(id: number): void {
+    this.store.deleteOne(id);
   }
 }
