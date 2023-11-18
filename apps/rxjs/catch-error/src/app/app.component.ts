@@ -1,9 +1,9 @@
-import { Component, DestroyRef, inject } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Subject, concatMap, map } from 'rxjs';
+import { Subject, catchError, concatMap, map, of } from 'rxjs';
 
 @Component({
   standalone: true,
@@ -29,18 +29,23 @@ import { Subject, concatMap, map } from 'rxjs';
   `,
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   submit$$ = new Subject<void>();
   input = '';
   response: unknown;
   private destroyRef = inject(DestroyRef);
-  constructor(private http: HttpClient) {}
+  private http = inject(HttpClient);
+
   ngOnInit() {
     this.submit$$
       .pipe(
         map(() => this.input),
         concatMap((value) =>
-          this.http.get(`https://jsonplaceholder.typicode.com/${value}/1`)
+          this.http.get(`https://jsonplaceholder.typicode.com/${value}/1`).pipe(
+            catchError((err) => {
+              return of(`Status code ${err.status}. Error while fetching data.`);
+            })
+          )
         ),
         takeUntilDestroyed(this.destroyRef)
       )
