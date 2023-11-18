@@ -53,10 +53,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "angular-ngfor-enhancement:build:production"
+          "buildTarget": "angular-ngfor-enhancement:build:production"
         },
         "development": {
-          "browserTarget": "angular-ngfor-enhancement:build:development"
+          "buildTarget": "angular-ngfor-enhancement:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -64,7 +64,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "angular-ngfor-enhancement:build"
+        "buildTarget": "angular-ngfor-enhancement:build"
       }
     },
     "lint": {

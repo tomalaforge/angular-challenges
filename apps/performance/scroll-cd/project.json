@@ -53,10 +53,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "performance-scroll-cd:build:production"
+          "buildTarget": "performance-scroll-cd:build:production"
         },
         "development": {
-          "browserTarget": "performance-scroll-cd:build:development"
+          "buildTarget": "performance-scroll-cd:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -64,7 +64,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "performance-scroll-cd:build"
+        "buildTarget": "performance-scroll-cd:build"
       }
     },
     "lint": {
@@ -81,8 +81,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/performance/scroll-cd/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "apps/performance/scroll-cd/jest.config.ts"
       }
     }
   },

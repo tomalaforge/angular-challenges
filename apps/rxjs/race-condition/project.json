@@ -53,10 +53,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "rxjs-race-condition:build:production"
+          "buildTarget": "rxjs-race-condition:build:production"
         },
         "development": {
-          "browserTarget": "rxjs-race-condition:build:development"
+          "buildTarget": "rxjs-race-condition:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -64,7 +64,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "rxjs-race-condition:build"
+        "buildTarget": "rxjs-race-condition:build"
       }
     },
     "lint": {
@@ -81,8 +81,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/rxjs/race-condition/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "apps/rxjs/race-condition/jest.config.ts"
       }
     },
     "component-test": {
