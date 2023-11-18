@@ -53,10 +53,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "typescript-overload:build:production"
+          "buildTarget": "typescript-overload:build:production"
         },
         "development": {
-          "browserTarget": "typescript-overload:build:development"
+          "buildTarget": "typescript-overload:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -64,7 +64,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "typescript-overload:build"
+        "buildTarget": "typescript-overload:build"
       }
     },
     "lint": {

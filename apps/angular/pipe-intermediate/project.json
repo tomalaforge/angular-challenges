@@ -53,10 +53,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "angular-pipe-intermediate:build:production"
+          "buildTarget": "angular-pipe-intermediate:build:production"
         },
         "development": {
-          "browserTarget": "angular-pipe-intermediate:build:development"
+          "buildTarget": "angular-pipe-intermediate:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -64,7 +64,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "angular-pipe-intermediate:build"
+        "buildTarget": "angular-pipe-intermediate:build"
       }
     },
     "lint": {
