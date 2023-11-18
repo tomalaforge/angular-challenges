@@ -1,11 +1,11 @@
-import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   OnInit,
+  Signal,
   inject,
 } from '@angular/core';
-import { Observable } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { CityStore } from '../../data-access/city.store';
 import {
   FakeHttpService,
@@ -18,7 +18,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
 @Component({
   selector: 'app-city-card',
   standalone: true,
-  imports: [CardComponent, ListItemComponent, AsyncPipe],
+  imports: [CardComponent, ListItemComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   styles: [
     `
@@ -29,7 +29,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   ],
   template: `<app-card
     class="bg-light-blue"
-    [list]="cities$ | async"
+    [list]="cities$()"
     (add)="onAddNewItem()">
     <img src="assets/img/city.png" width="200px" />
     <ng-template #tmplRow let-city>
@@ -40,13 +40,14 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   </app-card>`,
 })
 export class CityCardComponent implements OnInit {
-  cities$!: Observable<City[]>;
   private http: FakeHttpService = inject(FakeHttpService);
   private store: CityStore = inject(CityStore);
+  cities$: Signal<City[]> = toSignal(this.store.cities$, {
+    initialValue: [],
+  });
 
   ngOnInit(): void {
-    this.http.fetchCities$.subscribe(this.store.addAll);
-    this.cities$ = this.store.cities$;
+    this.http.fetchCities$.subscribe((c) => this.store.addAll(c));
   }
 
   public onAddNewItem(): void {

@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   OnInit,
+  Signal,
   inject,
 } from '@angular/core';
 import {
@@ -14,11 +15,12 @@ import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
 import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-teacher-card',
   standalone: true,
-  imports: [CardComponent, ListItemComponent, AsyncPipe],
+  imports: [CardComponent, ListItemComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   styles: [
     `
@@ -29,7 +31,7 @@ import { AsyncPipe } from '@angular/common';
   ],
   template: `<app-card
     class="bg-light-red"
-    [list]="teachers$ | async"
+    [list]="teachers$()"
     (add)="onAddNewItem()">
     <img src="assets/img/teacher.png" width="200px" />
     <ng-template #tmplRow let-teacher>
@@ -40,13 +42,14 @@ import { AsyncPipe } from '@angular/common';
   </app-card>`,
 })
 export class TeacherCardComponent implements OnInit {
-  teachers$!: Observable<Teacher[]>;
   private http: FakeHttpService = inject(FakeHttpService);
   private store: TeacherStore = inject(TeacherStore);
+  teachers$: Signal<Teacher[]> = toSignal(this.store.teachers$, {
+    initialValue: [],
+  });
 
   ngOnInit(): void {
-    this.http.fetchTeachers$.subscribe(this.store.addAll);
-    this.teachers$ = this.store.teachers$;
+    this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
   }
 
   public onAddNewItem(): void {
