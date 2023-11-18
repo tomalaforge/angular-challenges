@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { NgForEnhancenedDirective } from './ng-for-enhancened.directive';
+import { NgForElse } from './ng-for-enhancened.directive';
 
 interface Person {
   name: string;
@@ -7,7 +7,7 @@ interface Person {
 
 @Component({
   standalone: true,
-  imports: [NgForEnhancenedDirective],
+  imports: [NgForElse],
   selector: 'app-root',
   template: `
     <div *ngFor="let person of persons; else: emptyList">
@@ -15,7 +15,6 @@ interface Person {
     </div>
     <ng-template #emptyList>The list is empty !!</ng-template>
   `,
-  styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
