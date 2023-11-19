@@ -1,6 +1,14 @@
 import { AsyncPipe, NgIf } from '@angular/common';
-import { Component, HostListener } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  HostListener,
+  inject,
+  NgZone,
+  OnInit,
+} from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   standalone: true,
@@ -31,16 +39,38 @@ import { BehaviorSubject } from 'rxjs';
     `,
   ],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  private readonly document = inject(DOCUMENT);
+  private readonly ngZone = inject(NgZone);
+  private readonly cdRef = inject(ChangeDetectorRef);
+
   title = 'scroll-cd';
 
   private displayButtonSubject = new BehaviorSubject<boolean>(false);
   displayButton$ = this.displayButtonSubject.asObservable();
 
-  @HostListener('window:scroll', ['$event'])
+  ngOnInit(): void {
+    this.ngZone.runOutsideAngular(() => {
+      this.document.addEventListener('scroll', this.onScroll.bind(this));
+    });
+  }
+
   onScroll() {
     const pos = window.pageYOffset;
-    this.displayButtonSubject.next(pos > 50);
+    const displayButton: boolean = this.displayButtonSubject.value;
+
+    if (pos > 50 && !displayButton) {
+      this.onChangeDisplayButton(true);
+    }
+
+    if (pos < 50 && displayButton) {
+      this.onChangeDisplayButton(false);
+    }
+  }
+
+  onChangeDisplayButton(isShowButton: boolean) {
+    this.displayButtonSubject.next(isShowButton);
+    this.cdRef.detectChanges();
   }
 
   goToTop() {
