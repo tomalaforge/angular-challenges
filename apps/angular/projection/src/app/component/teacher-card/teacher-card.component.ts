@@ -5,6 +5,7 @@ import {
   Signal,
   inject,
 } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import {
   FakeHttpService,
   randTeacher,
@@ -12,15 +13,13 @@ import {
 import { TeacherStore } from '../../data-access/teacher.store';
 import { Teacher } from '../../model/teacher.model';
 import { CardComponent } from '../../ui/card/card.component';
+import { CardDirective } from '../../ui/directive/card.directive';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
-import { Observable } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
-import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-teacher-card',
   standalone: true,
-  imports: [CardComponent, ListItemComponent],
+  imports: [CardComponent, ListItemComponent, CardDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   styles: [
     `
@@ -34,7 +33,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
     [list]="teachers$()"
     (add)="onAddNewItem()">
     <img src="assets/img/teacher.png" width="200px" />
-    <ng-template #tmplRow let-teacher>
+    <ng-template tmplRow let-teacher>
       <app-list-item (delete)="onDeleteAnItem(teacher.id)">
         {{ teacher.firstname }}
       </app-list-item>

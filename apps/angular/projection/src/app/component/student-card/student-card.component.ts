@@ -13,12 +13,13 @@ import {
 import { StudentStore } from '../../data-access/student.store';
 import { Student } from '../../model/student.model';
 import { CardComponent } from '../../ui/card/card.component';
+import { CardDirective } from '../../ui/directive/card.directive';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-student-card',
   standalone: true,
-  imports: [CardComponent, ListItemComponent],
+  imports: [CardComponent, ListItemComponent, CardDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   styles: [
     `
@@ -32,7 +33,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
     [list]="students$()"
     (add)="onAddNewItem()">
     <img src="assets/img/student.webp" width="200px" />
-    <ng-template #tmplRow let-student>
+    <ng-template tmplRow let-student>
       <app-list-item (delete)="onDeleteAnItem(student.id)">
         {{ student.firstname }}
       </app-list-item>

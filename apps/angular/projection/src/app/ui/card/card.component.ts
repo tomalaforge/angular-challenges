@@ -8,11 +8,12 @@ import {
   Output,
   TemplateRef,
 } from '@angular/core';
+import { CardDirective } from '../directive/card.directive';
 
 @Component({
   selector: 'app-card',
   standalone: true,
-  imports: [NgFor, NgTemplateOutlet],
+  imports: [NgFor, NgTemplateOutlet, CardDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     class: 'border-2 border-black rounded-md p-4 w-fit flex flex-col gap-3',
@@ -36,7 +37,7 @@ import {
 export class CardComponent<T> {
   @Input() list: T[] | null = null;
   @Output() add: EventEmitter<void> = new EventEmitter<void>();
-  @ContentChild('tmplRow', { read: TemplateRef })
+  @ContentChild(CardDirective, { read: TemplateRef })
   templateRef!: TemplateRef<{ $implicit: T }>;
 
   public addNewItem(): void {
