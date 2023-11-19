@@ -15,6 +15,10 @@ export const APP_ROUTES: TypedRoute[] = [
     loadComponent: () => import('./login.component'),
   },
   {
+    path: 'no-user',
+    loadComponent: () => import('./dashboard/no-user.component'),
+  },
+  {
     path: 'enter',
     canMatch: [CanMatchRole],
     data: {

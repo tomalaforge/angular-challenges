@@ -1,7 +1,6 @@
 import { inject } from '@angular/core';
 import { CanMatchFn, Route, Router } from '@angular/router';
 import { UserStore } from './user.store';
-import { mergeMap, of } from 'rxjs';
 import { Role } from './user.model';
 
 const CanMatchRole: CanMatchFn = (route: Route) => {
@@ -11,20 +10,19 @@ const CanMatchRole: CanMatchFn = (route: Route) => {
   const accessRolesList: Role[] = route.data?.['roles'] ?? [];
   const isAdmin: boolean = route.data?.['isAdmin'] ?? false;
 
-  return store.isLoggedIn$.pipe(
-    mergeMap((user) => {
-      if (!user) {
-        return of(router.parseUrl('no-user'));
-      }
+  const user = store.user();
 
-      if (isAdmin) {
-        return store.isAdmin$;
-      } else if (accessRolesList.length > 0) {
-        return store.hasAnyRole(accessRolesList);
-      }
-      return of(false);
-    }),
-  );
+  if (!user) {
+    return router.parseUrl('no-user');
+  }
+
+  if (isAdmin) {
+    return store.isAdmin();
+  } else if (accessRolesList.length > 0) {
+    return store.hasAnyRole(accessRolesList);
+  }
+
+  return false;
 };
 
 export default CanMatchRole;
