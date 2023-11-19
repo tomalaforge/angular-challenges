@@ -1,8 +1,7 @@
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input, computed, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FakeServiceService } from './fake.service';
-import { map } from 'rxjs';
 
 interface MenuItem {
   path: string;
@@ -45,15 +44,15 @@ export class NavigationComponent {
 @Component({
   standalone: true,
   imports: [NavigationComponent, NgIf, AsyncPipe],
-  template: ` <app-nav [menus]="(menus$ | async)!"></app-nav> `,
+  template: ` <app-nav [menus]="menus()"></app-nav> `,
   host: {},
 })
 export class MainNavigationComponent {
   private fakeBackend = inject(FakeServiceService);
 
-  private readonly info$ = this.fakeBackend.getInfoFromBackend();
+  private readonly info = this.fakeBackend.getInfoFromBackend();
 
-  readonly menus$ = this.info$.pipe(map((value) => this.getMenu(value || '')));
+  readonly menus = computed(() => this.getMenu(this.info() || ''));
 
   private getMenu(prop: string) {
     return [
