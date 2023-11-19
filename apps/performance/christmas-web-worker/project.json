@@ -7,12 +7,12 @@
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@angular-devkit/build-angular:browser",
+      "executor": "@angular-devkit/build-angular:application",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/performance/christmas-web-worker",
         "index": "apps/performance/christmas-web-worker/src/index.html",
-        "main": "apps/performance/christmas-web-worker/src/main.ts",
+        "browser": "apps/performance/christmas-web-worker/src/main.ts",
         "polyfills": ["zone.js"],
         "tsConfig": "apps/performance/christmas-web-worker/tsconfig.app.json",
         "assets": [
@@ -39,9 +39,7 @@
           "outputHashing": "all"
         },
         "development": {
-          "buildOptimizer": false,
           "optimization": false,
-          "vendorChunk": true,
           "extractLicenses": false,
           "sourceMap": true,
           "namedChunks": true
@@ -53,10 +51,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "performance-christmas-web-worker:build:production"
+          "buildTarget": "performance-christmas-web-worker:build:production"
         },
         "development": {
-          "browserTarget": "performance-christmas-web-worker:build:development"
+          "buildTarget": "performance-christmas-web-worker:build:development"
         }
       },
       "defaultConfiguration": "development"
