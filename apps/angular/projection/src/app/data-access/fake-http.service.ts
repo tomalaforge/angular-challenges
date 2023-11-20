@@ -56,7 +56,13 @@ export const randomCity = (): City => ({
   country: randCountry(),
 });
 
-const cities = [randomCity(), randomCity(), randomCity()];
+const cities: City[] = [
+  randomCity(),
+  randomCity(),
+  randomCity(),
+  randomCity(),
+  randomCity(),
+];
 
 @Injectable({
   providedIn: 'root',
