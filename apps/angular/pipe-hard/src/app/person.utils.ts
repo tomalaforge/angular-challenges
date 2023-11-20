@@ -14,4 +14,4 @@ const isAllowed = (age: number, isFirst: boolean, activityAge: number) => {
 export const PersonUtils = {
   showName,
   isAllowed,
-};
+} as const;
