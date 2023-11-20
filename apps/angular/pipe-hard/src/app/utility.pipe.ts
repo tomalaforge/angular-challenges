@@ -17,7 +17,7 @@ export class UtilityPipe implements PipeTransform {
     value: FirstArg,
     functionName: FunctionNames,
     ...args: LastArg
-  ): unknown {
+  ): ReturnType<(typeof PersonUtils)[FunctionNames]> {
     return (PersonUtils[functionName] as Function)(value, ...args);
   }
 }
