@@ -1,6 +1,5 @@
 import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
-import { PersonUtils } from './person.utils';
 import { UtilityPipe } from './utility.pipe';
 
 @Component({
@@ -30,8 +29,4 @@ export class AppComponent {
     { name: 'hiking', minimumAge: 25 },
     { name: 'dancing', minimumAge: 1 },
   ];
-
-  showName = PersonUtils.showName;
-
-  isAllowed = PersonUtils.isAllowed;
 }
