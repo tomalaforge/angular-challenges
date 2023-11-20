@@ -1,8 +1,5 @@
 import { NgFor, NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { randStudent, randTeacher } from '../../data-access/fake-http.service';
-import { StudentStore } from '../../data-access/student.store';
-import { TeacherStore } from '../../data-access/teacher.store';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CardType } from '../../model/card.model';
 import { ListItemComponent } from '../list-item/list-item.component';
 
@@ -17,18 +14,16 @@ export class CardComponent {
   @Input() type!: CardType;
   @Input() customClass = '';
 
+  @Output() delete = new EventEmitter<number>();
+  @Output() add = new EventEmitter();
+
   CardType = CardType;
 
-  constructor(
-    private teacherStore: TeacherStore,
-    private studentStore: StudentStore
-  ) {}
-
   addNewItem() {
-    if (this.type === CardType.TEACHER) {
-      this.teacherStore.addOne(randTeacher());
-    } else if (this.type === CardType.STUDENT) {
-      this.studentStore.addOne(randStudent());
-    }
+    this.add.emit();
+  }
+
+  deleteItem(id: number) {
+    this.delete.emit(id);
   }
 }
