@@ -12,7 +12,7 @@ import { CardComponent } from '../../ui/card/card.component';
   selector: 'app-teacher-card',
   template: `<app-card
     [list]="teachers"
-    [type]="cardType"
+    [nameAttr]="'firstname'"
     (add)="addNewTeacher()"
     (delete)="deleteTeacher($event)"
     customClass="bg-light-red">
