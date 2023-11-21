@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { TimerContainerComponent } from './timer-container.component';
 import { DEFAULT_TIMER_TOKEN } from './data';
 
