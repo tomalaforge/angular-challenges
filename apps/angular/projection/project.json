@@ -6,13 +6,13 @@
   "prefix": "app",
   "targets": {
     "build": {
-      "executor": "@angular-devkit/build-angular:browser",
+      "executor": "@angular-devkit/build-angular:application",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/angular/projection",
         "index": "apps/angular/projection/src/index.html",
-        "main": "apps/angular/projection/src/main.ts",
-        "polyfills": "apps/angular/projection/src/polyfills.ts",
+        "browser": "apps/angular/projection/src/main.ts",
+        "polyfills": ["apps/angular/projection/src/polyfills.ts"],
         "tsConfig": "apps/angular/projection/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
@@ -37,18 +37,10 @@
               "maximumError": "4kb"
             }
           ],
-          "fileReplacements": [
-            {
-              "replace": "apps/angular/projection/src/environments/environment.ts",
-              "with": "apps/angular/projection/src/environments/environment.prod.ts"
-            }
-          ],
           "outputHashing": "all"
         },
         "development": {
-          "buildOptimizer": false,
           "optimization": false,
-          "vendorChunk": true,
           "extractLicenses": false,
           "sourceMap": true,
           "namedChunks": true
@@ -60,10 +52,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "angular-projection:build:production"
+          "buildTarget": "angular-projection:build:production"
         },
         "development": {
-          "browserTarget": "angular-projection:build:development"
+          "buildTarget": "angular-projection:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -71,11 +63,11 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "angular-projection:build"
+        "buildTarget": "angular-projection:build"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "options": {
         "lintFilePatterns": [
           "apps/angular/projection/**/*.ts",
@@ -87,8 +79,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/angular/projection/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "apps/angular/projection/jest.config.ts"
       }
     }
   },

@@ -40,12 +40,6 @@
               "maximumError": "4kb"
             }
           ],
-          "fileReplacements": [
-            {
-              "replace": "apps/angular/crud/src/environments/environment.ts",
-              "with": "apps/angular/crud/src/environments/environment.prod.ts"
-            }
-          ],
           "outputHashing": "all"
         },
         "development": {
@@ -63,10 +57,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "angular-crud:build:production"
+          "buildTarget": "angular-crud:build:production"
         },
         "development": {
-          "browserTarget": "angular-crud:build:development"
+          "buildTarget": "angular-crud:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -74,11 +68,11 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "angular-crud:build"
+        "buildTarget": "angular-crud:build"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "options": {
         "lintFilePatterns": [
           "apps/angular/crud/**/*.ts",
@@ -90,8 +84,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/angular/crud/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "apps/angular/crud/jest.config.ts"
       }
     }
   },

@@ -37,10 +37,10 @@ You can find the clone URL by clicking on the <span class="github-success-btn"><
 
 Open the project in any IDE of your choice.
 
-## Install all dependancies
+## Install all dependencies
 
 ```bash
-npm install
+npm ci
 ```
 
 ## Choose a challenge

@@ -36,12 +36,6 @@
               "maximumError": "4kb"
             }
           ],
-          "fileReplacements": [
-            {
-              "replace": "apps/angular/permissions/src/environments/environment.ts",
-              "with": "apps/angular/permissions/src/environments/environment.prod.ts"
-            }
-          ],
           "outputHashing": "all"
         },
         "development": {
@@ -59,10 +53,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "angular-permissions:build:production"
+          "buildTarget": "angular-permissions:build:production"
         },
         "development": {
-          "browserTarget": "angular-permissions:build:development"
+          "buildTarget": "angular-permissions:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -70,11 +64,11 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "angular-permissions:build"
+        "buildTarget": "angular-permissions:build"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "options": {
         "lintFilePatterns": [
           "apps/angular/permissions/**/*.ts",

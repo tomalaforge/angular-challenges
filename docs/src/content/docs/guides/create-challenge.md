@@ -25,7 +25,7 @@ To streamline the process, I have created an Nx generator that will set up all t
 - <b>challengeDifficulty</b>: The difficulty you think your challenge has. There are three difficulty levels : 🟢 easy / 🟠 medium / 🔴 hard
 - <b>name</b>: name of the Nx application.
   :::note
-  It must be written in **Kebab-Case**
+  It must be written in **kebab-case**
   :::
 - <b>docRepository</b>: The category of your Challenge: Nx, Angular, Angular Performance, Rxjs, NgRx, Typescript.
 
@@ -48,3 +48,7 @@ Don't forget to update the docs to introduce your challenge and provide your ins
 :::
 
 It's your turn to act!!! 💪
+
+## Solution Submittion
+
+After one week or so, don't forget to provide your solution to your challenge.

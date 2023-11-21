@@ -36,12 +36,6 @@
               "maximumError": "4kb"
             }
           ],
-          "fileReplacements": [
-            {
-              "replace": "apps/angular/ngfor-enhancement/src/environments/environment.ts",
-              "with": "apps/angular/ngfor-enhancement/src/environments/environment.prod.ts"
-            }
-          ],
           "outputHashing": "all"
         },
         "development": {
@@ -59,10 +53,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "angular-ngfor-enhancement:build:production"
+          "buildTarget": "angular-ngfor-enhancement:build:production"
         },
         "development": {
-          "browserTarget": "angular-ngfor-enhancement:build:development"
+          "buildTarget": "angular-ngfor-enhancement:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -70,11 +64,11 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "angular-ngfor-enhancement:build"
+        "buildTarget": "angular-ngfor-enhancement:build"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "options": {
         "lintFilePatterns": [
           "apps/angular/ngfor-enhancement/**/*.ts",

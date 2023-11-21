@@ -37,12 +37,6 @@
               "maximumError": "4kb"
             }
           ],
-          "fileReplacements": [
-            {
-              "replace": "apps/ngrx/effect-selector/src/environments/environment.ts",
-              "with": "apps/ngrx/effect-selector/src/environments/environment.prod.ts"
-            }
-          ],
           "outputHashing": "all"
         },
         "development": {
@@ -60,10 +54,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "ngrx-effect-selector:build:production"
+          "buildTarget": "ngrx-effect-selector:build:production"
         },
         "development": {
-          "browserTarget": "ngrx-effect-selector:build:development"
+          "buildTarget": "ngrx-effect-selector:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -71,11 +65,11 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "ngrx-effect-selector:build"
+        "buildTarget": "ngrx-effect-selector:build"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "options": {
         "lintFilePatterns": [
           "apps/ngrx/effect-selector/**/*.ts",
@@ -87,8 +81,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/ngrx/effect-selector/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "apps/ngrx/effect-selector/jest.config.ts"
       }
     }
   },
