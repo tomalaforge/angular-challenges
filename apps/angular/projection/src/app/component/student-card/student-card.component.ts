@@ -1,21 +1,18 @@
-import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import {
   FakeHttpService,
   randStudent,
 } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
-import { Student } from '../../model/student.model';
+import { CardRowDirective } from '../../ui/card/card-row.directive';
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
-import { CardViewModel } from './../../model/card.model';
-import { CardRowDirective } from '../../ui/card/card-row.directive';
 
 @Component({
   standalone: true,
   selector: 'app-student-card',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [AsyncPipe, CardComponent, CardRowDirective, ListItemComponent],
+  imports: [CardComponent, CardRowDirective, ListItemComponent],
   styles: [
     `
       .bg-light-green {
@@ -24,7 +21,7 @@ import { CardRowDirective } from '../../ui/card/card-row.directive';
     `,
   ],
   template: `
-    <app-card class="bg-light-green" [list]="datasource$ | async" (add)="add()">
+    <app-card class="bg-light-green" [list]="students$()" (add)="add()">
       <img src="assets/img/student.webp" width="200px" />
       <ng-template appCardRow let-student>
         <app-list-item (delete)="delete(student.id)">
@@ -34,19 +31,22 @@ import { CardRowDirective } from '../../ui/card/card-row.directive';
     </app-card>
   `,
 })
-export class StudentCardComponent implements OnInit, CardViewModel<Student> {
-  datasource$ = this.store.students$;
+export class StudentCardComponent implements OnInit {
+  readonly students$ = this.studentStore.data$;
 
-  constructor(private http: FakeHttpService, private store: StudentStore) {}
+  constructor(
+    private http: FakeHttpService,
+    private studentStore: StudentStore
+  ) {}
 
   ngOnInit(): void {
-    this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
+    this.http.fetchStudents$.subscribe((s) => this.studentStore.addAll(s));
   }
 
   add(): void {
-    this.store.addOne(randStudent());
+    this.studentStore.addOne(randStudent());
   }
   delete(id: number): void {
-    this.store.deleteOne(id);
+    this.studentStore.deleteOne(id);
   }
 }
