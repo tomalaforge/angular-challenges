@@ -19,7 +19,7 @@ import { NgIf } from '@angular/common';
     <ng-container *ngIf="isLoading$(); else loading">
       <button (click)="openTopicModal()">Open Topic</button> .
     </ng-container>
-    <ng-template #loading> loading.. </ng-template>
+    <ng-template #loading> loading... </ng-template>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
