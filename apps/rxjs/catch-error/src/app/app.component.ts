@@ -1,9 +1,9 @@
-import { Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { Component, DestroyRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Subject, concatMap, map } from 'rxjs';
+import { FormsModule } from '@angular/forms';
+import { Subject, catchError, concatMap, map, of } from 'rxjs';
 
 @Component({
   standalone: true,
@@ -40,10 +40,19 @@ export class AppComponent {
       .pipe(
         map(() => this.input),
         concatMap((value) =>
-          this.http.get(`https://jsonplaceholder.typicode.com/${value}/1`)
+          this.http
+            .get(`https://jsonplaceholder.typicode.com/${value}/1`)
+            .pipe(
+              catchError(() =>
+                of(
+                  'An error has occurred. Make sure your search contains one of the correct keywords: posts, comments, albums, photos, all, users.'
+                )
+              )
+            )
         ),
         takeUntilDestroyed(this.destroyRef)
       )
+      .pipe()
       .subscribe({
         next: (value) => {
           console.log(value);
