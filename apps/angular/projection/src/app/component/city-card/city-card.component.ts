@@ -9,22 +9,13 @@ import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
 import { CardViewModel } from '../../model/card.model';
 import { City } from '../../model/city.model';
+import { CardRowDirective } from '../../ui/card/card-row.directive';
 
 @Component({
   standalone: true,
   selector: 'app-city-card',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CardComponent, AsyncPipe, ListItemComponent],
-  template: `
-    <app-card class="bg-light-blue" [list]="datasource$ | async" (add)="add()">
-      <img src="assets/img/city.png" width="200px" />
-      <ng-template #rowRef let-city>
-        <app-list-item (delete)="delete(city.id)">
-          {{ city.name }}
-        </app-list-item>
-      </ng-template>
-    </app-card>
-  `,
+  imports: [AsyncPipe, CardComponent, CardRowDirective, ListItemComponent],
   styles: [
     `
       .bg-light-blue {
@@ -32,6 +23,16 @@ import { City } from '../../model/city.model';
       }
     `,
   ],
+  template: `
+    <app-card class="bg-light-blue" [list]="datasource$ | async" (add)="add()">
+      <img src="assets/img/city.png" width="200px" />
+      <ng-template appCardRow let-city>
+        <app-list-item (delete)="delete(city.id)">
+          {{ city.name }}
+        </app-list-item>
+      </ng-template>
+    </app-card>
+  `,
 })
 export class CityCardComponent implements OnInit, CardViewModel<City> {
   datasource$ = this.store.cities$;

@@ -3,8 +3,8 @@
 <section>
   <ng-container *ngFor="let item of list">
     <ng-template
-      [ngTemplateOutlet]="rowTemplate"
-      [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
+      [ngTemplateOutlet]="row.template"
+      [ngTemplateOutletContext]="{ $implicit: item }" />
   </ng-container>
 </section>
 

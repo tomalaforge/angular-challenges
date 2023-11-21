@@ -9,22 +9,13 @@ import { Student } from '../../model/student.model';
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
 import { CardViewModel } from './../../model/card.model';
+import { CardRowDirective } from '../../ui/card/card-row.directive';
 
 @Component({
   standalone: true,
   selector: 'app-student-card',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CardComponent, AsyncPipe, ListItemComponent],
-  template: `
-    <app-card class="bg-light-green" [list]="datasource$ | async" (add)="add()">
-      <img src="assets/img/student.webp" width="200px" />
-      <ng-template #rowRef let-student>
-        <app-list-item (delete)="delete(student.id)">
-          {{ student.firstname }}
-        </app-list-item>
-      </ng-template>
-    </app-card>
-  `,
+  imports: [AsyncPipe, CardComponent, CardRowDirective, ListItemComponent],
   styles: [
     `
       .bg-light-green {
@@ -32,6 +23,16 @@ import { CardViewModel } from './../../model/card.model';
       }
     `,
   ],
+  template: `
+    <app-card class="bg-light-green" [list]="datasource$ | async" (add)="add()">
+      <img src="assets/img/student.webp" width="200px" />
+      <ng-template appCardRow let-student>
+        <app-list-item (delete)="delete(student.id)">
+          {{ student.firstname }}
+        </app-list-item>
+      </ng-template>
+    </app-card>
+  `,
 })
 export class StudentCardComponent implements OnInit, CardViewModel<Student> {
   datasource$ = this.store.students$;
