@@ -1,6 +1,4 @@
-import { Injectable } from '@angular/core';
-import { ComponentStore } from '@ngrx/component-store';
-import { map } from 'rxjs';
+import { Injectable, computed, signal } from '@angular/core';
 
 export interface Currency {
   name: string;
@@ -17,13 +15,9 @@ export const currency: Currency[] = [
 ];
 
 @Injectable()
-export class CurrencyService extends ComponentStore<{ code: string }> {
-  readonly code$ = this.select((state) => state.code);
-  readonly symbol$ = this.code$.pipe(
-    map((code) => currency.find((c) => c.code === code)?.symbol ?? code)
+export class CurrencyService {
+  readonly code = signal('EUR');
+  readonly symbol = computed(
+    () => currency.find((i) => this.code() === i.code)?.symbol ?? this.code()
   );
-
-  constructor() {
-    super({ code: 'EUR' });
-  }
 }

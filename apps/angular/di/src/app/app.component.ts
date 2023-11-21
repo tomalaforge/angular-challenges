@@ -2,8 +2,8 @@ import { TableComponent } from '@angular-challenges/angular/di';
 import { AsyncPipe, NgFor } from '@angular/common';
 import { Component, Directive } from '@angular/core';
 import { CurrencyPipe } from './currency.pipe';
-import { CurrencyService } from './currency.service';
 import { Product, products } from './product.model';
+import { CurrencyDirective } from './currency.directive';
 
 interface ProductContext {
   $implicit: Product;
@@ -24,8 +24,14 @@ export class ProductDirective {
 
 @Component({
   standalone: true,
-  imports: [TableComponent, CurrencyPipe, AsyncPipe, NgFor, ProductDirective],
-  providers: [CurrencyService],
+  imports: [
+    TableComponent,
+    CurrencyPipe,
+    AsyncPipe,
+    NgFor,
+    ProductDirective,
+    CurrencyDirective,
+  ],
   selector: 'app-root',
   template: `
     <table [items]="products">
@@ -37,11 +43,17 @@ export class ProductDirective {
         </tr>
       </ng-template>
       <ng-template #body product let-product>
-        <tr>
+        <tr [appCurrency]="product.currencyCode">
           <td>{{ product.name }}</td>
-          <td>{{ product.priceA | currency | async }}</td>
-          <td>{{ product.priceB | currency | async }}</td>
-          <td>{{ product.priceC | currency | async }}</td>
+          <td>
+            {{ product.priceA | currency }}
+          </td>
+          <td>
+            {{ product.priceB | currency }}
+          </td>
+          <td>
+            {{ product.priceC | currency }}
+          </td>
         </tr>
       </ng-template>
     </table>
