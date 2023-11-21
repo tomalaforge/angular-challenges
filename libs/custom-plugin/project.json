@@ -33,8 +33,7 @@
             "glob": "executors.json",
             "output": "."
           }
-        ],
-        "updateBuildableProjectDepsInPackageJson": true
+        ]
       }
     },
     "lint": {
@@ -52,14 +51,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "libs/custom-plugin/jest.config.ts",
-        "passWithNoTests": true
-      },
-      "configurations": {
-        "ci": {
-          "ci": true,
-          "codeCoverage": true
-        }
+        "jestConfig": "libs/custom-plugin/jest.config.ts"
       }
     }
   },
