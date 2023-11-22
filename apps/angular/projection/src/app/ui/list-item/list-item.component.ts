@@ -1,11 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-list-item',
   template: `
     <div class="border border-grey-300 py-1 px-2 flex justify-between">
-      {{ name }}
-      <button (click)="deleteItem(id)">
+      <ng-content></ng-content>
+      <button (click)="delete.emit()">
         <img class="h-5" src="assets/svg/trash.svg" />
       </button>
     </div>
@@ -13,12 +13,5 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   standalone: true,
 })
 export class ListItemComponent {
-  @Input() id!: number;
-  @Input() name!: string;
-
-  @Output() delete = new EventEmitter<number>();
-
-  deleteItem(id: number) {
-    this.delete.emit(id);
-  }
+  @Output() public delete = new EventEmitter<void>();
 }

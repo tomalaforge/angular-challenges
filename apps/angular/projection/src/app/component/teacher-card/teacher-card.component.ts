@@ -4,26 +4,29 @@ import {
   randTeacher,
 } from '../../data-access/fake-http.service';
 import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
 import { Teacher } from '../../model/teacher.model';
 import { CardComponent } from '../../ui/card/card.component';
+import { CardDirective } from '../../ui/card/card.directive';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-teacher-card',
   template: `<app-card
     [list]="teachers"
-    [nameAttr]="'firstname'"
     (add)="addNewTeacher()"
-    (delete)="deleteTeacher($event)"
     customClass="bg-light-red">
     <img src="assets/img/teacher.png" width="200px" />
+    <ng-template template-row let-teacher>
+      <app-list-item (delete)="deleteTeacher(teacher.id)">
+        {{ teacher.firstname }}
+      </app-list-item>
+    </ng-template>
   </app-card>`,
   standalone: true,
-  imports: [CardComponent],
+  imports: [CardComponent, CardDirective, ListItemComponent],
 })
 export class TeacherCardComponent implements OnInit {
   teachers: Teacher[] = [];
-  cardType = CardType.TEACHER;
 
   constructor(
     private http: FakeHttpService,

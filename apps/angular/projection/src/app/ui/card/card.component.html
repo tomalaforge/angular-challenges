@@ -4,17 +4,15 @@
     <ng-content></ng-content>
 
   <section>
-    <app-list-item
-      *ngFor="let item of list"
-      [name]="item[nameAttr]"
-      [id]="item.id"
-      (delete)="deleteItem($event)">
-    </app-list-item>
+    <ng-container *ngFor="let item of list">
+      <ng-container [ngTemplateOutlet]="templateRef.template" [ngTemplateOutletContext]="{$implicit: item}">
+      </ng-container>
+    </ng-container>
   </section>
 
   <button
     class="border border-blue-500 bg-blue-300 p-2 rounded-sm"
-    (click)="addNewItem()">
+    (click)="add.emit()">
     Add
   </button>
 </div>

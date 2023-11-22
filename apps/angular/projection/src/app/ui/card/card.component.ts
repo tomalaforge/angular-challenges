@@ -1,26 +1,22 @@
-import { NgFor, NgIf } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ListItemComponent } from '../list-item/list-item.component';
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import {
+  Component,
+  ContentChild,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
+import { CardDirective } from './card.directive';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
   standalone: true,
-  imports: [NgIf, NgFor, ListItemComponent],
+  imports: [NgIf, NgFor, NgTemplateOutlet, CardDirective],
 })
-export class CardComponent {
-  @Input() list: any[] | null = null;
+export class CardComponent<T> {
+  @Input() list: T[] = [];
   @Input() customClass = '';
-  @Input() nameAttr = '';
-
-  @Output() delete = new EventEmitter<number>();
-  @Output() add = new EventEmitter();
-
-  addNewItem() {
-    this.add.emit();
-  }
-
-  deleteItem(id: number) {
-    this.delete.emit(id);
-  }
+  @Output() public add = new EventEmitter<void>();
+  @ContentChild(CardDirective) templateRef!: CardDirective<T>;
 }
