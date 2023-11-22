@@ -39,18 +39,20 @@ const { copyText } = Astro.props;
   const commandCopyBtn = document.querySelector('.copy-button');
   const copiedCheckMark = document.querySelector('.copied-checkmark');
   const tooltipText = document.querySelector('.tooltipText');
-  const container = document.querySelector('.copy-container');
 
-  container.addEventListener('mouseleave', () => {
-    copiedCheckMark.style.display = 'none';
-    commandCopyBtn.style.display = 'inline-block';
-    tooltipText.innerHTML = 'Copy';
-  });
+  let timeout;
   commandCopyBtn.addEventListener('click', () => {
     navigator.clipboard.writeText(copyText);
     tooltipText.innerHTML = 'Copied';
     copiedCheckMark.style.display = 'inline-block';
     commandCopyBtn.style.display = 'none';
+    //clear previous timeout
+    clearTimeout(timeout);
+    timeout = window.setTimeout(()=>{
+    copiedCheckMark.style.display = 'none';
+    commandCopyBtn.style.display = 'inline-block';
+    tooltipText.innerHTML = 'Copy';
+  }, 750)
   });
 </script>
 
