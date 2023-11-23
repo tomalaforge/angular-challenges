@@ -15,9 +15,9 @@ WIP: The following documentation will be reviewed and improved. However, you can
 
 <div class="chip">Challenge #9</div>
 
-The goal of this serie of 3 pipe challenges is to master PIPES in Angular.
+The goal of this series of 3 pipe challenges is to master PIPES in Angular.
 
-Pure pipe are a very useful way to transform data from your template. The difference between calling a function and a pipe is that pure pire are memoized. So they won't be recalculated every change detection cycle if the inputs hasn't changed.
+Pure pipes are a very useful way to transform data from your template. The difference between calling a function and a pipe is that pure pipes are memoized. So they won't be recalculated every change detection cycle if their inputs haven't changed.
 
 ## Information:
 
