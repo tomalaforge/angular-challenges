@@ -1,7 +1,7 @@
 ---
 title: 🔴 Real-life Application
 description: Challenge 29 is about testing a real-life application
-author: Thomas Laforge
+author: thomas-laforge
 challengeNumber: 29
 command: testing-todos-list
 sidebar:

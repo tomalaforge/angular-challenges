@@ -1,6 +1,6 @@
 # Power of Effect
 
-> Author: Thomas Laforge
+> author: thomas-laforge
 
 ### Run Application
 

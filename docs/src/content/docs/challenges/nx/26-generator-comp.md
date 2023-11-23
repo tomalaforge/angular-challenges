@@ -1,7 +1,7 @@
 ---
 title: 🟠 Component Generator
 description: Challenge 26 is about creating a Nx generator to create a custom component
-author: Thomas Laforge
+author: thomas-laforge
 challengeNumber: 26
 sidebar:
   order: 116
@@ -88,7 +88,7 @@ export class UserStore extends ComponentStore<UserState> implements OnStateInit,
       loading: this.loading$,
       error: this.error$,
     },
-    { debounce: true }
+    { debounce: true },
   );
 
   ngrxOnStateInit() {
@@ -106,11 +106,11 @@ export class UserStore extends ComponentStore<UserState> implements OnStateInit,
         this.userService.loadUsers().pipe(
           tapResponse(
             (users) => this.patchState({ users, loading: false }),
-            (err: string) => this.patchState({ error: err, loading: false })
-          )
-        )
-      )
-    )
+            (err: string) => this.patchState({ error: err, loading: false }),
+          ),
+        ),
+      ),
+    ),
   );
 }
 ```

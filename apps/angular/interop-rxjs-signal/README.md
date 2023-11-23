@@ -1,6 +1,6 @@
 # Interoperability Rxjs/Signal
 
-> Author: Thomas Laforge
+> author: thomas-laforge
 
 ### Run Application
 

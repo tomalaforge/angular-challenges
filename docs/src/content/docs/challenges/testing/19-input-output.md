@@ -1,7 +1,7 @@
 ---
 title: 🟠 Input Output
 description: Challenge 19 is about testing inputs and ouputs
-author: Thomas Laforge
+author: thomas-laforge
 challengeNumber: 19
 command: testing-input-output
 sidebar:

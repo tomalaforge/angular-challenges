@@ -1,7 +1,7 @@
 ---
 title: 🟠 Function Overload
 description: Challenge 15 is about creating overload functions
-author: Thomas Laforge
+author: thomas-laforge
 challengeNumber: 15
 command: typescript-overload
 blogLink: https://medium.com/ngconf/function-overloading-in-typescript-8236706b2c05

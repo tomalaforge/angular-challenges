@@ -23,7 +23,7 @@ function findDocFile(
   tree: Tree,
   path: string,
   number: string,
-  result: string[]
+  result: string[],
 ) {
   if (!tree.isFile(path)) {
     tree.children(path).forEach((child) => {
@@ -59,13 +59,13 @@ async function rewriteFile(tree: Tree, file: string) {
     tree,
     './docs/src/content/docs/challenges',
     String(number),
-    result
+    result,
   );
   const docFile = result[0];
 
   const pathElts = docFile.split('/');
   const link = `https://angular-challenges.vercel.app/challenges/${pathElts.at(
-    -2
+    -2,
   )}/${pathElts.at(-1)}/`;
 
   const doc = tree.read(docFile);
@@ -89,7 +89,7 @@ async function rewriteFile(tree: Tree, file: string) {
 
   const finalText = `# ${title}
 
-> Author: Thomas Laforge
+> author: thomas-laforge
 
 ### Run Application
 
@@ -154,14 +154,14 @@ Your PR title must start with <b>Answer:${number}</b>.
   console.log('header', header);
 
   const regexContent = new RegExp(
-    /Author: Thomas Laforge([\s\S]*?)### Submitting your work/
+    /author: thomas-laforge([\s\S]*?)### Submitting your work/,
   );
   const matchContent = buffer.toString().match(regexContent);
 
   let content = '';
   if (!matchContent) {
     const regexOldContent = new RegExp(
-      /Author: Thomas Laforge([\s\S]*?)## Submitting your work/
+      /author: thomas-laforge([\s\S]*?)## Submitting your work/,
     );
     content = buffer.toString().match(regexOldContent)[1];
   } else {

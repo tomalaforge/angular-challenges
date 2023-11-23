@@ -1,7 +1,7 @@
 ---
 title: 🟢 Module to Standalone
 description: Challenge 31 is about migrating a module based application to a standalone application.
-author: Thomas Laforge
+author: thomas-laforge
 challengeNumber: 31
 command: angular-module-to-standalone
 sidebar:
