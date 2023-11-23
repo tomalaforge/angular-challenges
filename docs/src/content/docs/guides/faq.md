@@ -10,7 +10,7 @@ sidebar:
   
   Most of the time, this issue arises because your node_modules are outdated, and you need to update them by running `npm ci`.
 
-If the installation process fails, you can resolve it by deleting your node_modules folder using the command `rm -rf node_modules` or `npx npkill` and then rerunning `npm ci`.
+If the installation process fails, you can resolve it by deleting your node_modules folder using the command `rm -rf node_modules` or `npx npkill` and then re-running `npm ci`.
 
 If the problem persists, please report the issue [here](https://github.com/tomalaforge/angular-challenges/issues/new).
 

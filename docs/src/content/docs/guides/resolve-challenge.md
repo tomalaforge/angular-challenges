@@ -82,7 +82,7 @@ You can now click on <span class="github-success-btn">Create pull request</span>
 
 I will read and comment on it <b>when I have some free time.</b>
 
-<p class="important-block">Don't worry if your answer is not reviewed immediatly. I'm doing it for <b>free</b> and during my <b>free time</b>. If you want to support me, you can do so by <a href="https://github.com/sponsors/tomalaforge">sponsoring me on github</a>. It will validate that my work is of great help for you or your team.</p>
+<p class="important-block">Don't worry if your answer is not reviewed immediately. I'm doing it for <b>free</b> and during my <b>free time</b>. If you want to support me, you can do so by <a href="https://github.com/sponsors/tomalaforge">sponsoring me on github</a>. It will validate that my work is of great help for you or your team.</p>
 
 :::note
 Everyone is welcome to comment and read other PRs.
