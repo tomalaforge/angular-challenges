@@ -7,6 +7,7 @@
   --primary-color: var(--sl-color-bg-nav) !important;
   --cardBgColor: #242526;
 
+  --sl-color-green: #39a549;
   --sl-hue-purple: 41;
   --sl-color-purple-low: hsl(var(--sl-hue-orange), 39%, 22%);
   --sl-color-purple: hsl(var(--sl-hue-orange), 82%, 63%);
