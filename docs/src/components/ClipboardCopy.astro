@@ -32,7 +32,7 @@ const { copyText } = Astro.props;
       d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
     ></path></svg
   >
-  <span class="tooltipText">Copy</span>
+  <span class="tooltipText triangle">Copied!</span>
 </span>
 
 <script define:vars={{ copyText }}>
@@ -40,53 +40,62 @@ const { copyText } = Astro.props;
   const copiedCheckMark = document.querySelector('.copied-checkmark');
   const tooltipText = document.querySelector('.tooltipText');
 
-  let timeout;
   commandCopyBtn.addEventListener('click', () => {
     navigator.clipboard.writeText(copyText);
-    tooltipText.innerHTML = 'Copied';
+    tooltipText.style.display = 'block';
     copiedCheckMark.style.display = 'inline-block';
     commandCopyBtn.style.display = 'none';
-    //clear previous timeout
-    clearTimeout(timeout);
-    timeout = window.setTimeout(()=>{
-    copiedCheckMark.style.display = 'none';
-    commandCopyBtn.style.display = 'inline-block';
-    tooltipText.innerHTML = 'Copy';
-  }, 750)
+
+    setTimeout(()=>{
+        copiedCheckMark.style.display = 'none';
+        commandCopyBtn.style.display = 'inline-block';
+        tooltipText.style.display = 'none';
+  }, 2000)
   });
 </script>
 
 <style>
   .copy-button {
-    fill: var(--sl-color-accent-high);
     margin-left: 0.5rem;
     cursor: pointer;
   }
 
-  .copied-checkmark {
+  .copy-button:hover{
     fill: var(--sl-color-accent-high);
+  }
+
+  .copied-checkmark {
+    fill: var(--sl-color-green);
     margin-left: 0.5rem;
     display: none;
   }
 
-  .copy-container:hover .tooltipText {
-    visibility: visible;
-  }
   .copy-container {
     position: relative;
   }
 
   .tooltipText {
     position: absolute;
-    visibility: hidden;
-    left: 0;
+    left: -14px;
     width: max-content;
     background-color: white;
-    display: block;
-    color: black;
-    padding: 0.125rem 0.25rem;
+    color: var(--sl-color-black);
+    display: none;
+    padding: 0.25rem 0.5rem;
     border-radius: 0.25rem;
-    top: 130%;
-    font-size: 0.5rem;
+    top: 200%;
+    font-size: 0.75rem;
   }
+
+  .triangle:before {
+    content: "";
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid white;
+    right: 28px;
+    top : -7px;
+}
 </style>
