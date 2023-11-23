@@ -1,6 +1,6 @@
 # Optimize Change Detection
 
-> Author: Thomas Laforge
+> author: thomas-laforge
 
 ### Run Application
 

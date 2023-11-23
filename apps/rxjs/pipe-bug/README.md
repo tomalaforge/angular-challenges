@@ -1,6 +1,6 @@
 # High Order Operator Bug
 
-> Author: Thomas Laforge
+> author: thomas-laforge
 
 ### Run Application
 

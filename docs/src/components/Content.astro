@@ -1,15 +1,18 @@
 ---
-import ChallengeFooter from './ChallengeFooter.astro'
-import CommentSection from './CommentSection.astro'
-import type { Props } from '@astrojs/starlight/props';
 import Default from '@astrojs/starlight/components/MarkdownContent.astro';
+import type { Props } from '@astrojs/starlight/props';
+import { getEntry } from 'astro:content';
+import Author from './Author.astro';
+import ChallengeFooter from './ChallengeFooter.astro';
+import CommentSection from './CommentSection.astro';
 
-const {challengeNumber, author} = Astro.props.entry.data;
+const {challengeNumber} = Astro.props.entry.data;
+const author = Astro.props.entry.data.author ? await getEntry(Astro.props.entry.data.author) : null;
 const renderCommentSection = !Astro.props.entry.data.noCommentSection;
 
 ---
 
-{ challengeNumber && author && <p class="author">Created by {author}</p> }
+{ challengeNumber && author && <Author {...author.data}/> }
 
 <Default {...Astro.props}><slot /></Default>
 

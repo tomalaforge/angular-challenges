@@ -1,6 +1,6 @@
 # Extend Lib Generator
 
-> Author: Thomas Laforge
+> author: thomas-laforge
 
 ### Documentation and Instruction
 

@@ -1,6 +1,6 @@
 # Wrap Function Pipe
 
-> Author: Thomas Laforge
+> author: thomas-laforge
 
 ### Run Application
 

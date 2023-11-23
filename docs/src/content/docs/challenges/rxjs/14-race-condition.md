@@ -1,7 +1,7 @@
 ---
 title: 🟢 Race Condition
 description: Challenge 14 is about race condition in Rxjs
-author: Thomas Laforge
+author: thomas-laforge
 challengeNumber: 14
 command: rxjs-race-condition
 sidebar:

@@ -1,6 +1,6 @@
 # Harness Creation
 
-> Author: Thomas Laforge
+> author: thomas-laforge
 
 ### Run Application
 

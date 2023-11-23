@@ -1,5 +1,11 @@
 ---
 
+interface Props {
+	link: string;
+	alt: string;
+	flag?: 'FR';
+}
+
 const { link, alt, flag } = Astro.props;
 const isFR = flag === 'FR';
 ---

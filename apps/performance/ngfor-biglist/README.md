@@ -1,6 +1,6 @@
 # NgFor optimize big list
 
-> Author: Thomas Laforge
+> author: thomas-laforge
 
 ### Run Application
 
