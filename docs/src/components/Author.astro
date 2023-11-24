@@ -1,0 +1,41 @@
+---
+import { Icon } from '@astrojs/starlight/components';
+
+interface Props {
+	name: string;
+	twitter?: string;
+    linkedin?: string;
+    github?: string;
+}
+
+const { name, twitter, linkedin, github } = Astro.props;
+
+---
+
+<p class="author">
+    Created by {name}
+    {twitter && <a href={twitter}><Icon class='icon' name="twitter" size="0.75rem" /></a>}
+    {linkedin && <a href={linkedin}><Icon class='icon' name="linkedin" size="0.75rem" /></a>}
+    {github && <a href={github}><Icon class='icon' name="github" size="0.75rem" /></a>}
+
+</p>
+
+<style>
+    .author {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        margin-top: -1rem;
+        font-size: var(--sl-text-xs);
+        color: var(--sl-color-gray-3);
+    }
+    
+    .icon {
+        vertical-align: middle;
+        color: var(--sl-color-gray-3);
+
+        &:hover {
+            color: var(--sl-color-accent-high)
+        }
+    }
+</style>

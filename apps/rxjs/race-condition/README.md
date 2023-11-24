@@ -1,6 +1,6 @@
 # Race Condition
 
-> Author: Thomas Laforge
+> author: thomas-laforge
 
 ### Run Application
 

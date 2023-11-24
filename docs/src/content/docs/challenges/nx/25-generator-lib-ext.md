@@ -1,7 +1,7 @@
 ---
 title: 🔴 Extend Lib Generator
 description: Challenge 25 is about creating a Nx generator to extend the built-in Library Generator
-author: Thomas Laforge
+author: thomas-laforge
 challengeNumber: 25
 sidebar:
   order: 207

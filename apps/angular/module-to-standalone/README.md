@@ -1,6 +1,6 @@
 # Module to Standalone
 
-> Author: Thomas Laforge
+> author: thomas-laforge
 
 ### Run Application
 

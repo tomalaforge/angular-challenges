@@ -1,6 +1,6 @@
 # Highly Customizable CSS
 
-> Author: Thomas Laforge
+> author: thomas-laforge
 
 ### Run Application
 

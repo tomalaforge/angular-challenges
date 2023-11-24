@@ -1,7 +1,7 @@
 ---
 title: 🟢 Projection
 description: Challenge 1 is about learning how to project DOM element through components
-author: Thomas Laforge
+author: thomas-laforge
 challengeNumber: 1
 command: angular-projection
 blogLink: https://medium.com/@thomas.laforge/create-a-highly-customizable-component-cc3a9805e4c5
@@ -15,7 +15,7 @@ sidebar:
 
 ## Information
 
-In Angular, content projection is a powerful technique for creating highly customizable components. Utilizing and understanding the concepts of <b>ng-content</b> and <b>ngTemplateOutlet</b> can sighificantly enhance your ability to create shareable components.
+In Angular, content projection is a powerful technique for creating highly customizable components. Utilizing and understanding the concepts of <b>ng-content</b> and <b>ngTemplateOutlet</b> can significantly enhance your ability to create shareable components.
 
 You can learn all about <b>ng-content</b> [here](https://angular.io/guide/content-projection#projecting-content-in-more-complex-environments) from simple projection to more complex ones.
 

@@ -1,6 +1,6 @@
 # Change Detection Bug
 
-> Author: Thomas Laforge
+> author: thomas-laforge
 
 ### Run Application
 
