@@ -54,4 +54,4 @@ this.todos = [...this.todos.filter((t) => t.id !== todoUpdated.id), todoUpdated]
 ### Step 4: Awesomeness!!! master your state.
 
 - Use the **component store of ngrx** as a local state of your component. _(or any other 3rd Party lib)_
-- Have a **localize** Loading/Error indicator, e.g. only on the Todo being processed and **disable** all buttons of the processed Todo. _(Hint: you will need to create an ItemComponent)_
+- Have a **localized** Loading/Error indicator, e.g. only on the Todo being processed and **disable** all buttons of the processed Todo. _(Hint: you will need to create an ItemComponent)_

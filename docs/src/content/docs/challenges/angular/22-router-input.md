@@ -20,7 +20,6 @@ In this application, we retrieve three pieces of information inside our `TestCom
 In Angular versions 15 or earlier, we use `ActivatedRoute` to obtain all this information and receive them through observables to listen for URL changes.
 
 In version 16, Angular introduced a new `Input` that can listen to route data. You can read more about it [here](https://medium.com/ngconf/accessing-route-params-in-angular-1f8e12770617).
-.
 
 ## Statement
 
