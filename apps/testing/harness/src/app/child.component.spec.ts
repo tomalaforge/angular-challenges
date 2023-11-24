@@ -18,7 +18,7 @@ describe('ChildComponent', () => {
     });
   });
 
-  describe('When disabled chebkbox is toggle', () => {
+  describe('When disabled checkbox is toggled', () => {
     test('Then slider is disabled', async () => {
       await render(ChildComponent);
     });
