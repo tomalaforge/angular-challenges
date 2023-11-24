@@ -39,7 +39,7 @@ this.todos[todoUpdated.id - 1] = todoUpdated;
 this.todos = [...this.todos.filter((t) => t.id !== todoUpdated.id), todoUpdated];
 ```
 
-- Use **ChangeDectection.OnPush**
+- Use **ChangeDetection.OnPush**
 
 ### Step 2: Improve
 
