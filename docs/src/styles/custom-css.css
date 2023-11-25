@@ -139,6 +139,11 @@ starlight-menu-button svg {
   color: var(--sl-color-text);
 }
 
+.starlight-aside--note .starlight-aside__title,
+.starlight-aside--tip .starlight-aside__title {
+  color: var(--sl-color-white);
+}
+
 .starlight-aside--danger {
   background-color: #f100002e;
   border: solid 1px red;
