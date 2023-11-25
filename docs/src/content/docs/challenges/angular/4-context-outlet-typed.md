@@ -17,7 +17,7 @@ WIP: The following documentation will be reviewed and improved. However, you can
 
 Angular offer the static function **ngTemplateContextGuard** to strongly type structural directive.
 
-However the context of **NgTemplateOutlet** type is **Object**. But which the help of the above guard, we can improve that behavior.
+However the context of **NgTemplateOutlet** type is **Object**. But with the help of the above guard, we can improve that behavior.
 
 ## Statement
 
@@ -41,4 +41,4 @@ Currently we have the following piece of code.
 
 As we can see, student is of type "any". We want to infer the correct type.
 
-But in this part, we can pass to ListComponent, a list of **any object**. And we still want the correct type to be infered.
+But in this part, we can pass to ListComponent, a list of **any object**. And we still want the correct type to be inferred.

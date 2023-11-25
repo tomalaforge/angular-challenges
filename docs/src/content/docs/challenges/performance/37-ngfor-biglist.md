@@ -30,6 +30,6 @@ The goal of this challenge is to implement a better alternative to display big l
 <details>
   <summary>Hint 1</summary>
 
-If you're unsure where to begin, I recommend reading the [Angular CDK virtualization documentation](https://material.angular.io/cdk/scrolling/overview)
+If you're unsure where to begin, I recommend reading the [Angular CDK virtualization documentation](https://material.angular.io/cdk/scrolling/overview).
 
 </details>

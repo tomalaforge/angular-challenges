@@ -43,6 +43,6 @@ Additionally, you should create a `HarnessPredicate` with the default predicate 
 
 Lastly, you will need to create the test suite for `app.component`. Some default tests have already been written, but feel free to add as many tests as you want and create as many harness methods as you need.
 
-> Angular Material documentation can be found [here](https://material.angular.io/cdk/test-harnesses/overview)
+> Angular Material documentation can be found [here](https://material.angular.io/cdk/test-harnesses/overview).
 
 Good luck !!! 💪
