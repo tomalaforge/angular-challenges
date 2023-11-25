@@ -18,9 +18,9 @@ NgRx Effect is a very powerful library develop by the NgRx team. Effects subscri
 
 But what we often forget is that Effects can subscribe to ANY observables. Which means we can wrap a hot observable inside an effect and had logic in it.
 
-In this exercice, we will find a way to create a very powerful, scalable and maintanable push messages listener. Currently, the code is located inside a single file with a if else condition to send the push data to the right location. This code is not very scalable since we need to add more and more else, and so not very maintanable since the piece of code will become bigger and bigger.
+In this exercice, we will find a way to create a very powerful, scalable and maintanable push messages listener. Currently, the code is located inside a single file with a if else condition to send the push data to the right location. This code is not very scalable since we need to add more and more else, and so not very maintainable since the piece of code will become bigger and bigger.
 
-Also, we load the whole file at startup even if we haven't load some part of the application (lazy loading); and so we don't need to listen or update that part of the store. We need to decouple that logic.
+Also, we load the whole file at startup even if we haven't loaded some part of the application (lazy loading); and so we don't need to listen or update that part of the store. We need to decouple that logic.
 
 ### Step 1
 
