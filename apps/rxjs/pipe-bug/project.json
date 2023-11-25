@@ -1,0 +1,82 @@
+{
+  "name": "rxjs-pipe-bug",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/rxjs/pipe-bug/src",
+  "prefix": "app",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/rxjs/pipe-bug",
+        "index": "apps/rxjs/pipe-bug/src/index.html",
+        "main": "apps/rxjs/pipe-bug/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/rxjs/pipe-bug/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/rxjs/pipe-bug/src/favicon.ico",
+          "apps/rxjs/pipe-bug/src/assets"
+        ],
+        "styles": ["apps/rxjs/pipe-bug/src/styles.scss"],
+        "scripts": [],
+        "allowedCommonJsDependencies": ["seedrandom"]
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "rxjs-pipe-bug:build:production"
+        },
+        "development": {
+          "buildTarget": "rxjs-pipe-bug:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "rxjs-pipe-bug:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/rxjs/pipe-bug/**/*.ts",
+          "apps/rxjs/pipe-bug/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

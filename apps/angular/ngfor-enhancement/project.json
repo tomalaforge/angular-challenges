@@ -1,0 +1,81 @@
+{
+  "name": "angular-ngfor-enhancement",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/angular/ngfor-enhancement/src",
+  "prefix": "app",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/angular/ngfor-enhancement",
+        "index": "apps/angular/ngfor-enhancement/src/index.html",
+        "main": "apps/angular/ngfor-enhancement/src/main.ts",
+        "polyfills": "apps/angular/ngfor-enhancement/src/polyfills.ts",
+        "tsConfig": "apps/angular/ngfor-enhancement/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/angular/ngfor-enhancement/src/favicon.ico",
+          "apps/angular/ngfor-enhancement/src/assets"
+        ],
+        "styles": ["apps/angular/ngfor-enhancement/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "angular-ngfor-enhancement:build:production"
+        },
+        "development": {
+          "buildTarget": "angular-ngfor-enhancement:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "angular-ngfor-enhancement:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/angular/ngfor-enhancement/**/*.ts",
+          "apps/angular/ngfor-enhancement/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

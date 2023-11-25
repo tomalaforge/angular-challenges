@@ -17,13 +17,19 @@
       "pattern": "^[a-zA-Z].*$"
     },
     "title": {
-      "description": "Title of your challenge. (use quote to add spaces)",
+      "description": "Title of your challenge.",
       "type": "string",
       "maxLength": "25",
       "$default": {
         "$source": "argv",
         "index": 1
       },
+      "x-priority": "important"
+    },
+    "author": {
+      "description": "Your full name",
+      "type": "string",
+      "maxLength": "25",
       "x-priority": "important"
     },
     "challengeDifficulty": {
@@ -49,7 +55,7 @@
         ]
       }
     },
-    "docRepository": {
+    "category": {
       "type": "string",
       "description": "The category of your challenge.",
       "x-priority": "important",
@@ -62,7 +68,7 @@
             "label": "Angular"
           },
           {
-            "value": "angular-performance",
+            "value": "performance",
             "label": "Angular Performance"
           },
           {
@@ -88,11 +94,6 @@
         ]
       }
     },
-    "directory": {
-      "description": "The directory of the new application.",
-      "type": "string",
-      "x-priority": "important"
-    },
     "addTest": {
       "description": "add spec files.",
       "type": "boolean",
@@ -114,5 +115,5 @@
     }
   },
   "additionalProperties": false,
-  "required": ["name", "title", "challengeDifficulty", "docRepository"]
+  "required": ["name", "title", "author", "challengeDifficulty", "category"]
 }

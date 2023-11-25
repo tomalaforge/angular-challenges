@@ -1,6 +1,8 @@
 ---
 title: 🟠 Component Generator
 description: Challenge 26 is about creating a Nx generator to create a custom component
+author: thomas-laforge
+challengeNumber: 26
 sidebar:
   order: 116
 ---
@@ -86,7 +88,7 @@ export class UserStore extends ComponentStore<UserState> implements OnStateInit,
       loading: this.loading$,
       error: this.error$,
     },
-    { debounce: true }
+    { debounce: true },
   );
 
   ngrxOnStateInit() {
@@ -104,11 +106,11 @@ export class UserStore extends ComponentStore<UserState> implements OnStateInit,
         this.userService.loadUsers().pipe(
           tapResponse(
             (users) => this.patchState({ users, loading: false }),
-            (err: string) => this.patchState({ error: err, loading: false })
-          )
-        )
-      )
-    )
+            (err: string) => this.patchState({ error: err, loading: false }),
+          ),
+        ),
+      ),
+    ),
   );
 }
 ```
@@ -141,22 +143,3 @@ export interface User {
   name: string;
 }
 ```
-
----
-
-:::tip[Reminder]
-Your PR title must start with <b>Answer:26</b>.
-:::
-
-<div class="article-footer">
-  <a
-    href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A26+label%3Aanswer"
-    alt="Component Generator community solutions">
-    ❖ Community Answers
-  </a>
-  <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A26+label%3A"answer+author"'
-    alt="Component Generator solution author">
-    ▶︎ Author Answer
-  </a>
-  </div>

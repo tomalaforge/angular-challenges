@@ -7,11 +7,10 @@ import {
   formatFiles,
   generateFiles,
   names,
-  readJsonFile,
   Tree,
   updateJson,
 } from '@nx/devkit';
-import { Linter } from '@nx/linter';
+import { Linter } from '@nx/eslint';
 import { join } from 'path';
 import { getProjectDir } from '../../utils/normalize';
 import { Schema } from './schema';
@@ -43,19 +42,14 @@ function findPreviousChallengeFilePath(tree, path, number) {
 export async function challengeGenerator(tree: Tree, options: Schema) {
   const { appProjectName, appDirectory } = getProjectDir(
     options.name,
-    options.directory
+    `apps/${options.category}`
   );
 
   const difficulty = options.challengeDifficulty;
 
-  // read json file with the total challanges and display order
-  const challengeNumberPath = 'challenge-number.json';
-  const challangeNumberJson = readJsonFile(challengeNumberPath);
-  const challengeNumber = challangeNumberJson.total + 1;
-  const order = challangeNumberJson[difficulty] + 1;
-
   await applicationGenerator(tree, {
     ...options,
+    directory: `apps/${options.category}`,
     style: 'scss',
     routing: false,
     inlineStyle: true,
@@ -69,6 +63,13 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
     skipTests: true,
   });
 
+  const challengeNumberPath = 'challenge-number.json';
+  const challangeNumberJson = JSON.parse(
+    tree.read(challengeNumberPath).toString()
+  );
+  const challengeNumber = challangeNumberJson.total + 1;
+  const order = challangeNumberJson[difficulty] + 1;
+
   generateFiles(tree, join(__dirname, 'files', 'app'), appDirectory, {
     tmpl: '',
   });
@@ -80,17 +81,18 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
     appProjectName,
     title: options.title,
     challengeNumber,
-    docRepository: options.docRepository,
+    category: options.category,
   });
 
   generateFiles(
     tree,
     join(__dirname, 'files', 'docs'),
-    `./docs/src/content/docs/challenges/${options.docRepository}`,
+    `./docs/src/content/docs/challenges/${options.category}`,
     {
       tmpl: '',
       projectName: names(options.name).name,
       appProjectName,
+      author: options.author,
       title: options.title,
       challengeNumber,
       difficulty,
@@ -122,7 +124,7 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
   const linkRegex = new RegExp(`link: \\/challenges\\/(.*?)\n`, 'gi');
   const replacedLink = replaced.replace(
     linkRegex,
-    `link: /challenges/${options.docRepository}/${challengeNumber}-${
+    `link: /challenges/${options.category}/${challengeNumber}-${
       names(options.name).name
     }/\n`
   );

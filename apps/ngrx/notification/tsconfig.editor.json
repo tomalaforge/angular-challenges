@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "**/*.ts",
+    "../../../libs/ngrx-notification/backend/src/lib/fake-backend.service.ts"
+  ],
+  "compilerOptions": {
+    "types": []
+  }
+}

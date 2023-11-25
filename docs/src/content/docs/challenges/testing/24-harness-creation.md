@@ -1,6 +1,9 @@
 ---
 title: 🟠 Harness Creation
 description: Challenge 24 is about creating a component harness.
+author: thomas-laforge
+challengeNumber: 24
+command: testing-create-harness
 sidebar:
   order: 112
 ---
@@ -8,8 +11,6 @@ sidebar:
 :::note
 WIP: The following documentation will be reviewed and improved. However, you can still take on the challenge. If you don't understand a certain part, please feel free to reach out or create an issue.
 :::
-
-<div class="chip">Challenge #24</div>
 
 ## Information
 
@@ -42,29 +43,6 @@ Additionally, you should create a `HarnessPredicate` with the default predicate 
 
 Lastly, you will need to create the test suite for `app.component`. Some default tests have already been written, but feel free to add as many tests as you want and create as many harness methods as you need.
 
-> Angular Material documentation can be found [here](https://material.angular.io/cdk/test-harnesses/overview)
+> Angular Material documentation can be found [here](https://material.angular.io/cdk/test-harnesses/overview).
 
 Good luck !!! 💪
-
----
-
-:::note
-Start the project by running: `npx nx serve create-harness`.
-:::
-
-:::tip[Reminder]
-Your PR title must start with <b>Answer:24</b>.
-:::
-
-<div class="article-footer">
-  <a
-    href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A24+label%3Aanswer"
-    alt="Harness Creation community solutions">
-    ❖ Community Answers
-  </a>
-  <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A24+label%3A"answer+author"'
-    alt="Harness Creation solution author">
-    ▶︎ Author Answer
-  </a>
-  </div>

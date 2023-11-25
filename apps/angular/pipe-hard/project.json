@@ -1,0 +1,81 @@
+{
+  "name": "angular-pipe-hard",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/angular/pipe-hard/src",
+  "prefix": "app",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/angular/pipe-hard",
+        "index": "apps/angular/pipe-hard/src/index.html",
+        "main": "apps/angular/pipe-hard/src/main.ts",
+        "polyfills": "apps/angular/pipe-hard/src/polyfills.ts",
+        "tsConfig": "apps/angular/pipe-hard/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/angular/pipe-hard/src/favicon.ico",
+          "apps/angular/pipe-hard/src/assets"
+        ],
+        "styles": ["apps/angular/pipe-hard/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "angular-pipe-hard:build:production"
+        },
+        "development": {
+          "buildTarget": "angular-pipe-hard:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "angular-pipe-hard:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/angular/pipe-hard/**/*.ts",
+          "apps/angular/pipe-hard/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

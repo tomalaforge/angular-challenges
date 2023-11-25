@@ -1,0 +1,98 @@
+{
+  "name": "testing-router-outlet",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/testing/router-outlet/src",
+  "prefix": "app",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/testing/router-outlet",
+        "index": "apps/testing/router-outlet/src/index.html",
+        "main": "apps/testing/router-outlet/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/testing/router-outlet/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/testing/router-outlet/src/favicon.ico",
+          "apps/testing/router-outlet/src/assets"
+        ],
+        "styles": ["apps/testing/router-outlet/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "testing-router-outlet:build:production"
+        },
+        "development": {
+          "buildTarget": "testing-router-outlet:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "testing-router-outlet:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/testing/router-outlet/**/*.ts",
+          "apps/testing/router-outlet/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/testing/router-outlet/jest.config.ts"
+      }
+    },
+    "component-test": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/testing/router-outlet/cypress.config.ts",
+        "testingType": "component",
+        "skipServe": true,
+        "devServerTarget": "testing-router-outlet:build"
+      }
+    }
+  },
+  "tags": []
+}

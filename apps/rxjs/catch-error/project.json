@@ -1,0 +1,88 @@
+{
+  "name": "rxjs-catch-error",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "app",
+  "sourceRoot": "apps/rxjs/catch-error/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/rxjs/catch-error",
+        "index": "apps/rxjs/catch-error/src/index.html",
+        "main": "apps/rxjs/catch-error/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/rxjs/catch-error/tsconfig.app.json",
+        "assets": [
+          "apps/rxjs/catch-error/src/favicon.ico",
+          "apps/rxjs/catch-error/src/assets"
+        ],
+        "styles": ["apps/rxjs/catch-error/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "rxjs-catch-error:build:production"
+        },
+        "development": {
+          "buildTarget": "rxjs-catch-error:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "rxjs-catch-error:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/rxjs/catch-error/**/*.ts",
+          "apps/rxjs/catch-error/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/rxjs/catch-error/jest.config.ts"
+      }
+    }
+  }
+}

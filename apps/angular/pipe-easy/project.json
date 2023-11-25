@@ -1,0 +1,81 @@
+{
+  "name": "angular-pipe-easy",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/angular/pipe-easy/src",
+  "prefix": "app",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/angular/pipe-easy",
+        "index": "apps/angular/pipe-easy/src/index.html",
+        "main": "apps/angular/pipe-easy/src/main.ts",
+        "polyfills": "apps/angular/pipe-easy/src/polyfills.ts",
+        "tsConfig": "apps/angular/pipe-easy/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/angular/pipe-easy/src/favicon.ico",
+          "apps/angular/pipe-easy/src/assets"
+        ],
+        "styles": ["apps/angular/pipe-easy/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "angular-pipe-easy:build:production"
+        },
+        "development": {
+          "buildTarget": "angular-pipe-easy:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "angular-pipe-easy:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/angular/pipe-easy/**/*.ts",
+          "apps/angular/pipe-easy/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

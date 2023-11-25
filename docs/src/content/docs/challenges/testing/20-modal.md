@@ -1,11 +1,12 @@
 ---
 title: 🟠 Modal
 description: Challenge 20 is about testing modals
+author: thomas-laforge
+challengeNumber: 20
+command: testing-modal
 sidebar:
   order: 111
 ---
-
-<div class="chip">Challenge #20</div>
 
 ## Information:
 
@@ -17,37 +18,14 @@ The goal of this challenge is to test the dialogs inside your application. To do
 
 You can play with it by running : `npx nx serve testing-modal`.
 
-The file named `app.component.spec.ts` will let test your application using Testing Library. To run the test suits, you need to run `npx nx test testing-modal`. You can also install [Jest Runner](https://marketplace.visualstudio.com/items?itemName=firsttris.vscode-jest-runner) to execute your test by clicking on the `Run` button above each `describe` or `it` blocks.
+The file named `app.component.spec.ts` will let you test your application using Testing Library. To run the test suites, you need to run `npx nx test testing-modal`. You can also install [Jest Runner](https://marketplace.visualstudio.com/items?itemName=firsttris.vscode-jest-runner) to execute your test by clicking on the `Run` button above each `describe` or `it` blocks.
 
-For testing cypress, you will execute your test inside the `app.component.cy.ts` and run `npx nx component-test testing-modal` to execute your test suits. You can add the `--watch` flag to execute your test in watch mode.
+For testing with Cypress, you will execute your test inside `app.component.cy.ts` and run `npx nx component-test testing-modal` to execute your test suites. You can add the `--watch` flag to execute your test in watch mode.
 
 # Statement
 
-The goal is to test multiple behaviors of the application describe inside each test files using Testing library and Cypress Component Testing.
+The goal is to test multiple behaviors of the application described inside each test file using Testing library and Cypress Component Testing.
 
 :::note
 I have created some `it` blocks but feel free to add more tests if you want.
 :::
-
----
-
-:::note
-Start the project by running: `npx nx serve testing-modal`.
-:::
-
-:::tip[Reminder]
-Your PR title must start with <b>Answer:20</b>.
-:::
-
-<div class="article-footer">
-  <a
-    href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A20+label%3Aanswer"
-    alt="Modal community solutions">
-    ❖ Community Answers
-  </a>
-  <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A20+label%3A"answer+author"'
-    alt="Modal solution author">
-    ▶︎ Author Answer
-  </a>
-  </div>

@@ -1,0 +1,81 @@
+{
+  "name": "angular-router-input",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "app",
+  "sourceRoot": "apps/angular/router-input/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/angular/router-input",
+        "index": "apps/angular/router-input/src/index.html",
+        "main": "apps/angular/router-input/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/angular/router-input/tsconfig.app.json",
+        "assets": [
+          "apps/angular/router-input/src/favicon.ico",
+          "apps/angular/router-input/src/assets"
+        ],
+        "styles": ["apps/angular/router-input/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "angular-router-input:build:production"
+        },
+        "development": {
+          "buildTarget": "angular-router-input:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "angular-router-input:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/angular/router-input/**/*.ts",
+          "apps/angular/router-input/**/*.html"
+        ]
+      }
+    }
+  }
+}

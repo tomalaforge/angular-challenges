@@ -9,6 +9,12 @@
   "imageSize": 100,
   "commit": true,
   "commitConvention": "angular",
+  "types": {
+    "challenge": {
+      "symbol": "🧩",
+      "description": "Created a challenge"
+    }
+  },
   "contributors": [
     {
       "login": "tomalaforge",
@@ -16,6 +22,7 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/30832608?v=4",
       "profile": "https://thomaslaforge.dev/home",
       "contributions": [
+        "challenge",
         "code",
         "doc",
         "content",
@@ -86,7 +93,45 @@
       "profile": "https://github.com/DeveshChau",
       "contributions": [
         "code",
-        "bug"
+        "bug",
+        "challenge"
+      ]
+    },
+    {
+      "login": "dmmishchenko",
+      "name": "Dmitriy Mishchenko",
+      "avatar_url": "https://avatars.githubusercontent.com/u/51910160?v=4",
+      "profile": "https://github.com/dmmishchenko",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "Sagardevkota",
+      "name": "Sagar Devkota",
+      "avatar_url": "https://avatars.githubusercontent.com/u/30800393?v=4",
+      "profile": "http://www.sagardev.com.np",
+      "contributions": [
+        "doc",
+        "code"
+      ]
+    },
+    {
+      "login": "nelsongutidev",
+      "name": "Nelson Gutierrez",
+      "avatar_url": "https://avatars.githubusercontent.com/u/62297014?v=4",
+      "profile": "https://nelsonguti.dev/",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "ho-ssain",
+      "name": "Hossain K. M.",
+      "avatar_url": "https://avatars.githubusercontent.com/u/61125174?v=4",
+      "profile": "https://github.com/ho-ssain",
+      "contributions": [
+        "doc"
       ]
     }
   ],

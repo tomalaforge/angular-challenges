@@ -1,11 +1,12 @@
 ---
 title: 🔴 Real-life Application
 description: Challenge 29 is about testing a real-life application
+author: thomas-laforge
+challengeNumber: 29
+command: testing-todos-list
 sidebar:
   order: 205
 ---
-
-<div class="chip">Challenge #29</div>
 
 ## Information:
 
@@ -19,9 +20,9 @@ Handling asynchronous tasks will be particularly challenging. It's important not
 
 You can play with it by running : `npx nx serve testing-todos-list`.
 
-To run Testing Library test suits, you need to run `npx nx test testing-input-output`. You can also install [Jest Runner](https://marketplace.visualstudio.com/items?itemName=firsttris.vscode-jest-runner) to execute your test by clicking on the `Run` button above each `describe` or `it` blocks.
+To run Testing Library test suits, you need to run `npx nx test testing-todos-list`. You can also install [Jest Runner](https://marketplace.visualstudio.com/items?itemName=firsttris.vscode-jest-runner) to execute your test by clicking on the `Run` button above each `describe` or `it` blocks.
 
-For testing cypress, you will execute your test inside the `child.component.cy.ts` and run `npx nx component-test testing-input-output` to execute your test suits. You can add the `--watch` flag to execute your test in watch mode.
+For testing cypress, you will execute your test inside the `child.component.cy.ts` and run `npx nx component-test testing-todos-list` to execute your test suits. You can add the `--watch` flag to execute your test in watch mode.
 
 # Statement
 
@@ -30,26 +31,3 @@ The goal is to test multiple behaviors of the application describe inside each t
 :::note
 I have created some `it` blocks but feel free to add more tests if you want.
 :::
-
----
-
-:::note
-Start the project by running: `npx nx serve testing-todos-list`.
-:::
-
-:::tip[Reminder]
-Your PR title must start with <b>Answer:29</b>.
-:::
-
-<div class="article-footer">
-  <a
-    href="https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A29+label%3Aanswer"
-    alt="Real-life Application community solutions">
-    ❖ Community Answers
-  </a>
-  <a
-    href='https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A29+label%3A"answer+author"'
-    alt="Real-life Application solution author">
-    ▶︎ Author Answer
-  </a>
-  </div>

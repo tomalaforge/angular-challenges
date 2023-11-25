@@ -1,0 +1,81 @@
+{
+  "name": "angular-pipe-intermediate",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/angular/pipe-intermediate/src",
+  "prefix": "app",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/angular/pipe-intermediate",
+        "index": "apps/angular/pipe-intermediate/src/index.html",
+        "main": "apps/angular/pipe-intermediate/src/main.ts",
+        "polyfills": "apps/angular/pipe-intermediate/src/polyfills.ts",
+        "tsConfig": "apps/angular/pipe-intermediate/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/angular/pipe-intermediate/src/favicon.ico",
+          "apps/angular/pipe-intermediate/src/assets"
+        ],
+        "styles": ["apps/angular/pipe-intermediate/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "angular-pipe-intermediate:build:production"
+        },
+        "development": {
+          "buildTarget": "angular-pipe-intermediate:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "angular-pipe-intermediate:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/angular/pipe-intermediate/**/*.ts",
+          "apps/angular/pipe-intermediate/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
