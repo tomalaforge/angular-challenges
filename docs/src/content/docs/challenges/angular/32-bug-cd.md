@@ -30,7 +30,7 @@ The goal of the challenge is to debug this application and make it work.
 <details>
   <summary>Hint 1</summary>
   
-  If you comment out `routerLinkActive="isSelected"` inside `NavigationComponent`: the application loads correctly.
+  If you comment out `routerLinkActive="isSelected"` inside `NavigationComponent`, the application loads correctly.
 </details>
 
 <details>
