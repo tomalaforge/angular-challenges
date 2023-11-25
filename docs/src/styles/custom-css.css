@@ -141,7 +141,7 @@ starlight-menu-button svg {
 
 .starlight-aside--note .starlight-aside__title,
 .starlight-aside--tip .starlight-aside__title {
-  color: white;
+  color: var(--sl-color-white);
 }
 
 .starlight-aside--danger {
