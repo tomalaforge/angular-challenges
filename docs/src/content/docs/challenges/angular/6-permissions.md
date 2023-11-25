@@ -33,7 +33,7 @@ In LoginComponent, you will find 6 buttons corresponding at 6 differents users.
 
 ## Step 1
 
-In **InformationComponent**, display the correct piece of information for each roles.
+In **InformationComponent**, display the correct piece of information for each role.
 
 ### Constraints:
 
