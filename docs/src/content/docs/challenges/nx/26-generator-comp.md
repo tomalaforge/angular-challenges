@@ -15,7 +15,7 @@ WIP: The following documentation will be reviewed and improved. However, you can
 
 Welcome to the marvelous world of Nx generators.
 
-Generators are awesome tools that can help you and your team generate code more quickly, especially for pieces of code that you use frequently. Inside an entreprise project, you often have to create components that look similar. And most of the time, you end up copy/pasting other components. In Nx, you can create this boilerplate in a simple command using generators.
+Generators are awesome tools that can help you and your team generate code more quickly, especially for pieces of code that you use frequently. Inside an enterprise project, you often have to create components that look similar. And most of the time, you end up copy/pasting other components. In Nx, you can create this boilerplate in a simple command using generators.
 
 ## Statement
 
