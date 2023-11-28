@@ -3,14 +3,12 @@ import { ChildComponent } from './child.component';
 import { HttpService } from './http.service';
 
 describe('ChildComponent', () => {
-  const setup = () => {
     const setup = () => {
       cy.mount(ChildComponent).then(() => {
         const http = TestBed.inject(HttpService);
         cy.stub(http, 'sendTitle').as('http');
       });
     };
-  };
   describe('When typing nothing and clicking on Validate', () => {
     test('Then show "Title is required" error message and no http request has been sent', async () => {
       setup();
