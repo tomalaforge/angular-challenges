@@ -10,7 +10,7 @@ describe('ChildComponent', () => {
       sendTitle: jest.fn(),
     });
     await render(ChildComponent, {
-      componentProviders: [
+      providers: [
         {
           provide: HttpService,
           useValue: httpServiceMock,
