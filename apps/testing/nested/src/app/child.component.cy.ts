@@ -28,7 +28,7 @@ describe('ChildComponent', () => {
       cy.get('input[type=text]').type('Good');
       cy.get('button').click();
       cy.contains('Title is required !!!').should('not.exist');
-      cy.get('@http').should('not.called');
+      cy.get('@http').should('be.called');
       cy.contains('Title is Good');
     });
   });
