@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { Todo } from './model/todo.interface';
 import { TodoService } from './service/todo.service';
-import { Observable } from 'rxjs';
 import { TodoComponent } from './component/todo.component';
 
 @Component({
@@ -10,7 +9,7 @@ import { TodoComponent } from './component/todo.component';
   imports: [CommonModule, TodoComponent],
   selector: 'app-root',
   template: `
-    @for (todo of todos | async; track $index) {
+    @for (todo of todoService.todoList(); track $index) {
       <app-todo [todo]="todo" />
     }
   `,
@@ -18,7 +17,6 @@ import { TodoComponent } from './component/todo.component';
 })
 export class AppComponent implements OnInit {
   todoService: TodoService = inject(TodoService);
-  todos: Observable<Todo[]> = this.todoService.todoList$;
 
   ngOnInit(): void {
     this.todoService.callTodoList();
