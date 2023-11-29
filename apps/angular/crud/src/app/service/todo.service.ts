@@ -10,6 +10,7 @@ export class TodoService {
   readonly baseUrl: string = 'https://jsonplaceholder.typicode.com/todos/';
 
   public todoList = signal<Todo[]>([]);
+  public todoError = signal<string>('');
   private http: HttpClient = inject(HttpClient);
 
   callTodoList(): void {
@@ -17,6 +18,7 @@ export class TodoService {
       next: (todoList) => {
         this.todoList.set(todoList);
       },
+      error: (error) => this.setError(error),
     });
   }
 
@@ -48,16 +50,22 @@ export class TodoService {
             );
           });
         },
+        error: (error) => this.setError(error),
       });
   }
 
   deleteTodo(todoId: number): void {
-    this.http.delete(this.baseUrl.concat(todoId.toString())).subscribe({
+    this.http.delete(this.baseUrl.concat('')).subscribe({
       next: () => {
         this.todoList.update((todoList) => {
           return todoList.filter((t) => t.id !== todoId);
         });
       },
+      error: (error) => this.setError(error),
     });
+  }
+
+  setError(error: { errorMessage: string }): void {
+    this.todoError.set(error.errorMessage);
   }
 }

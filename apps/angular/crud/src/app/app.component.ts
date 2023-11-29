@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewEncapsulation,
+  effect,
+  inject,
+} from '@angular/core';
 import { TodoService } from './service/todo.service';
 import { TodoComponent } from './component/todo.component';
 
@@ -12,10 +18,18 @@ import { TodoComponent } from './component/todo.component';
       <app-todo [todo]="todo" />
     }
   `,
-  styles: [],
+  encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent implements OnInit {
   todoService: TodoService = inject(TodoService);
+
+  constructor() {
+    effect(() => {
+      if (this.todoService.todoError() !== '') {
+        console.error(this.todoService.todoError());
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.todoService.callTodoList();
