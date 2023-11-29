@@ -1,0 +1,49 @@
+---
+title: Rendimiento en Angular
+prev: false
+next: false
+description: Aprende a usar la extensión de Chrome Angular Devtools.
+noCommentSection: true
+sidebar:
+  order: 1
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+En esta serie de desafíos sobre rendimiento, aprenderás cómo optimizar y mejorar el rendimiento de tu aplicación Angular.
+
+Antes de comenzar a resolver cualquier desafío, te invito a descargar la [extensión de Chrome Angular DevTools](https://chrome.google.com/webstore/detail/angular-devtools/ienfalfjdbdpebioblfackkekamfmbnh) si aún no lo has hecho.
+
+Esta extensión te permite perfilar tu aplicación y detectar problemas de rendimiento, lo cual es muy útil para entender dónde pueden ocurrir problemas de rendimiento.
+
+## Cómo usarlo
+
+Cuando sirves una aplicación Angular, puedes inspeccionar una página presionando <b>F12</b>, lo cual abrirá las <b>herramientas de desarrollo de Chrome</b>. Luego navega a la <b>pestaña Angular</b>. Desde allí, puedes seleccionar la <b>pestaña Profiler</b> como se muestra a continuación.
+
+![profiler tab](../../../../../assets/performance/profiler-tab.png 'Profiler tab')
+
+Ahora puedes perfilar tu aplicación haciendo clic en el botón de grabación. Puedes interactuar con tu aplicación y ver cuándo se activa la detección de cambios y qué componentes se vuelven a renderizar.
+
+:::tip[Aprende más]
+Puedes obtener más información en la [página de documentación](https://angular.io/guide/devtools).
+:::
+
+Ahora que sabes cómo usar la Angular DevTool, puedes elegir un desafío, perfilarlo y resolverlo.
+
+<LinkCard
+  title="🟢 Default vs OnPush"
+  description="Aprende la diferencia entre las estrategias de detección de cambios Default y OnPush."
+  href="/es/challenges/performance/34-default-onpush/"
+/>
+
+<LinkCard
+  title="🟢 Memoización"
+  description="Aprende sobre el poder de los pure pipes."
+  href="/es/challenges/performance/35-memoize/"
+/>
+
+<LinkCard
+  title="🟠 Optimizando el Change Detection"
+  description="Aprende sobre como optimizar tu aplicacion entendiendo bien el change detection en Angular"
+  href="/es/challenges/performance/12-scroll-cd/"
+/>
