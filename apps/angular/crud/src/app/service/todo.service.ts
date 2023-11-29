@@ -55,7 +55,7 @@ export class TodoService {
   }
 
   deleteTodo(todoId: number): void {
-    this.http.delete(this.baseUrl.concat('')).subscribe({
+    this.http.delete(this.baseUrl.concat(todoId.toString())).subscribe({
       next: () => {
         this.todoList.update((todoList) => {
           return todoList.filter((t) => t.id !== todoId);
