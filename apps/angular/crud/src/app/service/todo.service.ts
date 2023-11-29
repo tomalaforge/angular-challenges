@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, signal } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { Todo } from '../model/todo.interface';
 import { randText } from '@ngneat/falso';
 
@@ -10,8 +10,7 @@ export class TodoService {
   readonly baseUrl: string = 'https://jsonplaceholder.typicode.com/todos/';
 
   public todoList = signal<Todo[]>([]);
-
-  constructor(private http: HttpClient) {}
+  private http: HttpClient = inject(HttpClient);
 
   callTodoList(): void {
     this.http.get<Todo[]>(this.baseUrl).subscribe({
@@ -50,5 +49,15 @@ export class TodoService {
           });
         },
       });
+  }
+
+  deleteTodo(todoId: number): void {
+    this.http.delete(this.baseUrl.concat(todoId.toString())).subscribe({
+      next: () => {
+        this.todoList.update((todoList) => {
+          return todoList.filter((t) => t.id !== todoId);
+        });
+      },
+    });
   }
 }

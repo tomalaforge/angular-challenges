@@ -13,6 +13,7 @@ import { TodoService } from '../service/todo.service';
   template: `<div>
     {{ todo.title }}
     <button (click)="update(todo)">update</button>
+    <button (click)="delete(todo.id)">delete</button>
   </div>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -23,5 +24,9 @@ export class TodoComponent {
 
   update(todo: Todo) {
     this.todoService.updateTodo(todo);
+  }
+
+  delete(id: number) {
+    this.todoService.deleteTodo(id);
   }
 }
