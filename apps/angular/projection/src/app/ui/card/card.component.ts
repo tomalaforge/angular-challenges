@@ -15,11 +15,11 @@ import {
     <ng-content select="img"></ng-content>
 
     <section>
-      <ng-container *ngFor="let item of list">
+      @for (item of list; track item.id) {
         <ng-template
           [ngTemplateOutlet]="rowTemplate"
           [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
-      </ng-container>
+      }
     </section>
 
     <button
@@ -35,10 +35,10 @@ import {
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CardComponent<T> {
+export class CardComponent<T extends { id: number }> {
   @Input() list: T[] | null = null;
   @Output() add = new EventEmitter<void>();
 
-  @ContentChild('rowRef', { read: TemplateRef })
+  @ContentChild(TemplateRef)
   rowTemplate!: TemplateRef<{ $implicit: T }>;
 }

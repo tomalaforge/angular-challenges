@@ -11,7 +11,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
 @Component({
   selector: 'app-city-card',
   template: `
-    <app-card [list]="cities$ | async" (add)="addCity()" class="bg-light-green">
+    <app-card [list]="cities$()" (add)="addCity()" class="bg-light-green">
       <ng-template #rowRef let-city>
         <app-list-item (delete)="deleteCity(city.id)">
           {{ city.name }}
