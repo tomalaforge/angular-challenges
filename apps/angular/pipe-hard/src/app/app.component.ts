@@ -1,21 +1,22 @@
 import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { PersonUtils } from './person.utils';
+import { TransformPipe, IsAllowPipe } from './transform.pipe';
 
 @Component({
   standalone: true,
-  imports: [NgFor],
   selector: 'app-root',
   template: `
     <div *ngFor="let activity of activities">
       {{ activity.name }} :
       <div
         *ngFor="let person of persons; let index = index; let isFirst = first">
-        {{ showName(person.name, index) }}
-        {{ isAllowed(person.age, isFirst, activity.minimumAge) }}
+        {{ person.name | transform: index }}
+        {{ person.age | isAllow: isFirst : activity.minimumAge }}
       </div>
     </div>
   `,
+  imports: [NgFor, TransformPipe, IsAllowPipe],
 })
 export class AppComponent {
   persons = [
@@ -29,8 +30,4 @@ export class AppComponent {
     { name: 'hiking', minimumAge: 25 },
     { name: 'dancing', minimumAge: 1 },
   ];
-
-  showName = PersonUtils.showName;
-
-  isAllowed = PersonUtils.isAllowed;
 }
