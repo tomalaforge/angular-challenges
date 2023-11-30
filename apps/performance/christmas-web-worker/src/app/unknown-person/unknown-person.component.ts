@@ -1,18 +1,17 @@
-import { NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 @Component({
   selector: 'unknown-person',
   standalone: true,
-  imports: [NgIf],
   template: `
     <div
       class="bg-black absolute inset-0 z-10 text-white text-center text-3xl"
       [style.height.%]="100 - step">
-      <div
-        class="relative top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-        *ngIf="step !== 100">
-        Who is here?
-      </div>
+      @if (step !== 100) {
+        <div
+          class="relative top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+          Who is here?
+        </div>
+      }
     </div>
     <div class="text-center text-white text-4xl">Happy Christmas !!!</div>
     <div class="container">
