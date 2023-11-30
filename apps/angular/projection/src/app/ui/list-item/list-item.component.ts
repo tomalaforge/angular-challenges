@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { StudentStore } from '../../data-access/student.store';
 import { TeacherStore } from '../../data-access/teacher.store';
 import { CardType } from '../../model/card.model';
+import { CityStore } from '../../data-access/city.store';
 
 @Component({
   selector: 'app-list-item',
@@ -22,7 +23,8 @@ export class ListItemComponent {
 
   constructor(
     private teacherStore: TeacherStore,
-    private studentStore: StudentStore
+    private studentStore: StudentStore,
+    private cityStore: CityStore,
   ) {}
 
   delete(id: number) {
@@ -30,6 +32,8 @@ export class ListItemComponent {
       this.teacherStore.deleteOne(id);
     } else if (this.type === CardType.STUDENT) {
       this.studentStore.deleteOne(id);
+    } else {
+      this.cityStore.deleteOne(id);
     }
   }
 }
