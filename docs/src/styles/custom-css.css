@@ -34,7 +34,7 @@
   border-radius: 6px;
   padding: 2px 8px;
   background-color: rgb(35, 134, 54);
-  color: var(-color-btn);
+  color: var(--color-btn);
 }
 
 .github-neutral-btn {
