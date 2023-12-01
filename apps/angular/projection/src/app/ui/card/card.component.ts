@@ -1,10 +1,7 @@
 import { NgFor, NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { randStudent, randTeacher } from '../../data-access/fake-http.service';
-import { StudentStore } from '../../data-access/student.store';
-import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ListItemComponent } from '../list-item/list-item.component';
+import { BaseEntity } from '../../model/base-entity.model';
 
 @Component({
   selector: 'app-card',
@@ -13,22 +10,17 @@ import { ListItemComponent } from '../list-item/list-item.component';
   imports: [NgIf, NgFor, ListItemComponent],
 })
 export class CardComponent {
-  @Input() list: any[] | null = null;
-  @Input() type!: CardType;
+  @Input() list: BaseEntity[] = [];
   @Input() customClass = '';
+  @Input() imageSrc!: string;
+  @Output() deleteEvent = new EventEmitter<number>();
+  @Output() addItemEvent = new EventEmitter<void>();
 
-  CardType = CardType;
+  delete(id: number) {
+    this.deleteEvent.emit(id);
+  }
 
-  constructor(
-    private teacherStore: TeacherStore,
-    private studentStore: StudentStore
-  ) {}
-
-  addNewItem() {
-    if (this.type === CardType.TEACHER) {
-      this.teacherStore.addOne(randTeacher());
-    } else if (this.type === CardType.STUDENT) {
-      this.studentStore.addOne(randStudent());
-    }
+  addItem() {
+    this.addItemEvent.emit();
   }
 }
