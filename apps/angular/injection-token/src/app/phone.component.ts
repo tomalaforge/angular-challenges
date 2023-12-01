@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { TimerContainerComponent } from './timer-container.component';
+import { getTimerProvider } from './timer.provide';
+import { TWO_SEC_TIMER } from './data';
 
 @Component({
   selector: 'app-phone',
@@ -10,5 +12,6 @@ import { TimerContainerComponent } from './timer-container.component';
       <p class="italic">(should be 2000s)</p>
     </div>
     <timer-container />`,
+  providers: [getTimerProvider(TWO_SEC_TIMER)],
 })
 export default class PhoneComponent {}
