@@ -14,7 +14,7 @@ In this small application, you have an input prompting you to enter a name, and 
 If you enter a name, a confirmation modal will appear; otherwise an error modal will be displayed.
 In the confirmation modal, if you click the **Confirm** button, a message confirming the submission of the form will appear. If the user clicks on **Cancel**, an error message will be displayed.
 
-The goal of this challenge is to test the dialogs inside your application. To do so, we will test the full application like an end-to-end test will do. This means, we will test the `AppComponent` as a black box and react to events on the page. <b>No internal details should be tested</b>. The difference between an e2e test and integration test is that we will mock all API calls. _(All http requests are faked inside this application, but this would not be the case in a real entreprice application.)_
+The goal of this challenge is to test the dialogs inside your application. To do so, we will test the full application like an end-to-end test will do. This means, we will test the `AppComponent` as a black box and react to events on the page. <b>No internal details should be tested</b>. The difference between an e2e test and integration test is that we will mock all API calls. _(All http requests are faked inside this application, but this would not be the case in a real enterprise application.)_
 
 You can play with it by running : `npx nx serve testing-modal`.
 
