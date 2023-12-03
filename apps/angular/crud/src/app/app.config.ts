@@ -1,6 +1,9 @@
+import { provideHttpClient } from '@angular/common/http';
 import { ApplicationConfig } from '@angular/core';
-import { enableProdMode, importProvidersFrom } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import {
+  QueryClient,
+  provideAngularQuery,
+} from '@tanstack/angular-query-experimental';
 export const appConfig: ApplicationConfig = {
-  providers: [importProvidersFrom(HttpClientModule)],
+  providers: [provideHttpClient(), provideAngularQuery(new QueryClient())],
 };
