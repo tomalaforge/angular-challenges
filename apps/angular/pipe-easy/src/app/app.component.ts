@@ -7,9 +7,9 @@ import { NameIndexPipe } from './name-index.pipe';
   imports: [NgFor, NameIndexPipe],
   selector: 'app-root',
   template: `
-    @for (person of persons; track person; let index = $index) {
+    @for (person of persons; track person) {
       <li>
-        {{ person | nameIndex: index }}
+        {{ person | nameIndex: $index }}
       </li>
     }
   `,
