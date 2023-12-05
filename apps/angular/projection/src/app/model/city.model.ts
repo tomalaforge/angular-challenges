@@ -1,5 +1,5 @@
-import { BaseEntity } from './base-entity.model';
-
-export interface City extends BaseEntity {
+export interface City {
+  id: number;
+  name: string;
   country: string;
 }
