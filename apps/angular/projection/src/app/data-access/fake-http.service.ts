@@ -16,7 +16,7 @@ import { subject, Teacher } from '../model/teacher.model';
 
 const factoryTeacher = incrementalNumber();
 
-export const randTeacher = () => ({
+export const randTeacher = (): Teacher => ({
   id: factoryTeacher(),
   firstname: randFirstName(),
   lastname: randLastName(),

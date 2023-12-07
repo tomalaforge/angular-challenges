@@ -1,35 +1,53 @@
-import { Component, OnInit } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+import { Component, inject } from '@angular/core';
+import { randTeacher } from '../../data-access/fake-http.service';
 import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
-import { Teacher } from '../../model/teacher.model';
 import { CardComponent } from '../../ui/card/card.component';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
+import { AsyncPipe, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-teacher-card',
-  template: `<app-card
-    [list]="teachers"
-    [type]="cardType"
-    customClass="bg-light-red"></app-card>`,
+  template: `
+    @if (teachers$ | async; as teachers) {
+      <app-card [list]="teachers" customClass="bg-light-red">
+        <img src="assets/img/teacher.png" width="200px" alt="" />
+
+        <ng-template let-teacher #cardContent>
+          <app-list-item
+            [name]="teacher.firstname"
+            (deleteEmitter)="deleteTeacher(teacher.id)">
+          </app-list-item>
+        </ng-template>
+
+        <ng-template #cardButtons>
+          <button
+            class="border border-blue-500 bg-blue-300 p-2 rounded-sm"
+            (click)="addNewTeacher()">
+            Add
+          </button>
+        </ng-template>
+      </app-card>
+    }
+  `,
   styles: [
     `
-      ::ng-deep .bg-light-red {
+      :host::ng-deep .bg-light-red {
         background-color: rgba(250, 0, 0, 0.1);
       }
     `,
   ],
   standalone: true,
-  imports: [CardComponent],
+  imports: [CardComponent, NgIf, AsyncPipe, ListItemComponent],
 })
-export class TeacherCardComponent implements OnInit {
-  teachers: Teacher[] = [];
-  cardType = CardType.TEACHER;
+export class TeacherCardComponent {
+  private readonly _store = inject(TeacherStore);
+  protected readonly teachers$ = this._store.teachers$;
 
-  constructor(private http: FakeHttpService, private store: TeacherStore) {}
+  addNewTeacher(): void {
+    this._store.addOne(randTeacher());
+  }
 
-  ngOnInit(): void {
-    this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
-
-    this.store.teachers$.subscribe((t) => (this.teachers = t));
+  deleteTeacher(id: number): void {
+    this._store.deleteOne(id);
   }
 }

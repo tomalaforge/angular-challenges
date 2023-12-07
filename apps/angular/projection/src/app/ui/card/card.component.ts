@@ -1,34 +1,27 @@
-import { NgFor, NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { randStudent, randTeacher } from '../../data-access/fake-http.service';
-import { StudentStore } from '../../data-access/student.store';
-import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import {
+  Component,
+  ContentChild,
+  ElementRef,
+  Input,
+  TemplateRef,
+} from '@angular/core';
 import { ListItemComponent } from '../list-item/list-item.component';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
   standalone: true,
-  imports: [NgIf, NgFor, ListItemComponent],
+  imports: [NgIf, NgFor, ListItemComponent, NgTemplateOutlet],
 })
-export class CardComponent {
-  @Input() list: any[] | null = null;
-  @Input() type!: CardType;
+export class CardComponent<T> {
+  @Input({ required: true }) list: T[] | null = null;
+
   @Input() customClass = '';
 
-  CardType = CardType;
+  @ContentChild('cardButtons')
+  buttonState: TemplateRef<ElementRef> | null = null;
 
-  constructor(
-    private teacherStore: TeacherStore,
-    private studentStore: StudentStore
-  ) {}
-
-  addNewItem() {
-    if (this.type === CardType.TEACHER) {
-      this.teacherStore.addOne(randTeacher());
-    } else if (this.type === CardType.STUDENT) {
-      this.studentStore.addOne(randStudent());
-    }
-  }
+  @ContentChild('cardContent')
+  cardContent: TemplateRef<{ $implicit: T }> | null = null;
 }
