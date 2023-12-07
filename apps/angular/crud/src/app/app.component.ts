@@ -1,9 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, effect, inject } from '@angular/core';
-import { TodoService } from './service/todo.service';
+import { Component, OnInit, inject } from '@angular/core';
 import { TodoComponent } from './component/todo.component';
 import { LoadingService } from './service/loading.service';
 import { LoadingComponent } from './component/loading.component';
+import { Store } from '@ngrx/store';
+import { selectTodoList } from './state/selectors/todo.selectors';
+import { callTodoList } from './state/actions/todo.actions';
+import { TodoState } from './state/todo.state';
 
 @Component({
   standalone: true,
@@ -13,24 +16,18 @@ import { LoadingComponent } from './component/loading.component';
     @if (loadingService.loading()) {
       <app-loading />
     }
-    @for (todo of todoService.todoList(); track $index) {
+    @for (todo of todoList(); track $index) {
       <app-todo [todo]="todo" />
     }
   `,
 })
 export class AppComponent implements OnInit {
-  todoService: TodoService = inject(TodoService);
   loadingService: LoadingService = inject(LoadingService);
+  todoStore: Store<TodoState> = inject(Store<TodoState>);
 
-  constructor() {
-    effect(() => {
-      if (this.todoService.todoError() !== '') {
-        console.error(this.todoService.todoError());
-      }
-    });
-  }
+  readonly todoList = this.todoStore.selectSignal(selectTodoList);
 
   ngOnInit(): void {
-    this.todoService.callTodoList();
+    this.todoStore.dispatch(callTodoList());
   }
 }

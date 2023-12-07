@@ -5,28 +5,32 @@ import {
   inject,
 } from '@angular/core';
 import { Todo } from '../model/todo.interface';
-import { TodoService } from '../service/todo.service';
+import { Store } from '@ngrx/store';
+import { callDeleteTodo, callUpdateTodo } from '../state/actions/todo.actions';
+import { TodoState } from '../state/todo.state';
 
 @Component({
   standalone: true,
   selector: 'app-todo',
-  template: `<div>
-    {{ todo.title }}
-    <button (click)="update(todo)">update</button>
-    <button (click)="delete(todo.id)">delete</button>
-  </div>`,
+  template: `
+    <div>
+      {{ todo.title }}
+      <button (click)="update(todo)">update</button>
+      <button (click)="delete(todo.id)">delete</button>
+    </div>
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TodoComponent {
   @Input() todo!: Todo;
 
-  todoService: TodoService = inject(TodoService);
+  todoStore: Store<TodoState> = inject(Store<TodoState>);
 
   update(todo: Todo) {
-    this.todoService.updateTodo(todo);
+    this.todoStore.dispatch(callUpdateTodo({ todo: todo }));
   }
 
   delete(id: number) {
-    this.todoService.deleteTodo(id);
+    this.todoStore.dispatch(callDeleteTodo({ id: id }));
   }
 }
