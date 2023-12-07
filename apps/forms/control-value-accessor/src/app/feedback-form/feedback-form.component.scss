@@ -1,0 +1,50 @@
+* {
+  box-sizing: border-box;
+}
+
+:host {
+  display: block;
+  padding: 20px;
+}
+
+.feedback-form {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  padding: 20px;
+  border: 1px solid #000000;
+}
+
+.feedback-form-title {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.feedback-form-control {
+  max-height: 200px;
+  margin-bottom: 20px;
+  padding: 12px 12px 12px 20px;
+  border-radius: 0;
+  background-color: #fbfbfb;
+  color: #3c3c3c;
+  font-size: 18px;
+
+  &:focus {
+    padding: 10px 10px 10px 18px;
+    border: 2px solid #054ada;
+    outline: none;
+    background: #fff;
+  }
+}
+
+.feedback-form-submit {
+  padding: 10px;
+  background-color: #054ada;
+  color: #ffffff;
+  font-size: 18px;
+
+  &[disabled] {
+    background-color: #cccccc;
+    color: #ffffff;
+  }
+}
