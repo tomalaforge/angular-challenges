@@ -9,15 +9,8 @@
     </ng-container>
   </section>
 
-  <ng-template #defaultListItemTemplate let-item>
-    <app-list-item>
-      <div class="border border-grey-300 py-1 px-2 flex justify-between">
-        {{ item.firstname }}
-        <button (click)="deleteItem(item.id)">
-          <img class="h-5" src="assets/svg/trash.svg" />
-        </button>
-      </div>
-    </app-list-item>
+  <ng-template #defaultListItemTemplate>
+    <p>No data</p>
   </ng-template>
   <ng-content select="[addNewItem]"></ng-content>
 </div>

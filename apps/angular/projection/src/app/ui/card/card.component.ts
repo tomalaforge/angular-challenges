@@ -1,12 +1,12 @@
 import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import {
   Component,
+  ContentChild,
   EventEmitter,
   Input,
   Output,
   TemplateRef,
 } from '@angular/core';
-import { CardType } from '../../model/card.model';
 import { ListItemComponent } from '../list-item/list-item.component';
 
 @Component({
@@ -35,12 +35,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
 export class CardComponent {
   @Input() list: unknown[] | null = null;
   @Input() customClass = '';
-  @Input() specialTemplate!: TemplateRef<unknown>;
   @Output() deleteBtnClicked = new EventEmitter<number>();
-
-  CardType = CardType;
-
-  public deleteItem(itemId: number): void {
-    this.deleteBtnClicked.emit(itemId);
-  }
+  @ContentChild('specialTemplateRef', { read: TemplateRef })
+  specialTemplate!: TemplateRef<{ $implicit: ListItemComponent }>;
 }

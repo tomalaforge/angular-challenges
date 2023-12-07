@@ -5,30 +5,25 @@ import {
   randomCity,
 } from '../../data-access/fake-http.service';
 import { cityStore } from '../../data-access/city.store';
-import { AsyncPipe, JsonPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-city-card',
-  template: `<app-card
-      [list]="cities$ | async"
-      [specialTemplate]="specialTemplate"
-      customClass="bg-light-blue">
-      <img headerImg src="assets/img/student.webp" width="200px" />
-      <button
-        addNewItem
-        class="border border-blue-500 bg-blue-300 p-2 rounded-sm"
-        (click)="addNewItem()">
-        Add
-      </button>
-    </app-card>
-    <ng-template #specialTemplate let-item>
-      <div class="border border-grey-300 py-1 px-2 flex justify-between">
+  template: `<app-card [list]="cities$ | async" customClass="bg-light-blue">
+    <img headerImg src="assets/img/student.webp" width="200px" />
+    <button
+      addNewItem
+      class="border border-blue-500 bg-blue-300 p-2 rounded-sm"
+      (click)="addNewItem()">
+      Add
+    </button>
+    <ng-template #specialTemplateRef let-item>
+      <app-list-item (deleteItemClicked)="deleteCity(item.id)">
         {{ item.name }}
-        <button (click)="deleteCity(item.id)">
-          <img class="h-5" src="assets/svg/trash.svg" />
-        </button>
-      </div>
-    </ng-template> `,
+      </app-list-item>
+    </ng-template>
+  </app-card>`,
   styles: [
     `
       :host {
@@ -37,11 +32,14 @@ import { AsyncPipe, JsonPipe } from '@angular/common';
     `,
   ],
   standalone: true,
-  imports: [CardComponent, AsyncPipe, JsonPipe],
+  imports: [CardComponent, AsyncPipe, ListItemComponent],
 })
 export class CityCardComponent implements OnInit {
   public cities$ = this.store.cities$;
-  constructor(private http: FakeHttpService, private store: cityStore) {}
+  constructor(
+    private http: FakeHttpService,
+    private store: cityStore,
+  ) {}
 
   public ngOnInit(): void {
     this.http.fetchCities$.subscribe((c) => {

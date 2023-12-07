@@ -4,9 +4,9 @@ import {
   randStudent,
 } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
-import { CardType } from '../../model/card.model';
 import { Student } from '../../model/student.model';
 import { CardComponent } from '../../ui/card/card.component';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-student-card',
@@ -21,7 +21,12 @@ import { CardComponent } from '../../ui/card/card.component';
       (click)="addNewItem()">
       Add
     </button>
-  </app-card>`,
+    <ng-template #specialTemplateRef let-item>
+      <app-list-item (deleteItemClicked)="deleteStudent(item.id)">
+        {{ item.firstname }}
+      </app-list-item>
+    </ng-template>
+  </app-card> `,
   standalone: true,
   styles: [
     `
@@ -30,13 +35,15 @@ import { CardComponent } from '../../ui/card/card.component';
       }
     `,
   ],
-  imports: [CardComponent],
+  imports: [CardComponent, ListItemComponent],
 })
 export class StudentCardComponent implements OnInit {
   students: Student[] = [];
-  cardType = CardType.STUDENT;
 
-  constructor(private http: FakeHttpService, private store: StudentStore) {}
+  constructor(
+    private http: FakeHttpService,
+    private store: StudentStore,
+  ) {}
 
   ngOnInit(): void {
     this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
