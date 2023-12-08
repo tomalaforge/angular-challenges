@@ -1,5 +1,5 @@
-import { DestroyRef, inject, Injectable } from '@angular/core';
-import { BehaviorSubject, take, tap } from 'rxjs';
+import { DestroyRef, inject, Injectable, signal } from '@angular/core';
+import { take, tap } from 'rxjs';
 import { Teacher } from '../model/teacher.model';
 import { FakeHttpService } from './fake-http.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -11,9 +11,9 @@ export class TeacherStore {
   private readonly _http = inject(FakeHttpService);
   private readonly _destroyRef$ = inject(DestroyRef);
 
-  private readonly _teachers$ = new BehaviorSubject<Teacher[]>([]);
+  private readonly _teachers = signal<Teacher[]>([]);
 
-  readonly teachers$ = this._teachers$.asObservable();
+  teachers = this._teachers.asReadonly();
 
   constructor() {
     this.init();
@@ -30,14 +30,14 @@ export class TeacherStore {
   }
 
   addAll(teachers: Teacher[]) {
-    this._teachers$.next(teachers);
+    this._teachers.set(teachers);
   }
 
   addOne(teacher: Teacher) {
-    this._teachers$.next([...this._teachers$.value, teacher]);
+    this._teachers.update((cities) => [...cities, teacher]);
   }
 
   deleteOne(id: number) {
-    this._teachers$.next(this._teachers$.value.filter((t) => t.id !== id));
+    this._teachers.update((cities) => cities.filter((t) => t.id !== id));
   }
 }

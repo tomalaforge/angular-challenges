@@ -4,30 +4,28 @@ import { CityStore } from '../../data-access/city.store';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
+import { CardContentDirective } from '../../dicertives/card-content.directive';
+import { CardButtonsDirective } from '../../dicertives/card-buttons.directive';
 
 @Component({
   selector: 'app-city-card',
   template: `
-    @if (cities$ | async; as cities) {
-      <app-card [list]="cities" customClass="bg-light-blue">
-        <img src="assets/img/city.webp" width="200px" alt="" />
+    <app-card [list]="cities()" customClass="bg-light-blue">
+      <img src="assets/img/city.webp" width="200px" alt="" />
 
-        <ng-template let-city #cardContent>
-          <app-list-item
-            [name]="city.name"
-            (deleteEmitter)="deleteCity(city.id)">
-          </app-list-item>
-        </ng-template>
+      <ng-template let-city appCardContent>
+        <app-list-item [name]="city.name" (deleteEmitter)="deleteCity(city.id)">
+        </app-list-item>
+      </ng-template>
 
-        <ng-template #cardButtons>
-          <button
-            class="border border-blue-500 bg-blue-300 p-2 rounded-sm"
-            (click)="addNewCity()">
-            Add
-          </button>
-        </ng-template>
-      </app-card>
-    }
+      <ng-template appCardButtons>
+        <button
+          class="border border-blue-500 bg-blue-300 p-2 rounded-sm"
+          (click)="addNewCity()">
+          Add
+        </button>
+      </ng-template>
+    </app-card>
   `,
   styles: [
     `
@@ -37,11 +35,18 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
     `,
   ],
   standalone: true,
-  imports: [CardComponent, NgIf, AsyncPipe, ListItemComponent],
+  imports: [
+    CardComponent,
+    NgIf,
+    AsyncPipe,
+    ListItemComponent,
+    CardContentDirective,
+    CardButtonsDirective,
+  ],
 })
 export class CityCardComponent {
   private readonly _store = inject(CityStore);
-  protected readonly cities$ = this._store.cities$;
+  protected cities = this._store.cities;
 
   addNewCity(): void {
     this._store.addOne(randomCity());

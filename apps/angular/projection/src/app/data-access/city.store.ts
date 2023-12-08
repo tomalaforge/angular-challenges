@@ -1,5 +1,5 @@
-import { DestroyRef, inject, Injectable } from '@angular/core';
-import { BehaviorSubject, take, tap } from 'rxjs';
+import { DestroyRef, inject, Injectable, signal } from '@angular/core';
+import { take, tap } from 'rxjs';
 import { City } from '../model/city.model';
 import { FakeHttpService } from './fake-http.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -9,9 +9,9 @@ export class CityStore {
   private readonly _http = inject(FakeHttpService);
   private readonly _destroyRef$ = inject(DestroyRef);
 
-  private readonly _cities$ = new BehaviorSubject<City[]>([]);
+  private readonly _cities = signal<City[]>([]);
 
-  readonly cities$ = this._cities$.asObservable();
+  cities = this._cities.asReadonly();
 
   constructor() {
     this.init();
@@ -28,14 +28,14 @@ export class CityStore {
   }
 
   addAll(cities: City[]) {
-    this._cities$.next(cities);
+    this._cities.set(cities);
   }
 
   addOne(city: City) {
-    this._cities$.next([...this._cities$.value, city]);
+    this._cities.update((cities) => [...cities, city]);
   }
 
   deleteOne(id: number) {
-    this._cities$.next(this._cities$.value.filter((s) => s.id !== id));
+    this._cities.update((cities) => cities.filter((s) => s.id !== id));
   }
 }
