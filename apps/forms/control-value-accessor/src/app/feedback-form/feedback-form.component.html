@@ -1,4 +1,7 @@
-<form [formGroup]="feedbackForm" class="feedback-form">
+<form
+  [formGroup]="feedbackForm"
+  class="feedback-form"
+  (ngSubmit)="submitForm()">
   <legend class="feedback-form-title">Tell us what you think</legend>
   <input
     class="feedback-form-control"
@@ -10,8 +13,7 @@
     [formControl]="feedbackForm.controls.email"
     placeholder="Email"
     type="text" />
-  <app-feedback-control (ratingUpdated)="rating = $event">
-  </app-feedback-control>
+  <app-rating-control (ratingUpdated)="rating = $event"> </app-rating-control>
   <textarea
     class="feedback-form-control"
     [formControl]="feedbackForm.controls.comment"
@@ -20,9 +22,8 @@
     class="feedback-form-submit"
     type="submit"
     [disabled]="
-      feedbackForm.touched && (rating === null || feedbackForm.invalid)
-    "
-    (click)="submitForm()">
+      !feedbackForm.touched || rating === null || feedbackForm.invalid
+    ">
     Submit
   </button>
 </form>

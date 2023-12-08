@@ -5,11 +5,11 @@ import { Validators } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FeedbackControlComponent } from '../feedback-control/feedback-control.component';
+import { RatingControlComponent } from '../rating-control/rating-control.component';
 
 @Component({
   standalone: true,
-  imports: [FeedbackControlComponent, ReactiveFormsModule],
+  imports: [RatingControlComponent, ReactiveFormsModule],
   selector: 'app-feedback-form',
   templateUrl: 'feedback-form.component.html',
   styleUrls: ['feedback-form.component.scss'],

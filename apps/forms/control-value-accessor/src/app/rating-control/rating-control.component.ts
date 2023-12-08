@@ -4,11 +4,11 @@ import { Component } from '@angular/core';
 
 @Component({
   standalone: true,
-  selector: 'app-feedback-control',
-  templateUrl: 'feedback-control.component.html',
-  styleUrls: ['feedback-control.component.scss'],
+  selector: 'app-rating-control',
+  templateUrl: 'rating-control.component.html',
+  styleUrls: ['rating-control.component.scss'],
 })
-export class FeedbackControlComponent {
+export class RatingControlComponent {
   @Output()
   readonly ratingUpdated: EventEmitter<string> = new EventEmitter<string>();
 
