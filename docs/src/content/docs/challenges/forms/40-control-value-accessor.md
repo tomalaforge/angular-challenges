@@ -9,12 +9,34 @@ sidebar:
   badge: New
 ---
 
-:::note
-WIP: The following documentation will be reviewed and improved. However, you can still take on the challenge. If you don’t understand a certain part, please feel free to reach out or create an issue.
-:::
-
 ## Information
 
-In this exercise, you have to rewrite FeedbackControlComponent. It should implement Control Value Accessor interface.
-This interface is crucial for creating custom form controls that can interact seamlessly with Angular's forms API.
-The primary goal is to use control in the feedbackForm to eliminate the need for using @Output to retrieve the value and check it.
+In this challenge, the goal is to create a custom form field that is using the Form API of Angular `ControlValueAccessor`. You can find the documentation [here](https://angular.io/api/forms/ControlValueAccessor). This interface is crucial for creating custom form controls that can interact seamlessly with Angular's forms API.
+
+## Statement
+
+The primary goal is to use control in the `feedbackForm` to eliminate the need for using `@Output` to retrieve the value and inject it into the `FormGroup`.
+Additionally, you are required to integrate validation for the new control to ensure that rating data exist. (The form submission button should be disabled if the form is invalid).
+
+Currently, rating is coded this way:
+
+```html
+<app-rating-control (ratingUpdated)="rating = $event"> </app-rating-control>
+```
+
+```ts
+rating: string | null = null;
+
+onFormSubmit(): void {
+  this.feedBackSubmit.emit({
+    ...this.feedbackForm.value,
+    rating: this.rating, // not inside the FormGroup and no validation
+  });
+}
+```
+
+The goal is to include rating into the `FormGroup`
+
+```html
+<app-rating-control [formControl]="feedbackForm.controls.rating"> </app-rating-control>
+```

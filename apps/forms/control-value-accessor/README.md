@@ -1,11 +1,11 @@
 # Control Value Accessor
 
-> author: thomas-laforge
+> author: stanislav-gavrilov
 
 ### Run Application
 
 ```bash
-npx nx serve performance-control-value-accessor
+npx nx serve forms-control-value-accessor
 ```
 
 ### Documentation and Instruction
