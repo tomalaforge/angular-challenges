@@ -1,34 +1,41 @@
-import { Component, OnInit } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
-import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
+import { Component, OnInit, signal } from '@angular/core';
+import {
+  FakeHttpService,
+  randTeacher,
+} from '../../data-access/fake-http.service';
 import { Teacher } from '../../model/teacher.model';
 import { CardComponent } from '../../ui/card/card.component';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-teacher-card',
-  template: `<app-card
-    [list]="teachers"
-    customClass="bg-light-red"></app-card>`,
-  styles: [
-    `
-      ::ng-deep .bg-light-red {
-        background-color: rgba(250, 0, 0, 0.1);
-      }
-    `,
-  ],
+  template: `
+    <app-card [list]="teachers()" class="bg-red-400">
+      <img src="assets/img/teacher.png" width="200px" />
+      <ng-template #rowRef let-teacher>
+        <app-list-item (delete)="deleteOne(teacher.id)">
+          {{ teacher.firstname }} {{ teacher.lastname }}
+        </app-list-item>
+      </ng-template>
+    </app-card>
+  `,
+  styles: [],
   standalone: true,
-  imports: [CardComponent],
+  imports: [CardComponent, ListItemComponent],
 })
 export class TeacherCardComponent implements OnInit {
-  teachers: Teacher[] = [];
-  cardType = CardType.TEACHER;
+  teachers = signal<Teacher[]>([]);
 
-  constructor(private http: FakeHttpService, private store: TeacherStore) {}
+  constructor(private http: FakeHttpService) {}
 
   ngOnInit(): void {
-    this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
+    this.http.fetchTeachers$.subscribe((t) => this.teachers.update(() => t));
+  }
+  addOne() {
+    this.teachers.update((value) => [...value, randTeacher()]);
+  }
 
-    this.store.teachers$.subscribe((t) => (this.teachers = t));
+  deleteOne(id: number) {
+    this.teachers.update((value) => value.filter((s) => s.id !== id));
   }
 }
