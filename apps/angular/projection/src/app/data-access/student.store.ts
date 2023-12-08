@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Student } from '../model/student.model';
 
@@ -7,9 +7,11 @@ import { Student } from '../model/student.model';
 })
 export class StudentStore {
   private students = new BehaviorSubject<Student[]>([]);
+  // studentSignal = signal(new Student()[]);
   students$ = this.students.asObservable();
 
   addAll(students: Student[]) {
+    // this.studentSignal.update(students)
     this.students.next(students);
   }
 

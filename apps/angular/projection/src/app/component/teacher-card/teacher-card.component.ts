@@ -9,7 +9,6 @@ import { CardComponent } from '../../ui/card/card.component';
   selector: 'app-teacher-card',
   template: `<app-card
     [list]="teachers"
-    [type]="cardType"
     customClass="bg-light-red"></app-card>`,
   styles: [
     `
