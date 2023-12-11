@@ -10,19 +10,19 @@
   "types": {
     "challenge": {
       "symbol": "🧩",
-      "description": "Created a challenge"
+      "description": "Create a challenge"
     },
     "translation-es": {
       "symbol": "🇪🇸",
-      "description": "Translate the side in spanish"
+      "description": "Translate in Spanish"
     },
     "translation-fr": {
       "symbol": "🇫🇷",
-      "description": "Translate the side in french"
+      "description": "Translate in French"
     },
     "translation-pt": {
       "symbol": "🇵🇹",
-      "description": "Translate the side in portugese"
+      "description": "Translate in Portugese"
     }
   },
   "contributors": [
