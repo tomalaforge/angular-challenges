@@ -2,11 +2,8 @@
   <ng-content select="[cardImage]"></ng-content>
 
   <section>
-    <app-list-item *ngFor="let item of list">
-      <div itemName>{{ item[itemName] }}</div>
-      <button deleteButton (click)="delete(item.id)">
-        <img class="h-5" src="assets/svg/trash.svg" />
-      </button>
+    <app-list-item *ngFor="let item of list" [id]="item.id" (deleteItem)="delete($event)">
+      <ng-container itemName *ngTemplateOutlet="itemNameTemplate; context: item"></ng-container>
     </app-list-item>
   </section>
 

@@ -1,9 +1,8 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, signal } from '@angular/core';
 import {
   FakeHttpService,
   randStudent,
 } from '../../data-access/fake-http.service';
-import { StudentStore } from '../../data-access/student.store';
 import { Student } from '../../model/student.model';
 import { CardComponent } from '../../ui/card/card.component';
 
@@ -11,8 +10,8 @@ import { CardComponent } from '../../ui/card/card.component';
   selector: 'app-student-card',
   template: `
     <app-card
-      [list]="students"
-      itemName="firstname"
+      [list]="students()"
+      [itemNameTemplate]="itemNameTemplate"
       (deleteItem)="deleteItem($event)"
       customClass="bg-light-green">
       <img cardImage src="assets/img/student.webp" width="200px" />
@@ -23,6 +22,7 @@ import { CardComponent } from '../../ui/card/card.component';
         Add
       </button>
     </app-card>
+    <ng-template #itemNameTemplate let-name="firstname">{{ name }}</ng-template>
   `,
   standalone: true,
   styles: [
@@ -36,21 +36,19 @@ import { CardComponent } from '../../ui/card/card.component';
   encapsulation: ViewEncapsulation.None,
 })
 export class StudentCardComponent implements OnInit {
-  students: Student[] = [];
+  students = signal<Student[]>([]);
 
-  constructor(private http: FakeHttpService, private store: StudentStore) {}
+  constructor(private http: FakeHttpService) {}
 
   ngOnInit(): void {
-    this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
-
-    this.store.students$.subscribe((s) => (this.students = s));
+    this.http.fetchStudents$.subscribe((s) => this.students.set(s));
   }
 
   addNewItem() {
-    this.store.addOne(randStudent());
+    this.students.update((val) => [...val, randStudent()]);
   }
 
-  deleteItem(event: number) {
-    this.store.deleteOne(event);
+  deleteItem(id: number) {
+    this.students.update((val) => val.filter((t) => t.id !== id));
   }
 }

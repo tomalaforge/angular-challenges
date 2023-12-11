@@ -1,9 +1,8 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, signal } from '@angular/core';
 import {
   FakeHttpService,
   randTeacher,
 } from '../../data-access/fake-http.service';
-import { TeacherStore } from '../../data-access/teacher.store';
 import { Teacher } from '../../model/teacher.model';
 import { CardComponent } from '../../ui/card/card.component';
 
@@ -11,8 +10,8 @@ import { CardComponent } from '../../ui/card/card.component';
   selector: 'app-teacher-card',
   template: `
     <app-card
-      [list]="teachers"
-      itemName="firstname"
+      [list]="teachers()"
+      [itemNameTemplate]="itemNameTemplate"
       (deleteItem)="deleteItem($event)"
       customClass="bg-light-red">
       <img cardImage src="assets/img/teacher.png" width="200px" />
@@ -23,6 +22,7 @@ import { CardComponent } from '../../ui/card/card.component';
         Add
       </button>
     </app-card>
+    <ng-template #itemNameTemplate let-name="firstname">{{ name }}</ng-template>
   `,
   styles: [
     `
@@ -36,21 +36,19 @@ import { CardComponent } from '../../ui/card/card.component';
   encapsulation: ViewEncapsulation.None,
 })
 export class TeacherCardComponent implements OnInit {
-  teachers: Teacher[] = [];
+  teachers = signal<Teacher[]>([]);
 
-  constructor(private http: FakeHttpService, private store: TeacherStore) {}
+  constructor(private http: FakeHttpService) {}
 
   ngOnInit(): void {
-    this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
-
-    this.store.teachers$.subscribe((t) => (this.teachers = t));
+    this.http.fetchTeachers$.subscribe((t) => this.teachers.set(t));
   }
 
   addNewItem() {
-    this.store.addOne(randTeacher());
+    this.teachers.update((val) => [...val, randTeacher()]);
   }
 
-  deleteItem(event: number) {
-    this.store.deleteOne(event);
+  deleteItem(id: number) {
+    this.teachers.update((val) => val.filter((t) => t.id !== id));
   }
 }

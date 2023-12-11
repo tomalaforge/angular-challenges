@@ -1,7 +1,6 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, signal } from '@angular/core';
 import { CardComponent } from '../../ui/card/card.component';
 import { City } from '../../model/city.model';
-import { CityStore } from '../../data-access/city.store';
 import {
   FakeHttpService,
   randomCity,
@@ -11,8 +10,8 @@ import {
   selector: 'app-city-card',
   template: `
     <app-card
-      [list]="cities"
-      itemName="name"
+      [list]="cities()"
+      [itemNameTemplate]="itemNameTemplate"
       (deleteItem)="deleteItem($event)"
       customClass="bg-light-blue">
       <img cardImage src="assets/img/city.jpeg" width="200px" />
@@ -23,6 +22,7 @@ import {
         Add
       </button>
     </app-card>
+    <ng-template #itemNameTemplate let-name="name">{{ name }}</ng-template>
   `,
   styles: [
     `
@@ -36,21 +36,19 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class CityCardComponent implements OnInit {
-  cities: City[] = [];
+  cities = signal<City[]>([]);
 
-  constructor(private http: FakeHttpService, private store: CityStore) {}
+  constructor(private http: FakeHttpService) {}
 
   ngOnInit(): void {
-    this.http.fetchCities$.subscribe((t) => this.store.addAll(t));
-
-    this.store.cities$.subscribe((t) => (this.cities = t));
+    this.http.fetchCities$.subscribe((c) => this.cities.set(c));
   }
 
   addNewItem() {
-    this.store.addOne(randomCity());
+    this.cities.update((val) => [...val, randomCity()]);
   }
 
-  deleteItem(event: number) {
-    this.store.deleteOne(event);
+  deleteItem(id: number) {
+    this.cities.update((val) => val.filter((t) => t.id !== id));
   }
 }
