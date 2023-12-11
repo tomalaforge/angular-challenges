@@ -11,7 +11,7 @@ export enum TodoActionName {
   callDeleteTodo = '[Todo] call delete todo',
   deleteTodoSuccess = '[Todo] delete todo success',
 
-  todoErrorAlert = '[Todo] todo error',
+  todoStatus = '[Todo] todo status',
 }
 
 export const callTodoList = createAction(TodoActionName.callTodoList);
@@ -37,7 +37,7 @@ export const deleteTodoSuccess = createAction(
   props<{ id: number }>(),
 );
 
-export const todoErrorAlert = createAction(
-  TodoActionName.todoErrorAlert,
-  props<{ errorMsg: string }>(),
+export const todoStatus = createAction(
+  TodoActionName.todoStatus,
+  props<{ id: number; status: { loading: boolean; errorMsg: string } }>(),
 );
