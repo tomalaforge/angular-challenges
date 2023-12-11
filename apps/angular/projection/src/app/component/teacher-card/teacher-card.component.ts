@@ -4,15 +4,15 @@ import {
   randTeacher,
 } from '../../data-access/fake-http.service';
 import { TeacherStore } from '../../data-access/teacher.store';
-import { Teacher } from '../../model/teacher.model';
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
 import { CardItemContentDirective } from '../../ui/card/card-item-content.directive';
+import {toSignal} from "@angular/core/rxjs-interop";
 
 @Component({
   selector: 'app-teacher-card',
   template: ` <app-card
-    [list]="teachers"
+    [list]="teachers()"
     class="bg-light-red"
     (addItem)="addNewTeacher()">
     <img src="assets/img/teacher.png" width="200px" cardImage />
@@ -33,7 +33,7 @@ import { CardItemContentDirective } from '../../ui/card/card-item-content.direct
   imports: [CardComponent, ListItemComponent, CardItemContentDirective],
 })
 export class TeacherCardComponent implements OnInit {
-  teachers: Teacher[] = [];
+  teachers = toSignal(this.store.teachers$);
 
   constructor(
     private http: FakeHttpService,
@@ -42,8 +42,6 @@ export class TeacherCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
-
-    this.store.teachers$.subscribe((t) => (this.teachers = t));
   }
 
   addNewTeacher() {
