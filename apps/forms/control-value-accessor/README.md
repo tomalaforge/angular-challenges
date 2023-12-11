@@ -10,4 +10,4 @@ npx nx serve forms-control-value-accessor
 
 ### Documentation and Instruction
 
-Challenge documentation is [here](https://angular-challenges.vercel.app/challenges/forms/40-control-value-accessor/).
+Challenge documentation is [here](https://angular-challenges.vercel.app/challenges/forms/41-control-value-accessor/).
