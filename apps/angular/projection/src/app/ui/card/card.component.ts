@@ -18,7 +18,7 @@ import { CardItemContentDirective } from './card-item-content.directive';
   imports: [NgTemplateOutlet],
 })
 export class CardComponent<T extends { id: number }> {
-  @Input() list: T[] | undefined = [];
+  @Input() list: T[] = [];
 
   @Output() addItem = new EventEmitter<void>();
 

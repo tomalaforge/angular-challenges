@@ -7,7 +7,6 @@ import { CityStore } from '../../data-access/city.store';
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
 import { CardItemContentDirective } from '../../ui/card/card-item-content.directive';
-import {toSignal} from "@angular/core/rxjs-interop";
 
 @Component({
   selector: 'app-city-card',
@@ -32,7 +31,7 @@ import {toSignal} from "@angular/core/rxjs-interop";
   imports: [CardComponent, ListItemComponent, CardItemContentDirective],
 })
 export class CityCardComponent implements OnInit {
-  cities = toSignal(this.store.cities$);
+  cities = this.store.cities;
 
   constructor(
     private http: FakeHttpService,

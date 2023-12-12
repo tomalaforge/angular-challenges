@@ -7,7 +7,6 @@ import { StudentStore } from '../../data-access/student.store';
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
 import { CardItemContentDirective } from '../../ui/card/card-item-content.directive';
-import {toSignal} from "@angular/core/rxjs-interop";
 
 @Component({
   selector: 'app-student-card',
@@ -33,7 +32,7 @@ import {toSignal} from "@angular/core/rxjs-interop";
   imports: [CardComponent, ListItemComponent, CardItemContentDirective],
 })
 export class StudentCardComponent implements OnInit {
-  students = toSignal(this.store.students$);
+  students = this.store.students;
 
   constructor(
     private http: FakeHttpService,
