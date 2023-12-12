@@ -22,7 +22,11 @@
     },
     "translation-pt": {
       "symbol": "🇵🇹",
-      "description": "Translate in Portugese"
+      "description": "Translate in Portuguese"
+    },
+    "translation-pt-BR": {
+      "symbol": "🇧🇷",
+      "description": "Translate in Brazilian Portuguese"
     }
   },
   "contributors": [
@@ -117,6 +121,13 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/61125174?v=4",
       "profile": "https://github.com/ho-ssain",
       "contributions": ["doc"]
+    },
+    {
+      "login": "kabrunko-dev",
+      "name": "Diogo Nishikawa",
+      "avatar_url": "https://avatars.githubusercontent.com/u/142346548?v=4",
+      "profile": "https://github.com/kabrunko-dev/",
+      "contributions": ["translation-pt-BR"]
     }
   ],
   "contributorsPerLine": 7,
