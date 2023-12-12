@@ -6,14 +6,14 @@ export class HeavyCalculationService {
   private loadingLength = signal(0);
 
   loadingPercentage = computed(
-    () => (this.loadingLength() * 100) / this.finalLength
+    () => (this.loadingLength() * 100) / this.finalLength,
   );
 
   startLoading() {
-    this.randomHeavyCalculalationFunction();
+    this.randomHeavyCalculationFunction();
   }
 
-  private randomHeavyCalculalationFunction() {
+  private randomHeavyCalculationFunction() {
     for (let num = 2; num <= 10000000; num++) {
       let randomFlag = true;
       for (let i = 2; i <= Math.sqrt(num); i++) {
