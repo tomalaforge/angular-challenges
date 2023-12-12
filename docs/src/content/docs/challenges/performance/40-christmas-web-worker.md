@@ -29,4 +29,4 @@ First, create a web worker using the schematics, then move the issuing function.
 
 ### Note
 
-Since we are inside an Nx workspace, simply replace the `ng` command with `nx` when running the schematic.
+Since we are inside an Nx workspace, simply replace the `ng` command with `nx` when running the schematic with `npx`.
