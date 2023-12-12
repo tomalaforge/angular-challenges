@@ -4,6 +4,7 @@ import { defineConfig } from 'astro/config';
 export const locales = {
   root: { label: 'English', lang: 'en' },
   es: { label: 'Español', lang: 'es' },
+  fr: { label: 'Français', lang: 'fr' },
   'pt-br': { label: 'Português (Brasil)', lang: 'pt-BR' },
 };
 
@@ -29,6 +30,7 @@ export default defineConfig({
           autogenerate: { directory: 'guides' },
           translations: {
             es: 'Guías',
+            fr: 'Guides',
             'pt-BR': 'Guias',
           },
         },
@@ -37,6 +39,7 @@ export default defineConfig({
           autogenerate: { directory: 'challenges' },
           translations: {
             es: 'Desafíos',
+            fr: 'Challenges',
             'pt-BR': 'Desafios'
           },
         },
@@ -75,6 +78,10 @@ export default defineConfig({
         es: {
           label: 'Español',
           lang: 'es',
+        },
+        fr: {
+          label: 'Français',
+          lang: 'fr',
         },
         'pt-br': {
           label: 'Português (Brasil)',
