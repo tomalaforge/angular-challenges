@@ -7,7 +7,7 @@ command: angular-projection
 blogLink: https://medium.com/@thomas.laforge/create-a-highly-customizable-component-cc3a9805e4c5
 videoLink:
   link: https://www.youtube.com/watch?v=npyEyUZxoIw&ab_channel=ArthurLannelucq
-  alt: Projection video by Arthur Lannelucq
+  alt: Vídeo de projeção por Arthur Lannelucq
   flag: FR
 sidebar:
   order: 1
