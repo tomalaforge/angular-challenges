@@ -11,10 +11,10 @@ Você pode contribuir para este repositório das seguintes maneiras:
 
 🔥 Responder desafios e submeter sua resposta (guia [aqui](/pt-br/guides/resolve-challenge)).
 
-🔥 Comentar as soluções de outras pessoas dando _feedback_ construtivo e solidário.
+🔥 Comentar as soluções de outras pessoas dando feedback construtivo e solidário.
 
-🔥 Corrigindo erros de digitação (_typos_) ou erros de inglês na documentação.
+🔥 Corrigindo erros de digitação (typos) ou erros de inglês na documentação.
 
-🔥 Enviar um problema (_issue_) para sugerir novas ideias de desafios ou reportar um _bug_.
+🔥 Enviar um problema (issue) para sugerir novas ideias de desafios ou reportar um bug.
 
 🔥 Patrocinar o projeto [aqui](https://github.com/sponsors/tomalaforge).

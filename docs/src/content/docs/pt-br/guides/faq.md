@@ -6,9 +6,9 @@ sidebar:
 ---
 
 <details>
-  <summary>Por que minha aplicação não roda ou por que eu encontro erros no meu terminal quando rodo `nx serve`?</summary>
+  <summary>Por que minha aplicação não roda ou por que eu encontro erros no meu terminal quando executo `nx serve`?</summary>
   
-  Na maioria das vezes, o problema surge por que seu `node_modules` está desatualizado e você precisar atualizá-lo executando o comando `npm ci`.
+  Na maioria das vezes, o problema surge por que seu `node_modules` está desatualizado e você precisa atualizá-lo executando o comando `npm ci`.
 
 Se a instalação fracassar, você pode resolver deletando o diretório `node_modules` através do comando `rm -rf node_modules` ou `npx npkill`, e depois executar `npm ci` novamente.
 

@@ -1,25 +1,25 @@
 ---
-title: Verificar resposta dos outros
+title: Verifique a resposta dos outros
 description: Guia para verificar a resposta de outra pessoa
 sidebar:
   order: 3
 ---
 
-Todas as respostas dos Desafios Angular são apresentadas na forma de _Pull Request_ (PR). Para ver e segui-las, navegue pela página **Files Changes** no GitHub. Entretanto, entender e seguir esse processo pode não ser direto se você não estiver familiarizado com a interface. Assim, você pode preferir verificar a _branch_ e revisar a solução na sua IDE de preferência.
+Todas as respostas do Desafios Angular são apresentadas na forma de Pull Request (PR). Para ver e seguir elas, navegue pela página **Files Changes** no GitHub. Entretanto, entender e seguir esse processo pode não ser direto se você não estiver familiarizado com a interface. Muitas vezes, você pode preferir verificar a branch e revisar a solução na sua IDE de preferência.
 
-Este guia foi criado para ajudar você a conseguir ver as respostas que desejar.
+Este guia foi criado para ajudar você a conseguir isso.
 
 ## Confire PR de outra pessoa localmente
 
 ### Sincronize seu repositório
 
-Primeiro, você precisa sincronizar seu _fork_ para garantir que ele está atualizado com o repositório bifurcado.
+Primeiro, você precisa sincronizar seu fork para garantir que ele está atualizado com o repositório bifurcado.
 
-Isso pode ser feito clicando no botão **Sync fork** na página principal de seu _fork_.
+Isso pode ser feito clicando no botão Sync fork na página principal de seu fork.
 
 ![Sync project header](../../../../assets/fork-sync.png)
 
-A imagem acima mostra que minha _branch_ está atrás da _branch_ principal por 8 _commits_, e será necessário sincronizá-la para ficar atualizada.
+A imagem acima mostra que minha branch está atrás da branch principal por 8 commits, e será necessário sincronizá-la para deixar ela atualizada.
 
 ![Sync project update modal](../../../../assets/sync-fork-update.png)
 
@@ -29,7 +29,7 @@ Vá até o PR que desejar conferir localmente e pegue seu ID. Você o achará no
 
 ![PR header](../../../../assets/PR-header.png)
 
-Depois, abra um terminal, vá até o diretório de seu projeto e execute o seguinte comando:
+Depois, abra um terminal dentro do diretório de seu projeto e execute o seguinte comando:
 
 ```bash
 gh pr checkout <ID>
@@ -40,7 +40,7 @@ Se você não lembrar o comando, clique no butão <span class="github-neutral-bt
 ![PR code modal](../../../../assets/PR-code-btn-modal.png)
 
 :::note[Nota]
-Se o comando não funcionar, a CLI do GitHub vai guidar você durante o processo.
+Se o comando não funcionar ou fracassar, a CLI do GitHub vai guiar você durante o processo.
 :::
 
 🔥 Agora você pode navegar nas soluções localmente e rodá-las para testar. 🔥

@@ -15,7 +15,7 @@ sidebar:
 
 ## Informação
 
-Em Angular, projeção de conteúdo é uma técnica poderosa para criar componente altamente personalizados. Usar e entender os conceitos do <b>ng-content</b> e <b>ngTemplateOutlet</b> pode melhorar significativamente sua habilidade na criação de componentes compartilháveis.
+Em Angular, projeção de conteúdo é uma técnica robusta para criar componente altamente personalizados. Usar e entender os conceitos do <b>ng-content</b> e <b>ngTemplateOutlet</b> pode melhorar significativamente sua habilidade na criação de componentes compartilháveis.
 
 Você pode aprender tudo sobre <b>ng-content</b> [aqui](https://angular.io/guide/content-projection#projecting-content-in-more-complex-environments), desde projeção simples até casos mais complexos.
 
@@ -25,13 +25,13 @@ Com essas duas ferramentas em mãos, você está pronto para realizar o desafio.
 
 ## Declaração
 
-Você começará com uma aplicação totalmente funcional que inclui um _dashboard_, que possui um cartão de professor e de estudante. O objetivo é implementar o cartão de cidade.
+Você começará com uma aplicação totalmente funcional que inclui um dashboard, que possui um cartão de professor e de estudante. O objetivo é implementar o cartão de cidade.
 
-Apesar da aplicação funcionar, a experiência do desenvolvedor (DX) está longe de estar otimizada. Toda vez que você precisar implementar um novo cartão, você terá que modificar o `card.component.ts`. Em projetos reais, esse componente pode ser compartilhado entre várias aplicações. O objetivo do desafio é criar um `CardComponent` que possa ser personalizado sem nenhuma modificação. Uma vez criado o componente, você pode começar a implementar o `CityCardComponent` e assegurar que não mexerá no `CardComponent`.
+Apesar da aplicação funcionar, a experiência do desenvolvedor (DX) está nem um pouco otimizada. Toda vez que você precisar implementar um novo cartão, você terá que modificar o `card.component.ts`. Em projetos reais, esse componente pode ser compartilhado entre várias aplicações. O objetivo do desafio é criar um `CardComponent` que possa ser personalizado sem nenhuma modificação. Uma vez criado o componente, você pode começar a implementar o `CityCardComponent` e assegurar que não mexerá no `CardComponent`.
 
 ## Restrições
 
 - Você <b>deve</b> refatorar o `CardComponent` e `ListItemComponent`.
-- A diretiva `NgFor` deve ser declarada e permanecer dentro do `CardComponent`. Você pode ficar instigado em querer movê-la para o `ParentCardComponent` como `TeacherCardComponent`.
+- A diretiva `NgFor` deve ser declarada e permanecer dentro do `CardComponent`. Você pode ficar instigado em querer mover ela para o `ParentCardComponent` como `TeacherCardComponent`.
 - `CardComponent` não deve conter nenhum `NgIf` ou `NgSwitch`.
-- CSS: tente evitar usar `::ng-deep` (motivo [aqui](https://angular.io/guide/component-styles#deprecated-deep--and-ng-deep)). Ache uma maneira melhor para lidar com o CSS.
+- CSS: tente evitar usar `::ng-deep`. Ache uma maneira melhor para lidar com o CSS.
