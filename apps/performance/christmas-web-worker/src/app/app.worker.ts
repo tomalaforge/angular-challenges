@@ -23,12 +23,13 @@ addEventListener('message', () => {
 });
 
 /*
-- Struggled when I tried to recreate heavy-calculation.service into a class 
+- Struggled when I tried to recreate heavy-calculation.service as a class 
+- You cannot use a service inside a web worker.
 - Then you have add static to all methods 
 - I was able to recreate the same functionality where progress was 0 and then 100
 - only the main thread wasn't blocked
 
-- approach influenced by article below 
+- my approach was influenced by the article below 
 - https://octoperf.com/blog/2023/02/10/angular-performance-web-worker/#extracting-the-prime-number-logic
 
 */

@@ -33,7 +33,7 @@ export class AppComponent {
       worker.onmessage = ({ data }) => {
         this.loadingPercentage = data;
       };
-      worker.postMessage('start'); // what type here doesn't matter -> like a key
+      worker.postMessage('start'); // what you type here doesn't matter -> like a key
     } else {
       this.heavyCalculationService.startLoading();
     }
