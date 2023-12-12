@@ -5,6 +5,7 @@ export const locales = {
   root: { label: 'English', lang: 'en' },
   es: { label: 'Español', lang: 'es' },
   fr: { label: 'Français', lang: 'fr' },
+  'pt-br': { label: 'Português (Brasil)', lang: 'pt-BR' },
 };
 
 // https://astro.build/config
@@ -30,6 +31,7 @@ export default defineConfig({
           translations: {
             es: 'Guías',
             fr: 'Guides',
+            'pt-BR': 'Guias',
           },
         },
         {
@@ -38,6 +40,7 @@ export default defineConfig({
           translations: {
             es: 'Desafíos',
             fr: 'Challenges',
+            'pt-BR': 'Desafios'
           },
         },
       ],
@@ -79,6 +82,10 @@ export default defineConfig({
         fr: {
           label: 'Français',
           lang: 'fr',
+        },
+        'pt-br': {
+          label: 'Português (Brasil)',
+          lang: 'pt-BR',
         },
       },
     }),
