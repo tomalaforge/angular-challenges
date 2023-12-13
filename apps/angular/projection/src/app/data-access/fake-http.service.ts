@@ -12,11 +12,11 @@ import {
 import { map, timer } from 'rxjs';
 import { City } from '../model/city.model';
 import { Student } from '../model/student.model';
-import { subject, Teacher } from '../model/teacher.model';
+import { Teacher, subject } from '../model/teacher.model';
 
 const factoryTeacher = incrementalNumber();
 
-export const randTeacher = () => ({
+export const randomTeacher = () => ({
   id: factoryTeacher(),
   firstname: randFirstName(),
   lastname: randLastName(),
@@ -24,15 +24,15 @@ export const randTeacher = () => ({
 });
 
 const teachers: Teacher[] = [
-  randTeacher(),
-  randTeacher(),
-  randTeacher(),
-  randTeacher(),
+  randomTeacher(),
+  randomTeacher(),
+  randomTeacher(),
+  randomTeacher(),
 ];
 
 const factoryStudent = incrementalNumber();
 
-export const randStudent = (): Student => ({
+export const randomStudent = (): Student => ({
   id: factoryStudent(),
   firstname: randFirstName(),
   lastname: randLastName(),
@@ -41,11 +41,11 @@ export const randStudent = (): Student => ({
 });
 
 const students: Student[] = [
-  randStudent(),
-  randStudent(),
-  randStudent(),
-  randStudent(),
-  randStudent(),
+  randomStudent(),
+  randomStudent(),
+  randomStudent(),
+  randomStudent(),
+  randomStudent(),
 ];
 
 const factoryCity = incrementalNumber();
