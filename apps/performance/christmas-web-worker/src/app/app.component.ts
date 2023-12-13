@@ -16,7 +16,9 @@ import { UnknownPersonComponent } from './unknown-person/unknown-person.componen
       (click)="discover()">
       Discover
     </button>
-    <div class="p-1 text-white">Progress: {{ loadingPercentage }}%</div>
+    <div class="p-1 text-white">
+      Progress: {{ loadingPercentage | number: '1.2-2' }}%
+    </div>
   `,
   host: {
     class: `flex flex-col h-screen w-screen bg-[#1f75c0]`,
