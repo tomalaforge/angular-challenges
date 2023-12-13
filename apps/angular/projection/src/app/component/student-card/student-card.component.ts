@@ -1,35 +1,61 @@
-import { Component, OnInit } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+import { AsyncPipe } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
+import { Subscription } from 'rxjs';
+import {
+  FakeHttpService,
+  randStudent,
+} from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
-import { CardType } from '../../model/card.model';
 import { Student } from '../../model/student.model';
 import { CardComponent } from '../../ui/card/card.component';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-student-card',
-  template: `<app-card
-    [list]="students"
-    [type]="cardType"
-    customClass="bg-light-green"></app-card>`,
+  templateUrl: './student-card.component.html',
   standalone: true,
   styles: [
     `
-      ::ng-deep .bg-light-green {
+      .bg-light-green {
         background-color: rgba(0, 250, 0, 0.1);
       }
     `,
   ],
-  imports: [CardComponent],
+  imports: [CardComponent, ListItemComponent, AsyncPipe],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class StudentCardComponent implements OnInit {
-  students: Student[] = [];
-  cardType = CardType.STUDENT;
+export class StudentCardComponent implements OnInit, OnDestroy {
+  protected students$ = this.store.students$;
 
-  constructor(private http: FakeHttpService, private store: StudentStore) {}
+  private _subscriptions = new Subscription();
+
+  constructor(
+    private http: FakeHttpService,
+    private store: StudentStore,
+  ) {}
 
   ngOnInit(): void {
-    this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
+    this._subscriptions.add(
+      this.http.fetchStudents$.subscribe((s: Student[]): void =>
+        this.store.addAll(s),
+      ),
+    );
+  }
 
-    this.store.students$.subscribe((s) => (this.students = s));
+  ngOnDestroy(): void {
+    this._subscriptions.unsubscribe();
+  }
+
+  protected addStudent() {
+    this.store.addOne(randStudent());
+  }
+
+  protected deleteStudent(id: number) {
+    this.store.deleteOne(id);
   }
 }

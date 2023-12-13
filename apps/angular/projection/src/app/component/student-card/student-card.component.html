@@ -1,0 +1,8 @@
+<app-card [list]="students$ | async" (add)="addStudent()" class="bg-light-green">
+  <img src="assets/img/student.webp" width="200px" loading="lazy" />
+  <ng-template #rowRef let-student>
+    <app-list-item (delete)="deleteStudent(student.id)">
+      {{ student.firstname }}
+    </app-list-item>
+  </ng-template>
+</app-card>

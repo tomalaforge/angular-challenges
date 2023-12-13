@@ -7,17 +7,20 @@ import { Teacher } from '../model/teacher.model';
 })
 export class TeacherStore {
   private teachers = new BehaviorSubject<Teacher[]>([]);
-  teachers$ = this.teachers.asObservable();
 
-  addAll(teachers: Teacher[]) {
+  public teachers$ = this.teachers.asObservable();
+
+  public addAll(teachers: Teacher[]): void {
     this.teachers.next(teachers);
   }
 
-  addOne(teacher: Teacher) {
+  public addOne(teacher: Teacher): void {
     this.teachers.next([...this.teachers.value, teacher]);
   }
 
-  deleteOne(id: number) {
-    this.teachers.next(this.teachers.value.filter((t) => t.id !== id));
+  public deleteOne(id: number): void {
+    this.teachers.next(
+      this.teachers.value.filter((t: Teacher): boolean => t.id !== id),
+    );
   }
 }
