@@ -4,8 +4,10 @@ import { computed, signal } from '@angular/core';
 
 addEventListener('message', () => {
   const finalLength = 664579;
-  let loadingLength = signal(0);
-  let loadingPercentage = computed(() => (loadingLength() * 100) / finalLength);
+  const loadingLength = signal(0);
+  const loadingPercentage = computed(
+    () => (loadingLength() * 100) / finalLength,
+  );
 
   for (let num = 2; num <= 10000000; num++) {
     let randomFlag = true;
@@ -17,7 +19,7 @@ addEventListener('message', () => {
     }
     if (randomFlag) {
       loadingLength.update((l) => l + 1);
-      postMessage(loadingPercentage());
+      postMessage(loadingPercentage()); // best to read signal here ?
     }
   }
 });
