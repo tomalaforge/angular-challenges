@@ -3,7 +3,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { TodoComponent } from './component/todo.component';
 import { Store } from '@ngrx/store';
 import { selectTodoList } from './state/selectors/todo.selectors';
-import { callTodoList } from './state/actions/todo.actions';
+import { TodoActions } from './state/actions/todo.actions';
 import { TodoState } from './state/todo.state';
 
 @Component({
@@ -22,6 +22,6 @@ export class AppComponent implements OnInit {
   readonly todoList = this.todoStore.selectSignal(selectTodoList);
 
   ngOnInit(): void {
-    this.todoStore.dispatch(callTodoList());
+    this.todoStore.dispatch(TodoActions.callTodoList());
   }
 }

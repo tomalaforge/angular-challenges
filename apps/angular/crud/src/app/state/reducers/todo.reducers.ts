@@ -1,26 +1,21 @@
 import { createReducer, on } from '@ngrx/store';
 import { TodoState } from '../todo.state';
-import {
-  loadTodoList,
-  updateTodoSuccess,
-  deleteTodoSuccess,
-  todoStatus,
-} from '../actions/todo.actions';
+import { TodoActions } from '../actions/todo.actions';
 
 export const initialState: TodoState = { todoList: [] };
 
 export const todoReducer = createReducer(
   initialState,
-  on(loadTodoList, (state, { todoList }) => {
+  on(TodoActions.loadTodoList, (state, { todoList }) => {
     return { ...state, todoList: [...todoList] };
   }),
-  on(deleteTodoSuccess, (state, { id }) => {
+  on(TodoActions.deleteTodoSuccess, (state, { id }) => {
     return {
       ...state,
       todoList: [...state.todoList.filter((t) => t.id !== id)],
     };
   }),
-  on(updateTodoSuccess, (state, { todo }) => {
+  on(TodoActions.updateTodoSuccess, (state, { todo }) => {
     return {
       ...state,
       todoList: [...state.todoList.filter((t) => t.id !== todo.id), todo].sort(
@@ -28,14 +23,32 @@ export const todoReducer = createReducer(
       ),
     };
   }),
-  on(todoStatus, (state, { id, status }) => {
+  on(TodoActions.todoError, (state, { id, errorMsg }) => {
     return {
       ...state,
       todoList: [
         ...state.todoList.map((t) =>
-          t.id === id
-            ? { ...t, errorMsg: status.errorMsg, loading: status.loading }
-            : t,
+          t.id === id ? { ...t, errorMsg: errorMsg, loading: false } : t,
+        ),
+      ],
+    };
+  }),
+  on(TodoActions.callUpdateTodo, (state, { todo }) => {
+    return {
+      ...state,
+      todoList: [
+        ...state.todoList.map((t) =>
+          t.id === todo.id ? { ...t, loading: true, errorMsg: '' } : t,
+        ),
+      ],
+    };
+  }),
+  on(TodoActions.callDeleteTodo, (state, { id }) => {
+    return {
+      ...state,
+      todoList: [
+        ...state.todoList.map((t) =>
+          t.id === id ? { ...t, loading: true, errorMsg: '' } : t,
         ),
       ],
     };

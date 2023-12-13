@@ -1,9 +1,15 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { TodoService } from '../../service/todo.service';
-import { map, exhaustMap, catchError, concatMap } from 'rxjs/operators';
-import { EMPTY, concat, of } from 'rxjs';
-import { TodoActionName } from '../actions/todo.actions';
+import {
+  map,
+  exhaustMap,
+  catchError,
+  concatMap,
+  mergeMap,
+} from 'rxjs/operators';
+import { EMPTY, of } from 'rxjs';
+import { TodoActions } from '../actions/todo.actions';
 import { Todo } from '../../model/todo.interface';
 
 @Injectable()
@@ -13,13 +19,10 @@ export class TodoEffects {
 
   loadTodos$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(TodoActionName.callTodoList),
+      ofType(TodoActions.callTodoList),
       exhaustMap(() =>
         this.todoService.callTodoList().pipe(
-          map((todoList) => ({
-            type: TodoActionName.loadTodoList,
-            todoList: todoList,
-          })),
+          map((todoList) => TodoActions.loadTodoList({ todoList: todoList })),
           catchError(() => EMPTY),
         ),
       ),
@@ -28,38 +31,18 @@ export class TodoEffects {
 
   updateTodo$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(TodoActionName.callUpdateTodo),
+      ofType(TodoActions.callUpdateTodo),
       concatMap((action: { todo: Todo }) =>
-        concat(
-          of({
-            type: TodoActionName.todoStatus,
-            id: action.todo.id,
-            status: {
-              loading: true,
-            },
-          }),
-          this.todoService.updateTodo(action.todo).pipe(
-            map((todo) => ({
-              type: TodoActionName.updateTodoSuccess,
-              todo: todo,
-            })),
-            catchError(() =>
-              of({
-                type: TodoActionName.todoStatus,
+        this.todoService.updateTodo(action.todo).pipe(
+          map((todo) => TodoActions.updateTodoSuccess({ todo: todo })),
+          catchError(() =>
+            of(
+              TodoActions.todoError({
                 id: action.todo.id,
-                status: {
-                  errorMsg: 'Error updating todo',
-                },
+                errorMsg: 'Error updating todo',
               }),
             ),
           ),
-          of({
-            type: TodoActionName.todoStatus,
-            id: action.todo.id,
-            status: {
-              loading: false,
-            },
-          }),
         ),
       ),
     ),
@@ -67,38 +50,18 @@ export class TodoEffects {
 
   deleteTodo$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(TodoActionName.callDeleteTodo),
-      concatMap((action: { id: number }) =>
-        concat(
-          of({
-            type: TodoActionName.todoStatus,
-            id: action.id,
-            status: {
-              loading: true,
-            },
-          }),
-          this.todoService.deleteTodo(action.id).pipe(
-            map(() => ({
-              type: TodoActionName.deleteTodoSuccess,
-              id: action.id,
-            })),
-            catchError(() =>
-              of({
-                type: TodoActionName.todoStatus,
+      ofType(TodoActions.callDeleteTodo),
+      mergeMap((action: { id: number }) =>
+        this.todoService.deleteTodo(action.id).pipe(
+          map(() => TodoActions.deleteTodoSuccess({ id: action.id })),
+          catchError(() =>
+            of(
+              TodoActions.todoError({
                 id: action.id,
-                status: {
-                  errorMsg: 'Error deleting todo',
-                },
+                errorMsg: 'Error deleting todo',
               }),
             ),
           ),
-          of({
-            type: TodoActionName.todoStatus,
-            id: action.id,
-            status: {
-              loading: false,
-            },
-          }),
         ),
       ),
     ),

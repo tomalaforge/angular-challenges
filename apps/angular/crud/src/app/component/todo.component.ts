@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { Todo } from '../model/todo.interface';
 import { Store } from '@ngrx/store';
-import { callDeleteTodo, callUpdateTodo } from '../state/actions/todo.actions';
+import { TodoActions } from '../state/actions/todo.actions';
 import { TodoState } from '../state/todo.state';
 import { LoadingComponent } from './loading.component';
 
@@ -46,10 +46,10 @@ export class TodoComponent {
   todoStore: Store<TodoState> = inject(Store<TodoState>);
 
   update(todo: Todo) {
-    this.todoStore.dispatch(callUpdateTodo({ todo: todo }));
+    this.todoStore.dispatch(TodoActions.callUpdateTodo({ todo: todo }));
   }
 
   delete(id: number) {
-    this.todoStore.dispatch(callDeleteTodo({ id: id }));
+    this.todoStore.dispatch(TodoActions.callDeleteTodo({ id: id }));
   }
 }

@@ -1,43 +1,15 @@
-import { createAction, props } from '@ngrx/store';
+import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { Todo } from '../../model/todo.interface';
 
-export enum TodoActionName {
-  callTodoList = '[Todo] call todo list',
-  loadTodoList = '[Todo] load todo list',
-
-  callUpdateTodo = '[Todo] call update todo',
-  updateTodoSuccess = '[Todo] update todo success',
-
-  callDeleteTodo = '[Todo] call delete todo',
-  deleteTodoSuccess = '[Todo] delete todo success',
-
-  todoStatus = '[Todo] todo status',
-}
-
-export const callTodoList = createAction(TodoActionName.callTodoList);
-export const loadTodoList = createAction(
-  TodoActionName.loadTodoList,
-  props<{ todoList: Todo[] }>(),
-);
-export const callUpdateTodo = createAction(
-  TodoActionName.callUpdateTodo,
-  props<{ todo: Todo }>(),
-);
-export const callDeleteTodo = createAction(
-  TodoActionName.callDeleteTodo,
-  props<{ id: number }>(),
-);
-
-export const updateTodoSuccess = createAction(
-  TodoActionName.updateTodoSuccess,
-  props<{ todo: Todo }>(),
-);
-export const deleteTodoSuccess = createAction(
-  TodoActionName.deleteTodoSuccess,
-  props<{ id: number }>(),
-);
-
-export const todoStatus = createAction(
-  TodoActionName.todoStatus,
-  props<{ id: number; status: { loading: boolean; errorMsg: string } }>(),
-);
+export const TodoActions = createActionGroup({
+  source: 'Todo',
+  events: {
+    CallTodoList: emptyProps(),
+    LoadTodoList: props<{ todoList: Todo[] }>(),
+    CallUpdateTodo: props<{ todo: Todo }>(),
+    CallDeleteTodo: props<{ id: number }>(),
+    UpdateTodoSuccess: props<{ todo: Todo }>(),
+    DeleteTodoSuccess: props<{ id: number }>(),
+    TodoError: props<{ id: number; errorMsg: string }>(),
+  },
+});
