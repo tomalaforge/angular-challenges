@@ -23,10 +23,10 @@ addEventListener('message', () => {
 });
 
 /*
-- Struggled when I tried to recreate heavy-calculation.service as a class 
+- Struggled when I tried to recreate heavy-calculation.service as a class
 - You cannot use a service inside a web worker.
-- Then you have add static to all methods 
-- I was able to recreate the same functionality where progress was 0 and then 100
+- Then you have to add `static` to all methods 
+- I was able to recreate the same functionality where progress stays stuck at 0 and only updates when it hits 100
 - only the main thread wasn't blocked
 
 - my approach was influenced by the article below 

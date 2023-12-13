@@ -3,7 +3,7 @@ import { Component, inject } from '@angular/core';
 import { HeavyCalculationService } from './heavy-calculation.service';
 import { UnknownPersonComponent } from './unknown-person/unknown-person.component';
 
-// add OnPush ?
+// add ChangeDetection.OnPush? Bad Idea. You re-create the same problem again.
 @Component({
   standalone: true,
   imports: [CommonModule, UnknownPersonComponent],
