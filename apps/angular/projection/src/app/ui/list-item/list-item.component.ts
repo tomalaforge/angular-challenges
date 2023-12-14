@@ -24,7 +24,6 @@ export class ListItemComponent {
   @Output() delete = new EventEmitter<number>();
 
   deleteItem() {
-    console.log('deleteItem', this.id);
     this.delete.emit(this.id);
   }
 }
