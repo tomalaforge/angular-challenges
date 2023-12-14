@@ -35,3 +35,9 @@ Apesar da aplicação funcionar, a experiência do desenvolvedor (DX) está nem 
 - A diretiva `NgFor` deve ser declarada e permanecer dentro do `CardComponent`. Você pode ficar instigado em querer mover ela para o `ParentCardComponent` como `TeacherCardComponent`.
 - `CardComponent` não deve conter nenhum `NgIf` ou `NgSwitch`.
 - CSS: tente evitar usar `::ng-deep`. Ache uma maneira melhor para lidar com o CSS.
+
+## Desafios Bônus
+
+- Tente trabalhar com a nova sintaxe nativa de controle de fluxo para laços e condicionais (documentação [aqui](https://angular.dev/guide/templates/control-flow))
+- Usa a signal API para gerenciar o estado de seus componentes (documentação [aqui](https://angular.dev/guide/signals))
+- Para referenciar o template, use uma diretiva ao invés de strings mágicas
