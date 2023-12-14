@@ -1,7 +1,13 @@
-<ng-content [card-image]></ng-content>
+<ng-content [card-image] />
 
-<section>
-  <ng-content [item-template]></ng-content>
+<section *ngIf="list">
+  @for (item of list; track $index) {
+    @if (row) {
+      <ng-container
+        [ngTemplateOutlet]="row.templateRef"
+        [ngTemplateOutletContext]="{ $implicit: item }"></ng-container>
+    }
+  }
 </section>
 
 <button

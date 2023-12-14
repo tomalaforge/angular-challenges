@@ -1,30 +1,32 @@
-import { NgFor, NgIf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import {
   FakeHttpService,
   randomStudent,
 } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
 import { CardType } from '../../model/card.model';
-import { Student } from '../../model/student.model';
-import { CardComponent } from '../../ui/card/card.component';
+
+import {
+  CardComponent,
+  ListItemTemplateMarkerDirective,
+} from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-student-card',
   template: `
     <app-card
-      [list]="students"
+      [list]="students$ | async"
       (addNew)="onAddNewItem()"
       class="bg-light-green">
       <img card-image src="assets/img/student.webp" width="200px" />
 
-      <app-list-item
-        *ngFor="let s of students"
-        [id]="s.id"
-        (delete)="onDeleteItem($event)">
-        {{ s.firstname }}
-      </app-list-item>
+      <ng-template listItemTemplateMarker let-student>
+        <app-list-item [id]="student.id" (delete)="onDeleteItem($event)">
+          {{ student.firstname }}
+        </app-list-item>
+      </ng-template>
     </app-card>
   `,
   standalone: true,
@@ -35,10 +37,16 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
       }
     `,
   ],
-  imports: [NgIf, NgFor, CardComponent, ListItemComponent],
+  imports: [
+    AsyncPipe,
+    CardComponent,
+    ListItemComponent,
+    ListItemTemplateMarkerDirective,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StudentCardComponent implements OnInit {
-  students: Student[] = [];
+  students$ = this.store.students$;
   cardType = CardType.STUDENT;
 
   constructor(
@@ -48,8 +56,6 @@ export class StudentCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
-
-    this.store.students$.subscribe((s) => (this.students = s));
   }
 
   onAddNewItem() {

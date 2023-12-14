@@ -1,26 +1,30 @@
-import { NgFor, NgIf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CityStore } from '../../data-access/city.store';
 import {
   FakeHttpService,
   randomCity,
 } from '../../data-access/fake-http.service';
 import { CardType } from '../../model/card.model';
-import { City } from '../../model/city.model';
-import { CardComponent } from '../../ui/card/card.component';
+import {
+  CardComponent,
+  ListItemTemplateMarkerDirective,
+} from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-city-card',
   template: `
-    <app-card [list]="cities" (addNew)="onAddNewItem()" class="bg-light-blue">
+    <app-card
+      [list]="cities$ | async"
+      (addNew)="onAddNewItem()"
+      class="bg-light-blue">
       <img card-image src="assets/img/city.png" width="200px" />
-      <app-list-item
-        *ngFor="let c of cities"
-        [id]="c.id"
-        (delete)="onDeleteItem($event)">
-        {{ c.name }}
-      </app-list-item>
+      <ng-template listItemTemplateMarker let-city>
+        <app-list-item [id]="city.id" (delete)="onDeleteItem($event)">
+          {{ city.name }}
+        </app-list-item>
+      </ng-template>
     </app-card>
   `,
   standalone: true,
@@ -31,10 +35,18 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
       }
     `,
   ],
-  imports: [NgIf, NgFor, CardComponent, ListItemComponent],
+  imports: [
+    NgIf,
+    NgFor,
+    AsyncPipe,
+    CardComponent,
+    ListItemComponent,
+    ListItemTemplateMarkerDirective,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CityCardComponent implements OnInit {
-  cities: City[] = [];
+  cities$ = this.store.cities$;
   cardType = CardType.CITY;
 
   constructor(
@@ -44,8 +56,6 @@ export class CityCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.http.fetchCities$.subscribe((s) => this.store.addAll(s));
-
-    this.store.cities$.subscribe((s) => (this.cities = s));
   }
 
   onAddNewItem() {

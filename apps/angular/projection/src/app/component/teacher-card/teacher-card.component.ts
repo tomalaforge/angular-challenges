@@ -1,27 +1,30 @@
-import { NgFor, NgIf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import {
   FakeHttpService,
   randomTeacher,
 } from '../../data-access/fake-http.service';
 import { TeacherStore } from '../../data-access/teacher.store';
 import { CardType } from '../../model/card.model';
-import { Teacher } from '../../model/teacher.model';
-import { CardComponent } from '../../ui/card/card.component';
+import {
+  CardComponent,
+  ListItemTemplateMarkerDirective,
+} from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-teacher-card',
   template: `
-    <app-card [list]="teachers" (addNew)="onAddNewItem()" class="bg-light-red">
+    <app-card
+      [list]="teachers$ | async"
+      (addNew)="onAddNewItem()"
+      class="bg-light-red">
       <img card-image src="assets/img/teacher.png" width="200px" />
-
-      <app-list-item
-        *ngFor="let t of teachers"
-        [id]="t.id"
-        (delete)="onDeleteItem($event)">
-        {{ t.firstname }}
-      </app-list-item>
+      <ng-template listItemTemplateMarker let-teacher>
+        <app-list-item [id]="teacher.id" (delete)="onDeleteItem($event)">
+          {{ teacher.firstname }}
+        </app-list-item>
+      </ng-template>
     </app-card>
   `,
   styles: [
@@ -32,10 +35,18 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
     `,
   ],
   standalone: true,
-  imports: [NgIf, NgFor, CardComponent, ListItemComponent],
+  imports: [
+    NgIf,
+    NgFor,
+    AsyncPipe,
+    CardComponent,
+    ListItemComponent,
+    ListItemTemplateMarkerDirective,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TeacherCardComponent implements OnInit {
-  teachers: Teacher[] = [];
+  teachers$ = this.store.teachers$;
   cardType = CardType.TEACHER;
 
   constructor(
@@ -45,7 +56,6 @@ export class TeacherCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
-    this.store.teachers$.subscribe((t) => (this.teachers = t));
   }
 
   onAddNewItem() {
