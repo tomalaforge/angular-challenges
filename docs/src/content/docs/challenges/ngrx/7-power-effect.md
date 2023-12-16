@@ -8,10 +8,6 @@ sidebar:
   order: 206
 ---
 
-:::note
-WIP: The following documentation will be reviewed and improved. However, you can still take on the challenge. If you don't understand a certain part, please feel free to reach out or create an issue.
-:::
-
 ## Information
 
 NgRx Effect is a very powerful library developed by the NgRx team. Effects subscribe to a HOT Observable and listen to any event dispatched from any place inside the application.

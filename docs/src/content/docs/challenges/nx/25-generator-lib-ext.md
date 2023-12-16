@@ -7,10 +7,6 @@ sidebar:
   order: 207
 ---
 
-:::note
-WIP: The following documentation will be reviewed and improved. However, you can still take on the challenge. If you don't understand a certain part, please feel free to reach out or create an issue.
-:::
-
 ## Information
 
 Welcome to the marvelous world of Nx generators.

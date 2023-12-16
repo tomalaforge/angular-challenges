@@ -8,10 +8,6 @@ sidebar:
   order: 4
 ---
 
-:::note
-WIP: The following documentation will be reviewed and improved. However, you can still take on the challenge. If you don't understand a certain part, please feel free to reach out or create an issue.
-:::
-
 ## Information
 
 You begin with an application that has basic navigation and anchor navigation in the `HomeComponent`. However, using `href` recreates the path each time and refreshes the page.

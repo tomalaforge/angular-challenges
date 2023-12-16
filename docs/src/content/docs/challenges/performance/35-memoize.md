@@ -8,8 +8,6 @@ sidebar:
   order: 8
 ---
 
-<div class="chip">Challenge #35</div>
-
 ## Information
 
 In Angular, <b>pure Pipes</b> are very powerful because the value is memoized, which means if the input value doesn't change, the `transform` function of the pipe is not recomputed, and the cached value is outputted.

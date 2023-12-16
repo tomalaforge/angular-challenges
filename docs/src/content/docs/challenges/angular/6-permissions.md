@@ -9,10 +9,6 @@ sidebar:
   order: 102
 ---
 
-:::note
-WIP: The following documentation will be reviewed and improved. However, you can still take on the challenge. If you don't understand a certain part, please feel free to reach out or create an issue.
-:::
-
 ## Information
 
 Structural directive is an important concept you will need to master to improve your angular skills and knowledge. This will be the first part of this challenge.
@@ -21,7 +17,7 @@ Guard is also very important since you will always need it in every application 
 
 ## Statement
 
-In LoginComponent, you will find 6 buttons corresponding at 6 differents users.
+In LoginComponent, you will find 6 buttons corresponding to 6 differents user's role.
 
 - Admin
 - Manager
@@ -33,12 +29,12 @@ In LoginComponent, you will find 6 buttons corresponding at 6 differents users.
 
 ## Step 1
 
-In **InformationComponent**, display the correct piece of information for each role.
+In `InformationComponent`, you need to display the correct piece of information for each role using a structural directive.
 
 ### Constraints:
 
-- no ngIf directive inside **InformationComponent**
-- importing the store inside **InformationComponent** is not allowed.
+- no `ngIf` of `@if` inside `InformationComponent`
+- importing the store inside `InformationComponent` is not allowed.
 
 You should end up with something like below:
 
@@ -56,4 +52,4 @@ You should end up with something like below:
 
 ## Step 2
 
-In **Routes.ts**, route all user to the correct **DashboardComponent** using **CanMatch** guard.
+In `Routes.ts`, you should route all users to the correct `DashboardComponent` using `CanMatch` guard.

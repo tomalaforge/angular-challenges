@@ -9,13 +9,9 @@ sidebar:
   order: 201
 ---
 
-:::note
-WIP: The following documentation will be reviewed and improved. However, you can still take on the challenge. If you don't understand a certain part, please feel free to reach out or create an issue.
-:::
-
 ## Information
 
-Angular offer the static function **ngTemplateContextGuard** to strongly type structural directive.
+Angular offer the static function [`ngTemplateContextGuard`](https://angular.io/guide/structural-directives#typing-the-directives-context) to strongly type structural directive.
 
 However the context of **NgTemplateOutlet** type is **Object**. But with the help of the above guard, we can improve that behavior.
 
