@@ -11,7 +11,7 @@ sidebar:
 
 ## Information
 
-This challenge has been created for Angular Advent Calendar 2023.
+This challenge has been created for [Angular Advent Calendar](https://angularchristmascalendar.com) 2023.
 
 This application is basic. We click on the **Discover** button to reveal the surprise hidden behind the black screen. However, the current application provides an awful user experience. When we click on the button, the page freezes, and after a while, it reveals the secret all at once without a smooth animation.
 
@@ -30,5 +30,5 @@ First, create a web worker using a schematic, then move the issuing function. Fi
 :::note
 Since we are inside an Nx workspace, simply replace the `ng` command with `nx` when running the schematic.
 
-If `nx` is not install globally on your machine, prefix your command with `npx`.
+If `nx` is not installed globally on your machine, prefix your command with `npx`.
 :::
