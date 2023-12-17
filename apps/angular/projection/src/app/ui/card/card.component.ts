@@ -21,7 +21,9 @@ interface CardContentCtx<T> {
   selector: '[card-content]',
   standalone: true,
 })
-export class CardContentDirective {}
+export class CardContentDirective<T> {
+  constructor(public templateRef: TemplateRef<CardContentCtx<T>>) {}
+}
 
 @Component({
   selector: 'app-card',
@@ -31,7 +33,7 @@ export class CardContentDirective {}
     <section>
       @for (item of items; track item.id) {
         <ng-container
-          [ngTemplateOutlet]="listItemTemplate"
+          [ngTemplateOutlet]="listItemTemplate.templateRef"
           [ngTemplateOutletContext]="{ $implicit: item }"></ng-container>
       } @empty {
         <p>There are no items.</p>
@@ -58,8 +60,8 @@ export class CardComponent<T extends CardItem> {
 
   @Output() add = new EventEmitter<void>();
 
-  @ContentChild(CardContentDirective, { read: TemplateRef })
-  listItemTemplate!: TemplateRef<CardContentCtx<T>>;
+  @ContentChild(CardContentDirective)
+  listItemTemplate!: CardContentDirective<T>;
 }
 
 @Directive({
