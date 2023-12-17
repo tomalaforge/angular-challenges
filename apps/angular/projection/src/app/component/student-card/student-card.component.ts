@@ -1,35 +1,64 @@
-import { Component, OnInit } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+import { AsyncPipe } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  OnInit,
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Observable } from 'rxjs';
+import {
+  FakeHttpService,
+  randStudent,
+} from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
-import { CardType } from '../../model/card.model';
 import { Student } from '../../model/student.model';
-import { CardComponent } from '../../ui/card/card.component';
+import {
+  CardComponent,
+  CardContentDirective,
+  CardImageDirective,
+} from '../../ui/card/card.component';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-student-card',
-  template: `<app-card
-    [list]="students"
-    [type]="cardType"
-    customClass="bg-light-green"></app-card>`,
+  templateUrl: 'student-card.component.html',
+  styles:
+    ':host { display: block; } .bg-light-green { background-color: rgba(0, 250, 0, 0.1); }',
   standalone: true,
-  styles: [
-    `
-      ::ng-deep .bg-light-green {
-        background-color: rgba(0, 250, 0, 0.1);
-      }
-    `,
+  imports: [
+    AsyncPipe,
+    CardComponent,
+    CardImageDirective,
+    CardContentDirective,
+    ListItemComponent,
   ],
-  imports: [CardComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StudentCardComponent implements OnInit {
-  students: Student[] = [];
-  cardType = CardType.STUDENT;
+  students$!: Observable<Student[]>;
 
-  constructor(private http: FakeHttpService, private store: StudentStore) {}
+  constructor(
+    private destroyRef: DestroyRef,
+    private http: FakeHttpService,
+    private store: StudentStore,
+  ) {}
 
   ngOnInit(): void {
-    this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
+    this.http.fetchStudents$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((s) => this.store.addAll(s));
 
-    this.store.students$.subscribe((s) => (this.students = s));
+    this.students$ = this.store.students$.pipe(
+      takeUntilDestroyed(this.destroyRef),
+    );
+  }
+
+  add() {
+    this.store.addOne(randStudent());
+  }
+
+  delete(id: number) {
+    this.store.deleteOne(id);
   }
 }

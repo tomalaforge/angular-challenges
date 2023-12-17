@@ -1,0 +1,9 @@
+<app-card class="bg-light-red" [items]="teachers$ | async" (add)="add()">
+  <img card-img src="assets/img/teacher.png" alt="Teacher Card Image" />
+
+  <ng-template card-content let-teacher>
+    <app-list-item (delete)="delete(teacher.id)">
+      {{ teacher.firstName + ' ' + teacher.lastName }}
+    </app-list-item>
+  </ng-template>
+</app-card>
