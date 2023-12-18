@@ -1,0 +1,16 @@
+<svg width="0" height="0" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="star" width="50" height="50" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M31.77 11.857H19.74L15.99.5l-3.782 11.357H0l9.885 6.903-3.692 11.21 9.736-7.05 9.796 6.962-3.722-11.18 9.766-6.845z" />
+  </symbol>
+</svg>
+<div class="rating">
+  @for (item of [].constructor(5); track item) {
+    <svg
+      class="star"
+      [class.star-active]="isStarActive($index, value)"
+      (click)="setRating($index)">
+      <use xlink:href="#star"></use>
+    </svg>
+  }
+</div>
