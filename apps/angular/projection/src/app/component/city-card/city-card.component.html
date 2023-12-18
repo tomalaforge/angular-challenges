@@ -1,4 +1,4 @@
-<app-card class="bg-light-blue" [items]="cities$ | async" (add)="add()">
+<app-card class="bg-light-blue" [list]="store.items()" (add)="add()">
   <img card-img src="assets/img/city.png" alt="City Card Image" />
 
   <ng-template card-content let-city>

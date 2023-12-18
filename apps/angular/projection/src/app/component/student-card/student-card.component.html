@@ -1,4 +1,4 @@
-<app-card class="bg-light-green" [items]="students$ | async" (add)="add()">
+<app-card class="bg-light-green" [list]="store.items()" (add)="add()">
   <img card-img src="assets/img/student.webp" alt="Student Card Image" />
 
   <ng-template card-content let-student>

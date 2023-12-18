@@ -4,14 +4,14 @@ import {
   Component,
   DestroyRef,
   OnInit,
+  inject,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Observable } from 'rxjs';
-import { CityStore } from '../../data-access/city.store';
 import {
   FakeHttpService,
   randomCity,
 } from '../../data-access/fake-http.service';
+import { ItemStore, provideItemStore } from '../../data-access/item.store';
 import { City } from '../../model/city.model';
 import {
   CardComponent,
@@ -33,23 +33,18 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
     CardContentDirective,
     ListItemComponent,
   ],
+  providers: [provideItemStore<City>('city-store')],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CityCardComponent implements OnInit {
-  cities$!: Observable<City[]>;
-
-  constructor(
-    private destroyRef: DestroyRef,
-    private http: FakeHttpService,
-    private store: CityStore,
-  ) {}
+  destroyRef = inject(DestroyRef);
+  http = inject(FakeHttpService);
+  store = inject(ItemStore<City>);
 
   ngOnInit(): void {
     this.http.fetchCities$
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((c) => this.store.addAll(c));
-
-    this.cities$ = this.store.cities$.pipe(takeUntilDestroyed(this.destroyRef));
   }
 
   add() {

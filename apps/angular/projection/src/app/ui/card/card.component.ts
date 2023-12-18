@@ -31,7 +31,7 @@ export class CardContentDirective<T> {
     <ng-content select="[card-img]"></ng-content>
 
     <section>
-      @for (item of items; track item.id) {
+      @for (item of list; track item.id) {
         <ng-container
           [ngTemplateOutlet]="listItemTemplate.templateRef"
           [ngTemplateOutletContext]="{ $implicit: item }"></ng-container>
@@ -56,7 +56,7 @@ export class CardContentDirective<T> {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardComponent<T extends CardItem> {
-  @Input() items: T[] | null = null;
+  @Input() list!: T[];
 
   @Output() add = new EventEmitter<void>();
 

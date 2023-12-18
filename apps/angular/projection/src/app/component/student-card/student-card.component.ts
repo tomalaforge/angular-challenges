@@ -4,14 +4,14 @@ import {
   Component,
   DestroyRef,
   OnInit,
+  inject,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Observable } from 'rxjs';
 import {
   FakeHttpService,
   randStudent,
 } from '../../data-access/fake-http.service';
-import { StudentStore } from '../../data-access/student.store';
+import { ItemStore, provideItemStore } from '../../data-access/item.store';
 import { Student } from '../../model/student.model';
 import {
   CardComponent,
@@ -33,25 +33,18 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
     CardContentDirective,
     ListItemComponent,
   ],
+  providers: [provideItemStore<Student>('student-store')],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StudentCardComponent implements OnInit {
-  students$!: Observable<Student[]>;
-
-  constructor(
-    private destroyRef: DestroyRef,
-    private http: FakeHttpService,
-    private store: StudentStore,
-  ) {}
+  destroyRef = inject(DestroyRef);
+  http = inject(FakeHttpService);
+  store = inject(ItemStore<Student>);
 
   ngOnInit(): void {
     this.http.fetchStudents$
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((s) => this.store.addAll(s));
-
-    this.students$ = this.store.students$.pipe(
-      takeUntilDestroyed(this.destroyRef),
-    );
   }
 
   add() {
