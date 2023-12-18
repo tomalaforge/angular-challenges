@@ -6,7 +6,6 @@ challengeNumber: 40
 command: performance-christmas-web-worker
 sidebar:
   order: 119
-  badge: New
 ---
 
 ## Information

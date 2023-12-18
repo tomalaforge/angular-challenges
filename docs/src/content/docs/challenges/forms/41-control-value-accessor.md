@@ -5,7 +5,7 @@ author: stanislav-gavrilov
 challengeNumber: 41
 command: forms-control-value-accessor
 sidebar:
-  order: 119
+  order: 1
   badge: New
 ---
 
@@ -21,7 +21,7 @@ Additionally, you are required to integrate validation for the new control to en
 Currently, rating is coded this way:
 
 ```html
-<app-rating-control (ratingUpdated)="rating = $event"> </app-rating-control>
+<app-rating-control (ratingUpdated)="rating = $event"></app-rating-control>
 ```
 
 ```ts
@@ -38,5 +38,5 @@ onFormSubmit(): void {
 The goal is to include rating into the `FormGroup`
 
 ```html
-<app-rating-control [formControl]="feedbackForm.controls.rating"> </app-rating-control>
+<app-rating-control [formControl]="feedbackForm.controls.rating"></app-rating-control>
 ```
