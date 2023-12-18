@@ -1,6 +1,4 @@
-import { EventEmitter } from '@angular/core';
-import { Output } from '@angular/core';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   standalone: true,
