@@ -8,8 +8,8 @@
   @for (item of [].constructor(5); track item) {
     <svg
       class="star"
-      [class.star-active]="isStarActive($index, value)"
-      (click)="setRating($index)">
+      [class.star-active]="isStarActive($index, rating)"
+      (click)="setRating($index + 1)">
       <use xlink:href="#star"></use>
     </svg>
   }
