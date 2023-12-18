@@ -160,6 +160,15 @@
         "translation-pt-BR",
         "doc"
       ]
+    },
+    {
+      "login": "stillst",
+      "name": "stillst",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1463098?v=4",
+      "profile": "https://github.com/stillst",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
