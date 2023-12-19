@@ -5,8 +5,9 @@ import { FeedbackFormComponent } from './feedback-form/feedback-form.component';
   standalone: true,
   imports: [FeedbackFormComponent],
   selector: 'app-root',
-  template: `<app-feedback-form
-    (feedBackSubmit)="apiCall($event)"></app-feedback-form>`,
+  template: `
+    <app-feedback-form (feedBackSubmit)="apiCall($event)"></app-feedback-form>
+  `,
 })
 export class AppComponent {
   apiCall(event: Record<string, string | null>): void {
