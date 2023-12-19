@@ -52,7 +52,7 @@ Check [all 41 challenges](https://angular-challenges.vercel.app/)
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/kabrunko-dev/"><img src="https://avatars.githubusercontent.com/u/142346548?v=4?s=100" width="100px;" alt="Diogo Nishikawa"/><br /><sub><b>Diogo Nishikawa</b></sub></a><br /><a href="#translation-pt-BR-kabrunko-dev" title="Translate in Brazilian Portuguese">🇧🇷</a> <a href="https://github.com/tomalaforge/angular-challenges/commits?author=kabrunko-dev" title="Documentation">📖</a></td>
     </tr>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="http://www.streamoverlaypro.com"><img src="https://avatars.githubusercontent.com/u/1978642?v=4?s=100" width="100px;" alt="Erick Rodriguez"/><br /><sub><b>Erick Rodriguez</b></sub></a><br /><a href="https://github.com/tomalaforge/angular-challenges/commits?author=ErickRodrCodes" title="Translate in Spanish">🇪🇸</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/ErickRodrCodes"><img src="https://avatars.githubusercontent.com/u/1978642?v=4?s=100" width="100px;" alt="Erick Rodriguez"/><br /><sub><b>Erick Rodriguez</b></sub></a><br /><a href="https://github.com/tomalaforge/angular-challenges/commits?author=ErickRodrCodes" title="Translate in Spanish">🇪🇸</a></td>
     </tr>
   </tbody>
   <tfoot>
