@@ -2,7 +2,8 @@
 title: 🟠 Harness Creation
 description: Challenge 24 is about creating a component harness.
 author: thomas-laforge
-challengeNumber: 24
+challenge:
+  number: 24
 command: testing-create-harness
 sidebar:
   order: 112

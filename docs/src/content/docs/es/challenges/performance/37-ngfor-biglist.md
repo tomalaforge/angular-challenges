@@ -2,7 +2,9 @@
 title: 🟠 Optimizando una lista larga
 description: El desafio 37 trata sobre como optimizar una lista grande de elementos
 author: thomas-laforge
-challengeNumber: 37
+challenge:
+  label: Reto
+  number: 37
 command: performance-ngfor-biglist
 sidebar:
   order: 117

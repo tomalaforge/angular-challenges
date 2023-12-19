@@ -2,7 +2,9 @@
 title: 🟠 InjectionToken
 description: Desafio de Angular 39 para aprender sobre el poder del InjectionToken
 author: thomas-laforge
-challengeNumber: 39
+challenge:
+  label: Reto
+  number: 39
 command: angular-injection-token
 sidebar:
   order: 118

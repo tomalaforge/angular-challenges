@@ -2,12 +2,13 @@
 import type { Props } from '@astrojs/starlight/props';
 import Default from '@astrojs/starlight/components/PageTitle.astro';
 
-const challengeNumber = Astro.props.entry.data.challengeNumber;
+const {label: challengeLabel, number: challengeNumber} = Astro.props.entry.data.challenge;
+
 ---
 
 <div class="page-title-content">
     <Default {...Astro.props}><slot /></Default>
-    {challengeNumber && <div class="chip">Challenge #{challengeNumber}</div> }
+    {challengeNumber && <div class="chip">{challengeLabel} #{challengeNumber}</div> }
 </div>
 
 <style>
@@ -22,7 +23,7 @@ const challengeNumber = Astro.props.entry.data.challengeNumber;
             flex-direction: column;
             align-items: flex-start;
         }
-    } 
+    }
 
     .chip {
         border-width: 1px;

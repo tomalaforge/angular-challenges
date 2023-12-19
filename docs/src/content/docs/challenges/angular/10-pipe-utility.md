@@ -2,7 +2,8 @@
 title: 🔴 Utility Wrapper Pipe
 description: Challenge 10 is about creating a pipe to wrap utilities
 author: thomas-laforge
-challengeNumber: 10
+challenge:
+  number: 10
 command: angular-pipe-hard
 sidebar:
   order: 202

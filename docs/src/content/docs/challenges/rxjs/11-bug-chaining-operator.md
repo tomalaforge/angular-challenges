@@ -2,7 +2,8 @@
 title: 🟠 High Order Operator Bug
 description: Challenge 11 is about resolving a Rxjs bug because of high order operators
 author: thomas-laforge
-challengeNumber: 11
+challenge:
+  number: 11
 command: rxjs-pipe-bug
 sidebar:
   order: 114

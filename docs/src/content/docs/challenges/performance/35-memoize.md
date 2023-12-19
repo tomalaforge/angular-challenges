@@ -2,7 +2,8 @@
 title: 🟢 Memoization
 description: Challenge 35 is about learning how pure pipe works
 author: thomas-laforge
-challengeNumber: 35
+challenge:
+  number: 35
 command: performance-memoized
 sidebar:
   order: 8

@@ -2,7 +2,9 @@
 title: 🟢 Optimización de NgFor
 description: El Desafío 36 trata sobre como funciona trackby
 author: thomas-laforge
-challengeNumber: 36
+challenge:
+  label: Reto
+  number: 36
 command: performance-ngfor-optimize
 sidebar:
   order: 13

@@ -2,7 +2,9 @@
 title: <%= difficulty %> <%= title %>
 description: Challenge <%= challengeNumber %> is about ...
 author: <%= author %>
-challengeNumber: <%= challengeNumber %>
+challenge:
+  label: Challenge
+  number: <%= challengeNumber %>
 command: <%= appProjectName %>
 sidebar:
   order: <%= order %>

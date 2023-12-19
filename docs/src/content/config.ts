@@ -15,7 +15,12 @@ const docs = defineCollection({
   schema: (ctx) =>
     docsSchema()(ctx).extend({
       noCommentSection: z.boolean().optional().default(false),
-      challengeNumber: z.union([z.number(), z.boolean()]).default(false),
+      challenge: z
+        .object({
+          label: z.string().default('Challenge'),
+          number: z.union([z.number(), z.boolean()]).default(false),
+        })
+        .optional(),
       author: reference('authors').optional(),
       command: z.string().optional(),
       blogLink: z.string().optional(),

@@ -2,7 +2,8 @@
 title: 🟠 Web workers
 description: Challenge 40 is about learning how to create and use a web worker
 author: thomas-laforge
-challengeNumber: 40
+challenge:
+  number: 40
 command: performance-christmas-web-worker
 sidebar:
   order: 119

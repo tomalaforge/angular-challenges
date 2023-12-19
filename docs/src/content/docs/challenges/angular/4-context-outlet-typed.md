@@ -2,7 +2,8 @@
 title: 🔴 Typed ContextOutlet
 description: Challenge 4 is about strongly typing ngContextOutlet directives
 author: thomas-laforge
-challengeNumber: 4
+challenge:
+  number: 4
 command: angular-context-outlet-type
 blogLink: https://medium.com/@thomas.laforge/ngtemplateoutlet-type-checking-5d2dcb07a2c6
 sidebar:
