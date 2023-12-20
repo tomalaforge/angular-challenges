@@ -42,7 +42,7 @@
 
   "challenge.footer.note": "Nota",
   "challenge.footer.running": "Inicia el proyecto ejecutando el siguiente comando:",
-  "challenge.footer.start": "Tu Pull Request debe iniciar con",
+  "challenge.footer.start": "El título de tu PR debe iniciar con",
   "challenge.footer.answer": "Answer:",
   "challenge.footer.reminder": "¡No lo olvides!",
   "challenge.footer.communityAnswers": "Respuestas de la Comunidad",
