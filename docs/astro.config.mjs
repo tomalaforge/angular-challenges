@@ -2,10 +2,26 @@ import starlight from '@astrojs/starlight';
 import { defineConfig } from 'astro/config';
 
 export const locales = {
-  root: { label: 'English', lang: 'en' },
-  es: { label: 'Español', lang: 'es' },
-  fr: { label: 'Français', lang: 'fr' },
-  'pt-br': { label: 'Português (Brasil)', lang: 'pt-BR' },
+  root: {
+    label: 'English',
+    lang: 'en',
+  },
+  es: {
+    label: 'Español',
+    lang: 'es',
+  },
+  'es-mx': {
+    label: 'Español (México)',
+    lang: 'es-MX',
+  },
+  fr: {
+    label: 'Français',
+    lang: 'fr',
+  },
+  'pt-br': {
+    label: 'Português (Brasil)',
+    lang: 'pt-BR',
+  },
 };
 
 // https://astro.build/config
@@ -32,6 +48,7 @@ export default defineConfig({
             es: 'Guías',
             fr: 'Guides',
             'pt-BR': 'Guias',
+            'es-MX': 'Guias',
           },
         },
         {
@@ -40,7 +57,8 @@ export default defineConfig({
           translations: {
             es: 'Desafíos',
             fr: 'Challenges',
-            'pt-BR': 'Desafios'
+            'pt-BR': 'Desafios',
+            'es-MX': 'Retos',
           },
         },
       ],
@@ -70,24 +88,7 @@ export default defineConfig({
         MobileMenuFooter: './src/components/MobileMenuFooter.astro',
       },
       defaultLocale: 'root',
-      locales: {
-        root: {
-          label: 'English',
-          lang: 'en',
-        },
-        es: {
-          label: 'Español',
-          lang: 'es',
-        },
-        fr: {
-          label: 'Français',
-          lang: 'fr',
-        },
-        'pt-br': {
-          label: 'Português (Brasil)',
-          lang: 'pt-BR',
-        },
-      },
+      locales,
     }),
   ],
 });
