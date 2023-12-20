@@ -9,7 +9,7 @@ const {labels} = Astro.props;
 
 <div class="page-title-content">
     <Default {...Astro.props}><slot /></Default>
-    {challenge?.number && <div class="chip">{labels['page.title.challenge']} #{challenge.number}</div> }
+    {challenge?.number && <div class="chip">{labels['page.title.challenge'] ?? 'Challenge'} #{challenge.number}</div> }
 </div>
 
 <style>

@@ -14,7 +14,7 @@ const { name, twitter, linkedin, github, labels } = Astro.props;
 ---
 
 <p class="author">
-  {labels['author.createdBy']} {name}
+  {labels['author.createdBy'] ?? 'Created by'} {name}
     {twitter && <a href={twitter}><Icon class='icon' name="twitter" size="0.75rem" /></a>}
     {linkedin && <a href={linkedin}><Icon class='icon' name="linkedin" size="0.75rem" /></a>}
     {github && <a href={github}><Icon class='icon' name="github" size="0.75rem" /></a>}
