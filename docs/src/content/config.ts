@@ -18,7 +18,6 @@ const docs = defineCollection({
         noCommentSection: z.boolean().optional().default(false),
         challenge: z
           .object({
-            label: z.string().default('Challenge'),
             number: z.union([z.number(), z.boolean()]).default(false),
           })
           .optional(),
