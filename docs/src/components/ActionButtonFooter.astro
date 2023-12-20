@@ -1,17 +1,20 @@
 ---
 import { Icon } from '@astrojs/starlight/components';
 import MyIcon from './MyIcon.astro';
+import type { Props } from '@astrojs/starlight/props';
+
+const { labels } = Astro.props;
 
 ---
 
 <div class="action-footer">
     <a class="action-button" href='https://github.com/tomalaforge/angular-challenges'>
-        <div>Give a star</div>
+        <div>{labels['buttons.star']}</div>
         <Icon name='github' size="1rem" />
     </a>
-    
+
     <a class="action-button button-sponsor" href='https://github.com/sponsors/tomalaforge'>
-        <div>Sponsor</div>
+        <div>{labels['buttons.sponsor']}</div>
         <MyIcon name='heart' size="1rem" color="white" />
     </a>
 </div>

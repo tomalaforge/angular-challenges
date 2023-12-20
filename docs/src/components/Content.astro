@@ -6,19 +6,20 @@ import Author from './Author.astro';
 import ChallengeFooter from './ChallengeFooter.astro';
 import CommentSection from './CommentSection.astro';
 
+const { labels } = Astro.props;
 const {challenge} = Astro.props.entry.data;
 const author = Astro.props.entry.data.author ? await getEntry(Astro.props.entry.data.author) : null;
 const renderCommentSection = !Astro.props.entry.data.noCommentSection;
 
 ---
 
-{ challenge?.number && author && <Author {...author.data}/> }
+{ challenge?.number && author && <Author {...author.data} {labels}/> }
 
 <Default {...Astro.props}><slot /></Default>
 
 {challenge?.number && <ChallengeFooter {...Astro.props} />}
 
-{ renderCommentSection && <CommentSection /> }
+{ renderCommentSection && <CommentSection {...Astro.props} /> }
 
 <style>
     .author {
