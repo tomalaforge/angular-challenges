@@ -2,8 +2,7 @@
 title: 🟢 Checkbox
 description: Challenge 28 is about testing a simple checkbox
 author: thomas-laforge
-challenge:
-  number: 28
+challengeNumber: 28
 command: testing-checkbox
 sidebar:
   order: 10

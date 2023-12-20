@@ -2,9 +2,7 @@
 title: 🔴 ContextOutlet en forma de tipo
 description: El desafío 4 se trata de tipificar de manera fuerte las directivas de ngContextOutlet
 author: thomas-laforge
-challenge:
-  label: Reto
-  number: 4
+challengeNumber: 4
 command: angular-context-outlet-type
 blogLink: https://medium.com/@thomas.laforge/ngtemplateoutlet-type-checking-5d2dcb07a2c6
 sidebar:

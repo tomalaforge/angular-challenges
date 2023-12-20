@@ -3,8 +3,7 @@ title: 🟢 catchError
 description: Challenge 38 is about learning obervable completion.
 author: devesh-chaudhari
 command: rxjs-catch-error
-challenge:
-  number: 38
+challengeNumber: 38
 sidebar:
   order: 14
 ---

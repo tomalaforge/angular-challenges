@@ -2,8 +2,7 @@
 title: 🟢 Anchor Navigation
 description: Challenge 21 is about navigating inside the page with anchor
 author: thomas-laforge
-challenge:
-  number: 21
+challengeNumber: 21
 command: angular-anchor-scrolling
 sidebar:
   order: 4

@@ -2,8 +2,7 @@
 title: 🟠 Nested Components
 description: Challenge 18 is about testing nested components
 author: thomas-laforge
-challenge:
-  number: 18
+challengeNumber: 18
 command: testing-nested
 sidebar:
   order: 109

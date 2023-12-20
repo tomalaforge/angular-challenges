@@ -2,8 +2,7 @@
 title: 🟠 Router
 description: Challenge 17 is about testing the router
 author: thomas-laforge
-challenge:
-  number: 17
+challengeNumber: 17
 command: testing-router-outlet
 sidebar:
   order: 108

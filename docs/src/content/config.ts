@@ -16,11 +16,7 @@ const docs = defineCollection({
     docsSchema({
       extend: z.object({
         noCommentSection: z.boolean().optional().default(false),
-        challenge: z
-          .object({
-            number: z.union([z.number(), z.boolean()]).default(false),
-          })
-          .optional(),
+        challengeNumber: z.union([z.number(), z.boolean()]).default(false),
         author: reference('authors').optional(),
         command: z.string().optional(),
         blogLink: z.string().optional(),

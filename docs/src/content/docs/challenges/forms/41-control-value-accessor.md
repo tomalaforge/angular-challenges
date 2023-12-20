@@ -2,8 +2,7 @@
 title: 🟠 Control Value Accessor
 description: Challenge 41 is about creating a custom form control that implements Control Value Accessor interface.
 author: stanislav-gavrilov
-challenge:
-  number: 41
+challengeNumber: 41
 command: forms-control-value-accessor
 sidebar:
   order: 1

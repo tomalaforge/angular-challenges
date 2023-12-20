@@ -2,9 +2,7 @@
 title: 🟢 Aplicación CRUD
 description: El desafío 5 se trata de refactorizar una aplicación CRUD.
 author: thomas-laforge
-challenge:
-  label: Reto
-  number: 5
+challengeNumber: 5
 command: angular-crud
 sidebar:
   order: 2

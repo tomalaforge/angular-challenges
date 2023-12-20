@@ -2,8 +2,7 @@
 title: 🔴 Power of Effect
 description: Challenge 7 is about creating an Ngrx effect with another Rxjs Hot observable
 author: thomas-laforge
-challenge:
-  number: 7
+challengeNumber: 7
 command: ngrx-notification
 sidebar:
   order: 206

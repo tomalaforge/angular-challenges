@@ -2,8 +2,7 @@
 title: 🟢 NgFor Optimization
 description: Challenge 36 is about learning how trackby works
 author: thomas-laforge
-challenge:
-  number: 36
+challengeNumber: 36
 command: performance-ngfor-optimize
 sidebar:
   order: 13

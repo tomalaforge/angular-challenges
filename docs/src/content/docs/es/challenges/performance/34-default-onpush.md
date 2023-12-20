@@ -2,9 +2,7 @@
 title: 🟢 Default vs OnPush
 description: El desafío 34 trata sobre aprender la diferencia entre las estrategias de detección de cambios Default y OnPush.
 author: thomas-laforge
-challenge:
-  label: Reto
-  number: 34
+challengeNumber: 34
 command: performance-default-onpush
 sidebar:
   order: 7

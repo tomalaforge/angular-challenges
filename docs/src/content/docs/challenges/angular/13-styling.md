@@ -2,8 +2,7 @@
 title: 🟠 Highly Customizable CSS
 description: Challenge 13 is about creating highly customizable CSS styles
 author: thomas-laforge
-challenge:
-  number: 13
+challengeNumber: 13
 command: angular-styling
 sidebar:
   order: 104
