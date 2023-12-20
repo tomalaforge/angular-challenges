@@ -53,7 +53,7 @@ Check [all 41 challenges](https://angular-challenges.vercel.app/)
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="http://www.streamoverlaypro.com"><img src="https://avatars.githubusercontent.com/u/1978642?v=4?s=100" width="100px;" alt="Erick Rodriguez"/><br /><sub><b>Erick Rodriguez</b></sub></a><br /><a href="#translation-es-ErickRodrCodes" title="Translate in Spanish">🇪🇸</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://eduardoroth.dev"><img src="https://avatars.githubusercontent.com/u/5419161?v=4?s=100" width="100px;" alt="Eduardo Roth"/><br /><sub><b>Eduardo Roth</b></sub></a><br /><a href="https://github.com/tomalaforge/angular-challenges/commits?author=eduardoRoth" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://eduardoroth.dev"><img src="https://avatars.githubusercontent.com/u/5419161?v=4?s=100" width="100px;" alt="Eduardo Roth"/><br /><sub><b>Eduardo Roth</b></sub></a><br /><a href="https://github.com/tomalaforge/angular-challenges/commits?author=eduardoRoth" title="Documentation">📖</a> <a href="#translation-es-MX-eduardoRoth" title="Translate in Mexican">🇲🇽</a></td>
     </tr>
   </tbody>
   <tfoot>
