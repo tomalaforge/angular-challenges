@@ -25,7 +25,7 @@ import { PhotoStore } from './photos.store';
     RouterLinkWithHref,
   ],
   template: `
-    <h2 class="text-xl mb-2">Photos</h2>
+    <h2 class="mb-2 text-xl">Photos</h2>
 
     <mat-form-field appearance="fill">
       <mat-label>Search</mat-label>
@@ -33,23 +33,23 @@ import { PhotoStore } from './photos.store';
         type="text"
         matInput
         [formControl]="search"
-        placeholder="write an article" />
+        placeholder="find a photo" />
     </mat-form-field>
 
     <ng-container *ngrxLet="vm$ as vm">
       <section class="flex flex-col">
-        <section class="flex gap-3 items-center">
+        <section class="flex items-center gap-3">
           <button
             [disabled]="vm.page === 1"
             [class.bg-gray-400]="vm.page === 1"
-            class="text-xl border rounded-md p-3"
+            class="rounded-md border p-3 text-xl"
             (click)="store.previousPage()">
             <
           </button>
           <button
             [disabled]="vm.endOfPage"
             [class.bg-gray-400]="vm.endOfPage"
-            class="text-xl border rounded-md p-3"
+            class="rounded-md border p-3 text-xl"
             (click)="store.nextPage()">
             >
           </button>
@@ -93,7 +93,7 @@ export default class PhotosComponent implements OnInit {
         this.search.setValue(search);
         this.formInit = true;
       }
-    })
+    }),
   );
 
   private formInit = false;
@@ -104,8 +104,8 @@ export default class PhotosComponent implements OnInit {
       this.search.valueChanges.pipe(
         skipWhile(() => !this.formInit),
         debounceTime(300),
-        distinctUntilChanged()
-      )
+        distinctUntilChanged(),
+      ),
     );
   }
 
