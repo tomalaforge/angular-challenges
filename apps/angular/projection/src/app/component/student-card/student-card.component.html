@@ -1,0 +1,19 @@
+<app-card [list]="(students$ | async)" class="bg-light-green">
+  <img src="assets/img/student.webp" width="200px" />
+
+  <ng-template #itemTemplate let-item="item">
+    <app-list-item
+      [id]="item.id"
+      [name]="item.firstName + item.lastName"
+      (deleteEvent)="delete($event)"
+      >
+    </app-list-item>
+  </ng-template>
+
+  <button
+    addAction
+    class="rounded-sm border border-blue-500 bg-blue-300 p-2"
+    (click)="addNewItem()">
+    Add
+  </button>
+</app-card>

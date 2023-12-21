@@ -1,0 +1,10 @@
+<ng-content select="img"></ng-content>
+
+<section>
+  <ng-container *ngFor="let item of list">
+    <ng-template
+      *ngTemplateOutlet="itemTemplate; context: { item }"></ng-template>
+  </ng-container>
+</section>
+
+<ng-content select="[addAction]"></ng-content>
