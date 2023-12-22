@@ -1,23 +1,15 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable, effect } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { City } from '../model/city.model';
+import { ShareStore } from './share.store';
 
 @Injectable({
   providedIn: 'root',
 })
-export class CityStore {
-  private cities = new BehaviorSubject<City[]>([]);
-  cities$ = this.cities.asObservable();
-
-  addAll(cities: City[]) {
-    this.cities.next(cities);
-  }
-
-  addOne(student: City) {
-    this.cities.next([...this.cities.value, student]);
-  }
-
-  deleteOne(id: number) {
-    this.cities.next(this.cities.value.filter((s) => s.id !== id));
+export class CityStore extends ShareStore<City> {
+  constructor() {
+    super();
+    const _cities = toSignal(this.http.fetchCities$, { initialValue: [] });
+    effect(() => this.addAll(_cities()), { allowSignalWrites: true });
   }
 }
