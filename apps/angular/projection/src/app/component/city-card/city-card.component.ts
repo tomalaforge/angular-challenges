@@ -11,7 +11,7 @@ import { ListItemComponent } from './../../ui/list-item/list-item.component';
 @Component({
   selector: 'app-city-card',
   template: `
-    <app-card (add)="addCity()" [list]="cities$ | async">
+    <app-card class="bg-light-blue" (add)="addCity()" [list]="cities$ | async">
       <img width="200px" src="assets/img/city.png" alt="city image" />
 
       <ng-template #rowRef let-city>
@@ -21,6 +21,13 @@ import { ListItemComponent } from './../../ui/list-item/list-item.component';
       </ng-template>
     </app-card>
   `,
+  styles: [
+    `
+      .bg-light-blue {
+        background-color: rgba(0, 0, 255, 0.1);
+      }
+    `,
+  ],
   standalone: true,
   imports: [NgFor, CardComponent, AsyncPipe, ListItemComponent],
 })

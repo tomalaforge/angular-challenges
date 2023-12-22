@@ -14,9 +14,9 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   selector: 'app-student-card',
   template: `
     <app-card
+      class="bg-light-green"
       (add)="addStudent()"
-      [list]="students$ | async"
-      customClass="bg-light-green">
+      [list]="students$ | async">
       <img width="200px" src="assets/img/student.webp" alt="student image" />
 
       <ng-template #rowRef let-student>
@@ -29,7 +29,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   standalone: true,
   styles: [
     `
-      ::ng-deep .bg-light-green {
+      .bg-light-green {
         background-color: rgba(0, 250, 0, 0.1);
       }
     `,
