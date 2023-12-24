@@ -2,14 +2,18 @@ import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ListComponent } from './list.component';
 import { PersonComponent } from './person.component';
+import { PersonDirective } from './person.directive';
+
+// Great video resource
+// https://www.youtube.com/watch?v=dau7kQMdH4A
 
 @Component({
   standalone: true,
-  imports: [NgTemplateOutlet, PersonComponent, ListComponent],
+  imports: [NgTemplateOutlet, PersonComponent, ListComponent, PersonDirective],
   selector: 'app-root',
   template: `
     <person [person]="person">
-      <ng-template #personRef let-name let-age="age">
+      <ng-template personRef let-name let-age="age">
         {{ name }}: {{ age }}
       </ng-template>
     </person>
@@ -29,6 +33,11 @@ import { PersonComponent } from './person.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
+  // when you first run the app, person -> returns `no template` in the html
+
+  // is cities supposed to be in the html ?
+  // If you implement the guard and you can prevent the cities from returning anything ?
+
   person = {
     name: 'toto',
     age: 3,

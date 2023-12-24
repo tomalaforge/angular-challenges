@@ -7,6 +7,21 @@ import {
   TemplateRef,
 } from '@angular/core';
 
+// $implicit is a problem
+interface Students {
+  name: string;
+  age: number;
+}
+
+interface Cities {
+  name: string;
+  country: string;
+}
+
+type TItem = Students | Cities;
+
+// Use Angular 17 syntax
+
 @Component({
   selector: 'list',
   standalone: true,
@@ -17,17 +32,17 @@ import {
         *ngTemplateOutlet="
           listTemplateRef || emptyRef;
           context: { $implicit: item, appList: item, index: i }
-        ">
-      </ng-container>
+        "></ng-container>
     </div>
 
-    <ng-template #emptyRef> No Template </ng-template>
+    <ng-template #emptyRef>No Template</ng-template>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ListComponent<TItem extends object> {
+export class ListComponent<TItem> {
+  // remove the extends object?
   @Input() list!: TItem[];
 
-  @ContentChild('listRef', { read: TemplateRef })
+  @ContentChild('listRef', { read: TemplateRef }) // if you mistype listRef -> you won't get any warnings
   listTemplateRef!: TemplateRef<unknown>;
 }
