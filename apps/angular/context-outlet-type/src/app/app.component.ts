@@ -6,6 +6,7 @@ import { PersonDirective } from './person.directive';
 
 // Great video resource
 // https://www.youtube.com/watch?v=dau7kQMdH4A
+// https://github.com/joshuamorony/ng-template-outlet-example
 
 @Component({
   standalone: true,
@@ -34,9 +35,10 @@ import { PersonDirective } from './person.directive';
 })
 export class AppComponent {
   // when you first run the app, person -> returns `no template` in the html
+  // after adding the directive -> `toto: 3` is in the html.
 
   // is cities supposed to be in the html ?
-  // If you implement the guard and you can prevent the cities from returning anything ?
+  // If you implement a guard -> you can prevent either cities or students from being in the html
 
   person = {
     name: 'toto',

@@ -1,11 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Component, ContentChild, Input, TemplateRef } from '@angular/core';
-import { PersonDirective } from './person.directive';
-
-interface Person {
-  name: string;
-  age: number;
-}
+import { Person, PersonDirective } from './person.directive';
 
 @Component({
   standalone: true,
@@ -25,7 +20,7 @@ export class PersonComponent {
   @Input() person!: Person;
 
   @ContentChild(PersonDirective, { read: TemplateRef })
-  personTemplateRef!: TemplateRef<unknown>;
+  personTemplateRef!: TemplateRef<unknown>; // $implicit doesn't exist on Person
 
   /*
 

@@ -6,7 +6,7 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 
-interface PersonItem {
+export interface Person {
   name: string;
   age: number;
 }
@@ -14,7 +14,7 @@ interface PersonItem {
 interface PersonContext {
   $implicit: string;
   person: string;
-  name: PersonItem;
+  name: Person;
   age: number; // need to add age here -> angular docs had example where video didn't need to be added?
 }
 
@@ -24,7 +24,7 @@ interface PersonContext {
 })
 export class PersonDirective implements OnInit {
   @Input() personRef!: string;
-  @Input() personItem!: PersonItem;
+  @Input() person!: Person;
 
   // can inject as well ?
   constructor(
@@ -36,7 +36,7 @@ export class PersonDirective implements OnInit {
     const context = {
       $implicit: this.personRef,
       person: this.personRef,
-      name: this.personItem,
+      name: this.person,
     };
     this.viewContainerRef.createEmbeddedView(this.templateRef, context);
   }

@@ -20,7 +20,8 @@ interface Cities {
 
 type TItem = Students | Cities;
 
-// Use Angular 17 syntax
+// If use Angular 17 syntax
+// you shouldn't need CommonModule
 
 @Component({
   selector: 'list',
@@ -39,8 +40,8 @@ type TItem = Students | Cities;
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ListComponent<TItem> {
-  // remove the extends object?
+export class ListComponent<TItem extends object> {
+  // extends object helps constrain the type
   @Input() list!: TItem[];
 
   @ContentChild('listRef', { read: TemplateRef }) // if you mistype listRef -> you won't get any warnings
