@@ -6,16 +6,19 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 
+// Extra property added to Person
+// if it is not used in template, no error if it is not added to PersonContext?
 export interface Person {
   name: string;
   age: number;
 }
 
 interface PersonContext {
-  $implicit: string;
+  $implicit: Person;
   person: string;
   name: Person;
-  age: number; // need to add age here -> angular docs had example where video didn't need to be added?
+  age: number; // need to add age here -> angular docs had example where `video` didn't need to be added?
+  // Because the property wasn't used in the template?
 }
 
 @Directive({
@@ -24,7 +27,7 @@ interface PersonContext {
 })
 export class PersonDirective implements OnInit {
   @Input() personRef!: string;
-  @Input() person!: Person;
+  @Input() person!: Person; // this Input is what gives the typing
 
   // can inject as well ?
   constructor(
@@ -34,7 +37,7 @@ export class PersonDirective implements OnInit {
 
   ngOnInit(): void {
     const context = {
-      $implicit: this.personRef,
+      $implicit: this.person,
       person: this.personRef,
       name: this.person,
     };

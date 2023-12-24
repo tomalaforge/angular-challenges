@@ -2,7 +2,7 @@ import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ListComponent } from './list.component';
 import { PersonComponent } from './person.component';
-import { PersonDirective } from './person.directive';
+import { Person, PersonDirective } from './person.directive';
 
 // Great video resource
 // https://www.youtube.com/watch?v=dau7kQMdH4A
@@ -40,7 +40,7 @@ export class AppComponent {
   // is cities supposed to be in the html ?
   // If you implement a guard -> you can prevent either cities or students from being in the html
 
-  person = {
+  person: Person = {
     name: 'toto',
     age: 3,
   };

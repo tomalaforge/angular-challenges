@@ -25,6 +25,8 @@ export class PersonComponent {
   /*
 
   // leaving it the way it was -> still works when directive is used ?
+  // the typing depends on the Inputs in the directive
+  // TemplateRef<any | unknown> doesn't matter
 
   @ContentChild('#personRef', { read: TemplateRef })
   personTemplateRef!: TemplateRef<unknown>;
