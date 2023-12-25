@@ -32,14 +32,16 @@ import { Person, PersonDirective } from './person.directive';
       </ng-template>
     </person>
 
+    <!--can't just use listRef from directive and pass a generic type? -->
+    <!-- need *syntax? -->
     <list [list]="students">
-      <ng-template listRef let-student let-i="index">
+      <ng-template #listRef let-student let-i="index">
         {{ student.name }}: {{ student.age }} - {{ i }}
       </ng-template>
     </list>
 
     <list [list]="cities">
-      <ng-template listRef let-city let-i="index">
+      <ng-template #listRef let-city let-i="index">
         {{ city.name }}: {{ city.country }} - {{ i }}
       </ng-template>
     </list>
@@ -52,6 +54,12 @@ export class AppComponent {
 
   // is cities supposed to be in the html ?
   // If you implement a guard -> you can prevent either cities or students from being in the html
+
+  /*
+  export const isStudents = (tItem: TItem): TItem is Students => {
+    return (tItem as students).age !== undefined;
+  } 
+  */
 
   person: Person = {
     name: 'toto',
