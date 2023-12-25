@@ -7,19 +7,6 @@ import {
   TemplateRef,
 } from '@angular/core';
 
-// $implicit is a problem
-interface Students {
-  name: string;
-  age: number;
-}
-
-interface Cities {
-  name: string;
-  country: string;
-}
-
-type TItem = Students | Cities;
-
 // If use Angular 17 syntax
 // you shouldn't need CommonModule
 

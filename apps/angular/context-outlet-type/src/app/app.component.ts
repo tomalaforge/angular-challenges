@@ -1,16 +1,29 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ListComponent } from './list.component';
+import { Cities, ListDirective, Students } from './list.directive';
 import { PersonComponent } from './person.component';
 import { Person, PersonDirective } from './person.directive';
 
-// Great video resource
+// Useful Resources
+
 // https://www.youtube.com/watch?v=dau7kQMdH4A
 // https://github.com/joshuamorony/ng-template-outlet-example
 
+// type guard can be used as a pipe
+// https://medium.com/@bitbangx/type-guards-in-angular-templates-9a3c966e2145
+
+// https://angular.dev/guide/directives/structural-directives#improving-template-type-checking-for-custom-directives
+
 @Component({
   standalone: true,
-  imports: [NgTemplateOutlet, PersonComponent, ListComponent, PersonDirective],
+  imports: [
+    NgTemplateOutlet,
+    PersonComponent,
+    ListComponent,
+    PersonDirective,
+    ListDirective,
+  ],
   selector: 'app-root',
   template: `
     <person [person]="person">
@@ -20,13 +33,13 @@ import { Person, PersonDirective } from './person.directive';
     </person>
 
     <list [list]="students">
-      <ng-template #listRef let-student let-i="index">
+      <ng-template listRef let-student let-i="index">
         {{ student.name }}: {{ student.age }} - {{ i }}
       </ng-template>
     </list>
 
     <list [list]="cities">
-      <ng-template #listRef let-city let-i="index">
+      <ng-template listRef let-city let-i="index">
         {{ city.name }}: {{ city.country }} - {{ i }}
       </ng-template>
     </list>
@@ -45,12 +58,12 @@ export class AppComponent {
     age: 3,
   };
 
-  students = [
+  students: Students[] = [
     { name: 'toto', age: 3 },
     { name: 'titi', age: 4 },
   ];
 
-  cities = [
+  cities: Cities[] = [
     { name: 'Paris', country: 'France' },
     { name: 'Berlin', country: 'Germany' },
   ];
