@@ -26,17 +26,17 @@ export class FeedbackFormComponent {
     email: new FormControl('', {
       validators: Validators.required,
     }),
+    rating: new FormControl('', {
+      validators: Validators.required,
+    }),
     comment: new FormControl(),
   });
 
-  rating: string | null = null;
-
   submitForm(): void {
-    this.feedBackSubmit.emit({
-      ...this.feedbackForm.value,
-      rating: this.rating,
-    });
+    if (this.feedbackForm.valid) {
+      this.feedBackSubmit.emit(this.feedbackForm.value);
 
-    this.feedbackForm.reset();
+      this.feedbackForm.reset();
+    }
   }
 }

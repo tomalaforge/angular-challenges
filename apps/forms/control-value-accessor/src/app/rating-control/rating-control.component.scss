@@ -1,3 +1,6 @@
+$default-color: #d8d8d8;
+$active-color: #ffd055;
+
 .rating {
   display: flex;
   justify-content: center;
@@ -5,7 +8,18 @@
 
   &:hover {
     .star {
-      fill: #ffd055;
+      fill: $active-color;
+    }
+  }
+
+  &.disabled {
+    .star {
+      cursor: not-allowed;
+    }
+    &:hover {
+      .star {
+        fill: $default-color;
+      }
     }
   }
 }
@@ -13,14 +27,14 @@
 .star {
   width: 50px;
   height: 50px;
-  fill: #cccccc;
+  fill: $default-color;
   cursor: pointer;
 
   &:hover ~ .star {
-    fill: #d8d8d8;
+    fill: $default-color;
   }
 }
 
 .star-active {
-  fill: #ffd055 !important;
+  fill: $active-color !important;
 }

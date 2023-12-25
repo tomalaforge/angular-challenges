@@ -42,9 +42,11 @@
   background-color: #054ada;
   color: #ffffff;
   font-size: 18px;
+  cursor: pointer;
 
   &[disabled] {
     background-color: #cccccc;
     color: #ffffff;
+    cursor: not-allowed;
   }
 }
