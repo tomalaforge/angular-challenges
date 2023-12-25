@@ -1,5 +1,8 @@
 import { Directive, Input } from '@angular/core';
 
+// Named the interfaces plural
+// Could rename to Student / City
+
 export interface Students {
   name: string;
   age: number;
@@ -34,6 +37,9 @@ export class ListDirective<TItem extends object> {
 }
 
 /*
+
+// Started with same approach as person directive
+
 import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 
 export interface Students {
