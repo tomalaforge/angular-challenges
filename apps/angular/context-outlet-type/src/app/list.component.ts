@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -6,23 +6,27 @@ import {
   Input,
   TemplateRef,
 } from '@angular/core';
+import { ListDirective } from './list.directive';
 
 // If you use Angular 17 control-flow syntax, you don't need CommonModule
-// but you need CommonModule here for ngTemplateOutlet
+// you can import ngTemplateOutlet separately without CommonModule as well
 
 // I deleted the EmptyRef
+
+// context: { $implicit: item, appList: item, index: i }
+// appList -> redundant ?
 
 @Component({
   selector: 'list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [NgTemplateOutlet],
   template: `
     @for (item of list; track item; let i = $index) {
       <div>
         <ng-container
           *ngTemplateOutlet="
             listTemplateRef;
-            context: { $implicit: item, appList: item, index: i }
+            context: { $implicit: item, index: i }
           "></ng-container>
       </div>
     } @empty {
@@ -34,6 +38,6 @@ import {
 export class ListComponent<TItem extends object> {
   @Input() list!: TItem[];
 
-  @ContentChild('listRef', { read: TemplateRef })
+  @ContentChild(ListDirective, { read: TemplateRef })
   listTemplateRef!: TemplateRef<unknown>;
 }

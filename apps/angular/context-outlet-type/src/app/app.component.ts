@@ -15,6 +15,10 @@ import { Person, PersonDirective } from './person.directive';
 
 // https://angular.dev/guide/directives/structural-directives#improving-template-type-checking-for-custom-directives
 
+// https://vibhas1892.medium.com/difference-between-ng-template-ng-container-and-ng-content-a1d264619655
+
+// https://stackoverflow.com/questions/64045389/is-there-a-way-to-provide-static-typing-in-ng-template-let-bindings
+
 @Component({
   standalone: true,
   imports: [
@@ -32,16 +36,16 @@ import { Person, PersonDirective } from './person.directive';
       </ng-template>
     </person>
 
-    <!--can't just use listRef from directive and pass a generic type? -->
-    <!-- need *syntax? -->
+    <!--you can never type let-student type syntax ?  -->
+
     <list [list]="students">
-      <ng-template #listRef let-student let-i="index">
+      <ng-template [listRef]="students" let-student let-i="index">
         {{ student.name }}: {{ student.age }} - {{ i }}
       </ng-template>
     </list>
 
     <list [list]="cities">
-      <ng-template #listRef let-city let-i="index">
+      <ng-template [listRef]="cities" let-city let-i="index">
         {{ city.name }}: {{ city.country }} - {{ i }}
       </ng-template>
     </list>

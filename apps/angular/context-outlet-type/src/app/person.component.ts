@@ -2,6 +2,8 @@ import { NgTemplateOutlet } from '@angular/common';
 import { Component, ContentChild, Input, TemplateRef } from '@angular/core';
 import { Person, PersonDirective } from './person.directive';
 
+// emptyRef is the alternative template
+
 @Component({
   standalone: true,
   imports: [NgTemplateOutlet],
@@ -25,10 +27,11 @@ export class PersonComponent {
   /*
 
   // leaving it the way it was -> still works when directive is used ?
-  // the typing depends on the Inputs in the directive
-  // TemplateRef<any | unknown> doesn't matter
-
+ 
   @ContentChild('#personRef', { read: TemplateRef })
   personTemplateRef!: TemplateRef<unknown>;
+
+  // the typing depends on the Inputs in the directive
+  // TemplateRef<any | unknown> doesn't matter
   */
 }
