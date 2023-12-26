@@ -19,7 +19,7 @@ export const locales = {
     lang: 'fr',
   },
   'pt-br': {
-    label: 'Português (Brasil)',
+    label: 'Português',
     lang: 'pt-BR',
   },
 };
