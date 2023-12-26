@@ -4,21 +4,23 @@ import {
   OnInit,
   TemplateRef,
   ViewContainerRef,
+  inject,
 } from '@angular/core';
 
 // Extra property added to Person
-// if it is not used in template, no error if it is not added to PersonContext?
+// There is no error if it is not added to PersonContext
+// There will be an error if the property added is not optional
 export interface Person {
   name: string;
   age: number;
+  //extra?: string;
 }
 
 interface PersonContext {
   $implicit: Person;
   person: string;
   name: Person;
-  age: number; // need to add age here -> angular docs had example where `video` didn't need to be added?
-  // Because the property wasn't used in the template?
+  age: number;
 }
 
 @Directive({
@@ -29,11 +31,17 @@ export class PersonDirective implements OnInit {
   @Input() personRef!: string;
   @Input() person!: Person; // this Input is what gives the typing
 
-  // can inject as well ?
+  /*
   constructor(
     private readonly viewContainerRef: ViewContainerRef,
     private readonly templateRef: TemplateRef<PersonContext>,
   ) {}
+  */
+
+  // # -> new way to make variables private
+
+  readonly #viewContainerRef = inject(ViewContainerRef);
+  readonly #templateRef = inject(TemplateRef<PersonContext>);
 
   ngOnInit(): void {
     const context = {
@@ -41,7 +49,7 @@ export class PersonDirective implements OnInit {
       person: this.personRef,
       name: this.person,
     };
-    this.viewContainerRef.createEmbeddedView(this.templateRef, context);
+    this.#viewContainerRef.createEmbeddedView(this.#templateRef, context);
   }
 
   static ngTemplateContextGuard(

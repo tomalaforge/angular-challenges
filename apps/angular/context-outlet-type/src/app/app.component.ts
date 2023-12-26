@@ -36,7 +36,7 @@ import { Person, PersonDirective } from './person.directive';
       </ng-template>
     </person>
 
-    <!-- you can never type let-student type syntax directly -->
+    <!-- you can never type 'let' syntax directly -->
 
     <!-- this seems to work just have to bind data twice -->
 
