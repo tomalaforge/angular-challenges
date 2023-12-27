@@ -5,10 +5,10 @@ export const loadUsers = createAction('[User] Load User');
 
 export const loadUsersSuccess = createAction(
   '[User] Load Users Success',
-  props<{ user: User }>()
+  props<{ user: User }>(),
 );
 
 export const loadUsersFailure = createAction(
   '[User] Load Users Failure',
-  props<{ error: any }>()
+  props<{ error: string }>(),
 );

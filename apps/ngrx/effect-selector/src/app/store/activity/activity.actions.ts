@@ -5,10 +5,10 @@ export const loadActivities = createAction('[AppComponent] Load Activities');
 
 export const loadActivitiesSuccess = createAction(
   '[Activity Effect] Load Activitys Success',
-  props<{ activities: Activity[] }>()
+  props<{ activities: Activity[] }>(),
 );
 
 export const loadActivitiesFailure = createAction(
   '[Activity Effect] Load Activities Failure',
-  props<{ error: any }>()
+  props<{ error: string }>(),
 );
