@@ -8,8 +8,10 @@ import {
 import { Store } from '@ngrx/store';
 import { loadActivities } from './store/activity/activity.actions';
 import { ActivityType } from './store/activity/activity.model';
-import { selectActivities } from './store/activity/activity.selectors';
-import { selectAllTeachersByActivityType } from './store/status/status.selectors';
+import {
+  selectActivities,
+  selectAllTeachersByActivityType,
+} from './store/activity/activity.selectors';
 
 @Component({
   selector: 'app-root',
