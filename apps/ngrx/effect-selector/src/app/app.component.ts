@@ -6,12 +6,8 @@ import {
   inject,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { loadActivities } from './store/activity/activity.actions';
-import { ActivityType } from './store/activity/activity.model';
-import {
-  selectActivities,
-  selectAllTeachersByActivityType,
-} from './store/activity/activity.selectors';
+import { selectActivitiesWithTeachers } from './store/activity/activity.selectors';
+import { initApp } from './store/app.action';
 
 @Component({
   selector: 'app-root',
@@ -20,16 +16,12 @@ import {
   template: `
     <h1>Activity Board</h1>
     <section>
-      <div class="card" *ngFor="let activity of activities$ | async">
+      <div class="card" *ngFor="let activity of activities()">
         <h2>Activity Name: {{ activity.name }}</h2>
         <p>Main teacher: {{ activity.teacher.name }}</p>
         <span>All teachers available for : {{ activity.type }} are</span>
         <ul>
-          <li
-            *ngFor="
-              let teacher of getAllTeachersForActivityType$(activity.type)
-                | async
-            ">
+          <li *ngFor="let teacher of activity.teachers">
             {{ teacher.name }}
           </li>
         </ul>
@@ -59,12 +51,9 @@ import {
 export class AppComponent implements OnInit {
   private store = inject(Store);
 
-  activities$ = this.store.select(selectActivities);
+  activities = this.store.selectSignal(selectActivitiesWithTeachers);
 
   ngOnInit(): void {
-    this.store.dispatch(loadActivities());
+    this.store.dispatch(initApp());
   }
-
-  getAllTeachersForActivityType$ = (type: ActivityType) =>
-    this.store.select(selectAllTeachersByActivityType(type));
 }

@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { selectUserState } from '../user/user.selectors';
-import { ActivityType } from './activity.model';
+import { selectUser } from '../user/user.selectors';
+import { ActivityWithTeachers } from './activity.model';
 import { ActivityState, activityFeatureKey } from './activity.reducer';
 
 export const selectActivityState =
@@ -11,21 +11,20 @@ export const selectActivities = createSelector(
   (state) => state.activities,
 );
 
-export const selectAllTeachersByActivityType = (type: ActivityType) =>
-  createSelector(
-    selectActivityState,
-    selectUserState,
-    (activityState, userState) => {
-      if (userState.user?.isAdmin) {
-        return activityState.activities
-          .filter((a) => a.type === type)
-          .map((a) => {
-            return {
-              id: a.id,
-              name: a.teacher.name,
-            };
-          });
-      }
-      return [];
-    },
-  );
+export const selectActivitiesWithTeachers = createSelector(
+  selectActivities,
+  selectUser,
+  (activities, user) => {
+    if (!user?.isAdmin) return [];
+    return activities.map((a) => {
+      return {
+        ...a,
+        teachers: activities
+          .filter((ac) => ac.type === a.type)
+          .map((ac) => {
+            return { name: ac.teacher.name };
+          }),
+      } as ActivityWithTeachers;
+    });
+  },
+);
