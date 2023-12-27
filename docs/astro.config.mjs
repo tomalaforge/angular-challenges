@@ -18,9 +18,9 @@ export const locales = {
     label: 'Français',
     lang: 'fr',
   },
-  'pt-br': {
-    label: 'Português (Brasil)',
-    lang: 'pt-BR',
+  pt: {
+    label: 'Português',
+    lang: 'pt',
   },
 };
 
@@ -47,7 +47,7 @@ export default defineConfig({
           translations: {
             es: 'Guías',
             fr: 'Guides',
-            'pt-BR': 'Guias',
+            pt: 'Guias',
             'es-MX': 'Guias',
           },
         },
@@ -57,7 +57,7 @@ export default defineConfig({
           translations: {
             es: 'Desafíos',
             fr: 'Challenges',
-            'pt-BR': 'Desafios',
+            pt: 'Desafios',
             'es-MX': 'Retos',
           },
         },
