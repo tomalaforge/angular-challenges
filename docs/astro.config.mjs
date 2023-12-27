@@ -10,10 +10,6 @@ export const locales = {
     label: 'Español',
     lang: 'es',
   },
-  'es-mx': {
-    label: 'Español (México)',
-    lang: 'es-MX',
-  },
   fr: {
     label: 'Français',
     lang: 'fr',
@@ -48,7 +44,6 @@ export default defineConfig({
             es: 'Guías',
             fr: 'Guides',
             pt: 'Guias',
-            'es-MX': 'Guias',
           },
         },
         {
@@ -58,7 +53,6 @@ export default defineConfig({
             es: 'Desafíos',
             fr: 'Challenges',
             pt: 'Desafios',
-            'es-MX': 'Retos',
           },
         },
       ],
