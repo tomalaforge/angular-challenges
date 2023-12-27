@@ -34,20 +34,21 @@ const docs = defineCollection({
 const i18n = defineCollection({
   type: 'data',
   schema: i18nSchema({
-    extend: z.object({
-      'page.title.challenge': z.string(),
-      'author.createdBy': z.string(),
-      'buttons.star': z.string(),
-      'buttons.sponsor': z.string(),
-      'challenge.footer.note': z.string(),
-      'challenge.footer.running': z.string(),
-      'challenge.footer.start': z.string(),
-      'challenge.footer.answer': z.string(),
-      'challenge.footer.reminder': z.string(),
-      'challenge.footer.communityAnswers': z.string(),
-      'challenge.footer.authorAnswer': z.string(),
-      'challenge.footer.blogPost': z.string(),
-    }),
+    extend: z
+      .object({
+        'page.title.challenge': z.string(),
+        'author.createdBy': z.string(),
+        'buttons.star': z.string(),
+        'buttons.sponsor': z.string(),
+        'challenge.footer.note': z.string(),
+        'challenge.footer.running': z.string(),
+        'challenge.footer.start': z.string(),
+        'challenge.footer.reminder': z.string(),
+        'challenge.footer.communityAnswers': z.string(),
+        'challenge.footer.authorAnswer': z.string(),
+        'challenge.footer.blogPost': z.string(),
+      })
+      .partial(),
   }),
 });
 
