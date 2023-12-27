@@ -1,0 +1,14 @@
+{
+  "page.title.challenge": "Challenge",
+  "author.createdBy": "Créé par",
+  "buttons.star": "Donne une étoile",
+  "buttons.sponsor": "Sponsorise",
+
+  "challenge.footer.note": "Note",
+  "challenge.footer.running": "Démarre le projet en exécutant:",
+  "challenge.footer.start": "Le titre de ta PR doit commencer par",
+  "challenge.footer.reminder": "Rappel",
+  "challenge.footer.communityAnswers": "Solution de la communauté",
+  "challenge.footer.authorAnswer": "Solution de l'auteur",
+  "challenge.footer.blogPost": "Article"
+}
