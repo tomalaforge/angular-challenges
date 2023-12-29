@@ -1,9 +1,9 @@
-import { Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Subject, concatMap, map } from 'rxjs';
+import { FormsModule } from '@angular/forms';
+import { Subject, catchError, concatMap, map, of } from 'rxjs';
 
 @Component({
   standalone: true,
@@ -11,9 +11,9 @@ import { Subject, concatMap, map } from 'rxjs';
   selector: 'app-root',
   template: `
     <div class="form-container">
-      <span
-        >possible values: posts, comments, albums, photos, todos, users</span
-      >
+      <span>
+        possible values: posts, comments, albums, photos, todos, users
+      </span>
     </div>
     <form class="form-container" (ngSubmit)="submit$$.next()">
       <input
@@ -29,7 +29,7 @@ import { Subject, concatMap, map } from 'rxjs';
   `,
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   submit$$ = new Subject<void>();
   input = '';
   response: unknown;
@@ -40,20 +40,14 @@ export class AppComponent {
       .pipe(
         map(() => this.input),
         concatMap((value) =>
-          this.http.get(`https://jsonplaceholder.typicode.com/${value}/1`)
+          this.http
+            .get(`https://jsonplaceholder.typicode.com/${value}/1`)
+            .pipe(catchError((e) => of(e))),
         ),
-        takeUntilDestroyed(this.destroyRef)
+        takeUntilDestroyed(this.destroyRef),
       )
-      .subscribe({
-        next: (value) => {
-          console.log(value);
-          this.response = value;
-        },
-        error: (error) => {
-          console.log(error);
-          this.response = error;
-        },
-        complete: () => console.log('done'),
+      .subscribe((value) => {
+        this.response = value;
       });
   }
 }
