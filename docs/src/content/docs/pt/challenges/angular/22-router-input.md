@@ -1,6 +1,6 @@
 ---
 title: 🟢 @RouterInput()
-description: Defasio 22 é sobre o usar do decorador @Input para recuperar parâmetros do roteador.
+description: Desafio 22 é sobre o uso do decorador @Input para recuperar parâmetros do roteador.
 author: thomas-laforge
 challengeNumber: 22
 command: angular-router-input
