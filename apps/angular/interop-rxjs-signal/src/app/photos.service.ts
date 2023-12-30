@@ -8,8 +8,8 @@ export interface FlickrAPIResponse {
     page: number;
     pages: number;
     perpage: number;
-    total: number;
     photo: Photo[];
+    total: number;
   };
   stat: string;
 }
