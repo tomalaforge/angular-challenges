@@ -1,3 +1,4 @@
 {
-  "editor.wordWrapColumn": 120
+  "editor.wordWrapColumn": 120,
+  "typescript.inlayHints.parameterNames.enabled": "all"
 }
