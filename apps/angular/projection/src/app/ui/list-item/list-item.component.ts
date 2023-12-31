@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { StudentStore } from '../../data-access/student.store';
 import { TeacherStore } from '../../data-access/teacher.store';
 import { CardType } from '../../model/card.model';
@@ -7,12 +7,6 @@ import { CardType } from '../../model/card.model';
 @Component({
   selector: 'app-list-item',
   template: `
-    <!-- <div class="border border-grey-300 py-1 px-2 flex justify-between">
-      {{ name }}
-      <button (click)="delete(id)">
-        <img class="h-5" src="assets/svg/trash.svg" />
-      </button>
-    </div> -->
     <ng-template #templateTest>
       {{ name }}
       <button (click)="delete(id)">
@@ -27,7 +21,7 @@ import { CardType } from '../../model/card.model';
   standalone: true,
   imports: [NgTemplateOutlet],
 })
-export class ListItemComponent {
+export class ListItemComponent implements OnChanges {
   @Input() id!: number;
   @Input() name!: string;
   @Input() type!: CardType;
@@ -36,6 +30,10 @@ export class ListItemComponent {
     private teacherStore: TeacherStore,
     private studentStore: StudentStore,
   ) {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(this.id, this.name, this, this.type);
+  }
 
   delete(id: number) {
     if (this.type === CardType.TEACHER) {
