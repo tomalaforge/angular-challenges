@@ -6,7 +6,6 @@ challengeNumber: 41
 command: forms-control-value-accessor
 sidebar:
   order: 1
-  badge: New
 ---
 
 ## Information

@@ -76,6 +76,9 @@
       ],
       "@tomalaforge/ngrx-callstate-store": [
         "libs/shared/ngrx-callstate-store/src/index.ts"
+      ],
+      "@angular-challenges/static-dynamic-import/users": [
+        "libs/static-dynamic-import/users/src/index.ts"
       ]
     }
   },

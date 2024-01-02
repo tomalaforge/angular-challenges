@@ -97,6 +97,7 @@
     "prettier": "^3.1.0",
     "prettier-plugin-organize-imports": "^3.2.4",
     "prettier-plugin-tailwindcss": "^0.5.9",
+    "source-map-explorer": "^2.5.3",
     "testing-library-selector": "^0.3.1",
     "ts-jest": "29.1.0",
     "ts-node": "10.9.1",
