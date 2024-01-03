@@ -31,9 +31,9 @@ In LoginComponent, you will find 6 buttons corresponding to 6 differents user's 
 
 In `InformationComponent`, you need to display the correct piece of information for each role using a structural directive.
 
-### Constraints:
+### Constraints
 
-- no `ngIf` of `@if` inside `InformationComponent`
+- no `ngIf` or `@if` inside `InformationComponent`
 - importing the store inside `InformationComponent` is not allowed.
 
 You should end up with something like below:
