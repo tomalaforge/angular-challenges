@@ -3,7 +3,7 @@ import {
   randStudent,
   randTeacher,
 } from '@angular-challenges/ngrx-notification/model';
-import { inject, Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { randCompanyName, randFirstName } from '@ngneat/falso';
 import { concatLatestFrom } from '@ngrx/effects';
 import { map, tap, timer } from 'rxjs';
@@ -17,7 +17,7 @@ export class FakeBackendService {
 
   getAllTeachers = () => this.fakeDbService.teachers$;
   getAllStudents = () => this.fakeDbService.students$;
-  getAllStchools = () => this.fakeDbService.schools$;
+  getAllSchools = () => this.fakeDbService.schools$;
 
   start() {
     this.fakeAddTeacher();
@@ -33,7 +33,7 @@ export class FakeBackendService {
       .pipe(
         map(() => randTeacher()),
         tap((teacher) => this.pushService.pushData(teacher)),
-        tap((teacher) => this.fakeDbService.addTeacher(teacher))
+        tap((teacher) => this.fakeDbService.addTeacher(teacher)),
       )
       .subscribe();
   }
@@ -48,7 +48,7 @@ export class FakeBackendService {
           version: teacher.version + 1,
         })),
         tap((teacher) => this.pushService.pushData(teacher)),
-        tap((teacher) => this.fakeDbService.updateTeacher(teacher))
+        tap((teacher) => this.fakeDbService.updateTeacher(teacher)),
       )
       .subscribe();
   }
@@ -58,7 +58,7 @@ export class FakeBackendService {
       .pipe(
         map(() => randStudent()),
         tap((student) => this.pushService.pushData(student)),
-        tap((student) => this.fakeDbService.addStudent(student))
+        tap((student) => this.fakeDbService.addStudent(student)),
       )
       .subscribe();
   }
@@ -73,7 +73,7 @@ export class FakeBackendService {
           version: student.version + 1,
         })),
         tap((student) => this.pushService.pushData(student)),
-        tap((student) => this.fakeDbService.updateSudent(student))
+        tap((student) => this.fakeDbService.updateSudent(student)),
       )
       .subscribe();
   }
@@ -83,7 +83,7 @@ export class FakeBackendService {
       .pipe(
         map(() => randSchool()),
         tap((school) => this.pushService.pushData(school)),
-        tap((school) => this.fakeDbService.addSchool(school))
+        tap((school) => this.fakeDbService.addSchool(school)),
       )
       .subscribe();
   }
@@ -98,7 +98,7 @@ export class FakeBackendService {
           version: school.version + 1,
         })),
         tap((school) => this.pushService.pushData(school)),
-        tap((school) => this.fakeDbService.updateSchool(school))
+        tap((school) => this.fakeDbService.updateSchool(school)),
       )
       .subscribe();
   }
