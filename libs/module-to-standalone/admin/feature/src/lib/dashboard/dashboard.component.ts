@@ -1,22 +1,16 @@
-import { Component, NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'lib-dashboard',
-  template: `Dashboard
+  template: `
+    Dashboard
 
     <button
       routerLink="create-user"
-      class="border bg-gray-700 rounded-lg p-2 text-white ml-10">
+      class="ml-10 rounded-lg border bg-gray-700 p-2 text-white">
       Create User
-    </button> `,
+    </button>
+  `,
 })
 export class DashboardComponent {}
-
-@NgModule({
-  imports: [
-    RouterModule.forChild([{ path: '', component: DashboardComponent }]),
-  ],
-  declarations: [DashboardComponent],
-})
-export class DashboardModule {}

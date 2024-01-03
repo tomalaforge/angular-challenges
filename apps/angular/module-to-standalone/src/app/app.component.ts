@@ -1,25 +1,30 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
+  standalone: true,
+  imports: [RouterModule],
   selector: 'app-root',
-  template: ` <div class="flex gap-2">
+  template: `
+    <div class="flex gap-2">
       <button
         routerLink="home"
-        class="border px-4 py-2 border-blue-400 rounded-md">
+        class="rounded-md border border-blue-400 px-4 py-2">
         Home
       </button>
       <button
         routerLink="admin"
-        class="border px-4 py-2 border-blue-400 rounded-md">
+        class="rounded-md border border-blue-400 px-4 py-2">
         Admin
       </button>
       <button
         routerLink="user"
-        class="border px-4 py-2 border-blue-400 rounded-md">
+        class="rounded-md border border-blue-400 px-4 py-2">
         User
       </button>
     </div>
-    <router-outlet></router-outlet>`,
+    <router-outlet></router-outlet>
+  `,
   host: {
     class: 'flex flex-col p-4 gap-3',
   },

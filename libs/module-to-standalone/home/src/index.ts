@@ -1,1 +1,2 @@
-export * from './lib/home.module';
+export * from './home.routes';
+export * from './lib/home.component';
