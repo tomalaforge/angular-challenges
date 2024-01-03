@@ -4,7 +4,6 @@ import {
   randTeacher,
 } from '../../data-access/fake-http.service';
 import { TeacherStore } from '../../data-access/teacher.store';
-import { Teacher } from '../../model/teacher.model';
 import {
   CardComponent,
   CardListItemDirective,
@@ -14,28 +13,24 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
 @Component({
   selector: 'app-teacher-card',
   template: `
-    <app-card [list]="teachers" customClass="bg-light-red">
+    <app-card
+      customClass="bg-light-red"
+      [list]="teachers()"
+      (addItem)="addNewItem()">
       <img src="assets/img/teacher.png" width="200px" image />
 
-      <ng-template cardListItem let-student>
-        <app-list-item
-          [name]="student.firstName"
-          [id]="student.id"
-          (deleteItem)="onDeleteItem($event)"></app-list-item>
+      <ng-template cardListItem let-teacher>
+        <app-list-item (deleteItem)="onDeleteItem(teacher.id)">
+          <p>{{ teacher.firstName }}</p>
+        </app-list-item>
       </ng-template>
-
-      <button
-        class="rounded-sm border border-blue-500 bg-blue-300 p-2"
-        (click)="addNewItem()">
-        Add
-      </button>
     </app-card>
   `,
   standalone: true,
   imports: [CardComponent, ListItemComponent, CardListItemDirective],
 })
 export class TeacherCardComponent implements OnInit {
-  teachers: Teacher[] = [];
+  teachers = this.teacherStore.teachers;
 
   constructor(
     private http: FakeHttpService,
@@ -44,8 +39,6 @@ export class TeacherCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.http.fetchTeachers$.subscribe((t) => this.teacherStore.addAll(t));
-
-    this.teacherStore.teachers$.subscribe((t) => (this.teachers = t));
   }
 
   addNewItem() {

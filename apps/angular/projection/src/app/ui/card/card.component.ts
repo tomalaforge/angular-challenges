@@ -3,7 +3,9 @@ import {
   Component,
   ContentChild,
   Directive,
+  EventEmitter,
   Input,
+  Output,
   TemplateRef,
 } from '@angular/core';
 import { ListItemComponent } from '../list-item/list-item.component';
@@ -33,15 +35,25 @@ export class CardListItemDirective {
       </section>
 
       <ng-content></ng-content>
+
+      <button
+        class="rounded-sm border border-blue-500 bg-blue-300 p-2"
+        (click)="addNewItem()">
+        Add
+      </button>
     </div>
   `,
-
   standalone: true,
   imports: [NgIf, NgFor, ListItemComponent, NgTemplateOutlet],
 })
 export class CardComponent<T> {
   @Input() list: T[] | null = null;
   @Input() customClass = '';
+  @Output() addItem = new EventEmitter();
 
   @ContentChild(CardListItemDirective) content!: CardListItemDirective;
+
+  addNewItem() {
+    this.addItem.emit();
+  }
 }
