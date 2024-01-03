@@ -1,8 +1,8 @@
+import { Injectable } from '@angular/core';
 import { CanActivate, Router, UrlTree } from '@angular/router';
+import { Observable, map } from 'rxjs';
 
 import { AuthorizationService } from '@angular-challenges/module-to-standalone/core/service';
-import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,14 +10,14 @@ import { Observable, map } from 'rxjs';
 export class IsAuthorizedGuard implements CanActivate {
   constructor(
     private authorizationService: AuthorizationService,
-    private router: Router
+    private router: Router,
   ) {}
 
   canActivate(): Observable<boolean | UrlTree> {
     return this.authorizationService.isAuthorized$.pipe(
       map((isAuthorized) =>
-        isAuthorized ? true : this.router.createUrlTree(['forbidden'])
-      )
+        isAuthorized ? true : this.router.createUrlTree(['forbidden']),
+      ),
     );
   }
 }
