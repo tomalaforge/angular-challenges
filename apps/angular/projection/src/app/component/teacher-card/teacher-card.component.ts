@@ -4,7 +4,6 @@ import {
   randTeacher,
 } from '../../data-access/fake-http.service';
 import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
@@ -36,10 +35,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   imports: [CardComponent, ListItemComponent],
 })
 export class TeacherCardComponent implements OnInit {
-  //teachers: Teacher[] = [];
   teachers = this.store.teachers;
-  cardType = CardType.TEACHER;
-
   constructor(
     private http: FakeHttpService,
     private store: TeacherStore,
@@ -47,13 +43,13 @@ export class TeacherCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
-
-    //this.store.teachers$.subscribe((t) => (this.teachers = t));
   }
+
   addNewItem() {
     this.store.addOne(randTeacher());
     console.log(this.store);
   }
+
   deleteTeacher(id: number) {
     this.store.deleteOne(id);
   }
