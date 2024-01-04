@@ -3,7 +3,7 @@ import { Route } from '@angular/router';
 import { provideToken } from '@angular-challenges/module-to-standalone/core/providers';
 import { UserShellComponent } from './user-shell.component';
 
-export const userShellRoutes: Route[] = [
+export const UserShellRoutes: Route[] = [
   {
     path: '',
     component: UserShellComponent,
@@ -21,7 +21,7 @@ export const userShellRoutes: Route[] = [
         path: 'contact',
         loadChildren: () =>
           import('@angular-challenges/module-to-standalone/user/contact').then(
-            (_) => _.ROUTES,
+            (_) => _.ContactFeatureRoutes,
           ),
       },
     ],

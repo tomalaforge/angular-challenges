@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
-export const ROUTES: Routes = [
+export const AdminFeatureRoutes: Routes = [
   {
     path: '',
     component: DashboardComponent,

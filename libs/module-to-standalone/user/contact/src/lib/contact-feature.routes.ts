@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 
-export const ROUTES: Routes = [
+export const ContactFeatureRoutes: Routes = [
   {
     path: '',
     loadComponent: () =>

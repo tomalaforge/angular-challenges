@@ -8,7 +8,7 @@ export const AppRoutes: Routes = [
     path: 'home',
     loadChildren: () =>
       import('@angular-challenges/module-to-standalone/home').then(
-        (_) => _.ROUTES,
+        (_) => _.HomeRoutes,
       ),
   },
   {
@@ -16,14 +16,14 @@ export const AppRoutes: Routes = [
     canActivate: [IsAuthorizedGuard],
     loadChildren: () =>
       import('@angular-challenges/module-to-standalone/admin/feature').then(
-        (_) => _.ROUTES,
+        (_) => _.AdminFeatureRoutes,
       ),
   },
   {
     path: 'user',
     loadChildren: () =>
       import('@angular-challenges/module-to-standalone/user/shell').then(
-        (_) => _.userShellRoutes,
+        (_) => _.UserShellRoutes,
       ),
   },
   {
