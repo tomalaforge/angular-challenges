@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 
 import { randCountry, randFirstName, randLastName } from '@ngneat/falso';
-import type { User } from './user.model';
-import { UserPipe } from './user.pipe';
+import { User, UserPipe } from 'user';
 
 export const randUser = (): User => ({
   name: randFirstName(),

@@ -10,3 +10,5 @@ export class UserPipe implements PipeTransform {
     return `${user.name} ${user.lastname} - ${user.country}`;
   }
 }
+
+// https://github.com/angular-eslint/angular-eslint/blob/main/packages/eslint-plugin/docs/rules/no-host-metadata-property.md

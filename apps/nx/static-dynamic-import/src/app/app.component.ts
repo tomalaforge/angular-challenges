@@ -1,9 +1,6 @@
-import {
-  UserPipe,
-  type User,
-} from '@angular-challenges/static-dynamic-import/users';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { User, UserPipe } from 'user';
 
 @Component({
   standalone: true,
