@@ -1,23 +1,18 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { City } from '../model/city.model';
+import { randomCity } from './fake-http.service';
+import { Store } from './store';
 
 @Injectable({
   providedIn: 'root',
 })
-export class CityStore {
-  private cities = new BehaviorSubject<City[]>([]);
-  cities$ = this.cities.asObservable();
-
-  addAll(cities: City[]) {
-    this.cities.next(cities);
+export class CityStore extends Store {
+  constructor() {
+    super(new BehaviorSubject<City[]>([]));
   }
 
-  addOne(student: City) {
-    this.cities.next([...this.cities.value, student]);
-  }
-
-  deleteOne(id: number) {
-    this.cities.next(this.cities.value.filter((s) => s.id !== id));
+  override randItem() {
+    return randomCity();
   }
 }
