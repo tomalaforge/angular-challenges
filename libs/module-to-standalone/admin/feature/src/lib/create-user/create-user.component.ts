@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   standalone: true,
+  imports: [RouterModule],
   selector: 'lib-create-user',
   template: `
     Create User Form

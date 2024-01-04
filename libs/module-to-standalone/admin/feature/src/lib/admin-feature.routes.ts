@@ -10,11 +10,6 @@ export const ROUTES: Routes = [
   },
   {
     path: 'create-user',
-    children: [
-      {
-        path: '',
-        component: CreateUserComponent,
-      },
-    ],
+    component: CreateUserComponent,
   },
 ];
