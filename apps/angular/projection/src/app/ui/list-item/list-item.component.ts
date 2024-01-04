@@ -1,15 +1,12 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { StudentStore } from '../../data-access/student.store';
-import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-list-item',
   template: `
     <ng-template #templateTest>
       {{ name }}
-      <button (click)="delete(id)">
+      <button (click)="delete()">
         <img class="h-5" src="assets/svg/trash.svg" />
       </button>
     </ng-template>
@@ -21,25 +18,12 @@ import { CardType } from '../../model/card.model';
   standalone: true,
   imports: [NgTemplateOutlet],
 })
-export class ListItemComponent implements OnChanges {
+export class ListItemComponent {
   @Input() id!: number;
   @Input() name!: string;
-  @Input() type!: CardType;
+  @Output() deleteEvent = new EventEmitter<number>();
 
-  constructor(
-    private teacherStore: TeacherStore,
-    private studentStore: StudentStore,
-  ) {}
-
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.id, this.name, this, this.type);
-  }
-
-  delete(id: number) {
-    if (this.type === CardType.TEACHER) {
-      this.teacherStore.deleteOne(id);
-    } else if (this.type === CardType.STUDENT) {
-      this.studentStore.deleteOne(id);
-    }
+  delete() {
+    this.deleteEvent.emit(this.id);
   }
 }

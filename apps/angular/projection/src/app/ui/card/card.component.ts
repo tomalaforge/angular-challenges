@@ -1,20 +1,15 @@
-import { NgFor, NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { CardType } from '../../model/card.model';
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { Component, Input, TemplateRef } from '@angular/core';
 import { ListItemComponent } from '../list-item/list-item.component';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
   standalone: true,
-  imports: [NgIf, NgFor, ListItemComponent],
+  imports: [NgIf, NgFor, ListItemComponent, NgTemplateOutlet],
 })
-export class CardComponent {
-  @Input() list: any; // (Student|Teacher)[] | null = null;
-  @Input() type!: CardType;
+export class CardComponent<T> {
+  @Input() list: T[] = [];
   @Input() customClass = '';
-
-  CardType = CardType;
-
-  constructor() {}
+  @Input() itemRef!: TemplateRef<{ $implicit: T }>;
 }

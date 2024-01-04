@@ -12,17 +12,18 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
 @Component({
   selector: 'app-teacher-card',
   template: `
-    <app-card [list]="teachers" [type]="cardType" customClass="bg-light-red">
+    <app-card
+      [list]="teachers"
+      customClass="bg-light-red"
+      [itemRef]="teacherTemplate">
       <img ngProjectAs="cardImage" src="assets/img/teacher.png" width="200px" />
 
-      <section ngProjectAs="listaItems">
-        @for (item of teachers; track item.id) {
-          <app-list-item
-            [name]="item.firstName"
-            [id]="item.id"
-            [type]="cardType" />
-        }
-      </section>
+      <ng-template #teacherTemplate let-teacher>
+        <app-list-item
+          [id]="teacher.id"
+          name="{{ teacher.firstName }}"
+          (deleteEvent)="deleteTeacher(teacher.id)"></app-list-item>
+      </ng-template>
 
       <button
         button
@@ -32,13 +33,6 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
       </button>
     </app-card>
   `,
-  styles: [
-    `
-      ::ng-deep .bg-light-red {
-        background-color: rgba(250, 0, 0, 0.1);
-      }
-    `,
-  ],
   standalone: true,
   imports: [CardComponent, ListItemComponent],
 })
@@ -57,7 +51,10 @@ export class TeacherCardComponent implements OnInit {
     this.store.teachers$.subscribe((t) => (this.teachers = t));
   }
   addNewItem() {
-    console.log('ll');
     this.store.addOne(randTeacher());
+    console.log(this.store);
+  }
+  deleteTeacher(id: number) {
+    this.store.deleteOne(id);
   }
 }

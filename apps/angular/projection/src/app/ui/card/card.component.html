@@ -1,11 +1,13 @@
 <div class="border-2 border-black rounded-md p-4 w-fit flex flex-col gap-3" [class]="customClass">
     <ng-content select="cardImage"></ng-content>
 
-    <ng-content select="listaItems"></ng-content>
+    <section>
+        <ng-container>
+            @for (item of list; track item; ) {
+            <ng-template [ngTemplateOutlet]="itemRef" [ngTemplateOutletContext]="{$implicit: item}"></ng-template>
+            }
+        </ng-container>
+    </section>
 
-    <!-- <section>
-        @for (item of list; track item.id; ) {
-        <app-list-item [name]="item.firstName" [id]="item.id" [type]="type" /> }
-    </section> -->
     <ng-content select="[button]"></ng-content>
 </div>
