@@ -41,6 +41,4 @@ export class CardComponent<T extends { id: number }> {
 
   @ContentChild('rowRef', { read: TemplateRef })
   rowTemplate!: TemplateRef<{ $implicit: T }>;
-
-  constructor() {}
 }
