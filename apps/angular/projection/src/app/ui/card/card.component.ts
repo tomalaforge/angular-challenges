@@ -14,7 +14,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
       <section>
         @for (item of list; track item.id) {
           <app-list-item
-            [name]="item.firstName"
+            [name]="item[showingProp]"
             [id]="item.id"
             (deleteItem)="deleteItem($event)"></app-list-item>
         }
@@ -33,6 +33,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
 export class CardComponent {
   @Input() list: any[] | null = null;
   @Input() type!: CardType;
+  @Input() showingProp!: string;
   @Input() customClass = '';
 
   constructor(@SkipSelf() private storeService: Store) {}

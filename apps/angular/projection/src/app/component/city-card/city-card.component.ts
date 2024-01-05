@@ -9,7 +9,11 @@ import { CardComponent } from '../../ui/card/card.component';
 @Component({
   selector: 'app-city-card',
   template: `
-    <app-card [list]="cities" [type]="cardType">
+    <app-card
+      [list]="cities"
+      [type]="cardType"
+      customClass="bg-indigo-200/50"
+      showingProp="name">
       <img src="assets/img/city.png" alt="" />
     </app-card>
   `,

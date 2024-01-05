@@ -9,18 +9,15 @@ import { CardComponent } from '../../ui/card/card.component';
 @Component({
   selector: 'app-student-card',
   template: `
-    <app-card [list]="students" [type]="cardType" customClass="bg-light-green">
+    <app-card
+      [list]="students"
+      [type]="cardType"
+      customClass="bg-green-200/50"
+      showingProp="firstName">
       <img src="assets/img/student.webp" alt="" />
     </app-card>
   `,
   standalone: true,
-  styles: [
-    `
-      ::ng-deep .bg-light-green {
-        background-color: rgba(0, 250, 0, 0.1);
-      }
-    `,
-  ],
   imports: [CardComponent],
   providers: [{ provide: Store, useExisting: StudentStore }],
 })
