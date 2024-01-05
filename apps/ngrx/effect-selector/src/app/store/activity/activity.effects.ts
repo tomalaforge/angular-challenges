@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, concatMap, map } from 'rxjs/operators';
-import * as ActivityActions from './activity.actions';
+// import * as ActivityActions from './activity.actions';
 // I don't like doing * imports -> build size implications
 // Not gonna matter if you change to createActionGroup
+import { ActivityActions } from './activity.actions';
 import { ActivityService } from './activity.service';
 
 @Injectable()

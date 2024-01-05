@@ -1,5 +1,5 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import * as ActivityActions from './activity.actions';
+import { ActivityActions } from './activity.actions';
 import { Activity } from './activity.model';
 
 export interface ActivityState {
