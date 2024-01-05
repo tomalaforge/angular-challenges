@@ -59,6 +59,9 @@ export class AppComponent implements OnInit {
   // need a view model?
 
   // should just have one action
+  // move state up
+  // create app actions
+  // then the other load actions useless
   ngOnInit(): void {
     this.store.dispatch(ActivityActions.loadActivities());
     this.store.dispatch(UserActions.loadUsers());

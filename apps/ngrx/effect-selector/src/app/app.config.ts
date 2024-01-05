@@ -6,7 +6,6 @@ import {
   activityFeatureKey,
   activityReducer,
 } from './store/activity/activity.reducer';
-import { StatusEffects } from './store/status/status.effects';
 import { UserEffects } from './store/user/user.effects';
 
 import { statusFeatureKey, statusReducer } from './store/status/status.reducer';
@@ -25,6 +24,6 @@ const reducers = {
 export const appConfig: ApplicationConfig = {
   providers: [
     provideStore(reducers),
-    provideEffects([ActivityEffects, UserEffects, StatusEffects]),
+    provideEffects([ActivityEffects, UserEffects]),
   ],
 };
