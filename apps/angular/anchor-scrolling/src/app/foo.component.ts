@@ -7,7 +7,7 @@ import { NavButtonComponent } from './nav-button.component';
   selector: 'app-foo',
   template: `
     Welcome to foo page
-    <nav-button routerLink="home" class="fixed left-1/2 top-3">
+    <nav-button routerLink="/home" class="fixed left-1/2 top-3">
       Home Page
     </nav-button>
     <div class="h-screen bg-blue-200">section 1</div>
