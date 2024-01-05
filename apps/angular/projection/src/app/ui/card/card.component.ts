@@ -1,6 +1,6 @@
 import { Component, Input, SkipSelf } from '@angular/core';
 import { Store } from '../../data-access/store';
-import { CardType } from '../../model/card.model';
+import { CardItem, CardType } from '../../model/card.model';
 import { ListItemComponent } from '../list-item/list-item.component';
 
 @Component({
@@ -36,7 +36,7 @@ export class CardComponent {
   @Input() showingProp!: string;
   @Input() customClass = '';
 
-  constructor(@SkipSelf() private storeService: Store) {}
+  constructor(@SkipSelf() private storeService: Store<CardItem>) {}
 
   addNewItem() {
     const item = this.storeService.randItem();

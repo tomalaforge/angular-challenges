@@ -7,7 +7,7 @@ import { Store } from './store';
 @Injectable({
   providedIn: 'root',
 })
-export class StudentStore extends Store {
+export class StudentStore extends Store<Student> {
   constructor() {
     super(new BehaviorSubject<Student[]>([]));
   }
