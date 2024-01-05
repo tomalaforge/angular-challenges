@@ -2,13 +2,13 @@ import { AsyncPipe, NgFor } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  inject,
   OnInit,
+  inject,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { loadActivities } from './store/activity/activity.actions';
 import { ActivityType } from './store/activity/activity.model';
-import { selectActivities } from './store/activity/activity.selectors';
+import { selectActivities } from './store/activity/activity.reducer';
 import { loadStatuses } from './store/status/status.actions';
 import { selectAllTeachersByActivityType } from './store/status/status.selectors';
 import { loadUsers } from './store/user/user.actions';
@@ -61,6 +61,9 @@ export class AppComponent implements OnInit {
 
   activities$ = this.store.select(selectActivities);
 
+  // need a view model?
+
+  // should just have one action
   ngOnInit(): void {
     this.store.dispatch(loadActivities());
     this.store.dispatch(loadUsers());

@@ -5,10 +5,23 @@ export const loadUsers = createAction('[User] Load User');
 
 export const loadUsersSuccess = createAction(
   '[User] Load Users Success',
-  props<{ user: User }>()
+  props<{ user: User }>(),
 );
 
 export const loadUsersFailure = createAction(
   '[User] Load Users Failure',
-  props<{ error: any }>()
+  props<{ error: unknown }>(), // @typescript-eslint/no-explicit-any
 );
+
+/*
+
+export const UserActions = createActionGroup({
+  source: 'User',
+  events: {
+    'Load User': emptyProps(),
+    'Load Users Success': props<{ user: User }>(),
+    'Load Users Failure': props<{ error: unknown }>(),
+  },
+});
+
+*/

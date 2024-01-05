@@ -3,6 +3,8 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, concatMap, map } from 'rxjs/operators';
 import * as ActivityActions from './activity.actions';
+// I don't like doing * imports -> build size implications
+// Not gonna matter if you change to createActionGroup
 import { ActivityService } from './activity.service';
 
 @Injectable()
@@ -13,18 +15,18 @@ export class ActivityEffects {
       concatMap(() =>
         this.ActivityService.fetchActivities().pipe(
           map((activities) =>
-            ActivityActions.loadActivitiesSuccess({ activities })
+            ActivityActions.loadActivitiesSuccess({ activities }),
           ),
           catchError((error) =>
-            of(ActivityActions.loadActivitiesFailure({ error }))
-          )
-        )
-      )
+            of(ActivityActions.loadActivitiesFailure({ error })),
+          ),
+        ),
+      ),
     );
   });
 
   constructor(
     private actions$: Actions,
-    private ActivityService: ActivityService
+    private ActivityService: ActivityService,
   ) {}
 }
