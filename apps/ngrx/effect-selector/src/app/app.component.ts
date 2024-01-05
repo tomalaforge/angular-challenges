@@ -7,10 +7,9 @@ import {
 } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ActivityActions } from './store/activity/activity.actions';
-import { ActivityType } from './store/activity/activity.model';
 import { selectActivities } from './store/activity/activity.reducer';
 import { loadStatuses } from './store/status/status.actions';
-import { selectAllTeachersByActivityType } from './store/status/status.selectors';
+import { StatusSelectors } from './store/status/status.selectors';
 import { UserActions } from './store/user/user.actions';
 
 @Component({
@@ -25,11 +24,7 @@ import { UserActions } from './store/user/user.actions';
         <p>Main teacher: {{ activity.teacher.name }}</p>
         <span>All teachers available for : {{ activity.type }} are</span>
         <ul>
-          <li
-            *ngFor="
-              let teacher of getAllTeachersForActivityType$(activity.type)
-                | async
-            ">
+          <li *ngFor="let teacher of getAllTeachersForActivityType$() | async">
             {{ teacher.name }}
           </li>
         </ul>
@@ -70,6 +65,6 @@ export class AppComponent implements OnInit {
     this.store.dispatch(loadStatuses());
   }
 
-  getAllTeachersForActivityType$ = (type: ActivityType) =>
-    this.store.select(selectAllTeachersByActivityType(type));
+  getAllTeachersForActivityType$ = () =>
+    this.store.select(StatusSelectors.selectStatuses);
 }

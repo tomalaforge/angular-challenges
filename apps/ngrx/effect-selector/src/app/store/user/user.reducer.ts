@@ -23,7 +23,7 @@ const userFeature = createFeature({
 });
 
 export const {
-  selectUser,
   name: userFeatureKey,
   reducer: userReducer,
+  selectUser,
 } = userFeature;
