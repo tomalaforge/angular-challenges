@@ -23,6 +23,4 @@ export class ListItemComponent {
   @Input() id!: number;
   @Input() name!: string;
   @Output() delete = new EventEmitter<void>();
-
-  constructor() {}
 }
