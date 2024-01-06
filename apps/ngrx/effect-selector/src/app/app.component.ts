@@ -6,11 +6,9 @@ import {
   inject,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { ActivityActions } from './store/activity/activity.actions';
+import { AppActions } from './app.actions';
 import { selectActivities } from './store/activity/activity.reducer';
-import { loadStatuses } from './store/status/status.actions';
 import { StatusSelectors } from './store/status/status.selectors';
-import { UserActions } from './store/user/user.actions';
 
 @Component({
   selector: 'app-root',
@@ -55,20 +53,17 @@ export class AppComponent implements OnInit {
   private store = inject(Store);
 
   activities$ = this.store.select(selectActivities);
-
-  // need a view model?
-
-  // should just have one action
-  // move state up
-  // create app actions
-  // then the other load actions useless
-  ngOnInit(): void {
-    this.store.dispatch(ActivityActions.loadActivities());
-    this.store.dispatch(UserActions.loadUsers());
-    this.store.dispatch(loadStatuses());
-  }
-
   getAllTeachersForActivityType$ = this.store.select(
     StatusSelectors.selectStatuses,
   );
+
+  // use a view model ?
+  // works without it
+  // view model helps with testing and mocking
+
+  // Now with one dispatch here -> Are the other load actions useless?
+  // I guess you could use those actions for local loading
+  ngOnInit(): void {
+    this.store.dispatch(AppActions.initApp());
+  }
 }

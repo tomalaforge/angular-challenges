@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, concatMap, map } from 'rxjs/operators';
+import { AppActions } from '../../app.actions';
 import { ActivityActions } from './activity.actions';
 import { ActivityService } from './activity.service';
 
@@ -9,7 +10,7 @@ import { ActivityService } from './activity.service';
 export class ActivityEffects {
   loadActivities$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ActivityActions.loadActivities),
+      ofType(AppActions.initApp),
       concatMap(() =>
         this.ActivityService.fetchActivities().pipe(
           map((activities) =>
