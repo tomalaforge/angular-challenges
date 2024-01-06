@@ -15,7 +15,8 @@ const reducers = {
 };
 
 // provideStore -> no global state?
-// then just the features
+// just add the features
+// https://timdeschryver.dev/blog/you-should-take-advantage-of-the-improved-ngrx-apis#registering-the-store
 
 export const appConfig: ApplicationConfig = {
   providers: [
