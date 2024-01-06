@@ -56,11 +56,6 @@ import { StatusSelectors } from './store/status/status.selectors';
 export class AppComponent implements OnInit {
   private store = inject(Store);
 
-  activities$ = this.store.select(selectActivities);
-  getAllTeachersForActivityType$ = this.store.select(
-    StatusSelectors.selectStatuses,
-  );
-
   // this could be in another file like app.selector.ts
   #vm = createSelector(
     selectActivities,
