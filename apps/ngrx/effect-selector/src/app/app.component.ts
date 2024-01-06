@@ -72,8 +72,6 @@ export class AppComponent implements OnInit {
 
   // view model helps with testing and mocking
 
-  // Now with one dispatch here -> Are the other load actions useless?
-  // I guess you could use those actions for local loading
   ngOnInit(): void {
     this.store.dispatch(AppActions.initApp());
   }

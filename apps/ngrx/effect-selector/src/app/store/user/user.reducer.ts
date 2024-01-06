@@ -3,7 +3,7 @@ import { UserActions } from './user.actions';
 import { User } from './user.model';
 
 export interface UserState {
-  user: User | undefined;
+  user: User | undefined; // with createFeature `user?:User` doesn't work ?
 }
 
 export const initialState: UserState = {
