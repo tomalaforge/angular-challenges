@@ -20,5 +20,4 @@ Challenge documentation is [here](https://angular-challenges.vercel.app/challeng
 - [YouTube](https://www.youtube.com/watch?v=aTrD0VOBFso)
 - [Github](https://github.com/ngrx/platform/issues/3719)
 - [NgRx](https://ngrx.io/guide/store/feature-creators)
-- [Dev.to](https://dev.to/brandontroberts/maximizing-and-simplifying-component-views-with-ngrx-selectors-286j)
 - [In Depth Dev](https://indepth.dev/posts/1442/ngrx-bad-practices)
