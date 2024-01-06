@@ -11,8 +11,8 @@ export const initialState: ActivityState = {
 };
 
 // extraSelectors -> can't use outside selectors as parameters ?
-// extraSelectors is for derived state from ActivityState only
-// i.e. the length of the activities array
+// extraSelectors -> derived state from ActivityState only
+// i.e. the length of the activities array etc
 
 const activityFeature = createFeature({
   name: 'Activity',

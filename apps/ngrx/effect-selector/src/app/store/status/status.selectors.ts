@@ -30,7 +30,8 @@ const selectStatuses = createSelector(
   selectUser,
   selectActivities,
   (user, activities) => {
-    if (!user) return [];
+    // this code is taken from the status.effects file
+    if (!user?.isAdmin) return [];
 
     return activities.reduce((status: Status[], activity): Status[] => {
       const index = status.findIndex((s) => s.name === activity.type);

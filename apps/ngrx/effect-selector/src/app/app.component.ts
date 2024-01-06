@@ -24,7 +24,7 @@ import { UserActions } from './store/user/user.actions';
         <p>Main teacher: {{ activity.teacher.name }}</p>
         <span>All teachers available for : {{ activity.type }} are</span>
         <ul>
-          <li *ngFor="let teacher of getAllTeachersForActivityType$() | async">
+          <li *ngFor="let teacher of getAllTeachersForActivityType$ | async">
             {{ teacher.name }}
           </li>
         </ul>
@@ -68,6 +68,7 @@ export class AppComponent implements OnInit {
     this.store.dispatch(loadStatuses());
   }
 
-  getAllTeachersForActivityType$ = () =>
-    this.store.select(StatusSelectors.selectStatuses);
+  getAllTeachersForActivityType$ = this.store.select(
+    StatusSelectors.selectStatuses,
+  );
 }

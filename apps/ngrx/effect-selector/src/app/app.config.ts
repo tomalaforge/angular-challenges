@@ -7,13 +7,9 @@ import {
   activityReducer,
 } from './store/activity/activity.reducer';
 import { UserEffects } from './store/user/user.effects';
-
-import { statusFeatureKey, statusReducer } from './store/status/status.reducer';
-
 import { userFeatureKey, userReducer } from './store/user/user.reducer';
 
 const reducers = {
-  [statusFeatureKey]: statusReducer,
   [activityFeatureKey]: activityReducer,
   [userFeatureKey]: userReducer,
 };
