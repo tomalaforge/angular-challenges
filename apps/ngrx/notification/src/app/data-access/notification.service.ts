@@ -22,12 +22,12 @@ export class NotificationService {
       .subscribe((notification: Push) => {
         if (isTeacher(notification)) {
           this.store.dispatch(
-            teacherActions.addOneTeacher({ teacher: notification })
+            teacherActions.addOneTeacher({ teacher: notification }),
           );
         }
         if (isStudent(notification)) {
           this.store.dispatch(
-            studentActions.addOneStudent({ student: notification })
+            studentActions.addOneStudent({ student: notification }),
           );
         }
         if (isSchool(notification)) {

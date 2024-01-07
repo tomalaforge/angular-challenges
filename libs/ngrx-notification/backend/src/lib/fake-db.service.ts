@@ -16,19 +16,19 @@ export class FakeDBService extends ComponentStore<{
   readonly teachers$ = this.select((state) => state.teachers);
   readonly randomTeacher$ = this.select(
     this.teachers$,
-    (teachers) => teachers[randNumber({ max: teachers.length - 1 })]
+    (teachers) => teachers[randNumber({ max: teachers.length - 1 })],
   );
 
   readonly students$ = this.select((state) => state.students);
   readonly randomStudents$ = this.select(
     this.students$,
-    (students) => students[randNumber({ max: students.length - 1 })]
+    (students) => students[randNumber({ max: students.length - 1 })],
   );
 
   readonly schools$ = this.select((state) => state.schools);
   readonly randomSchool$ = this.select(
     this.schools$,
-    (schools) => schools[randNumber({ max: schools.length - 1 })]
+    (schools) => schools[randNumber({ max: schools.length - 1 })],
   );
 
   constructor() {

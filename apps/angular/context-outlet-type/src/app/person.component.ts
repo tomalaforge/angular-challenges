@@ -17,7 +17,7 @@ interface Person {
         context: { $implicit: person.name, age: person.age }
       "></ng-container>
 
-    <ng-template #emptyRef> No Template </ng-template>
+    <ng-template #emptyRef>No Template</ng-template>
   `,
 })
 export class PersonComponent {

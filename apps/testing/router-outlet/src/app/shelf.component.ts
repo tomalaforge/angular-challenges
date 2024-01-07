@@ -25,8 +25,8 @@ export default class ShelfComponent {
       availableBooks.filter(
         (b) =>
           b.name.toLowerCase().includes(param) ||
-          b.author.toLowerCase().includes(param)
-      )
-    )
+          b.author.toLowerCase().includes(param),
+      ),
+    ),
   );
 }

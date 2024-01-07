@@ -16,8 +16,8 @@ export class StudentEffects {
       switchMap(() =>
         this.httpService
           .getAllStudents()
-          .pipe(map((students) => studentActions.addAllStudents({ students })))
-      )
-    )
+          .pipe(map((students) => studentActions.addAllStudents({ students }))),
+      ),
+    ),
   );
 }

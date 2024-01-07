@@ -11,7 +11,7 @@ import { skip } from 'rxjs';
   template: `
     <mat-card class="items-center">
       <mat-card-content>
-        <div class="flex gap-10 items-center">
+        <div class="flex items-center gap-10">
           <button id="minusButton" mat-mini-fab (click)="back()">
             <mat-icon>arrow_back_ios</mat-icon>
           </button>

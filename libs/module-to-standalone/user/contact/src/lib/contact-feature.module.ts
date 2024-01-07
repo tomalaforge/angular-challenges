@@ -11,14 +11,14 @@ import { RouterModule } from '@angular/router';
         path: '',
         loadChildren: () =>
           import('./dashboard/dashboard.component').then(
-            (m) => m.ContactDashboardModule
+            (m) => m.ContactDashboardModule,
           ),
       },
       {
         path: 'create-contact',
         loadChildren: () =>
           import('./create-contact/create-contact.component').then(
-            (m) => m.CreateContactModule
+            (m) => m.CreateContactModule,
           ),
       },
     ]),

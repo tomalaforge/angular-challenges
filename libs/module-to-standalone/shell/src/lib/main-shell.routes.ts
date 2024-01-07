@@ -7,7 +7,7 @@ export const appRoutes: Route[] = [
     path: 'home',
     loadChildren: () =>
       import('@angular-challenges/module-to-standalone/home').then(
-        (m) => m.ModuleToStandaloneHomeModule
+        (m) => m.ModuleToStandaloneHomeModule,
       ),
   },
   {
@@ -15,14 +15,14 @@ export const appRoutes: Route[] = [
     canActivate: [IsAuthorizedGuard],
     loadChildren: () =>
       import('@angular-challenges/module-to-standalone/admin/feature').then(
-        (m) => m.AdminFeatureModule
+        (m) => m.AdminFeatureModule,
       ),
   },
   {
     path: 'user',
     loadChildren: () =>
       import('@angular-challenges/module-to-standalone/user/shell').then(
-        (m) => m.UserShellModule
+        (m) => m.UserShellModule,
       ),
   },
 
@@ -30,7 +30,7 @@ export const appRoutes: Route[] = [
     path: 'forbidden',
     loadChildren: () =>
       import('@angular-challenges/module-to-standalone/forbidden').then(
-        (m) => m.ForbiddenModule
+        (m) => m.ForbiddenModule,
       ),
   },
 ];

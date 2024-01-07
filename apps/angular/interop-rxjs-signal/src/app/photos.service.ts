@@ -16,7 +16,7 @@ export class PhotoService {
 
   public searchPublicPhotos(
     searchTerm: string,
-    page: number
+    page: number,
   ): Observable<FlickrAPIResponse> {
     return this.http.get<FlickrAPIResponse>(
       'https://www.flickr.com/services/rest/',
@@ -33,7 +33,7 @@ export class PhotoService {
           extras: 'tags,date_taken,owner_name,url_q,url_m',
           api_key: 'c3050d39a5bb308d9921bef0e15c437d',
         },
-      }
+      },
     );
   }
 }
