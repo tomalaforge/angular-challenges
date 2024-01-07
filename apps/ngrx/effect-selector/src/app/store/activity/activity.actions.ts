@@ -6,6 +6,6 @@ export const ActivityActions = createActionGroup({
   events: {
     'Load Activities': emptyProps(),
     'Load Activities Success': props<{ activities: Activity[] }>(),
-    'Load Activities Failure': props<{ error: string }>(),
+    'Load Activities Failure': props<{ error: unknown }>(),
   },
 });
