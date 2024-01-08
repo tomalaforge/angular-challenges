@@ -1,7 +1,11 @@
 /* eslint-disable @angular-eslint/component-selector */
+import { PushService } from '@angular-challenges/ngrx-notification/backend';
+import { Push, isTeacher } from '@angular-challenges/ngrx-notification/model';
 import { AsyncPipe, NgFor } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Subscription, filter } from 'rxjs';
+import { teacherActions } from './store/teacher.actions';
 import { TeacherSelectors } from './store/teacher.selectors';
 
 @Component({
@@ -26,8 +30,27 @@ import { TeacherSelectors } from './store/teacher.selectors';
     `,
   ],
 })
-export class TeacherComponent {
+export class TeacherComponent implements OnInit, OnDestroy {
+  private store = inject(Store);
+
   teacher$ = this.store.select(TeacherSelectors.selectTeachers);
 
-  constructor(private store: Store) {}
+  private pushService = inject(PushService);
+  subscription!: Subscription;
+
+  ngOnInit(): void {
+    this.subscription = this.pushService.notification$
+      .pipe(filter(Boolean))
+      .subscribe((notification: Push) => {
+        if (isTeacher(notification)) {
+          this.store.dispatch(
+            teacherActions.addOneTeacher({ teacher: notification }),
+          );
+        }
+      });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 }
