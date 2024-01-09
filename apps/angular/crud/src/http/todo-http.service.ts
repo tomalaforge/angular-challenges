@@ -25,4 +25,8 @@ export class TodoHttpService {
       },
     );
   }
+
+  deleteTodoItem(id: number) {
+    return this.http.delete(`${this.TODO_REQ_URL}/${id}`);
+  }
 }
