@@ -66,8 +66,6 @@ export class StudentStore
     this.addStudents();
   }
 
-  // this adds students to the list
-  // injected the global store to dispatch action for the snackbar alert
   private readonly addStudents = this.effect<void>(
     pipe(
       switchMap(() =>
@@ -79,7 +77,7 @@ export class StudentStore
                 this.store.dispatch(
                   appActions.showAlert({
                     message: 'Add 1 student',
-                    component: 'student',
+                    component: 'Student',
                   }),
                 );
               }

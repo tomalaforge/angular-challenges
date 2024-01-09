@@ -27,9 +27,8 @@ export class AppEffects {
   });
 
   snackbarAlert(message: string, component: string = 'Student') {
-    // the class ternary wasn't working because components were title-cased
     const _class =
-      component == 'Student'
+      component === 'Student'
         ? 'green-snackbar'
         : component === 'Teacher'
           ? 'red-snackbar'

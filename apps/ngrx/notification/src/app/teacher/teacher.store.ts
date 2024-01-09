@@ -66,8 +66,6 @@ export class TeacherStore
     this.addTeachers();
   }
 
-  // this adds teachers to the list
-  // injected the global store to dispatch action for the snackbar alert
   private readonly addTeachers = this.effect<void>(
     pipe(
       switchMap(() =>
