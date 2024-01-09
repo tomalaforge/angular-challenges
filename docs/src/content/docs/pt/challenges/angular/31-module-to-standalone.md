@@ -1,5 +1,5 @@
 ---
-title: 🟢 Module to Standalone
+title: 🟢 Módulo para Standalone
 description: Desafio 31 é sobre migrar uma aplicação baseada em módulos para uma aplicação baseada em componentes standalone.
 author: thomas-laforge
 challengeNumber: 31
