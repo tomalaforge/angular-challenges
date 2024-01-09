@@ -16,7 +16,7 @@ import { HttpService } from '../data-access/http.service';
 import { TOKEN } from '../token';
 
 @Injectable()
-export class studentStore
+export class StudentStore
   extends ComponentStore<{ students: Student[] }>
   implements OnStoreInit, OnStateInit
 {
