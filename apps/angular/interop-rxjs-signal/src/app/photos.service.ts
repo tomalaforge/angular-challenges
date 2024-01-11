@@ -5,9 +5,13 @@ import { Photo } from './photo.model';
 
 export interface FlickrAPIResponse {
   photos: {
+    page: number;
     pages: number;
+    perpage: number;
+    total: number;
     photo: Photo[];
   };
+  stat: string;
 }
 
 @Injectable({ providedIn: 'root' })
