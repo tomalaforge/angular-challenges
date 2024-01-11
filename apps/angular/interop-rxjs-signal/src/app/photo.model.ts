@@ -10,7 +10,7 @@ export interface Photo {
   isfamily: number;
   datetaken: string;
   datetakengranularity: number;
-  datetakenunknown: unknown;
+  datetakenunknown: string;
   ownername: string;
   tags: string;
   url_q: string;
