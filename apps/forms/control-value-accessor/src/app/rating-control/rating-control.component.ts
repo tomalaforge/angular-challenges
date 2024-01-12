@@ -1,20 +1,25 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, Optional, SkipSelf } from '@angular/core';
+import { ControlContainer, FormsModule } from '@angular/forms';
 
 @Component({
   standalone: true,
   selector: 'app-rating-control',
   templateUrl: 'rating-control.component.html',
   styleUrls: ['rating-control.component.scss'],
+  viewProviders: [
+    {
+      provide: ControlContainer,
+      deps: [[new SkipSelf(), Optional, ControlContainer]],
+      useFactory: (controlContainer: ControlContainer) => controlContainer,
+    },
+  ],
+  imports: [FormsModule],
 })
 export class RatingControlComponent {
-  @Output()
-  readonly ratingUpdated: EventEmitter<string> = new EventEmitter<string>();
-
   value: number | null = null;
 
   setRating(index: number): void {
     this.value = index + 1;
-    this.ratingUpdated.emit(`${this.value}`);
   }
 
   isStarActive(index: number, value: number | null): boolean {
