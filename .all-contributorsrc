@@ -50,6 +50,13 @@
       ]
     },
     {
+      "login": "jdegand",
+      "name": "J. Degand",
+      "avatar_url": "https://avatars.githubusercontent.com/u/70610011?v=4",
+      "profile": "https://github.com/jdegand",
+      "contributions": ["doc", "content", "code"]
+    },
+    {
       "login": "DeveshChau",
       "name": "Devesh Chaudhari",
       "avatar_url": "https://avatars.githubusercontent.com/u/9509673?v=4",
@@ -97,13 +104,6 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/1807493?v=4",
       "profile": "https://github.com/tomer953",
       "contributions": ["bug", "doc", "code"]
-    },
-    {
-      "login": "jdegand",
-      "name": "J. Degand",
-      "avatar_url": "https://avatars.githubusercontent.com/u/70610011?v=4",
-      "profile": "https://github.com/jdegand",
-      "contributions": ["doc"]
     },
     {
       "login": "dmmishchenko",
