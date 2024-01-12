@@ -18,6 +18,6 @@ Neste desafio, você precisará usar tanto variáveis CSS como `:host-context` p
 
 - Na sua submissão final, seu componente não deve conter nenhuma linha de código. Toda a estilização deve ser manipulada dentro do decorador _(ou arquivos css externos se preferir)_
 
-## Bônus
+## Nota
 
-- Você pode manter o `@Input` no componente `TextStaticComponent` e utilizar `@HostBinding` (documentação [aqui](https://angular.dev/api/core/HostBinding)) para usufruir o autocompletar.
+Há uma outra maneira de estilizar o componente `TextStaticComponent` (ver [PR](https://github.com/tomalaforge/angular-challenges/pull/341/files#diff-082bc0154adae46609f52c9e366d4768ae9278dcb495a9a7ec7cb0baf393fb1c))
