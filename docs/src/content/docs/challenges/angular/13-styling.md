@@ -17,7 +17,3 @@ In this challenge, you will need to use both CSS variables and `:host-context` t
 ## Constraints
 
 - In your final submission, your component should not contain any lines of code. All styling should be handled within the decorator _(or external css files if you prefer)_
-
-## Note
-
-There is also another way to style the `TextStaticComponent` (see [PR](https://github.com/tomalaforge/angular-challenges/pull/341/files#diff-082bc0154adae46609f52c9e366d4768ae9278dcb495a9a7ec7cb0baf393fb1c))

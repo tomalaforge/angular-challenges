@@ -17,7 +17,3 @@ Neste desafio, você precisará usar tanto variáveis CSS como `:host-context` p
 ## Restrições
 
 - Na sua submissão final, seu componente não deve conter nenhuma linha de código. Toda a estilização deve ser manipulada dentro do decorador _(ou arquivos css externos se preferir)_
-
-## Nota
-
-Há uma outra maneira de estilizar o componente `TextStaticComponent` (ver [PR](https://github.com/tomalaforge/angular-challenges/pull/341/files#diff-082bc0154adae46609f52c9e366d4768ae9278dcb495a9a7ec7cb0baf393fb1c))
