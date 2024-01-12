@@ -4,21 +4,21 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { randText } from '@ngneat/falso';
 import { TodoHttpService } from '../http/todo-http.service';
 import { TodoItem } from '../models/todo';
+import { TodoItemComponent } from './todo-item.component';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, MatProgressSpinnerModule],
+  imports: [CommonModule, MatProgressSpinnerModule, TodoItemComponent],
   selector: 'app-root',
   template: `
     <div *ngIf="isProcessing" class="indicator">
       <mat-spinner></mat-spinner>
     </div>
     @for (todo of todos(); track todo.id) {
-      <div>
-        {{ todo.title }}
-        <button (click)="update(todo, $index)">Update</button>
-        <button (click)="delete(todo.id, $index)">Delete</button>
-      </div>
+      <app-todo-item
+        [title]="todo.title"
+        (update)="update(todo, $index)"
+        (delete)="delete(todo.id, $index)"></app-todo-item>
     }
   `,
   styles: [
