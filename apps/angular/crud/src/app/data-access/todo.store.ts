@@ -16,7 +16,6 @@ export class TodoStore {
       .get<Todo[]>('https://jsonplaceholder.typicode.com/todos')
       .subscribe((todos) => {
         this._todos.set(todos);
-        console.log(todos);
       });
   }
 
@@ -37,12 +36,19 @@ export class TodoStore {
         },
       )
       .subscribe((todoUpdated: Todo) => {
-        // this.todos[todoUpdated.id - 1] = todoUpdated;
         this._todos.update((value) => [
           ...value.filter((t) => t.id < todoUpdated.id),
           todoUpdated,
           ...value.filter((t) => t.id > todoUpdated.id),
-        ]); //) = [...this._todos.filter((t) => t.id < todoUpdated.id), todoUpdated];
+        ]);
+      });
+  }
+
+  delete(id: number) {
+    this.http
+      .delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+      .subscribe(() => {
+        this._todos.update((value) => [...value.filter((t) => t.id != id)]);
       });
   }
 }

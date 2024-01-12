@@ -1,6 +1,13 @@
-import { ApplicationConfig } from '@angular/core';
-import { enableProdMode, importProvidersFrom } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { ApplicationConfig, ErrorHandler } from '@angular/core';
+import { GlobalErrorHandler } from '../error_handler';
+import { loaderInterceptor } from './interceptors/loader.interceptor';
 export const appConfig: ApplicationConfig = {
-  providers: [importProvidersFrom(HttpClientModule)],
+  providers: [
+    provideHttpClient(withInterceptors([loaderInterceptor])),
+    {
+      provide: ErrorHandler,
+      useClass: GlobalErrorHandler,
+    },
+  ],
 };
