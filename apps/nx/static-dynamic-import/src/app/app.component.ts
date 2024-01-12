@@ -1,5 +1,5 @@
 import {
-  UserPipe,
+  UserComponent,
   type User,
 } from '@angular-challenges/static-dynamic-import/users';
 import { Component } from '@angular/core';
@@ -7,10 +7,11 @@ import { RouterOutlet } from '@angular/router';
 
 @Component({
   standalone: true,
-  imports: [UserPipe, RouterOutlet],
+  imports: [UserComponent, RouterOutlet],
   selector: 'app-root',
   template: `
-    Author: {{ author | user }}
+    Author:
+    <sdi-user [user]="author" />
     <router-outlet />
   `,
   host: {
@@ -20,7 +21,7 @@ import { RouterOutlet } from '@angular/router';
 export class AppComponent {
   author: User = {
     name: 'Thomas',
-    lastname: 'Laforge',
+    lastName: 'Laforge',
     country: 'France',
   };
 }
