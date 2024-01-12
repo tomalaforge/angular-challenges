@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Feedback } from './feedback';
 import { FeedbackFormComponent } from './feedback-form/feedback-form.component';
 
 @Component({
@@ -10,7 +11,7 @@ import { FeedbackFormComponent } from './feedback-form/feedback-form.component';
   `,
 })
 export class AppComponent {
-  apiCall(event: Record<string, string | null>): void {
+  apiCall(event: Feedback): void {
     console.log(event);
   }
 }

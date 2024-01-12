@@ -1,42 +1,22 @@
+import { JsonPipe } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Feedback } from '../feedback';
 import { RatingControlComponent } from '../rating-control/rating-control.component';
 
 @Component({
   standalone: true,
-  imports: [RatingControlComponent, ReactiveFormsModule],
+  imports: [RatingControlComponent, ReactiveFormsModule, JsonPipe, FormsModule],
   selector: 'app-feedback-form',
   templateUrl: 'feedback-form.component.html',
   styleUrls: ['feedback-form.component.scss'],
 })
 export class FeedbackFormComponent {
   @Output()
-  readonly feedBackSubmit: EventEmitter<Record<string, string | null>> =
-    new EventEmitter<Record<string, string | null>>();
+  readonly feedBackSubmit: EventEmitter<Feedback> =
+    new EventEmitter<Feedback>();
 
-  readonly feedbackForm = new FormGroup({
-    name: new FormControl('', {
-      validators: Validators.required,
-    }),
-    email: new FormControl('', {
-      validators: Validators.required,
-    }),
-    comment: new FormControl(),
-  });
-
-  rating: string | null = null;
-
-  submitForm(): void {
-    this.feedBackSubmit.emit({
-      ...this.feedbackForm.value,
-      rating: this.rating,
-    });
-
-    this.feedbackForm.reset();
+  submitForm(value: Feedback): void {
+    this.feedBackSubmit.emit(value);
   }
 }

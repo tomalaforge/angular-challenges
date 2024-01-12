@@ -5,6 +5,7 @@
   </symbol>
 </svg>
 <div class="rating">
+  <input type="hidden" [ngModel]="value" name="rating" required />
   @for (item of [].constructor(5); track item) {
     <svg
       class="star"
