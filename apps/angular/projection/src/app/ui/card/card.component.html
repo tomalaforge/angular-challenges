@@ -1,0 +1,19 @@
+<div
+  class="flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4"
+  [class]="customClass">
+  <ng-content select="[headerImg]"></ng-content>
+  <section>
+    <ng-container *ngFor="let item of list">
+      <ng-container
+        *ngTemplateOutlet="
+          specialTemplate || defaultListItemTemplate;
+          context: { $implicit: item }
+        "></ng-container>
+    </ng-container>
+  </section>
+
+  <ng-template #defaultListItemTemplate>
+    <p>No data</p>
+  </ng-template>
+  <ng-content select="[addNewItem]"></ng-content>
+</div>
