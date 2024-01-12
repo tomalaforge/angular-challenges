@@ -31,9 +31,8 @@ export class NotificationService {
           );
         }
         if (isSchool(notification)) {
-          // SchoolStore is not providedin root. thus at initialization, SchoolStore is undefined
-          // Option 1: set SchoolStore in root, but we don't want this to separate our class.
-          // Option 2: your turn
+          // SchoolStore is a ComponentStore.  We can't dispatch a school action here.
+          // We are stuck.  We must have done something wrong and need to refactor...
         }
       });
   }
