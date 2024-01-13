@@ -9,6 +9,7 @@ import { Todo } from './model/todo.model';
   imports: [CommonModule, SpinnerComponent],
   selector: 'app-root',
   template: `
+    <h1>{{ title }}</h1>
     <app-spinner></app-spinner>
     @for (todo of todos(); track todo.id) {
       <div>
@@ -21,6 +22,7 @@ import { Todo } from './model/todo.model';
   styles: [],
 })
 export class AppComponent {
+  title = 'Crud Example';
   todoStore = inject(TodoStore);
   todos = this.todoStore.todos;
 
