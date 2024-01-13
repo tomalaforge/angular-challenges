@@ -11,7 +11,6 @@ import { LoaderService } from '../../data-access/loader.service';
       <div class="container">
         <mat-spinner></mat-spinner>
         <mat-progress-spinner value="0"></mat-progress-spinner>
-        <!-- <h1>Texto centrado</h1> -->
       </div>
     }
   `,
