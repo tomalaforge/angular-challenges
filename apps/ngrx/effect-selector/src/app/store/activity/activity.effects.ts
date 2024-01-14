@@ -13,18 +13,18 @@ export class ActivityEffects {
       concatMap(() =>
         this.ActivityService.fetchActivities().pipe(
           map((activities) =>
-            ActivityActions.loadActivitiesSuccess({ activities })
+            ActivityActions.loadActivitiesSuccess({ activities }),
           ),
           catchError((error) =>
-            of(ActivityActions.loadActivitiesFailure({ error }))
-          )
-        )
-      )
+            of(ActivityActions.loadActivitiesFailure({ error })),
+          ),
+        ),
+      ),
     );
   });
 
   constructor(
     private actions$: Actions,
-    private ActivityService: ActivityService
+    private ActivityService: ActivityService,
   ) {}
 }

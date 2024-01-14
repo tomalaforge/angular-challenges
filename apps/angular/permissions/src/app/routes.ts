@@ -8,7 +8,7 @@ export const APP_ROUTES = [
     path: 'enter',
     loadComponent: () =>
       import('./dashboard/admin.component').then(
-        (m) => m.AdminDashboardComponent
+        (m) => m.AdminDashboardComponent,
       ),
   },
 ];

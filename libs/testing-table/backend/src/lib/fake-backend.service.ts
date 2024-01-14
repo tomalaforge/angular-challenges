@@ -18,13 +18,13 @@ export class FakeBackendService {
   getUsers = (active: keyof User, dir: SortDirection, pageIndex: number) =>
     timer(0, 1000).pipe(
       take(1),
-      map(() => this.sortByKey(this.users, active, sort[dir]))
+      map(() => this.sortByKey(this.users, active, sort[dir])),
     );
 
   private sortByKey(
     arr: User[],
     key: keyof User,
-    direction: SortDirectionIndex
+    direction: SortDirectionIndex,
   ): User[] {
     return arr.sort((a, b) => {
       const valueA = a[key];

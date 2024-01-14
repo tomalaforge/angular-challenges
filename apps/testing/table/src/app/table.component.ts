@@ -94,7 +94,7 @@ export class TableComponent
   private api = inject(FakeBackendService);
 
   readonly issues$ = this.select((s) => s.users).pipe(
-    tap((t) => console.log('UserNEw ', t))
+    tap((t) => console.log('UserNEw ', t)),
   );
   readonly loading$ = this.select((s) => s.loading);
   readonly error$ = this.select((s) => s.error);
@@ -124,11 +124,11 @@ export class TableComponent
           tap((t) => console.log('user', t)),
           tapResponse(
             (data) => this.patchState({ users: data, loading: false }),
-            (err) => this.patchState({ error: err as string, loading: false })
-          )
-        )
-      )
-    )
+            (err) => this.patchState({ error: err as string, loading: false }),
+          ),
+        ),
+      ),
+    ),
   );
 
   ngAfterViewInit(): void {
@@ -137,7 +137,7 @@ export class TableComponent
     this.loadData(
       this.select({
         sortActive: this.sort.sortChange.pipe(
-          map((s) => s.active as keyof User)
+          map((s) => s.active as keyof User),
         ),
         sortDir: this.sort.sortChange.pipe(map((s) => s.direction)),
         pageIndex: this.paginator.page.pipe(map((p) => p.pageIndex)),
@@ -146,8 +146,8 @@ export class TableComponent
           sortActive: this.sort.active as keyof User,
           sortDir: this.sort.direction,
           pageIndex: 1,
-        })
-      )
+        }),
+      ),
     );
   }
 

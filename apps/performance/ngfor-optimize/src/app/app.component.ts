@@ -16,7 +16,7 @@ import { PersonListComponent } from './person-list.component';
   providers: [PersonService],
   selector: 'app-root',
   template: `
-    <h1 class="font-semibold text-center text-3xl" title="Title">
+    <h1 class="text-center text-3xl font-semibold" title="Title">
       List of Persons
     </h1>
 
@@ -30,7 +30,7 @@ import { PersonListComponent } from './person-list.component';
     </mat-form-field>
 
     <app-person-list
-      class="max-w-2xl w-3/4"
+      class="w-3/4 max-w-2xl"
       [persons]="persons()"
       (delete)="personService.deletePerson($event)"
       (update)="personService.updatePerson($event)" />

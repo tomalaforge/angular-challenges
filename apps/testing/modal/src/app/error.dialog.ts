@@ -9,7 +9,9 @@ import { MatDialogModule } from '@angular/material/dialog';
   template: `
     <h1 mat-dialog-title>Error</h1>
     <div mat-dialog-content>
-      You must enter a <span class="font-bold">name</span> first!!
+      You must enter a
+      <span class="font-bold">name</span>
+      first!!
     </div>
     <div mat-dialog-actions>
       <button mat-button mat-dialog-close>OK</button>

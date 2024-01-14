@@ -20,27 +20,30 @@ import { MatInputModule } from '@angular/material/input';
     MatButtonModule,
     NgIf,
   ],
-  template: ` <form [formGroup]="form" #ngForm="ngForm" (ngSubmit)="submit()">
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Description</mat-label>
-      <input
-        type="text"
-        matInput
-        formControlName="description"
-        placeholder="My new task" />
-      <mat-error *ngIf="form.controls.description.hasError('required')">
-        Description is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
-    <button
-      class="ml-4"
-      mat-flat-button
-      color="primary"
-      type="submit"
-      [disabled]="loading">
-      Add new Ticket
-    </button>
-  </form>`,
+  template: `
+    <form [formGroup]="form" #ngForm="ngForm" (ngSubmit)="submit()">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Description</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="description"
+          placeholder="My new task" />
+        <mat-error *ngIf="form.controls.description.hasError('required')">
+          Description is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <button
+        class="ml-4"
+        mat-flat-button
+        color="primary"
+        type="submit"
+        [disabled]="loading">
+        Add new Ticket
+      </button>
+    </form>
+  `,
 })
 export class AddComponent {
   @Input() loading = false;

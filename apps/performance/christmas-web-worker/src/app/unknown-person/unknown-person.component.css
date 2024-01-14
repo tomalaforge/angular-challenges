@@ -147,7 +147,9 @@ body {
   position: absolute;
   top: 40px;
   left: 40px;
-  box-shadow: 38px 0 #0078ca, 19px 20px #f69697;
+  box-shadow:
+    38px 0 #0078ca,
+    19px 20px #f69697;
 }
 .eyes:before {
   height: 12px;
