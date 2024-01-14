@@ -2,13 +2,14 @@
 import type { Props } from '@astrojs/starlight/props';
 import VideoButton from './VideoButton.astro'
 import ClipboardCopy from './ClipboardCopy.astro'
+import { Icon } from '@astrojs/starlight/components';
 
 const { labels } = Astro.props;
 const {author, challengeNumber, title, blogLink, videoLink, command} = Astro.props.entry.data;
 
 const authorLink = `https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A${challengeNumber}+label%3A"answer+author"`;
 const authorDescription = `${title} solution author`;
-const communityLink = `https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A${challengeNumber}+label%3Aanswer`;
+const communityLink = `https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A${challengeNumber}+label%3Aanswer+sort%3Areactions-%2B1-desc`;
 const communityDescription = `${title} community solutions`;
 const npxCommand = `npx nx serve ${command}`;
 ---
@@ -31,7 +32,7 @@ const npxCommand = `npx nx serve ${command}`;
   <a
     href={communityLink}
     alt={communityDescription}>
-    ❖ {labels['challenge.footer.communityAnswers'] ?? 'Community Answers'}
+    ❖ {labels['challenge.footer.communityAnswers'] ?? 'Community Answers'}*
   </a>
   <a
     href={authorLink}
@@ -49,6 +50,10 @@ const npxCommand = `npx nx serve ${command}`;
      {videoLink && <VideoButton {...videoLink} {...Astro.props}/>}
 </div>
 
+<div class="footer-note">
+* You can upvote an answer with a 👍 if you like it
+</div>
+
 <style>
     .separator {
         border-top: solid 1px var(--sl-color-hairline);
@@ -61,6 +66,12 @@ const npxCommand = `npx nx serve ${command}`;
         margin-block: -0.125rem;
         padding: 0.125rem 0.375rem;
         font-size: var(--sl-text-code-sm);
+    }
+
+    .footer-note {
+      display: flex;
+      gap: 0.25rem;
+      margin-top: 3rem;
     }
 </style>
 
