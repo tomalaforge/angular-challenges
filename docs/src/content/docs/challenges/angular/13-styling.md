@@ -14,6 +14,6 @@ Styling is an important aspect of a frontend developer's day job, but it is ofte
 
 In this challenge, you will need to use both CSS variables and `:host-context` to remove all `@Input()` from your code.
 
-## Constraints:
+## Constraints
 
 - In your final submission, your component should not contain any lines of code. All styling should be handled within the decorator _(or external css files if you prefer)_
