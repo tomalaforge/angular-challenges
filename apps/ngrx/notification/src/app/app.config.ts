@@ -1,5 +1,6 @@
 import { FakeBackendService } from '@angular-challenges/ngrx-notification/backend';
 import { APP_INITIALIZER, ApplicationConfig, inject } from '@angular/core';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
 import { provideEffects } from '@ngrx/effects';
 import { provideStore } from '@ngrx/store';
@@ -42,5 +43,6 @@ export const appConfig: ApplicationConfig = {
         return () => service.init();
       },
     },
+    provideAnimations(),
   ],
 };
