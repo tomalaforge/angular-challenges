@@ -1,9 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { randText } from '@ngneat/falso';
-import { TodoHttpService } from '../http/todo-http.service';
 import { TodoItem } from '../models/todo';
+import { AppStore } from '../stores/app.store';
 import { TodoItemComponent } from './todo-item.component';
 
 @Component({
@@ -11,14 +10,15 @@ import { TodoItemComponent } from './todo-item.component';
   imports: [CommonModule, MatProgressSpinnerModule, TodoItemComponent],
   selector: 'app-root',
   template: `
-    <div *ngIf="isProcessing" class="indicator">
+    <div *ngIf="isAppProcessing$ | async" class="indicator">
       <mat-spinner></mat-spinner>
     </div>
-    @for (todo of todos(); track todo.id) {
+    @for (todo of todos$ | async; track todo.id) {
       <app-todo-item
         [title]="todo.title"
-        (update)="update(todo, $index)"
-        (delete)="delete(todo.id, $index)"></app-todo-item>
+        [isProcessing]="isTodoItemProcessing(todo.id)"
+        (update)="update(todo)"
+        (delete)="delete(todo.id)"></app-todo-item>
     }
   `,
   styles: [
@@ -36,54 +36,27 @@ import { TodoItemComponent } from './todo-item.component';
   host: {
     styles: 'position: relative',
   },
+  providers: [AppStore],
 })
 export class AppComponent implements OnInit {
-  todos = signal<TodoItem[]>([]);
-  isProcessing = false;
+  constructor(private readonly appStore: AppStore) {}
 
-  constructor(private todoHttpService: TodoHttpService) {}
+  todos$ = this.appStore.todos$;
+  isAppProcessing$ = this.appStore.isAppProcessing$;
 
   ngOnInit(): void {
-    this.init();
+    this.appStore.getTodoItems();
   }
 
-  init() {
-    this.isProcessing = true;
-    this.todoHttpService.getTodoList().subscribe((todos) => {
-      this.isProcessing = false;
-      this.todos.set(todos);
-    });
+  update(todo: TodoItem) {
+    this.appStore.updateTodoItem(todo);
   }
 
-  update(todo: TodoItem, index: number) {
-    this.isProcessing = true;
-
-    const body = {
-      todo: todo.id,
-      title: randText(),
-      body: todo.body,
-      userId: todo.userId,
-    };
-
-    this.todoHttpService
-      .updateTodoItem(todo.id, body)
-      .subscribe((todoUpdated: TodoItem) => {
-        this.isProcessing = false;
-        this.todos.update((value: TodoItem[]) => {
-          value.splice(index, 1, todoUpdated);
-          return value;
-        });
-      });
+  delete(id: number) {
+    this.appStore.deleteTodoItem(id);
   }
 
-  delete(id: number, index: number) {
-    this.isProcessing = true;
-    this.todoHttpService.deleteTodoItem(id).subscribe(() => {
-      this.isProcessing = false;
-      this.todos.update((value: TodoItem[]) => {
-        value.splice(index, 1);
-        return value;
-      });
-    });
+  isTodoItemProcessing(id: number): boolean {
+    return this.appStore.isTodoItemProcessing(id);
   }
 }
