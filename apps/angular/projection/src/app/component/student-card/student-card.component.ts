@@ -14,6 +14,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   template: `
     <app-card
       [list]="students"
+      nameKey="firstName"
       customClass="bg-light-green"
       (addItem)="onAddItem()"
       (deleteItem)="onDeleteItem($event)">

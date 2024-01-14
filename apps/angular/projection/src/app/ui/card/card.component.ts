@@ -13,7 +13,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
       <section>
         <app-list-item
           *ngFor="let item of list"
-          [name]="item.firstName"
+          [name]="item[nameKey]"
           [id]="item.id"
           (deleteItem)="onDeleteItem($event)"></app-list-item>
       </section>
@@ -31,6 +31,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
 export class CardComponent {
   @Input() list: any[] | null = null;
   @Input() customClass = '';
+  @Input() nameKey = '';
 
   @Output() deleteItem = new EventEmitter();
   @Output() addItem = new EventEmitter();
