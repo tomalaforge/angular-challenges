@@ -1,4 +1,3 @@
-import { NgFor, NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ListItemComponent } from '../list-item/list-item.component';
 
@@ -11,11 +10,12 @@ import { ListItemComponent } from '../list-item/list-item.component';
       <ng-content select="[image-header]"></ng-content>
 
       <section>
-        <app-list-item
-          *ngFor="let item of list"
-          [name]="item[nameKey]"
-          [id]="item.id"
-          (deleteItem)="onDeleteItem($event)"></app-list-item>
+        @for (item of list; track item.id) {
+          <app-list-item
+            [name]="item[nameKey]"
+            [id]="item.id"
+            (deleteItem)="onDeleteItem($event)"></app-list-item>
+        }
       </section>
 
       <button
@@ -26,7 +26,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
     </div>
   `,
   standalone: true,
-  imports: [NgIf, NgFor, ListItemComponent],
+  imports: [ListItemComponent],
 })
 export class CardComponent {
   @Input() list: any[] | null = null;
