@@ -1,7 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+import { AsyncPipe } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  ViewEncapsulation,
+} from '@angular/core';
+import { Observable } from 'rxjs';
+import {
+  FakeHttpService,
+  randTeacher,
+} from '../../data-access/fake-http.service';
 import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
 import { Teacher } from '../../model/teacher.model';
 import { CardComponent } from '../../ui/card/card.component';
 
@@ -9,23 +18,42 @@ import { CardComponent } from '../../ui/card/card.component';
   selector: 'app-teacher-card',
   template: `
     <app-card
-      [list]="teachers"
-      [type]="cardType"
-      customClass="bg-light-red"></app-card>
+      [list]="teachers$ | async"
+      [content]="'firstName'"
+      [imgTemplate]="imgTemplate"
+      [buttonTemplate]="buttonTemplate"
+      [deleteTemplate]="deleteTemplate"
+      class="bg-light-red"></app-card>
+    <ng-template #imgTemplate>
+      <img src="assets/img/teacher.png" width="200px" />
+    </ng-template>
+    <ng-template #buttonTemplate>
+      <button
+        class="rounded-sm border border-blue-500 bg-blue-300 p-2"
+        (click)="addNewItem()">
+        Add
+      </button>
+    </ng-template>
+    <ng-template #deleteTemplate let-id>
+      <button (click)="delete(id)">
+        <img class="h-5" src="assets/svg/trash.svg" />
+      </button>
+    </ng-template>
   `,
   styles: [
     `
-      ::ng-deep .bg-light-red {
+      .bg-light-red {
         background-color: rgba(250, 0, 0, 0.1);
       }
     `,
   ],
   standalone: true,
-  imports: [CardComponent],
+  imports: [CardComponent, AsyncPipe],
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TeacherCardComponent implements OnInit {
-  teachers: Teacher[] = [];
-  cardType = CardType.TEACHER;
+  teachers$: Observable<Teacher[]> = this.store.teachers$;
 
   constructor(
     private http: FakeHttpService,
@@ -34,7 +62,13 @@ export class TeacherCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
+  }
 
-    this.store.teachers$.subscribe((t) => (this.teachers = t));
+  addNewItem() {
+    this.store.addOne(randTeacher());
+  }
+
+  delete(id: number) {
+    this.store.deleteOne(id);
   }
 }
