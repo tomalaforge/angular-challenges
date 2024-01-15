@@ -142,7 +142,99 @@
   "fileMap": {
     "nonProjectFiles": [
       {
+        "file": "pull_request_template.md",
+        "hash": "9448729776476618360"
+      },
+      {
+        "file": "package-lock.json",
+        "hash": "15174302719579531063"
+      },
+      {
+        "file": "jest.config.ts",
+        "hash": "3407785570333453138"
+      },
+      {
+        "file": ".husky/pre-commit",
+        "hash": "15772567824124401214"
+      },
+      {
+        "file": "logo/angular-challenge.png",
+        "hash": "10361910020761919075"
+      },
+      {
         "file": "NX",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "tsconfig.base.json",
+        "hash": "5540061405186433010"
+      },
+      {
+        "file": ".prettierignore",
+        "hash": "1513939061254451726"
+      },
+      {
+        "file": "apps/.gitkeep",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "README.md",
+        "hash": "15177457321113768673"
+      },
+      {
+        "file": ".prettierrc",
+        "hash": "10739220704614765743"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "2342763103911753283"
+      },
+      {
+        "file": "commitlint.config.js",
+        "hash": "9313694002410609114"
+      },
+      {
+        "file": "CONTRIBUTING.md",
+        "hash": "8465929384208206582"
+      },
+      {
+        "file": "package.json",
+        "hash": "15503311385646087236"
+      },
+      {
+        "file": "logo/angular.svg",
+        "hash": "14893402338531245624"
+      },
+      {
+        "file": ".eslintignore",
+        "hash": "13404745306227114823"
+      },
+      {
+        "file": ".vscode/settings.json",
+        "hash": "15144249268153562100"
+      },
+      {
+        "file": ".husky/commit-msg",
+        "hash": "12857529330704966066"
+      },
+      {
+        "file": "logo/twitter.svg",
+        "hash": "6870079998973349120"
+      },
+      {
+        "file": "jest.preset.js",
+        "hash": "6481884873699543387"
+      },
+      {
+        "file": ".editorconfig",
+        "hash": "11532813898455409296"
+      },
+      {
+        "file": "decorate-angular-cli.js",
+        "hash": "16715193905812192462"
+      },
+      {
+        "file": "libs/.gitkeep",
         "hash": "3244421341483603138"
       },
       {
@@ -150,120 +242,32 @@
         "hash": "13729009613695173575"
       },
       {
-        "file": ".editorconfig",
-        "hash": "11532813898455409296"
-      },
-      {
-        "file": ".gitignore",
-        "hash": "2342763103911753283"
-      },
-      {
-        "file": "pull_request_template.md",
-        "hash": "9448729776476618360"
-      },
-      {
-        "file": "decorate-angular-cli.js",
-        "hash": "16715193905812192462"
-      },
-      {
-        "file": ".prettierrc",
-        "hash": "10739220704614765743"
-      },
-      {
-        "file": "tools/tsconfig.tools.json",
-        "hash": "11810713488198132402"
-      },
-      {
-        "file": ".vscode/extensions.json",
-        "hash": "1031907106376631047"
-      },
-      {
-        "file": ".husky/pre-commit",
-        "hash": "15772567824124401214"
-      },
-      {
-        "file": "commitlint.config.js",
-        "hash": "9313694002410609114"
-      },
-      {
-        "file": ".vscode/settings.json",
-        "hash": "15144249268153562100"
-      },
-      {
-        "file": "package-lock.json",
-        "hash": "15174302719579531063"
-      },
-      {
-        "file": "libs/.gitkeep",
-        "hash": "3244421341483603138"
-      },
-      {
         "file": "example.README.md",
         "hash": "12989985122201486652"
-      },
-      {
-        "file": "tsconfig.base.json",
-        "hash": "5540061405186433010"
       },
       {
         "file": "migrations.json",
         "hash": "12659958833587832680"
       },
       {
-        "file": "package.json",
-        "hash": "9492385507502976135"
-      },
-      {
-        "file": ".husky/commit-msg",
-        "hash": "12857529330704966066"
-      },
-      {
-        "file": "jest.preset.js",
-        "hash": "6481884873699543387"
-      },
-      {
-        "file": "apps/.gitkeep",
-        "hash": "3244421341483603138"
-      },
-      {
-        "file": "logo/angular-challenge.png",
-        "hash": "10361910020761919075"
-      },
-      {
-        "file": "README.md",
-        "hash": "15177457321113768673"
-      },
-      {
-        "file": ".eslintignore",
-        "hash": "13404745306227114823"
-      },
-      {
         "file": "nx.json",
         "hash": "3104375892515373800"
       },
       {
-        "file": "CONTRIBUTING.md",
-        "hash": "8465929384208206582"
+        "file": ".nx/cache/d/server-process.json",
+        "hash": "1850123793963085505"
       },
       {
-        "file": "logo/twitter.svg",
-        "hash": "6870079998973349120"
+        "file": ".vscode/extensions.json",
+        "hash": "1031907106376631047"
       },
       {
         "file": "README.test.md",
         "hash": "12897179369569678894"
       },
       {
-        "file": ".prettierignore",
-        "hash": "1513939061254451726"
-      },
-      {
-        "file": "jest.config.ts",
-        "hash": "3407785570333453138"
-      },
-      {
-        "file": "logo/angular.svg",
-        "hash": "14893402338531245624"
+        "file": "tools/tsconfig.tools.json",
+        "hash": "11810713488198132402"
       }
     ],
     "projectFileMap": {
@@ -3837,7 +3841,7 @@
         },
         {
           "file": "apps/projection/tsconfig.json",
-          "hash": "14307820879110957700"
+          "hash": "16215743172653279690"
         },
         {
           "file": "apps/projection/tsconfig.spec.json",

@@ -2725,3 +2725,239 @@
 [NX Daemon Server] - 2024-01-15T08:42:07.107Z - Time taken for 'hash changed files from watcher' 7.635300040245056ms
 [NX Daemon Server] - 2024-01-15T08:43:02.122Z - [WATCHER]: Processing file changes in outputs
 [NX Daemon Server] - 2024-01-15T08:43:02.181Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T08:48:31.258Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T08:48:31.262Z - [WATCHER]: apps/projection/src/assets/img/city.png was created or restored
+[NX Daemon Server] - 2024-01-15T08:48:31.371Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-01-15T08:48:31.371Z - [REQUEST]: apps/projection/src/assets/img/city.png
+[NX Daemon Server] - 2024-01-15T08:48:31.371Z - [REQUEST]: 
+[NX Daemon Server] - 2024-01-15T08:48:32.126Z - Time taken for 'hash changed files from watcher' 3.08160001039505ms
+[NX Daemon Server] - 2024-01-15T08:49:16.048Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T08:49:16.051Z - [WATCHER]: apps/projection/src/app/component/city-card/city-card.component.ts was modified
+[NX Daemon Server] - 2024-01-15T08:49:16.280Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-01-15T08:49:16.283Z - [REQUEST]: apps/projection/src/app/component/city-card/city-card.component.ts
+[NX Daemon Server] - 2024-01-15T08:49:16.285Z - [REQUEST]: 
+[NX Daemon Server] - 2024-01-15T08:49:17.105Z - Time taken for 'hash changed files from watcher' 5.086000025272369ms
+[NX Daemon Server] - 2024-01-15T08:49:17.521Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T08:50:19.129Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T08:50:19.209Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T08:50:22.424Z - [WATCHER]: apps/projection/src/app/component/city-card/city-card.component.ts was modified
+[NX Daemon Server] - 2024-01-15T08:50:22.425Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T08:50:22.847Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-01-15T08:50:22.847Z - [REQUEST]: apps/projection/src/app/component/city-card/city-card.component.ts
+[NX Daemon Server] - 2024-01-15T08:50:22.847Z - [REQUEST]: 
+[NX Daemon Server] - 2024-01-15T08:50:24.015Z - Time taken for 'hash changed files from watcher' 3.198900043964386ms
+[NX Daemon Server] - 2024-01-15T08:50:24.747Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T08:51:25.017Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T08:51:25.143Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T08:52:53.840Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T08:52:53.844Z - [WATCHER]: apps/projection/src/app/component/student-card/student-card.component.ts was modified
+[NX Daemon Server] - 2024-01-15T08:52:54.661Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-01-15T08:52:54.662Z - [REQUEST]: apps/projection/src/app/component/student-card/student-card.component.ts
+[NX Daemon Server] - 2024-01-15T08:52:54.662Z - [REQUEST]: 
+[NX Daemon Server] - 2024-01-15T08:52:55.251Z - Time taken for 'hash changed files from watcher' 3.315500020980835ms
+[NX Daemon Server] - 2024-01-15T08:52:56.047Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T08:53:08.809Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T08:53:08.812Z - [WATCHER]: apps/projection/src/app/component/student-card/student-card.component.ts was modified
+[NX Daemon Server] - 2024-01-15T08:53:10.307Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T08:53:10.419Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-01-15T08:53:10.419Z - [REQUEST]: apps/projection/src/app/component/student-card/student-card.component.ts
+[NX Daemon Server] - 2024-01-15T08:53:10.419Z - [REQUEST]: 
+[NX Daemon Server] - 2024-01-15T08:53:11.018Z - Time taken for 'hash changed files from watcher' 3.9550000429153442ms
+[NX Daemon Server] - 2024-01-15T08:53:44.458Z - [WATCHER]: apps/projection/src/app/component/student-card/student-card.component.ts was modified
+[NX Daemon Server] - 2024-01-15T08:53:44.459Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T08:53:45.849Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T08:53:45.928Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T08:53:47.668Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-01-15T08:53:47.668Z - [REQUEST]: apps/projection/src/app/component/student-card/student-card.component.ts
+[NX Daemon Server] - 2024-01-15T08:53:47.669Z - [REQUEST]: 
+[NX Daemon Server] - 2024-01-15T08:53:48.224Z - Time taken for 'hash changed files from watcher' 3.1401000022888184ms
+[NX Daemon Server] - 2024-01-15T08:54:20.542Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T08:54:20.546Z - [WATCHER]: apps/projection/src/app/component/student-card/student-card.component.ts was modified
+[NX Daemon Server] - 2024-01-15T08:54:21.569Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T08:54:26.968Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-01-15T08:54:26.968Z - [REQUEST]: apps/projection/src/app/component/student-card/student-card.component.ts
+[NX Daemon Server] - 2024-01-15T08:54:26.968Z - [REQUEST]: 
+[NX Daemon Server] - 2024-01-15T08:54:28.573Z - Time taken for 'hash changed files from watcher' 3.7836999893188477ms
+[NX Daemon Server] - 2024-01-15T08:55:08.529Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T08:55:08.548Z - [WATCHER]: apps/projection/src/app/component/student-card/student-card.component.ts was modified
+[NX Daemon Server] - 2024-01-15T08:55:10.202Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T08:55:10.385Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T08:55:14.962Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-01-15T08:55:14.962Z - [REQUEST]: apps/projection/src/app/component/student-card/student-card.component.ts
+[NX Daemon Server] - 2024-01-15T08:55:14.962Z - [REQUEST]: 
+[NX Daemon Server] - 2024-01-15T08:55:15.803Z - Time taken for 'hash changed files from watcher' 3.0612000226974487ms
+[NX Daemon Server] - 2024-01-15T08:55:20.444Z - [WATCHER]: apps/projection/src/app/component/student-card/student-card.component.ts was modified
+[NX Daemon Server] - 2024-01-15T08:55:20.445Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T08:55:21.446Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T08:55:26.876Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-01-15T08:55:26.876Z - [REQUEST]: apps/projection/src/app/component/student-card/student-card.component.ts
+[NX Daemon Server] - 2024-01-15T08:55:26.876Z - [REQUEST]: 
+[NX Daemon Server] - 2024-01-15T08:55:27.339Z - Time taken for 'hash changed files from watcher' 3.6032000184059143ms
+[NX Daemon Server] - 2024-01-15T08:55:37.009Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T08:55:37.012Z - [WATCHER]: apps/projection/src/app/component/student-card/student-card.component.ts was modified
+[NX Daemon Server] - 2024-01-15T08:55:37.944Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T08:55:43.431Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-01-15T08:55:43.431Z - [REQUEST]: apps/projection/src/app/component/student-card/student-card.component.ts
+[NX Daemon Server] - 2024-01-15T08:55:43.431Z - [REQUEST]: 
+[NX Daemon Server] - 2024-01-15T08:55:43.672Z - Time taken for 'hash changed files from watcher' 2.954900026321411ms
+[NX Daemon Server] - 2024-01-15T08:56:21.310Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T08:56:21.315Z - [WATCHER]: apps/projection/src/app/component/city-card/city-card.component.ts was modified
+[NX Daemon Server] - 2024-01-15T08:56:21.422Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T08:56:21.426Z - [WATCHER]: apps/projection/src/app/component/city-card/city-card.component.ts was modified
+[NX Daemon Server] - 2024-01-15T08:56:23.220Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T08:56:27.768Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-01-15T08:56:27.769Z - [REQUEST]: apps/projection/src/app/component/city-card/city-card.component.ts
+[NX Daemon Server] - 2024-01-15T08:56:27.769Z - [REQUEST]: 
+[NX Daemon Server] - 2024-01-15T08:56:28.060Z - Time taken for 'hash changed files from watcher' 2.98989999294281ms
+[NX Daemon Server] - 2024-01-15T08:57:23.785Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T08:57:23.894Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T08:57:24.065Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T08:57:24.144Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T08:58:06.134Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T08:58:06.138Z - [WATCHER]: apps/projection/src/app/component/city-card/city-card.component.ts was modified
+[NX Daemon Server] - 2024-01-15T08:58:08.256Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T08:58:12.542Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-01-15T08:58:12.542Z - [REQUEST]: apps/projection/src/app/component/city-card/city-card.component.ts
+[NX Daemon Server] - 2024-01-15T08:58:12.542Z - [REQUEST]: 
+[NX Daemon Server] - 2024-01-15T08:58:12.886Z - Time taken for 'hash changed files from watcher' 2.52810001373291ms
+[NX Daemon Server] - 2024-01-15T08:59:08.665Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:15:15.108Z - [WATCHER]: apps/projection/src/app/component/city-card/city-card.component.ts was modified
+[NX Daemon Server] - 2024-01-15T09:15:15.109Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:15:16.081Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:15:16.294Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:15:21.524Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-01-15T09:15:21.525Z - [REQUEST]: apps/projection/src/app/component/city-card/city-card.component.ts
+[NX Daemon Server] - 2024-01-15T09:15:21.525Z - [REQUEST]: 
+[NX Daemon Server] - 2024-01-15T09:15:21.893Z - Time taken for 'hash changed files from watcher' 6.948099970817566ms
+[NX Daemon Server] - 2024-01-15T09:16:16.609Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:17:15.407Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:17:15.411Z - [WATCHER]: apps/projection/src/app/component/city-card/city-card.component.ts was modified
+[NX Daemon Server] - 2024-01-15T09:17:17.332Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:17:19.923Z - [WATCHER]: apps/projection/src/app/component/city-card/city-card.component.ts was modified
+[NX Daemon Server] - 2024-01-15T09:17:19.926Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:17:20.787Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:17:21.826Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-01-15T09:17:21.826Z - [REQUEST]: apps/projection/src/app/component/city-card/city-card.component.ts
+[NX Daemon Server] - 2024-01-15T09:17:21.826Z - [REQUEST]: 
+[NX Daemon Server] - 2024-01-15T09:17:22.244Z - Time taken for 'hash changed files from watcher' 2.1448999643325806ms
+[NX Daemon Server] - 2024-01-15T09:17:35.939Z - [WATCHER]: apps/projection/src/app/component/city-card/city-card.component.ts was modified
+[NX Daemon Server] - 2024-01-15T09:17:35.940Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:17:36.872Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:17:42.357Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-01-15T09:17:42.358Z - [REQUEST]: apps/projection/src/app/component/city-card/city-card.component.ts
+[NX Daemon Server] - 2024-01-15T09:17:42.358Z - [REQUEST]: 
+[NX Daemon Server] - 2024-01-15T09:17:42.945Z - Time taken for 'hash changed files from watcher' 3.3192999958992004ms
+[NX Daemon Server] - 2024-01-15T09:18:05.645Z - [WATCHER]: apps/projection/src/app/component/city-card/city-card.component.ts was modified
+[NX Daemon Server] - 2024-01-15T09:18:05.646Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:18:06.581Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:18:12.056Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-01-15T09:18:12.056Z - [REQUEST]: apps/projection/src/app/component/city-card/city-card.component.ts
+[NX Daemon Server] - 2024-01-15T09:18:12.056Z - [REQUEST]: 
+[NX Daemon Server] - 2024-01-15T09:18:12.608Z - Time taken for 'hash changed files from watcher' 2.2118000388145447ms
+[NX Daemon Server] - 2024-01-15T09:18:22.154Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:18:22.158Z - [WATCHER]: apps/projection/src/app/component/city-card/city-card.component.ts was modified
+[NX Daemon Server] - 2024-01-15T09:18:22.969Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:18:28.579Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-01-15T09:18:28.583Z - [REQUEST]: apps/projection/src/app/component/city-card/city-card.component.ts
+[NX Daemon Server] - 2024-01-15T09:18:28.583Z - [REQUEST]: 
+[NX Daemon Server] - 2024-01-15T09:18:29.178Z - Time taken for 'hash changed files from watcher' 11.757499992847443ms
+[NX Daemon Server] - 2024-01-15T09:18:43.443Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:18:43.447Z - [WATCHER]: apps/projection/src/app/component/city-card/city-card.component.ts was modified
+[NX Daemon Server] - 2024-01-15T09:18:44.905Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:18:49.857Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-01-15T09:18:49.858Z - [REQUEST]: apps/projection/src/app/component/city-card/city-card.component.ts
+[NX Daemon Server] - 2024-01-15T09:18:49.858Z - [REQUEST]: 
+[NX Daemon Server] - 2024-01-15T09:18:50.257Z - Time taken for 'hash changed files from watcher' 2ms
+[NX Daemon Server] - 2024-01-15T09:19:45.482Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:19:45.518Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:19:45.587Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:20:03.231Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:20:03.234Z - [WATCHER]: apps/projection/src/app/component/city-card/city-card.component.ts was modified
+[NX Daemon Server] - 2024-01-15T09:20:04.265Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:20:09.650Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-01-15T09:20:09.651Z - [REQUEST]: apps/projection/src/app/component/city-card/city-card.component.ts
+[NX Daemon Server] - 2024-01-15T09:20:09.651Z - [REQUEST]: 
+[NX Daemon Server] - 2024-01-15T09:20:10.496Z - Time taken for 'hash changed files from watcher' 3.925399959087372ms
+[NX Daemon Server] - 2024-01-15T09:20:29.969Z - [WATCHER]: apps/projection/src/app/component/city-card/city-card.component.ts was modified
+[NX Daemon Server] - 2024-01-15T09:20:29.976Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:20:30.983Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:20:36.393Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-01-15T09:20:36.393Z - [REQUEST]: apps/projection/src/app/component/city-card/city-card.component.ts
+[NX Daemon Server] - 2024-01-15T09:20:36.394Z - [REQUEST]: 
+[NX Daemon Server] - 2024-01-15T09:20:36.683Z - Time taken for 'hash changed files from watcher' 10.839299976825714ms
+[NX Daemon Server] - 2024-01-15T09:20:45.218Z - [WATCHER]: apps/projection/src/app/component/city-card/city-card.component.ts was modified
+[NX Daemon Server] - 2024-01-15T09:20:45.219Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:20:46.315Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:20:51.626Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-01-15T09:20:51.626Z - [REQUEST]: apps/projection/src/app/component/city-card/city-card.component.ts
+[NX Daemon Server] - 2024-01-15T09:20:51.626Z - [REQUEST]: 
+[NX Daemon Server] - 2024-01-15T09:20:51.914Z - Time taken for 'hash changed files from watcher' 2.6718000173568726ms
+[NX Daemon Server] - 2024-01-15T09:21:46.755Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:21:46.848Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:26:10.634Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:26:10.638Z - [WATCHER]: apps/projection/src/app/data-access/city.store.ts was created or restored
+[NX Daemon Server] - 2024-01-15T09:26:10.744Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-01-15T09:26:10.745Z - [REQUEST]: apps/projection/src/app/data-access/city.store.ts
+[NX Daemon Server] - 2024-01-15T09:26:10.745Z - [REQUEST]: 
+[NX Daemon Server] - 2024-01-15T09:26:11.706Z - Time taken for 'hash changed files from watcher' 3.166000008583069ms
+[NX Daemon Server] - 2024-01-15T09:26:34.254Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:26:34.256Z - [WATCHER]: apps/projection/src/app/data-access/city.store.ts was modified
+[NX Daemon Server] - 2024-01-15T09:26:34.460Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-01-15T09:26:34.461Z - [REQUEST]: apps/projection/src/app/data-access/city.store.ts
+[NX Daemon Server] - 2024-01-15T09:26:34.461Z - [REQUEST]: 
+[NX Daemon Server] - 2024-01-15T09:26:34.903Z - Time taken for 'hash changed files from watcher' 2.9825000166893005ms
+[NX Daemon Server] - 2024-01-15T09:27:35.148Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:27:52.786Z - [WATCHER]: apps/projection/src/app/data-access/city.store.ts was modified
+[NX Daemon Server] - 2024-01-15T09:27:52.786Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:27:53.190Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-01-15T09:27:53.190Z - [REQUEST]: apps/projection/src/app/data-access/city.store.ts
+[NX Daemon Server] - 2024-01-15T09:27:53.190Z - [REQUEST]: 
+[NX Daemon Server] - 2024-01-15T09:27:53.748Z - Time taken for 'hash changed files from watcher' 2.5306000113487244ms
+[NX Daemon Server] - 2024-01-15T09:28:53.898Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:28:53.980Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:28:55.612Z - [WATCHER]: apps/projection/src/app/component/city-card/city-card.component.ts was modified
+[NX Daemon Server] - 2024-01-15T09:28:55.612Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:28:56.421Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-01-15T09:28:56.421Z - [REQUEST]: apps/projection/src/app/component/city-card/city-card.component.ts
+[NX Daemon Server] - 2024-01-15T09:28:56.421Z - [REQUEST]: 
+[NX Daemon Server] - 2024-01-15T09:28:56.790Z - Time taken for 'hash changed files from watcher' 3.1251999735832214ms
+[NX Daemon Server] - 2024-01-15T09:28:57.662Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:28:57.866Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:29:01.820Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:29:01.823Z - [WATCHER]: apps/projection/src/app/component/city-card/city-card.component.ts was modified
+[NX Daemon Server] - 2024-01-15T09:29:03.433Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-01-15T09:29:03.434Z - [REQUEST]: apps/projection/src/app/component/city-card/city-card.component.ts
+[NX Daemon Server] - 2024-01-15T09:29:03.434Z - [REQUEST]: 
+[NX Daemon Server] - 2024-01-15T09:29:03.973Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:29:03.974Z - Time taken for 'hash changed files from watcher' 3.1241000294685364ms
+[NX Daemon Server] - 2024-01-15T09:30:04.368Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:30:04.425Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:31:40.412Z - [WATCHER]: apps/projection/src/app/component/city-card/city-card.component.ts was modified
+[NX Daemon Server] - 2024-01-15T09:31:40.413Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:31:41.437Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:31:43.674Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-01-15T09:31:43.675Z - [REQUEST]: apps/projection/src/app/component/city-card/city-card.component.ts
+[NX Daemon Server] - 2024-01-15T09:31:43.675Z - [REQUEST]: 
+[NX Daemon Server] - 2024-01-15T09:31:44.301Z - Time taken for 'hash changed files from watcher' 3.373199999332428ms
+[NX Daemon Server] - 2024-01-15T09:32:41.812Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:32:41.895Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:51:43.765Z - Closed a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-01-15T09:51:45.462Z - Closed a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-01-15T09:54:49.406Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:54:49.409Z - [WATCHER]: apps/projection/src/app/component/city-card/city-card.component.ts was modified
+[NX Daemon Server] - 2024-01-15T09:54:49.496Z - [WATCHER]: apps/projection/src/app/component/city-card/city-card.component.ts was modified
+[NX Daemon Server] - 2024-01-15T09:54:49.497Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:54:49.776Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:54:49.778Z - [WATCHER]: apps/projection/src/app/component/student-card/student-card.component.ts was modified
+[NX Daemon Server] - 2024-01-15T09:54:49.916Z - [WATCHER]: 0 file(s) created or restored, 2 file(s) modified, 0 file(s) deleted
+[NX Daemon Server] - 2024-01-15T09:54:49.917Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:54:49.977Z - [WATCHER]: apps/projection/src/app/data-access/city.store.ts was modified
+[NX Daemon Server] - 2024-01-15T09:54:49.978Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:54:50.059Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:54:50.062Z - [WATCHER]: 0 file(s) created or restored, 2 file(s) modified, 0 file(s) deleted
+[NX Daemon Server] - 2024-01-15T09:54:50.111Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-01-15T09:54:50.113Z - [WATCHER]: apps/projection/src/app/ui/list-item/list-item.component.ts was modified
+[NX Daemon Server] - 2024-01-15T09:54:55.819Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-01-15T09:54:55.819Z - [REQUEST]: apps/projection/src/app/component/city-card/city-card.component.ts,apps/projection/src/app/component/student-card/student-card.component.ts,apps/projection/src/app/component/teacher-card/teacher-card.component.ts,apps/projection/src/app/data-access/city.store.ts,apps/projection/src/app/ui/list-item/list-item.component.ts,apps/projection/src/app/ui/card/card.component.ts
+[NX Daemon Server] - 2024-01-15T09:54:55.819Z - [REQUEST]: 
+[NX Daemon Server] - 2024-01-15T09:54:56.197Z - Time taken for 'hash changed files from watcher' 5.006099998950958ms
