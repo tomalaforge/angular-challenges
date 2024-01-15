@@ -1,0 +1,10 @@
+<app-card [list]="students$ | async" (actionClicked)="addNewItem()">
+  <app-card-image>
+    <img src="assets/img/student.webp" width="200px" />
+  </app-card-image>
+  <ng-template appCardListItem let-student>
+    <app-list-item (actionClicked)="deleteItem(student.id)">
+      {{student.firstName}}
+    </app-list-item>
+  </ng-template>
+</app-card>
