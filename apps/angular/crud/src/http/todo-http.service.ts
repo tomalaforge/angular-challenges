@@ -7,12 +7,12 @@ import { TodoItem } from '../models/todo';
   providedIn: 'root',
 })
 export class TodoHttpService {
-  TODO_REQ_URL = 'https://jsonplaceholder.typicode.com/todos';
+  private readonly url = 'https://jsonplaceholder.typicode.com';
 
   constructor(private http: HttpClient) {}
 
   getTodoList() {
-    return this.http.get<TodoItem[]>(this.TODO_REQ_URL);
+    return this.http.get<TodoItem[]>(`${this.url}/todos`);
   }
 
   updateTodoItem(item: TodoItem) {
@@ -24,7 +24,7 @@ export class TodoHttpService {
     };
 
     return this.http.put<TodoItem>(
-      `${this.TODO_REQ_URL}/${item.id}`,
+      `${this.url}/todos/${item.id}`,
       JSON.stringify(body),
       {
         headers: {
@@ -35,6 +35,6 @@ export class TodoHttpService {
   }
 
   deleteTodoItem(id: number) {
-    return this.http.delete<void>(`${this.TODO_REQ_URL}/${id}`);
+    return this.http.delete<void>(`${this.url}/todos/${id}`);
   }
 }
