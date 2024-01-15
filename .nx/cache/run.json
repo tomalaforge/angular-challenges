@@ -1,0 +1,21 @@
+{
+  "run": {
+    "command": "nx serve projection",
+    "startTime": "2024-01-14T08:15:51.169Z",
+    "endTime": "2024-01-14T08:15:52.402Z",
+    "inner": false
+  },
+  "tasks": [
+    {
+      "taskId": "projection:serve:development",
+      "target": "serve",
+      "projectName": "projection",
+      "hash": "1231971018406832643",
+      "startTime": "2024-01-14T08:15:51.185Z",
+      "endTime": "2024-01-14T08:15:52.400Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 1
+    }
+  ]
+}

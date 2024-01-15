@@ -1,0 +1,16 @@
+Could not find 'nx' module in this workspace. Error: [readCachedProjectGraph] ERROR: No cached ProjectGraph is available.
+
+If you are leveraging \`readCachedProjectGraph()\` directly then you will need to refactor your usage to first ensure that
+the ProjectGraph is created by calling \`await createProjectGraphAsync()\` somewhere before attempting to read the data.
+
+If you encounter this error as part of running standard \`nx\` commands then please open an issue on https://github.com/nrwl/nx
+    at readCachedProjectGraph [90m(E:\Development\web_development\Github_contribution\angular-challenges\[39mnode_modules\[4mnx[24m\src\project-graph\project-graph.js:30:15[90m)[39m
+    at run [90m(E:\Development\web_development\Github_contribution\angular-challenges\[39mnode_modules\[4mnx[24m\src\command-line\run\run.js:179:69[90m)[39m
+    at [90mE:\Development\web_development\Github_contribution\angular-challenges\[39mnode_modules\[4mnx[24m\bin\run-executor.js:60:48
+    at Generator.next (<anonymous>)
+    at [90mE:\Development\web_development\Github_contribution\angular-challenges\[39mnode_modules\[4mtslib[24m\tslib.js:169:75
+    at new Promise (<anonymous>)
+    at Object.__awaiter [90m(E:\Development\web_development\Github_contribution\angular-challenges\[39mnode_modules\[4mtslib[24m\tslib.js:165:16[90m)[39m
+    at process.<anonymous> [90m(E:\Development\web_development\Github_contribution\angular-challenges\[39mnode_modules\[4mnx[24m\bin\run-executor.js:58:44[90m)[39m
+[90m    at process.emit (node:events:514:28)[39m
+[90m    at emit (node:internal/child_process:937:14)[39m
