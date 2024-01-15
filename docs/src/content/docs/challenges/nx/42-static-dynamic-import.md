@@ -6,7 +6,6 @@ challengeNumber: 42
 command: nx-static-dynamic-import
 sidebar:
   order: 15
-  badge: New
 ---
 
 ## Information
