@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
-  let component: HTMLElement;
+  let el: HTMLElement;
   const mockStore: MockStore<Partial<AppState>> = createMockStore({
     initialState: { todos: [], isAppProcessing: false },
   });
@@ -32,11 +32,11 @@ describe('AppComponent', () => {
       ],
     });
     fixture = TestBed.createComponent(AppComponent);
-    component = fixture.nativeElement;
+    el = fixture.nativeElement;
   });
 
   it('should start with an empty array', () => {
-    const todoEls = component.querySelectorAll('.todo-item');
+    const todoEls = el.querySelectorAll('.todo-item');
     expect(todoEls.length).toBe(0);
   });
 
@@ -44,7 +44,7 @@ describe('AppComponent', () => {
     fixture.componentInstance.ngOnInit();
     fixture.detectChanges();
 
-    const todoEls = component.querySelectorAll('.todo-item');
+    const todoEls = el.querySelectorAll('.todo-item');
     expect(todoEls.length).toBe(todoItems.length);
   });
 });

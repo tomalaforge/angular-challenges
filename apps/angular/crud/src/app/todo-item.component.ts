@@ -16,7 +16,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
         @if (isProcessing) {
           <mat-spinner [diameter]="16"></mat-spinner>
         } @else {
-          <span>{{ title }}</span>
+          <span class="title">{{ title }}</span>
         }
       </div>
       <div class="todo-action">
