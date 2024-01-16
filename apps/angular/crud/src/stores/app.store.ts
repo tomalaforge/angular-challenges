@@ -82,9 +82,8 @@ export class AppStore extends ComponentStore<AppState> {
         this.todoHttpService.deleteTodoItem(id).pipe(
           tap(() => {
             this.patchState((state) => {
-              const prevIndex = state.todos.findIndex((v) => v.id === id);
-              if (prevIndex !== -1) state.todos.splice(prevIndex, 1);
-              return state;
+              const todos = state.todos.filter((v) => v.id !== id);
+              return { todos };
             });
           }),
         ),
