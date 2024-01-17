@@ -10,10 +10,6 @@ sidebar:
 ---
 
 :::note
-WIP: The following documentation will be reviewed and improved. However, you can still take on the challenge. If you don't understand a certain part, please feel free to reach out or create an issue.
-:::
-
-:::note
 This challenge is inspired by a real-life example that I simplified to create this nice challenge.
 :::
 

@@ -7,10 +7,6 @@ sidebar:
   order: 116
 ---
 
-:::note
-WIP: The following documentation will be reviewed and improved. However, you can still take on the challenge. If you don't understand a certain part, please feel free to reach out or create an issue.
-:::
-
 ## Information
 
 Welcome to the marvelous world of Nx generators.
@@ -41,7 +37,9 @@ Just below, you will have the end result of your generator for a `UserComponent`
   standalone: true,
   imports: [LetDirective],
   providers: [provideComponentStore(UserStore)],
-  template: ` <ng-container *ngrxLet="vm$ as vm"> // do things </ng-container> `,
+  template: `
+    <ng-container *ngrxLet="vm$ as vm">// do things</ng-container>
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserComponent {

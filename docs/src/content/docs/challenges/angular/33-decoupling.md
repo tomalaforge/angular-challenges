@@ -8,10 +8,6 @@ sidebar:
   order: 106
 ---
 
-:::note
-WIP: The following documentation will be reviewed and improved. However, you can still take on the challenge. If you don't understand a certain part, please feel free to reach out or create an issue.
-:::
-
 > Big thanks to **Robin Goetz** and his [Spartan Project](https://github.com/goetzrobin/spartan).
 > This challenge was proposed by Robin and is strongly inspired by his project.
 

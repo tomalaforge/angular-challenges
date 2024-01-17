@@ -16,8 +16,8 @@ export class AppService {
           ? topicToDelete
               .map((t) => this.dbService.deleteOneTopic(t.id))
               .reduce((acc, curr) => merge(acc, curr), of(true))
-          : of(true)
-      )
+          : of(true),
+      ),
     );
   }
 }

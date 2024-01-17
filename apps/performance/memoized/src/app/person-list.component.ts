@@ -27,7 +27,7 @@ const fibonacci = (num: number): number => {
     MatChipsModule,
   ],
   template: `
-    <h1 class="font-semibold text-center" title="Title">
+    <h1 class="text-center font-semibold" title="Title">
       {{ title | titlecase }}
     </h1>
 
@@ -43,7 +43,7 @@ const fibonacci = (num: number): number => {
       <mat-list-item *ngFor="let person of persons">
         <div MatListItemLine class="flex justify-between">
           <h3>{{ person.name }}</h3>
-          <mat-chip> {{ calculate(person.fib) }} </mat-chip>
+          <mat-chip>{{ calculate(person.fib) }}</mat-chip>
         </div>
       </mat-list-item>
     </mat-list>

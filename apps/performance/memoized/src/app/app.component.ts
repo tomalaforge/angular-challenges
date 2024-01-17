@@ -11,7 +11,7 @@ import { PersonListComponent } from './person-list.component';
     <p>Performance is key!!</p>
     <button
       (click)="loadList = true"
-      class="border border-black p-2 rounded-md">
+      class="rounded-md border border-black p-2">
       Load List
     </button>
 

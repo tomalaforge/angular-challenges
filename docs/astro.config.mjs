@@ -2,8 +2,22 @@ import starlight from '@astrojs/starlight';
 import { defineConfig } from 'astro/config';
 
 export const locales = {
-  root: { label: 'English', lang: 'en' },
-  es: { label: 'Español', lang: 'es' },
+  root: {
+    label: 'English',
+    lang: 'en',
+  },
+  es: {
+    label: 'Español',
+    lang: 'es',
+  },
+  fr: {
+    label: 'Français',
+    lang: 'fr',
+  },
+  pt: {
+    label: 'Português',
+    lang: 'pt',
+  },
 };
 
 // https://astro.build/config
@@ -28,6 +42,8 @@ export default defineConfig({
           autogenerate: { directory: 'guides' },
           translations: {
             es: 'Guías',
+            fr: 'Guides',
+            pt: 'Guias',
           },
         },
         {
@@ -35,6 +51,8 @@ export default defineConfig({
           autogenerate: { directory: 'challenges' },
           translations: {
             es: 'Desafíos',
+            fr: 'Challenges',
+            pt: 'Desafios',
           },
         },
       ],
@@ -64,16 +82,7 @@ export default defineConfig({
         MobileMenuFooter: './src/components/MobileMenuFooter.astro',
       },
       defaultLocale: 'root',
-      locales: {
-        root: {
-          label: 'English',
-          lang: 'en',
-        },
-        es: {
-          label: 'Español',
-          lang: 'es',
-        },
-      },
+      locales,
     }),
   ],
 });

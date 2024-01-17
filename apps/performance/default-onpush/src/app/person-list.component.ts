@@ -21,7 +21,7 @@ import { MatListModule } from '@angular/material/list';
     CDFlashingDirective,
   ],
   template: `
-    <h1 cd-flash class="font-semibold text-center" title="Title">
+    <h1 cd-flash class="text-center font-semibold" title="Title">
       {{ title | titlecase }}
     </h1>
 

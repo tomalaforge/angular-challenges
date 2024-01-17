@@ -153,3 +153,9 @@ starlight-menu-button svg {
 .starlight-aside--danger .starlight-aside__title {
   color: red;
 }
+
+details {
+  summary {
+    cursor: pointer;
+  }
+}

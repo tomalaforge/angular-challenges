@@ -9,10 +9,6 @@ sidebar:
   order: 113
 ---
 
-:::note
-WIP: The following documentation will be reviewed and improved. However, you can still take on the challenge. If you don't understand a certain part, please feel free to reach out or create an issue.
-:::
-
 For this exercice, you will have a dashboard of activities displaying the name, the main teacher and a list of subtitutes.
 
 ## Information

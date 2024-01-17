@@ -5,10 +5,12 @@ import { TimerContainerComponent } from './timer-container.component';
   selector: 'app-video',
   standalone: true,
   imports: [TimerContainerComponent],
-  template: `<div class="flex gap-2">
+  template: `
+    <div class="flex gap-2">
       Video Call Timer:
       <p class="italic">(should be the default 1000s)</p>
     </div>
-    <timer-container />`,
+    <timer-container />
+  `,
 })
 export default class VideoComponent {}

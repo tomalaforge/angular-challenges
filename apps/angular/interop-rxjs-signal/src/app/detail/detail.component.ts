@@ -9,13 +9,25 @@ import { Photo } from '../photo.model';
   imports: [DatePipe, RouterLink],
   template: `
     <img src="{{ photo.url_m }}" alt="{{ photo.title }}" class="image" />
-    <p><span class="font-bold">Title:</span> {{ photo.title }}</p>
-    <p><span class="font-bold">Owner:</span> {{ photo.ownername }}</p>
-    <p><span class="font-bold">Date:</span> {{ photo.datetaken | date }}</p>
-    <p><span class="font-bold">Tags:</span> {{ photo.tags }}</p>
+    <p>
+      <span class="font-bold">Title:</span>
+      {{ photo.title }}
+    </p>
+    <p>
+      <span class="font-bold">Owner:</span>
+      {{ photo.ownername }}
+    </p>
+    <p>
+      <span class="font-bold">Date:</span>
+      {{ photo.datetaken | date }}
+    </p>
+    <p>
+      <span class="font-bold">Tags:</span>
+      {{ photo.tags }}
+    </p>
 
     <button
-      class="border border-black rounded-md px-4 py-2 mt-10"
+      class="mt-10 rounded-md border border-black px-4 py-2"
       routerLink="">
       Back
     </button>

@@ -17,11 +17,10 @@ import {
         *ngTemplateOutlet="
           listTemplateRef || emptyRef;
           context: { $implicit: item, appList: item, index: i }
-        ">
-      </ng-container>
+        "></ng-container>
     </div>
 
-    <ng-template #emptyRef> No Template </ng-template>
+    <ng-template #emptyRef>No Template</ng-template>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

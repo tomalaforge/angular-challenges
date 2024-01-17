@@ -8,10 +8,6 @@ sidebar:
   order: 2
 ---
 
-:::note
-WIP: The following documentation will be reviewed and improved. However, you can still take on the challenge. If you don't understand a certain part, please feel free to reach out or create an issue.
-:::
-
 ## Information
 
 Communicating and having a global/local state in sync with your backend is the heart of any application. You will need to master these following best practises to build strong and reliable Angular Applications.
@@ -27,8 +23,7 @@ Currently we have a working example but filled with lots of bad practices.
 What you will need to do:
 
 - Avoid **any** as a type. Using Interface to leverage Typescript type system prevent errors
-- Use a **separate service** for all your http calls and use a **BehaviourSubject** for your todoList
-- Use **AsyncPipe** to subscribe to your todo list. _(Lets you handle subscription, unsubscription and refresh of the page when data has changed)_, avoid manual subscribe when it's not needed
+- Use a **separate service** for all your http calls and use a **Signal** for your todoList
 - Don't **mutate** data
 
 ```typescript
@@ -38,8 +33,6 @@ this.todos[todoUpdated.id - 1] = todoUpdated;
 // Prefer something like this, but need to be improved because we still want the same order
 this.todos = [...this.todos.filter((t) => t.id !== todoUpdated.id), todoUpdated];
 ```
-
-- Use **ChangeDetection.OnPush**
 
 ### Step 2: Improve
 
@@ -53,5 +46,5 @@ this.todos = [...this.todos.filter((t) => t.id !== todoUpdated.id), todoUpdated]
 
 ### Step 4: Awesomeness!!! master your state.
 
-- Use the **component store of ngrx** as a local state of your component. _(or any other 3rd Party lib)_
+- Use the **component store of ngrx**, **ngrx/store**, **rxAngular**, **tanstack-query** or **ngrx/signal-store** as a local state of your component.
 - Have a **localized** Loading/Error indicator, e.g. only on the Todo being processed and **disable** all buttons of the processed Todo. _(Hint: you will need to create an ItemComponent)_
