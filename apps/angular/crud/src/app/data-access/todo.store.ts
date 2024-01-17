@@ -12,6 +12,14 @@ export class TodoStore {
   todos = computed(this._todos);
 
   constructor() {
+    // this.http
+    //   .get<Todo[]>('https://jsonplaceholder.typicode.com/todos')
+    //   .subscribe((todos) => {
+    //     this._todos.set(todos);
+    //   });
+  }
+
+  load() {
     this.http
       .get<Todo[]>('https://jsonplaceholder.typicode.com/todos')
       .subscribe((todos) => {
@@ -19,36 +27,28 @@ export class TodoStore {
       });
   }
 
-  update(todo: Todo) {
-    this.http
-      .put<Todo>(
-        `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
-        JSON.stringify({
-          todo: todo.id,
-          title: randText(),
-          body: todo.title,
-          userId: todo.userId,
-        }),
-        {
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-          },
-        },
-      )
-      .subscribe((todoUpdated: Todo) => {
-        this._todos.update((value) => [
-          ...value.filter((t) => t.id < todoUpdated.id),
-          todoUpdated,
-          ...value.filter((t) => t.id > todoUpdated.id),
-        ]);
-      });
+  getByQuery() {
+    return this.http.get<Todo[]>('https://jsonplaceholder.typicode.com/todos');
   }
 
   delete(id: number) {
-    this.http
-      .delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
-      .subscribe(() => {
-        this._todos.update((value) => [...value.filter((t) => t.id != id)]);
-      });
+    return this.http.delete(`https://jsonplaceholder.typicode.com/todos/${id}`);
+  }
+
+  update(todo: Todo) {
+    return this.http.put<Todo>(
+      `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
+      JSON.stringify({
+        todo: todo.id,
+        title: randText(),
+        body: todo.title,
+        userId: todo.userId,
+      }),
+      {
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      },
+    );
   }
 }

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { SpinnerComponent } from './components/spinner/spinner.component';
-import { TodoStore } from './data-access/todo.store';
+import { TodoStore2 } from './data-access/todosignals.store';
 import { Todo } from './model/todo.model';
 
 @Component({
@@ -11,7 +11,7 @@ import { Todo } from './model/todo.model';
   template: `
     <h1>{{ title }}</h1>
     <app-spinner></app-spinner>
-    @for (todo of todos(); track todo.id) {
+    @for (todo of todoStore2.todos(); track todo.id) {
       <div>
         {{ todo.title }}
         <button (click)="update(todo)">Update</button>
@@ -21,15 +21,18 @@ import { Todo } from './model/todo.model';
   `,
   styles: [],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Crud Example';
-  todoStore = inject(TodoStore);
-  todos = this.todoStore.todos;
+  readonly todoStore2 = inject(TodoStore2);
+
+  ngOnInit(): void {
+    this.todoStore2.loadByQuery();
+  }
 
   update(todo: Todo) {
-    this.todoStore.update(todo);
+    this.todoStore2.update(todo);
   }
   delete(id: number) {
-    this.todoStore.delete(id);
+    this.todoStore2.delete(id);
   }
 }
