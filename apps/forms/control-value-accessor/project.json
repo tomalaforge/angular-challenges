@@ -1,0 +1,86 @@
+{
+  "name": "forms-control-value-accessor",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "app",
+  "sourceRoot": "apps/forms/control-value-accessor/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:application",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/forms/control-value-accessor",
+        "index": "apps/forms/control-value-accessor/src/index.html",
+        "browser": "apps/forms/control-value-accessor/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/forms/control-value-accessor/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/forms/control-value-accessor/src/favicon.ico",
+          "apps/forms/control-value-accessor/src/assets"
+        ],
+        "styles": ["apps/forms/control-value-accessor/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "forms-control-value-accessor:build:production"
+        },
+        "development": {
+          "buildTarget": "forms-control-value-accessor:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "forms-control-value-accessor:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/forms/control-value-accessor/**/*.ts",
+          "apps/forms/control-value-accessor/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/forms/control-value-accessor/jest.config.ts"
+      }
+    }
+  }
+}

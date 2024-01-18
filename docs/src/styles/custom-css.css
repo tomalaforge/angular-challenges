@@ -7,6 +7,7 @@
   --primary-color: var(--sl-color-bg-nav) !important;
   --cardBgColor: #242526;
 
+  --sl-color-green: #39a549;
   --sl-hue-purple: 41;
   --sl-color-purple-low: hsl(var(--sl-hue-orange), 39%, 22%);
   --sl-color-purple: hsl(var(--sl-hue-orange), 82%, 63%);
@@ -33,7 +34,7 @@
   border-radius: 6px;
   padding: 2px 8px;
   background-color: rgb(35, 134, 54);
-  color: var(-color-btn);
+  color: var(--color-btn);
 }
 
 .github-neutral-btn {
@@ -84,7 +85,7 @@ a.primary > svg {
 }
 
 b {
-  color: var(--sl-color-accent-high);
+  color: var(--sl-color-accent-high) !important;
 }
 
 .starlight-aside--tip b {
@@ -123,4 +124,38 @@ starlight-menu-button svg {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.important-block {
+  border: solid 1px red;
+  padding: 16px;
+  background-color: #f100002e;
+}
+
+.starlight-aside--note,
+.starlight-aside--tip {
+  background-color: transparent;
+  border: solid 1px gray;
+  color: var(--sl-color-text);
+}
+
+.starlight-aside--note .starlight-aside__title,
+.starlight-aside--tip .starlight-aside__title {
+  color: var(--sl-color-white);
+}
+
+.starlight-aside--danger {
+  background-color: #f100002e;
+  border: solid 1px red;
+  color: var(--sl-color-text);
+}
+
+.starlight-aside--danger .starlight-aside__title {
+  color: red;
+}
+
+details {
+  summary {
+    cursor: pointer;
+  }
 }

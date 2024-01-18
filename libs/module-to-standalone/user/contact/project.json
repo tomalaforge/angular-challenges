@@ -10,8 +10,7 @@
       "executor": "@nx/angular:ng-packagr-lite",
       "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
       "options": {
-        "project": "libs/module-to-standalone/user/contact/ng-package.json",
-        "updateBuildableProjectDepsInPackageJson": true
+        "project": "libs/module-to-standalone/user/contact/ng-package.json"
       },
       "configurations": {
         "production": {
@@ -27,14 +26,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "libs/module-to-standalone/user/contact/jest.config.ts",
-        "passWithNoTests": true
-      },
-      "configurations": {
-        "ci": {
-          "ci": true,
-          "codeCoverage": true
-        }
+        "jestConfig": "libs/module-to-standalone/user/contact/jest.config.ts"
       }
     },
     "lint": {

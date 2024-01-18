@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class PushService {
   private notificationSubject = new BehaviorSubject<Push | undefined>(
-    undefined
+    undefined,
   );
   notification$ = this.notificationSubject.asObservable();
 

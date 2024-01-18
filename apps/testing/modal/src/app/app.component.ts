@@ -58,8 +58,8 @@ export class AppComponent {
       .afterClosed()
       .subscribe((result) =>
         this.result.next(
-          result ? 'Name has been submitted' : 'Name is invalid !!'
-        )
+          result ? 'Name has been submitted' : 'Name is invalid !!',
+        ),
       );
   }
 }

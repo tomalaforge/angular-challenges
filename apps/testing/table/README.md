@@ -1,6 +1,6 @@
 <h1>Table testing</h1>
 
-> Author: Thomas Laforge
+> author: thomas-laforge
 
 ## Statement:
 

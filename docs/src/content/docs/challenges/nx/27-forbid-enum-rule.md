@@ -1,15 +1,11 @@
 ---
 title: 🟢 Custom Eslint Rule
 description: Challenge 27 is about creating a custom Eslint Rule to forbid enums
-author: Thomas Laforge
+author: thomas-laforge
 challengeNumber: 27
 sidebar:
   order: 12
 ---
-
-:::note
-WIP: The following documentation will be reviewed and improved. However, you can still take on the challenge. If you don't understand a certain part, please feel free to reach out or create an issue.
-:::
 
 ## Information
 

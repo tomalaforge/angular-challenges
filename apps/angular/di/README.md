@@ -1,6 +1,6 @@
 # Master Dependancy Injection
 
-> Author: Thomas Laforge
+> author: thomas-laforge
 
 ### Run Application
 
@@ -10,4 +10,4 @@ npx nx serve angular-di
 
 ### Documentation and Instruction
 
-Challenge documentation is [here](https://angular-challenges.vercel.app/challenges/angular/16-angular-di/).
+Challenge documentation is [here](https://angular-challenges.vercel.app/challenges/angular/16-di/).

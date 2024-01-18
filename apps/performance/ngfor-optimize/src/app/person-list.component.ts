@@ -10,16 +10,16 @@ import { Person } from './person.model';
   template: `
     <div
       *ngFor="let person of persons"
-      class="flex justify-between items-center border-b">
+      class="flex items-center justify-between border-b">
       <h3>{{ person.name }}</h3>
       <div class="flex gap-10 py-1">
         <button
-          class="border rounded-md p-2 bg-blue-500 text-white"
+          class="rounded-md border bg-blue-500 p-2 text-white"
           (click)="update.emit(person.email)">
           UPDATE
         </button>
         <button
-          class="border rounded-md p-2 bg-red-500 text-white"
+          class="rounded-md border bg-red-500 p-2 text-white"
           (click)="delete.emit(person.email)">
           DELETE
         </button>

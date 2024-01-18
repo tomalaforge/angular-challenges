@@ -1,6 +1,6 @@
 # Custom Eslint Rule
 
-> Author: Thomas Laforge
+> author: thomas-laforge
 
 ### Run Application
 

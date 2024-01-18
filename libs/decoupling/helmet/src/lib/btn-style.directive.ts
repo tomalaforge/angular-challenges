@@ -27,7 +27,7 @@ export class BtnHelmetDirective {
     this.renderer.setAttribute(
       this.element.nativeElement,
       'data-state',
-      this.state()
+      this.state(),
     );
   });
 }

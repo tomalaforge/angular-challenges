@@ -5,16 +5,16 @@ import { combineLatest, map, mapTo, Observable, startWith, timer } from 'rxjs';
  */
 export const nonFlickerLoader = (
   data$: Observable<boolean>,
-  duration = 300
+  duration = 300,
 ): Observable<boolean> => {
   const isTrueWhileDuration$ = timer(duration).pipe(
     mapTo(false),
-    startWith(true)
+    startWith(true),
   );
 
   return combineLatest([data$, isTrueWhileDuration$]).pipe(
     map(([data, isTrueWhileDuration]) =>
-      isTrueWhileDuration ? isTrueWhileDuration : data
-    )
+      isTrueWhileDuration ? isTrueWhileDuration : data,
+    ),
   );
 };

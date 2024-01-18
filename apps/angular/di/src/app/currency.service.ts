@@ -20,7 +20,7 @@ export const currency: Currency[] = [
 export class CurrencyService extends ComponentStore<{ code: string }> {
   readonly code$ = this.select((state) => state.code);
   readonly symbol$ = this.code$.pipe(
-    map((code) => currency.find((c) => c.code === code)?.symbol ?? code)
+    map((code) => currency.find((c) => c.code === code)?.symbol ?? code),
   );
 
   constructor() {

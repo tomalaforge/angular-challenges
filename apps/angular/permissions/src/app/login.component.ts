@@ -18,7 +18,7 @@ import { UserStore } from './user.store';
   imports: [InformationComponent, RouterLink, ButtonComponent],
   selector: 'app-login',
   template: `
-    <header class="flex gap-3 items-center">
+    <header class="flex items-center gap-3">
       Log as :
       <button app-button (click)="admin()">Admin</button>
       <button app-button (click)="manager()">Manager</button>
@@ -26,12 +26,12 @@ import { UserStore } from './user.store';
       <button app-button (click)="writer()">Writer</button>
       <button app-button (click)="readerWriter()">Reader and Writer</button>
       <button app-button (click)="client()">Client</button>
-      <button app-button (click)="everyone()">Client</button>
+      <button app-button (click)="everyone()">Everyone</button>
     </header>
 
     <app-information></app-information>
 
-    <button app-button class=" mt-10" routerLink="enter">
+    <button app-button class="mt-10" routerLink="enter">
       Enter application
     </button>
   `,

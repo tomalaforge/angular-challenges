@@ -1,7 +1,7 @@
 ---
 title: 🟠 Directive Enhancement
 description: Challenge 3 is about enhancing a built-in directive
-author: Thomas Laforge
+author: thomas-laforge
 challengeNumber: 3
 command: angular-ngfor-enhancement
 blogLink: https://medium.com/@thomas.laforge/ngfor-enhancement-716b44656a6c
@@ -10,7 +10,7 @@ sidebar:
 ---
 
 :::note
-WIP: The following documentation will be reviewed and improved. However, you can still take on the challenge. If you don't understand a certain part, please feel free to reach out or create an issue.
+This exercice can feel obsolete with the new control flow and the empty block inside the `@for` block. However **structural directives** are not going to be deleted any time soon, so you can still learn a lot from this exercice.
 :::
 
 ## Information

@@ -13,11 +13,14 @@ export class UserEffects {
       concatMap(() =>
         this.userService.fetchUser().pipe(
           map((user) => UserActions.loadUsersSuccess({ user })),
-          catchError((error) => of(UserActions.loadUsersFailure({ error })))
-        )
-      )
+          catchError((error) => of(UserActions.loadUsersFailure({ error }))),
+        ),
+      ),
     );
   });
 
-  constructor(private actions$: Actions, private userService: UserService) {}
+  constructor(
+    private actions$: Actions,
+    private userService: UserService,
+  ) {}
 }

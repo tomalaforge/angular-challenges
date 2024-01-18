@@ -19,22 +19,28 @@ import { DetailStore } from './detail.store';
     LetDirective,
   ],
   template: `
-    <h2 class="text-xl mb-2">Ticket Detail:</h2>
+    <h2 class="mb-2 text-xl">Ticket Detail:</h2>
     <ng-container *ngrxLet="vm$ as vm">
       <mat-progress-bar
         mode="query"
         *ngIf="vm.loading"
         class="mt-5"></mat-progress-bar>
       <section *ngIf="vm.ticket as ticket" class="flex flex-col gap-4">
-        <div><span class="font-bold">Ticket:</span> {{ ticket.id }}</div>
         <div>
-          <span class="font-bold">Description:</span> {{ ticket.description }}
+          <span class="font-bold">Ticket:</span>
+          {{ ticket.id }}
         </div>
         <div>
-          <span class="font-bold">AssigneeId:</span> {{ ticket.assigneeId }}
+          <span class="font-bold">Description:</span>
+          {{ ticket.description }}
         </div>
         <div>
-          <span class="font-bold">Is done:</span> {{ ticket.completed }}
+          <span class="font-bold">AssigneeId:</span>
+          {{ ticket.assigneeId }}
+        </div>
+        <div>
+          <span class="font-bold">Is done:</span>
+          {{ ticket.completed }}
         </div>
       </section>
     </ng-container>

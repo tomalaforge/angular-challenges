@@ -1,7 +1,7 @@
 ---
 title: 🟠 Optimize Big List
 description: Challenge 37 is about learning how virtualization optimize big list rendering
-author: Thomas Laforge
+author: thomas-laforge
 challengeNumber: 37
 command: performance-ngfor-biglist
 sidebar:
@@ -30,6 +30,6 @@ The goal of this challenge is to implement a better alternative to display big l
 <details>
   <summary>Hint 1</summary>
 
-If you're unsure where to begin, I recommend reading the [Angular CDK virtualization documentation](https://material.angular.io/cdk/scrolling/overview)
+If you're unsure where to begin, I recommend reading the [Angular CDK virtualization documentation](https://material.angular.io/cdk/scrolling/overview).
 
 </details>

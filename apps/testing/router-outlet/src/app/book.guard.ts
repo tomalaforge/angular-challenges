@@ -4,7 +4,7 @@ import { availableBooks } from './book.model';
 
 export const bookGuard = (
   route: ActivatedRouteSnapshot,
-  router = inject(Router)
+  router = inject(Router),
 ) => {
   const searchParam = route.queryParams?.['book'].toLowerCase();
 
@@ -13,7 +13,7 @@ export const bookGuard = (
     availableBooks.some(
       (b) =>
         b.author.toLowerCase().includes(searchParam) ||
-        b.name.toLowerCase().includes(searchParam)
+        b.name.toLowerCase().includes(searchParam),
     );
 
   return isBookAvailable || router.parseUrl('no-result');

@@ -53,10 +53,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "angular-context-outlet-type:build:production"
+          "buildTarget": "angular-context-outlet-type:build:production"
         },
         "development": {
-          "browserTarget": "angular-context-outlet-type:build:development"
+          "buildTarget": "angular-context-outlet-type:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -64,7 +64,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "angular-context-outlet-type:build"
+        "buildTarget": "angular-context-outlet-type:build"
       }
     },
     "lint": {

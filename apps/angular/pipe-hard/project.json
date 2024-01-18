@@ -53,10 +53,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "angular-pipe-hard:build:production"
+          "buildTarget": "angular-pipe-hard:build:production"
         },
         "development": {
-          "browserTarget": "angular-pipe-hard:build:development"
+          "buildTarget": "angular-pipe-hard:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -64,7 +64,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "angular-pipe-hard:build"
+        "buildTarget": "angular-pipe-hard:build"
       }
     },
     "lint": {

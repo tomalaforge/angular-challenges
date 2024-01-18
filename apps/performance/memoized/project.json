@@ -57,10 +57,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "performance-memoized:build:production"
+          "buildTarget": "performance-memoized:build:production"
         },
         "development": {
-          "browserTarget": "performance-memoized:build:development"
+          "buildTarget": "performance-memoized:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -68,7 +68,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "performance-memoized:build"
+        "buildTarget": "performance-memoized:build"
       }
     },
     "lint": {

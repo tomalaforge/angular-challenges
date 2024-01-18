@@ -25,5 +25,5 @@ export const statusReducer = createReducer(
       statuses,
       teachersMap: map,
     };
-  })
+  }),
 );

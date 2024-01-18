@@ -53,10 +53,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "angular-module-to-standalone:build:production"
+          "buildTarget": "angular-module-to-standalone:build:production"
         },
         "development": {
-          "browserTarget": "angular-module-to-standalone:build:development"
+          "buildTarget": "angular-module-to-standalone:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -64,7 +64,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "angular-module-to-standalone:build"
+        "buildTarget": "angular-module-to-standalone:build"
       }
     },
     "lint": {

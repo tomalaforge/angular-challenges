@@ -1,16 +1,12 @@
 ---
 title: 🟠 Harness Creation
 description: Challenge 24 is about creating a component harness.
-author: Thomas Laforge
+author: thomas-laforge
 challengeNumber: 24
 command: testing-create-harness
 sidebar:
   order: 112
 ---
-
-:::note
-WIP: The following documentation will be reviewed and improved. However, you can still take on the challenge. If you don't understand a certain part, please feel free to reach out or create an issue.
-:::
 
 ## Information
 
@@ -43,6 +39,6 @@ Additionally, you should create a `HarnessPredicate` with the default predicate 
 
 Lastly, you will need to create the test suite for `app.component`. Some default tests have already been written, but feel free to add as many tests as you want and create as many harness methods as you need.
 
-> Angular Material documentation can be found [here](https://material.angular.io/cdk/test-harnesses/overview)
+> Angular Material documentation can be found [here](https://material.angular.io/cdk/test-harnesses/overview).
 
 Good luck !!! 💪
