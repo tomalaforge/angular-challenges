@@ -4,13 +4,19 @@
   "buttons.star": "Dar uma estrela",
   "buttons.sponsor": "Patrocinar",
 
-  "challenge.footer.note": "Nota",
-  "challenge.footer.running": "Rode o projeto executando o comando:",
-  "challenge.footer.start": "O título do seu PR deve começar com",
-  "challenge.footer.reminder": "Não esqueça",
-  "challenge.footer.communityAnswers": "Solução da Comunidade",
-  "challenge.footer.authorAnswer": "Solução do Autor do Desafio",
-  "challenge.footer.blogPost": "Artigo",
+  "404.text": "Página não encontrada. Verifique a URL ou tente usar a barra de busca.",
 
-  "404.text": "Página não encontrada. Verifique a URL ou tente usar a barra de busca."
+  "challenge.footer": {
+    "note": "Nota",
+    "running": "Rode o projeto executando o comando:",
+    "start": "O título do seu PR deve começar com",
+    "reminder": "Não esqueça",
+    "communityAnswers": "Solução da Comunidade",
+    "authorAnswer": "Solução do Autor do Desafio",
+    "blogPost": "Artigo",
+    "gettingStarted": {
+      "title": "Para realizar este desafio, comece lendo: ",
+      "link": "Começando"
+    }
+  }
 }

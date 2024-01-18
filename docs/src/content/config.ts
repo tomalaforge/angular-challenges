@@ -47,6 +47,10 @@ const i18n = defineCollection({
         'challenge.footer.communityAnswers': z.string(),
         'challenge.footer.authorAnswer': z.string(),
         'challenge.footer.blogPost': z.string(),
+        'challenge.footer.gettingStarted': z.object({
+          title: z.string(),
+          link: z.string(),
+        }),
       })
       .partial(),
   }),

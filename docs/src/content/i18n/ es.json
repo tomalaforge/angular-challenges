@@ -40,11 +40,25 @@
   "buttons.star": "Danos una estrella",
   "buttons.sponsor": "Patrocínanos",
 
-  "challenge.footer.note": "Nota",
-  "challenge.footer.running": "Inicia el proyecto ejecutando el siguiente comando:",
-  "challenge.footer.start": "El título de tu PR debe iniciar con",
-  "challenge.footer.reminder": "¡No lo olvides!",
-  "challenge.footer.communityAnswers": "Respuestas de la Comunidad",
-  "challenge.footer.authorAnswer": "Respuesta del Autor del Reto",
-  "challenge.footer.blogPost": "Blog Post"
+  "note": "Nota",
+  "running": "Inicia el proyecto ejecutando el siguiente comando:",
+  "start": "El título de tu PR debe iniciar con",
+  "reminder": "¡No lo olvides!",
+  "communityAnswers": "Respuestas de la Comunidad",
+  "authorAnswer": "Respuesta del Autor del Reto",
+  "blogPost": "Blog Post",
+
+  "challenge.footer": {
+    "note": "Nota",
+    "running": "Inicia el proyecto ejecutando el siguiente comando:",
+    "start": "El título de tu PR debe iniciar con",
+    "reminder": "¡No lo olvides!",
+    "communityAnswers": "Respuestas de la Comunidad",
+    "authorAnswer": "Respuesta del Autor del Reto",
+    "blogPost": "Blog Post",
+    "gettingStarted": {
+      "title": "Para realizar este desafío, comienza por leer: ",
+      "link": "Inicio"
+    }
+  }
 }

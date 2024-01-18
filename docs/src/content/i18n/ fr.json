@@ -4,11 +4,17 @@
   "buttons.star": "Donne une étoile",
   "buttons.sponsor": "Sponsorise",
 
-  "challenge.footer.note": "Note",
-  "challenge.footer.running": "Démarre le projet en exécutant:",
-  "challenge.footer.start": "Le titre de ta PR doit commencer par",
-  "challenge.footer.reminder": "Rappel",
-  "challenge.footer.communityAnswers": "Solution de la communauté",
-  "challenge.footer.authorAnswer": "Solution de l'auteur",
-  "challenge.footer.blogPost": "Article"
+  "challenge.footer": {
+    "note": "Note",
+    "running": "Démarre le projet en exécutant:",
+    "start": "Le titre de ta PR doit commencer par",
+    "reminder": "Rappel",
+    "communityAnswers": "Solution de la communauté",
+    "authorAnswer": "Solution de l'auteur",
+    "blogPost": "Article",
+    "gettingStarted": {
+      "title": "Pour faire ce challenge, commencer par lire: ",
+      "link": "Comment Démarrer"
+    }
+  }
 }
