@@ -2,8 +2,10 @@ import { TitleCasePipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  Input,
   OnChanges,
+  computed,
+  input,
+  numberAttribute,
 } from '@angular/core';
 
 type Category = 'Youth' | 'Junior' | 'Open' | 'Senior';
@@ -19,7 +21,7 @@ const ageToCategory = (age: number): Category => {
   standalone: true,
   imports: [TitleCasePipe],
   template: `
-    {{ fullName | titlecase }} plays tennis in the {{ category }} category!!
+    {{ fullName() | titlecase }} plays tennis in the {{ category }} category!!
   `,
   host: {
     class: 'text-xl text-green-800',
@@ -27,15 +29,24 @@ const ageToCategory = (age: number): Category => {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserComponent implements OnChanges {
-  @Input({ required: true }) name!: string;
-  @Input() lastName?: string;
-  @Input() age?: string;
+  name = input.required<string>();
+  lastName = input<string>();
+  age = input<unknown>({ transform: numberAttribute });
+  fullName = computed(() => this.name() + ' ' + this.lastName());
 
-  fullName = '';
   category: Category = 'Junior';
 
   ngOnChanges(): void {
-    this.fullName = `${this.name} ${this.lastName ?? ''}`;
-    this.category = ageToCategory(Number(this.age) ?? 0);
+    this.category = ageToCategory(Number(this.age()) ?? 0);
   }
 }
+
+// Once again, Angular adds something without official documentation
+// Input vs input
+// what about output ?
+// https://dev.to/railsstudent/examples-of-new-signal-inputs-in-angular-k0c
+// withComponentInputBinding vs this
+// input should be required initially? https://github.com/angular/angular/issues/53909 -> which choice leads to more boilerplate?
+// https://github.com/angular/angular/issues/53969 - numberAttribute gotchas
+// You get a `Input Is Required But No Value Is Available Yet` error if you don't call the signal in the fullName literal
+// i.e. this.fullName = `${this.name} ${this.lastName ?? ''}`

@@ -10,18 +10,23 @@ import { UserComponent } from './user.component';
     <div class="flex flex-col gap-3">
       <div class="flex gap-2 ">
         Name:
-        <input #name class="border" />
+        <input #name name="name" class="border" autocomplete="off" />
         @if (showUser && !name.value) {
           <div class="text-sm text-red-500">name required</div>
         }
       </div>
       <div class="flex gap-2 ">
         LastName:
-        <input #lastName class="border" />
+        <input #lastName name="lastName" class="border" autocomplete="off" />
       </div>
       <div class="flex gap-2 ">
         Age:
-        <input type="number" #age class="border" />
+        <input
+          type="number"
+          #age
+          name="age"
+          class="border"
+          autocomplete="off" />
       </div>
       <button
         (click)="showUser = true"
