@@ -2,7 +2,6 @@ import { TitleCasePipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  OnChanges,
   computed,
   input,
   numberAttribute,
@@ -21,24 +20,19 @@ const ageToCategory = (age: number): Category => {
   standalone: true,
   imports: [TitleCasePipe],
   template: `
-    {{ fullName() | titlecase }} plays tennis in the {{ category }} category!!
+    {{ fullName() | titlecase }} plays tennis in the {{ category() }} category!!
   `,
   host: {
     class: 'text-xl text-green-800',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserComponent implements OnChanges {
+export class UserComponent {
   name = input.required<string>();
   lastName = input<string>();
   age = input<unknown>({ transform: numberAttribute });
   fullName = computed(() => this.name() + ' ' + this.lastName());
-
-  category: Category = 'Junior';
-
-  ngOnChanges(): void {
-    this.category = ageToCategory(Number(this.age()) ?? 0);
-  }
+  category = computed(() => ageToCategory(Number(this.age()) ?? 0));
 }
 
 // Once again, Angular adds something without official documentation
@@ -50,3 +44,4 @@ export class UserComponent implements OnChanges {
 // https://github.com/angular/angular/issues/53969 - numberAttribute gotchas
 // You get a `Input Is Required But No Value Is Available Yet` error if you don't call the signal in the fullName literal
 // i.e. this.fullName = `${this.name} ${this.lastName ?? ''}`
+// ngOnChanges -> computed
