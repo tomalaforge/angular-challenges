@@ -1,16 +1,12 @@
 ---
 title: 🟢 Race Condition
 description: Challenge 14 is about race condition in Rxjs
-author: Thomas Laforge
+author: thomas-laforge
 challengeNumber: 14
 command: rxjs-race-condition
 sidebar:
   order: 11
 ---
-
-:::note
-WIP: The following documentation will be reviewed and improved. However, you can still take on the challenge. If you don't understand a certain part, please feel free to reach out or create an issue.
-:::
 
 ## Information
 

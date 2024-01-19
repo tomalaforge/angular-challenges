@@ -1,6 +1,6 @@
 # Directive Enhancement
 
-> Author: Thomas Laforge
+> author: thomas-laforge
 
 ### Run Application
 

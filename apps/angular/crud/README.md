@@ -1,6 +1,6 @@
 # Crud application
 
-> Author: Thomas Laforge
+> author: thomas-laforge
 
 ### Run Application
 
@@ -10,4 +10,4 @@ npx nx serve angular-crud
 
 ### Documentation and Instruction
 
-Challenge documentation is [here](https://angular-challenges.vercel.app/challenges/angular/5-angular-crud/).
+Challenge documentation is [here](https://angular-challenges.vercel.app/challenges/angular/5-crud/).

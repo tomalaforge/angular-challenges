@@ -16,7 +16,7 @@ export class PersonService {
     this.persons.set(
       this.fakeBackend
         .returnNewList(this.persons())
-        .filter((p) => p.email !== email)
+        .filter((p) => p.email !== email),
     );
   }
 
@@ -24,7 +24,7 @@ export class PersonService {
     this.persons.set(
       this.fakeBackend
         .returnNewList(this.persons())
-        .map((p) => (p.email === email ? { email, name: randFirstName() } : p))
+        .map((p) => (p.email === email ? { email, name: randFirstName() } : p)),
     );
   }
 

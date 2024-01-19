@@ -23,7 +23,7 @@ export const appConfig: ApplicationConfig = {
           redirectTo: '',
         },
       ],
-      withComponentInputBinding()
+      withComponentInputBinding(),
     ),
   ],
 };

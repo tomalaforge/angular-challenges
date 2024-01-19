@@ -6,7 +6,7 @@ import { CardType } from '../../model/card.model';
 @Component({
   selector: 'app-list-item',
   template: `
-    <div class="border border-grey-300 py-1 px-2 flex justify-between">
+    <div class="border-grey-300 flex justify-between border px-2 py-1">
       {{ name }}
       <button (click)="delete(id)">
         <img class="h-5" src="assets/svg/trash.svg" />
@@ -22,7 +22,7 @@ export class ListItemComponent {
 
   constructor(
     private teacherStore: TeacherStore,
-    private studentStore: StudentStore
+    private studentStore: StudentStore,
   ) {}
 
   delete(id: number) {

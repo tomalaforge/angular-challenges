@@ -1,7 +1,7 @@
 ---
 title: 🟢 Projection
 description: Challenge 1 is about learning how to project DOM element through components
-author: Thomas Laforge
+author: thomas-laforge
 challengeNumber: 1
 command: angular-projection
 blogLink: https://medium.com/@thomas.laforge/create-a-highly-customizable-component-cc3a9805e4c5
@@ -15,7 +15,7 @@ sidebar:
 
 ## Information
 
-In Angular, content projection is a powerful technique for creating highly customizable components. Utilizing and understanding the concepts of <b>ng-content</b> and <b>ngTemplateOutlet</b> can sighificantly enhance your ability to create shareable components.
+In Angular, content projection is a powerful technique for creating highly customizable components. Utilizing and understanding the concepts of <b>ng-content</b> and <b>ngTemplateOutlet</b> can significantly enhance your ability to create shareable components.
 
 You can learn all about <b>ng-content</b> [here](https://angular.io/guide/content-projection#projecting-content-in-more-complex-environments) from simple projection to more complex ones.
 
@@ -32,6 +32,12 @@ While the application works, the developer experience is far from being optimal.
 ## Constraints
 
 - You <b>must</b> refactor the `CardComponent` and `ListItemComponent`.
-- The `NgFor` directive must be declared and remain inside the `CardComponent`. You might be tempted to move it to the `CardComponent` but avoid doing so.
+- The `NgFor` directive must be declared and remain inside the `CardComponent`. You might be tempted to move it to the `ParentCardComponent` like `TeacherCardComponent`.
 - `CardComponent` should not contain any `NgIf` or `NgSwitch`.
 - CSS: try to avoid using `::ng-deep`. Find a better way to handle CSS styling.
+
+## Bonus Challenges
+
+- Try to work with the new built-in control flow syntax for loops and conditionals (documentation [here](https://angular.dev/guide/templates/control-flow))
+- Use the signal API to manage your components state (documentation [here](https://angular.dev/guide/signals))
+- To reference the template, use a directive instead of magic strings

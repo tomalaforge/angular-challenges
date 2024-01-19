@@ -3,13 +3,15 @@ import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'lib-create-contact',
-  template: `Create Contact Form
+  template: `
+    Create Contact Form
 
     <button
       routerLink=".."
-      class="border bg-gray-700 rounded-lg p-2 text-white ml-5">
+      class="ml-5 rounded-lg border bg-gray-700 p-2 text-white">
       Back
-    </button> `,
+    </button>
+  `,
 })
 export class CreateContactComponent {}
 

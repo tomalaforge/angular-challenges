@@ -1,0 +1,51 @@
+---
+import { Icon } from '@astrojs/starlight/components';
+import MyIcon from './MyIcon.astro';
+import type { Props } from '@astrojs/starlight/props';
+
+const { labels } = Astro.props;
+
+---
+
+<div class="action-footer">
+    <a class="action-button" href='https://github.com/tomalaforge/angular-challenges'>
+        <div>{labels['buttons.star'] ?? 'Give a star'}</div>
+        <Icon name='github' size="1rem" />
+    </a>
+
+    <a class="action-button button-sponsor" href='https://github.com/sponsors/tomalaforge'>
+        <div>{labels['buttons.sponsor'] ?? 'Sponsor'}</div>
+        <MyIcon name='heart' size="1rem" color="white" />
+    </a>
+</div>
+
+<style>
+    .action-button {
+        display: flex!important;
+        justify-content: center;
+        gap: 0.5em;
+        align-items: center;
+        border-radius: 999rem;
+        color: var(--sl-color-white)!important;
+        line-height: 1.1875;
+        text-decoration: none;
+        font-size: var(--sl-text-sm)!important;
+        border: 1px solid;
+        font-size: var(--sl-text-base);
+        padding: 0.4rem 0.8rem;
+    }
+
+    .action-footer {
+        display: flex;
+        flex-direction: column;
+        gap: 0.7rem;
+        margin-bottom: 10px;
+    }
+
+    .button-sponsor {
+        background-color: red;
+        border-color: red;
+        color: white;
+    }
+
+</style>

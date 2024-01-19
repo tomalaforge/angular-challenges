@@ -42,7 +42,7 @@ function findPreviousChallengeFilePath(tree, path, number) {
 export async function challengeGenerator(tree: Tree, options: Schema) {
   const { appProjectName, appDirectory } = getProjectDir(
     options.name,
-    `apps/${options.category}`
+    `apps/${options.category}`,
   );
 
   const difficulty = options.challengeDifficulty;
@@ -65,7 +65,7 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
 
   const challengeNumberPath = 'challenge-number.json';
   const challangeNumberJson = JSON.parse(
-    tree.read(challengeNumberPath).toString()
+    tree.read(challengeNumberPath).toString(),
   );
   const challengeNumber = challangeNumberJson.total + 1;
   const order = challangeNumberJson[difficulty] + 1;
@@ -97,7 +97,7 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
       challengeNumber,
       difficulty,
       order,
-    }
+    },
   );
 
   if (options.addTest) {
@@ -111,7 +111,7 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
   const readmeRegex = new RegExp(`all ${challengeNumber - 1} challenges`);
   const readmeReplace = readme.replace(
     readmeRegex,
-    `all ${challengeNumber} challenges`
+    `all ${challengeNumber} challenges`,
   );
 
   tree.write('./README.md', readmeReplace);
@@ -126,7 +126,7 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
     linkRegex,
     `link: /challenges/${options.category}/${challengeNumber}-${
       names(options.name).name
-    }/\n`
+    }/\n`,
   );
 
   tree.write('./docs/src/content/docs/index.mdx', replacedLink);
@@ -134,14 +134,14 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
   const previousChallengeFilePath = findPreviousChallengeFilePath(
     tree,
     `./docs/src/content/docs/challenges`,
-    String(challengeNumber - 1)
+    String(challengeNumber - 1),
   );
 
   const previousChallenge = tree.read(previousChallengeFilePath).toString();
 
   tree.write(
     previousChallengeFilePath,
-    previousChallenge.replace(`badge: New`, ``)
+    previousChallenge.replace(`badge: New`, ``),
   );
 
   updateJson(tree, challengeNumberPath, (json) => {

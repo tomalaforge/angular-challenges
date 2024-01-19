@@ -1,6 +1,6 @@
 # Real-life Application
 
-> Author: Thomas Laforge
+> author: thomas-laforge
 
 ### Run Application
 

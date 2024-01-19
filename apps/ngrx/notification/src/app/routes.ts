@@ -1,11 +1,11 @@
 import { Route } from '@angular/router';
+import { TeacherComponent } from './teacher/teacher.component';
 
 export const ROUTES: Route[] = [
   { path: '', pathMatch: 'full', redirectTo: 'teacher' },
   {
     path: 'teacher',
-    loadComponent: () =>
-      import('./teacher/teacher.component').then((m) => m.TeacherComponent),
+    component: TeacherComponent,
   },
   {
     path: 'student',

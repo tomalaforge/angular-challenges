@@ -19,7 +19,7 @@ export const ERROR_TOKEN = new InjectionToken<ErrorHandler<any>>('error', {
 });
 
 export const provideErrorHandler = <T extends ErrorHandler<any>>(
-  errorHandlerClass: Type<T>
+  errorHandlerClass: Type<T>,
 ): ClassProvider => ({ provide: ERROR_TOKEN, useClass: errorHandlerClass });
 
 export const FLICKER_TIME = new InjectionToken<number>('flicker', {

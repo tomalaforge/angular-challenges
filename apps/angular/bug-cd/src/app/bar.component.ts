@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-bar',
   standalone: true,
-  template: ` BarComponent `,
+  template: `
+    BarComponent
+  `,
 })
 export class BarComponent {}
