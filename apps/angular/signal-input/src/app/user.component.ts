@@ -2,7 +2,6 @@ import { TitleCasePipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  Input,
   OnChanges,
   input
 } from '@angular/core';
