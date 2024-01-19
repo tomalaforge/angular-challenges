@@ -10,12 +10,21 @@ import { Todo } from './model/todo.model';
   selector: 'app-root',
   template: `
     <h1>{{ title }}</h1>
-    <app-spinner></app-spinner>
+    <!-- <app-spinner></app-spinner> -->
     @for (todo of todoStore2.todos(); track todo.id) {
       <div>
         {{ todo.title }}
-        <button (click)="update(todo)">Update</button>
-        <button (click)="delete(todo.id)">Delete</button>
+        <button
+          [disabled]="todoStore2.isDeleting() || todoStore2.isUpdating()"
+          (click)="update(todo)">
+          Update
+        </button>
+        <button
+          [disabled]="todoStore2.isDeleting() || todoStore2.isUpdating()"
+          (click)="delete(todo)">
+          Delete
+        </button>
+        <span>{{ todo.status }}</span>
       </div>
     }
   `,
@@ -32,7 +41,7 @@ export class AppComponent implements OnInit {
   update(todo: Todo) {
     this.todoStore2.update(todo);
   }
-  delete(id: number) {
-    this.todoStore2.delete(id);
+  delete(todo: Todo) {
+    this.todoStore2.delete(todo);
   }
 }

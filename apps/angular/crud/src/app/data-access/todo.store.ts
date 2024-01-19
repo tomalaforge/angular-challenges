@@ -11,13 +11,7 @@ export class TodoStore {
   private _todos = signal<Todo[]>([]);
   todos = computed(this._todos);
 
-  constructor() {
-    // this.http
-    //   .get<Todo[]>('https://jsonplaceholder.typicode.com/todos')
-    //   .subscribe((todos) => {
-    //     this._todos.set(todos);
-    //   });
-  }
+  constructor() {}
 
   load() {
     this.http
@@ -32,7 +26,9 @@ export class TodoStore {
   }
 
   delete(id: number) {
-    return this.http.delete(`https://jsonplaceholder.typicode.com/todos/${id}`);
+    return this.http.delete(
+      `https://xxxxjsonplaceholder.typicode.com/todos/${id}`,
+    );
   }
 
   update(todo: Todo) {

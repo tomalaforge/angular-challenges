@@ -3,17 +3,21 @@ import { tapResponse } from '@ngrx/component-store';
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { debounceTime, distinctUntilChanged, pipe, switchMap, tap } from 'rxjs';
-import { Todo } from '../model/todo.model';
+import { ResponseError, Todo } from '../model/todo.model';
 import { TodoStore } from './todo.store';
 
 type TodoState = {
   todos: Todo[];
   isLoading: boolean;
+  isDeleting: boolean;
+  isUpdating: boolean;
 };
 
 const initialState: TodoState = {
   todos: [],
   isLoading: false,
+  isDeleting: false,
+  isUpdating: false,
 };
 
 export const TodoStore2 = signalStore(
@@ -37,20 +41,37 @@ export const TodoStore2 = signalStore(
       ),
     ),
 
-    delete: rxMethod<number>(
+    delete: rxMethod<Todo>(
       pipe(
         debounceTime(300),
         distinctUntilChanged(),
-        tap(() => patchState(state, { isLoading: true })),
-        switchMap((id) => {
-          return TodoSignalService.delete(id).pipe(
+        tap((todo) =>
+          patchState(state, {
+            todos: [
+              ...state.todos().filter((t) => t.id < todo.id),
+              { ...todo, status: 'Deleting...' },
+              ...state.todos().filter((t) => t.id > todo.id),
+            ],
+            isDeleting: true,
+          }),
+        ),
+        switchMap((todo) => {
+          return TodoSignalService.delete(todo.id).pipe(
             tapResponse({
               next: () =>
                 patchState(state, {
-                  todos: [...state.todos().filter((t) => t.id != id)],
+                  todos: [...state.todos().filter((t) => t.id != todo.id)],
                 }),
-              error: console.error,
-              finalize: () => patchState(state, { isLoading: false }),
+              error: (err: ResponseError) => {
+                patchState(state, {
+                  todos: [
+                    ...state.todos().filter((t) => t.id < todo.id),
+                    { ...todo, status: err.message },
+                    ...state.todos().filter((t) => t.id > todo.id),
+                  ],
+                });
+              },
+              finalize: () => patchState(state, { isDeleting: false }),
             }),
           );
         }),
@@ -61,7 +82,16 @@ export const TodoStore2 = signalStore(
       pipe(
         debounceTime(300),
         distinctUntilChanged(),
-        tap(() => patchState(state, { isLoading: true })),
+        tap((todo) =>
+          patchState(state, {
+            todos: [
+              ...state.todos().filter((t) => t.id < todo.id),
+              { ...todo, status: 'Updating...' },
+              ...state.todos().filter((t) => t.id > todo.id),
+            ],
+            isUpdating: true,
+          }),
+        ),
         switchMap((Todo) => {
           return TodoSignalService.update(Todo).pipe(
             tapResponse({
@@ -73,12 +103,24 @@ export const TodoStore2 = signalStore(
                     ...state.todos().filter((t) => t.id > Todo.id),
                   ],
                 }),
-              error: console.error,
-              finalize: () => patchState(state, { isLoading: false }),
+              error: (err: ResponseError) => {
+                patchState(state, {
+                  todos: [
+                    ...state.todos().filter((t) => t.id < Todo.id),
+                    { ...Todo, status: err.message },
+                    ...state.todos().filter((t) => t.id > Todo.id),
+                  ],
+                });
+              },
+              finalize: () => patchState(state, { isUpdating: false }),
             }),
           );
         }),
       ),
     ),
+
+    // setStatus(id:number){
+
+    // }
   })),
 );
