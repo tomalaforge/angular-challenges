@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { DEFAULT_TIMER } from './data';
 
 @Component({
   standalone: true,
   imports: [RouterOutlet, RouterLink],
+  providers: [{ provide: DEFAULT_TIMER, useValue: 1000 }],
   selector: 'app-root',
   template: `
     <div class="mb-5 flex gap-4">
