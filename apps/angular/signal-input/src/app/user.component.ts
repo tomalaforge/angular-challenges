@@ -4,6 +4,7 @@ import {
   Component,
   Input,
   OnChanges,
+  input
 } from '@angular/core';
 
 type Category = 'Youth' | 'Junior' | 'Open' | 'Senior';
