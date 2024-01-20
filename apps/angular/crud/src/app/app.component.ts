@@ -10,7 +10,7 @@ import { Todo } from './model/todo.model';
   selector: 'app-root',
   template: `
     <h1>{{ title }}</h1>
-    <!-- <app-spinner></app-spinner> -->
+    <app-spinner></app-spinner>
     @for (todo of todoStore2.todos(); track todo.id) {
       <div>
         {{ todo.title }}

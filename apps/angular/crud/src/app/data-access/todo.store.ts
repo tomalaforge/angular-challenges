@@ -26,9 +26,7 @@ export class TodoStore {
   }
 
   delete(id: number) {
-    return this.http.delete(
-      `https://xxxxjsonplaceholder.typicode.com/todos/${id}`,
-    );
+    return this.http.delete(`https://jsonplaceholder.typicode.com/todos/${id}`);
   }
 
   update(todo: Todo) {
