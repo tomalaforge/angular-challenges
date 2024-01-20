@@ -13,11 +13,11 @@ export const studentAdapter: EntityAdapter<Student> =
 export const studentReducer = createReducer(
   studentAdapter.getInitialState(),
   on(studentActions.addOneStudent, (state, { student }) =>
-    studentAdapter.upsertOne(student, state)
+    studentAdapter.upsertOne(student, state),
   ),
   on(studentActions.addAllStudents, (state, { students }) =>
-    studentAdapter.setAll(students, state)
-  )
+    studentAdapter.setAll(students, state),
+  ),
 );
 
 export const { selectIds, selectEntities, selectAll, selectTotal } =

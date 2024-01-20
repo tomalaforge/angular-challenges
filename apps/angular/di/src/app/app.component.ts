@@ -16,7 +16,7 @@ interface ProductContext {
 export class ProductDirective {
   static ngTemplateContextGuard(
     dir: ProductDirective,
-    ctx: unknown
+    ctx: unknown,
   ): ctx is ProductContext {
     return true;
   }

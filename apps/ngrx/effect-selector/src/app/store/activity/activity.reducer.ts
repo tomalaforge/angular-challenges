@@ -21,5 +21,5 @@ export const activityReducer = createReducer(
   on(ActivityActions.loadActivitiesFailure, (state) => ({
     state,
     activities: [],
-  }))
+  })),
 );

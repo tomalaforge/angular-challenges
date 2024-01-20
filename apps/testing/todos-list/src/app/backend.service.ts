@@ -101,7 +101,7 @@ export class BackendService {
     const updatedTicket = { ...foundTicket, ...updates };
 
     this.storedTickets = this.storedTickets.map((t) =>
-      t.id === ticketId ? updatedTicket : t
+      t.id === ticketId ? updatedTicket : t,
     );
 
     return of(updatedTicket).pipe(delay(randomDelay()));

@@ -14,7 +14,9 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-student-card',
+
   templateUrl: 'student-card.component.html',
+
   standalone: true,
   styles: [
     `

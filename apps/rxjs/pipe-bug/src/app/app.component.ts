@@ -1,6 +1,6 @@
 /* eslint-disable @angular-eslint/component-selector */
 import { AsyncPipe, NgFor } from '@angular/common';
-import { Component, inject, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { BehaviorSubject, take } from 'rxjs';
 import { AppService } from './app.service';
 import { TopicType } from './localDB.service';
@@ -29,8 +29,8 @@ export class ButtonDeleteComponent {
         this.message$$.next(
           result
             ? `All ${this.topic} have been deleted`
-            : `Error: deletion of some ${this.topic} failed`
-        )
+            : `Error: deletion of some ${this.topic} failed`,
+        ),
       );
   }
 }

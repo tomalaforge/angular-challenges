@@ -16,8 +16,8 @@ export class TeacherEffects {
       switchMap(() =>
         this.httpService
           .getAllTeachers()
-          .pipe(map((teachers) => teacherActions.addAllTeachers({ teachers })))
-      )
-    )
+          .pipe(map((teachers) => teacherActions.addAllTeachers({ teachers }))),
+      ),
+    ),
   );
 }

@@ -15,7 +15,7 @@ import { MatSliderModule } from '@angular/material/slider';
         <h2 class="my-3">Slider configuration</h2>
 
         <section class="flex items-center">
-          <mat-form-field class="m-4 max-w-[180px] w-full">
+          <mat-form-field class="m-4 w-full max-w-[180px]">
             <mat-label>Value</mat-label>
             <input
               matInput
@@ -23,15 +23,15 @@ import { MatSliderModule } from '@angular/material/slider';
               [(ngModel)]="value"
               id="input-value" />
           </mat-form-field>
-          <mat-form-field class="m-4 max-w-[180px] w-full">
+          <mat-form-field class="m-4 w-full max-w-[180px]">
             <mat-label>Min value</mat-label>
             <input matInput type="number" [(ngModel)]="min" id="input-min" />
           </mat-form-field>
-          <mat-form-field class="m-4 max-w-[180px] w-full">
+          <mat-form-field class="m-4 w-full max-w-[180px]">
             <mat-label>Max value</mat-label>
             <input matInput type="number" [(ngModel)]="max" id="input-max" />
           </mat-form-field>
-          <mat-form-field class="m-4 max-w-[180px] w-full">
+          <mat-form-field class="m-4 w-full max-w-[180px]">
             <mat-label>Step size</mat-label>
             <input matInput type="number" [(ngModel)]="step" id="input-step" />
           </mat-form-field>

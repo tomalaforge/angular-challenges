@@ -12,7 +12,9 @@ import { TopicService, TopicType } from './topic.service';
 @Component({
   standalone: true,
   selector: 'app-root',
-  template: ` <button (click)="openTopicModal()">Open Topic</button> `,
+  template: `
+    <button (click)="openTopicModal()">Open Topic</button>
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {

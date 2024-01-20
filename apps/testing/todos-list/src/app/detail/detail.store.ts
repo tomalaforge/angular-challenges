@@ -36,14 +36,17 @@ export class DetailStore
     loading: this.loading$,
   });
 
-  constructor(private backend: BackendService, private route: ActivatedRoute) {
+  constructor(
+    private backend: BackendService,
+    private route: ActivatedRoute,
+  ) {
     super(initialState);
   }
 
   readonly loadTicket = this.effect<void>(
     pipe(
       concatLatestFrom(() =>
-        this.route.params.pipe(map((p) => p[PARAM_TICKET_ID]))
+        this.route.params.pipe(map((p) => p[PARAM_TICKET_ID])),
       ),
       tap(() => this.patchState({ loading: true, error: '' })),
       mergeMap(([, id]) =>
@@ -54,11 +57,11 @@ export class DetailStore
                 loading: false,
                 ticket,
               }),
-            (error: unknown) => this.patchState({ error })
-          )
-        )
-      )
-    )
+            (error: unknown) => this.patchState({ error }),
+          ),
+        ),
+      ),
+    ),
   );
 
   ngrxOnStateInit() {

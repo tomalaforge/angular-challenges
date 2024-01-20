@@ -44,7 +44,7 @@ export class LocalDBService extends ComponentStore<DBState> {
   deleteOne = this.updater(
     (state, id: number): DBState => ({
       infos: state.infos.filter((i) => i.id !== id),
-    })
+    }),
   );
 
   deleteOneTopic = (id: number) =>

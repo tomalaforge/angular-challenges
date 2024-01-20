@@ -47,7 +47,7 @@ export class PhotoStore
   private readonly endOfPage$ = this.select(
     this.page$,
     this.pages$,
-    (page, pages) => page === pages
+    (page, pages) => page === pages,
   );
 
   readonly vm$ = this.select(
@@ -60,7 +60,7 @@ export class PhotoStore
       loading: this.loading$,
       error: this.error$,
     },
-    { debounce: true }
+    { debounce: true },
   );
 
   ngrxOnStoreInit() {
@@ -82,7 +82,7 @@ export class PhotoStore
       this.select({
         search: this.search$,
         page: this.page$,
-      })
+      }),
     );
   }
 
@@ -91,21 +91,21 @@ export class PhotoStore
       ...state,
       search,
       page: 1,
-    })
+    }),
   );
 
   readonly nextPage = this.updater(
     (state): PhotoState => ({
       ...state,
       page: state.page + 1,
-    })
+    }),
   );
 
   readonly previousPage = this.updater(
     (state): PhotoState => ({
       ...state,
       page: state.page - 1,
-    })
+    }),
   );
 
   readonly searchPhotos = this.effect<{ search: string; page: number }>(
@@ -123,13 +123,13 @@ export class PhotoStore
               });
               localStorage.setItem(
                 PHOTO_STATE_KEY,
-                JSON.stringify({ search, page })
+                JSON.stringify({ search, page }),
               );
             },
-            (error: unknown) => this.patchState({ error, loading: false })
-          )
-        )
-      )
-    )
+            (error: unknown) => this.patchState({ error, loading: false }),
+          ),
+        ),
+      ),
+    ),
   );
 }
