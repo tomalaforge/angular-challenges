@@ -1,7 +1,6 @@
 import { NgFor } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { HeavyComputationPipe } from './heavy-computation.pipe';
-//import { HeavyComputationPipe } from './heavy-computation.pipe';
 
 @Component({
   standalone: true,
