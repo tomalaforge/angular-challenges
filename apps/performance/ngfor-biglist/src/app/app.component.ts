@@ -21,13 +21,13 @@ import { PersonListComponent } from './person-list.component';
   template: `
     <button
       (click)="loadList.set(true)"
-      class="rounded-md border border-black p-2">
+      class="border border-black p-2 rounded-md">
       Load List
     </button>
 
     <app-person-list
       *ngIf="loadList()"
-      class="w-3/4 max-w-2xl"
+      class="max-w-2xl w-3/4"
       [persons]="persons()" />
   `,
   host: {

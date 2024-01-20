@@ -5,9 +5,7 @@ import { ChildComponent } from './child.component';
   standalone: true,
   imports: [ChildComponent],
   selector: 'app-root',
-  template: `
-    <app-child />
-  `,
+  template: `<app-child />`,
   styles: [''],
 })
 export class AppComponent {}

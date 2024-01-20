@@ -14,9 +14,7 @@ import { HttpService } from './http.service';
   selector: 'app-input',
   standalone: true,
   imports: [ReactiveFormsModule],
-  template: `
-    <input type="text" [formControl]="title" />
-  `,
+  template: ` <input type="text" [formControl]="title" /> `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputComponent {
@@ -26,9 +24,7 @@ export class InputComponent {
 @Component({
   selector: 'result',
   standalone: true,
-  template: `
-    <p>Title is {{ title }}</p>
-  `,
+  template: ` <p>Title is {{ title }}</p> `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ResultComponent {
@@ -38,9 +34,7 @@ export class ResultComponent {
 @Component({
   selector: 'app-button',
   standalone: true,
-  template: `
-    <button (click)="validate.emit()">Validate</button>
-  `,
+  template: `<button (click)="validate.emit()">Validate</button>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonComponent {
@@ -50,9 +44,7 @@ export class ButtonComponent {
 @Component({
   selector: 'app-error',
   standalone: true,
-  template: `
-    <p>Title is required !!!</p>
-  `,
+  template: `<p>Title is required !!!</p>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ErrorComponent {

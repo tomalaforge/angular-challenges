@@ -3,15 +3,13 @@ import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'lib-dashboard',
-  template: `
-    Dashboard
+  template: `Dashboard
 
     <button
       routerLink="create-user"
-      class="ml-10 rounded-lg border bg-gray-700 p-2 text-white">
+      class="border bg-gray-700 rounded-lg p-2 text-white ml-10">
       Create User
-    </button>
-  `,
+    </button> `,
 })
 export class DashboardComponent {}
 

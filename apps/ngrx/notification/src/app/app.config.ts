@@ -1,20 +1,21 @@
-import { FakeBackendService } from '@angular-challenges/ngrx-notification/backend';
-import { APP_INITIALIZER, ApplicationConfig, inject } from '@angular/core';
-import { provideRouter } from '@angular/router';
-import { provideEffects } from '@ngrx/effects';
+import { ApplicationConfig } from '@angular/core';
 import { provideStore } from '@ngrx/store';
-import { NotificationService } from './data-access/notification.service';
-import { ROUTES } from './routes';
-import { StudentEffects } from './student/store/student.effects';
-import {
-  studentReducer,
-  studentsFeatureKey,
-} from './student/store/student.reducer';
+import { provideEffects } from '@ngrx/effects';
 import { TeacherEffects } from './teacher/store/teacher.effects';
+import { StudentEffects } from './student/store/student.effects';
+import { provideRouter } from '@angular/router';
+import { ROUTES } from './routes';
+import { APP_INITIALIZER, inject } from '@angular/core';
+import { FakeBackendService } from '@angular-challenges/ngrx-notification/backend';
+import { NotificationService } from './data-access/notification.service';
 import {
   teacherReducer,
   teachersFeatureKey,
 } from './teacher/store/teacher.reducer';
+import {
+  studentReducer,
+  studentsFeatureKey,
+} from './student/store/student.reducer';
 
 const REDUCERS = {
   [teachersFeatureKey]: teacherReducer,

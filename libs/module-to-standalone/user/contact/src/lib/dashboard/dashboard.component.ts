@@ -3,15 +3,13 @@ import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'lib-contact-dashboard',
-  template: `
-    Contact Dashboard
+  template: `Contact Dashboard
 
     <button
       routerLink="create-contact"
-      class="ml-10 rounded-lg border bg-gray-700 p-2 text-white">
+      class="border bg-gray-700 rounded-lg p-2 text-white ml-10">
       Create contact
-    </button>
-  `,
+    </button> `,
 })
 export class ContactDashboardComponent {}
 

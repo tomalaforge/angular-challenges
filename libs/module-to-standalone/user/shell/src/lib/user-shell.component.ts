@@ -5,15 +5,15 @@ import { Component, Inject } from '@angular/core';
   selector: 'lib-user-shell',
   template: `
     -- User Panel --
-    <div class="flex items-center gap-2">
+    <div class="flex gap-2 items-center">
       <button
         routerLink="home"
-        class="rounded-md border border-blue-400 px-4 py-2">
+        class="border px-4 py-2 border-blue-400 rounded-md">
         Home
       </button>
       <button
         routerLink="contact"
-        class="rounded-md border border-blue-400 px-4 py-2">
+        class="border px-4 py-2 border-blue-400 rounded-md">
         Contact
       </button>
       More buttons ...

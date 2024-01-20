@@ -6,9 +6,7 @@ import { DEFAULT_TIMER } from './data';
 @Component({
   selector: 'timer',
   standalone: true,
-  template: `
-    Timer running {{ timer() }}
-  `,
+  template: ` Timer running {{ timer() }} `,
 })
 export class TimerComponent {
   timer = toSignal(interval(DEFAULT_TIMER));

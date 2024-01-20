@@ -15,7 +15,7 @@ interface MenuItem {
   template: `
     <ng-container *ngFor="let menu of menus">
       <a
-        class="rounded-md border px-4 py-2"
+        class="border px-4 py-2 rounded-md"
         [routerLink]="menu.path"
         routerLinkActive="isSelected">
         {{ menu.name }}

@@ -3,8 +3,6 @@ import { Component } from '@angular/core';
   selector: 'app-home',
   standalone: true,
   imports: [],
-  template: `
-    <div>Home</div>
-  `,
+  template: `<div>Home</div>`,
 })
 export default class HomeComponent {}

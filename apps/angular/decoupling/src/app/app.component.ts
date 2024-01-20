@@ -6,8 +6,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [BtnDisabledDirective, BtnHelmetDirective],
   selector: 'app-root',
-  template: `
-    <button btnDisabled hlm>Coucou</button>
-  `,
+  template: ` <button btnDisabled hlm>Coucou</button> `,
 })
 export class AppComponent {}

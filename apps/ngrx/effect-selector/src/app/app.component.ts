@@ -2,8 +2,8 @@ import { AsyncPipe, NgFor } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  OnInit,
   inject,
+  OnInit,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { loadActivities } from './store/activity/activity.actions';
