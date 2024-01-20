@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { StatusComponent } from './components/status/status.component';
 import { TodoStore2 } from './data-access/todosignals.store';
 import { Todo } from './model/todo.model';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, SpinnerComponent],
+  imports: [CommonModule, SpinnerComponent, StatusComponent],
   selector: 'app-root',
   template: `
     <h1>{{ title }}</h1>
@@ -24,7 +25,7 @@ import { Todo } from './model/todo.model';
           (click)="delete(todo)">
           Delete
         </button>
-        <span>{{ todo.status }}</span>
+        <app-status [status]="todo.status"></app-status>
       </div>
     }
   `,
