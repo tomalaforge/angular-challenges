@@ -1,5 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ListContextDirective } from './directives/list-context.directive';
 import { PersonContextDirective } from './directives/person-context.directive';
 import { ListComponent } from './list.component';
 import { PersonComponent } from './person.component';
@@ -11,6 +12,7 @@ import { PersonComponent } from './person.component';
     PersonComponent,
     ListComponent,
     PersonContextDirective,
+    ListContextDirective,
   ],
   selector: 'app-root',
   template: `
@@ -21,13 +23,13 @@ import { PersonComponent } from './person.component';
     </person>
 
     <list [list]="students">
-      <ng-template #listRef let-student let-i="index">
+      <ng-template [context]="students" let-student let-i="index">
         {{ student.name }}: {{ student.age }} - {{ i }}
       </ng-template>
     </list>
 
     <list [list]="cities">
-      <ng-template #listRef let-city let-i="index">
+      <ng-template [context]="cities" let-city let-i="index">
         {{ city.name }}: {{ city.country }} - {{ i }}
       </ng-template>
     </list>

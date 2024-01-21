@@ -6,6 +6,8 @@ import {
   Input,
   TemplateRef,
 } from '@angular/core';
+import { ListContextDirective } from './directives/list-context.directive';
+import { ListContext } from './models/list-context.interface';
 
 @Component({
   selector: 'list',
@@ -16,7 +18,7 @@ import {
       <ng-container
         *ngTemplateOutlet="
           listTemplateRef || emptyRef;
-          context: { $implicit: item, appList: item, index: i }
+          context: { $implicit: item, index: i }
         "></ng-container>
     </div>
 
@@ -27,6 +29,6 @@ import {
 export class ListComponent<TItem extends object> {
   @Input() list!: TItem[];
 
-  @ContentChild('listRef', { read: TemplateRef })
-  listTemplateRef!: TemplateRef<unknown>;
+  @ContentChild(ListContextDirective, { read: TemplateRef })
+  listTemplateRef!: TemplateRef<ListContext<TItem>>;
 }
