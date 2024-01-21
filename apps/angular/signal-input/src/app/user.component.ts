@@ -30,7 +30,7 @@ const ageToCategory = (age: number): Category => {
 export class UserComponent {
   name = input.required<string>();
   lastName = input<string>();
-  age = input<number, string>(0, { transform: numberAttribute });
+  age = input(0, { transform: numberAttribute });
 
   fullName = computed(() => `${this.name()} ${this.lastName() ?? ''}`);
   category = computed(() => ageToCategory(this.age()));
