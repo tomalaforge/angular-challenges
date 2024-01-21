@@ -1,0 +1,10 @@
+<app-card [list]="cities$() | async" (actionClicked)="addNewItem()">
+  <app-card-image>
+    <img src="assets/img/city.png" width="200px" />
+  </app-card-image>
+  <ng-template appCardListItem let-city>
+    <app-list-item (actionClicked)="deleteItem(city.id)">
+      {{city.name}}
+    </app-list-item>
+  </ng-template>
+</app-card>
