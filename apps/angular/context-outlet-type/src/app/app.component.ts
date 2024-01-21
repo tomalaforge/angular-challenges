@@ -1,15 +1,21 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { PersonContextDirective } from './directives/person-context.directive';
 import { ListComponent } from './list.component';
 import { PersonComponent } from './person.component';
 
 @Component({
   standalone: true,
-  imports: [NgTemplateOutlet, PersonComponent, ListComponent],
+  imports: [
+    NgTemplateOutlet,
+    PersonComponent,
+    ListComponent,
+    PersonContextDirective,
+  ],
   selector: 'app-root',
   template: `
     <person [person]="person">
-      <ng-template #personRef let-name let-age="age">
+      <ng-template person let-name let-age="age">
         {{ name }}: {{ age }}
       </ng-template>
     </person>
