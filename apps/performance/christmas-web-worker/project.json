@@ -20,7 +20,8 @@
           "apps/performance/christmas-web-worker/src/assets"
         ],
         "styles": ["apps/performance/christmas-web-worker/src/styles.scss"],
-        "scripts": []
+        "scripts": [],
+        "webWorkerTsConfig": "apps/performance/christmas-web-worker/tsconfig.worker.json"
       },
       "configurations": {
         "production": {
