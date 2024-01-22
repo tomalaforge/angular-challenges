@@ -1,13 +1,64 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { switchMap, tap } from 'rxjs';
+import { CityStore } from '../../data-access/city.store';
+import {
+  FakeHttpService,
+  randomCity,
+} from '../../data-access/fake-http.service';
+import { City } from '../../model/city.model';
+import { CardListItemDirective } from '../../ui/card/card-list-item.directive';
+import { CardComponent } from '../../ui/card/card.component';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-city-card',
-  template: 'TODO City',
+  template: `
+    <app-card
+      [list]="cities()"
+      class="bg-light-blue"
+      (addedItem)="addNewCity()">
+      <img image src="assets/img/city.png" width="200px" />
+      <ng-template appCardListItem let-item>
+        <app-list-item (deletedItem)="deleteCity(item.id)">
+          <div description>
+            {{ item.name }}
+          </div>
+        </app-list-item>
+      </ng-template>
+    </app-card>
+  `,
   standalone: true,
-  imports: [],
+  styles: [
+    `
+      .bg-light-blue {
+        background-color: rgba(0, 0, 250, 0.1);
+      }
+    `,
+  ],
+  imports: [CardComponent, ListItemComponent, CardListItemDirective],
 })
-export class CityCardComponent implements OnInit {
-  constructor() {}
+export class CityCardComponent {
+  http = inject(FakeHttpService);
+  store = inject(CityStore);
 
-  ngOnInit(): void {}
+  cities = toSignal(
+    this.http.fetchCities$.pipe(
+      tap((cities) => {
+        this.store.addAll(cities);
+      }),
+      switchMap(() => {
+        return this.store.cities$;
+      }),
+    ),
+    { initialValue: [] as City[] },
+  );
+
+  addNewCity(): void {
+    this.store.addOne(randomCity());
+  }
+
+  deleteCity(id: number) {
+    this.store.deleteOne(id);
+  }
 }
