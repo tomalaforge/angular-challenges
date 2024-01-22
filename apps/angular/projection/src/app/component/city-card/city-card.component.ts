@@ -11,7 +11,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
 @Component({
   selector: 'app-city-card',
   template: `
-    <app-card [list]="cities$ | async" customClass="bg-light-blue">
+    <app-card [list]="$cities()" customClass="bg-light-blue">
       <img headerImg src="assets/img/student.webp" width="200px" />
       <button
         addNewItem
@@ -37,7 +37,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   imports: [CardComponent, AsyncPipe, ListItemComponent],
 })
 export class CityCardComponent implements OnInit {
-  public cities$ = this.store.cities$;
+  public $cities = this.store.cities;
   constructor(
     private http: FakeHttpService,
     private store: cityStore,
