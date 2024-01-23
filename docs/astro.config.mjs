@@ -18,6 +18,10 @@ export const locales = {
     label: 'Português',
     lang: 'pt',
   },
+  ru: {
+    label: 'Русский',
+    lang: 'ru',
+  },
 };
 
 // https://astro.build/config
@@ -44,6 +48,7 @@ export default defineConfig({
             es: 'Guías',
             fr: 'Guides',
             pt: 'Guias',
+            ru: 'Руководство',
           },
         },
         {
@@ -53,6 +58,7 @@ export default defineConfig({
             es: 'Desafíos',
             fr: 'Challenges',
             pt: 'Desafios',
+            ru: 'Задачи',
           },
         },
       ],
