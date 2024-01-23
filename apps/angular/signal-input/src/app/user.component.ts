@@ -28,8 +28,8 @@ const ageToCategory = (age: number): Category => {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserComponent {
-  name = input.required();
-  lastName = input();
+  name = input.required<string>();
+  lastName = input<string>();
   age = input(0, {
     transform: numberAttribute,
   });
