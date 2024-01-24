@@ -14,10 +14,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
       [list]="students()"
       customClass="bg-light-green"
       [itemRef]="studentTemplate">
-      <img
-        ngProjectAs="cardImage"
-        src="assets/img/student.webp"
-        width="200px" />
+      <img cardImage src="assets/img/student.webp" width="200px" />
 
       <ng-template #studentTemplate let-student>
         <app-list-item
