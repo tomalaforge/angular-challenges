@@ -31,20 +31,22 @@ export class RoleAuthDirective implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.userStore.user$.subscribe({
-      next: (user) => {
-        if (
-          this.userRoles.some(
-            (r) => user?.roles.findIndex((e) => e === r) !== -1,
-          )
-        ) {
-          //then has access
-          this.viewContainer.createEmbeddedView(this.templateRef);
-        } else {
-          // no access
-          this.viewContainer.clear();
-        }
-      },
-    });
+    this.userStore.user$
+      .subscribe({
+        next: (user) => {
+          if (
+            this.userRoles.some(
+              (r) => user?.roles.findIndex((e) => e === r) !== -1,
+            )
+          ) {
+            //then has access
+            this.viewContainer.createEmbeddedView(this.templateRef);
+          } else {
+            // no access
+            this.viewContainer.clear();
+          }
+        },
+      })
+      .unsubscribe();
   }
 }

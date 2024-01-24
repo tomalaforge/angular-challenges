@@ -22,11 +22,13 @@ export class AdminAuthDirective implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.userStore.user$.subscribe({
-      next: (user) =>
-        user?.isAdmin
-          ? this.viewContainer.createEmbeddedView(this.templateRef)
-          : this.viewContainer.clear(),
-    });
+    this.userStore.user$
+      .subscribe({
+        next: (user) =>
+          user?.isAdmin
+            ? this.viewContainer.createEmbeddedView(this.templateRef)
+            : this.viewContainer.clear(),
+      })
+      .unsubscribe();
   }
 }
