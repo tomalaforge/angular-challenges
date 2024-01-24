@@ -14,7 +14,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
       [list]="cities()"
       customClass="bg-light-blue"
       [itemRef]="cityTemplate">
-      <img ngProjectAs="cardImage" src="assets/img/city.png" width="200px" />
+      <img cardImage src="assets/img/city.png" width="200px" />
 
       <ng-template #cityTemplate let-city>
         <app-list-item
