@@ -49,7 +49,7 @@ export class CardListItemDirective<T> {
   imports: [NgIf, NgFor, ListItemComponent, NgTemplateOutlet],
 })
 export class CardComponent<T> {
-  @Input() list: T[] | null = null;
+  @Input() list: T[] | undefined = [];
   @Output() actionClicked = new EventEmitter();
   @ContentChild(CardListItemDirective) rowTemplate!: CardListItemDirective<T>;
 }

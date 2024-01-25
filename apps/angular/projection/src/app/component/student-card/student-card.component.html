@@ -1,4 +1,4 @@
-<app-card [list]="students$() | async" (actionClicked)="addNewItem()">
+<app-card [list]="students$()" (actionClicked)="addNewItem()">
   <app-card-image>
     <img src="assets/img/student.webp" width="200px" />
   </app-card-image>

@@ -1,5 +1,6 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { CityStore } from '../../data-access/city.store';
 import {
   FakeHttpService,
@@ -37,7 +38,7 @@ export class CityCardComponent implements OnInit {
   private http = inject(FakeHttpService);
   private store = inject(CityStore);
 
-  public cities$ = signal(this.store.cities$);
+  public cities$ = toSignal(this.store.cities$); // : Signal<City[] | undefined>
 
   ngOnInit(): void {
     this.http.fetchCities$.subscribe((s) => this.store.addAll(s));

@@ -1,5 +1,6 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import {
   FakeHttpService,
   randStudent,
@@ -37,7 +38,7 @@ export class StudentCardComponent implements OnInit {
   private http = inject(FakeHttpService);
   private store = inject(StudentStore);
 
-  public students$ = signal(this.store.students$);
+  public students$ = toSignal(this.store.students$); // : Signal<Student[] | undefined>
 
   ngOnInit(): void {
     this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));

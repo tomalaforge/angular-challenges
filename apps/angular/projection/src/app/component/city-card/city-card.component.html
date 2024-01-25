@@ -1,4 +1,4 @@
-<app-card [list]="cities$() | async" (actionClicked)="addNewItem()">
+<app-card [list]="cities$()" (actionClicked)="addNewItem()">
   <app-card-image>
     <img src="assets/img/city.png" width="200px" />
   </app-card-image>
