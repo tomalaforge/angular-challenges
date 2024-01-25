@@ -33,7 +33,7 @@ import { UserComponent } from './user.component';
       <app-user
         [name]="name.value"
         [lastName]="lastName.value"
-        [age]="age.value" />
+        [age]="parseStringToNumber(age.value)" />
     }
   `,
   host: {
@@ -42,4 +42,8 @@ import { UserComponent } from './user.component';
 })
 export class AppComponent {
   showUser = false;
+
+  parseStringToNumber(value: string) {
+    return Number(value);
+  }
 }
