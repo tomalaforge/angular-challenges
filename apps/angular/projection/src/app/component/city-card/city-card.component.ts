@@ -18,9 +18,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
       [ListItemTemplate]="itemTemplate">
       <img src="assets/img/city.png" width="200px" image />
       <ng-template #itemTemplate let-item>
-        <app-list-item
-          [item]="item"
-          (DeleteNewRecordEmitter)="handleDeleteCity($event)">
+        <app-list-item [item]="item">
           <p>{{ item.name }}</p>
         </app-list-item>
       </ng-template>
