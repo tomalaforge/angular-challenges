@@ -31,7 +31,7 @@ export class CardListItemDirective<T> {
       <ng-content select="app-card-image"></ng-content>
 
       <section>
-        @for (item of list; track item) {
+        @for (item of list; track item.id) {
           <ng-template
             [ngTemplateOutlet]="rowTemplate.templateRef"
             [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
@@ -48,7 +48,7 @@ export class CardListItemDirective<T> {
   standalone: true,
   imports: [NgIf, NgFor, ListItemComponent, NgTemplateOutlet],
 })
-export class CardComponent<T> {
+export class CardComponent<T extends { id: number }> {
   @Input() list: T[] | undefined = [];
   @Output() actionClicked = new EventEmitter();
   @ContentChild(CardListItemDirective) rowTemplate!: CardListItemDirective<T>;
