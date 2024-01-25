@@ -1,12 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  Signal,
-  WritableSignal,
-  computed,
-  inject,
-  signal,
-} from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { HeavyCalculationService } from './heavy-calculation.service';
 import { UnknownPersonComponent } from './unknown-person/unknown-person.component';
 
@@ -35,10 +28,9 @@ import { UnknownPersonComponent } from './unknown-person/unknown-person.componen
 export class AppComponent {
   private readonly heavyCalculationService = inject(HeavyCalculationService);
 
-  private readonly webWorkerLoadingPercentage: WritableSignal<number> =
-    signal(0);
+  private readonly webWorkerLoadingPercentage = signal(0);
 
-  readonly loadingPercentage: Signal<number> = computed(
+  readonly loadingPercentage = computed(
     () =>
       this.heavyCalculationService.loadingPercentage() ||
       this.webWorkerLoadingPercentage(),
