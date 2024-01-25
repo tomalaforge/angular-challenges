@@ -10,13 +10,10 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
 @Component({
   selector: 'app-student-card',
   template: `
-    <app-card
-      [list]="students()"
-      customClass="bg-light-green"
-      [itemRef]="studentTemplate">
+    <app-card [list]="students()" customClass="bg-light-green">
       <img cardImage src="assets/img/student.webp" width="200px" />
 
-      <ng-template #studentTemplate let-student>
+      <ng-template #genericTemplate let-student>
         <app-list-item
           [id]="student.id"
           name="{{ student.firstName }}"
