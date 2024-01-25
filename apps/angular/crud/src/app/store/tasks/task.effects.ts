@@ -40,7 +40,7 @@ export class TasksEffects {
         return this.service.putEntity(action.task).pipe(
           mergeMap((data) => {
             return of(
-              taskActions.updTaskSuccess({ task: action.task }),
+              taskActions.updTaskSuccess({ task: data }),
               appActions.showAlert({
                 message: 'Task updated',
                 resultType: 'pass',
@@ -65,7 +65,7 @@ export class TasksEffects {
       ofType(taskActions.delTaskAction),
       exhaustMap((action) => {
         return this.service.delEntity(action.task).pipe(
-          mergeMap((data) => {
+          mergeMap(() => {
             return of(
               taskActions.delTaskSuccess({ task: action.task }),
               appActions.showAlert({

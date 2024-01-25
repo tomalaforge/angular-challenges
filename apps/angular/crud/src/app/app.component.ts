@@ -1,11 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  OnInit,
-  WritableSignal,
-  inject,
-  signal,
-} from '@angular/core';
+import { Component, OnInit, WritableSignal, inject } from '@angular/core';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -52,15 +46,17 @@ import { TaskComponent } from './ui/task/task.component';
   styles: [],
 })
 export class AppComponent implements OnInit {
-  private stodos = signal<Task[]>([]);
-  public get todos(): Task[] {
-    return this.stodos();
-  }
   public loaderService = inject(LoaderService);
   private store = inject(Store);
 
+  private stodos = this.store.selectSignal(selectList) as WritableSignal<
+    Task[]
+  >;
+  public get todos(): Task[] {
+    return this.stodos();
+  }
+
   ngOnInit(): void {
     this.store.dispatch(taskActions.loadTasksAction());
-    this.stodos = this.store.selectSignal(selectList) as WritableSignal<Task[]>;
   }
 }
