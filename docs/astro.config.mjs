@@ -76,8 +76,10 @@ export default defineConfig({
         },
         {
           tag: 'script',
-          content: `<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2438923752868254"
-     crossorigin="anonymous"></script>`
+          attrs: {
+            src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2438923752868254',
+            async: true,
+          }
         }
       ],
       components: {
