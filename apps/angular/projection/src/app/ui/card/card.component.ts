@@ -1,5 +1,5 @@
 import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
-import { Component, Input, TemplateRef } from '@angular/core';
+import { Component, ContentChild, Input, TemplateRef } from '@angular/core';
 import { ListItemComponent } from '../list-item/list-item.component';
 
 @Component({
@@ -9,7 +9,10 @@ import { ListItemComponent } from '../list-item/list-item.component';
   imports: [NgIf, NgFor, ListItemComponent, NgTemplateOutlet],
 })
 export class CardComponent<T> {
+  @ContentChild('genericTemplate', { static: true }) itemRef!: TemplateRef<{
+    $implicit: T;
+  }>;
   @Input() list: T[] = [];
   @Input() customClass = '';
-  @Input() itemRef!: TemplateRef<{ $implicit: T }>;
+  // @Input() itemRef!: TemplateRef<{ $implicit: T }>;
 }

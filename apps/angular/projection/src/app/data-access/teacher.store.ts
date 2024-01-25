@@ -1,4 +1,4 @@
-import { Injectable, computed, signal } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Teacher } from '../model/teacher.model';
 
 @Injectable({
@@ -6,7 +6,7 @@ import { Teacher } from '../model/teacher.model';
 })
 export class TeacherStore {
   private _teachers = signal<Teacher[]>([]);
-  teachers = computed(this._teachers);
+  teachers = this._teachers.asReadonly();
 
   addAll(teachers: Teacher[]) {
     this._teachers.set(teachers);

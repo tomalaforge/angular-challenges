@@ -1,4 +1,4 @@
-import { Injectable, computed, signal } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { City } from '../model/city.model';
 
 @Injectable({
@@ -6,7 +6,7 @@ import { City } from '../model/city.model';
 })
 export class CityStore {
   private _cities = signal<City[]>([]);
-  cities = computed(this._cities);
+  cities = this._cities.asReadonly();
 
   addAll(cities: City[]) {
     this._cities.set(cities);
