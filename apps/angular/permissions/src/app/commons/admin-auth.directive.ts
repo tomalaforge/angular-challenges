@@ -1,9 +1,9 @@
 import {
   Directive,
-  Input,
   OnInit,
   TemplateRef,
   ViewContainerRef,
+  input,
 } from '@angular/core';
 import { UserStore } from '../user.store';
 
@@ -12,8 +12,7 @@ import { UserStore } from '../user.store';
   standalone: true,
 })
 export class AdminAuthDirective implements OnInit {
-  @Input()
-  hasRoleSuperAdmin: boolean = false;
+  hasRoleSuperAdmin = input(false);
 
   constructor(
     private templateRef: TemplateRef<any>,
@@ -25,7 +24,7 @@ export class AdminAuthDirective implements OnInit {
     this.userStore.user$
       .subscribe({
         next: (user) =>
-          user?.isAdmin
+          user?.isAdmin && this.hasRoleSuperAdmin()
             ? this.viewContainer.createEmbeddedView(this.templateRef)
             : this.viewContainer.clear(),
       })

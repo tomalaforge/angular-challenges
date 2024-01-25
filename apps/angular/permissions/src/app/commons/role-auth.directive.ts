@@ -1,9 +1,9 @@
 import {
   Directive,
-  Input,
   OnInit,
   TemplateRef,
   ViewContainerRef,
+  input,
 } from '@angular/core';
 import { Role } from '../user.model';
 import { UserStore } from '../user.store';
@@ -13,16 +13,7 @@ import { UserStore } from '../user.store';
   standalone: true,
 })
 export class RoleAuthDirective implements OnInit {
-  private userRoles!: Role[];
-
-  @Input()
-  set hasRole(roles: Role[]) {
-    if (!roles || !roles.length) {
-      throw new Error('Roles value is empty or missed');
-    }
-
-    this.userRoles = roles;
-  }
+  hasRole = input.required<Role[]>();
 
   constructor(
     private templateRef: TemplateRef<any>,
@@ -35,7 +26,7 @@ export class RoleAuthDirective implements OnInit {
       .subscribe({
         next: (user) => {
           if (
-            this.userRoles.some(
+            this.hasRole().some(
               (r) => user?.roles.findIndex((e) => e === r) !== -1,
             )
           ) {
