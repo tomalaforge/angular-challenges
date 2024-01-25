@@ -9,11 +9,11 @@ export function LoaderInterceptor(
 ): Observable<HttpEvent<unknown>> {
   const loaderService = inject(LoaderService);
   //loaderService.isLoading$.next(true);
-  loaderService.isLoading$.set(true);
+  loaderService.isLoading.set(true);
   return next(req).pipe(
     finalize(() => {
       //loaderService.isLoading$.next(false);
-      loaderService.isLoading$.set(false);
+      loaderService.isLoading.set(false);
     }),
   );
 }

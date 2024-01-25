@@ -17,18 +17,18 @@ import { LoaderService } from '../loader/loader.service';
       <div class="flex gap-3">
         <button
           class="bg-blue-500 hover:bg-blue-700 text-white  py-2 px-4 rounded-full hover:shadow-lg {{
-            loaderService.isLoading$() ? 'opacity-50 cursor-not-allowed' : ''
+            loaderService.isLoading() ? 'opacity-50 cursor-not-allowed' : ''
           }}"
           (click)="updateTask(task)"
-          [disabled]="loaderService.isLoading$()">
+          [disabled]="loaderService.isLoading()">
           Update
         </button>
         <button
           class="bg-pink-500 hover:bg-pink-700 text-white  py-2 px-4 rounded-full hover:shadow-lg {{
-            loaderService.isLoading$() ? 'opacity-50 cursor-not-allowed' : ''
+            loaderService.isLoading() ? 'opacity-50 cursor-not-allowed' : ''
           }}"
           (click)="deleteTask(task)"
-          [disabled]="loaderService.isLoading$()">
+          [disabled]="loaderService.isLoading()">
           Delete
         </button>
       </div>

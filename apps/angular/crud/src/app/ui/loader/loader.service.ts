@@ -5,5 +5,5 @@ import { Injectable, signal } from '@angular/core';
 })
 export class LoaderService {
   //public isLoading$: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  public isLoading$ = signal<boolean>(false);
+  public isLoading = signal<boolean>(false);
 }

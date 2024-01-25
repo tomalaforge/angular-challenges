@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, exhaustMap, map, of, switchMap } from 'rxjs';
+import { catchError, exhaustMap, map, mergeMap, of } from 'rxjs';
 import { TaskService } from '../../service/task.service';
 import { appActions } from '../commons/app.action';
 import { taskActions } from './task.action';
@@ -36,9 +36,9 @@ export class TasksEffects {
   updTaskEffect = createEffect(() =>
     this.actions$.pipe(
       ofType(taskActions.updTaskAction),
-      switchMap((action) => {
+      exhaustMap((action) => {
         return this.service.putEntity(action.task).pipe(
-          switchMap((data) => {
+          mergeMap((data) => {
             return of(
               taskActions.updTaskSuccess({ task: action.task }),
               appActions.showAlert({
@@ -63,9 +63,9 @@ export class TasksEffects {
   delTaskEffect = createEffect(() =>
     this.actions$.pipe(
       ofType(taskActions.delTaskAction),
-      switchMap((action) => {
+      exhaustMap((action) => {
         return this.service.delEntity(action.task).pipe(
-          switchMap((data) => {
+          mergeMap((data) => {
             return of(
               taskActions.delTaskSuccess({ task: action.task }),
               appActions.showAlert({

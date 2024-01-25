@@ -1,13 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit, inject, signal } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  WritableSignal,
+  inject,
+  signal,
+} from '@angular/core';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
 import { Task } from './model/task';
 import { taskActions } from './store/tasks/task.action';
-import { getTaskListSelector } from './store/tasks/task.selector';
+import { selectList } from './store/tasks/task.reducer';
 import { LoaderService } from './ui/loader/loader.service';
 import { TaskComponent } from './ui/task/task.component';
 
@@ -23,7 +28,7 @@ import { TaskComponent } from './ui/task/task.component';
   selector: 'app-root',
   template: `
     <div class="relative flex h-max justify-center">
-      @if (loaderService.isLoading$()) {
+      @if (loaderService.isLoading()) {
         <div class="fixed z-10 w-full">
           <mat-progress-bar mode="indeterminate" value="40"></mat-progress-bar>
         </div>
@@ -37,7 +42,7 @@ import { TaskComponent } from './ui/task/task.component';
           <div class="w-30vw mb-5 text-center text-xl">Title</div>
           <div class="mb-5 text-center text-xl">Actions</div>
         </div>
-        @for (todo of todos; track $index) {
+        @for (todo of todos; track todo.id) {
           <app-task [task]="todo"></app-task>
           <hr />
         }
@@ -46,28 +51,16 @@ import { TaskComponent } from './ui/task/task.component';
   `,
   styles: [],
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit {
   private stodos = signal<Task[]>([]);
-  private sysSubs: Subscription = new Subscription();
   public get todos(): Task[] {
     return this.stodos();
   }
   public loaderService = inject(LoaderService);
   private store = inject(Store);
 
-  ngOnDestroy(): void {
-    this.sysSubs.unsubscribe();
-  }
-
   ngOnInit(): void {
     this.store.dispatch(taskActions.loadTasksAction());
-    this.sysSubs.add(
-      this.store.select(getTaskListSelector).subscribe({
-        next: (res) => this.stodos.set(res),
-        error: () => {
-          this.stodos.set([]);
-        },
-      }),
-    );
+    this.stodos = this.store.selectSignal(selectList) as WritableSignal<Task[]>;
   }
 }
