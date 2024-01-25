@@ -31,7 +31,7 @@ export class CardListItemDirective<T> {
       <ng-content select="app-card-image"></ng-content>
 
       <section>
-        @for (item of list; track $index) {
+        @for (item of list; track item) {
           <ng-template
             [ngTemplateOutlet]="rowTemplate.templateRef"
             [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
