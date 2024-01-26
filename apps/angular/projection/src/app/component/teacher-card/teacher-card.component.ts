@@ -12,7 +12,6 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   template: `
     <app-card [list]="teachers()" customClass="bg-light-red">
       <img cardImage src="assets/img/teacher.png" width="200px" />
-
       <ng-template #genericTemplate let-teacher>
         <app-list-item
           [id]="teacher.id"
