@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Signal, signal, WritableSignal } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { City } from '../model/city.model';
 
@@ -6,18 +6,17 @@ import { City } from '../model/city.model';
   providedIn: 'root',
 })
 export class CityStore {
-  private cities = new BehaviorSubject<City[]>([]);
-  cities$ = this.cities.asObservable();
+  cities = signal<City[]>([]);
 
   addAll(cities: City[]) {
-    this.cities.next(cities);
+    this.cities.set(cities);
   }
 
   addOne(student: City) {
-    this.cities.next([...this.cities.value, student]);
+    this.cities.update(x => [...x, student]);
   }
 
   deleteOne(id: number) {
-    this.cities.next(this.cities.value.filter((s) => s.id !== id));
+    this.cities.update(x => x.filter(x => x.id !== id));
   }
 }

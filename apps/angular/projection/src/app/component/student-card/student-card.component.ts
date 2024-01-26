@@ -1,4 +1,4 @@
-import { Component, OnInit, signal, WritableSignal } from '@angular/core';
+import { Component, OnInit, Signal, signal, WritableSignal } from '@angular/core';
 import {
   FakeHttpService,
   randStudent,
@@ -7,6 +7,7 @@ import { StudentStore } from '../../data-access/student.store';
 import { Student } from '../../model/student.model';
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-student-card',
@@ -14,12 +15,11 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
     <app-card
       [list]="students()"
       customClass="bg-light-green"
-      (AddNewRecordEmitter)="handleAddNewStudent()"
-      [ListItemTemplate]="itemTemplate">
+      (AddNewRecordEmitter)="handleAddNewStudent()">
       <img src="assets/img/student.webp" width="200px" image />
       <ng-template #itemTemplate let-item>
         <app-list-item
-          [item]="item"
+          [id]="item.id"
           (DeleteNewRecordEmitter)="handleDeleteStudent($event)">
           <p>{{ item.firstName }} {{ item.lastName }}</p>
         </app-list-item>
@@ -31,7 +31,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   imports: [CardComponent, ListItemComponent],
 })
 export class StudentCardComponent implements OnInit {
-  students: WritableSignal<Student[]> = signal([]);
+  students: Signal<Student[]> = signal([]);
 
   constructor(
     private http: FakeHttpService,
@@ -40,8 +40,7 @@ export class StudentCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
-
-    this.store.students$.subscribe((s) => this.students.set(s));
+    this.students = this.store.cities
   }
 
   handleDeleteStudent(id: number) {

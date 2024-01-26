@@ -1,4 +1,4 @@
-import { Component, OnInit, signal, WritableSignal } from '@angular/core';
+import { Component, OnInit, Signal, signal, WritableSignal } from '@angular/core';
 import { CityStore } from '../../data-access/city.store';
 import {
   FakeHttpService,
@@ -7,6 +7,7 @@ import {
 import { City } from '../../model/city.model';
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-city-card',
@@ -14,11 +15,10 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
     <app-card
       [list]="cities()"
       customClass="bg-light-blue"
-      (AddNewRecordEmitter)="handleAddNewCity()"
-      [ListItemTemplate]="itemTemplate">
+      (AddNewRecordEmitter)="handleAddNewCity()">
       <img src="assets/img/city.png" width="200px" image />
       <ng-template #itemTemplate let-item>
-        <app-list-item [item]="item">
+        <app-list-item [id]="item.id">
           <p>{{ item.name }}</p>
         </app-list-item>
       </ng-template>
@@ -28,7 +28,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   imports: [CardComponent, ListItemComponent],
 })
 export class CityCardComponent implements OnInit {
-  cities: WritableSignal<City[]> = signal([]);
+  cities: Signal<City[]> = signal([]);
   constructor(
     private http: FakeHttpService,
     private store: CityStore,
@@ -36,8 +36,7 @@ export class CityCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.http.fetchCities$.subscribe((s) => this.store.addAll(s));
-
-    this.store.cities$.subscribe((s) => this.cities.set(s));
+    this.cities = this.store.cities
   }
 
   handleDeleteCity(id: number) {

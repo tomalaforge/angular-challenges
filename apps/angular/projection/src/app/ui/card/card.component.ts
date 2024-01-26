@@ -1,10 +1,10 @@
 import { NgTemplateOutlet } from '@angular/common';
 import {
-  Component,
+  Component, ContentChild,
   EventEmitter,
   Input,
   Output,
-  TemplateRef,
+  TemplateRef
 } from '@angular/core';
 import { CardType } from '../../model/card.model';
 import { ListItemComponent } from '../list-item/list-item.component';
@@ -17,7 +17,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
       [class]="customClass">
       <ng-content select="[image]"></ng-content>
       <section>
-        @for (item of list; track item.id) {
+        @for (item of list; track item) {
           <ng-container
             [ngTemplateOutlet]="ListItemTemplate"
             [ngTemplateOutletContext]="{ $implicit: item }"></ng-container>
@@ -34,15 +34,12 @@ import { ListItemComponent } from '../list-item/list-item.component';
   standalone: true,
   imports: [ListItemComponent, NgTemplateOutlet],
 })
-export class CardComponent {
-  @Input() list: any[] | null = null;
+export class CardComponent<T> {
+  @Input() list: T[] | null = null
   @Input() customClass = '';
   @Output() AddNewRecordEmitter = new EventEmitter<null>();
-  @Input() ListItemTemplate!: TemplateRef<any>;
+  @ContentChild('itemTemplate') ListItemTemplate: TemplateRef<{ $implicit: T }> | null = null
 
-  CardType = CardType;
-
-  constructor() {}
   addNewItem() {
     this.AddNewRecordEmitter.emit();
   }
