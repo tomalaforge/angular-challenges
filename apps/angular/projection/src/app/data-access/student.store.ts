@@ -1,7 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 import { Student } from '../model/student.model';
-import { City } from '../model/city.model';
 
 @Injectable({
   providedIn: 'root',
@@ -14,10 +12,10 @@ export class StudentStore {
   }
 
   addOne(student: Student) {
-    this.cities.update(x => [...x, student]);
+    this.cities.update((x) => [...x, student]);
   }
 
   deleteOne(id: number) {
-    this.cities.update(x => x.filter(x => x.id !== id));
+    this.cities.update((x) => x.filter((x) => x.id !== id));
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Signal, signal, WritableSignal } from '@angular/core';
+import { Component, OnInit, Signal, signal } from '@angular/core';
 import {
   FakeHttpService,
   randStudent,
@@ -7,7 +7,6 @@ import { StudentStore } from '../../data-access/student.store';
 import { Student } from '../../model/student.model';
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
-import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-student-card',
@@ -40,7 +39,7 @@ export class StudentCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
-    this.students = this.store.cities
+    this.students = this.store.cities;
   }
 
   handleDeleteStudent(id: number) {

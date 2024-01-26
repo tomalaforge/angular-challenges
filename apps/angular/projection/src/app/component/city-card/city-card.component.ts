@@ -1,4 +1,4 @@
-import { Component, OnInit, Signal, signal, WritableSignal } from '@angular/core';
+import { Component, OnInit, Signal, signal } from '@angular/core';
 import { CityStore } from '../../data-access/city.store';
 import {
   FakeHttpService,
@@ -7,7 +7,6 @@ import {
 import { City } from '../../model/city.model';
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
-import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-city-card',
@@ -36,7 +35,7 @@ export class CityCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.http.fetchCities$.subscribe((s) => this.store.addAll(s));
-    this.cities = this.store.cities
+    this.cities = this.store.cities;
   }
 
   handleDeleteCity(id: number) {

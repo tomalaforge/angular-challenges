@@ -1,12 +1,12 @@
 import { NgTemplateOutlet } from '@angular/common';
 import {
-  Component, ContentChild,
+  Component,
+  ContentChild,
   EventEmitter,
   Input,
   Output,
-  TemplateRef
+  TemplateRef,
 } from '@angular/core';
-import { CardType } from '../../model/card.model';
 import { ListItemComponent } from '../list-item/list-item.component';
 
 @Component({
@@ -35,10 +35,12 @@ import { ListItemComponent } from '../list-item/list-item.component';
   imports: [ListItemComponent, NgTemplateOutlet],
 })
 export class CardComponent<T> {
-  @Input() list: T[] | null = null
+  @Input() list: T[] | null = null;
   @Input() customClass = '';
   @Output() AddNewRecordEmitter = new EventEmitter<null>();
-  @ContentChild('itemTemplate') ListItemTemplate: TemplateRef<{ $implicit: T }> | null = null
+  @ContentChild('itemTemplate') ListItemTemplate: TemplateRef<{
+    $implicit: T;
+  }> | null = null;
 
   addNewItem() {
     this.AddNewRecordEmitter.emit();
