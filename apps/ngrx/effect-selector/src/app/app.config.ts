@@ -3,18 +3,24 @@ import { provideEffects } from '@ngrx/effects';
 import { provideStore } from '@ngrx/store';
 import { ActivityEffects } from './store/activity/activity.effects';
 import {
+  ActivityState,
   activityFeatureKey,
   activityReducer,
 } from './store/activity/activity.reducer';
-import { StatusEffects } from './store/status/status.effects';
 import { UserEffects } from './store/user/user.effects';
 
-import { statusFeatureKey, statusReducer } from './store/status/status.reducer';
+import {
+  UserState,
+  userFeatureKey,
+  userReducer,
+} from './store/user/user.reducer';
 
-import { userFeatureKey, userReducer } from './store/user/user.reducer';
+export interface AppStore {
+  [activityFeatureKey]: ActivityState;
+  [userFeatureKey]: UserState;
+}
 
 const reducers = {
-  [statusFeatureKey]: statusReducer,
   [activityFeatureKey]: activityReducer,
   [userFeatureKey]: userReducer,
 };
@@ -22,6 +28,6 @@ const reducers = {
 export const appConfig: ApplicationConfig = {
   providers: [
     provideStore(reducers),
-    provideEffects([ActivityEffects, UserEffects, StatusEffects]),
+    provideEffects([ActivityEffects, UserEffects]),
   ],
 };

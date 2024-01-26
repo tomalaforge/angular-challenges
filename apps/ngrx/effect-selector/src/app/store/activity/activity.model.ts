@@ -53,3 +53,7 @@ export const activities: Activity[] = [
   randActivity(),
   randActivity(),
 ];
+
+export interface ActivityWithTeachers extends Activity {
+  teachers: Array<{ name: string }>;
+}

@@ -1,0 +1,15 @@
+<h1>Activity Board</h1>
+<section>
+  @for (activity of activities(); track activity.id) {
+    <div class="card">
+      <h2>Activity Name: {{ activity.name }}</h2>
+      <p>Main teacher: {{ activity.teacher.name }}</p>
+      <span>All teachers available for : {{ activity.type }} are</span>
+      <ul>
+        @for (teacher of activity.teachers; track teacher.name) {
+          <li>{{ teacher.name }}</li>
+        }
+      </ul>
+    </div>
+  }
+</section>

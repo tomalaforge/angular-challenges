@@ -12,3 +12,9 @@ export const loadActivitiesFailure = createAction(
   '[Activity Effect] Load Activities Failure',
   props<{ error: unknown }>(),
 );
+
+export const ActivityActions = {
+  loadActivities,
+  loadActivitiesSuccess,
+  loadActivitiesFailure,
+};

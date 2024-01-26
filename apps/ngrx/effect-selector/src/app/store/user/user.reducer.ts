@@ -14,6 +14,6 @@ export const initialState: UserState = {
 
 export const userReducer = createReducer(
   initialState,
-  on(UserActions.loadUsersSuccess, (state, { user }) => ({ ...state, user })),
   on(UserActions.loadUsersFailure, (state) => ({ ...state, user: undefined })),
+  on(UserActions.loadUsersSuccess, (state, { user }) => ({ ...state, user })),
 );

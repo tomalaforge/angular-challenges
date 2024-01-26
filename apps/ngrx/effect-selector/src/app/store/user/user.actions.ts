@@ -12,3 +12,9 @@ export const loadUsersFailure = createAction(
   '[User] Load Users Failure',
   props<{ error: unknown }>(),
 );
+
+export const UserActions = {
+  loadUsers,
+  loadUsersSuccess,
+  loadUsersFailure,
+};

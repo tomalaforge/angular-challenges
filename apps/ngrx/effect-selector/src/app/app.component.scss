@@ -1,0 +1,14 @@
+section {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border: solid;
+  border-width: 1px;
+  border-color: black;
+  padding: 2px;
+}
