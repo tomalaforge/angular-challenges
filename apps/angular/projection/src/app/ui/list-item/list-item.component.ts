@@ -1,6 +1,4 @@
 import { Component, EventEmitter, Output, input } from '@angular/core';
-import { StudentStore } from '../../data-access/student.store';
-import { TeacherStore } from '../../data-access/teacher.store';
 
 @Component({
   selector: 'app-list-item',
@@ -17,9 +15,4 @@ import { TeacherStore } from '../../data-access/teacher.store';
 export class ListItemComponent {
   id = input<number>();
   @Output() delete = new EventEmitter<number>();
-
-  constructor(
-    private teacherStore: TeacherStore,
-    private studentStore: StudentStore,
-  ) {}
 }

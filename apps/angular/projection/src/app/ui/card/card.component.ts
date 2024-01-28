@@ -4,9 +4,9 @@ import {
   Component,
   ContentChild,
   EventEmitter,
-  Input,
   Output,
   TemplateRef,
+  input,
 } from '@angular/core';
 import { ListItemComponent } from '../list-item/list-item.component';
 
@@ -17,7 +17,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
       <ng-content select="img"></ng-content>
 
       <section>
-        @for (item of list; track item) {
+        @for (item of list(); track item) {
           <div
             [ngTemplateOutlet]="rowTemplate"
             [ngTemplateOutletContext]="{ $implicit: item }"></div>
@@ -36,7 +36,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardComponent<T> {
-  @Input() list: T[] | null = null;
+  list = input<T[] | null>(null);
 
   @Output() add = new EventEmitter<void>();
   @ContentChild('rowRef', { read: TemplateRef })
