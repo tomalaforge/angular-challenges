@@ -1,40 +1,66 @@
-import { Component, OnInit } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  inject,
+} from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import {
+  FakeHttpService,
+  randStudent,
+} from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
-import { CardType } from '../../model/card.model';
-import { Student } from '../../model/student.model';
 import { CardComponent } from '../../ui/card/card.component';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-student-card',
   template: `
     <app-card
-      [list]="students"
-      [type]="cardType"
-      customClass="bg-light-green"></app-card>
+      [list]="store.students"
+      (add)="addStudent()"
+      class="bg-light-green">
+      <img src="assets/img/student.webp" width="200px" />
+
+      <ng-template #rowRef let-student>
+        <app-list-item (delete)="deleteStudent(student.id)">
+          {{ student.firstName }}
+        </app-list-item>
+      </ng-template>
+    </app-card>
   `,
   standalone: true,
   styles: [
     `
-      ::ng-deep .bg-light-green {
+      .bg-light-green {
         background-color: rgba(0, 250, 0, 0.1);
       }
     `,
   ],
-  imports: [CardComponent],
+  imports: [CardComponent, ListItemComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class StudentCardComponent implements OnInit {
-  students: Student[] = [];
-  cardType = CardType.STUDENT;
+export class StudentCardComponent {
+  protected store = inject(StudentStore);
+  private http = inject(FakeHttpService);
 
-  constructor(
-    private http: FakeHttpService,
-    private store: StudentStore,
-  ) {}
+  constructor() {
+    const fetchStudents = toSignal(this.http.fetchStudents$, {
+      initialValue: [],
+    });
+    effect(
+      () => {
+        this.store.addAll(fetchStudents());
+      },
+      { allowSignalWrites: true },
+    );
+  }
 
-  ngOnInit(): void {
-    this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
+  addStudent(): void {
+    this.store.addOne(randStudent());
+  }
 
-    this.store.students$.subscribe((s) => (this.students = s));
+  deleteStudent(id: number) {
+    this.store.deleteOne(id);
   }
 }
