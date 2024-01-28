@@ -6,15 +6,15 @@
 
   "challenge.footer": {
     "note": "Note",
-    "running": "Démarre le projet en exécutant:",
-    "start": "Le titre de ta PR doit commencer par",
-    "reminder": "Rappel",
-    "communityAnswers": "Solution de la communauté",
-    "authorAnswer": "Solution de l'auteur",
-    "blogPost": "Article",
+    "running": "Start the project by running:",
+    "start": "Your PR title must start with",
+    "reminder": "Reminder",
+    "communityAnswers": "Community Answers",
+    "authorAnswer": "Author Answer",
+    "blogPost": "Blog Post",
     "gettingStarted": {
-      "title": "Pour faire ce challenge, commencer par lire: ",
-      "link": "Comment Démarrer"
+      "title": "To do this challenge, start by reading: ",
+      "link": "Getting Started"
     }
   }
 }
