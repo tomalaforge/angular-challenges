@@ -1,0 +1,20 @@
+{
+  "page.title.challenge": "Challenge",
+  "author.createdBy": "Created by",
+  "buttons.star": "Give a star",
+  "buttons.sponsor": "Sponsor",
+
+  "challenge.footer": {
+    "note": "Note",
+    "running": "Démarre le projet en exécutant:",
+    "start": "Le titre de ta PR doit commencer par",
+    "reminder": "Rappel",
+    "communityAnswers": "Solution de la communauté",
+    "authorAnswer": "Solution de l'auteur",
+    "blogPost": "Article",
+    "gettingStarted": {
+      "title": "Pour faire ce challenge, commencer par lire: ",
+      "link": "Comment Démarrer"
+    }
+  }
+}
