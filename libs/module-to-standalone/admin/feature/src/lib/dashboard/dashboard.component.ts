@@ -1,5 +1,5 @@
 import { Component, NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'lib-dashboard',
@@ -12,13 +12,15 @@ import { RouterModule } from '@angular/router';
       Create User
     </button>
   `,
+  standalone: true,
+  imports: [RouterLink],
 })
 export class DashboardComponent {}
 
 @NgModule({
   imports: [
     RouterModule.forChild([{ path: '', component: DashboardComponent }]),
+    DashboardComponent,
   ],
-  declarations: [DashboardComponent],
 })
 export class DashboardModule {}
