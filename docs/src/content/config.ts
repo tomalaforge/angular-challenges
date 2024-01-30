@@ -40,16 +40,18 @@ const i18n = defineCollection({
         'author.createdBy': z.string(),
         'buttons.star': z.string(),
         'buttons.sponsor': z.string(),
-        'challenge.footer.note': z.string(),
-        'challenge.footer.running': z.string(),
-        'challenge.footer.start': z.string(),
-        'challenge.footer.reminder': z.string(),
-        'challenge.footer.communityAnswers': z.string(),
-        'challenge.footer.authorAnswer': z.string(),
-        'challenge.footer.blogPost': z.string(),
-        'challenge.footer.gettingStarted': z.object({
-          title: z.string(),
-          link: z.string(),
+        'challenge.footer': z.object({
+          note: z.string(),
+          running: z.string(),
+          start: z.string(),
+          reminder: z.string(),
+          communityAnswers: z.string(),
+          authorAnswer: z.string(),
+          blogPost: z.string(),
+          gettingStarted: z.object({
+            title: z.string(),
+            link: z.string(),
+          }),
         }),
       })
       .partial(),
