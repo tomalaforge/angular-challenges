@@ -12,5 +12,9 @@
   "challenge.footer.authorAnswer": "Решение автора",
   "challenge.footer.blogPost": "Статья",
   "challenge.footer.gettingStarted.title": "Чтобы пройти это испытание, прочитайте:",
-  "challenge.footer.gettingStarted.link": "Первые шаги"
+  "challenge.footer.gettingStarted.link": "Первые шаги",
+  "subscription.button": "Subscribe",
+  "subscription.email": "username@gmail.com",
+  "subscription.note.title": "Notes",
+  "subscription.note.description": "This email will only be used for sending new challenges updates"
 }

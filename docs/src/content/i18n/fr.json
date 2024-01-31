@@ -11,5 +11,9 @@
   "challenge.footer.authorAnswer": "Author Answer",
   "challenge.footer.blogPost": "Blog Post",
   "challenge.footer.gettingStarted.title": "To do this challenge, start by reading: ",
-  "challenge.footer.gettingStarted.link": "Getting Started"
+  "challenge.footer.gettingStarted.link": "Getting Started",
+  "subscription.button": "Subscribe",
+  "subscription.email": "username@gmail.com",
+  "subscription.note.title": "Notes",
+  "subscription.note.description": "This email will only be used for sending new challenges updates"
 }
