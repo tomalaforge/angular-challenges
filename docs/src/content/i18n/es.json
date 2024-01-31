@@ -51,5 +51,9 @@
   "challenge.footer.authorAnswer": "Respuesta del Autor del Reto",
   "challenge.footer.blogPost": "Blog Post",
   "challenge.footer.gettingStarted.title": "Para realizar este desafío, comienza por leer: ",
-  "challenge.footer.gettingStarted.link": "Inicio"
+  "challenge.footer.gettingStarted.link": "Inicio",
+  "subscription.button": "Subscribe",
+  "subscription.email": "username@gmail.com",
+  "subscription.note.title": "Notes",
+  "subscription.note.description": "This email will only be used for sending new challenges updates"
 }

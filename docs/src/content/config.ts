@@ -49,6 +49,9 @@ const i18n = defineCollection({
         'challenge.footer.blogPost': z.string(),
         'challenge.footer.gettingStarted.title': z.string(),
         'challenge.footer.gettingStarted.link': z.string(),
+        'subscription.button': z.string(),
+        'subscription.note.title': z.string(),
+        'subscription.note.description': z.string(),
       })
       .partial(),
   }),
