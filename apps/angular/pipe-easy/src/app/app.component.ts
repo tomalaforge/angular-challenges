@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { MyPipePipe } from './my-pipe.pipe';
 
@@ -6,11 +5,13 @@ import { MyPipePipe } from './my-pipe.pipe';
   standalone: true,
   selector: 'app-root',
   template: `
-    <div *ngFor="let person of persons; let index = index">
-      {{ person | myPipe: index }}
-    </div>
+    @for (person of persons; track $index) {
+      <div>
+        {{ person | myPipe: $index }}
+      </div>
+    }
   `,
-  imports: [NgFor, MyPipePipe],
+  imports: [MyPipePipe],
 })
 export class AppComponent {
   persons = ['toto', 'jack'];
