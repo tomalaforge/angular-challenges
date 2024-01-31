@@ -2,7 +2,7 @@
 export default {
   displayName: 'testing-checkbox',
   preset: '../../../jest.preset.js',
-  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/subscription-setup.ts'],
   coverageDirectory: '../../../coverage/apps/testing/checkbox',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [

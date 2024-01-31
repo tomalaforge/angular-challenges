@@ -32,7 +32,7 @@ You should only override the jest configuration is the `unitTestRunner` option i
 export default {
   displayName: '< libName >', // 👈 lib name
   preset: '../../../jest.preset.js', // 👈 be careful with the path
-  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/subscription-setup.ts'],
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

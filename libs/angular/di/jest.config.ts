@@ -2,7 +2,7 @@
 export default {
   displayName: 'angular/di',
   preset: '../../../jest.preset.js',
-  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/subscription-setup.ts'],
   coverageDirectory: '../../../coverage/libs/angular/di',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
