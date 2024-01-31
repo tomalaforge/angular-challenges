@@ -9,7 +9,7 @@ import { FeatureComponentGeneratorSchema } from './schema';
 
 export async function featureComponentGenerator(
   tree: Tree,
-  options: FeatureComponentGeneratorSchema
+  options: FeatureComponentGeneratorSchema,
 ) {
   const projectRoot = `libs/${options.name}`;
   addProjectConfiguration(tree, options.name, {

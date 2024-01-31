@@ -2,7 +2,7 @@
 export default {
   displayName: 'testing-router-outlet',
   preset: '../../../jest.preset.js',
-  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/subscription-setup.ts'],
   globals: {},
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [

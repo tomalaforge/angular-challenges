@@ -1,0 +1,19 @@
+{
+  "page.title.challenge": "Challenge",
+  "author.createdBy": "Créé par",
+  "buttons.star": "Donne une étoile",
+  "buttons.sponsor": "Sponsorise",
+  "challenge.footer.note": "Note",
+  "challenge.footer.running": "Start the project by running:",
+  "challenge.footer.start": "Your PR title must start with",
+  "challenge.footer.reminder": "Reminder",
+  "challenge.footer.communityAnswers": "Community Answers",
+  "challenge.footer.authorAnswer": "Author Answer",
+  "challenge.footer.blogPost": "Blog Post",
+  "challenge.footer.gettingStarted.title": "To do this challenge, start by reading: ",
+  "challenge.footer.gettingStarted.link": "Getting Started",
+  "subscription.button": "Subscribe",
+  "subscription.email": "username@gmail.com",
+  "subscription.note.title": "Notes",
+  "subscription.note.description": "This email will only be used for sending new challenges updates"
+}

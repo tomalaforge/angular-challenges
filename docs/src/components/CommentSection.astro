@@ -1,5 +1,9 @@
 ---
+import type { Props } from '@astrojs/starlight/props';
 
+const {lang, locale} = Astro.props;
+
+const shortLang = lang.split('-')[0];
 ---
 
 <div class="separator"></div>
@@ -15,7 +19,7 @@
         data-emit-metadata="0"
         data-input-position="bottom"
         data-theme="preferred_color_scheme"
-        data-lang="en"
+        data-lang={shortLang}
         data-loading="lazy"
         crossorigin="anonymous"
         async>

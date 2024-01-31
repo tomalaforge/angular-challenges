@@ -2,7 +2,7 @@
 export default {
   displayName: 'decoupling-brain',
   preset: '../../../jest.preset.js',
-  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/subscription-setup.ts'],
   coverageDirectory: '../../../coverage/libs/decoupling/brain',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [

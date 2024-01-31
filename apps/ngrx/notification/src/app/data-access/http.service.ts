@@ -10,5 +10,5 @@ export class HttpService {
 
   getAllStudents = () => this.fakeBackend.getAllStudents().pipe(take(1));
 
-  getAllSchools = () => this.fakeBackend.getAllStchools().pipe(take(1));
+  getAllSchools = () => this.fakeBackend.getAllSchools().pipe(take(1));
 }

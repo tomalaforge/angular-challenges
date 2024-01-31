@@ -26,9 +26,9 @@
       "symbol": "🇵🇹",
       "description": "Translate in Portuguese"
     },
-    "translation-pt-BR": {
-      "symbol": "🇧🇷",
-      "description": "Translate in Brazilian Portuguese"
+    "translation-ru": {
+      "symbol": "🇷🇺",
+      "description": "Translate in Russian"
     }
   },
   "contributors": [
@@ -45,6 +45,38 @@
         "ideas",
         "design",
         "translation-fr"
+      ]
+    },
+    {
+      "login": "jdegand",
+      "name": "J. Degand",
+      "avatar_url": "https://avatars.githubusercontent.com/u/70610011?v=4",
+      "profile": "https://github.com/jdegand",
+      "contributions": [
+        "doc",
+        "content",
+        "code"
+      ]
+    },
+    {
+      "login": "DeveshChau",
+      "name": "Devesh Chaudhari",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9509673?v=4",
+      "profile": "https://github.com/DeveshChau",
+      "contributions": [
+        "code",
+        "bug",
+        "challenge"
+      ]
+    },
+    {
+      "login": "stillst",
+      "name": "stillst",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1463098?v=4",
+      "profile": "https://github.com/stillst",
+      "contributions": [
+        "challenge",
+        "translation-ru"
       ]
     },
     {
@@ -95,26 +127,6 @@
       ]
     },
     {
-      "login": "jdegand",
-      "name": "J. Degand",
-      "avatar_url": "https://avatars.githubusercontent.com/u/70610011?v=4",
-      "profile": "https://github.com/jdegand",
-      "contributions": [
-        "doc"
-      ]
-    },
-    {
-      "login": "DeveshChau",
-      "name": "Devesh Chaudhari",
-      "avatar_url": "https://avatars.githubusercontent.com/u/9509673?v=4",
-      "profile": "https://github.com/DeveshChau",
-      "contributions": [
-        "code",
-        "bug",
-        "challenge"
-      ]
-    },
-    {
       "login": "dmmishchenko",
       "name": "Dmitriy Mishchenko",
       "avatar_url": "https://avatars.githubusercontent.com/u/51910160?v=4",
@@ -157,9 +169,28 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/142346548?v=4",
       "profile": "https://github.com/kabrunko-dev/",
       "contributions": [
-        "translation-pt-BR",
+        "code",
+        "translation-pt",
+        "doc"
+      ]
+    },
+    {
+      "login": "ErickRodrCodes",
+      "name": "Erick Rodriguez",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1978642?v=4",
+      "profile": "http://www.streamoverlaypro.com",
+      "contributions": [
+        "translation-es"
+      ]
+    },
+    {
+      "login": "eduardoRoth",
+      "name": "Eduardo Roth",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5419161?v=4",
+      "profile": "https://eduardoroth.dev",
+      "contributions": [
         "doc",
-        "code"
+        "translation-es"
       ]
     }
   ],

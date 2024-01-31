@@ -10,14 +10,14 @@ import { Observable, map } from 'rxjs';
 export class IsAuthorizedGuard implements CanActivate {
   constructor(
     private authorizationService: AuthorizationService,
-    private router: Router
+    private router: Router,
   ) {}
 
   canActivate(): Observable<boolean | UrlTree> {
     return this.authorizationService.isAuthorized$.pipe(
       map((isAuthorized) =>
-        isAuthorized ? true : this.router.createUrlTree(['forbidden'])
-      )
+        isAuthorized ? true : this.router.createUrlTree(['forbidden']),
+      ),
     );
   }
 }

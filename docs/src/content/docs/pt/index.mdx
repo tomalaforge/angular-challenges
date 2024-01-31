@@ -3,19 +3,17 @@ title: Bem-vindos aos Desafios Angular
 description: Comece resolvendo esses desafios e se torne um melhor desenvolvedor frontend Angular.
 template: splash
 noCommentSection: true
-banner:
-  content: Terei menos tempo livre nos próximos dois meses, não se preocupe se seus pull requests levarem um tempo para serem revisados.
 hero:
   tagline: Comece agora e vire um especialista em Angular!
   image:
     file: ../../../assets/angular-challenge.webp
   actions:
     - text: Iniciar
-      link: /pt-br/guides/getting-started/
+      link: /pt/guides/getting-started/
       icon: right-arrow
       variant: primary
     - text: Ir para o desafio mais recente
-      link: /pt-br/challenges/performance/40-christmas-web-worker/
+      link: /pt/challenges/angular/43-signal-input/
       icon: rocket
     - text: Dar uma estrela
       link: https://github.com/tomalaforge/angular-challenges
@@ -25,39 +23,54 @@ hero:
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 import MyIcon from '../../../components/MyIcon.astro';
+import SubscriptionForm from '../../../components/SubscriptionForm.astro'
 
 <CardGrid>
-  <Card title="40 Desafios">
-    Este repositório possui 40 desafios relacionados a <b>Angular</b>, <b>Nx</b>, <b>RxJS</b>,
+  <Card title="43 Desafios">
+    Este repositório possui 43 desafios relacionados a <b>Angular</b>, <b>Nx</b>, <b>RxJS</b>,
     <b>Ngrx</b> e <b>Typescript</b>.
     Esses desafios são voltados para problemas reais ou funcionalidades específicas afim de
     melhorar suas habilidades.
   </Card>
 
-  <Card title="Torne-se um contribuidor OSS">
-    Um dos objetivos desse repositório é <b>diminuir a barreira</b> de entrada para o Software de
-    Código Aberto (OSS). Ao realizar esses desafios, você aprenderá como começar a contruibuir em
-    qualquer outro Projeto de Código Aberto.
+  <Card title="Inscreva-se para ser notificado do desafio mais recente">
+  <SubscriptionForm isNote={false} lang="pt"/>
   </Card>
 
-  <Card title="Aprenda junto com os outros">
-    Aprender e praticar um novo framework é sempre desafiador. Este conjunto de desafios
-    possui casos de uso reais para aplicarmos o que aprendemos. Qualquer um pode comentar e
-    oferecer assistência.
-    <b>
-      Aprender sozinho é legal, mas aprender junto com outras pessoas levará você mais longe.
-    </b>
-  </Card>
+{' '}
 
-  <Card title="Contribua">
-    Tem algum problema, um bug interessante ou uma ideia? Não hesite;
-    <b>crie seus próprios desafios</b> sem perder tempo.
-  </Card>
+<Card title="Torne-se um contribuidor OSS">
+  Um dos objetivos desse repositório é <b>diminuir a barreira</b> de entrada
+  para o Software de Código Aberto (OSS). Ao realizar esses desafios, você
+  aprenderá como começar a contruibuir em qualquer outro Projeto de Código
+  Aberto.
+</Card>
 
-  <Card title="Prepare-se para entrevistas">
-    Completar esses desafios vai preparar você para quaisquer desafios técnicos que encontrar em
-    uma entrevista para uma vaga frontend.
-  </Card>
+{' '}
+
+<Card title="Aprenda junto com os outros">
+  Aprender e praticar um novo framework é sempre desafiador. Este conjunto de
+  desafios possui casos de uso reais para aplicarmos o que aprendemos. Qualquer
+  um pode comentar e oferecer assistência.
+  <b>
+    Aprender sozinho é legal, mas aprender junto com outras pessoas levará você
+    mais longe.
+  </b>
+</Card>
+
+{' '}
+
+<Card title="Contribua">
+  Tem algum problema, um bug interessante ou uma ideia? Não hesite;
+  <b>crie seus próprios desafios</b> sem perder tempo.
+</Card>
+
+{' '}
+
+<Card title="Prepare-se para entrevistas">
+  Completar esses desafios vai preparar você para quaisquer desafios técnicos
+  que encontrar em uma entrevista para uma vaga frontend.
+</Card>
 
   <Card title="Patrocínio">
     Este projeto é livre e tem o objetivo de permanecer assim o máximo possível. No entanto,

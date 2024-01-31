@@ -36,7 +36,7 @@ export interface ErrorState {
 export type CallState = LoadingState | ErrorState;
 
 export const getErrorCallState = (
-  callState: CallState
+  callState: CallState,
 ): CustomError | undefined => {
   if (isErrorState(callState)) {
     return callState.error;

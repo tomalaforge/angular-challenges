@@ -2,7 +2,7 @@
 export default {
   displayName: 'shared-utils',
   preset: '../../../jest.preset.js',
-  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/subscription-setup.ts'],
   globals: {},
   coverageDirectory: '../../../coverage/libs/shared/utils',
   transform: {

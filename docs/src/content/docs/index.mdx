@@ -3,8 +3,6 @@ title: Welcome to Angular Challenges
 description: Get started by resolving those challenges and becoming a better Angular FrontEnd engineer.
 template: splash
 noCommentSection: true
-banner:
-  content: I will have less free time in the next two months, so don't worry if your pull requests take some time to be reviewed.
 hero:
   tagline: Start now and become an Angular Expert!
   image:
@@ -15,7 +13,7 @@ hero:
       icon: right-arrow
       variant: primary
     - text: Go to the latest Challenge
-      link: /challenges/performance/40-christmas-web-worker/
+      link: /challenges/angular/43-signal-input/
       icon: rocket
     - text: Give a star
       link: https://github.com/tomalaforge/angular-challenges
@@ -26,10 +24,18 @@ hero:
 import { Card, CardGrid } from '@astrojs/starlight/components';
 import MyIcon from '../../components/MyIcon.astro';
 
+import SubscriptionForm from '../../components/SubscriptionForm.astro'
+
+
 <CardGrid>
-<Card title="40 Challenges">
-    This repository gathers 40 Challenges related to <b>Angular</b>, <b>Nx</b>, <b>RxJS</b>, <b>Ngrx</b> and <b>Typescript</b>. 
+
+<Card title="43 Challenges">
+    This repository gathers 43 challenges related to <b>Angular</b>, <b>Nx</b>, <b>RxJS</b>, <b>Ngrx</b> and <b>Typescript</b>.
     These challenges resolve around real-life issues or specific features to elevate your skills.
+</Card>
+
+<Card title="Subscribe to get notify of latest challenges">
+<SubscriptionForm isNote={false}/>
 </Card>
 
 <Card title="Become an OSS Maintainer">

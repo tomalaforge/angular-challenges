@@ -32,7 +32,7 @@ export function createVehicle(
   type: VehicleType,
   fuel?: Fuel,
   capacity?: number,
-  isPublicTransport?: boolean
+  isPublicTransport?: boolean,
 ): Vehicle {
   switch (type) {
     case 'bicycle':

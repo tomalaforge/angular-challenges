@@ -22,7 +22,7 @@ export class StatusEffects {
               return activities.reduce(
                 (status: Status[], activity): Status[] => {
                   const index = status.findIndex(
-                    (s) => s.name === activity.type
+                    (s) => s.name === activity.type,
                   );
                   if (index === -1) {
                     return [
@@ -34,16 +34,19 @@ export class StatusEffects {
                     return status;
                   }
                 },
-                []
+                [],
               );
             }
             return [];
           }),
-          map((statuses) => StatusActions.loadStatusesSuccess({ statuses }))
-        )
-      )
+          map((statuses) => StatusActions.loadStatusesSuccess({ statuses })),
+        ),
+      ),
     );
   });
 
-  constructor(private actions$: Actions, private store: Store) {}
+  constructor(
+    private actions$: Actions,
+    private store: Store,
+  ) {}
 }

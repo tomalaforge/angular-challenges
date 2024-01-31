@@ -6,7 +6,7 @@ import { RouterOutlet } from '@angular/router';
   imports: [RouterOutlet],
   selector: 'app-root',
   template: `
-    <h1 class="text-xl px-4 py-2">My Application</h1>
+    <h1 class="px-4 py-2 text-xl">My Application</h1>
     <section class="flex">
       <router-outlet name="side" />
       <div class="border p-4">

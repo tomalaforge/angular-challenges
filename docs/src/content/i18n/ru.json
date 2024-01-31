@@ -1,0 +1,20 @@
+{
+  "page.title.challenge": "Испытание",
+  "author.createdBy": "Создано",
+  "buttons.star": "Дать звезду",
+  "buttons.sponsor": "Спонсор",
+  "404.text": "Страница не найдена. Проверьте URL-адрес или воспользуйтесь строкой поиска.",
+  "challenge.footer.note": "Примечание",
+  "challenge.footer.running": "Запустите проект, выполнив команду:",
+  "challenge.footer.start": "Название вашего PR должно начинаться со слов",
+  "challenge.footer.reminder": "Не забудьте",
+  "challenge.footer.communityAnswers": "Решения сообщества",
+  "challenge.footer.authorAnswer": "Решение автора",
+  "challenge.footer.blogPost": "Статья",
+  "challenge.footer.gettingStarted.title": "Чтобы пройти это испытание, прочитайте:",
+  "challenge.footer.gettingStarted.link": "Первые шаги",
+  "subscription.button": "Subscribe",
+  "subscription.email": "username@gmail.com",
+  "subscription.note.title": "Notes",
+  "subscription.note.description": "This email will only be used for sending new challenges updates"
+}

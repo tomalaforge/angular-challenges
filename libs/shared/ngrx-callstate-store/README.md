@@ -175,8 +175,7 @@ export class CallStateError {
 export class CallStateErrorHandler implements ErrorHandler<CallStateError> {
   toError = (error: unknown): CallStateError => {
     if (error instanceof CallStateError) return error;
-    if (error instanceof Error)
-      return new CallStateError(error.name, error.message);
+    if (error instanceof Error) return new CallStateError(error.name, error.message);
     return new CallStateError(UNKNOWN_ERROR_CAUSE, UNKNOWN_ERROR_MESSAGE);
   };
 

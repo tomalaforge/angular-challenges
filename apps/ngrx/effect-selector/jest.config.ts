@@ -2,7 +2,7 @@
 export default {
   displayName: 'ngrx-effect-selector',
   preset: '../../../jest.preset.js',
-  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/subscription-setup.ts'],
   globals: {},
   coverageDirectory: '../../../coverage/apps/ngrx/effect-selector',
   transform: {

@@ -1,0 +1,20 @@
+{
+  "page.title.challenge": "Desafio",
+  "author.createdBy": "Criado por",
+  "buttons.star": "Dar uma estrela",
+  "buttons.sponsor": "Patrocinar",
+  "404.text": "Página não encontrada. Verifique a URL ou tente usar a barra de busca.",
+  "challenge.footer.note": "Nota",
+  "challenge.footer.running": "Rode o projeto executando o comando:",
+  "challenge.footer.start": "O título do seu PR deve começar com",
+  "challenge.footer.reminder": "Não esqueça",
+  "challenge.footer.communityAnswers": "Solução da Comunidade",
+  "challenge.footer.authorAnswer": "Solução do Autor do Desafio",
+  "challenge.footer.blogPost": "Artigo",
+  "challenge.footer.gettingStarted.title": "Para realizar este desafio, comece lendo: ",
+  "challenge.footer.gettingStarted.link": "Começando",
+  "subscription.button": "Inscrever-se",
+  "subscription.email": "usuario@gmail.com",
+  "subscription.note.title": "Notas",
+  "subscription.note.description": "Este email será apenas usado para enviar atualizações de novos desafios"
+}

@@ -7,10 +7,6 @@ sidebar:
   order: 12
 ---
 
-:::note
-WIP: The following documentation will be reviewed and improved. However, you can still take on the challenge. If you don't understand a certain part, please feel free to reach out or create an issue.
-:::
-
 ## Information
 
 Eslint is an amazing tool that helps developers avoid simple mistakes and adhere to company style guides.

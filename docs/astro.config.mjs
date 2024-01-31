@@ -2,10 +2,26 @@ import starlight from '@astrojs/starlight';
 import { defineConfig } from 'astro/config';
 
 export const locales = {
-  root: { label: 'English', lang: 'en' },
-  es: { label: 'Español', lang: 'es' },
-  fr: { label: 'Français', lang: 'fr' },
-  'pt-br': { label: 'Português (Brasil)', lang: 'pt-BR' },
+  root: {
+    label: 'English',
+    lang: 'en',
+  },
+  es: {
+    label: 'Español',
+    lang: 'es',
+  },
+  fr: {
+    label: 'Français',
+    lang: 'fr',
+  },
+  pt: {
+    label: 'Português',
+    lang: 'pt',
+  },
+  ru: {
+    label: 'Русский',
+    lang: 'ru',
+  },
 };
 
 // https://astro.build/config
@@ -31,7 +47,8 @@ export default defineConfig({
           translations: {
             es: 'Guías',
             fr: 'Guides',
-            'pt-BR': 'Guias',
+            pt: 'Guias',
+            ru: 'Руководство',
           },
         },
         {
@@ -40,7 +57,8 @@ export default defineConfig({
           translations: {
             es: 'Desafíos',
             fr: 'Challenges',
-            'pt-BR': 'Desafios'
+            pt: 'Desafios',
+            ru: 'Задачи',
           },
         },
       ],
@@ -62,6 +80,13 @@ export default defineConfig({
   gtag('config', 'G-6BXJ62W6G5');
           `,
         },
+        {
+          tag: 'script',
+          attrs: {
+            src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2438923752868254',
+            async: true,
+          }
+        }
       ],
       components: {
         MarkdownContent: './src/components/Content.astro',
@@ -70,24 +95,7 @@ export default defineConfig({
         MobileMenuFooter: './src/components/MobileMenuFooter.astro',
       },
       defaultLocale: 'root',
-      locales: {
-        root: {
-          label: 'English',
-          lang: 'en',
-        },
-        es: {
-          label: 'Español',
-          lang: 'es',
-        },
-        fr: {
-          label: 'Français',
-          lang: 'fr',
-        },
-        'pt-br': {
-          label: 'Português (Brasil)',
-          lang: 'pt-BR',
-        },
-      },
+      locales,
     }),
   ],
 });

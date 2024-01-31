@@ -9,7 +9,7 @@ import { CustomLibraryGeneratorSchema } from './schema';
 
 export async function customLibraryGenerator(
   tree: Tree,
-  options: CustomLibraryGeneratorSchema
+  options: CustomLibraryGeneratorSchema,
 ) {
   const projectRoot = `libs/${options.name}`;
   addProjectConfiguration(tree, options.name, {

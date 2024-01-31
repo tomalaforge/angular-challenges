@@ -47,7 +47,7 @@ export class TicketStore
               users.find((user) => user.id === ticket.assigneeId)?.name ??
               'unassigned',
           }))
-        : tickets
+        : tickets,
   );
 
   readonly tickets$ = this.select(
@@ -55,8 +55,8 @@ export class TicketStore
     this.search$,
     (tickets, search) =>
       tickets.filter((t) =>
-        t.description.toLowerCase().includes(search.toLowerCase())
-      )
+        t.description.toLowerCase().includes(search.toLowerCase()),
+      ),
   );
 
   readonly vm$ = this.select(
@@ -66,7 +66,7 @@ export class TicketStore
       loading: this.loading$,
       error: this.error$,
     },
-    { debounce: true }
+    { debounce: true },
   );
 
   readonly updateAssignee = this.updater((state, ticket: Ticket) => {
@@ -107,11 +107,11 @@ export class TicketStore
                 loading: false,
                 tickets,
               }),
-            (error: unknown) => this.patchState({ error, loading: false })
-          )
-        )
-      )
-    )
+            (error: unknown) => this.patchState({ error, loading: false }),
+          ),
+        ),
+      ),
+    ),
   );
 
   readonly loadUsers = this.effect<void>(
@@ -125,11 +125,11 @@ export class TicketStore
                 loading: false,
                 users,
               }),
-            (error: unknown) => this.patchState({ error, loading: false })
-          )
-        )
-      )
-    )
+            (error: unknown) => this.patchState({ error, loading: false }),
+          ),
+        ),
+      ),
+    ),
   );
 
   readonly addTicket = this.effect<string>(
@@ -143,11 +143,11 @@ export class TicketStore
                 loading: false,
                 tickets: [...state.tickets, newTicket],
               })),
-            (error: unknown) => this.patchState({ error, loading: false })
-          )
-        )
-      )
-    )
+            (error: unknown) => this.patchState({ error, loading: false }),
+          ),
+        ),
+      ),
+    ),
   );
 
   readonly assignTicket = this.effect<{ userId: number; ticketId: number }>(
@@ -157,11 +157,11 @@ export class TicketStore
         this.backend.assign(info.ticketId, Number(info.userId)).pipe(
           tapResponse(
             (newTicket) => this.updateAssignee(newTicket),
-            (error: unknown) => this.patchState({ error, loading: false })
-          )
-        )
-      )
-    )
+            (error: unknown) => this.patchState({ error, loading: false }),
+          ),
+        ),
+      ),
+    ),
   );
 
   readonly done = this.effect<number>(
@@ -171,10 +171,10 @@ export class TicketStore
         this.backend.complete(ticketId, true).pipe(
           tapResponse(
             (newTicket) => this.updateAssignee(newTicket),
-            (error: unknown) => this.patchState({ error, loading: false })
-          )
-        )
-      )
-    )
+            (error: unknown) => this.patchState({ error, loading: false }),
+          ),
+        ),
+      ),
+    ),
   );
 }

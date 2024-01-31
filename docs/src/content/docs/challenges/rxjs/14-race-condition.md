@@ -8,10 +8,6 @@ sidebar:
   order: 11
 ---
 
-:::note
-WIP: The following documentation will be reviewed and improved. However, you can still take on the challenge. If you don't understand a certain part, please feel free to reach out or create an issue.
-:::
-
 ## Information
 
 The goal of this application is to display a list of topics in a modal when a button is clicked. The application functions correctly. However, your tech lead has asked you to add tests and they are failing.

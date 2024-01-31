@@ -22,30 +22,38 @@ import { Ticket, TicketUser, User } from '../../backend.service';
   ],
   template: `
     <li
-      class="flex-grow flex items-center gap-5 justify-between"
+      class="flex flex-grow items-center justify-between gap-5"
       [class.bg-green-200]="ticket.completed">
       <button [routerLink]="['/detail', ticket.id]" class="flex flex-col gap-2">
-        <div><span class="font-bold">Ticket:</span> {{ ticket.id }}</div>
         <div>
-          <span class="font-bold">Description:</span> {{ ticket.description }}
+          <span class="font-bold">Ticket:</span>
+          {{ ticket.id }}
         </div>
         <div>
-          <span class="font-bold">Assignee:</span> {{ $any(ticket).assignee }}
+          <span class="font-bold">Description:</span>
+          {{ ticket.description }}
         </div>
-        <div><span class="font-bold">Done:</span> {{ ticket.completed }}</div>
+        <div>
+          <span class="font-bold">Assignee:</span>
+          {{ $any(ticket).assignee }}
+        </div>
+        <div>
+          <span class="font-bold">Done:</span>
+          {{ ticket.completed }}
+        </div>
       </button>
       <div class="flex flex-col">
         <form
           [formGroup]="form"
           #ngForm="ngForm"
           (ngSubmit)="submit()"
-          class="flex justify-center items-center gap-4">
+          class="flex items-center justify-center gap-4">
           <mat-form-field appearance="fill">
             <mat-label>Assign to</mat-label>
             <mat-select formControlName="assignee">
-              <mat-option *ngFor="let user of users" [value]="user.id">{{
-                user.name
-              }}</mat-option>
+              <mat-option *ngFor="let user of users" [value]="user.id">
+                {{ user.name }}
+              </mat-option>
             </mat-select>
           </mat-form-field>
           <button mat-flat-button color="primary" type="submit">Assign</button>

@@ -1,0 +1,26 @@
+.rating {
+  display: flex;
+  justify-content: center;
+  padding: 0 10px;
+
+  &:hover {
+    .star {
+      fill: #ffd055;
+    }
+  }
+}
+
+.star {
+  width: 50px;
+  height: 50px;
+  fill: #cccccc;
+  cursor: pointer;
+
+  &:hover ~ .star {
+    fill: #d8d8d8;
+  }
+}
+
+.star-active {
+  fill: #ffd055 !important;
+}

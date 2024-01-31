@@ -4,9 +4,10 @@ import { Component, Inject } from '@angular/core';
 
 @Component({
   selector: 'lib-home',
-  template: `Home component
+  template: `
+    Home component
 
-    <section class="flex gap-5 items-center">
+    <section class="flex items-center gap-5">
       Authorization :
       <button class="border p-2  " (click)="authorizeService.authorize()">
         Authorize
@@ -17,11 +18,12 @@ import { Component, Inject } from '@angular/core';
       (isAuthorized: {{ authorizeService.isAuthorized$ | async }})
     </section>
 
-    <section>LoadedToken {{ token }}</section> `,
+    <section>LoadedToken {{ token }}</section>
+  `,
 })
 export class HomeComponent {
   constructor(
     public authorizeService: AuthorizationService,
-    @Inject(TOKEN) public token: string
+    @Inject(TOKEN) public token: string,
   ) {}
 }

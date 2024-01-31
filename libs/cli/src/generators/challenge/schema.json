@@ -24,13 +24,16 @@
         "$source": "argv",
         "index": 1
       },
-      "x-priority": "important"
+      "x-priority": "important",
+      "x-prompt": "What should be the title of your challenge?",
+      "pattern": "^[a-zA-Z].*$"
     },
     "author": {
       "description": "Your full name",
       "type": "string",
       "maxLength": "25",
-      "x-priority": "important"
+      "x-priority": "important",
+      "x-prompt": "Author?"
     },
     "challengeDifficulty": {
       "description": "The difficulty of the challenge.",
