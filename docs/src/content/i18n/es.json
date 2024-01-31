@@ -19,11 +19,9 @@
   "page.previousLink": "Anterior",
   "page.nextLink": "Siguiente",
   "404.text": "Página no encontrada. Por favor revisa la URL o intenta utilizando la barra de búsqueda.",
-
   "expressiveCode.copyButtonCopied": "Copiado!",
   "expressiveCode.copyButtonTooltip": "Copiar al portapapeles",
   "expressiveCode.terminalWindowFallbackTitle": "Ventana de terminal",
-
   "pagefind.clear_search": "Borrar",
   "pagefind.load_more": "Cargar más resultados",
   "pagefind.search_label": "Buscar en este sitio",
@@ -34,12 +32,10 @@
   "pagefind.alt_search": "Sin resultados para tu búsqueda de [SEARCH_TERM]. Te estamos mostrando resultados para [DIFFERENT_TERM]",
   "pagefind.search_suggestion": "Sin resultados para tu búsqueda de [SEARCH_TERM]. Intenta alguna de las siguientes búsquedas:",
   "pagefind.searching": "Buscando [SEARCH_TERM]...",
-
   "page.title.challenge": "Reto",
   "author.createdBy": "Creado por",
   "buttons.star": "Danos una estrella",
   "buttons.sponsor": "Patrocínanos",
-
   "note": "Nota",
   "running": "Inicia el proyecto ejecutando el siguiente comando:",
   "start": "El título de tu PR debe iniciar con",
@@ -47,18 +43,13 @@
   "communityAnswers": "Respuestas de la Comunidad",
   "authorAnswer": "Respuesta del Autor del Reto",
   "blogPost": "Blog Post",
-
-  "challenge.footer": {
-    "note": "Nota",
-    "running": "Inicia el proyecto ejecutando el siguiente comando:",
-    "start": "El título de tu PR debe iniciar con",
-    "reminder": "¡No lo olvides!",
-    "communityAnswers": "Respuestas de la Comunidad",
-    "authorAnswer": "Respuesta del Autor del Reto",
-    "blogPost": "Blog Post",
-    "gettingStarted": {
-      "title": "Para realizar este desafío, comienza por leer: ",
-      "link": "Inicio"
-    }
-  }
+  "challenge.footer.note": "Nota",
+  "challenge.footer.running": "Inicia el proyecto ejecutando el siguiente comando:",
+  "challenge.footer.start": "El título de tu PR debe iniciar con",
+  "challenge.footer.reminder": "¡No lo olvides!",
+  "challenge.footer.communityAnswers": "Respuestas de la Comunidad",
+  "challenge.footer.authorAnswer": "Respuesta del Autor del Reto",
+  "challenge.footer.blogPost": "Blog Post",
+  "challenge.footer.gettingStarted.title": "Para realizar este desafío, comienza por leer: ",
+  "challenge.footer.gettingStarted.link": "Inicio"
 }
