@@ -1,10 +1,7 @@
 ---
-import type { Props } from '@astrojs/starlight/props';
 import VideoButton from './VideoButton.astro';
 import ClipboardCopy from './ClipboardCopy.astro';
-import { Icon } from '@astrojs/starlight/components';
-import { Debug } from 'astro:components';
-import { getCollection, getEntry } from 'astro:content';
+import { getEntry } from 'astro:content';
 
 const { lang } = Astro.props;
 const { author, challengeNumber, title, blogLink, videoLink, command } = Astro.props.entry.data;
