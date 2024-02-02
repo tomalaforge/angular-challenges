@@ -1,14 +1,17 @@
 import { ApplicationConfig } from '@angular/core';
-import { provideRouter, withViewTransitions } from '@angular/router';
+import { provideRouter, withComponentInputBinding } from '@angular/router';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(
       [
-        { path: 'bar', loadComponent: () => import('./bar.component') },
-        { path: 'foo', loadComponent: () => import('./foo.component') },
+        { path: '', loadComponent: () => import('./blog/blog.component') },
+        {
+          path: 'post/:id',
+          loadComponent: () => import('./post/post.component'),
+        },
       ],
-      withViewTransitions(),
+      withComponentInputBinding(),
     ),
   ],
 };
