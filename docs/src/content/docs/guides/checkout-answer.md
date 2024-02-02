@@ -40,7 +40,7 @@ If you don't remember the command, click on the Code button on the right side of
 ![PR code modal](../../../assets/PR-code-btn-modal.png)
 
 :::note
-If the command doesn't work or fails, Github CLI will guide you through the process.
+If the command doesn't work or fails, GitHub CLI will guide you through the process.
 :::
 
 🔥 You can now navigate through the solution locally and serve it to test it. 🔥
