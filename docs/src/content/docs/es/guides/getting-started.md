@@ -29,7 +29,7 @@ git clone https://github.com/[YOUR_GITHUB_NAME]/angular-challenges.git
 :::note
 Puede encontrar la URL de clonación haciendo clic en el botón <span class="github-success-btn"><> Code</span> en su <b>propia instancia</b> del repositorio de Desafíos de Angular.
 
-![Header of github workpspace](../../../../assets/header-github.png)
+![Header of github workspace](../../../../assets/header-github.png)
 
 :::
 

@@ -30,7 +30,7 @@ git clone https://github.com/[YOUR_GITHUB_NAME]/angular-challenges.git
 
 Вы можете найти URL адрес клонированного репозитория, нажав на кнопку <span class="github-success-btn"><> Code</span> в <b>вашем собственном</b> экземпляре репозитория Angular Challenges.
 
-![Header of github workpspace](../../../../assets/header-github.png)
+![Header of github workspace](../../../../assets/header-github.png)
 
 :::
 
