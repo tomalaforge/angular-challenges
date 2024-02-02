@@ -5,7 +5,7 @@ sidebar:
   order: 1
 ---
 
-Para comenzar con <b>Desafió de Angular</b>, siga estos pasos:
+Para comenzar con <b>Desafíos de Angular</b>, siga estos pasos:
 
 ## Crea una cuenta de Github
 
