@@ -11,7 +11,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
       <ng-content select="card-image"></ng-content>
       <section>
         @for (item of list; track item.id) {
-          <app-list-item [name]="item.firstName" [type]="type">
+          <app-list-item [name]="item.firstName || item.name" [type]="type">
             <button ngProjectAs="list-button" (click)="deleteItem(item.id)">
               <img class="h-5" src="assets/svg/trash.svg" />
             </button>
@@ -29,6 +29,10 @@ import { ListItemComponent } from '../list-item/list-item.component';
 
       .bg-light-red {
         background-color: rgba(250, 0, 0, 0.1);
+      }
+
+      .bg-light-blue {
+        background-color: rgba(0, 0, 250, 0.1);
       }
     `,
   ],
