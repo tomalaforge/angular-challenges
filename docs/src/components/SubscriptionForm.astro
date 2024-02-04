@@ -12,7 +12,7 @@ const { data } = await getEntry('i18n', lang ?? 'en');
     <form novalidate="" class="sp-element-container ">
       <div class="sp-field " sp-id="sp-76dfa588-3af2-4619-b685-835cf8c62ef0">
         <input
-          type="email" sp-type="email" name="sform[email]" class="sp-form-control " placeholder="username@gmail.com"
+          type="email" sp-type="email" name="sform[email]" class="sp-form-control " placeholder={data['subscription.email']}
           sp-tips="%7B%22required%22%3A%22Required%20field%22%2C%22wrong%22%3A%22Wrong%20email%22%7D" autocomplete="on"
           required="required"></div>
       <div class="sp-field sp-button-container " sp-id="sp-82642eda-e68f-4b7a-a2b8-69e9d9bb5c99">

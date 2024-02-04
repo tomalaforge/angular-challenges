@@ -38,8 +38,10 @@ const i18n = defineCollection({
       .object({
         'page.title.challenge': z.string(),
         'author.createdBy': z.string(),
+        'buttons.email': z.string(),
         'buttons.star': z.string(),
         'buttons.sponsor': z.string(),
+        'buttons.clipboardCopy': z.string(),
         'challenge.footer.note': z.string(),
         'challenge.footer.running': z.string(),
         'challenge.footer.start': z.string(),
@@ -47,9 +49,12 @@ const i18n = defineCollection({
         'challenge.footer.communityAnswers': z.string(),
         'challenge.footer.authorAnswer': z.string(),
         'challenge.footer.blogPost': z.string(),
+        'challenge.footer.video': z.string(),
         'challenge.footer.gettingStarted.title': z.string(),
         'challenge.footer.gettingStarted.link': z.string(),
+        'challenge.footer.upvoteAnswer': z.string(),
         'subscription.button': z.string(),
+        'subscription.email': z.string(),
         'subscription.note.title': z.string(),
         'subscription.note.description': z.string(),
       })
