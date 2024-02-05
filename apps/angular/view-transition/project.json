@@ -15,12 +15,12 @@
         "browser": "apps/angular/view-transition/src/main.ts",
         "polyfills": ["zone.js"],
         "tsConfig": "apps/angular/view-transition/tsconfig.app.json",
-        "inlineStyleLanguage": "css",
+        "inlineStyleLanguage": "scss",
         "assets": [
           "apps/angular/view-transition/src/favicon.ico",
           "apps/angular/view-transition/src/assets"
         ],
-        "styles": ["apps/angular/view-transition/src/styles.css"],
+        "styles": ["apps/angular/view-transition/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
