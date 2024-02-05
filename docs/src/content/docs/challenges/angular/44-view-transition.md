@@ -53,7 +53,13 @@ Remenber, you can have only ONE UNIQUE `view-transition-name` per page.
 
 The goal of this challenge is to transition from the state shown in this video:
 
+<video controls src="https://github.com/tomalaforge/angular-challenges/assets/30832608/1e247bc4-3826-4e1c-afb0-aebdfec2ee85">
+</video>
+
 To the final state shown in the following video:
+
+<video controls src="https://github.com/tomalaforge/angular-challenges/assets/30832608/27850781-a948-4ed6-a7e4-096473b755aa">
+</video>
 
 Observe the following:
 
