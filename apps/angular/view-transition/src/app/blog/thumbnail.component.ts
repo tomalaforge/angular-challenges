@@ -16,7 +16,8 @@ import { ThumbnailHeaderComponent } from './thumbnail-header.component';
         width="960"
         height="540"
         class="rounded-t-3xl"
-        [priority]="post().id === '1'" />
+        [priority]="post().id === '1'"
+        [style.view-transition-name]="'image-' + post().id" />
       <h2 class="p-3 text-3xl">{{ post().title }}</h2>
       <p class="p-3">{{ post().description }}</p>
       <thumbnail-header [date]="post().date" />

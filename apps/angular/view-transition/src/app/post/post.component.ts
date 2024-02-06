@@ -27,6 +27,7 @@ import { PostHeaderComponent } from './post-header.component';
         Back
       </button>
       <img [ngSrc]="post().image" alt="" width="960" height="540" />
+      <!-- need explicit heights for animations api -->
       <h2 class="p-7 text-center text-5xl">{{ post().title }}</h2>
       <post-header [date]="post().date" class="mb-20" />
       @for (chapter of fakeTextChapter; track $index) {
