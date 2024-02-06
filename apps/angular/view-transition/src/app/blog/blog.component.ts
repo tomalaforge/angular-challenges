@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { posts } from '../data';
+import { NavigationService } from '../navigation.service';
 import { ThumbnailComponent } from './thumbnail.component';
 
 @Component({
@@ -8,17 +9,37 @@ import { ThumbnailComponent } from './thumbnail.component';
   imports: [ThumbnailComponent],
   template: `
     <div
-      class="fixed left-0  right-0 top-0 z-50 flex h-20 items-center justify-center border-b-2 bg-white text-4xl shadow-md">
+      class="app-header fixed left-0  right-0 top-0 z-50 flex h-20 items-center justify-center border-b-2 bg-white text-4xl shadow-md">
       Blog List
     </div>
-    <div class="my-20 flex h-screen flex-col items-center gap-10 border p-10">
+    <div class="my-20 flex h-screen flex-col items-center gap-10 p-10">
       @for (post of posts; track post.id) {
-        <blog-thumbnail [post]="post" />
+        <blog-thumbnail
+          [post]="post"
+          [class.transition]="
+            $index === this.navigationService.currentPostId()
+          " />
       }
     </div>
+  `,
+  styles: `
+    .app-header {
+      view-transition-name: app-header;
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class BlogComponent {
   posts = posts;
+
+  navigationService = inject(NavigationService);
+
+  constructor() {
+    setTimeout(() =>
+      window.scrollTo({
+        top: this.navigationService.oldScroll(),
+        behavior: 'instant',
+      }),
+    );
+  }
 }

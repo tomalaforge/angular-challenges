@@ -2,3 +2,66 @@
 @tailwind components;
 @tailwind utilities;
 
+.transition {
+  .blog-image {
+    view-transition-name: blog-image;
+  }
+
+  .blog-title {
+    view-transition-name: blog-title;
+  }
+
+  .blog-description {
+    view-transition-name: blog-description;
+  }
+
+  .blog-user-avatar {
+    view-transition-name: blog-user-avatar;
+  }
+
+  .blog-framework {
+    view-transition-name: blog-framework;
+  }
+
+  .blog-user-name {
+    view-transition-name: blog-user-name;
+  }
+
+  .blog-user-date {
+    view-transition-name: blog-user-date;
+  }
+}
+
+::view-transition-old(blog-title), ::view-transition-old(blog-user-date) {
+  display: none;
+}
+
+::view-transition-new(blog-title), ::view-transition-new(blog-user-date) {
+  animation: none;
+}
+
+::view-transition-old(blog-description):only-child {
+  animation: none;
+  display: none;
+}
+
+
+::view-transition-new(app-header):only-child {
+  animation: 250ms cubic-bezier(0.4, 0, 0.2, 1) both slide-in;
+}
+
+::view-transition-old(app-header):only-child {
+  animation: 250ms cubic-bezier(0.4, 0, 0.2, 1) both slide-out;
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateY(-70px);
+  }
+}
+
+@keyframes slide-out {
+  to {
+    transform: translateY(-70px);
+  }
+}

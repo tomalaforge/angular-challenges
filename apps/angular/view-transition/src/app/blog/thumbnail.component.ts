@@ -15,10 +15,10 @@ import { ThumbnailHeaderComponent } from './thumbnail-header.component';
         alt=""
         width="960"
         height="540"
-        class="rounded-t-3xl"
+        class="blog-image rounded-t-3xl"
         [priority]="post().id === '1'" />
-      <h2 class="p-3 text-3xl">{{ post().title }}</h2>
-      <p class="p-3">{{ post().description }}</p>
+      <h2 class="blog-title p-3 text-3xl">{{ post().title }}</h2>
+      <p class="blog-description p-3">{{ post().description }}</p>
       <thumbnail-header [date]="post().date" />
     </a>
   `,
