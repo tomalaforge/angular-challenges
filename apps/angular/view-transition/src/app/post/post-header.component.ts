@@ -13,13 +13,15 @@ import { Component, input } from '@angular/core';
         alt=""
         class="rounded-full border border-black p-0.5"
         width="50"
-        height="50" />
+        height="50"
+        [style.view-transition-name]="'profil'" />
       <img
         ngSrc="assets/angular.webp"
         alt=""
         width="30"
         height="30"
-        class="absolute -bottom-2 -right-2" />
+        class="absolute -bottom-2 -right-2"
+        [style.view-transition-name]="'angular'" />
     </div>
     <span class="text-md mt-2 font-bold uppercase">Thomas Laforge</span>
     <span class="text-sm">{{ date() }}</span>

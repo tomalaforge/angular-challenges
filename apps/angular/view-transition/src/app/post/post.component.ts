@@ -46,3 +46,9 @@ export default class PostComponent {
 
   fakeTextChapter = fakeTextChapters;
 }
+
+/*
+<post-header [date]="post().date" class="mb-20" [style.view-transition-name]="'post-header'" />
+
+// You can't put animation on post-header.  You will get the movement but the picture and angular logo are already together.
+*/
