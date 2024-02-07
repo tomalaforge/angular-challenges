@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 /*
-// useful to increase duration to actually see animation
-// cross-fade default animation is subtle 
+// useful to increase duration to actually see the animation
+// the cross-fade default animation is subtle 
 
 ::view-transition-old(root),
 ::view-transition-new(root) {
@@ -83,7 +83,8 @@
     }
 }
 
-/* Don't only-child applies here as the elements are not present in both views -> the same content but different elements  */
+// Don't think only-child applies here, as the elements are not present in both views (old & new)  
+//the same content but different elements 
 
 ::view-transition-old(profil) {
     animation: 1500ms cubic-bezier(0.4, 0, 0.2, 1) slide-to-left;
