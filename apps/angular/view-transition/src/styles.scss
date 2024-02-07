@@ -84,53 +84,53 @@
 
 @keyframes slide-from-right {
     0% {
-        transform: translateX(-300px);
+        transform: translateX(-300px) translateY(25px);
     }
 
     100% {
-        transform: translateX(0);
+        transform: translateX(0) translateY(0);
     }
 }
 
 @keyframes slide-to-left {
     0% {
-        transform: translateX(0);
+        transform: translateX(0) translateY(0);
     }
     100% {
-        transform: translateX(-300px);
+        transform: translateX(-300px) translateY(25px);
     }
 }
 
 @keyframes slide-to-left-2 {
     0% {
-        transform: translateX(300px);
+        transform: translateX(300px) translateY(25px);
     }
     100% {
-        transform: translateX(0);
+        transform: translateX(0) translateY(0);
     }
 }
 
 @keyframes slide-to-right {
     0% {
-        transform: translateX(0);
+        transform: translateX(0) translateY(0);
     }
     100% {
-        transform: translateX(300px);
+        transform: translateX(300px) translateY(25px);
     }
 }
 
-::view-transition-old(profil) {
-    animation: 1500ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
+::view-transition-old(profil):only-child {
+    animation: 1500ms cubic-bezier(0.4, 0, 0.2, 1) slide-to-left;
 }
 
-::view-transition-new(profil) {
-    animation: 1500ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
+::view-transition-new(profil):only-child {
+    animation: 1500ms cubic-bezier(0.4, 0, 0.2, 1) slide-from-right;
 }
 
-::view-transition-old(angular) {
-    animation: 1500ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-right;
+::view-transition-old(angular):only-child {
+    animation: 1500ms cubic-bezier(0.4, 0, 0.2, 1) slide-to-right;
 }
 
-::view-transition-new(angular) {
-    animation: 1500ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left-2;
+::view-transition-new(angular):only-child {
+    animation: 1500ms cubic-bezier(0.4, 0, 0.2, 1) slide-to-left-2;
 }
