@@ -27,3 +27,7 @@ import { Component, input } from '@angular/core';
 export class ThumbnailHeaderComponent {
   date = input.required<string>();
 }
+
+/* 
+// if you add the transition tag in this component, there will be a duplicate warning.
+*/
