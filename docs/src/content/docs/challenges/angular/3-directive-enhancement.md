@@ -15,7 +15,7 @@ This exercice can feel obsolete with the new control flow and the empty block in
 
 ## Information
 
-Directive is a very powerful tool only offered by the Angular framework. You can apply the DRY principal by having shared logic inside a directive and applying it to any component you want.
+Directive is a very powerful tool only offered by the Angular framework. You can apply the DRY principle by having shared logic inside a directive and applying it to any component you want.
 
 But the real power is that you can enhance an already existing directive which moreover doesn't **belong** to you.
 
@@ -23,7 +23,7 @@ But the real power is that you can enhance an already existing directive which m
 
 In this exercice, we have a want to display a list of persons. If the list is empty, you must display _" the list is empty !! "_.
 
-Currently we have :
+Currently we have:
 
 ```typescript
     <ng-container *ngIf="persons.length > 0; else emptyList">
@@ -34,7 +34,7 @@ Currently we have :
     <ng-template #emptyList>The list is empty !!</ng-template>
 ```
 
-We want to get rid of the ng-container by writing :
+We want to get rid of the `ng-container` by writing:
 
 ```typescript
     <div *ngFor="let person of persons; empty: emptyList">
@@ -43,4 +43,4 @@ We want to get rid of the ng-container by writing :
     <ng-template #emptyList>The list is empty !!</ng-template>
 ```
 
-The goal is to **improve the ngFor directive**
+The goal is to **improve the ngFor directive**.
