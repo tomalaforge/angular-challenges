@@ -51,4 +51,13 @@ export default class PostComponent {
 <post-header [date]="post().date" class="mb-20" [style.view-transition-name]="'post-header'" />
 
 // You can't put animation on post-header.  You will get the movement but the picture and angular logo are already together.
+
+// adding click function `(click)="back($event)"`  here doesn't seem to help.  This component is destroyed. 
+
+back(event: Event){
+  if (event.target instanceof HTMLElement) {
+    event.target.parentElement?.classList.add('active');
+  }
+}
+
 */
