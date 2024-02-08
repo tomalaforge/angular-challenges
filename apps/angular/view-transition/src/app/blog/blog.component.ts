@@ -30,6 +30,9 @@ export default class BlogComponent implements OnInit {
   // implements OnInit
   posts = posts;
 
+  // this kind of works -> need to localize this to post when click happens
+  // check if back-transition exists -> remove it on OnInit
+
   router = inject(Router);
   document = inject(DOCUMENT);
 

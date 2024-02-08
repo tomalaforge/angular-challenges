@@ -37,7 +37,7 @@
     }
 
     100% {
-        transform: translateX(-300px) translateY(25px);
+        transform: translateX(-260px) translateY(44px);
     }
 }
 
@@ -53,11 +53,11 @@
 
 @keyframes slide-to-right {
     0% {
-        transform: translateX(0) translateY(0);
+        transform: translateX(0) translateY(0) scale(1);
     }
 
     100% {
-        transform: translateX(300px) translateY(25px);
+        transform: translateX(240px) translateY(25px) scale(1.6);
     }
 }
 
