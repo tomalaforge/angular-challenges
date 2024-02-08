@@ -11,12 +11,9 @@ import { ThumbnailHeaderComponent } from './thumbnail-header.component';
   template: `
     <a [routerLink]="['post', post().id]">
       <img
-        [ngSrc]="post().image"
+        [src]="post().image"
         alt=""
-        width="960"
-        height="540"
-        class="rounded-t-3xl"
-        [priority]="post().id === '1'" />
+        class="animation-cover h-32 w-full rounded-t-3xl object-cover" />
       <h2 class="p-3 text-3xl">{{ post().title }}</h2>
       <p class="p-3">{{ post().description }}</p>
       <thumbnail-header [date]="post().date" />

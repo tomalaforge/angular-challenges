@@ -2,3 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+.post-active{
+  .animation-logo{
+    view-transition-name: animation-logo;
+  }
+  .animation-cover{
+    view-transition-name: animation-cover;
+  }
+  .animation-profil{
+    view-transition-name: animation-profil;
+  }
+}

@@ -1,5 +1,11 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+} from '@angular/core';
 import { posts } from '../data';
+import { CurrentTransitionService } from '../service';
 import { ThumbnailComponent } from './thumbnail.component';
 
 @Component({
@@ -13,7 +19,10 @@ import { ThumbnailComponent } from './thumbnail.component';
     </div>
     <div class="my-20 flex h-screen flex-col items-center gap-10 border p-10">
       @for (post of posts; track post.id) {
-        <blog-thumbnail [post]="post" />
+        <blog-thumbnail
+          [post]="post"
+          [id]="post.id"
+          [class.post-active]="animationId() === post.id" />
       }
     </div>
   `,
@@ -21,4 +30,12 @@ import { ThumbnailComponent } from './thumbnail.component';
 })
 export default class BlogComponent {
   posts = posts;
+  currentTransitionService = inject(CurrentTransitionService);
+  animationId = computed(() => {
+    const transition = this.currentTransitionService.currentTransition();
+    return (
+      transition?.to.firstChild?.params['id'] ||
+      transition?.from.firstChild?.params['id']
+    );
+  });
 }
