@@ -20,5 +20,23 @@ import { ThumbnailComponent } from './thumbnail.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class BlogComponent {
+  // implements OnInit
   posts = posts;
+
+  /*
+  router = inject(Router);
+  document = inject(DOCUMENT);
+
+  ngOnInit(){
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    this.router.events.subscribe((val: any) => {
+      console.log(val?.url)
+      if(val.url === "/"){
+        this.document.documentElement.classList.add('back-transition');
+      } else {
+        this.document.documentElement.classList.remove('back-transition');
+      }
+    })
+  }
+  */
 }
