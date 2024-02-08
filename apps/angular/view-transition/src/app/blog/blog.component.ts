@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+} from '@angular/core';
+import { Router } from '@angular/router';
 import { posts } from '../data';
 import { ThumbnailComponent } from './thumbnail.component';
 
@@ -19,24 +26,22 @@ import { ThumbnailComponent } from './thumbnail.component';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class BlogComponent {
+export default class BlogComponent implements OnInit {
   // implements OnInit
   posts = posts;
 
-  /*
   router = inject(Router);
   document = inject(DOCUMENT);
 
-  ngOnInit(){
+  ngOnInit() {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     this.router.events.subscribe((val: any) => {
-      console.log(val?.url)
-      if(val.url === "/"){
+      console.log(val?.url);
+      if (val.url === '/') {
         this.document.documentElement.classList.add('back-transition');
       } else {
         this.document.documentElement.classList.remove('back-transition');
       }
-    })
+    });
   }
-  */
 }

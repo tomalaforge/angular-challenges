@@ -20,7 +20,7 @@ import { ThumbnailHeaderComponent } from './thumbnail-header.component';
         [style.view-transition-name]="'image-' + post().id" />
       <h2 class="p-3 text-3xl">{{ post().title }}</h2>
       <p class="p-3">{{ post().description }}</p>
-      <thumbnail-header [date]="post().date" />
+      <thumbnail-header [date]="post().date" [id]="post().id" />
     </a>
   `,
   host: {

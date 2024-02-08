@@ -85,3 +85,19 @@
 ::view-transition-new(angular) {
     animation: 1500ms cubic-bezier(0.4, 0, 0.2, 1) slide-to-left-2;
 }
+
+.back-transition::view-transition-old(profil):only-child {
+    animation: 1500ms cubic-bezier(0.4, 0, 0.2, 1) slide-to-left;
+}
+
+.back-transition::view-transition-old(angular):only-child {
+    animation: 1500ms cubic-bezier(0.4, 0, 0.2, 1) slide-to-right;
+}
+
+.back-transition::view-transition-new(angular1) {
+    display: none;
+}
+
+.back-transition::view-transition-new(profil1) {
+    display: none;
+}
