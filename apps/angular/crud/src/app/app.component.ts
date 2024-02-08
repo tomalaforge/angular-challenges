@@ -1,15 +1,22 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { AppService } from './app.service';
-import { TODOTYPE } from './app.model';
-import { Observable } from 'rxjs';
-
+import { Component, OnInit, effect } from '@angular/core';
+import { TodoService } from './services/todo.service';
+import { todo } from './todo.model';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatProgressSpinnerModule],
   selector: 'app-root',
   template: `
-    <div *ngFor="let todo of todos$ | async">
+    <!-- 
+    // this is optional  
+    @if (isError) {
+      <p class="error">{{ isError }}</p>
+    } -->
+    @if (isLoading) {
+      <mat-spinner></mat-spinner>
+    }
+    <div *ngFor="let todo of todos$">
       {{ todo.title }}
       <button (click)="update(todo)">Update</button>
       <button (click)="delete(todo.id)">Delete</button>
@@ -18,18 +25,28 @@ import { Observable } from 'rxjs';
   styles: [],
 })
 export class AppComponent implements OnInit {
-  todos$!: Observable<TODOTYPE[]>;
+  todos$!: todo[];
+  // isError!: string | null;
+  isLoading!: boolean;
 
-  constructor(private appService: AppService) {}
+  constructor(private todoService: TodoService) {
+    effect(() => {
+      // const { todos, isError, isLoading } = this.todoService.appSignal();
+      const { todos, isLoading } = this.todoService.appSignal();
+      this.todos$ = todos;
+      // this.isError = isError;
+      this.isLoading = isLoading;
+    });
+  }
   ngOnInit(): void {
-    this.appService.getAllTodos().subscribe();
-    this.todos$ = this.appService.todos$;
+    this.todoService.getAllTodos();
   }
 
-  update(todo: TODOTYPE) {
-    this.appService.update(todo);
+  update(todo: todo) {
+    this.todoService.update(todo);
   }
+
   delete(id: number) {
-    this.appService.delete(id);
+    this.todoService.delete(id);
   }
 }

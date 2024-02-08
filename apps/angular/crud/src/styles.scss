@@ -8,3 +8,15 @@ body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
+
+mat-spinner{
+  position: fixed !important;
+  top: 50%;
+  left: 50%;
+  right: 50%;
+}
+
+.error{
+  color: rgb(240, 21, 21);
+  font-weight: 500;
+}
