@@ -15,6 +15,7 @@ import { Component, input } from '@angular/core';
         width="50"
         height="50"
         [style.view-transition-name]="'profil'" />
+      <!--add id to transition names? -->
       <!--use class instead? -->
       <img
         ngSrc="assets/angular.webp"

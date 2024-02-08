@@ -28,6 +28,8 @@ Challenge documentation is [here](https://angular-challenges.vercel.app/challeng
 - Have to be pretty much pixel perfect for the illusion to work.
 - `Just in Time` -> you have small window to use javascript to manipulate the animation.
 - Not mobile responsive.
+- I did my animations on the detail page. I can't target the correct post because the middle view doesn't have an id. I may need to add one.
+- I think it is probably incorrect to target the detail page for the animations. But it should be possible either way.
 
 ## Useful Resources
 
