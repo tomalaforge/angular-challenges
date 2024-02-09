@@ -73,4 +73,21 @@ export default class PostComponent {
 
 // You can't put animation on post-header.  
 // You will get the movement but the picture and angular logo are already together.
+
+// Before adding the `back` function, I tried using a `back-transition` class like the Chrome article.   
+
+router = inject(Router);
+document = inject(DOCUMENT);
+
+ngOnInit() {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  this.router.events.subscribe((val: any) => {
+    if (val.url === '/') {
+      this.document.documentElement.classList.add('back-transition');
+    } else {
+      this.document.documentElement.classList.remove('back-transition');
+    }
+  });
+}
+
 */

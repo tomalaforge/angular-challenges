@@ -28,12 +28,14 @@ Challenge documentation is [here](https://angular-challenges.vercel.app/challeng
 - Have to be pretty much pixel perfect for the illusion to work.
 - `Just in Time` -> you have small window to use javascript to manipulate the animation.
 - Not mobile responsive.
-- I did my animations on the detail page. I can't target the correct post because the middle view doesn't have an id. I may need to add one.
+- I did my animations on the detail page. I couldn't target the correct post because the middle view didn't have an id. I added one later on.
 - I think it is probably incorrect to target the detail page for the animations. But it should be possible either way.
-- Animations can be segmented to happen only for each item, but the profile picture is higher on the page than its final resting place. How to account for the height difference ? The profile pictures are different, but if it is pixel perfect to looks like the same picture is moving.
+- Animations can be segmented to happen only for each item, but the profile picture is higher on the page than its final resting place. How to account for the height difference? I duplicated animations to change the `transformY` values. The images are different and it needs to be pixel perfect to make it look like the image doesn't move when it re-renders after
+  the animation ends.
 
 ## Useful Resources
 
+- [Chrome Docs](https://developer.chrome.com/docs/web-platform/view-transitions#changing-on-navigation-type) - changing on navigationt type
 - [Medium](https://blog.angular.io/check-out-angulars-support-for-the-view-transitions-api-3937376cfc19) - check out angulars support for the view transitions api
 - [Stack Overflow](https://stackoverflow.com/questions/16546350/is-there-a-way-to-make-css-animation-work-diagonally) - is there a way to make css animation work diagonally
 - [Angular Docs](https://angular.io/guide/route-animations) - route animations

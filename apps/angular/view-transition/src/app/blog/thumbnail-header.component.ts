@@ -37,15 +37,7 @@ export class ThumbnailHeaderComponent {
 
 /* 
 // if you add any transition tag in this component, there will be a duplicate warning.  
-// Even if you try to use a class, there will be a duplicate warning.  You can't directly set the transition name here.
+// Even if you try to use a class, there will be a duplicate warning.
 // This component is rendered multiple times, but it is not in a loop.
-// You can't use an implementation like the thumbnail component and add an index or id to the name.  
-// I think you need to call a function when the back button is clicked and assign the elements in this component
-// with the transition names previously defined.  
-// Probably need to remove the transition name from the other element as well. 
-// If you don't, there will probably be duplicate warning and the animation will not work.   
-// Other ideas to explore:
-// Clip path ?
-// applicationRef.tick   
-// https://developer.chrome.com/docs/web-platform/view-transitions#changing-on-navigation-type
+// You can pass the id as a signal input and add the id to make the transition name unique.  
 */
