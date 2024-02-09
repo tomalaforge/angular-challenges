@@ -23,7 +23,7 @@
 
 @keyframes slide-from-right {
     0% {
-        transform: translateX(-300px) translateY(25px);
+        transform: translateX(-300px) translateY(25px); // problem with hard coded values
     }
 
     100% {
@@ -61,44 +61,128 @@
     }
 }
 
-::view-transition-new(profil) {
+@keyframes slide-to-left-green {
+    0% {
+        transform: translateX(0) translateY(0);
+    }
+
+    100% {
+        transform: translateX(-260px) translateY(720px);
+    }
+}
+
+@keyframes slide-to-right-green {
+    0% {
+        transform: translateX(0) translateY(0) scale(1);
+    }
+
+    100% {
+        transform: translateX(50px) translateY(700px) scale(1.6);
+    }
+}
+
+@keyframes slide-to-left-blue {
+    0% {
+        transform: translateX(0) translateY(0);
+    }
+
+    100% {
+        transform: translateX(-260px) translateY(1220px);
+    }
+}
+
+@keyframes slide-to-right-blue {
+    0% {
+        transform: translateX(0) translateY(0) scale(1);
+    }
+
+    100% {
+        transform: translateX(50px) translateY(1200px) scale(1.6);
+    }
+}
+
+::view-transition-new(profil1a) {
     animation: 1500ms cubic-bezier(0.4, 0, 0.2, 1) slide-to-left-2, 1500ms cubic-bezier(0.4, 0, 0.2, 1) slide-from-right;
 }
 
-::view-transition-new(angular) {
+::view-transition-new(angular1a) {
     animation: 1500ms cubic-bezier(0.4, 0, 0.2, 1) slide-to-left-2;
 }
 
-.back-transition::view-transition-old(profil):only-child {
+::view-transition-new(profil2a) {
+    animation: 1500ms cubic-bezier(0.4, 0, 0.2, 1) slide-to-left-2, 1500ms cubic-bezier(0.4, 0, 0.2, 1) slide-from-right;
+}
+
+::view-transition-new(angular2a) {
+    animation: 1500ms cubic-bezier(0.4, 0, 0.2, 1) slide-to-left-2;
+}
+
+::view-transition-new(profil3a) {
+    animation: 1500ms cubic-bezier(0.4, 0, 0.2, 1) slide-to-left-2, 1500ms cubic-bezier(0.4, 0, 0.2, 1) slide-from-right;
+}
+
+::view-transition-new(angular3a) {
+    animation: 1500ms cubic-bezier(0.4, 0, 0.2, 1) slide-to-left-2;
+}
+
+.red::view-transition-old(profil1a) {
     animation: 1500ms cubic-bezier(0.4, 0, 0.2, 1) slide-to-left;
 }
 
-.back-transition::view-transition-old(angular):only-child {
+.red::view-transition-old(angular1a) {
     animation: 1500ms cubic-bezier(0.4, 0, 0.2, 1) slide-to-right;
 }
 
-.back-transition::view-transition-new(angular1) {
+.red::view-transition-new(angular1) {
     display: none;
 }
 
-.back-transition::view-transition-new(profil1) {
+.red::view-transition-new(profil1) {
+    display: none;
+}
+
+.green::view-transition-old(profil2a) {
+    animation: 1500ms cubic-bezier(0.4, 0, 0.2, 1) slide-to-left-green;
+}
+
+.green::view-transition-old(angular2a) {
+    animation: 1500ms cubic-bezier(0.4, 0, 0.2, 1) slide-to-right-green;
+}
+
+.green::view-transition-new(angular2) {
+    display: none;
+}
+
+.green::view-transition-new(profil2) {
+    display: none;
+}
+
+.blue::view-transition-old(profil3a) {
+    animation: 1500ms cubic-bezier(0.4, 0, 0.2, 1) slide-to-left-blue;
+}
+
+.blue::view-transition-old(angular3a) {
+    animation: 1500ms cubic-bezier(0.4, 0, 0.2, 1) slide-to-right-blue;
+}
+
+.blue::view-transition-new(angular3) {
+    display: none;
+}
+
+.blue::view-transition-new(profil3) {
     display: none;
 }
 
 /*
-.back-transition::view-transition-new(angular2) {
-    display: none;
+.red{
+    background:red;
 }
 
-.back-transition::view-transition-new(profil2) {
-    display: none;
+.green{
+    background:green;
 }
 
-.back-transition::view-transition-new(angular3) {
-    display: none;
-}
-
-.back-transition::view-transition-new(profil3) {
-    display: none;
+.blue{
+    background: blue;
 }
 */

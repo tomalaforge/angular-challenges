@@ -30,6 +30,7 @@ Challenge documentation is [here](https://angular-challenges.vercel.app/challeng
 - Not mobile responsive.
 - I did my animations on the detail page. I can't target the correct post because the middle view doesn't have an id. I may need to add one.
 - I think it is probably incorrect to target the detail page for the animations. But it should be possible either way.
+- Animations can be segmented to happen only for each item, but the profile picture is higher on the page than its final resting place. How to account for the height difference ? The profile pictures are different, but if it is pixel perfect to looks like the same picture is moving.
 
 ## Useful Resources
 

@@ -1,11 +1,4 @@
-import { DOCUMENT } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit,
-  inject,
-} from '@angular/core';
-import { Router } from '@angular/router';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { posts } from '../data';
 import { ThumbnailComponent } from './thumbnail.component';
 
@@ -26,10 +19,11 @@ import { ThumbnailComponent } from './thumbnail.component';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class BlogComponent implements OnInit {
+export default class BlogComponent {
   // implements OnInit
   posts = posts;
 
+  /*
   // this kind of works -> need to localize this to the post where the click happens
   // check if back-transition exists -> remove it on OnInit
 
@@ -46,4 +40,5 @@ export default class BlogComponent implements OnInit {
       }
     });
   }
+  */
 }

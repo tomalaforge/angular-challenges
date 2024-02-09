@@ -14,16 +14,14 @@ import { Component, input } from '@angular/core';
         class="rounded-full border border-black p-0.5"
         width="50"
         height="50"
-        [style.view-transition-name]="'profil'" />
-      <!--add id to transition names? -->
-      <!--use class instead? -->
+        [style.view-transition-name]="'profil' + id() + 'a'" />
       <img
         ngSrc="assets/angular.webp"
         alt=""
         width="30"
         height="30"
         class="absolute -bottom-2 -right-2"
-        [style.view-transition-name]="'angular'" />
+        [style.view-transition-name]="'angular' + id() + 'a'" />
     </div>
     <span class="text-md mt-2 font-bold uppercase">Thomas Laforge</span>
     <span class="text-sm">{{ date() }}</span>
@@ -35,4 +33,5 @@ import { Component, input } from '@angular/core';
 })
 export class PostHeaderComponent {
   date = input.required<string>();
+  id = input.required<string>();
 }
