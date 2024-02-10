@@ -27,7 +27,7 @@ const npxCommand = `npx nx serve ${command}`;
     <p>{data['challenge.footer.gettingStarted.title']} <a
       href="/guides/getting-started">{data['challenge.footer.gettingStarted.link']}</a>.</p>
     <p>{data['challenge.footer.running']} <code class="code" dir="auto">{npxCommand}
-      <ClipboardCopy copyText={npxCommand} />
+      <ClipboardCopy copyText={npxCommand} {...Astro.props} />
     </code></p>
   </section>
 </aside>
@@ -71,7 +71,7 @@ const npxCommand = `npx nx serve ${command}`;
 </div>
 
 <div class="footer-note">
-  * You can upvote an answer with a 👍 if you like it
+  * {data['challenge.footer.upvoteAnswer']}
 </div>
 
 <style>

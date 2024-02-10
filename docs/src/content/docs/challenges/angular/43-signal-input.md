@@ -6,7 +6,6 @@ challengeNumber: 43
 command: angular-signal-input
 sidebar:
   order: 16
-  badge: New
 ---
 
 ## Information

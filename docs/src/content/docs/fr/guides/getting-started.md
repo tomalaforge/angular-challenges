@@ -7,7 +7,7 @@ sidebar:
 
 Pour commencer avec les <b>Challenges Angular</b>, suivez ces étapes :
 
-## Créez un compte Github
+## Créez un compte GitHub
 
 Si vous souhaitez soumettre une réponse, vous devrez avoir votre propre compte GitHub. De plus, avoir un compte GitHub est toujours bénéfique et c'est gratuit.
 
@@ -29,7 +29,7 @@ git clone https://github.com/[VOTRE_NOM_GITHUB]/angular-challenges.git
 :::note
 Vous pouvez trouver l'URL de clonage en cliquant sur le bouton <span class="github-success-btn"><> Code</span> dans votre <b>propre instance</b> du dépôt des Challenges Angular.
 
-![Header of github workpspace](../../../../assets/header-github.png)
+![Header of GitHub workspace](../../../../assets/header-github.png)
 
 :::
 
