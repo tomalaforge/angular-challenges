@@ -1,4 +1,4 @@
-import { CommonModule, NgFor, NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ListItemComponent } from '../list-item/list-item.component';
 
@@ -10,17 +10,18 @@ import { ListItemComponent } from '../list-item/list-item.component';
     <ng-container *ngTemplateOutlet="itemLists; context: list"></ng-container>
 
     <ng-template #itemLists let-itemList="list">
-      <app-list-item
-        *ngFor="let item of list"
-        [name]="item.firstName || item.name"
-        [id]="item.id"
-        (deleteItem)="onDeleteItem($event)"></app-list-item>
+      @for (item of list; track item.id) {
+        <app-list-item
+          [name]="item.firstName || item.name"
+          [id]="item.id"
+          (deleteItem)="onDeleteItem($event)"></app-list-item>
+      }
     </ng-template>
 
     <ng-content select="[addButton]"></ng-content>
   `,
   standalone: true,
-  imports: [NgIf, NgFor, ListItemComponent, CommonModule],
+  imports: [ListItemComponent, CommonModule],
   host: {
     class: 'border-2 border-black rounded-md p-4 w-fit flex flex-col gap-3',
   },

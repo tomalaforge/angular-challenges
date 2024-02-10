@@ -4,14 +4,13 @@ import {
   randTeacher,
 } from '../../data-access/fake-http.service';
 import { TeacherStore } from '../../data-access/teacher.store';
-import { Teacher } from '../../model/teacher.model';
 import { CardComponent } from '../../ui/card/card.component';
 
 @Component({
   selector: 'app-teacher-card',
   template: `
     <app-card
-      [list]="teachers"
+      [list]="teachers()"
       class="bg-light-red"
       (deleteItem)="deleteTeacher($event)">
       <img image src="assets/img/teacher.png" alt="Teacher" width="200px" />
@@ -34,7 +33,7 @@ import { CardComponent } from '../../ui/card/card.component';
   imports: [CardComponent],
 })
 export class TeacherCardComponent implements OnInit {
-  teachers: Teacher[] = [];
+  teachers = this.store.teachers;
 
   constructor(
     private http: FakeHttpService,
@@ -43,7 +42,6 @@ export class TeacherCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
-    this.store.teachers$.subscribe((t) => (this.teachers = t));
   }
 
   addNewTeacher() {

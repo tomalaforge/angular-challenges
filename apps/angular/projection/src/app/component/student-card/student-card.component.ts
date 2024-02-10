@@ -4,16 +4,12 @@ import {
   randStudent,
 } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
-import { Student } from '../../model/student.model';
 import { CardComponent } from '../../ui/card/card.component';
 
 @Component({
   selector: 'app-student-card',
   template: `
-    <app-card
-      [list]="students"
-      class="bg-light-green"
-      (deleteItem)="deleteStudent($event)">
+    <app-card [list]="students()" class="bg-light-green">
       <img image src="assets/img/student.webp" alt="Student" width="200px" />
       <button
         addButton
@@ -34,7 +30,7 @@ import { CardComponent } from '../../ui/card/card.component';
   imports: [CardComponent],
 })
 export class StudentCardComponent implements OnInit {
-  students: Student[] = [];
+  students = this.store.students;
 
   constructor(
     private http: FakeHttpService,
@@ -43,7 +39,6 @@ export class StudentCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
-    this.store.students$.subscribe((s) => (this.students = s));
   }
 
   addNewStudent() {
