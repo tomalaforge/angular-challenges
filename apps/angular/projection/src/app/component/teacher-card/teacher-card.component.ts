@@ -5,15 +5,18 @@ import {
 } from '../../data-access/fake-http.service';
 import { TeacherStore } from '../../data-access/teacher.store';
 import { CardComponent } from '../../ui/card/card.component';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-teacher-card',
   template: `
-    <app-card
-      [list]="teachers()"
-      class="bg-light-red"
-      (deleteItem)="deleteTeacher($event)">
+    <app-card [list]="teachers()" class="bg-light-red">
       <img image src="assets/img/teacher.png" alt="Teacher" width="200px" />
+      <ng-template #rowRef let-teacher>
+        <app-list-item (delete)="deleteTeacher(teacher.id)">
+          {{ teacher.firstName }}
+        </app-list-item>
+      </ng-template>
       <button
         addButton
         class="rounded-sm border border-blue-500 bg-blue-300 p-2"
@@ -30,7 +33,7 @@ import { CardComponent } from '../../ui/card/card.component';
     `,
   ],
   standalone: true,
-  imports: [CardComponent],
+  imports: [CardComponent, ListItemComponent],
 })
 export class TeacherCardComponent implements OnInit {
   teachers = this.store.teachers;

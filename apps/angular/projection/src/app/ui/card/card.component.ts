@@ -1,22 +1,23 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ContentChild, Input, TemplateRef } from '@angular/core';
 import { ListItemComponent } from '../list-item/list-item.component';
+
+interface Identifiable {
+  id?: number;
+}
 
 @Component({
   selector: 'app-card',
   template: `
     <ng-content select="[image]"></ng-content>
 
-    <ng-container *ngTemplateOutlet="itemLists; context: list"></ng-container>
-
-    <ng-template #itemLists let-itemList="list">
-      @for (item of list; track item.id) {
-        <app-list-item
-          [name]="item.firstName || item.name"
-          [id]="item.id"
-          (deleteItem)="onDeleteItem($event)"></app-list-item>
-      }
-    </ng-template>
+    @for (item of list; track item.id) {
+      <ng-container>
+        <ng-template
+          [ngTemplateOutlet]="rowTemplate"
+          [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
+      </ng-container>
+    }
 
     <ng-content select="[addButton]"></ng-content>
   `,
@@ -26,14 +27,10 @@ import { ListItemComponent } from '../list-item/list-item.component';
     class: 'border-2 border-black rounded-md p-4 w-fit flex flex-col gap-3',
   },
 })
-export class CardComponent {
-  @Input() list: any[] | null = null;
+export class CardComponent<T extends Identifiable> {
+  @Input() list: T[] | null = null;
   @Input() customClass = '';
-  @Output() deleteItem = new EventEmitter<number>();
 
-  constructor() {}
-
-  onDeleteItem(id: number) {
-    this.deleteItem.emit(id);
-  }
+  @ContentChild('rowRef', { read: TemplateRef })
+  rowTemplate!: TemplateRef<{ $implicit: T }>;
 }

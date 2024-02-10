@@ -5,12 +5,18 @@ import {
 } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
 import { CardComponent } from '../../ui/card/card.component';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-student-card',
   template: `
     <app-card [list]="students()" class="bg-light-green">
       <img image src="assets/img/student.webp" alt="Student" width="200px" />
+      <ng-template #rowRef let-student>
+        <app-list-item (delete)="deleteStudent(student.id)">
+          {{ student.firstName }}
+        </app-list-item>
+      </ng-template>
       <button
         addButton
         class="rounded-sm border border-blue-500 bg-blue-300 p-2"
@@ -27,7 +33,7 @@ import { CardComponent } from '../../ui/card/card.component';
       }
     `,
   ],
-  imports: [CardComponent],
+  imports: [CardComponent, ListItemComponent],
 })
 export class StudentCardComponent implements OnInit {
   students = this.store.students;
