@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { CityCardComponent } from './component/city-card/city-card.component';
-import { StudentCardComponent } from './component/student-card/student-card.component';
-import { TeacherCardComponent } from './component/teacher-card/teacher-card.component';
+import { CityCardComponent } from './components/city-card/city-card.component';
+import { StudentCardComponent } from './components/student-card/student-card.component';
+import { TeacherCardComponent } from './components/teacher-card/teacher-card.component';
 
 @Component({
   selector: 'app-root',
