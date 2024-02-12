@@ -1,21 +1,20 @@
 import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
-import { ShowNamePipe } from './shared/ShowName.pipe';
-import { IsAllowedPipe } from './shared/is-allowed.pipe';
+import { CustomPipe } from './shared/custom.pipe';
+import { Person } from './shared/person';
 
 @Component({
   standalone: true,
   selector: 'app-root',
   template: `
     <div *ngFor="let person of persons; let index = index; let isFirst = first">
-      {{ person.name | showName: index }}
-      {{ person.age | isAllowed: isFirst }}
+      {{ person | custom: index : isFirst }}
     </div>
   `,
-  imports: [NgFor, ShowNamePipe, IsAllowedPipe],
+  imports: [NgFor, CustomPipe],
 })
 export class AppComponent {
-  persons = [
+  persons: Person[] = [
     { name: 'Toto', age: 10 },
     { name: 'Jack', age: 15 },
     { name: 'John', age: 30 },
