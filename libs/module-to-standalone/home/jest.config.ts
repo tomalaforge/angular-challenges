@@ -2,7 +2,7 @@
 export default {
   displayName: 'module-to-standalone-home',
   preset: '../../../jest.preset.js',
-  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/subscription-setup.ts'],
   coverageDirectory: '../../../coverage/libs/module-to-standalone/home',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [

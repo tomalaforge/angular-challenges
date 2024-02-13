@@ -25,7 +25,7 @@ import { RowComponent } from './ui/row.component';
     LetDirective,
   ],
   template: `
-    <h2 class="text-xl mb-2">Tickets</h2>
+    <h2 class="mb-2 text-xl">Tickets</h2>
 
     <mat-form-field appearance="fill">
       <mat-label>Search</mat-label>
@@ -45,14 +45,13 @@ import { RowComponent } from './ui/row.component';
         mode="query"
         *ngIf="vm.loading"
         class="mt-5"></mat-progress-bar>
-      <ul class="flex flex-col gap-4 max-w-3xl">
+      <ul class="flex max-w-3xl flex-col gap-4">
         <app-row
           *ngFor="let t of vm.tickets"
           [ticket]="t"
           [users]="vm.users"
           (assign)="ticketStore.assignTicket($event)"
-          (closeTicket)="ticketStore.done($event)">
-        </app-row>
+          (closeTicket)="ticketStore.done($event)"></app-row>
       </ul>
       <footer class="text-red-500">
         {{ vm.error }}

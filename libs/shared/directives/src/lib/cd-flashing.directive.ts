@@ -6,7 +6,10 @@ import { Directive, DoCheck, ElementRef, NgZone } from '@angular/core';
   standalone: true,
 })
 export class CDFlashingDirective implements DoCheck {
-  constructor(private elementRef: ElementRef, private zone: NgZone) {}
+  constructor(
+    private elementRef: ElementRef,
+    private zone: NgZone,
+  ) {}
 
   ngDoCheck(): void {
     this.cdRan();

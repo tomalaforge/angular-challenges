@@ -11,14 +11,14 @@ import { RouterModule } from '@angular/router';
         path: '',
         loadChildren: () =>
           import('./dashboard/dashboard.component').then(
-            (m) => m.DashboardModule
+            (m) => m.DashboardModule,
           ),
       },
       {
         path: 'create-user',
         loadChildren: () =>
           import('./create-user/create-user.component').then(
-            (m) => m.CreateUserModule
+            (m) => m.CreateUserModule,
           ),
       },
     ]),

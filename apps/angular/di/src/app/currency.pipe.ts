@@ -11,7 +11,7 @@ export class CurrencyPipe implements PipeTransform {
 
   transform(price: number) {
     return this.currencyService.symbol$.pipe(
-      map((s) => `${String(price)}${s}`)
+      map((s) => `${String(price)}${s}`),
     );
   }
 }

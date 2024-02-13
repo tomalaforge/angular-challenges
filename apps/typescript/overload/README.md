@@ -1,6 +1,6 @@
 # Function Overload
 
-> Author: Thomas Laforge
+> author: thomas-laforge
 
 ### Run Application
 

@@ -5,10 +5,12 @@ import { TimerContainerComponent } from './timer-container.component';
   selector: 'app-phone',
   standalone: true,
   imports: [TimerContainerComponent],
-  template: `<div class="flex gap-2">
+  template: `
+    <div class="flex gap-2">
       Phone Call Timer:
       <p class="italic">(should be 2000s)</p>
     </div>
-    <timer-container />`,
+    <timer-container />
+  `,
 })
 export default class PhoneComponent {}

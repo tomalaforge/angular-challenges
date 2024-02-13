@@ -5,5 +5,5 @@ export const loadStatuses = createAction('[Status] Load Statuses');
 
 export const loadStatusesSuccess = createAction(
   '[Status] Load Statuses Success',
-  props<{ statuses: Status[] }>()
+  props<{ statuses: Status[] }>(),
 );

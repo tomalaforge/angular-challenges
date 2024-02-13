@@ -1,7 +1,7 @@
 ---
 title: 🟠 Input Output
 description: Challenge 19 is about testing inputs and ouputs
-author: Thomas Laforge
+author: thomas-laforge
 challengeNumber: 19
 command: testing-input-output
 sidebar:
@@ -20,7 +20,7 @@ For testing cypress, you will execute your test inside the `child.component.cy.t
 
 # Statement
 
-The goal is to test multiple behaviors of the application describe inside each test files using Testing library and Cypress Component Testing.
+The goal is to test multiple behaviors of the application described inside each test file using Testing library and Cypress Component Testing.
 
 :::note
 I have created some `it` blocks but feel free to add more tests if you want.

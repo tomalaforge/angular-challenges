@@ -1,6 +1,6 @@
 # Typed ContextOutlet
 
-> Author: Thomas Laforge
+> author: thomas-laforge
 
 ### Run Application
 

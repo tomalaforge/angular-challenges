@@ -2,7 +2,7 @@
 export default {
   displayName: 'shared-ngrx-callstate-store',
   preset: '../../../jest.preset.js',
-  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/subscription-setup.ts'],
   globals: {},
   coverageDirectory: '../../../coverage/libs/shared/ngrx-callstate-store',
   transform: {

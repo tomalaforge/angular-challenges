@@ -7,10 +7,12 @@ import { CardComponent } from '../../ui/card/card.component';
 
 @Component({
   selector: 'app-teacher-card',
-  template: `<app-card
-    [list]="teachers"
-    [type]="cardType"
-    customClass="bg-light-red"></app-card>`,
+  template: `
+    <app-card
+      [list]="teachers"
+      [type]="cardType"
+      customClass="bg-light-red"></app-card>
+  `,
   styles: [
     `
       ::ng-deep .bg-light-red {
@@ -25,7 +27,10 @@ export class TeacherCardComponent implements OnInit {
   teachers: Teacher[] = [];
   cardType = CardType.TEACHER;
 
-  constructor(private http: FakeHttpService, private store: TeacherStore) {}
+  constructor(
+    private http: FakeHttpService,
+    private store: TeacherStore,
+  ) {}
 
   ngOnInit(): void {
     this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));

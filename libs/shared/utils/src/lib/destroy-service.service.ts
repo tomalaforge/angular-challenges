@@ -22,7 +22,7 @@ function describeDestroyService() {
 
     if (!destroy$) {
       throw new Error(
-        'It seems that you forgot to provide DestroyService. Add "provideDestroyService()" to your declarable\'s providers.'
+        'It seems that you forgot to provide DestroyService. Add "provideDestroyService()" to your declarable\'s providers.',
       );
     }
 

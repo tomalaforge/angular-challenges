@@ -1,7 +1,7 @@
 ---
 title: 🟢 Projection
 description: Challenge 1 is about learning how to project DOM element through components
-author: Thomas Laforge
+author: thomas-laforge
 challengeNumber: 1
 command: angular-projection
 blogLink: https://medium.com/@thomas.laforge/create-a-highly-customizable-component-cc3a9805e4c5
@@ -35,3 +35,9 @@ While the application works, the developer experience is far from being optimal.
 - The `NgFor` directive must be declared and remain inside the `CardComponent`. You might be tempted to move it to the `ParentCardComponent` like `TeacherCardComponent`.
 - `CardComponent` should not contain any `NgIf` or `NgSwitch`.
 - CSS: try to avoid using `::ng-deep`. Find a better way to handle CSS styling.
+
+## Bonus Challenges
+
+- Try to work with the new built-in control flow syntax for loops and conditionals (documentation [here](https://angular.dev/guide/templates/control-flow))
+- Use the signal API to manage your components state (documentation [here](https://angular.dev/guide/signals))
+- To reference the template, use a directive instead of magic strings

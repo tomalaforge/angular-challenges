@@ -13,6 +13,7 @@ import {
 import { Linter } from '@nx/eslint';
 import { join } from 'path';
 import { getProjectDir } from '../../utils/normalize';
+import { langMapper } from './files/lang-mapper';
 import { Schema } from './schema';
 
 function findPreviousChallengeFilePath(tree, path, number) {
@@ -25,8 +26,7 @@ function findPreviousChallengeFilePath(tree, path, number) {
     .find((child) => child.startsWith(`${number}-`));
 
   if (matchingChild) {
-    const fullPath = path + '/' + matchingChild;
-    return fullPath;
+    return path + '/' + matchingChild;
   }
 
   for (const child of tree.children(path)) {
@@ -42,14 +42,15 @@ function findPreviousChallengeFilePath(tree, path, number) {
 export async function challengeGenerator(tree: Tree, options: Schema) {
   const { appProjectName, appDirectory } = getProjectDir(
     options.name,
-    `apps/${options.category}`
+    `apps/${options.category}`,
   );
 
   const difficulty = options.challengeDifficulty;
 
   await applicationGenerator(tree, {
     ...options,
-    directory: `apps/${options.category}`,
+    name: `${options.category}-${options.name}`,
+    directory: `apps/${options.category}/${options.name}`,
     style: 'scss',
     routing: false,
     inlineStyle: true,
@@ -61,14 +62,15 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
     addTailwind: true,
     standalone: true,
     skipTests: true,
+    projectNameAndRootFormat: 'as-provided',
   });
 
   const challengeNumberPath = 'challenge-number.json';
-  const challangeNumberJson = JSON.parse(
-    tree.read(challengeNumberPath).toString()
+  const challengeNumberJson = JSON.parse(
+    tree.read(challengeNumberPath).toString(),
   );
-  const challengeNumber = challangeNumberJson.total + 1;
-  const order = challangeNumberJson[difficulty] + 1;
+  const challengeNumber = challengeNumberJson.total + 1;
+  const order = challengeNumberJson[difficulty] + 1;
 
   generateFiles(tree, join(__dirname, 'files', 'app'), appDirectory, {
     tmpl: '',
@@ -97,7 +99,7 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
       challengeNumber,
       difficulty,
       order,
-    }
+    },
   );
 
   if (options.addTest) {
@@ -111,37 +113,53 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
   const readmeRegex = new RegExp(`all ${challengeNumber - 1} challenges`);
   const readmeReplace = readme.replace(
     readmeRegex,
-    `all ${challengeNumber} challenges`
+    `all ${challengeNumber} challenges`,
   );
 
   tree.write('./README.md', readmeReplace);
 
-  const docs = tree.read('./docs/src/content/docs/index.mdx').toString();
+  for (const lang of ['en', 'es', 'fr', 'pt', 'ru']) {
+    const docs = tree
+      .read(`./docs/src/content/docs/${lang === 'en' ? '' : lang}/index.mdx`)
+      .toString();
 
-  const regex = new RegExp(`${challengeNumber - 1} Challenges`, 'gi');
-  const replaced = docs.replace(regex, `${challengeNumber} Challenges`);
+    const regex = new RegExp(
+      `${challengeNumber - 1} ${langMapper[lang]}`,
+      'gi',
+    );
+    const replaced = docs.replace(
+      regex,
+      `${challengeNumber} ${langMapper[lang]}`,
+    );
 
-  const linkRegex = new RegExp(`link: \\/challenges\\/(.*?)\n`, 'gi');
-  const replacedLink = replaced.replace(
-    linkRegex,
-    `link: /challenges/${options.category}/${challengeNumber}-${
-      names(options.name).name
-    }/\n`
-  );
+    const linkRegex = new RegExp(
+      `link: \\/${lang}\\/challenges\\/(.*?)\n`,
+      'gi',
+    );
+    const replacedLink = replaced.replace(
+      linkRegex,
+      `link: /${lang}/challenges/${options.category}/${challengeNumber}-${
+        names(options.name).name
+      }/\n`,
+    );
 
-  tree.write('./docs/src/content/docs/index.mdx', replacedLink);
+    tree.write(
+      `./docs/src/content/docs/${lang === 'en' ? '' : lang}/index.mdx`,
+      replacedLink,
+    );
+  }
 
   const previousChallengeFilePath = findPreviousChallengeFilePath(
     tree,
     `./docs/src/content/docs/challenges`,
-    String(challengeNumber - 1)
+    String(challengeNumber - 1),
   );
 
   const previousChallenge = tree.read(previousChallengeFilePath).toString();
 
   tree.write(
     previousChallengeFilePath,
-    previousChallenge.replace(`badge: New`, ``)
+    previousChallenge.replace(`badge: New`, ``),
   );
 
   updateJson(tree, challengeNumberPath, (json) => {

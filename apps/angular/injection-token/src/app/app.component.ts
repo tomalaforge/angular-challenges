@@ -5,15 +5,17 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   standalone: true,
   imports: [RouterOutlet, RouterLink],
   selector: 'app-root',
-  template: ` <div class="flex gap-4 mb-5">
-      <button class="border rounded-md px-4 py-2" routerLink="video">
+  template: `
+    <div class="mb-5 flex gap-4">
+      <button class="rounded-md border px-4 py-2" routerLink="video">
         Video
       </button>
-      <button class="border rounded-md px-4 py-2" routerLink="phone">
+      <button class="rounded-md border px-4 py-2" routerLink="phone">
         Phone
       </button>
     </div>
-    <router-outlet />`,
+    <router-outlet />
+  `,
   host: {
     class: 'p-10 flex flex-col',
   },

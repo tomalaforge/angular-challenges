@@ -1,21 +1,17 @@
 ---
 title: 🟠 Component Generator
 description: Challenge 26 is about creating a Nx generator to create a custom component
-author: Thomas Laforge
+author: thomas-laforge
 challengeNumber: 26
 sidebar:
   order: 116
 ---
 
-:::note
-WIP: The following documentation will be reviewed and improved. However, you can still take on the challenge. If you don't understand a certain part, please feel free to reach out or create an issue.
-:::
-
 ## Information
 
 Welcome to the marvelous world of Nx generators.
 
-Generators are awesome tools that can help you and your team generate code more quickly, especially for pieces of code that you use frequently. Inside an entreprise project, you often have to create components that look similar. And most of the time, you end up copy/pasting other components. In Nx, you can create this boilerplate in a simple command using generators.
+Generators are awesome tools that can help you and your team generate code more quickly, especially for pieces of code that you use frequently. Inside an enterprise project, you often have to create components that look similar. And most of the time, you end up copy/pasting other components. In Nx, you can create this boilerplate in a simple command using generators.
 
 ## Statement
 
@@ -41,7 +37,9 @@ Just below, you will have the end result of your generator for a `UserComponent`
   standalone: true,
   imports: [LetDirective],
   providers: [provideComponentStore(UserStore)],
-  template: ` <ng-container *ngrxLet="vm$ as vm"> // do things </ng-container> `,
+  template: `
+    <ng-container *ngrxLet="vm$ as vm">// do things</ng-container>
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserComponent {
@@ -88,7 +86,7 @@ export class UserStore extends ComponentStore<UserState> implements OnStateInit,
       loading: this.loading$,
       error: this.error$,
     },
-    { debounce: true }
+    { debounce: true },
   );
 
   ngrxOnStateInit() {
@@ -106,11 +104,11 @@ export class UserStore extends ComponentStore<UserState> implements OnStateInit,
         this.userService.loadUsers().pipe(
           tapResponse(
             (users) => this.patchState({ users, loading: false }),
-            (err: string) => this.patchState({ error: err, loading: false })
-          )
-        )
-      )
-    )
+            (err: string) => this.patchState({ error: err, loading: false }),
+          ),
+        ),
+      ),
+    ),
   );
 }
 ```

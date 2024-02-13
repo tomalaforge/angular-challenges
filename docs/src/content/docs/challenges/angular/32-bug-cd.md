@@ -1,17 +1,13 @@
 ---
 title: 🟠 Change Detection Bug
 description: Challenge 32 is about debugging an application that has issue when change detection is triggered
-author: Thomas Laforge
+author: thomas-laforge
 challengeNumber: 32
 command: angular-bug-cd
 blogLink: https://medium.com/ngconf/function-calls-inside-template-are-dangerous-15f9822a6629
 sidebar:
   order: 105
 ---
-
-:::note
-WIP: The following documentation will be reviewed and improved. However, you can still take on the challenge. If you don't understand a certain part, please feel free to reach out or create an issue.
-:::
 
 :::note
 This challenge is inspired by a real-life example that I simplified to create this nice challenge.
@@ -30,7 +26,7 @@ The goal of the challenge is to debug this application and make it work.
 <details>
   <summary>Hint 1</summary>
   
-  If you comment out `routerLinkActive="isSelected"` inside `NavigationComponent`: the application loads correctly.
+  If you comment out `routerLinkActive="isSelected"` inside `NavigationComponent`, the application loads correctly.
 </details>
 
 <details>
