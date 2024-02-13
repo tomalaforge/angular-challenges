@@ -4,7 +4,6 @@ import {
   Component,
   computed,
   input,
-  InputSignal,
   Signal,
 } from '@angular/core';
 
@@ -29,14 +28,14 @@ const ageToCategory = (age: number): Category => {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserComponent {
-  name: InputSignal<string> = input.required<string>();
-  lastName: InputSignal<string | unknown> = input<string | unknown>();
-  age: InputSignal<number, string> = input<number, string>(0, {
+  name = input.required<string>();
+  lastName = input('');
+  age = input(0, {
     transform: (value: string) => Number(value),
   });
 
   fullName: Signal<string> = computed(
-    () => `${this.name()} ${this.lastName() ?? ''}`,
+    () => `${this.name()} ${this.lastName()}`,
   );
   category = computed(() => ageToCategory(this.age()));
 
