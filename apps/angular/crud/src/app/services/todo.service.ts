@@ -41,7 +41,7 @@ export class TodoService {
       'Content-type': 'application/json; charset=UTF-8',
     };
     return this.http.delete<void>(
-      `https://jsonplaceholder.typicode.com/odos/${todo.id}`,
+      `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
       { headers },
     );
   }

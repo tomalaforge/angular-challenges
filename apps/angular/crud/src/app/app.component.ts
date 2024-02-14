@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, WritableSignal } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { LoadingDialog } from './components/loading.dialog';
 import { ITodo } from './models';
 import { TodoService } from './services/todo.service';
 
@@ -24,6 +26,7 @@ export class AppComponent implements OnInit {
   constructor(
     private readonly todoService: TodoService,
     private readonly snackbar: MatSnackBar,
+    private readonly dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -31,22 +34,36 @@ export class AppComponent implements OnInit {
   }
 
   updateTodo(todo: ITodo): void {
-    this.todoService.update(todo).subscribe((updatedTodo: ITodo) => {
-      const updateArray = (arr: ITodo[], updatedTodo: ITodo) =>
-        arr.map((todo) => (todo.id === updatedTodo.id ? updatedTodo : todo));
-      this.todos.update((todos) => updateArray(todos, updatedTodo));
-    });
+    this.dialog.open(LoadingDialog);
+    this.todoService.update(todo).subscribe(
+      (updatedTodo: ITodo) => {
+        this.dialog.closeAll();
+        this.todos.update((todos) =>
+          todos.map((t) => (t.id === updatedTodo.id ? updatedTodo : todo)),
+        );
+      },
+      (error) => {
+        this.showErrorMessage();
+        this.dialog.closeAll();
+      },
+    );
   }
 
   deleteTodo(todo: ITodo): void {
+    this.dialog.open(LoadingDialog);
     this.todoService.delete(todo).subscribe(
       () => {
-        const updateArray = (arr: ITodo[], deletedTodo: ITodo) =>
-          arr.filter((todo) => todo.id !== deletedTodo.id);
-        this.todos.update((todos) => updateArray(todos, todo));
+        this.dialog.closeAll();
+        this.todos.update((todos) => todos.filter((t) => t.id !== todo.id));
       },
-      (error) =>
-        this.snackbar.open('Error occured', undefined, { duration: 3000 }),
+      (error) => {
+        this.showErrorMessage();
+        this.dialog.closeAll();
+      },
     );
+  }
+
+  showErrorMessage(): void {
+    this.snackbar.open('Error occured', undefined, { duration: 3000 });
   }
 }
