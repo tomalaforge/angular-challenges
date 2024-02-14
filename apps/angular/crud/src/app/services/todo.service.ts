@@ -35,4 +35,14 @@ export class TodoService {
       { headers },
     );
   }
+
+  delete(todo: ITodo): Observable<void> {
+    const headers = {
+      'Content-type': 'application/json; charset=UTF-8',
+    };
+    return this.http.delete<void>(
+      `https://jsonplaceholder.typicode.com/odos/${todo.id}`,
+      { headers },
+    );
+  }
 }
