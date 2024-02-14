@@ -2,5 +2,12 @@
   "eslint.validate": [
     "json"
   ],
-  "cSpell.language": "en,es-ES"
+  "cSpell.language": "en,es-ES",
+  "editor.codeActionsOnSave": {
+    "source.addMissingImports": "always"
+  },
+  "editor.formatOnSave": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
