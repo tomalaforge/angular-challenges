@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoadingDialog } from './dialogs/loading.dialog';
 import { Todo } from './models';
-import { TodoService } from './services/todo.service';
+import { TodoService } from './services/todo-api.service';
 
 @Component({
   standalone: true,
