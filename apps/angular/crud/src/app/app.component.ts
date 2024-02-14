@@ -38,9 +38,7 @@ export class AppComponent implements OnInit {
     this.todoService.update(todo).subscribe(
       (updatedTodo: ITodo) => {
         this.dialog.closeAll();
-        this.todos.update((todos) =>
-          todos.map((t) => (t.id === updatedTodo.id ? updatedTodo : todo)),
-        );
+        this.todos.update((todos) => this.updateArrayItem(todos, updatedTodo));
       },
       (error) => {
         this.showErrorMessage();
@@ -65,5 +63,9 @@ export class AppComponent implements OnInit {
 
   showErrorMessage(): void {
     this.snackbar.open('Error occured', undefined, { duration: 3000 });
+  }
+
+  private updateArrayItem(array: Todo[], updatedTodo: Todo): Todo[] {
+    return array.map((t) => (t.id === updatedTodo.id ? updatedTodo : t));
   }
 }
