@@ -2,23 +2,23 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, WritableSignal, signal } from '@angular/core';
 import { randText } from '@ngneat/falso';
 import { Observable } from 'rxjs';
-import { ITodo } from '../models';
+import { Todo } from '../models';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TodoService {
-  todos: WritableSignal<ITodo[]> = signal([]);
+  todos: WritableSignal<Todo[]> = signal([]);
 
   constructor(private readonly http: HttpClient) {}
 
   getAll(): void {
     this.http
-      .get<ITodo[]>('https://jsonplaceholder.typicode.com/todos')
+      .get<Todo[]>('https://jsonplaceholder.typicode.com/todos')
       .subscribe((todos) => this.todos.set(todos));
   }
 
-  update(todo: ITodo): Observable<ITodo> {
+  update(todo: Todo): Observable<Todo> {
     const body = JSON.stringify({
       todo: todo.id,
       title: randText(),
@@ -29,14 +29,14 @@ export class TodoService {
       'Content-type': 'application/json; charset=UTF-8',
     };
 
-    return this.http.put<ITodo>(
+    return this.http.put<Todo>(
       `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
       body,
       { headers },
     );
   }
 
-  delete(todo: ITodo): Observable<void> {
+  delete(todo: Todo): Observable<void> {
     const headers = {
       'Content-type': 'application/json; charset=UTF-8',
     };

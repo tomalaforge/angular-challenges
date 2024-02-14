@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, WritableSignal } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { LoadingDialog } from './components/loading.dialog';
-import { ITodo } from './models';
+import { LoadingDialog } from './dialogs/loading.dialog';
+import { Todo } from './models';
 import { TodoService } from './services/todo.service';
 
 @Component({
@@ -21,7 +21,7 @@ import { TodoService } from './services/todo.service';
   `,
 })
 export class AppComponent implements OnInit {
-  todos: WritableSignal<ITodo[]> = this.todoService.todos;
+  todos: WritableSignal<Todo[]> = this.todoService.todos;
 
   constructor(
     private readonly todoService: TodoService,
@@ -33,10 +33,10 @@ export class AppComponent implements OnInit {
     this.todoService.getAll();
   }
 
-  updateTodo(todo: ITodo): void {
+  updateTodo(todo: Todo): void {
     this.dialog.open(LoadingDialog);
     this.todoService.update(todo).subscribe(
-      (updatedTodo: ITodo) => {
+      (updatedTodo: Todo) => {
         this.dialog.closeAll();
         this.todos.update((todos) => this.updateArrayItem(todos, updatedTodo));
       },
@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
     );
   }
 
-  deleteTodo(todo: ITodo): void {
+  deleteTodo(todo: Todo): void {
     this.dialog.open(LoadingDialog);
     this.todoService.delete(todo).subscribe(
       () => {
