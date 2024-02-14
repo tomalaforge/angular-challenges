@@ -2,9 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, WritableSignal } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { LoadingDialog } from './dialogs/loading.dialog';
+import { LoadingDialog } from './dialogs';
 import { Todo } from './models';
-import { TodoService } from './services/todo-api.service';
+import { TodoService } from './services';
 
 @Component({
   standalone: true,
