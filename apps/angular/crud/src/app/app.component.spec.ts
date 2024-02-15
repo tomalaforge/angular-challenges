@@ -19,10 +19,9 @@ describe('app component', () => {
     // Arrange
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    const service = TestBed.inject(TodoService);
 
     // Act
-    service.todos.set(mockTodos);
+    app.todos.set(mockTodos);
 
     // Arrange
     expect(app.todos().length).toBe(mockTodos.length);
@@ -40,6 +39,7 @@ describe('app component', () => {
     const changeTodo = Todo.mockData()[0];
     changeTodo.title = 'test change';
     app.updateTodo(changeTodo);
+    // TODO: open dialog and spy on dialog closeAll(), then expect closeAll() to be called in test
     // const openDialogSpy = jest.spyOn(app.dialog, 'open');
 
     // Assert
@@ -62,9 +62,8 @@ describe('app component', () => {
     app.removeArrayItem(mockTodos, deleteTodo);
 
     // Assert
-    // expect(app.removeArrayItem).toBeCalledWith(mockTodos, deleteTodo);
     // TODO: not working yet, Matcher error: received value must be a mock or spy function
-    // Received has type:  function | Received has value: [Function removeArrayItem]
+    // expect(app.removeArrayItem).toBeCalledWith(mockTodos, deleteTodo);
 
     const todos = app.todos();
     const findDeletedTodo = todos.find((t) => t.id === deleteTodo.id);
