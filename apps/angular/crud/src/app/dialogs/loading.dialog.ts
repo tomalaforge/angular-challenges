@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatDialogContent } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
@@ -11,5 +11,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   `,
   standalone: true,
   imports: [MatDialogContent, MatProgressSpinnerModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoadingDialog {}

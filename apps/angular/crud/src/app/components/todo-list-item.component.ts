@@ -1,9 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, WritableSignal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { LoadingDialog } from '../dialogs';
 import { Todo } from '../models';
 import { TodoService } from '../services';
 
@@ -11,10 +14,11 @@ import { TodoService } from '../services';
   standalone: true,
   imports: [CommonModule, MatCheckboxModule],
   selector: 'app-todo-list-item',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div>
       <mat-checkbox></mat-checkbox>
-      <span>{{ todo.title }}</span>
+      <ng-content></ng-content>
     </div>
     <div>
       <button (click)="updateTodo(todo)">Update</button>
@@ -37,48 +41,28 @@ import { TodoService } from '../services';
   `,
 })
 export class TodoListItemComponent {
-  todos: WritableSignal<Todo[]> = this.todoService.todos;
+  @Input() todo!: Todo;
 
-  constructor(
-    private readonly todoService: TodoService,
-    private readonly snackbar: MatSnackBar,
-    public dialog: MatDialog,
-  ) {}
+  @Output() openDialog = new EventEmitter<void>();
+  @Output() updateItemInArray = new EventEmitter<Todo>();
+  @Output() removeItemInArray = new EventEmitter<Todo>();
+  @Output() showErrorMessage = new EventEmitter<void>();
+
+  constructor(private readonly todoService: TodoService) {}
 
   updateTodo(todo: Todo): void {
-    this.dialog.open(LoadingDialog);
+    this.openDialog.emit();
     this.todoService.update(todo).subscribe(
-      (updatedTodo: Todo) => this.updateArrayItem(this.todos(), updatedTodo),
-      (error) => this.showErrorMessage(),
+      (updatedTodo: Todo) => this.updateItemInArray.emit(updatedTodo),
+      (error) => this.showErrorMessage.emit(),
     );
   }
 
   deleteTodo(todo: Todo): void {
-    this.dialog.open(LoadingDialog);
+    this.openDialog.emit();
     this.todoService.delete(todo).subscribe(
-      () => this.removeArrayItem(this.todos(), todo),
-      (error) => this.showErrorMessage(),
+      () => this.removeItemInArray.emit(todo),
+      (error) => this.showErrorMessage.emit(),
     );
-  }
-
-  showErrorMessage(): void {
-    if (this.dialog.openDialogs) {
-      this.dialog.closeAll();
-    }
-    this.snackbar.open('Error occured', undefined, { duration: 3000 });
-  }
-
-  updateArrayItem(array: Todo[], updatedTodo: Todo): void {
-    if (this.dialog.openDialogs) {
-      this.dialog.closeAll();
-    }
-    this.todos.set(Todo.updateItemInArray(array, updatedTodo));
-  }
-
-  removeArrayItem(array: Todo[], deleteTodo: Todo): void {
-    if (this.dialog.openDialogs) {
-      this.dialog.closeAll();
-    }
-    this.todos.set(Todo.removeItemFromArray(array, deleteTodo));
   }
 }
