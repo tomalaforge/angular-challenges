@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
   constructor(
     private readonly todoService: TodoService,
     private readonly snackbar: MatSnackBar,
-    private readonly dialog: MatDialog,
+    public dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -36,36 +36,39 @@ export class AppComponent implements OnInit {
   updateTodo(todo: Todo): void {
     this.dialog.open(LoadingDialog);
     this.todoService.update(todo).subscribe(
-      (updatedTodo: Todo) => {
-        this.dialog.closeAll();
-        this.todos.update((todos) => this.updateArrayItem(todos, updatedTodo));
-      },
-      (error) => {
-        this.showErrorMessage();
-        this.dialog.closeAll();
-      },
+      (updatedTodo: Todo) => this.updateArrayItem(this.todos(), updatedTodo),
+      (error) => this.showErrorMessage(),
     );
   }
 
   deleteTodo(todo: Todo): void {
     this.dialog.open(LoadingDialog);
     this.todoService.delete(todo).subscribe(
-      () => {
-        this.dialog.closeAll();
-        this.todos.update((todos) => todos.filter((t) => t.id !== todo.id));
-      },
-      (error) => {
-        this.showErrorMessage();
-        this.dialog.closeAll();
-      },
+      () => this.removeArrayItem(this.todos(), todo),
+      (error) => this.showErrorMessage(),
     );
   }
 
   showErrorMessage(): void {
+    this.dialog.closeAll();
     this.snackbar.open('Error occured', undefined, { duration: 3000 });
   }
 
-  private updateArrayItem(array: Todo[], updatedTodo: Todo): Todo[] {
-    return array.map((t) => (t.id === updatedTodo.id ? updatedTodo : t));
+  updateArrayItem(array: Todo[], updatedTodo: Todo): void {
+    if (this.dialog.openDialogs) {
+      this.dialog.closeAll();
+    }
+    const updatedArray = array.map((t) =>
+      t.id === updatedTodo.id ? updatedTodo : t,
+    );
+    this.todos.set(updatedArray);
+  }
+
+  removeArrayItem(array: Todo[], deleteTodo: Todo): void {
+    if (this.dialog.openDialogs) {
+      this.dialog.closeAll();
+    }
+    const arrayWithoutItem = array.filter((t) => t.id !== deleteTodo.id);
+    this.todos.set(arrayWithoutItem);
   }
 }

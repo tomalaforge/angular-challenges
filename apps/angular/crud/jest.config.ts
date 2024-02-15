@@ -2,14 +2,14 @@
 export default {
   displayName: 'angular-crud',
   preset: '../../../jest.preset.js',
-  setupFilesAfterEnv: ['<rootDir>/src/subscription-setup.ts'],
+  setupFilesAfterEnv: ['./src/test-setup.ts'],
   globals: {},
   coverageDirectory: '../../../coverage/apps/angular/crud',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',
       {
-        tsconfig: '<rootDir>/tsconfig.spec.json',
+        tsconfig: './apps/angular/crud/tsconfig.spec.json',
         stringifyContentPathRegex: '\\.(html|svg)$',
       },
     ],
