@@ -34,6 +34,12 @@ import { TodosStore } from './store';
                 <li>
                   <app-todo-list-item
                     [todo]="todo"
+                    [isLoading]="
+                      store.updatingTodoId() === todo.id && store.isLoading()
+                    "
+                    [error]="
+                      store.updatingTodoId() === todo.id && store.error()
+                    "
                     (updateTodoEvent)="updateTodo($event)"
                     (deleteTodoEvent)="deleteTodo($event)"></app-todo-list-item>
                 </li>
@@ -69,14 +75,14 @@ export class AppComponent {
     effect(() => {
       const state = getState(this.store);
 
-      if (state.isLoading) {
+      if (state.todos === undefined && state.isLoading) {
         this.dialog.open(LoadingDialog);
       } else {
         this.dialog.closeAll();
+      }
 
-        if (state.error) {
-          this.snackbar.open('Error occured', undefined, { duration: 3000 });
-        }
+      if (state.error) {
+        this.snackbar.open('Error occured', undefined, { duration: 3000 });
       }
     });
   }
@@ -92,18 +98,18 @@ export class AppComponent {
   }
 
   updateTodo(todo: Todo): void {
-    this.store.setLoading(true);
+    this.store.updateTodo(todo.id);
     this.todoApiService
       .update(todo)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(
-        (updatedTodo: Todo) => this.store.updateTodo(updatedTodo),
+        (updatedTodo: Todo) => this.store.changeTodo(updatedTodo),
         (error) => this.store.setError(error),
       );
   }
 
   deleteTodo(todo: Todo): void {
-    this.store.setLoading(true);
+    this.store.updateTodo(todo.id);
     this.todoApiService
       .delete(todo)
       .pipe(takeUntilDestroyed(this.destroyRef))

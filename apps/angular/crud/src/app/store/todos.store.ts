@@ -3,12 +3,14 @@ import { Todo } from '../models';
 
 export type TodosState = {
   todos: Todo[] | undefined;
+  updatingTodoId: number | undefined;
   isLoading: boolean;
   error: unknown;
 };
 
 const initialState: TodosState = {
   todos: undefined,
+  updatingTodoId: undefined,
   isLoading: true,
   error: null,
 };
@@ -23,9 +25,18 @@ export const TodosStore = signalStore(
         error: null,
       }));
     },
-    updateTodo(todo: Todo): void {
+    updateTodo(todoId: number): void {
+      patchState(store, (state) => ({
+        ...state,
+        updatingTodoId: todoId,
+        error: null,
+        isLoading: true,
+      }));
+    },
+    changeTodo(todo: Todo): void {
       patchState(store, (state) => ({
         todos: Todo.updateItemInArray(state.todos, todo),
+        updatingTodoId: undefined,
         isLoading: false,
         error: null,
       }));
@@ -33,19 +44,15 @@ export const TodosStore = signalStore(
     deleteTodo(todo: Todo): void {
       patchState(store, (state) => ({
         todos: Todo.deleteItemFromArray(state.todos, todo),
+        updatingTodoId: undefined,
         isLoading: false,
         error: null,
-      }));
-    },
-    setLoading(isLoading: boolean): void {
-      patchState(store, (state) => ({
-        ...state,
-        isLoading,
       }));
     },
     setError(error: unknown): void {
       patchState(store, (state) => ({
         todos: state.todos,
+        updatingTodoId: state.updatingTodoId,
         isLoading: false,
         error,
       }));

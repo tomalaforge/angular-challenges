@@ -7,11 +7,19 @@ import {
   Output,
 } from '@angular/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 import { Todo } from '../models';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, MatCheckboxModule],
+  imports: [
+    CommonModule,
+    MatCheckboxModule,
+    MatProgressSpinnerModule,
+    MatIconModule,
+  ],
   selector: 'app-todo-list-item',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
@@ -20,8 +28,13 @@ import { Todo } from '../models';
       {{ todo.title }}
     </div>
     <div>
-      <button (click)="updateTodo(todo)">Update</button>
-      <button (click)="deleteTodo(todo)">Delete</button>
+      @if (isLoading) {
+        <mat-spinner diameter="20"></mat-spinner>
+      } @else if (error) {
+        <mat-icon>error</mat-icon>
+      }
+      <button (click)="updateTodo(todo)" [disabled]="isLoading">Update</button>
+      <button (click)="deleteTodo(todo)" [disabled]="isLoading">Delete</button>
     </div>
   `,
   styles: `
@@ -33,7 +46,6 @@ import { Todo } from '../models';
       & > div {
         display: flex;
         align-items: center;
-        height: fit-content;
         gap: 10px;
       }
     }
@@ -41,6 +53,8 @@ import { Todo } from '../models';
 })
 export class TodoListItemComponent {
   @Input({ required: true }) todo!: Todo;
+  @Input() isLoading: boolean = false;
+  @Input() error: unknown = null;
 
   @Output() updateTodoEvent = new EventEmitter<Todo>();
   @Output() deleteTodoEvent = new EventEmitter<Todo>();

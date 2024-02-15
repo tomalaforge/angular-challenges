@@ -36,7 +36,7 @@ describe('app component', () => {
     app.store.setTodos(mockTodos);
     const changeTodo = Todo.mockData()[0];
     changeTodo.title = 'test change';
-    app.store.updateTodo(changeTodo);
+    app.store.changeTodo(changeTodo);
     // TODO: open dialog and spy on dialog closeAll(), then expect closeAll() to be called in test
     // const openDialogSpy = jest.spyOn(app.dialog, 'open');
 
