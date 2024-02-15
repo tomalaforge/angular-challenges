@@ -23,4 +23,4 @@ In version 16, Angular introduced a new `Input` that can listen to route data. Y
 
 ## Statement
 
-The goal of this exercice is to refactor the code to use the new `RouterInput` strategy.
+The goal of this exercise is to refactor the code to use the new `RouterInput` strategy.

@@ -14,7 +14,7 @@ Pure pipes are a very useful way to transform data from your template. The diffe
 
 ## Information:
 
-In this third exercice, you want to access utils functions. Currently you cannot access them directly from your template. The goal is to create a specific pipe for this utils file where you will need to pass the name of the function you want to call and the needed arguments.
+In this third exercise, you want to access utils functions. Currently you cannot access them directly from your template. The goal is to create a specific pipe for this utils file where you will need to pass the name of the function you want to call and the needed arguments.
 
 ## Constraints:
 

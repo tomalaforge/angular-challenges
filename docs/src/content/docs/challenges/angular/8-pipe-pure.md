@@ -15,7 +15,7 @@ Pure pipes are a very useful way to transform data from your template. The diffe
 
 ## Information
 
-In this first exercice, you call a simple function inside your template. The goal is to convert it to a pipe.
+In this first exercise, you call a simple function inside your template. The goal is to convert it to a pipe.
 
 ## Constraints
 
