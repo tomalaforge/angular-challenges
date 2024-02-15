@@ -28,6 +28,7 @@
     "@ngrx/effects": "17.0.1",
     "@ngrx/entity": "17.0.1",
     "@ngrx/router-store": "17.0.1",
+    "@ngrx/signals": "^17.1.0",
     "@ngrx/store": "17.0.1",
     "@nx/angular": "17.2.8",
     "@rx-angular/cdk": "^17.0.0",

@@ -27,11 +27,11 @@ export class Todo {
     );
   }
 
-  static updateItemInArray(array: Todo[], item: Todo): Todo[] {
+  static updateItemInArray(array: Todo[] = [], item: Todo): Todo[] {
     return array.map((t) => (t.id === item.id ? item : t));
   }
 
-  static removeItemFromArray(array: Todo[], item: Todo): Todo[] {
+  static deleteItemFromArray(array: Todo[] = [], item: Todo): Todo[] {
     return array.filter((t) => t.id !== item.id);
   }
 

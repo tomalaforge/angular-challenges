@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, WritableSignal, signal } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { randText } from '@ngneat/falso';
 import { Observable } from 'rxjs';
+
 import { Todo } from '../models';
 
 const TODOS_ENDPOINT = 'https://jsonplaceholder.typicode.com/todos';
@@ -10,8 +11,6 @@ const TODOS_ENDPOINT = 'https://jsonplaceholder.typicode.com/todos';
   providedIn: 'root',
 })
 export class TodoApiService {
-  todos: WritableSignal<Todo[]> = signal([]);
-
   constructor(private readonly http: HttpClient) {}
 
   getAll(): Observable<Todo[]> {
