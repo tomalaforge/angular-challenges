@@ -5,7 +5,7 @@ author: wandrille-guesdon
 challengeNumber: 45
 command: angular-react-in-angular
 sidebar:
-  order: NaN
+  order: 209
   badge: New
 ---
 
@@ -60,14 +60,15 @@ npm i --save-dev @types/react @types/react-dom
 <details>
   <summary>Hint 3 - Display</summary>
   To render the component, it should look like this:
-  
+
     ```
     <react root>.render(
         <React.StrictMode>
         ...
         </React.StrictMode>
     )
-    ``` 
+    ```
+
 </details>
 
 <details>
