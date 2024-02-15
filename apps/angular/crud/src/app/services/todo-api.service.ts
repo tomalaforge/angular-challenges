@@ -9,15 +9,13 @@ const TODOS_ENDPOINT = 'https://jsonplaceholder.typicode.com/todos';
 @Injectable({
   providedIn: 'root',
 })
-export class TodoService {
+export class TodoApiService {
   todos: WritableSignal<Todo[]> = signal([]);
 
   constructor(private readonly http: HttpClient) {}
 
-  getAll(): void {
-    this.http
-      .get<Todo[]>(TODOS_ENDPOINT)
-      .subscribe((todos) => this.todos.set(todos));
+  getAll(): Observable<Todo[]> {
+    return this.http.get<Todo[]>(TODOS_ENDPOINT);
   }
 
   update(todo: Todo): Observable<Todo> {

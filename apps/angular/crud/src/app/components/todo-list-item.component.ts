@@ -8,7 +8,6 @@ import {
 } from '@angular/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { Todo } from '../models';
-import { TodoService } from '../services';
 
 @Component({
   standalone: true,
@@ -18,7 +17,7 @@ import { TodoService } from '../services';
   template: `
     <div>
       <mat-checkbox></mat-checkbox>
-      <ng-content></ng-content>
+      {{ todo.title }}
     </div>
     <div>
       <button (click)="updateTodo(todo)">Update</button>
@@ -41,28 +40,16 @@ import { TodoService } from '../services';
   `,
 })
 export class TodoListItemComponent {
-  @Input() todo!: Todo;
+  @Input({ required: true }) todo!: Todo;
 
-  @Output() openDialog = new EventEmitter<void>();
-  @Output() updateItemInArray = new EventEmitter<Todo>();
-  @Output() removeItemInArray = new EventEmitter<Todo>();
-  @Output() showErrorMessage = new EventEmitter<void>();
+  @Output() updateTodoEvent = new EventEmitter<Todo>();
+  @Output() deleteTodoEvent = new EventEmitter<Todo>();
 
-  constructor(private readonly todoService: TodoService) {}
-
-  updateTodo(todo: Todo): void {
-    this.openDialog.emit();
-    this.todoService.update(todo).subscribe(
-      (updatedTodo: Todo) => this.updateItemInArray.emit(updatedTodo),
-      (error) => this.showErrorMessage.emit(),
-    );
+  updateTodo(updatedTodo: Todo): void {
+    this.updateTodoEvent.emit(updatedTodo);
   }
 
   deleteTodo(todo: Todo): void {
-    this.openDialog.emit();
-    this.todoService.delete(todo).subscribe(
-      () => this.removeItemInArray.emit(todo),
-      (error) => this.showErrorMessage.emit(),
-    );
+    this.deleteTodoEvent.emit(todo);
   }
 }
