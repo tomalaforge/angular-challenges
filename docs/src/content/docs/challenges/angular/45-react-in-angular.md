@@ -1,7 +1,7 @@
 ---
 title: 🔴 React in angular
 description: Challenge 45 is about learning how to benefit from the numerous libraries in React
-author: Wandrille Guesdon
+author: wandrille-guesdon
 challengeNumber: 45
 command: angular-react-in-angular
 sidebar:
