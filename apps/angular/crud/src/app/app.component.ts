@@ -99,17 +99,13 @@ export class AppComponent implements OnInit {
     if (this.dialog.openDialogs) {
       this.dialog.closeAll();
     }
-    const updatedArray = array.map((t) =>
-      t.id === updatedTodo.id ? updatedTodo : t,
-    );
-    this.todos.set(updatedArray);
+    this.todos.set(Todo.updateItemInArray(array, updatedTodo));
   }
 
   removeArrayItem(array: Todo[], deleteTodo: Todo): void {
     if (this.dialog.openDialogs) {
       this.dialog.closeAll();
     }
-    const arrayWithoutItem = array.filter((t) => t.id !== deleteTodo.id);
-    this.todos.set(arrayWithoutItem);
+    this.todos.set(Todo.removeItemFromArray(array, deleteTodo));
   }
 }

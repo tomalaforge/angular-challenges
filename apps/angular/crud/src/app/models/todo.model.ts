@@ -27,6 +27,14 @@ export class Todo {
     );
   }
 
+  static updateItemInArray(array: Todo[], item: Todo): Todo[] {
+    return array.map((t) => (t.id === item.id ? item : t));
+  }
+
+  static removeItemFromArray(array: Todo[], item: Todo): Todo[] {
+    return array.filter((t) => t.id !== item.id);
+  }
+
   static mockData(): TodoModel[] {
     return [
       {
