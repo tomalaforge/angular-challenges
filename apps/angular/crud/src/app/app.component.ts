@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, WritableSignal } from '@angular/core';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoadingDialog } from './dialogs';
@@ -8,15 +10,54 @@ import { TodoService } from './services';
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatCardModule, MatCheckboxModule],
   selector: 'app-root',
   template: `
-    @for (todo of todos(); track todo.id) {
-      <div>
-        {{ todo.title }}
-        <button (click)="updateTodo(todo)">Update</button>
-        <button (click)="deleteTodo(todo)">Delete</button>
-      </div>
+    <div class="container">
+      <mat-card>
+        <mat-card-content>
+          <ul>
+            @for (todo of todos(); track todo.id) {
+              <li>
+                <div class="todo-list-item">
+                  <div>
+                    <mat-checkbox></mat-checkbox>
+                    <span>{{ todo.title }}</span>
+                  </div>
+                  <div>
+                    <button (click)="updateTodo(todo)">Update</button>
+                    <button (click)="deleteTodo(todo)">Delete</button>
+                  </div>
+                </div>
+              </li>
+            }
+          </ul>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  `,
+  styles: `
+    mat-card {
+      width: fit-content;
+      margin: 20px auto;
+    }
+
+    ul {
+      list-style-type: none;
+      padding-inline-start: 0px;
+    }
+
+    .todo-list-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+
+      & > div {
+        display: flex;
+        align-items: center;
+        height: fit-content;
+        gap: 10px;
+      }
     }
   `,
 })
