@@ -210,6 +210,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "svenson95",
+      "name": "Sven Brodny",
+      "avatar_url": "https://avatars.githubusercontent.com/u/46655156?v=4",
+      "profile": "https://svenson95.github.io/sb-portfolio/",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
