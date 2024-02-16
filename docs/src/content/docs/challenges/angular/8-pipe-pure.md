@@ -24,7 +24,7 @@ A **impure** pipe is called every change detection cycle.
 
 There are some useful predefined pipes like the DatePipe, UpperCasePipe and CurrencyPipe. To learn more about pipes in Angular, check the API documentation [here](https://angular.io/guide/pipes).
 
-## Information
+## Statement
 
 In this exercise, you need to refactor a transform function inside a component, which is called inside your template. The goal is to convert this function to a pipe.
 

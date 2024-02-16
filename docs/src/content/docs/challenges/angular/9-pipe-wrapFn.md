@@ -9,6 +9,8 @@ sidebar:
   order: 103
 ---
 
+## Information
+
 This is the second of three `@Pipe()` challenges, the goal of this series is to master **pipes** in Angular.
 
 Pipes are a very powerful way to transform data in your template. The difference between calling a function and a pipe is that pure pipes are memoized. So they won't be recalculated every change detection cycle if their inputs haven't changed.
@@ -24,7 +26,7 @@ A **impure** pipe is called every change detection cycle.
 
 There are some useful predefined pipes like the DatePipe, UpperCasePipe and CurrencyPipe. To learn more about pipes in Angular, check the API documentation [here](https://angular.io/guide/pipes).
 
-## Information:
+## Statement
 
 In this exercise, you are calling multiple functions inside your template. You can create a specific pipe for each of the functions but this will be too cumbersome.
 The goal is to create a `wrapFn` pipe to wrap your callback function though a pipe. Your function MUST remain inside your component. **`WrapFn` must be highly reusable.**
