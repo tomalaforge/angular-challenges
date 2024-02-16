@@ -2,6 +2,8 @@ import { Component, EventEmitter, input, Output } from '@angular/core';
 
 type Post = { title: string; description: string; pictureLink: string };
 
+// this is the wrapper component ?
+
 @Component({
   standalone: true,
   selector: 'app-post',
