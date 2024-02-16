@@ -9,7 +9,7 @@ sidebar:
   order: 113
 ---
 
-For this exercice, you will have a dashboard of activities displaying the name, the main teacher and a list of subtitutes.
+For this exercise, you will have a dashboard of activities displaying the name, the main teacher and a list of subtitutes.
 
 ## Information
 
