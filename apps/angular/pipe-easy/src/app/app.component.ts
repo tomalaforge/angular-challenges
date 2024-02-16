@@ -12,9 +12,9 @@ import { Component } from '@angular/core';
   `,
 })
 export class AppComponent {
-  persons = ['toto', 'jack', 'samuel', 'steve'];
+  persons = ['toto', 'jack'];
 
-  // TODO: very heavy computation
+  // very heavy computation
   heavyComputation(name: string, index: number) {
     return `${name} - ${index}`;
   }
