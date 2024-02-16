@@ -19,7 +19,7 @@ By default a pipe is pure, you should be aware that setting `pure` to false is p
 
 :::note
 A **pure** pipe is only called when the value changes.\
-A **impure** pipe is called for every change detection cycle no matter whether the value changes.
+A **impure** pipe is called every change detection cycle.
 :::
 
 There are some useful predefined pipes like the DatePipe, UpperCasePipe and CurrencyPipe. To learn more about pipes in Angular, check the API documentation [here](https://angular.io/guide/pipes).
