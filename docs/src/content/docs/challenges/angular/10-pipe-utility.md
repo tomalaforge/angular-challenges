@@ -17,7 +17,7 @@ Pipes are designed to be efficient and optimized for performance. They use chang
 By default a pipe is pure, you should be aware that setting `pure` to false is prone to be inefficient, because it increases the amount of rerenders.
 
 :::note
-A **pure** pipe is only called mwhen the value changes.
+A **pure** pipe is only called when the value changes.\
 A **impure** pipe is called for every change detection cycle no matter whether the value changes.
 :::
 
