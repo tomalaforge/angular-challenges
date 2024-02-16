@@ -7,16 +7,15 @@ import { Component } from '@angular/core';
   selector: 'app-root',
   template: `
     <div *ngFor="let person of persons; let index = index">
-      {{ numberedPerson(person, index) }}
+      {{ heavyComputation(person, index) }}
     </div>
   `,
 })
 export class AppComponent {
-  // TODO: untyped array?
   persons = ['toto', 'jack', 'samuel', 'steve'];
 
-  // TODO: very heavy computation, replace this function with a pipe
-  numberedPerson(name: string, index: number) {
-    return `${index + 1}. ${name}`;
+  // TODO: very heavy computation
+  heavyComputation(name: string, index: number) {
+    return `${name} - ${index}`;
   }
 }
