@@ -9,6 +9,8 @@ sidebar:
   order: 3
 ---
 
+## Information
+
 This is the first of three `@Pipe()` challenges, the goal of this series is to master **pipes** in Angular.
 
 Pipes are a very powerful way to transform data in your template. The difference between calling a function and a pipe is that pure pipes are memoized. So they won't be recalculated every change detection cycle if their inputs haven't changed.
