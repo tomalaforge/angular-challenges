@@ -14,8 +14,8 @@ import { Component } from '@angular/core';
 export class AppComponent {
   persons = ['toto', 'jack'];
 
-  // very heavy computation
   heavyComputation(name: string, index: number) {
+    // very heavy computation
     return `${name} - ${index}`;
   }
 }
