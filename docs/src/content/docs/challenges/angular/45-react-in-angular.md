@@ -15,14 +15,14 @@ Many components are available in React, and it can be interesting to use them in
 
 ## Information
 
-In this challenge, we have a simple application and a react component `ReactPost` in `app/react` to illustrate a react component from a library.
+In this challenge, we have a simple application and a React component `ReactPost` in `app/react` to illustrate a React component from a library.
 
 ## Statement
 
 - Your task is to display the posts with the React component `ReactPost`.
 - When you select a post, the post should be highlighted.
 
-In order to play with the react component, you should start by installing the react dependencies.
+In order to play with the React component, you should start by installing the React dependencies.
 
 ```bash
 npm i --save react react-dom
@@ -31,7 +31,7 @@ npm i --save-dev @types/react @types/react-dom
 
 ## Constraints
 
-- Do not transform the react component in an angular component. The React component is pretty simple and can be written with ease in Angular. But **the goal is to use the React component**.
+- Do not transform the React component into an Angular component. The React component is pretty simple and can be written with ease in Angular. But **the goal is to use the React component**.
 
 ### Hint
 
