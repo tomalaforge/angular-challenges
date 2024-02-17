@@ -26,9 +26,6 @@ In order to play with the React component, you should start by installing the Re
 
 ```bash
 npm i --save react react-dom
-```
-
-```bash
 npm i --save-dev @types/react @types/react-dom
 ```
 
