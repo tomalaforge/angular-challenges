@@ -21,7 +21,7 @@ const containerElementName = "reactPostComponentContainer";
 })
 export class PostComponent implements OnChanges, OnDestroy, AfterViewInit {
   post = input<Post | undefined>(undefined);
-  isSelected = input<boolean>(true);
+  isSelected = input<boolean>(false);
   @Output() selectPost = new EventEmitter<void>();
   @ViewChild(containerElementName, { static: true }) containerRef!: ElementRef;
 
@@ -44,7 +44,7 @@ export class PostComponent implements OnChanges, OnDestroy, AfterViewInit {
     const root = createRoot(this.containerRef.nativeElement as HTMLElement);
     root.render(
       <React.StrictMode>
-        <ReactPost description={this.post()?.description} pictureLink={this.post()?.pictureLink} title={this.post()?.title}  handleClick={()=> this.selectPost} selected={this.isSelected()} /> 
+        <ReactPost description={this.post()?.description} pictureLink={this.post()?.pictureLink} title={this.post()?.title} handleClick={() => this.selectPost.emit()} selected={this.isSelected()} />
       </React.StrictMode>
     );
   }

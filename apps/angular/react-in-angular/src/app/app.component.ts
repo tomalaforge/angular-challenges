@@ -12,7 +12,6 @@ type Post = { title: string; description: string };
       <div class="flex gap-2">
         @for (post of posts; track post.title) {
           <div class="rounded-lg bg-gray-100 p-4">
-            <!--need id here? -->
             <app-post
               (selectPost)="selectPost(post)"
               [post]="post"
