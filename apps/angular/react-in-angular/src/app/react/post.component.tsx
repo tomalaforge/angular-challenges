@@ -21,7 +21,7 @@ const containerElementName = "reactPostComponentContainer";
 })
 export class PostComponent implements OnChanges, OnDestroy, AfterViewInit {
   post = input<Post | undefined>(undefined);
-  isSelected = input<boolean>(false);
+  isSelected = input<boolean>(true);
   @Output() selectPost = new EventEmitter<void>();
   @ViewChild(containerElementName, { static: true }) containerRef!: ElementRef;
 
@@ -39,12 +39,12 @@ export class PostComponent implements OnChanges, OnDestroy, AfterViewInit {
   }
 
   // need to change file to `tsx` -> otherwise React.StrictMode is being referred to as a type error
-
+  // the pictures seem to load slow because the root is rendered twice?
   private render() {
     const root = createRoot(this.containerRef.nativeElement as HTMLElement);
     root.render(
       <React.StrictMode>
-        <ReactPost handleClick={()=> console.log('clicked')} />
+        <ReactPost description={this.post()?.description} pictureLink={this.post()?.pictureLink} title={this.post()?.title}  handleClick={()=> this.selectPost} selected={this.isSelected()} /> 
       </React.StrictMode>
     );
   }
