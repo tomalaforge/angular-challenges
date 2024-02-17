@@ -19,7 +19,9 @@ Challenge documentation is [here](https://angular-challenges.vercel.app/challeng
 
 ## Notes
 
-- ViewChild typically used to get reference to the DOM element. viewChild signal will that work ?
+- ViewChild typically used to get reference to the DOM element. `viewChild` signal is being added to Angular soon.
+- You need a wrapper component for the div with the `root` id.
+- Instead of lifecycle methods -> use computed or effect ?
 
 ## Useful Resources
 
