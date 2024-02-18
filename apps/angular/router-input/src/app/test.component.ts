@@ -4,9 +4,9 @@ import { Component, Input as RouterInput } from '@angular/core';
   selector: 'app-subscription',
   standalone: true,
   template: `
-    <div>TestId: {{ this.testId }}</div>
-    <div>Permission: {{ this.permission }}</div>
-    <div>User: {{ this.user }}</div>
+    <div>TestId: {{ testId }}</div>
+    <div>Permission: {{ permission }}</div>
+    <div>User: {{ user }}</div>
   `,
 })
 export default class TestComponent {
