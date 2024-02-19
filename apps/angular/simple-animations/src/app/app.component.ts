@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   imports: [],
   selector: 'app-root',
   styles: `
-    .column {
+    section {
       @apply flex flex-1 flex-col gap-5;
     }
 
@@ -19,8 +19,8 @@ import { Component } from '@angular/core';
   `,
   template: `
     <div class="mx-20 my-40 flex gap-5">
-      <div class="column">
-        <section>
+      <section>
+        <div>
           <h3>2008</h3>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae
@@ -28,9 +28,9 @@ import { Component } from '@angular/core';
             quidem sit placeat possimus tempore dolorum inventore corporis atque
             quae ad, nobis explicabo delectus.
           </p>
-        </section>
+        </div>
 
-        <section>
+        <div>
           <h3>2010</h3>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae
@@ -38,9 +38,9 @@ import { Component } from '@angular/core';
             quidem sit placeat possimus tempore dolorum inventore corporis atque
             quae ad, nobis explicabo delectus.
           </p>
-        </section>
+        </div>
 
-        <section>
+        <div>
           <h4>2012</h4>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae
@@ -48,10 +48,10 @@ import { Component } from '@angular/core';
             quidem sit placeat possimus tempore dolorum inventore corporis atque
             quae ad, nobis explicabo delectus.
           </p>
-        </section>
-      </div>
+        </div>
+      </section>
 
-      <div class="column">
+      <section>
         <div class="list-item">
           <span>Name:</span>
           <span>Samuel</span>
@@ -81,7 +81,7 @@ import { Component } from '@angular/core';
           <span>Like Pizza:</span>
           <span>Hell yeah</span>
         </div>
-      </div>
+      </section>
     </div>
   `,
 })
