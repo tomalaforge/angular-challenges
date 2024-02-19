@@ -17,9 +17,9 @@ However the context of **NgTemplateOutlet** type is **Object**. But with the hel
 
 ## Statement
 
-In this exercice, we want to learn how to strongly type our ng-template in our AppComponent.
+In this exercise, we want to learn how to strongly type our ng-template in our AppComponent.
 
-This exercice has two levels of complexity.
+This exercise has two levels of complexity.
 
 ### Level 1: known Interface
 

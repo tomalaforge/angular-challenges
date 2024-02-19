@@ -6,7 +6,6 @@ import { Component, input } from '@angular/core';
   standalone: true,
   imports: [NgOptimizedImage],
   template: `
-    <!--    <div class="flex flex-col gap-3">-->
     <div class="relative">
       <img
         ngSrc="assets/profil.webp"
@@ -23,7 +22,6 @@ import { Component, input } from '@angular/core';
     </div>
     <span class="text-md mt-2 font-bold uppercase">Thomas Laforge</span>
     <span class="text-sm">{{ date() }}</span>
-    <!--    </div>-->
   `,
   host: {
     class: 'flex flex-col justify-center items-center',

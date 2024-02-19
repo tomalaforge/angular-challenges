@@ -6,7 +6,6 @@ challengeNumber: 44
 command: angular-view-transition
 sidebar:
   order: 208
-  badge: New
 ---
 
 ## Informação

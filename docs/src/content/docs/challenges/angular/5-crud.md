@@ -14,7 +14,7 @@ Communicating and having a global/local state in sync with your backend is the h
 
 ## Statement
 
-In this exercice, you have a small CRUD application, which get a list of TODOS, update and delete some todos.
+In this exercise, you have a small CRUD application, which get a list of TODOS, update and delete some todos.
 
 Currently we have a working example but filled with lots of bad practices.
 
