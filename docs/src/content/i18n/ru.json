@@ -20,5 +20,5 @@
   "subscription.button": "Подписаться",
   "subscription.email": "username@gmail.com",
   "subscription.note.title": "Примечание",
-  "subscription.note.description": "Этот email будет использоваться только для о новых испытаниях"
+  "subscription.note.description": "Этот email будет использоваться только для сообщений о новых испытаниях"
 }
