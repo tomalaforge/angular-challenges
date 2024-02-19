@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, signal } from '@angular/core';
-import { appModel, todo } from '../todo.model';
+import { Injectable, computed, signal } from '@angular/core';
 import { randText } from '@ngneat/falso';
+import { appModel, todo } from '../todo.model';
 
 @Injectable({ providedIn: 'root' })
 export class TodoService {
@@ -12,6 +12,9 @@ export class TodoService {
     // isError: null, //optional
     isLoading: false,
   });
+
+  todoSignal = computed(() => this.appSignal().todos);
+  loadingSignal = computed(() => this.appSignal().isLoading);
 
   constructor(private http: HttpClient) {}
 

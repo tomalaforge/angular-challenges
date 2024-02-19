@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, effect } from '@angular/core';
+import { Component, OnInit, Signal } from '@angular/core';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TodoService } from './services/todo.service';
 import { todo } from './todo.model';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 @Component({
   standalone: true,
   imports: [CommonModule, MatProgressSpinnerModule],
@@ -13,31 +13,25 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     @if (isError) {
       <p class="error">{{ isError }}</p>
     } -->
-    @if (isLoading) {
+    @if (isLoading()) {
       <mat-spinner></mat-spinner>
     }
-    <div *ngFor="let todo of todos$">
-      {{ todo.title }}
-      <button (click)="update(todo)">Update</button>
-      <button (click)="delete(todo.id)">Delete</button>
-    </div>
+    @for (todo of todos$(); track $index) {
+      <div>
+        {{ todo.title }}
+        <button (click)="update(todo)">Update</button>
+        <button (click)="delete(todo.id)">Delete</button>
+      </div>
+    }
   `,
   styles: [],
 })
 export class AppComponent implements OnInit {
-  todos$!: todo[];
-  // isError!: string | null;
-  isLoading!: boolean;
+  todos$: Signal<todo[]> = this.todoService.todoSignal;
+  isLoading: Signal<boolean> = this.todoService.loadingSignal;
 
-  constructor(private todoService: TodoService) {
-    effect(() => {
-      // const { todos, isError, isLoading } = this.todoService.appSignal();
-      const { todos, isLoading } = this.todoService.appSignal();
-      this.todos$ = todos;
-      // this.isError = isError;
-      this.isLoading = isLoading;
-    });
-  }
+  constructor(private todoService: TodoService) {}
+
   ngOnInit(): void {
     this.todoService.getAllTodos();
   }
