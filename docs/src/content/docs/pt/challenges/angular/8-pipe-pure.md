@@ -4,7 +4,7 @@ description: Desafio 8 é sobre criar um pipe puro
 author: thomas-laforge
 challengeNumber: 8
 command: angular-pipe-easy
-blogLink: https://medium.com/ngconf/deep-dive-into-angular-pipes-c40593cd15d
+blogLink: https://medium.com/ngconf/deep-dive-into-angular-pipes-c040588cd15d
 sidebar:
   order: 3
 ---
