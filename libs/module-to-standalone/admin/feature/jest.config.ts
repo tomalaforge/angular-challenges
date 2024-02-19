@@ -2,7 +2,7 @@
 export default {
   displayName: 'module-to-standalone-admin-feature',
   preset: '../../../../jest.preset.js',
-  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/subscription-setup.ts'],
   coverageDirectory:
     '../../../../coverage/libs/module-to-standalone/admin/feature',
   transform: {

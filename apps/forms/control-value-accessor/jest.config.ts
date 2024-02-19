@@ -2,7 +2,7 @@
 export default {
   displayName: 'forms-control-value-accessor',
   preset: '../../../jest.preset.js',
-  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/subscription-setup.ts'],
   coverageDirectory: '../../../coverage/apps/forms/control-value-accessor',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [

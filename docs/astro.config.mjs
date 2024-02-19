@@ -18,6 +18,10 @@ export const locales = {
     label: 'Português',
     lang: 'pt',
   },
+  ru: {
+    label: 'Русский',
+    lang: 'ru',
+  },
 };
 
 // https://astro.build/config
@@ -44,6 +48,7 @@ export default defineConfig({
             es: 'Guías',
             fr: 'Guides',
             pt: 'Guias',
+            ru: 'Руководство',
           },
         },
         {
@@ -53,6 +58,7 @@ export default defineConfig({
             es: 'Desafíos',
             fr: 'Challenges',
             pt: 'Desafios',
+            ru: 'Задачи',
           },
         },
       ],
@@ -74,6 +80,13 @@ export default defineConfig({
   gtag('config', 'G-6BXJ62W6G5');
           `,
         },
+        {
+          tag: 'script',
+          attrs: {
+            src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2438923752868254',
+            async: true,
+          }
+        }
       ],
       components: {
         MarkdownContent: './src/components/Content.astro',

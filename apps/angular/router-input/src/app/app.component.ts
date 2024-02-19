@@ -12,7 +12,7 @@ import { RouterLink, RouterModule } from '@angular/router';
     <label for="testId">TestId</label>
     <input id="testId" type="number" [formControl]="testId" />
     <button
-      [routerLink]="'test/' + testId.value"
+      [routerLink]="'subscription/' + testId.value"
       [queryParams]="{ user: userName.value }">
       Test
     </button>

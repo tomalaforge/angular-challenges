@@ -2,7 +2,7 @@
 export default {
   displayName: 'decoupling-core',
   preset: '../../../jest.preset.js',
-  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/subscription-setup.ts'],
   coverageDirectory: '../../../coverage/libs/decoupling/core',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [

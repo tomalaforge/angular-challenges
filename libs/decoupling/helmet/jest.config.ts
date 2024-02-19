@@ -2,7 +2,7 @@
 export default {
   displayName: 'decoupling-helmet',
   preset: '../../../jest.preset.js',
-  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/subscription-setup.ts'],
   coverageDirectory: '../../../coverage/libs/decoupling/helmet',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [

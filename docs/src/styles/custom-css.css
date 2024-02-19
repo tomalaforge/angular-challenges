@@ -159,3 +159,7 @@ details {
     cursor: pointer;
   }
 }
+
+.body:where(.astro-v5tidmuc) {
+  height: 100%;
+}
