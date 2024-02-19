@@ -4,11 +4,24 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   selector: 'app-root',
+  styles: `
+    .column {
+      @apply flex flex-1 flex-col gap-5;
+    }
+
+    .list-item {
+      @apply flex flex-row border-b px-5 pb-2;
+
+      span {
+        @apply flex-1;
+      }
+    }
+  `,
   template: `
     <div class="mx-20 my-40 flex gap-5">
-      <div class="flex flex-1 flex-col gap-5">
+      <div class="column">
         <section>
-          <h4 class="subtitle">2008</h4>
+          <h3>2008</h3>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae
             mollitia sequi accusantium, distinctio similique laudantium eveniet
@@ -18,7 +31,7 @@ import { Component } from '@angular/core';
         </section>
 
         <section>
-          <h4 class="subtitle">2010</h4>
+          <h3>2010</h3>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae
             mollitia sequi accusantium, distinctio similique laudantium eveniet
@@ -28,7 +41,7 @@ import { Component } from '@angular/core';
         </section>
 
         <section>
-          <h4 class="subtitle">2012</h4>
+          <h4>2012</h4>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae
             mollitia sequi accusantium, distinctio similique laudantium eveniet
@@ -38,41 +51,38 @@ import { Component } from '@angular/core';
         </section>
       </div>
 
-      <div class="flex flex-1 flex-col gap-5">
-        <div class="flex flex-col gap-3">
-          <div class="flex flex-col border-b px-5 pb-2 lg:flex-row">
-            <div class="key flex-1">Name:</div>
-            <div class="value flex-1">Samuel</div>
-          </div>
+      <div class="column">
+        <div class="list-item">
+          <span>Name:</span>
+          <span>Samuel</span>
+        </div>
 
-          <div class="flex flex-col border-b px-5 pb-2 lg:flex-row">
-            <div class="key flex-1">Age:</div>
-            <div class="value flex-1">28</div>
-          </div>
+        <div class="list-item">
+          <span>Age:</span>
+          <span>28</span>
+        </div>
 
-          <div class="flex flex-col border-b px-5 pb-2 lg:flex-row">
-            <div class="key flex-1">Birthdate:</div>
-            <div class="value flex-1">02.11.1995</div>
-          </div>
+        <div class="list-item">
+          <span>Birthdate:</span>
+          <span>02.11.1995</span>
+        </div>
 
-          <div class="flex flex-col border-b px-5 pb-2 lg:flex-row">
-            <div class="key flex-1">City:</div>
-            <div class="value flex-1">Berlin</div>
-          </div>
+        <div class="list-item">
+          <span>City:</span>
+          <span>Berlin</span>
+        </div>
 
-          <div class="flex flex-col border-b px-5 pb-2 lg:flex-row">
-            <div class="key flex-1">Language:</div>
-            <div class="value flex-1">English</div>
-          </div>
+        <div class="list-item">
+          <span>Language:</span>
+          <span>English</span>
+        </div>
 
-          <div class="flex flex-col border-b px-5 pb-2 lg:flex-row">
-            <div class="key flex-1">Like Pizza:</div>
-            <div class="value flex-1">Hell yeah</div>
-          </div>
+        <div class="list-item">
+          <span>Like Pizza:</span>
+          <span>Hell yeah</span>
         </div>
       </div>
     </div>
   `,
-  styles: [''],
 })
 export class AppComponent {}
