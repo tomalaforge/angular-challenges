@@ -1,6 +1,6 @@
 ---
 title: 🔴 React em angular
-description: Desafio 5 é sobre aprender como se beneficiar das vários bibliotecas em React
+description: Desafio 5 é sobre aprender como se beneficiar das várias bibliotecas em React
 author: wandrille-guesdon
 challengeNumber: 45
 command: angular-react-in-angular
