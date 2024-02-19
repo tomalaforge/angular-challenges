@@ -1,22 +1,27 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { map } from 'rxjs';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-subscription',
   standalone: true,
   imports: [AsyncPipe],
   template: `
-    <div>TestId: {{ testId$ | async }}</div>
-    <div>Permission: {{ permission$ | async }}</div>
-    <div>User: {{ user$ | async }}</div>
+    <div>TestId: {{ _testId }}</div>
+    <div>Permission: {{ _permission }}</div>
+    <div>User: {{ _user }}</div>
   `,
 })
 export default class TestComponent {
-  private activatedRoute = inject(ActivatedRoute);
-
-  testId$ = this.activatedRoute.params.pipe(map((p) => p['testId']));
-  permission$ = this.activatedRoute.data.pipe(map((d) => d['permission']));
-  user$ = this.activatedRoute.queryParams.pipe(map((q) => q['user']));
+  _testId?: string;
+  _permission?: string;
+  _user?: string;
+  @Input() set testId(value: string) {
+    this._testId = value;
+  }
+  @Input() set permission(value: string) {
+    this._permission = value;
+  }
+  @Input() set user(value: string) {
+    this._user = value;
+  }
 }
