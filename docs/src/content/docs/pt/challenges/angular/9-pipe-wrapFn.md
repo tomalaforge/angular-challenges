@@ -11,7 +11,7 @@ sidebar:
 
 ## Informação
 
-Este é o primeiro de três desafios `@Pipe()`, sendo o objetivo dominar **pipes** em Angular.
+Este é o segundo de três desafios `@Pipe()`, sendo o objetivo dominar **pipes** em Angular.
 
 Pipes são uma maneira bem poderosa de transformar dados em seu template. A diferença entre chamar uma função e um pipe é que pipes puros são memoizados. Por isso, eles não são recalculados em cada ciclo de detecção de mudanças se suas entradas não mudarem.
 
