@@ -1,5 +1,5 @@
 import { CDFlashingDirective } from '@angular-challenges/shared/directives';
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
 
 @Component({
@@ -16,6 +16,7 @@ import { MatListModule } from '@angular/material/list';
     </mat-list-item>
   `,
   styles: ``,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PersonRowComponent {
   @Input({ required: true }) name!: string;
