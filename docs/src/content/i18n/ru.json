@@ -1,10 +1,10 @@
 {
   "page.title.challenge": "Испытание",
   "author.createdBy": "Создано",
-  "buttons.email": "Email subscription",
-  "buttons.star": "Дать звезду",
-  "buttons.sponsor": "Спонсор",
-  "buttons.clipboardCopy": "Copied!",
+  "buttons.email": "Подписаться на email рассылку",
+  "buttons.star": "Добавить звезду",
+  "buttons.sponsor": "Спонсировать",
+  "buttons.clipboardCopy": "Скопировано!",
   "404.text": "Страница не найдена. Проверьте URL-адрес или воспользуйтесь строкой поиска.",
   "challenge.footer.note": "Примечание",
   "challenge.footer.running": "Запустите проект, выполнив команду:",
@@ -13,12 +13,12 @@
   "challenge.footer.communityAnswers": "Решения сообщества",
   "challenge.footer.authorAnswer": "Решение автора",
   "challenge.footer.blogPost": "Статья",
-  "challenge.footer.video": "Video",
+  "challenge.footer.video": "Видео",
   "challenge.footer.gettingStarted.title": "Чтобы пройти это испытание, прочитайте:",
   "challenge.footer.gettingStarted.link": "Первые шаги",
-  "challenge.footer.upvoteAnswer": "You can upvote an answer with a 👍 if you like it",
-  "subscription.button": "Subscribe",
+  "challenge.footer.upvoteAnswer": "Вы можете проголосовать за этот ответ 👍 если он вам понравился",
+  "subscription.button": "Подписаться",
   "subscription.email": "username@gmail.com",
-  "subscription.note.title": "Notes",
-  "subscription.note.description": "This email will only be used for sending new challenges updates"
+  "subscription.note.title": "Примечание",
+  "subscription.note.description": "Этот email будет использоваться только для о новых испытаниях"
 }
