@@ -11,6 +11,8 @@ sidebar:
 
 ## Information
 
+This is the first of two animation challenges, the goal of this series is to master animations in Angular.
+
 Well-designed animations can make your application more fun and straightforward to use, but they aren't just cosmetic. Animations can improve your application and user experience in a number of ways:
 
 - Without animations, web page transitions can seem abrupt and jarring.

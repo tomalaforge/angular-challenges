@@ -10,6 +10,8 @@ sidebar:
 
 ## Informação
 
+Este é o segundo de três desafios animation, sendo o objetivo dominar animations em Angular.
+
 A View Transition API é uma nova API que fornece um conjunto de funcionalidades, permitindo desenvolvedores controlarem e manipularem as transições e animações entre views dentro de uma aplicação.
 Isso tem um papel importante na melhoria da experiência do usuário (UX), trazendo vida a aplicações com transições atraentes e cativantes afim de guiar usuários por diferentes páginas e seções da aplicação.
 
