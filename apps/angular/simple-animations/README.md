@@ -1,6 +1,6 @@
 # Simple Animations
 
-> author: thomas-laforge
+> author: sven-brodny
 
 ### Run Application
 
@@ -10,4 +10,4 @@ npx nx serve angular-simple-animations
 
 ### Documentation and Instruction
 
-Challenge documentation is [here](https://angular-challenges.vercel.app/challenges/angular/45-simple-animations/).
+Challenge documentation is [here](https://angular-challenges.vercel.app/challenges/angular/46-simple-animations/).

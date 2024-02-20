@@ -1,8 +1,8 @@
 ---
 title: 🟢 Simple Animations
-description: Challenge 45 is about learning angular's integrated animation API
+description: Challenge 46 is about learning Angular's integrated animation API
 author: sven-brodny
-challengeNumber: 45
+challengeNumber: 46
 command: angular-simple-animations
 sidebar:
   order: 17
@@ -13,9 +13,9 @@ sidebar:
 
 Well-designed animations can make your application more fun and straightforward to use, but they aren't just cosmetic. Animations can improve your application and user experience in a number of ways:
 
-- Without animations, web page transitions can seem abrupt and jarring
-- Motion greatly enhances the user experience, so animations give users a chance to detect the application's response to their actions
-- Good animations intuitively call the user's attention to where it is needed
+- Without animations, web page transitions can seem abrupt and jarring.
+- Motion greatly enhances the user experience, so animations give users a chance to detect the application's response to their actions.
+- Good animations intuitively call the user's attention to where it is needed.
 
 I would recommend you to read the [official documentation](https://angular.io/guide/animations). You will learn everything that is necessary to successfully complete the challenge.
 
@@ -27,12 +27,12 @@ The goal of this challenge is to add animations.
 
 ## Constraints
 
-Don't use any css and utilize angular's integrated `@angular/animations` api.
+Don't use any CSS and utilize Angular's integrated `@angular/animations` API.
 
 ### Level 1
 
-Add a fading or moving animation for the paragraphs on the left side
+Add a fading or moving animation for the paragraphs on the left side.
 
 ### Level 2
 
-Add a stagger animation for the list on the right side
+Add a stagger animation for the list on the right side.
