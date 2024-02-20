@@ -1,4 +1,4 @@
-// import React from 'react';
+import React from 'react';
 
 export default function ReactPost(props: {
   title?: string,
@@ -8,7 +8,8 @@ export default function ReactPost(props: {
   handleClick: () => void
 }) {
   return (
-    <div className={props.selected ? 'bg-blue-100' : 'bg-white'}>
+   <React.StrictMode>
+     <div className={props.selected ? 'bg-blue-100' : 'bg-white'}>
       <div className="max-w-sm rounded overflow-hidden shadow-lg">
         <img className="w-full h-32 object-cover" src={props.pictureLink} alt={props.title}></img>
         <div className="px-6 py-4 flex flex-col gap-2">
@@ -23,5 +24,6 @@ export default function ReactPost(props: {
         </div>
       </div>
     </div>
+   </React.StrictMode>
   );
 }
