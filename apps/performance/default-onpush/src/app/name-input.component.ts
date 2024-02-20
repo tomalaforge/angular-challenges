@@ -24,7 +24,7 @@ import { MatInputModule } from '@angular/material/input';
         matInput
         type="text"
         [(ngModel)]="label"
-        (keydown)="handleKey($event)" />
+        (keydown.enter)="handleEnter()" />
     </mat-form-field>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -34,10 +34,8 @@ export class NameInputComponent {
 
   label = '';
 
-  handleKey(event: KeyboardEvent) {
-    if (event.key === 'Enter') {
-      this.newNameEvent.emit(this.label);
-      this.label = '';
-    }
+  handleEnter() {
+    this.newNameEvent.emit(this.label);
+    this.label = '';
   }
 }
