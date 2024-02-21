@@ -29,7 +29,8 @@ The goal of this challenge is to add animations, they should run when the user a
 
 ## Constraints
 
-Don't use any CSS and utilize Angular's integrated `@angular/animations` API.
+- Don't use any CSS and utilize Angular's integrated `@angular/animations` API.
+- Don't trigger the animations with a button like in the examples, rather when the user enter or reload the page.
 
 ### Level 1
 
