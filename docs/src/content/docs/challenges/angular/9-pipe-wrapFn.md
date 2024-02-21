@@ -29,7 +29,7 @@ There are some useful predefined pipes like the DatePipe, UpperCasePipe and Curr
 ## Statement
 
 In this exercise, you are calling multiple functions inside your template. You can create a specific pipe for each of the functions but this will be too cumbersome.
-The goal is to create a `wrapFn` pipe to wrap your callback function though a pipe. Your function MUST remain inside your component. **`WrapFn` must be highly reusable.**
+The goal is to create a `wrapFn` pipe to wrap your callback function through a pipe. Your function MUST remain inside your component. **`WrapFn` must be highly reusable.**
 
 ## Constraints:
 
