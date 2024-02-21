@@ -36,9 +36,13 @@ The goal of this challenge is to add animations, they should run when the user a
 
 Add a fading or moving animation for the paragraphs on the left side.
 
+<video controls src="https://github.com/svenson95/angular-challenges/assets/46655156/d3e2c8de-335c-4189-be1b-cc7c0d68e89d">
+</video>
+
 ### Level 2
 
 Add a stagger animation for the list on the right side.
 
 <video controls src="https://github.com/svenson95/angular-challenges/assets/46655156/7b5e770f-38bb-43a2-9dd1-cc1329cab82f">
 </video>
+
