@@ -22,10 +22,10 @@ import { Category, CategoryType } from './models/category.model';
 export class UserComponent {
   name = input.required<string>();
   lastName = input<string>();
-  age = input<string>();
+  age = input(undefined, { transform: (v: string) => Number(v) });
 
   fullName = computed(() => `${this.name()} ${this.lastName()}`);
   category = computed(() =>
-    this.age() ? Category.ageToCategory(+this.age()!) : CategoryType.Junior,
+    this.age() ? Category.ageToCategory(this.age()!) : CategoryType.Junior,
   );
 }
