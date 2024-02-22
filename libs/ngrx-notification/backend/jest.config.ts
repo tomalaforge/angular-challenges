@@ -2,7 +2,7 @@
 export default {
   displayName: 'ngrx-notification-backend',
   preset: '../../../jest.preset.js',
-  setupFilesAfterEnv: ['<rootDir>/src/subscription-setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {},
   coverageDirectory: '../../../coverage/libs/ngrx-notification/backend',
   transform: {

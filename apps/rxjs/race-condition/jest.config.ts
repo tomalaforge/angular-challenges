@@ -2,7 +2,7 @@
 export default {
   displayName: 'rxjs-race-condition',
   preset: '../../../jest.preset.js',
-  setupFilesAfterEnv: ['<rootDir>/src/subscription-setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {},
   coverageDirectory: '../../../coverage/apps/rxjs/race-condition',
   transform: {

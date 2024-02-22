@@ -2,7 +2,7 @@
 export default {
   displayName: 'angular-bug-cd',
   preset: '../../../jest.preset.js',
-  setupFilesAfterEnv: ['<rootDir>/src/subscription-setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   coverageDirectory: '../../../coverage/apps/angular/bug-cd',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [

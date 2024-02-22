@@ -2,7 +2,7 @@
 export default {
   displayName: 'testing-table',
   preset: '../../../jest.preset.js',
-  setupFilesAfterEnv: ['<rootDir>/src/subscription-setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

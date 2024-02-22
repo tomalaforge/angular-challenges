@@ -2,7 +2,7 @@
 export default {
   displayName: 'angular-interop-rxjs-signal',
   preset: '../../../jest.preset.js',
-  setupFilesAfterEnv: ['<rootDir>/src/subscription-setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   coverageDirectory: '../../../coverage/apps/angular/interop-rxjs-signal',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [

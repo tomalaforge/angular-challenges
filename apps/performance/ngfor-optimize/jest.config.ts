@@ -2,7 +2,7 @@
 export default {
   displayName: 'performance-ngfor-optimize',
   preset: '../../../jest.preset.js',
-  setupFilesAfterEnv: ['<rootDir>/src/subscription-setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   coverageDirectory: '../../../coverage/apps/performance/ngfor-optimize',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [

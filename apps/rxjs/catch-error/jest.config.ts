@@ -2,7 +2,7 @@
 export default {
   displayName: 'rxjs-catch-error',
   preset: '../../../jest.preset.js',
-  setupFilesAfterEnv: ['<rootDir>/src/subscription-setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   coverageDirectory: '../../../coverage/apps/rxjs/catch-error',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [

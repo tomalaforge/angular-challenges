@@ -2,7 +2,7 @@
 export default {
   displayName: 'angular-anchor-scrolling',
   preset: '../../../jest.preset.js',
-  setupFilesAfterEnv: ['<rootDir>/src/subscription-setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   coverageDirectory: '../../../coverage/apps/angular/anchor-scrolling',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [

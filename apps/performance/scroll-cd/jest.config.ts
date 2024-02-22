@@ -2,7 +2,7 @@
 export default {
   displayName: 'performance-scroll-cd',
   preset: '../../../jest.preset.js',
-  setupFilesAfterEnv: ['<rootDir>/src/subscription-setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {},
   coverageDirectory: '../../../coverage/apps/performance/scroll-cd',
   transform: {

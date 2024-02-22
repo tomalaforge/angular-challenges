@@ -2,7 +2,7 @@
 export default {
   displayName: 'shared-directives',
   preset: '../../../jest.preset.js',
-  setupFilesAfterEnv: ['<rootDir>/src/subscription-setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   coverageDirectory: '../../../coverage/libs/shared/directives',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [

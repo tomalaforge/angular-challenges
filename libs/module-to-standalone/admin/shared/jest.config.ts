@@ -2,7 +2,7 @@
 export default {
   displayName: 'module-to-standalone-admin-shared',
   preset: '../../../../jest.preset.js',
-  setupFilesAfterEnv: ['<rootDir>/src/subscription-setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   coverageDirectory:
     '../../../../coverage/libs/module-to-standalone/admin/shared',
   transform: {

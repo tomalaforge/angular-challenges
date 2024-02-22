@@ -2,7 +2,7 @@
 export default {
   displayName: 'angular-projection',
   preset: '../../../jest.preset.js',
-  setupFilesAfterEnv: ['<rootDir>/src/subscription-setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {},
   coverageDirectory: '../../../coverage/apps/angular/projection',
   transform: {
