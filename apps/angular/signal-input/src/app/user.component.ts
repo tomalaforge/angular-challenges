@@ -7,6 +7,8 @@ import {
 } from '@angular/core';
 import { Category, CategoryType } from './models/category.model';
 
+const CATEGORY_DEFAULT: CategoryType = 'JUNIOR';
+
 @Component({
   selector: 'app-user',
   standalone: true,
@@ -26,6 +28,6 @@ export class UserComponent {
 
   fullName = computed(() => `${this.name()} ${this.lastName()}`);
   category = computed(() =>
-    this.age() ? Category.ageToCategory(this.age()!) : CategoryType.Junior,
+    this.age() ? Category.fromAge(this.age()!) : CATEGORY_DEFAULT,
   );
 }
