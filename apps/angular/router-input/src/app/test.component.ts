@@ -6,22 +6,13 @@ import { Component, Input } from '@angular/core';
   standalone: true,
   imports: [AsyncPipe],
   template: `
-    <div>TestId: {{ _testId }}</div>
-    <div>Permission: {{ _permission }}</div>
-    <div>User: {{ _user }}</div>
+    <div>TestId: {{ testId }}</div>
+    <div>Permission: {{ permission }}</div>
+    <div>User: {{ user }}</div>
   `,
 })
 export default class TestComponent {
-  _testId?: string;
-  _permission?: string;
-  _user?: string;
-  @Input() set testId(value: string) {
-    this._testId = value;
-  }
-  @Input() set permission(value: string) {
-    this._permission = value;
-  }
-  @Input() set user(value: string) {
-    this._user = value;
-  }
+  @Input() testId!: string;
+  @Input() permission!: string;
+  @Input() user!: string;
 }
