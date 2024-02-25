@@ -1,15 +1,23 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { User } from './user.model';
+import { Injectable, computed, signal } from '@angular/core';
+import { Role, User } from './user.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserStore {
-  private user = new BehaviorSubject<User | undefined>(undefined);
-  user$ = this.user.asObservable();
+  private readonly user = signal<User | undefined>(undefined);
 
-  add(user: User) {
-    this.user.next(user);
+  readonly isUserLoggedIn = computed<boolean>(() => !!this.user());
+  readonly isAdmin = computed<boolean>(() => !!this.user()?.isAdmin);
+
+  hasAnyRole(roles: Role[]): boolean {
+    const user = this.user();
+    return user?.isAdmin
+      ? true
+      : user?.roles.some((r) => roles.includes(r)) ?? false;
+  }
+
+  select(user: User): void {
+    this.user.set(user);
   }
 }

@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+
 import { ButtonComponent } from './button.component';
 import { InformationComponent } from './information.component';
 import {
+  User,
   admin,
   client,
   everyone,
@@ -14,19 +16,21 @@ import {
 import { UserStore } from './user.store';
 
 @Component({
+  selector: 'app-login',
   standalone: true,
   imports: [InformationComponent, RouterLink, ButtonComponent],
-  selector: 'app-login',
   template: `
     <header class="flex items-center gap-3">
       Log as :
-      <button app-button (click)="admin()">Admin</button>
-      <button app-button (click)="manager()">Manager</button>
-      <button app-button (click)="reader()">Reader</button>
-      <button app-button (click)="writer()">Writer</button>
-      <button app-button (click)="readerWriter()">Reader and Writer</button>
-      <button app-button (click)="client()">Client</button>
-      <button app-button (click)="everyone()">Everyone</button>
+      <button app-button (click)="select(admin)">Admin</button>
+      <button app-button (click)="select(manager)">Manager</button>
+      <button app-button (click)="select(reader)">Reader</button>
+      <button app-button (click)="select(writer)">Writer</button>
+      <button app-button (click)="select(readerAndWriter)">
+        Reader and Writer
+      </button>
+      <button app-button (click)="select(client)">Client</button>
+      <button app-button (click)="select(everyone)">Everyone</button>
     </header>
 
     <app-information></app-information>
@@ -35,29 +39,20 @@ import { UserStore } from './user.store';
       Enter application
     </button>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent {
-  constructor(private userStore: UserStore) {}
+  private readonly userStore = inject(UserStore);
 
-  admin() {
-    this.userStore.add(admin);
-  }
-  manager() {
-    this.userStore.add(manager);
-  }
-  reader() {
-    this.userStore.add(reader);
-  }
-  writer() {
-    this.userStore.add(writer);
-  }
-  readerWriter() {
-    this.userStore.add(readerAndWriter);
-  }
-  client() {
-    this.userStore.add(client);
-  }
-  everyone() {
-    this.userStore.add(everyone);
+  readonly admin = admin;
+  readonly manager = manager;
+  readonly reader = reader;
+  readonly writer = writer;
+  readonly readerAndWriter = readerAndWriter;
+  readonly client = client;
+  readonly everyone = everyone;
+
+  select(role: User): void {
+    this.userStore.select(role);
   }
 }
