@@ -11,13 +11,16 @@ sidebar:
 
 ## Information
 
-Structural directive is an important concept you will need to master to improve your angular skills and knowledge. This will be the first part of this challenge.
+Structural directives are directives which change the DOM layout by adding and removing DOM elements. This is an important concept you'll need to improve your angular skills and knowledge. This will be the first part of this challenge. For more information check out the [official documentation](https://angular.io/guide/structural-directives).
 
-Guard is also very important since you will always need it in every application you build.
+Guards like `CanActivate` or `CanMatch` are also very important, since you'll need it in the most application's you build. If you're not very familiar with route guards, check out this two articles.
+
+- [Everything you need to know about route Guard in Angular](https://itnext.io/everything-you-need-to-know-about-route-guard-in-angular-697a062d3198)
+- [Create a route Guard to manage permissions](https://medium.com/@thomas.laforge/create-a-route-guard-to-manage-permissions-26f16cc9a1ca)
 
 ## Statement
 
-In LoginComponent, you will find 6 buttons corresponding to 6 differents user's role.
+In `LoginComponent` you'll find 6 buttons corresponding to 6 different user's role.
 
 - Admin
 - Manager
@@ -29,12 +32,12 @@ In LoginComponent, you will find 6 buttons corresponding to 6 differents user's 
 
 ## Step 1
 
-In `InformationComponent`, you need to display the correct piece of information for each role using a structural directive.
+In `InformationComponent` you'll need to display the correct piece of information for each role using a structural directive.
 
 ### Constraints
 
-- no `ngIf` or `@if` inside `InformationComponent`
-- importing the store inside `InformationComponent` is not allowed.
+- No `ngIf` or `@if` inside `InformationComponent`.
+- Importing the store inside `InformationComponent` is not allowed.
 
 You should end up with something like below:
 
@@ -52,4 +55,4 @@ You should end up with something like below:
 
 ## Step 2
 
-In `Routes.ts`, you should route all users to the correct `DashboardComponent` using `CanMatch` guard.
+In `Routes.ts` you should route all users to the correct `DashboardComponent` using `CanMatch` guard.
