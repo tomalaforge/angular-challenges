@@ -6,7 +6,6 @@ challengeNumber: 45
 command: angular-react-in-angular
 sidebar:
   order: 209
-  badge: New
 ---
 
 The goal of this challenge is to use a React component inside an Angular application.

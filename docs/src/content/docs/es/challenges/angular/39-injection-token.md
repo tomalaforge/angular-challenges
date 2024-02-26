@@ -6,7 +6,6 @@ challengeNumber: 39
 command: angular-injection-token
 sidebar:
   order: 118
-  badge: New
 ---
 
 ## Información

@@ -6,7 +6,6 @@ challengeNumber: 45
 command: angular-react-in-angular
 sidebar:
   order: 209
-  badge: New
 ---
 
 O objetivo deste desafio é usar um componente React dentro de uma aplicação Angular.
@@ -15,7 +14,7 @@ Muitos componentes estão disponíveis em React, e pode ser interessante usar el
 
 ## Informação
 
-Neste desafio temos uma simples aplicação e um componente React `ReactPost` em `app/react` para ilustrar um componente React de uma biblioteca. 
+Neste desafio temos uma simples aplicação e um componente React `ReactPost` em `app/react` para ilustrar um componente React de uma biblioteca.
 
 ## Declaração
 
