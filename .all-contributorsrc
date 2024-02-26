@@ -89,6 +89,16 @@
       ]
     },
     {
+      "login": "svenson95",
+      "name": "Sven Brodny",
+      "avatar_url": "https://avatars.githubusercontent.com/u/46655156?v=4",
+      "profile": "https://svenson95.github.io/sb-portfolio/",
+      "contributions": [
+        "doc",
+        "challenge"
+      ]
+    },
+    {
       "login": "alan-bio",
       "name": "Alan Dragicevich",
       "avatar_url": "https://avatars.githubusercontent.com/u/31838230?v=4",
@@ -207,15 +217,6 @@
       "name": "Fernando Bello",
       "avatar_url": "https://avatars.githubusercontent.com/u/63980689?v=4",
       "profile": "https://github.com/1fbr",
-      "contributions": [
-        "doc"
-      ]
-    },
-    {
-      "login": "svenson95",
-      "name": "Sven Brodny",
-      "avatar_url": "https://avatars.githubusercontent.com/u/46655156?v=4",
-      "profile": "https://svenson95.github.io/sb-portfolio/",
       "contributions": [
         "doc"
       ]
