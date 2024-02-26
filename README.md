@@ -77,6 +77,8 @@ Check [all 46 challenges](https://angular-challenges.vercel.app/)
 
 Contributions of any kind are welcome.
 
+If I have forgotten to add you as a contributor, please reach out to me. 🙏
+
 ## Licensev
 
 MIT
