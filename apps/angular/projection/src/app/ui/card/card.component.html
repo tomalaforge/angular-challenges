@@ -1,27 +1,12 @@
-<div
-  class="border-2 border-black rounded-md p-4 w-fit flex flex-col gap-3"
-  [class]="customClass">
-  <img
-    *ngIf="type === CardType.TEACHER"
-    src="assets/img/teacher.png"
-    width="200px" />
-  <img
-    *ngIf="type === CardType.STUDENT"
-    src="assets/img/student.webp"
-    width="200px" />
-
+<div class="border-2 border-black rounded-md p-4 w-fit flex flex-col gap-3" [class]="customClass">
+  <ng-content select="img"></ng-content>
   <section>
-    <app-list-item
-      *ngFor="let item of list"
-      [name]="item.firstname"
-      [id]="item.id"
-      [type]="type">
-    </app-list-item>
+    @for(listItem of list; track listItem.id) {
+    <ng-container [ngTemplateOutlet]="rowRef.templateRef"
+      [ngTemplateOutletContext]="{$implicit: listItem}"></ng-container>
+    }
   </section>
-
-  <button
-    class="border border-blue-500 bg-blue-300 p-2 rounded-sm"
-    (click)="addNewItem()">
+  <button class="border border-blue-500 bg-blue-300 p-2 rounded-sm" (click)="addNewItem()">
     Add
   </button>
 </div>
