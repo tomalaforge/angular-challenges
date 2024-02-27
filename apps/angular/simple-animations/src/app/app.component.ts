@@ -19,11 +19,11 @@ import { Component } from '@angular/core';
 
     .list-item {
       @apply flex flex-row border-b px-5 pb-2;
-      
+
       span {
         @apply flex-1;
       }
-      
+    }
     }
   `,
   animations: [
