@@ -24,7 +24,6 @@ import { Component } from '@angular/core';
         @apply flex-1;
       }
     }
-    }
   `,
   animations: [
     trigger('slideIn', [
