@@ -1,3 +1,11 @@
+import {
+  animate,
+  query,
+  stagger,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 import { Component } from '@angular/core';
 
 @Component({
@@ -11,15 +19,37 @@ import { Component } from '@angular/core';
 
     .list-item {
       @apply flex flex-row border-b px-5 pb-2;
-
-      span {
-        @apply flex-1;
-      }
+    }
+    
+    span {
+      @apply flex-1;
     }
   `,
+  animations: [
+    trigger('slideIn', [
+      transition(':enter', [
+        style({ transform: 'translateX(-100%)' }),
+        animate('400ms ease-in', style({ transform: 'translateX(0%)' })),
+      ]),
+    ]),
+    trigger('stagger', [
+      transition(':enter', [
+        query('.list-item', [
+          style({ opacity: 0, transform: 'translateX(-100px)' }),
+          stagger(400, [
+            animate(
+              '500ms cubic-bezier(0.35, 0, 0.25, 1)',
+              style({ opacity: 1, transform: 'none' }),
+            ),
+          ]),
+        ]),
+      ]),
+    ]),
+  ],
   template: `
     <div class="mx-20 my-40 flex gap-5">
-      <section>
+      <!-- The posts could be inside *ngFor loop but for an animation to work a trackBy function is required  -->
+      <section [@slideIn]>
         <div>
           <h3>2008</h3>
           <p>
@@ -51,7 +81,7 @@ import { Component } from '@angular/core';
         </div>
       </section>
 
-      <section>
+      <section [@stagger]>
         <div class="list-item">
           <span>Name:</span>
           <span>Samuel</span>
