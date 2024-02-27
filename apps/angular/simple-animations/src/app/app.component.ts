@@ -36,7 +36,8 @@ import { Component } from '@angular/core';
       transition(':enter', [
         query('.list-item', [
           style({ opacity: 0, transform: 'translateX(-100px)' }),
-          stagger(400, [
+          stagger(500, [
+            // for event loop -> better to use 250 increments (250,500,750,1000)?
             animate(
               '500ms cubic-bezier(0.35, 0, 0.25, 1)',
               style({ opacity: 1, transform: 'none' }),
