@@ -19,17 +19,18 @@ import { Component } from '@angular/core';
 
     .list-item {
       @apply flex flex-row border-b px-5 pb-2;
-    }
-    
-    span {
-      @apply flex-1;
+      
+      span {
+        @apply flex-1;
+      }
+      
     }
   `,
   animations: [
     trigger('slideIn', [
       transition(':enter', [
         style({ transform: 'translateX(-100%)' }),
-        animate('400ms ease-in', style({ transform: 'translateX(0%)' })),
+        animate('1000ms ease-in', style({ transform: 'translateX(0%)' })),
       ]),
     ]),
     trigger('stagger', [
