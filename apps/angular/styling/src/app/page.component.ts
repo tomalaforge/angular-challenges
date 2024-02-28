@@ -11,7 +11,13 @@ import { TextComponent } from './text.component';
     <static-text></static-text>
     <static-text type="error"></static-text>
     <static-text type="warning"></static-text>
-    <text class="blue-text">This is a blue text</text>
+    <text>This is a blue text</text>
+  `,
+  styles: `
+    text {
+      --text-size: 15px;
+      --text-color: blue;
+    }
   `,
 })
 export class PageComponent {}

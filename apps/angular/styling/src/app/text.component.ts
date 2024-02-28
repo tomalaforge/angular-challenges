@@ -11,25 +11,8 @@ import { Component } from '@angular/core';
   `,
   styles: `
     :host {
-      &:not(.blue-text) {
-        font-size: 10px;
-        color: black;
-      }
-
-      &.blue-text {
-        font-size: 15px;
-        color: blue;
-      }
-    }
-
-    :host-context(.error) p {
-      font-size: 30px;
-      color: red;
-    }
-
-    :host-context(.warning) p {
-      font-size: 25px;
-      color: orange;
+      font-size: var(--text-size);
+      color: var(--text-color);
     }
   `,
 })

@@ -1,8 +1,6 @@
 /* eslint-disable @angular-eslint/component-selector */
-import { Component, HostBinding, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { TextComponent } from './text.component';
-
-export type StaticTextType = 'normal' | 'warning' | 'error';
 
 @Component({
   selector: 'static-text',
@@ -11,9 +9,21 @@ export type StaticTextType = 'normal' | 'warning' | 'error';
   template: `
     <text>This is a static text</text>
   `,
+  styles: `
+    :host {
+      --text-size: 10px;
+      --text-color: black;
+
+      &[type="error"] {
+        --text-size: 30px;
+        --text-color: red;
+      }
+
+      &[type="warning"] {
+        --text-size: 25px;
+        --text-color: orange;
+      }
+    }
+  `,
 })
-export class TextStaticComponent {
-  @HostBinding('class')
-  @Input()
-  type: StaticTextType = 'normal';
-}
+export class TextStaticComponent {}
