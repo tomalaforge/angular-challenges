@@ -32,7 +32,7 @@ import { UserStore } from './user.store';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginComponent {
+export default class LoginComponent {
   private readonly store = inject(UserStore);
 
   select(type: UserType): void {
