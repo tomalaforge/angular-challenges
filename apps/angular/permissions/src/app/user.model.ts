@@ -1,4 +1,12 @@
 export type Role = 'MANAGER' | 'WRITER' | 'READER' | 'CLIENT';
+export type UserType =
+  | 'admin'
+  | 'manager'
+  | 'reader'
+  | 'writer'
+  | 'readerAndWriter'
+  | 'client'
+  | 'everyone';
 
 export interface User {
   name: string;
@@ -43,7 +51,17 @@ export const client: User = {
 };
 
 export const everyone: User = {
-  name: 'client',
+  name: 'everyone',
   isAdmin: false,
   roles: [],
 };
+
+export const types = [
+  admin,
+  manager,
+  reader,
+  writer,
+  readerAndWriter,
+  client,
+  everyone,
+];
