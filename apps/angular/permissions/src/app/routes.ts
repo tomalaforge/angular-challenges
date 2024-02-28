@@ -1,6 +1,5 @@
-import { inject } from '@angular/core';
 import { Route } from '@angular/router';
-import { HasPermissionGuard } from './has-permission.guard';
+import { hasRole, isAdmin } from './has-permission.guard';
 
 export const APP_ROUTES: Route[] = [
   {
@@ -14,34 +13,22 @@ export const APP_ROUTES: Route[] = [
   },
   {
     path: 'enter',
-    canMatch: [() => inject(HasPermissionGuard).canMatch()],
-    data: {
-      isAdmin: true,
-    },
+    canMatch: [() => isAdmin()],
     loadComponent: () => import('./dashboard/admin.component'),
   },
   {
     path: 'enter',
-    canMatch: [() => inject(HasPermissionGuard).canMatch()],
-    data: {
-      roles: ['MANAGER'],
-    },
+    canMatch: [() => hasRole(['MANAGER'])],
     loadComponent: () => import('./dashboard/manager.component'),
   },
   {
     path: 'enter',
-    canMatch: [() => inject(HasPermissionGuard).canMatch()],
-    data: {
-      roles: ['WRITER', 'READER'],
-    },
+    canMatch: [() => hasRole(['WRITER', 'READER'])],
     loadComponent: () => import('./dashboard/writer-reader.component'),
   },
   {
     path: 'enter',
-    canMatch: [() => inject(HasPermissionGuard).canMatch()],
-    data: {
-      roles: ['CLIENT'],
-    },
+    canMatch: [() => hasRole(['CLIENT'])],
     loadComponent: () => import('./dashboard/client.component'),
   },
   {
