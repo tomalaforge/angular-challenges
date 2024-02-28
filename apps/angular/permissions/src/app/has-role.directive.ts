@@ -1,4 +1,3 @@
-import { provideDestroyService } from '@angular-challenges/shared/utils';
 import {
   Directive,
   Input,
@@ -14,7 +13,6 @@ import { UserStore } from './user.store';
 @Directive({
   standalone: true,
   selector: '[appHasRole], [appHasRoleIsAdmin]',
-  providers: [provideDestroyService()],
 })
 export class HasRoleDirective {
   private readonly templateRef = inject(TemplateRef<unknown>);
