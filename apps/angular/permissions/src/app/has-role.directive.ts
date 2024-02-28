@@ -1,10 +1,10 @@
 import {
   Directive,
-  Input,
   TemplateRef,
   ViewContainerRef,
   effect,
   inject,
+  input,
 } from '@angular/core';
 
 import { Role } from './user.model';
@@ -19,16 +19,16 @@ export class HasRoleDirective {
   private readonly viewContainer = inject(ViewContainerRef);
   private readonly store = inject(UserStore);
 
-  @Input('appHasRole') role: Role[] = [];
-  @Input('appHasRoleIsAdmin') isAdmin = false;
+  readonly appHasRole = input<Role[]>([]);
+  readonly appHasRoleIsAdmin = input<boolean>(false);
 
   constructor() {
     effect(() => {
-      if (this.isAdmin) {
+      if (this.appHasRoleIsAdmin()) {
         const isAdmin = this.store.isAdmin();
         isAdmin ? this.addTemplate() : this.clearTemplate();
-      } else if (this.role) {
-        this.store.hasAnyRole(this.role)
+      } else if (this.appHasRole()) {
+        this.store.hasAnyRole(this.appHasRole())
           ? this.addTemplate()
           : this.clearTemplate();
       } else {
