@@ -26,13 +26,13 @@ On the other hand, [Union Types](https://www.typescriptlang.org/docs/handbook/2/
 type Difficulty = 'EASY' | 'NORMAL';
 ```
 
-### Reasons to use Union types
+### Reasons to use Union Types
 
-Enums are a conecpt borrowed from languages like C# and Java. TypeScript Enums are compiled into JavaScript objects with keys for both the names and values of the Enum members. This results in larger output files and additional memory consumption, which can be particularly problematic in performance-critical applications.
+Enums are a concept borrowed from languages like C# and Java. TypeScript Enums are compiled into JavaScript objects with keys for both the names and values of the Enum members. This results in larger output files and additional memory consumption, which can be particularly problematic in performance-critical applications.
 
 Enums have some more pitfalls as well:
 
-- Non-const enums do not fit to the conect "a typed superset of JavaScript". They violate the concept by emitting JavaScript objects that live in runtime with a syntax that is not compatible with JavaScript.
+- Non-const enums do not fit to the concept "a typed superset of JavaScript". They violate the concept by emitting JavaScript objects that live in runtime with a syntax that is not compatible with JavaScript.
 - Const enums in contrast cannot be transpiled with Babel. But there are workarounds for this issue, e. g. using `babel-plugin-const-enum` plugin.
 - To use enums you have to import them, if you want to use enum values in a template, you'll need to declare a variable in your component too.
 - Numeric enums are not type safe ...
@@ -53,7 +53,7 @@ Another good thing is that they add meaning to otherwise meaningless values, so 
 
 ### Conclusion
 
-Enums are not redundant, but in most cases union is preferred. Unless you care a lot about maintainability, where Enums fit a little bit better. Here are some more interesing articles discussing this subject:
+Enums are not redundant, but in most cases union types are preferred. Unless you care a lot about maintainability, where Enums maybe fit a little bit better. Here are some more interesing articles discussing this subject:
 
 - [Should You Use Enums or Union Types in Typescript?](https://www.bam.tech/article/should-you-use-enums-or-union-types-in-typescript)
 - [Typescript has unions, so are enums redundant?](https://stackoverflow.com/questions/40275832/typescript-has-unions-so-are-enums-redundant)
@@ -61,7 +61,7 @@ Enums are not redundant, but in most cases union is preferred. Unless you care a
 
 ## Statement
 
-The goal of this challenge is to refactor the enums `Difficulty` & `Direction`
+The goal of this challenge is to refactor the enums `Difficulty` & `Direction`.
 
-- Refactor `Difficulty` to const enum
-- Refacotr `Direction` to union type
+- Refactor `Difficulty` to const enum.
+- Refactor `Direction` to union type.
