@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, WritableSignal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { switchMap, tap } from 'rxjs';
 import { FakeHttpService } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
 import { CardType } from '../../model/card.model';
@@ -8,7 +10,10 @@ import { CardComponent } from '../../ui/card/card.component';
 @Component({
   selector: 'app-student-card',
   template: `
-    <app-card [list]="students" [type]="cardType" customClass="bg-light-green">
+    <app-card
+      [list]="students()"
+      [type]="cardType"
+      customClass="bg-light-green">
       <img src="assets/img/student.webp" width="200px" />
     </app-card>
   `,
@@ -23,7 +28,13 @@ import { CardComponent } from '../../ui/card/card.component';
   imports: [CardComponent],
 })
 export class StudentCardComponent implements OnInit {
-  students: Student[] = [];
+  students: WritableSignal<Student[]> = <WritableSignal<Student[]>>toSignal(
+    this.http.fetchStudents$.pipe(
+      tap((s) => this.store.addAll(s)),
+      switchMap(() => this.store.students$),
+    ),
+  );
+
   cardType = CardType.STUDENT;
 
   constructor(
@@ -31,9 +42,5 @@ export class StudentCardComponent implements OnInit {
     private store: StudentStore,
   ) {}
 
-  ngOnInit(): void {
-    this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
-
-    this.store.students$.subscribe((s) => (this.students = s));
-  }
+  ngOnInit(): void {}
 }
