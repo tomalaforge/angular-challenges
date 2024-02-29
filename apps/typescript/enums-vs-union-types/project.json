@@ -1,0 +1,73 @@
+{
+  "name": "typescript-enums-vs-union-types",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "app",
+  "sourceRoot": "apps/typescript/enums-vs-union-types/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:application",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/typescript/enums-vs-union-types",
+        "index": "apps/typescript/enums-vs-union-types/src/index.html",
+        "browser": "apps/typescript/enums-vs-union-types/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/typescript/enums-vs-union-types/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/typescript/enums-vs-union-types/src/favicon.ico",
+          "apps/typescript/enums-vs-union-types/src/assets"
+        ],
+        "styles": ["apps/typescript/enums-vs-union-types/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "typescript-enums-vs-union-types:build:production"
+        },
+        "development": {
+          "buildTarget": "typescript-enums-vs-union-types:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "typescript-enums-vs-union-types:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    }
+  }
+}
