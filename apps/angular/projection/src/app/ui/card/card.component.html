@@ -1,0 +1,19 @@
+<div class="flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4">
+  <ng-content select="img"></ng-content>
+
+  <section>
+    <ng-container *ngFor="let item of list!">
+      <ng-template
+        *ngTemplateOutlet="
+              rowTemplate;
+              context: { $implicit: item }
+            "></ng-template>
+    </ng-container>
+  </section>
+
+  <button
+    class="rounded-sm border border-blue-500 bg-blue-300 p-2"
+    (click)="add.emit()">
+    Add
+  </button>
+</div>
