@@ -33,5 +33,5 @@ export class UserComponent {
   $age = input(0, { alias: 'age', transform: Number });
 
   $fullName = computed(() => `${this.$name()} ${this.$lastName()}`);
-  $category = computed(() => ageToCategory(Number(this.$age())));
+  $category = computed(() => ageToCategory(this.$age()));
 }
