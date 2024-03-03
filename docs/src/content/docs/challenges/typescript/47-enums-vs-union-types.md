@@ -47,9 +47,19 @@ const hard: Difficulty = 2; // no error
 
 ### Reasons to use Enums
 
-With an enum, it is much easier to find all usages of a value in a project, thus refactoring & maintaining is extremly easy. If you stick to assigning strings to the enum keys all the time, you can avoid a lot of issues.
+Enums are the best option for code refactoring, it is much easier to find all usages of a value in a project, thus refactoring & maintaining is extremly easy. If you stick to assigning strings to the enum keys all the time, you can avoid a lot of issues.
 
-Another good thing is that they add meaning to otherwise meaningless values, so they can improve readability. For example `HttpStatus.Forbidden` gives more information than `Forbidden`.
+It's true that enums produces larger output files, but that's not always a real problem. As long as the enum do it's job without any problems, it shouldn't be something you care that much about.
+
+Another good thing is that the necessary enum prefix add meaning to otherwise meaningless values, so they can improve readability. For example `HttpStatus.Forbidden` gives more information than `Forbidden`.
+
+### Mapped types
+
+A [mapped type](https://learntypescript.dev/08/l2-mapped-type) is the process of creating a new type by mapping type information from an existing type.
+
+```typescript
+type Difficulty = { [K in 'EASY' | 'NORMAL']: string };
+```
 
 ### Conclusion
 
@@ -63,5 +73,5 @@ Enums are not redundant, but in most cases union types are preferred. Unless you
 
 The goal of this challenge is to refactor the enums `Difficulty` & `Direction`.
 
-- Refactor `Difficulty` to const enum.
-- Refactor `Direction` to union type.
+- Refactor `Difficulty` enum to **union type**.
+- Refactor `Direction` enum to **mapped type**.
