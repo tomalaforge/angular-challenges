@@ -1,0 +1,7 @@
+<app-card  (add)="addStudent()"
+[list]="students"
+customClass="bg-light-green">
+<ng-template #rowRef let-student>
+    <app-list-item (delete)="deleteStudent(student.id)" [name]="student.firstName"></app-list-item>
+</ng-template>
+<img src="assets/img/student.webp" width="200px" /></app-card>
