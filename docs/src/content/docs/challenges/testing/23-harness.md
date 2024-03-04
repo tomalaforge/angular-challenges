@@ -19,6 +19,6 @@ Documentation for Angular Material component is [here](https://material.angular.
 
 ## Statement
 
-The goal is to test the functionality of `child.component.ts`, which consists of some inputs & checkboxes related to a `mat-slider`. I have prepared a test suite that you need to implement, but feel free to include additional tests as well.
+Test the functionality of `child.component.ts`, which consists of some inputs & checkboxes related to a `mat-slider`. Implement the prepared test suite, but feel free to include additional tests as well.
 
 **Note:** You are welcome to use Testing Library if you wish.
