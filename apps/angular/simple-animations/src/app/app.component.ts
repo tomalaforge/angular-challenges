@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { ANIMATIONS } from './app.animation';
 
 @Component({
   standalone: true,
   imports: [],
   selector: 'app-root',
+  animations: ANIMATIONS,
   styles: `
     section {
       @apply flex flex-1 flex-col gap-5;
@@ -19,7 +21,7 @@ import { Component } from '@angular/core';
   `,
   template: `
     <div class="mx-20 my-40 flex gap-5">
-      <section>
+      <section [@slideIn]>
         <div>
           <h3>2008</h3>
           <p>
@@ -51,38 +53,24 @@ import { Component } from '@angular/core';
         </div>
       </section>
 
-      <section>
-        <div class="list-item">
-          <span>Name:</span>
-          <span>Samuel</span>
-        </div>
-
-        <div class="list-item">
-          <span>Age:</span>
-          <span>28</span>
-        </div>
-
-        <div class="list-item">
-          <span>Birthdate:</span>
-          <span>02.11.1995</span>
-        </div>
-
-        <div class="list-item">
-          <span>City:</span>
-          <span>Berlin</span>
-        </div>
-
-        <div class="list-item">
-          <span>Language:</span>
-          <span>English</span>
-        </div>
-
-        <div class="list-item">
-          <span>Like Pizza:</span>
-          <span>Hell yeah</span>
-        </div>
+      <section [@stagger]>
+        @for (item of items; track item.detail) {
+          <div class="list-item">
+            <span>{{ item.detail }}:</span>
+            <span>{{ item.value }}</span>
+          </div>
+        }
       </section>
     </div>
   `,
 })
-export class AppComponent {}
+export class AppComponent {
+  public items = [
+    { detail: 'Name', value: 'Samuel' },
+    { detail: 'Age', value: 28 },
+    { detail: 'Birthdate', value: '02.11.1995' },
+    { detail: 'City', value: 'Berlin' },
+    { detail: 'Language', value: 'English' },
+    { detail: 'LikePizza', value: 'Hell yeah' },
+  ];
+}
