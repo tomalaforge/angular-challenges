@@ -88,6 +88,10 @@ a.action,
   align-items: center;
   margin-top: 0;
   background-color: var(--sl-color-accent-high);
+
+  &.action {
+    color: var(--color-btn);
+  }
 }
 
 .article-footer > a > p {
