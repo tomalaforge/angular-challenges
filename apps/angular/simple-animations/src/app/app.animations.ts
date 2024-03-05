@@ -16,10 +16,10 @@ export const fadeInAnimation = trigger('fadeInAnimation', [
 ]);
 
 export const staggerAnimation = trigger('staggerAnimation', [
-  transition('* => *', [
-    query(':enter', style({ opacity: 0 }), { optional: true }),
+  transition(':enter', [
+    query('.list-item', style({ opacity: 0 })),
     query(
-      ':enter',
+      '.list-item',
       stagger('100ms', [
         animate(
           '300ms 200ms',
