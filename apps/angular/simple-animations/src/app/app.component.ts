@@ -21,7 +21,7 @@ import { ANIMATIONS } from './app.animation';
   `,
   template: `
     <div class="mx-20 my-40 flex gap-5">
-      <section [@slideIn]>
+      <section @slideIn>
         <div>
           <h3>2008</h3>
           <p>
@@ -53,7 +53,7 @@ import { ANIMATIONS } from './app.animation';
         </div>
       </section>
 
-      <section [@stagger]>
+      <section @stagger>
         @for (item of items; track item.detail) {
           <div class="list-item">
             <span>{{ item.detail }}:</span>
