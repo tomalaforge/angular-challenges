@@ -1,6 +1,6 @@
 # Enums vs Union Types
 
-> author: thomas-laforge
+> author: sven-brodny
 
 ### Run Application
 
