@@ -1,14 +1,14 @@
 import { Component, computed, signal } from '@angular/core';
 
-enum Difficulty {
-  EASY = 'easy',
-  NORMAL = 'normal',
-}
+type Difficulty = 'Easy' | 'Normal';
+type Direction = 'left' | 'right';
 
-enum Direction {
-  LEFT = 'left',
-  RIGHT = 'right',
-}
+type DirectionLabelMap = { [key in Direction]: string };
+
+const directionLabels: DirectionLabelMap = {
+  left: 'Left',
+  right: 'Right',
+};
 
 @Component({
   standalone: true,
@@ -17,10 +17,10 @@ enum Direction {
   template: `
     <section>
       <div>
-        <button mat-stroked-button (click)="difficulty.set(Difficulty.EASY)">
+        <button mat-stroked-button (click)="difficulty.set('Easy')">
           Easy
         </button>
-        <button mat-stroked-button (click)="difficulty.set(Difficulty.NORMAL)">
+        <button mat-stroked-button (click)="difficulty.set('Normal')">
           Normal
         </button>
       </div>
@@ -29,10 +29,8 @@ enum Direction {
 
     <section>
       <div>
-        <button mat-stroked-button (click)="direction.set(Direction.LEFT)">
-          Left
-        </button>
-        <button mat-stroked-button (click)="direction.set(Direction.RIGHT)">
+        <button mat-stroked-button (click)="direction.set('left')">Left</button>
+        <button mat-stroked-button (click)="direction.set('right')">
           Right
         </button>
       </div>
@@ -54,30 +52,16 @@ enum Direction {
   `,
 })
 export class AppComponent {
-  readonly Difficulty = Difficulty;
-  readonly difficulty = signal<Difficulty>(Difficulty.EASY);
-
-  readonly Direction = Direction;
+  readonly difficulty = signal<Difficulty>('Easy');
   readonly direction = signal<Direction | undefined>(undefined);
 
-  readonly difficultyLabel = computed<string>(() => {
-    switch (this.difficulty()) {
-      case Difficulty.EASY:
-        return Difficulty.EASY;
-      case Difficulty.NORMAL:
-        return Difficulty.NORMAL;
-    }
-  });
+  readonly difficultyLabel = computed<string>(() => this.difficulty());
 
   readonly directionLabel = computed<string>(() => {
     const prefix = 'You choosed to go';
-    switch (this.direction()) {
-      case Direction.LEFT:
-        return `${prefix} ${Direction.LEFT}`;
-      case Direction.RIGHT:
-        return `${prefix} ${Direction.RIGHT}`;
-      default:
-        return 'Choose a direction!';
-    }
+    const selectedDirection = this.direction();
+    return selectedDirection
+      ? `${prefix} ${directionLabels[selectedDirection]}`
+      : 'Choose a direction!';
   });
 }
