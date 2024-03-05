@@ -41,23 +41,30 @@ export class LoginComponent {
 
   admin() {
     this.userStore.add(admin);
+    console.log('admin');
   }
   manager() {
     this.userStore.add(manager);
+    console.log('manager');
   }
   reader() {
     this.userStore.add(reader);
+    console.log('reader');
   }
   writer() {
     this.userStore.add(writer);
+    console.log('writer');
   }
   readerWriter() {
     this.userStore.add(readerAndWriter);
+    console.log('readerandwriter');
   }
   client() {
     this.userStore.add(client);
+    console.log('client');
   }
   everyone() {
     this.userStore.add(everyone);
+    console.log('everyone');
   }
 }
