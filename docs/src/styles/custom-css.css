@@ -16,6 +16,9 @@
   --color-btn: var(--sl-color-white);
   --color-chip: rgb(35, 38, 47);
   --color-chip-border: rgba(240, 246, 252, 0.1);
+
+  --button-transform: translateY(-1px);
+  --button-transition: all 100ms ease-in-out 30ms;
 }
 
 :root[data-theme='light'],
@@ -48,6 +51,18 @@
   width: fit-content;
   gap: 6px;
   margin: 0px 2px;
+}
+
+a.action, 
+.article-footer > a, 
+.action-footer > a.action-button {
+  transition: var(--button-transition);
+
+  &:hover {
+    opacity: 0.9;
+    transform: var(--button-transform);
+    transition: var(--button-transition);
+  }
 }
 
 .article-footer {
