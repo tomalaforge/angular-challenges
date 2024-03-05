@@ -18,7 +18,7 @@
   --color-chip-border: rgba(240, 246, 252, 0.1);
 
   --button-transform: translateY(-1px);
-  --button-transition: all 100ms ease-in-out 30ms;
+  --button-transition: transform 150ms ease-in-out 30ms, opacity 100ms ease-in-out;
 }
 
 :root[data-theme='light'],
