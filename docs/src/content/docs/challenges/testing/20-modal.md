@@ -8,7 +8,7 @@ sidebar:
   order: 111
 ---
 
-## Information:
+## Information
 
 In this small application, you have an input prompting you to enter a name, and a **Confirm** button to submit your form.
 If you enter a name, a confirmation modal will appear; otherwise an error modal will be displayed.
