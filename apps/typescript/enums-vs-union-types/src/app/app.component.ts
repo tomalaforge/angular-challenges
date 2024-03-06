@@ -94,9 +94,10 @@ export class AppComponent {
     }
   });
 
-  // either string or key seems to work
+  // either string or key works
+  // if not left / right / undefined -> error
   readonly directionLabel = computed<string>(() => {
-    const prefix = 'You choose to go';
+    const prefix = 'You chose to go';
     switch (this.direction()) {
       case 'left':
         return `${prefix} ${DirectionMap.left}`;
