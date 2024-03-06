@@ -1,10 +1,5 @@
 import { Component, computed, signal } from '@angular/core';
 
-enum Difficulty {
-  EASY = 'easy',
-  NORMAL = 'normal',
-}
-
 enum Direction {
   LEFT = 'left',
   RIGHT = 'right',
@@ -23,6 +18,8 @@ const Difficulty = {
 // Object.values(enum) can be useful to spot differences between enums and const enums.  
 */
 
+type Difficulty = 'easy' | 'normal';
+
 @Component({
   standalone: true,
   imports: [],
@@ -30,10 +27,10 @@ const Difficulty = {
   template: `
     <section>
       <div>
-        <button mat-stroked-button (click)="difficulty.set(Difficulty.EASY)">
+        <button mat-stroked-button (click)="difficulty.set('easy')">
           Easy
         </button>
-        <button mat-stroked-button (click)="difficulty.set(Difficulty.NORMAL)">
+        <button mat-stroked-button (click)="difficulty.set('normal')">
           Normal
         </button>
       </div>
@@ -67,18 +64,17 @@ const Difficulty = {
   `,
 })
 export class AppComponent {
-  readonly Difficulty = Difficulty;
-  readonly difficulty = signal<Difficulty>(Difficulty.EASY);
+  readonly difficulty = signal<Difficulty>('easy');
 
   readonly Direction = Direction;
   readonly direction = signal<Direction | undefined>(undefined);
 
   readonly difficultyLabel = computed<string>(() => {
     switch (this.difficulty()) {
-      case Difficulty.EASY:
-        return Difficulty.EASY;
-      case Difficulty.NORMAL:
-        return Difficulty.NORMAL;
+      case 'easy':
+        return 'easy';
+      case 'normal':
+        return 'normal';
     }
   });
 
