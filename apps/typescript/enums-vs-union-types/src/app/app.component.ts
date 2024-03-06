@@ -1,13 +1,8 @@
 import { Component, computed, signal } from '@angular/core';
 
-enum Direction {
-  LEFT = 'left',
-  RIGHT = 'right',
-}
-
 /*
 // Using `as const` can be a great alternative to either.
-// You gain flexibility and consistency with such an implementation. 
+// You gain flexibility and consistency with such an implementation. Also, less complicated. 
 // [See this Matt Pocock video for more](https://www.youtube.com/watch?v=jjMbPt_H3RQ) 
 
 const Difficulty = {
@@ -19,6 +14,18 @@ const Difficulty = {
 */
 
 type Difficulty = 'easy' | 'normal';
+
+type AllowedDirections = 'left' | 'right';
+
+// dont think you need to declare yourself
+type MappedType = {
+  [K in AllowedDirections]: string;
+};
+
+const DirectionMap: MappedType = {
+  left: 'left',
+  right: 'right',
+};
 
 @Component({
   standalone: true,
@@ -39,10 +46,8 @@ type Difficulty = 'easy' | 'normal';
 
     <section>
       <div>
-        <button mat-stroked-button (click)="direction.set(Direction.LEFT)">
-          Left
-        </button>
-        <button mat-stroked-button (click)="direction.set(Direction.RIGHT)">
+        <button mat-stroked-button (click)="direction.set('left')">Left</button>
+        <button mat-stroked-button (click)="direction.set('right')">
           Right
         </button>
       </div>
@@ -66,8 +71,7 @@ type Difficulty = 'easy' | 'normal';
 export class AppComponent {
   readonly difficulty = signal<Difficulty>('easy');
 
-  readonly Direction = Direction;
-  readonly direction = signal<Direction | undefined>(undefined);
+  readonly direction = signal<AllowedDirections | undefined>(undefined);
 
   readonly difficultyLabel = computed<string>(() => {
     switch (this.difficulty()) {
@@ -81,10 +85,10 @@ export class AppComponent {
   readonly directionLabel = computed<string>(() => {
     const prefix = 'You choose to go';
     switch (this.direction()) {
-      case Direction.LEFT:
-        return `${prefix} ${Direction.LEFT}`;
-      case Direction.RIGHT:
-        return `${prefix} ${Direction.RIGHT}`;
+      case 'left':
+        return `${prefix} ${DirectionMap.left}`;
+      case 'right':
+        return `${prefix} ${DirectionMap.right}`;
       default:
         return 'Choose a direction!';
     }
