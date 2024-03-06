@@ -15,14 +15,26 @@ const Difficulty = {
 
 type Difficulty = 'easy' | 'normal';
 
-type AllowedDirections = 'left' | 'right';
+//type AllowedDirections = 'left' | 'right';
 
-// dont think you need to declare yourself
+type Directions = {
+  left: string;
+  right: string;
+};
+
+/*
+// dont think you need to declare a MappedType yourself
+// the correct mapped type will be inferred automatically with Readonly
+// can add modifiers to MappedType -> `readonly`
+
+// Check this [YouTube Video](https://www.youtube.com/watch?v=fn12l_8LfxI)
+
 type MappedType = {
   [K in AllowedDirections]: string;
 };
+*/
 
-const DirectionMap: MappedType = {
+const DirectionMap: Readonly<Directions> = {
   left: 'left',
   right: 'right',
 };
@@ -71,7 +83,7 @@ const DirectionMap: MappedType = {
 export class AppComponent {
   readonly difficulty = signal<Difficulty>('easy');
 
-  readonly direction = signal<AllowedDirections | undefined>(undefined);
+  readonly direction = signal<keyof Directions | undefined>(undefined);
 
   readonly difficultyLabel = computed<string>(() => {
     switch (this.difficulty()) {
@@ -82,12 +94,13 @@ export class AppComponent {
     }
   });
 
+  // either string or key seems to work
   readonly directionLabel = computed<string>(() => {
     const prefix = 'You choose to go';
     switch (this.direction()) {
       case 'left':
         return `${prefix} ${DirectionMap.left}`;
-      case 'right':
+      case DirectionMap.right:
         return `${prefix} ${DirectionMap.right}`;
       default:
         return 'Choose a direction!';
