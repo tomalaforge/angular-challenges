@@ -10,6 +10,19 @@ enum Direction {
   RIGHT = 'right',
 }
 
+/*
+// Using `as const` can be a great alternative to either.
+// You gain flexibility and consistency with such an implementation. 
+// [See this Matt Pocock video for more](https://www.youtube.com/watch?v=jjMbPt_H3RQ) 
+
+const Difficulty = {
+  EASY: 'easy',
+  NORMAL: 'normal'
+} as const;
+
+// Object.values(enum) can be useful to spot differences between enums and const enums.  
+*/
+
 @Component({
   standalone: true,
   imports: [],
@@ -70,7 +83,7 @@ export class AppComponent {
   });
 
   readonly directionLabel = computed<string>(() => {
-    const prefix = 'You choosed to go';
+    const prefix = 'You choose to go';
     switch (this.direction()) {
       case Direction.LEFT:
         return `${prefix} ${Direction.LEFT}`;
