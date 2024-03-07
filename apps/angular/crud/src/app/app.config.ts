@@ -1,5 +1,9 @@
-import { HttpClientModule } from '@angular/common/http';
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { provideHttpClient } from '@angular/common/http';
+import { ApplicationConfig } from '@angular/core';
+import {
+  provideAngularQuery,
+  QueryClient,
+} from '@tanstack/angular-query-experimental';
 export const appConfig: ApplicationConfig = {
-  providers: [importProvidersFrom(HttpClientModule)],
+  providers: [provideHttpClient(), provideAngularQuery(new QueryClient())],
 };
