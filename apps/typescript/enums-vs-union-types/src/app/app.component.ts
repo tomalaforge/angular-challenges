@@ -82,29 +82,20 @@ const DirectionMap: Readonly<Directions> = {
 })
 export class AppComponent {
   readonly difficulty = signal<Difficulty>('easy');
-
   readonly direction = signal<keyof Directions | undefined>(undefined);
 
   readonly difficultyLabel = computed<string>(() => {
-    switch (this.difficulty()) {
-      case 'easy':
-        return 'easy';
-      case 'normal':
-        return 'normal';
-    }
+    return this.difficulty() === 'easy' ? 'easy' : 'normal';
   });
 
-  // either string or key works
-  // if not left / right / undefined -> error
   readonly directionLabel = computed<string>(() => {
     const prefix = 'You chose to go';
-    switch (this.direction()) {
-      case 'left':
-        return `${prefix} ${DirectionMap.left}`;
-      case DirectionMap.right:
-        return `${prefix} ${DirectionMap.right}`;
-      default:
-        return 'Choose a direction!';
+    const selectedDirection = this.direction();
+
+    if (selectedDirection && DirectionMap[selectedDirection]) {
+      return `${prefix} ${DirectionMap[selectedDirection]}`;
+    } else {
+      return 'Choose a direction!';
     }
   });
 }
