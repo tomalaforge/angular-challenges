@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import {
   FakeHttpService,
   randTeacher,
 } from '../../data-access/fake-http.service';
 import { TeacherStore } from '../../data-access/teacher.store';
+import { templateRefDirective } from '../../directives/tempateRef.directive';
 import { Teacher } from '../../model/teacher.model';
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
@@ -11,10 +12,12 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
 @Component({
   selector: 'app-teacher-card',
   template: `
-    <app-card [list]="teachers" (addItem)="addItem()" class="bg-light-red">
+    <app-card [list]="teachers()" (addItem)="addTeacher()" class="bg-light-red">
       <img src="assets/img/teacher.png" width="200px" />
-      <ng-template #templateRef let-teacher>
-        <app-list-item [id]="teacher.id" (deleteItem)="deleteItem(teacher.id)">
+      <ng-template templateRef let-teacher>
+        <app-list-item
+          [id]="teacher.id"
+          (deleteItem)="deleteTeacher(teacher.id)">
           {{ teacher.firstName }}
         </app-list-item>
       </ng-template>
@@ -28,27 +31,27 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
     `,
   ],
   standalone: true,
-  imports: [CardComponent, ListItemComponent],
+  imports: [CardComponent, ListItemComponent, templateRefDirective],
 })
 export class TeacherCardComponent implements OnInit {
-  teachers: Teacher[] = [];
+  teachers = signal<Teacher[]>([]);
 
-  constructor(
-    private http: FakeHttpService,
-    private store: TeacherStore,
-  ) {}
+  http = inject(FakeHttpService);
+  storeTeachers = inject(TeacherStore);
 
   ngOnInit(): void {
-    this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
+    this.http.fetchTeachers$.subscribe((t) => this.storeTeachers.addAll(t));
 
-    this.store.teachers$.subscribe((t) => (this.teachers = t));
+    this.storeTeachers.teachers$.subscribe((teachers) =>
+      this.teachers.set(teachers),
+    );
   }
 
-  addItem() {
-    this.store.addOne(randTeacher());
+  addTeacher() {
+    this.storeTeachers.addOne(randTeacher());
   }
 
-  deleteItem(teacherId: number) {
-    this.store.deleteOne(teacherId);
+  deleteTeacher(teacherId: number) {
+    this.storeTeachers.deleteOne(teacherId);
   }
 }

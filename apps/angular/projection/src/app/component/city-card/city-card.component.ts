@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { CityStore } from '../../data-access/city.store';
 import {
   FakeHttpService,
   randomCity,
 } from '../../data-access/fake-http.service';
+import { templateRefDirective } from '../../directives/tempateRef.directive';
 import { City } from '../../model/city.model';
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
@@ -11,17 +12,17 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
 @Component({
   selector: 'app-city-card',
   template: `
-    <app-card [list]="cities" (addItem)="addItem()" class="bg-light-green">
+    <app-card [list]="cities()" (addItem)="addCity()" class="bg-light-green">
       <img src="assets/img/city.png" width="200px" />
-      <ng-template #templateRef let-city>
-        <app-list-item [id]="city.id" (deleteItem)="deleteItem(city.id)">
+      <ng-template templateRef let-city>
+        <app-list-item [id]="city.id" (deleteItem)="deleteCity(city.id)">
           {{ city.name }}
         </app-list-item>
       </ng-template>
     </app-card>
   `,
   standalone: true,
-  imports: [CardComponent, ListItemComponent],
+  imports: [CardComponent, ListItemComponent, templateRefDirective],
   styles: [
     `
       .bg-light-green {
@@ -31,24 +32,22 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   ],
 })
 export class CityCardComponent implements OnInit {
-  cities: City[] = [];
+  cities = signal<City[]>([]);
 
-  constructor(
-    private http: FakeHttpService,
-    private store: CityStore,
-  ) {}
+  http = inject(FakeHttpService);
+  storeCity = inject(CityStore);
 
   ngOnInit(): void {
-    this.http.fetchCities$.subscribe((s) => this.store.addAll(s));
+    this.http.fetchCities$.subscribe((cities) => this.storeCity.addAll(cities));
 
-    this.store.cities$.subscribe((s) => (this.cities = s));
+    this.storeCity.cities$.subscribe((cities) => this.cities.set(cities));
   }
 
-  addItem() {
-    this.store.addOne(randomCity());
+  addCity() {
+    this.storeCity.addOne(randomCity());
   }
 
-  deleteItem(cityId: number) {
-    this.store.deleteOne(cityId);
+  deleteCity(cityId: number) {
+    this.storeCity.deleteOne(cityId);
   }
 }

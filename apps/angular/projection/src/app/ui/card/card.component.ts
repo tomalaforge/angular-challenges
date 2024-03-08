@@ -7,6 +7,7 @@ import {
   Output,
   TemplateRef,
 } from '@angular/core';
+import { templateRefDirective } from '../../directives/tempateRef.directive';
 import { ListItemComponent } from '../list-item/list-item.component';
 
 @Component({
@@ -31,7 +32,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
     </button>
   `,
   standalone: true,
-  imports: [NgFor, ListItemComponent, NgTemplateOutlet],
+  imports: [NgFor, ListItemComponent, NgTemplateOutlet, templateRefDirective],
   host: {
     class: 'flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4',
   },
@@ -42,7 +43,7 @@ export class CardComponent<T extends { id: number }> {
   @Output()
   addItem: EventEmitter<void> = new EventEmitter<void>();
 
-  @ContentChild('templateRef')
+  @ContentChild(templateRefDirective, { read: TemplateRef })
   template!: TemplateRef<{ $implicit: T }>;
 
   addNewItem() {
