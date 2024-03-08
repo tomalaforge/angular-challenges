@@ -70,7 +70,7 @@ export class AppComponent {
   });
 
   readonly directionLabel = computed<string>(() => {
-    const prefix = 'You choosed to go';
+    const prefix = 'You chose to go';
     switch (this.direction()) {
       case Direction.LEFT:
         return `${prefix} ${Direction.LEFT}`;

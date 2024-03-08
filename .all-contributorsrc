@@ -48,6 +48,18 @@
       ]
     },
     {
+      "login": "svenson95",
+      "name": "Sven Brodny",
+      "avatar_url": "https://avatars.githubusercontent.com/u/46655156?v=4",
+      "profile": "https://svenson95.github.io/sb-portfolio/",
+      "contributions": [
+        "doc",
+        "challenge",
+        "content",
+        "design"
+      ]
+    },
+    {
       "login": "jdegand",
       "name": "J. Degand",
       "avatar_url": "https://avatars.githubusercontent.com/u/70610011?v=4",
@@ -85,16 +97,6 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/15016833?v=4",
       "profile": "https://wandrille-guesdon.com/",
       "contributions": [
-        "challenge"
-      ]
-    },
-    {
-      "login": "svenson95",
-      "name": "Sven Brodny",
-      "avatar_url": "https://avatars.githubusercontent.com/u/46655156?v=4",
-      "profile": "https://svenson95.github.io/sb-portfolio/",
-      "contributions": [
-        "doc",
         "challenge"
       ]
     },
