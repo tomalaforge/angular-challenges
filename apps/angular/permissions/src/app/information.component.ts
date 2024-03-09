@@ -1,7 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { HasRoleDirective } from './HasRole.directive';
-import { admin, manager } from './user.model';
+import {
+  User,
+  admin,
+  client,
+  everyone,
+  manager,
+  reader,
+  writer,
+} from './user.model';
 import { UserStore } from './user.store';
 
 @Component({
@@ -11,21 +19,33 @@ import { UserStore } from './user.store';
   template: `
     <h2 class="mt-10 text-xl">Information Panel</h2>
     <!-- admin can see everything -->
-    <div *hasRole="adminRole">visible only for super admin</div>
-    <div *hasRole="managerRole">visible if manager</div>
-    <!-- <div>visible if manager and/or reader</div>
-    <div>visible if manager and/or writer</div>
-    <div *hasRole="'client'">visible if client</div>
-    <div *hasRole="'everyone'">visible for everyone</div> -->
-    -->
-    <!-- <div *hasRole="'manager'" >informacion del manager</div> -->
-    <!-- <div>{{(this.user$|async)?.name}}</div> -->
+    <div *hasRole="[adminRole]">visible only for super admin</div>
+    <div *hasRole="[managerRole]">visible if manager</div>
+    <div *hasRole="[managerRole, readerRole]">
+      visible if manager and/or reader
+    </div>
+    <div *hasRole="[managerRole, writerRole]">
+      visible if manager and/or writer
+    </div>
+    <div *hasRole="[clientRole]">visible if client</div>
+    <div *hasRole="[everyoneRole]">visible for everyone</div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InformationComponent {
-  adminRole = admin;
-  managerRole = manager;
+  adminRole: User;
+  readerRole: User;
+  managerRole: User;
+  writerRole: User;
+  clientRole: User;
+  everyoneRole: User;
   user$ = this.userStore.user$;
-  constructor(private userStore: UserStore) {}
+  constructor(private userStore: UserStore) {
+    this.adminRole = admin;
+    this.managerRole = manager;
+    this.writerRole = writer;
+    this.clientRole = client;
+    this.readerRole = reader;
+    this.everyoneRole = everyone;
+  }
 }

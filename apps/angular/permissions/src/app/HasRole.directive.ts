@@ -15,41 +15,41 @@ import { UserStore } from './user.store';
   standalone: true,
 })
 export class HasRoleDirective implements OnInit {
-  //@Input() roleSent: User={} as User;
-  roleSent: User = {} as User;
-  @Input() set hasRole(role: User) {
+  roleSent: User[] = [] as User[];
+  @Input() set hasRole(role: User[]) {
     this.roleSent = role;
-    //console.log("el rol es: ", role)
   }
-  // get the template ref from the ng-template host
+
   private template = inject(TemplateRef<unknown>);
-  // get the viewcontainerref from the host: <!--comment-->
   private vcr = inject(ViewContainerRef);
-  // @Input() csdIf: boolean = false;
   private userStore = inject(UserStore);
-  // ngOnChanges(): void {
-  //   const user$ = this.userStore.user$;
-  //   console.log(user$)
-  // }
 
   public ngOnInit(): void {
     this.userStore.user$.pipe().subscribe((p) => {
       if (p == undefined) return;
       this.vcr.clear();
-      if (p.isAdmin) this.vcr.createEmbeddedView(this.template);
+      if (this.isAdmin(p)) {
+        this.vcr.createEmbeddedView(this.template);
+        return;
+      }
+
+      let rolesFlattened: string[] = [];
+      let namesRoles: string[] = [];
+      this.roleSent.forEach((p) => {
+        namesRoles = [...namesRoles, p.name];
+        rolesFlattened = [...rolesFlattened, ...p.roles];
+      });
+      if (rolesFlattened.length === 0) {
+        if (namesRoles.includes('admin')) return;
+        this.vcr.createEmbeddedView(this.template);
+        return;
+      }
       const intersectionResult = this.performIntersection(
-        this.roleSent.roles,
+        rolesFlattened,
         p.roles,
       );
       if (intersectionResult && intersectionResult.length > 0)
         this.vcr.createEmbeddedView(this.template);
-
-      console.log('el rol activo es ', p.roles);
-      console.log('el rol del div es ', this.roleSent.roles);
-      console.log('la interseccion ', intersectionResult);
-
-      // console.log("el rol activo es ", p?.name)
-      // console.log("el rol del div es ", this.roleSent)
     });
   }
 
@@ -57,5 +57,9 @@ export class HasRoleDirective implements OnInit {
     const intersectionResult = arr1.filter((x) => arr2.indexOf(x) !== -1);
 
     return intersectionResult;
+  }
+
+  private isAdmin(user: User): boolean {
+    return user.isAdmin;
   }
 }
