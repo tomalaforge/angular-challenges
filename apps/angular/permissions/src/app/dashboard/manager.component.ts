@@ -1,14 +1,16 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ButtonComponent } from '../button.component';
+import { DashboardComponent } from './dashboard.component';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-manager-dashboard',
   standalone: true,
-  imports: [RouterLink, ButtonComponent],
+  imports: [RouterLink, ButtonComponent, DashboardComponent],
   template: `
-    <p>dashboard for Manager works!</p>
-    <button app-button routerLink="/">Logout</button>
+    <app-dashboard>
+      <p>dashboard for Manager works!</p>
+    </app-dashboard>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

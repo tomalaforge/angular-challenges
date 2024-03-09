@@ -4,14 +4,14 @@ import { ButtonComponent } from '../button.component';
 import { DashboardComponent } from './dashboard.component';
 
 @Component({
-  selector: 'app-admin-dashboard',
+  selector: 'app-client-dashboard',
   standalone: true,
   imports: [RouterLink, ButtonComponent, DashboardComponent],
   template: `
     <app-dashboard>
-      <p>dashboard for Admin works!</p>
+      <p>dashboard for Client works!</p>
     </app-dashboard>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AdminDashboardComponent {}
+export class ClientDashboardComponent {}
