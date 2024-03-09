@@ -1,6 +1,9 @@
 ---
 title: Первые шаги
 description: Руководство о том, как начать работу с испытаниями Angular.
+contributors:
+  - stillst
+  - 1fbr
 sidebar:
   order: 1
 ---

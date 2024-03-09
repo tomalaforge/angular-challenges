@@ -2,6 +2,8 @@
 title: 🟠 Estilos CSS Altamente Personalizables
 description: El desafío 13 trata sobre la creación de estilos CSS altamente personalizables
 author: thomas-laforge
+contributors:
+  - ErickRodrCodes
 challengeNumber: 13
 command: angular-styling
 sidebar:

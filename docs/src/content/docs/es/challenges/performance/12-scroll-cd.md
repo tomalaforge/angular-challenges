@@ -2,6 +2,8 @@
 title: 🟠 Optimizar el Change Detection al desplazarse
 description: Desafío 12 sobre la optimización del número de ciclos de detección de cambios al desplazarse
 author: thomas-laforge
+contributors:
+  - nelsongutidev
 challengeNumber: 12
 command: performance-scroll-cd
 sidebar:

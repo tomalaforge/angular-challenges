@@ -1,6 +1,8 @@
 ---
 title: Сделайте rebase вашей ветки
 description: Руководство по rebase ветки на последние изменения
+contributors:
+  - stillst
 sidebar:
   order: 6
 ---

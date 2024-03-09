@@ -2,6 +2,8 @@
 title: 🟢 Navegação por Âncora
 description: Desafio 21 é sobre navegação dentro de uma página por âncora
 author: thomas-laforge
+contributors:
+  - kabrunko-dev
 challengeNumber: 21
 command: angular-anchor-scrolling
 sidebar:

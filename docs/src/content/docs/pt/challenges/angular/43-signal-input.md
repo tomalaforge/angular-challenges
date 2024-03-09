@@ -2,6 +2,8 @@
 title: 🟢 Signal Input
 description: Desafio 43 é sobre como usar signal inputs
 author: thomas-laforge
+contributors:
+  - kabrunko-dev
 challengeNumber: 43
 command: angular-signal-input
 sidebar:

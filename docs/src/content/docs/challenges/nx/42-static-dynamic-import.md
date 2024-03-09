@@ -2,6 +2,8 @@
 title: 🟢 Static vs Dynamic Import
 description: Challenge 42 is about understanding and fixing the eslint rule - Static imports of lazy-loaded libraries are forbidden.
 author: thomas-laforge
+contributors:
+  - tomalaforge
 challengeNumber: 42
 command: nx-static-dynamic-import
 sidebar:

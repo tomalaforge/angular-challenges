@@ -18,6 +18,7 @@ const docs = defineCollection({
         noCommentSection: z.boolean().optional().default(false),
         challengeNumber: z.union([z.number(), z.boolean()]).default(false),
         author: reference('authors').optional(),
+        contributors: z.array(z.string()).optional(),
         command: z.string().optional(),
         blogLink: z.string().optional(),
         videoLink: z
@@ -57,6 +58,8 @@ const i18n = defineCollection({
         'subscription.email': z.string(),
         'subscription.note.title': z.string(),
         'subscription.note.description': z.string(),
+        'contributor.title': z.string(),
+        'contributor.subtitle': z.string(),
       })
       .partial(),
   }),

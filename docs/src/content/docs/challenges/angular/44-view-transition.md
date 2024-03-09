@@ -2,6 +2,9 @@
 title: 🔴 View Transition
 description: Challenge 44 is about learning the new view transition animation API
 author: thomas-laforge
+contributors:
+  - tomalaforge
+  - jdegand
 challengeNumber: 44
 command: angular-view-transition
 sidebar:

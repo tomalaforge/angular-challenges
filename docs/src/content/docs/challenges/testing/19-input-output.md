@@ -2,6 +2,11 @@
 title: 🟠 Input Output
 description: Challenge 19 is about testing inputs and ouputs
 author: thomas-laforge
+contributors:
+  - tomalaforge
+  - tomer953
+  - svenson95
+  - jdegand
 challengeNumber: 19
 command: testing-input-output
 sidebar:

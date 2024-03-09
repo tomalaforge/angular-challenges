@@ -1,6 +1,9 @@
 ---
 title: Inicio
 description: Una guía para comenzar con los Desafíos de Angular
+contributors:
+  - nelsongutidev
+  - 1fbr
 sidebar:
   order: 1
 ---

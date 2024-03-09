@@ -2,6 +2,8 @@
 title: 🟠 Directiva Estructural
 description: El Desafío 6 se trata de generar una Directiva Estructural que manipule los permisos
 author: thomas-laforge
+contributors:
+  - ErickRodrCodes
 challengeNumber: 6
 command: angular-permissions
 blogLink: https://medium.com/@thomas.laforge/create-a-custom-structural-directive-to-manage-permissions-like-a-pro-11a1acad30ad

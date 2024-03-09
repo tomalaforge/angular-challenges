@@ -1,6 +1,8 @@
 ---
 title: Começando
 description: Um guia de como começar com Desafios Angular.
+contributors:
+  - kabrunko-dev
 sidebar:
   order: 1
 ---

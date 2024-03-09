@@ -2,6 +2,11 @@
 title: 🟠 Modal
 description: Challenge 20 is about testing modals
 author: thomas-laforge
+contributors:
+  - tomalaforge
+  - tomer953
+  - svenson95
+  - jdegand
 challengeNumber: 20
 command: testing-modal
 sidebar:

@@ -2,6 +2,8 @@
 title: 🟠 Bug de Detección de Cambios
 description: El desafío 32 trata sobre depurar una aplicación que tiene problemas cuando se activa la detección de cambios
 author: thomas-laforge
+contributors:
+  - ErickRodrCodes
 challengeNumber: 32
 command: angular-bug-cd
 blogLink: https://medium.com/ngconf/function-calls-inside-template-are-dangerous-15f9822a6629

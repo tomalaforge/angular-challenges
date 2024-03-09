@@ -2,6 +2,11 @@
 title: 🟠 Structural Directive
 description: Challenge 6 is about creating a structural directive to handle permissions
 author: thomas-laforge
+contributors:
+  - tomalaforge
+  - tomer953
+  - kabrunko-dev
+  - svenson95
 challengeNumber: 6
 command: angular-permissions
 blogLink: https://medium.com/@thomas.laforge/create-a-custom-structural-directive-to-manage-permissions-like-a-pro-11a1acad30ad

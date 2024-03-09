@@ -2,6 +2,8 @@
 title: 🟢 De Módulo a Standalone (Independiente)
 description: El desafío 31 trata sobre migrar una aplicación basada en módulos a una aplicación independiente.
 author: thomas-laforge
+contributors:
+  - ErickRodrCodes
 challengeNumber: 31
 command: angular-module-to-standalone
 sidebar:

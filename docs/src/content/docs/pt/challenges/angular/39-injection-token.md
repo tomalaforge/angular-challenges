@@ -2,6 +2,8 @@
 title: 🟠 InjectionToken
 description: Desafio 39 é sobre o poder da injeção de dependência
 author: thomas-laforge
+contributors:
+  - kabrunko-dev
 challengeNumber: 39
 command: angular-injection-token
 sidebar:

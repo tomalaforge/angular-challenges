@@ -3,6 +3,8 @@ title: 🟢 catchError
 description: Desafio 38 é sobre aprender conclusão de observable
 author: devesh-chaudhari
 command: rxjs-catch-error
+contributors:
+  - kabrunko-dev
 challengeNumber: 38
 sidebar:
   order: 14

@@ -1,6 +1,8 @@
 ---
 title: Создайте свое испытание
 description: Руководство по созданию испытания
+contributors:
+  - stillst
 sidebar:
   order: 5
 ---

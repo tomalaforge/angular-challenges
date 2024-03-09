@@ -1,6 +1,8 @@
 ---
 title: Contribuye
 description: Guía para contribuir al proyecto
+contributors:
+  - nelsongutidev
 sidebar:
   order: 4
 ---

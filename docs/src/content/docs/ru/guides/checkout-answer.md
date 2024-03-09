@@ -1,6 +1,9 @@
 ---
 title: Изучайте чужие решения
 description: Руководство по просмотру чужого ответа.
+contributors:
+  - stillst
+  - 1fbr
 sidebar:
   order: 3
 ---

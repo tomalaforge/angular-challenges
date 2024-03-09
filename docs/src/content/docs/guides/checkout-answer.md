@@ -1,6 +1,10 @@
 ---
 title: Check out Somebody's Answer
 description: Guide to checking out someone else's answer.
+contributors:
+  - tomalaforge
+  - gsgonzalez88
+  - 1fbr
 sidebar:
   order: 3
 ---

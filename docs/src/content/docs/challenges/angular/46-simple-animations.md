@@ -2,6 +2,8 @@
 title: 🟢 Simple Animations
 description: Challenge 46 is about learning Angular's integrated animation API
 author: sven-brodny
+contributors:
+  - svenson95
 challengeNumber: 46
 command: angular-simple-animations
 sidebar:

@@ -2,6 +2,8 @@
 title: 🟠 Pipe Empacotador de Função
 description: Challenge 9 is about creating a pipe to wrap component fonctions
 author: thomas-laforge
+contributors:
+  - kabrunko-dev
 challengeNumber: 9
 command: angular-pipe-intermediate
 blogLink: https://medium.com/ngconf/boost-your-apps-performance-by-wrapping-your-functions-inside-a-pipe-7e889a901d1d

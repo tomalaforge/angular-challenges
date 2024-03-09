@@ -2,6 +2,8 @@
 title: 🟢 Проекция контента
 description: Challenge 1 заключается в изучении проекции элементов DOM через компоненты
 author: thomas-laforge
+contributors:
+  - stillst
 challengeNumber: 1
 command: angular-projection
 blogLink: https://medium.com/@thomas.laforge/create-a-highly-customizable-component-cc3a9805e4c5

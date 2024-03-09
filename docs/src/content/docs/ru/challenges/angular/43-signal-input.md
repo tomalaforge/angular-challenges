@@ -2,6 +2,8 @@
 title: 🟢 Signal Input
 description: Испытание 43 про то как использовать signal inputs
 author: thomas-laforge
+contributors:
+  - stillst
 challengeNumber: 43
 command: angular-signal-input
 sidebar:

@@ -1,6 +1,9 @@
 ---
 title: Contribute
 description: Guide to contribute
+contributors:
+  - tomalaforge
+  - jdegand
 sidebar:
   order: 4
 ---

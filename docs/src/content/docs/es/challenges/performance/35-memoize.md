@@ -2,6 +2,8 @@
 title: 🟢 Memoización
 description: El desafío 35 trata sobre cómo funcionan las tuberías puras
 author: thomas-laforge
+contributors:
+  - nelsongutidev
 challengeNumber: 35
 command: performance-memoized
 sidebar:

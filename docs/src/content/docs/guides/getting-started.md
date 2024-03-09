@@ -1,6 +1,10 @@
 ---
 title: Getting Started
 description: A guide on how to get started with Angular Challenges.
+contributors:
+  - tomalaforge
+  - 1fbr
+  - ho-ssain
 sidebar:
   order: 1
 ---

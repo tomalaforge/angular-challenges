@@ -1,6 +1,10 @@
 ---
 title: Resolve a Challenge
 description: Guide to resolve a challenge
+contributors:
+  - tomalaforge
+  - 1fbr
+  - gsgonzalez88
 sidebar:
   order: 2
 ---

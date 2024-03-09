@@ -1,6 +1,8 @@
 ---
 title: FAQ
 description: Respostas para perguntas
+contributors:
+  - kabrunko-dev
 sidebar:
   order: 7
 ---

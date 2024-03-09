@@ -2,6 +2,8 @@
 title: 🔴 Типизация ContextOutlet
 description: Испытание 4 про строгую типизацию ngContextOutlet директивы
 author: thomas-laforge
+contributors:
+  - stillst
 challengeNumber: 4
 command: angular-context-outlet-type
 blogLink: https://medium.com/@thomas.laforge/ngtemplateoutlet-type-checking-5d2dcb07a2c6

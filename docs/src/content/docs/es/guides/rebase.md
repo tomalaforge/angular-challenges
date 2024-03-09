@@ -1,6 +1,8 @@
 ---
 title: Hacer rebase a tu rama
 description: Guía para hacer rebase a tu rama
+contributors:
+  - nelsongutidev
 sidebar:
   order: 6
 ---

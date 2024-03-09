@@ -5,6 +5,7 @@ import { getEntry } from 'astro:content';
 import Author from './Author.astro';
 import ChallengeFooter from './ChallengeFooter.astro';
 import CommentSection from './CommentSection.astro';
+import ContributorsFooter from './ContributorsFooter.astro';
 
 const { lang } = Astro.props;
 const { data } = await getEntry('i18n', lang);
@@ -25,6 +26,8 @@ const renderCommentSection = !Astro.props.entry.data.noCommentSection;
 
 { renderCommentSection &&
 <CommentSection {...Astro.props} /> }
+
+ <ContributorsFooter {...Astro.props} />
 
 <style>
   .author {

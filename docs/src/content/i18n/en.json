@@ -19,5 +19,7 @@
   "subscription.button": "Subscribe",
   "subscription.email": "username@gmail.com",
   "subscription.note.title": "Notes",
-  "subscription.note.description": "This email will only be used for sending new challenges updates"
+  "subscription.note.description": "This email will only be used for sending new challenges updates",
+  "contributor.title": "Contributors",
+  "contributor.subtitle": "Thanks to all the contributors who have helped make this documentation better!"
 }
