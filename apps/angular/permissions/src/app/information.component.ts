@@ -1,5 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnChanges,
+} from '@angular/core';
 import { HasRoleDirective } from './HasRole.directive';
 import {
   User,
@@ -10,7 +15,6 @@ import {
   reader,
   writer,
 } from './user.model';
-import { UserStore } from './user.store';
 
 @Component({
   selector: 'app-information',
@@ -32,20 +36,27 @@ import { UserStore } from './user.store';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InformationComponent {
+export class InformationComponent implements OnChanges {
+  @Input() userRole: User | undefined = {} as User;
+
   adminRole: User;
   readerRole: User;
   managerRole: User;
   writerRole: User;
   clientRole: User;
   everyoneRole: User;
-  user$ = this.userStore.user$;
-  constructor(private userStore: UserStore) {
+  constructor() {
     this.adminRole = admin;
     this.managerRole = manager;
     this.writerRole = writer;
     this.clientRole = client;
     this.readerRole = reader;
     this.everyoneRole = everyone;
+  }
+  ngOnChanges(): void {
+    console.log(
+      'el rol que me viene como parametro input es : ',
+      this.userRole,
+    );
   }
 }

@@ -28,7 +28,7 @@ export class HasRoleDirective implements OnInit {
     this.userStore.user$.pipe().subscribe((p) => {
       if (p == undefined) return;
       this.vcr.clear();
-      if (this.isAdmin(p)) {
+      if (p.isAdmin) {
         this.vcr.createEmbeddedView(this.template);
         return;
       }
@@ -57,9 +57,5 @@ export class HasRoleDirective implements OnInit {
     const intersectionResult = arr1.filter((x) => arr2.indexOf(x) !== -1);
 
     return intersectionResult;
-  }
-
-  private isAdmin(user: User): boolean {
-    return user.isAdmin;
   }
 }

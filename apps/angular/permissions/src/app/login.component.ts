@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 import { ButtonComponent } from './button.component';
 import { InformationComponent } from './information.component';
 import {
+  User,
   admin,
   client,
   everyone,
@@ -29,7 +30,7 @@ import { UserStore } from './user.store';
       <button app-button (click)="everyone()">Everyone</button>
     </header>
 
-    <app-information></app-information>
+    <app-information [userRole]="this.userRole"></app-information>
 
     <button app-button class="mt-10" routerLink="enter">
       Enter application
@@ -37,7 +38,12 @@ import { UserStore } from './user.store';
   `,
 })
 export class LoginComponent {
-  constructor(private userStore: UserStore) {}
+  userRole: User | undefined = {} as User;
+  constructor(private userStore: UserStore) {
+    this.userStore.user$.pipe().subscribe((p) => {
+      this.userRole = p;
+    });
+  }
 
   admin() {
     this.userStore.add(admin);

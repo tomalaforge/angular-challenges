@@ -1,3 +1,8 @@
+import { authGuardGuard } from './authGuard.guard';
+import { AdminDashboardComponent } from './dashboard/admin.component';
+import { ManagerDashboardComponent } from './dashboard/manager.component';
+//import { CanActivate } from '@angular/router';
+
 export const APP_ROUTES = [
   {
     path: '',
@@ -6,9 +11,20 @@ export const APP_ROUTES = [
   },
   {
     path: 'enter',
-    loadComponent: () =>
-      import('./dashboard/admin.component').then(
-        (m) => m.AdminDashboardComponent,
-      ),
+    component: AdminDashboardComponent,
+    canActivate: [authGuardGuard],
+  },
+  // {
+  //   path: 'enter',
+  //   loadComponent: () =>
+  //     import('./dashboard/admin.component').then(
+  //       (m) => m.AdminDashboardComponent,
+  //     ),
+  //     CanActivate:[authGuardGuard]
+  // },
+  {
+    path: 'manager',
+    component: ManagerDashboardComponent,
+    CanActivate: [authGuardGuard],
   },
 ];
