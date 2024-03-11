@@ -1,1 +1,1 @@
-export * from './lib/main-shell.module';
+export { appRoutes } from './lib/main-shell.routes';

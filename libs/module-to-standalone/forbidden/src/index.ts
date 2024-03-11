@@ -1,1 +1,1 @@
-export * from './lib/forbidden.module';
+export { ForbiddenComponent } from './lib/forbidden.component';

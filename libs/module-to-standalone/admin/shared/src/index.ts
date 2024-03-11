@@ -1,1 +1,1 @@
-export * from './lib/authorized.guard';
+export { IsAuthorizedGuard } from './lib/authorized.guard';
