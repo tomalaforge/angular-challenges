@@ -2,6 +2,8 @@
 title: 🟢 Crud приложение
 description: Задача 5 посвящена рефакторингу crud-приложения
 author: thomas-laforge
+contributors:
+  - webbomj
 challengeNumber: 5
 command: angular-crud
 sidebar:
