@@ -12,8 +12,6 @@ sidebar:
 
 A component harness is a class that lets a test interact with a component via a supported API.
 
-## Information
-
 The objective of this challenge is to have a better understanding of the CDK test harness API. In this initial challenge, we will only use Angular Material's built-in harnesses.
 
 Documentation for CDK Component Harness is [here](https://material.angular.io/cdk/test-harnesses/overview#api-for-test-authors).
