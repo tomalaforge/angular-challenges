@@ -1,0 +1,75 @@
+---
+import { getEntry } from 'astro:content';
+
+const contributors = Astro.props.entry.data.contributors ?? [];
+const { lang } = Astro.props;
+const { data } = await getEntry('i18n', lang);
+---
+
+
+{contributors.length === 0 ? null :
+<div class="wrapper card">
+  <h3>{data['contributor.title']}</h3>
+  <p>{data['contributor.subtitle']}</p>
+  <ul class="list">
+    {contributors.map((contributor: string) => (
+      <li key={`contributor-${contributor}`} class="contributor">
+        <a href={`https://github.com/${contributor}`} target="_blank" rel="noreferrer">
+          <img
+            loading="lazy"
+            src={`https://github.com/${contributor}.png?size=80`}
+            width="40"
+            height="40"
+            alt={contributor}
+            class="avatar"
+          />
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>
+  }
+
+<style>
+  .wrapper {
+    margin: 50px 0;
+  }
+
+  .card {
+    border-radius: 10px;
+    min-width: 230px;
+    padding: 25px;
+    flex: 1;
+    border: 1px solid var(--sl-color-gray-5);
+  }
+
+  h3 {
+    color: var(--sl-color-white);
+    margin-bottom: 1rem;
+  }
+
+  .list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: left;
+    gap: 8px;
+    align-items: center;
+    list-style: none;
+    margin: 10px 0;
+    padding: 0;
+  }
+
+  .contributor {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+  }
+
+  .avatar {
+    border-radius: 50%;
+    width: 40px;
+    height: auto;
+  }
+
+</style>

@@ -1,6 +1,8 @@
 ---
 title: Rebase your branch
 description: Guide to rebase a branch to latest change
+contributors:
+  - tomalaforge
 sidebar:
   order: 6
 ---

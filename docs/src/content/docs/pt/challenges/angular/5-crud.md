@@ -2,6 +2,8 @@
 title: 🟢 Aplicação Crud
 description: Desafio 5 é sobre refatorar uma aplicação crud is about refactoring a crud application
 author: thomas-laforge
+contributors:
+  - kabrunko-dev
 challengeNumber: 5
 command: angular-crud
 sidebar:

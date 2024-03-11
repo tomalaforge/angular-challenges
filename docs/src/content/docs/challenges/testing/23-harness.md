@@ -2,6 +2,11 @@
 title: 🟢 Harness
 description: Challenge 23 is about testing with component harnesses
 author: thomas-laforge
+contributors:
+  - tomalaforge
+  - tomer953
+  - svenson95
+  - jdegand
 challengeNumber: 23
 command: testing-harness
 sidebar:

@@ -2,6 +2,8 @@
 title: 🟠 Control Value Accessor
 description: Desafio 41 é sobre criar um controle personalizado de formulário que implemente a interface Control Value Accessor.
 author: stanislav-gavrilov
+contributors:
+  - kabrunko-dev
 challengeNumber: 41
 command: forms-control-value-accessor
 sidebar:

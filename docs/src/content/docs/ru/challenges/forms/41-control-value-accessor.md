@@ -2,6 +2,8 @@
 title: 🟠 Control Value Accessor
 description: Испытание 41 про создание пользовательское поле формы которое использует интерфейс ControlValueAccessor.
 author: stanislav-gavrilov
+contributors:
+  - stillst
 challengeNumber: 41
 command: forms-control-value-accessor
 sidebar:

@@ -1,5 +1,7 @@
 ---
 title: Comment démarrer
+contributors:
+  - tomalaforge
 description: Un guide sur la manière de commencer avec sur Angular Challenges.
 sidebar:
   order: 1

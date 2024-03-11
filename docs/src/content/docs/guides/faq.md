@@ -1,6 +1,9 @@
 ---
 title: FAQ
 description: Answer to question
+contributors:
+  - tomalaforge
+  - jdegand
 sidebar:
   order: 7
 ---

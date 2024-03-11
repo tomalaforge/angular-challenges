@@ -2,6 +2,8 @@
 title: 🟠 Веб-воркеры
 description: Испытание 40 о том как создать и использовать веб-воркер
 author: thomas-laforge
+contributors:
+  - stillst
 challengeNumber: 40
 command: performance-christmas-web-worker
 sidebar:

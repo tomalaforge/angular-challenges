@@ -2,6 +2,11 @@
 title: 🟢 Crud application
 description: Challenge 5 is about refactoring a crud application
 author: thomas-laforge
+contributors:
+  - tomalaforge
+  - tomer953
+  - svenson95
+  - jdegand
 challengeNumber: 5
 command: angular-crud
 sidebar:

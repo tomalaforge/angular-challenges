@@ -2,6 +2,8 @@
 title: 🔴 Interoperabilidade Rxjs/Signal
 description: Desafio 30 é sobre aprender como misturar signal com Rxjs
 author: thomas-laforge
+contributors:
+  - kabrunko-dev
 challengeNumber: 30
 command: angular-interop-rxjs-signal
 sidebar:

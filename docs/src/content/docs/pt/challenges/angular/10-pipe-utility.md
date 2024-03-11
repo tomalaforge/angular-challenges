@@ -2,6 +2,8 @@
 title: 🔴 Pipe Empacotador de Utilidade
 description: Desafio 10 é sobre a criação de um pipe para empacotar utilidades
 author: thomas-laforge
+contributors:
+  - kabrunko-dev
 challengeNumber: 10
 command: angular-pipe-hard
 sidebar:

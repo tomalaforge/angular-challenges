@@ -1,6 +1,8 @@
 ---
 title: Revisar la Respuesta de Alguien
 description: Guía para revisar la respuesta de otra persona.
+contributors:
+  - nelsongutidev
 sidebar:
   order: 3
 ---

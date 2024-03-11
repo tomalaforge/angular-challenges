@@ -2,6 +2,9 @@
 title: 🟢 Enums vs Union Types
 description: Challenge 47 is about the comparison between enums and union types
 author: sven-brodny
+contributors:
+  - svenson95
+  - jdegand
 challengeNumber: 47
 command: typescript-enums-vs-union-types
 sidebar:

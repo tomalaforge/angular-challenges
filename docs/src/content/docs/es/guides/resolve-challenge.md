@@ -1,6 +1,9 @@
 ---
 title: Resolver un Desafío
 description: Guía para resolver un desafío
+contributors:
+  - nelsongutidev
+  - 1fbr
 sidebar:
   order: 2
 ---

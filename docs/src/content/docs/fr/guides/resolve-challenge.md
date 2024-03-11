@@ -1,5 +1,7 @@
 ---
 title: Résoudre un Challenge
+contributors:
+  - tomalaforge
 description: Guide pour résoudre un challenge
 sidebar:
   order: 2

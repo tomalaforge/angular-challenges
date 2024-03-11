@@ -1,6 +1,9 @@
 ---
 title: Пройдите испытание
 description: Инструкция по прохождению испытания
+contributors:
+  - stillst
+  - 1fbr
 sidebar:
   order: 2
 ---

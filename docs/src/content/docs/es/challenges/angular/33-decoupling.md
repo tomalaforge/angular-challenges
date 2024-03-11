@@ -2,6 +2,8 @@
 title: 🟠 Desacoplando Componentes
 description: El desafío 33 trata sobre desacoplar dos componentes fuertemente unidos utilizando Token de Inyección
 author: thomas-laforge
+contributors:
+  - ErickRodrCodes
 challengeNumber: 33
 command: angular-decoupling
 sidebar:

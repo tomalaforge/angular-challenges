@@ -1,6 +1,8 @@
 ---
 title: Rebase sua branch
 description: Guia para realizar rebase em uma branch e atualizá-la com as mudanças mais recentes
+contributors:
+  - kabrunko-dev
 sidebar:
   order: 6
 ---

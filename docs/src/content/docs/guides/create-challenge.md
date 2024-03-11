@@ -1,6 +1,9 @@
 ---
 title: Create your own challenge
 description: Guide to create your own challenge
+contributors:
+  - tomalaforge
+  - gsgonzalez88
 sidebar:
   order: 5
 ---

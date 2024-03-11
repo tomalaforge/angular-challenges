@@ -2,6 +2,9 @@
 title: 🟠 Optimize Big List
 description: Challenge 37 is about learning how virtualization optimize big list rendering
 author: thomas-laforge
+contributors:
+  - tomalaforge
+  - jdegand
 challengeNumber: 37
 command: performance-ngfor-biglist
 sidebar:

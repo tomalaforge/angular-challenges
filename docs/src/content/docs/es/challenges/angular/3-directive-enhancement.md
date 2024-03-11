@@ -2,6 +2,8 @@
 title: 🟠 Mejorar Directiva
 description: El desafío 3 se trata de una directive incorporada.
 author: thomas-laforge
+contributors:
+  - ErickRodrCodes
 challengeNumber: 3
 command: angular-ngfor-enhancement
 blogLink: https://medium.com/@thomas.laforge/ngfor-enhancement-716b44656a6c

@@ -59,5 +59,7 @@
   "subscription.button": "Suscríbete",
   "subscription.email": "usuario@gmail.com",
   "subscription.note.title": "Notas",
-  "subscription.note.description": "Este correo se utilizará para informar acerca de nuevos retos"
+  "subscription.note.description": "Este correo se utilizará para informar acerca de nuevos retos",
+  "contributor.title": "Contributors",
+  "contributor.subtitle": "Thanks to all the contributors who have helped make this documentation better!"
 }

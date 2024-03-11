@@ -1,6 +1,8 @@
 ---
 title: Часто задаваемые вопросы
 description: Ответы на вопросы
+contributors:
+  - stillst
 sidebar:
   order: 7
 ---

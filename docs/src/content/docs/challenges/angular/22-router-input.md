@@ -2,6 +2,10 @@
 title: 🟢 @RouterInput()
 description: Challenge 22 is about using the @Input decorator to retreive router params.
 author: thomas-laforge
+contributors:
+  - tomalaforge
+  - tomer953
+  - svenson95
 challengeNumber: 22
 command: angular-router-input
 blogLink: https://medium.com/ngconf/accessing-route-params-in-angular-1f8e12770617

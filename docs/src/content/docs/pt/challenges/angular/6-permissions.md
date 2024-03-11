@@ -2,6 +2,8 @@
 title: 🟠 Diretiva Estrutural
 description: Desafio 6 é sobre criar uma diretiva estrutural para manipular permissões
 author: thomas-laforge
+contributors:
+  - kabrunko-dev
 challengeNumber: 6
 command: angular-permissions
 blogLink: https://medium.com/@thomas.laforge/create-a-custom-structural-directive-to-manage-permissions-like-a-pro-11a1acad30ad

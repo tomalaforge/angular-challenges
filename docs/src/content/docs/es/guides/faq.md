@@ -1,6 +1,8 @@
 ---
 title: Preguntas Frecuentes
 description: Preguntas frecuentes sobre el proyecto
+contributors:
+  - nelsongutidev
 sidebar:
   order: 7
 ---

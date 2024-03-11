@@ -1,6 +1,8 @@
 ---
 title: Verifique a resposta dos outros
 description: Guia para verificar a resposta de outra pessoa
+contributors:
+  - kabrunko-dev
 sidebar:
   order: 3
 ---

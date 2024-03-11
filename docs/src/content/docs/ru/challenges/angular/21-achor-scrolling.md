@@ -2,6 +2,8 @@
 title: 🟢Навигация по якорю
 description: Испытание 21 про навигацию на странице с помощью якоря
 author: thomas-laforge
+contributors:
+  - stillst
 challengeNumber: 21
 command: angular-anchor-scrolling
 sidebar:

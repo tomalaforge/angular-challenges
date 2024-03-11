@@ -2,6 +2,8 @@
 title: 🟠 Aprimoramento de Diretiva
 description: Desafio 3 é sobre o aprimoramento de uma diretiva nativa
 author: thomas-laforge
+contributors:
+  - kabrunko-dev
 challengeNumber: 3
 command: angular-ngfor-enhancement
 blogLink: https://medium.com/@thomas.laforge/ngfor-enhancement-716b44656a6c

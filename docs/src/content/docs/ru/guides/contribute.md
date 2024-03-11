@@ -1,6 +1,8 @@
 ---
 title: Вносите свой вклад
 description: Описание как помочь проекту
+contributors:
+  - stillst
 sidebar:
   order: 4
 ---

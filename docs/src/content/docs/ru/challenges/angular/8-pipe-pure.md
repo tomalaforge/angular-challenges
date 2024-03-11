@@ -2,6 +2,8 @@
 title: 🟢Чистый пайп
 description: Испытание 8 про создание чистого пайпа
 author: thomas-laforge
+contributors:
+  - stillst
 challengeNumber: 8
 command: angular-pipe-easy
 blogLink: https://medium.com/ngconf/deep-dive-into-angular-pipes-c040588cd15d

@@ -1,6 +1,8 @@
 ---
 title: Resolva um desafio
 description: Guia de como resolver um desafio
+contributors:
+  - kabrunko-dev
 sidebar:
   order: 2
 ---
