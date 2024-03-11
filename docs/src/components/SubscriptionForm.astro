@@ -85,6 +85,11 @@ const { data } = await getEntry('i18n', lang ?? 'en');
       text-decoration: none;
       font-size: var(--sl-text-sm);
       background: var(--sl-color-text-accent);
+
+      &:hover {
+        top: unset;
+        opacity: unset;
+      }
     }
   }
 
