@@ -10,6 +10,14 @@ const directionLabels: DirectionLabelMap = {
   right: 'Right',
 };
 
+/*  line 6 to 11 can be refactored to use Record type like below.
+    I commented this out since the challenge is to use a Mapped type */
+
+// const directionLabels: Record<Direction, string> = {
+//   left: 'Left',
+//   right: 'Right',
+// };
+
 @Component({
   standalone: true,
   imports: [],
