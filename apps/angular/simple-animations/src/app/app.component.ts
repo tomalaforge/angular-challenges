@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { blockEnter, cascadeEnter } from './app.animations';
 
 @Component({
   standalone: true,
   imports: [],
   selector: 'app-root',
+  animations: [blockEnter, cascadeEnter],
   styles: `
     section {
       @apply flex flex-1 flex-col gap-5;
@@ -19,7 +21,7 @@ import { Component } from '@angular/core';
   `,
   template: `
     <div class="mx-20 my-40 flex gap-5">
-      <section>
+      <section [@blockEnter]>
         <div>
           <h3>2008</h3>
           <p>
@@ -51,7 +53,7 @@ import { Component } from '@angular/core';
         </div>
       </section>
 
-      <section>
+      <section [@cascadeEnter]>
         <div class="list-item">
           <span>Name:</span>
           <span>Samuel</span>
