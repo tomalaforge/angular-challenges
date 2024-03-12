@@ -1,24 +1,48 @@
-import { CommonModule } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   ContentChild,
+  Directive,
   Input,
   TemplateRef,
 } from '@angular/core';
 
+interface ListContext<T> {
+  $implicit: T;
+  appList: T[];
+  index: number;
+}
+
+@Directive({
+  selector: 'ng-template[list]',
+  standalone: true,
+})
+export class ListRefDirective<T> {
+  @Input() list!: T[];
+
+  static ngTemplateContextGuard<TContext>(
+    dir: ListRefDirective<TContext>,
+    ctx: unknown,
+  ): ctx is ListContext<TContext> {
+    return true;
+  }
+}
+
 @Component({
   selector: 'list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [NgTemplateOutlet],
   template: `
-    <div *ngFor="let item of list; index as i">
-      <ng-container
-        *ngTemplateOutlet="
-          listTemplateRef || emptyRef;
-          context: { $implicit: item, appList: item, index: i }
-        "></ng-container>
-    </div>
+    @for (item of list; track $index) {
+      <div>
+        <ng-container
+          *ngTemplateOutlet="
+            listTemplateRef || emptyRef;
+            context: { $implicit: item, appList: item, index: $index }
+          "></ng-container>
+      </div>
+    }
 
     <ng-template #emptyRef>No Template</ng-template>
   `,
@@ -27,6 +51,6 @@ import {
 export class ListComponent<TItem extends object> {
   @Input() list!: TItem[];
 
-  @ContentChild('listRef', { read: TemplateRef })
+  @ContentChild(ListRefDirective, { read: TemplateRef })
   listTemplateRef!: TemplateRef<unknown>;
 }
