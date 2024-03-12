@@ -59,23 +59,13 @@ export class AppComponent {
   readonly direction = signal<DirectionType | undefined>(undefined);
 
   readonly difficultyLabel = computed<string>(() => {
-    switch (this.difficulty()) {
-      case 'easy':
-        return 'easy';
-      case 'normal':
-        return 'normal';
-    }
+    return this.difficulty();
   });
 
   readonly directionLabel = computed<string>(() => {
     const prefix = 'You chose to go';
-    switch (this.direction()) {
-      case Direction.LEFT:
-        return `${prefix} ${Direction.LEFT}`;
-      case Direction.RIGHT:
-        return `${prefix} ${Direction.RIGHT}`;
-      default:
-        return 'Choose a direction!';
-    }
+    return this.direction()
+      ? `${prefix} ${this.direction()}`
+      : 'Choose a direction!';
   });
 }
