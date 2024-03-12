@@ -1,0 +1,14 @@
+:host-context {
+  font-size: 10px;
+  color: black;
+}
+
+:host-context(.warning) {
+  font-size: 25px;
+  color: orange;
+}
+
+:host-context(.error) {
+  font-size: 30px;
+  color: red;
+}
