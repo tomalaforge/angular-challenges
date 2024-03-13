@@ -34,7 +34,7 @@ sidebar:
 
 Если вы нажмете на одну из полос (обозначенную желтой стрелкой на рисунке ниже), вы увидите, что цикл обнаружения изменений в `PersonListComponent` занимает более 3 секунд.
 
-![profiler record](../../../../assets/performance/35/memoize-profiler.png 'Profiler Record')
+![profiler record](../../../../../assets/performance/35/memoize-profiler.png 'Profiler Record')
 
 ## Пояснение
 
