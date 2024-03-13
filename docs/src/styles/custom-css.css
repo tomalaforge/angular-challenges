@@ -16,6 +16,9 @@
   --color-btn: var(--sl-color-white);
   --color-chip: rgb(35, 38, 47);
   --color-chip-border: rgba(240, 246, 252, 0.1);
+
+  --button-transition: opacity 100ms ease-in-out;
+  --button-hover-opacity: 0.85;
 }
 
 :root[data-theme='light'],
@@ -48,6 +51,21 @@
   width: fit-content;
   gap: 6px;
   margin: 0px 2px;
+}
+
+a.action,
+.article-footer > a,
+.action-footer > a.action-button {
+  transition: var(--button-transition);
+
+  &:hover {
+    opacity: var(--button-hover-opacity);
+    transition: var(--button-transition);
+
+    &:not(.primary):not(.button-sponsor) {
+      opacity: 0.66;
+    }
+  }
 }
 
 .article-footer {
