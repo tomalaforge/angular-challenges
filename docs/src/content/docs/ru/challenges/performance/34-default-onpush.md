@@ -34,7 +34,7 @@ sidebar:
 
 Если вы нажмете на одну из полос (обозначенную желтой стрелкой на рисунке ниже), вы можете увидеть, что на `PersonListComponent`, `RandomComponent` и все `MatListItem` влияет цикл обнаружения изменений, даже когда мы взаимодействуем только с полем ввода.
 
-![profiler record](../../../../assets/performance/34/profiler-record.png 'Profiler Record')
+![profiler record](../../../../../assets/performance/34/profiler-record.png 'Profiler Record')
 
 ## Пояснение
 
