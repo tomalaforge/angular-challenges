@@ -1,68 +1,44 @@
-import { Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  input,
+  signal,
+} from '@angular/core';
 
 import { CDFlashingDirective } from '@angular-challenges/shared/directives';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatListModule } from '@angular/material/list';
+import { HeaderComponent } from './header.component';
+import { InputComponent } from './input.component';
+import { PersonItemsComponent } from './person-items.component';
 
 @Component({
   selector: 'app-person-list',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    CommonModule,
-    FormsModule,
-    MatListModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatChipsModule,
     CDFlashingDirective,
+    InputComponent,
+    HeaderComponent,
+    PersonItemsComponent,
   ],
   template: `
-    <h1 cd-flash class="text-center font-semibold" title="Title">
-      {{ title | titlecase }}
-    </h1>
-
-    <mat-form-field class="w-4/5" cd-flash>
-      <input
-        placeholder="Add one member to the list"
-        matInput
-        type="text"
-        [(ngModel)]="label"
-        (keydown)="handleKey($event)" />
-    </mat-form-field>
-
-    <mat-list class="flex w-full">
-      <div *ngIf="names?.length === 0" class="empty-list-label">Empty list</div>
-      <mat-list-item
-        *ngFor="let name of names"
-        cd-flash
-        class="text-orange-500">
-        <div MatListItemLine class="flex justify-between">
-          <h3 title="Name">
-            {{ name }}
-          </h3>
-        </div>
-      </mat-list-item>
-      <mat-divider *ngIf="names?.length !== 0"></mat-divider>
-    </mat-list>
+    <app-header [title]="title()"></app-header>
+    <app-input (addItem)="addItem($event)"></app-input>
+    <app-person-items [names]="_names()"></app-person-items>
   `,
   host: {
     class: 'w-full flex flex-col items-center',
   },
 })
 export class PersonListComponent {
-  @Input() names: string[] = [];
-  @Input() title = '';
+  _names = signal<string[]>([]);
 
-  label = '';
+  @Input() set names(value: string[]) {
+    this._names.update(() => value);
+  }
+  title = input.required<string>();
 
-  handleKey(event: any) {
-    if (event.keyCode === 13) {
-      this.names?.unshift(this.label);
-      this.label = '';
-    }
+  addItem(name: string) {
+    this._names.update((names) => [...names, name]);
   }
 }
