@@ -9,7 +9,8 @@ const difficulty = {
 
 /* Mapped Type */
 type Direction = 'left' | 'right';
-const direction: Record<Direction, string> = {
+type DirectionMap = { [key in Direction]: string };
+const directions: DirectionMap = {
   left: 'left',
   right: 'right',
 };
@@ -65,7 +66,7 @@ export class AppComponent {
 
   readonly directionLabel = computed(() =>
     this.direction()
-      ? `You chose to go ${direction[this.direction()!]}`
+      ? `You chose to go ${directions[this.direction()!]}`
       : 'Choose a direction',
   );
 }
