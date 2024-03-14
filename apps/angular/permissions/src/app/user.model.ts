@@ -6,6 +6,11 @@ export interface User {
   roles: Role[];
 }
 
+export interface InfoHasRole {
+  rolesInformation: User[];
+  UserLogged: User | undefined;
+}
+
 export const admin: User = {
   name: 'admin',
   isAdmin: true,

@@ -38,39 +38,36 @@ import { UserStore } from './user.store';
   `,
 })
 export class LoginComponent {
-  userRole: User | undefined = {} as User;
+  userRole: User | undefined = {} as User | undefined;
   constructor(private userStore: UserStore) {
-    this.userStore.user$.pipe().subscribe((p) => {
-      this.userRole = p;
+    this.userStore.user$.pipe().subscribe((p: User | undefined) => {
+      if (p == undefined) return;
+      this.userRole = { name: p.name, isAdmin: p?.isAdmin, roles: p.roles };
+      // let nuevoObjeto: User | undefined = {} as User | undefined;
+      // nuevoObjeto = {name:p.name, isAdmin:p?.isAdmin, roles:p.roles}
+      // this.userRole = nuevoObjeto;
     });
   }
 
   admin() {
     this.userStore.add(admin);
-    console.log('admin');
   }
   manager() {
     this.userStore.add(manager);
-    console.log('manager');
   }
   reader() {
     this.userStore.add(reader);
-    console.log('reader');
   }
   writer() {
     this.userStore.add(writer);
-    console.log('writer');
   }
   readerWriter() {
     this.userStore.add(readerAndWriter);
-    console.log('readerandwriter');
   }
   client() {
     this.userStore.add(client);
-    console.log('client');
   }
   everyone() {
     this.userStore.add(everyone);
-    console.log('everyone');
   }
 }

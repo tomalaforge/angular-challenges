@@ -7,12 +7,12 @@ import {
 } from '@angular/core';
 import { HasRoleDirective } from './HasRole.directive';
 import {
+  InfoHasRole,
   User,
   admin,
   client,
   everyone,
   manager,
-  reader,
   writer,
 } from './user.model';
 
@@ -23,40 +23,50 @@ import {
   template: `
     <h2 class="mt-10 text-xl">Information Panel</h2>
     <!-- admin can see everything -->
-    <div *hasRole="[adminRole]">visible only for super admin</div>
-    <div *hasRole="[managerRole]">visible if manager</div>
-    <div *hasRole="[managerRole, readerRole]">
-      visible if manager and/or reader
-    </div>
-    <div *hasRole="[managerRole, writerRole]">
-      visible if manager and/or writer
-    </div>
-    <div *hasRole="[clientRole]">visible if client</div>
-    <div *hasRole="[everyoneRole]">visible for everyone</div>
+
+    <div *hasRole="infoAdmin">visible only for super admin</div>
+    <div *hasRole="infoManager">visible if manager</div>
+    <!--
+    <div *hasRole="infoManagerReader">visible if manager and/or reader</div>
+    <div *hasRole="infoManagerWriter">visible if manager and/or writer</div>
+    <div *hasRole="infoClient">visible if client</div>
+    <div *hasRole="infoEveryone">visible for everyone</div> -->
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InformationComponent implements OnChanges {
   @Input() userRole: User | undefined = {} as User;
 
-  adminRole: User;
-  readerRole: User;
-  managerRole: User;
-  writerRole: User;
-  clientRole: User;
-  everyoneRole: User;
-  constructor() {
-    this.adminRole = admin;
-    this.managerRole = manager;
-    this.writerRole = writer;
-    this.clientRole = client;
-    this.readerRole = reader;
-    this.everyoneRole = everyone;
-  }
+  infoAdmin: InfoHasRole = {} as InfoHasRole;
+  infoManagerReader: InfoHasRole = {} as InfoHasRole;
+  infoManager: InfoHasRole = {} as InfoHasRole;
+  infoManagerWriter: InfoHasRole = {} as InfoHasRole;
+  infoClient: InfoHasRole = {} as InfoHasRole;
+  infoEveryone: InfoHasRole = {} as InfoHasRole;
+
+  constructor() {}
   ngOnChanges(): void {
     console.log(
       'el rol que me viene como parametro input es : ',
       this.userRole,
     );
+    this.infoAdmin = { UserLogged: this.userRole, rolesInformation: [admin] };
+    this.infoManagerReader = {
+      UserLogged: this.userRole,
+      rolesInformation: [admin, manager],
+    };
+    this.infoManager = {
+      UserLogged: this.userRole,
+      rolesInformation: [manager],
+    };
+    this.infoManagerWriter = {
+      UserLogged: this.userRole,
+      rolesInformation: [manager, writer],
+    };
+    this.infoClient = { UserLogged: this.userRole, rolesInformation: [client] };
+    this.infoEveryone = {
+      UserLogged: this.userRole,
+      rolesInformation: [everyone],
+    };
   }
 }
