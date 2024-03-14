@@ -1,8 +1,6 @@
-import { NgFor, NgIf, NgStyle, NgTemplateOutlet } from '@angular/common';
+import { NgStyle, NgTemplateOutlet } from '@angular/common';
 import { Component, ContentChild, Input, TemplateRef } from '@angular/core';
-import { CardType } from '../../model/card.model';
 import { ListItemComponent } from '../list-item/list-item.component';
-
 @Component({
   selector: 'app-card',
   template: `
@@ -11,30 +9,28 @@ import { ListItemComponent } from '../list-item/list-item.component';
       [ngStyle]="{ 'background-color': customClass }">
       <ng-content select="img"></ng-content>
       <section>
-        <div *ngFor="let item of list">
-          <app-list-item
-            [name]="item.firstName ? item.firstName : item.name"
-            [id]="item.id">
+        @for (item of list; track item.id) {
+          <app-list-item [id]="item.id">
             <ng-container
               *ngTemplateOutlet="
                 deleteButton;
-                context: { $implicit: item.id }
+                context: {
+                  $implicit: item.id,
+                  name: item.name,
+                  firstName: item.firstName
+                }
               "></ng-container>
           </app-list-item>
-        </div>
+        }
       </section>
       <ng-content select="button"></ng-content>
     </div>
   `,
   standalone: true,
-  imports: [NgIf, NgFor, ListItemComponent, NgTemplateOutlet, NgStyle],
+  imports: [ListItemComponent, NgTemplateOutlet, NgStyle],
 })
 export class CardComponent {
   @Input() list: any[] | null = null;
-  @Input() type!: CardType;
   @Input() customClass = '';
-
-  CardType = CardType;
-
   @ContentChild('deleteButton') deleteButton!: TemplateRef<any>;
 }

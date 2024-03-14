@@ -1,23 +1,20 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, WritableSignal, signal } from '@angular/core';
 import { CityStore } from '../../data-access/city.store';
 import {
   FakeHttpService,
   randomCity,
 } from '../../data-access/fake-http.service';
-import { CardType } from '../../model/card.model';
 import { City } from '../../model/city.model';
 import { CardComponent } from '../../ui/card/card.component';
 
 @Component({
   selector: 'app-city-card',
   template: `
-    <app-card
-      [list]="cities"
-      [type]="cardType"
-      customClass="rgba(0, 0, 250, 0.1)">
+    <app-card [list]="cities()" customClass="rgba(0, 0, 250, 0.1)">
       <img src="assets/img/city.png" width="200px" />
-      <ng-template #deleteButton let-id>
+      <ng-template #deleteButton let-id let-name="name">
+        {{ name }}
         <button (click)="deleteCity(id)">
           <img class="h-5" src="assets/svg/trash.svg" />
         </button>
@@ -33,8 +30,7 @@ import { CardComponent } from '../../ui/card/card.component';
   imports: [CardComponent, NgTemplateOutlet],
 })
 export class CityCardComponent implements OnInit {
-  cities: City[] = [];
-  cardType = CardType.CITY;
+  cities: WritableSignal<City[]> = signal([]);
 
   constructor(
     private http: FakeHttpService,
@@ -43,7 +39,7 @@ export class CityCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.http.fetchCities$.subscribe((c) => this.store.addAll(c));
-    this.store.cities$.subscribe((c) => (this.cities = c));
+    this.store.cities$.subscribe((c) => this.cities.set(c));
   }
 
   addCity() {

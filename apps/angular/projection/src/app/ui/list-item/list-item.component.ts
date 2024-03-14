@@ -4,7 +4,6 @@ import { Component, Input } from '@angular/core';
   selector: 'app-list-item',
   template: `
     <div class="border-grey-300 flex justify-between border px-2 py-1">
-      {{ name }}
       <ng-content></ng-content>
     </div>
   `,
