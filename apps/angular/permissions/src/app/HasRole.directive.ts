@@ -32,6 +32,7 @@ export class HasRoleDirective implements OnChanges {
   private userStore = inject(UserStore);
 
   public ngOnChanges(): void {
+    if (!this.userLogged?.name) return;
     console.log(
       'El usuario logeado es: ',
       this.userLogged,
