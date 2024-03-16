@@ -26,7 +26,7 @@ In this small application, we have a navigation menu to route our application to
 The goal of the challenge is to debug this application and make it work.
 
 :::note
-Without knowing the exact reason for the issue, you can "fix" the error and get the program to function. One such approach would be to memoize the `getMenu` function. The application might function, but you will miss the lesson of this challenge. Make sure you can explain why your fix works.  
+Without knowing the exact reason for the issue, you can "fix" the error and get the program to function. One such approach would be to memoize the `getMenu` function. The application might work again, but make sure you really understand the problem and its consequences. Making it work isn't always enough; fixing this bug in the wrong way can cause a loss of performance or lead to other problems later on.  
 :::
 
 ## Hints
@@ -40,6 +40,6 @@ Without knowing the exact reason for the issue, you can "fix" the error and get 
 <details>
   <summary>Hint 2</summary>
 
-If you open the [`RouterLinkActive` source code](https://github.com/angular/angular/blob/main/packages/router/src/directives/router_link_active.ts) and go to **line 196**, Angular is calling `this.cdr.markForCheck` inside a microTask which triggers a new CD cycle. If you comment out this line, the application loads again, however the bug is not inside the Angular Framework. 😅😯
+If you open the [`RouterLinkActive` source code](https://github.com/angular/angular/blob/main/packages/router/src/directives/router_link_active.ts) and go to **line 196**, Angular is calling `this.cdr.markForCheck` inside a microTask, which triggers a new CD cycle. If you comment out this line, the application loads again, however, the bug should not be fixed by changing the Angular source code. 😅😯
 
 </details>
