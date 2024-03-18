@@ -8,6 +8,7 @@ contributors:
   - dmmishchenko
   - kabrunko-dev
   - svenson95
+challengeNumber: 1
 command: angular-projection
 blogLink: https://medium.com/@thomas.laforge/create-a-highly-customizable-component-cc3a9805e4c5
 videoLink:
