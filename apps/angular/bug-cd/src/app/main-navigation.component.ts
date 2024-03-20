@@ -1,6 +1,7 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, Input, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { map } from 'rxjs';
 import { FakeServiceService } from './fake.service';
 
 interface MenuItem {
@@ -41,18 +42,16 @@ export class NavigationComponent {
   standalone: true,
   imports: [NavigationComponent, AsyncPipe],
   template: `
-    @if (info$ | async; as info) {
-      <app-nav [menus]="getMenu(info)" />
-    } @else {
-      <app-nav [menus]="getMenu('')" />
-    }
+    <app-nav [menus]="(menus$ | async)!" />
   `,
   host: {},
 })
 export class MainNavigationComponent {
   private fakeBackend = inject(FakeServiceService);
 
-  readonly info$ = this.fakeBackend.getInfoFromBackend();
+  readonly menus$ = this.fakeBackend
+    .getInfoFromBackend()
+    .pipe(map((info) => this.getMenu(info || '')));
 
   getMenu(prop: string) {
     return [
