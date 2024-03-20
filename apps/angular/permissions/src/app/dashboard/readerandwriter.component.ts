@@ -12,4 +12,4 @@ import { ButtonComponent } from '../button.component';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ReaderAndWriterComponent {}
+export class ReaderAndWriterDashboardComponent {}

@@ -12,4 +12,8 @@ export class UserStore {
   add(user: User) {
     this.user.next(user);
   }
+
+  loggedUser(): User | undefined {
+    return this.user.getValue();
+  }
 }
