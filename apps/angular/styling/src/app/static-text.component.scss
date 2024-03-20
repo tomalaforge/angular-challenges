@@ -1,14 +1,9 @@
-:host-context {
-  font-size: 10px;
-  color: black;
-}
-
 :host-context(.warning) {
-  font-size: 25px;
-  color: orange;
+  --static-font-size: 25px;
+  --static-font-color: orange;
 }
 
 :host-context(.error) {
-  font-size: 30px;
-  color: red;
+  --static-font-size: 30px;
+  --static-font-color: red;
 }
