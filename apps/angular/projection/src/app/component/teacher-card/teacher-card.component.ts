@@ -1,23 +1,20 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, OnInit, WritableSignal, signal } from '@angular/core';
-import {
-  FakeHttpService,
-  randTeacher,
-} from '../../data-access/fake-http.service';
+import { Component, Signal } from '@angular/core';
+import { randTeacher } from '../../data-access/fake-http.service';
 import { TeacherStore } from '../../data-access/teacher.store';
 import { Teacher } from '../../model/teacher.model';
 import { CardComponent } from '../../ui/card/card.component';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-teacher-card',
   template: `
-    <app-card [list]="teachers()" customClass="rgba(250, 0, 0, 0.1)">
+    <app-card [list]="teachers()" backgroundColor="rgba(250, 0, 0, 0.1)">
       <img src="assets/img/teacher.png" width="200px" />
-      <ng-template #deleteButton let-id let-firstName="firstName">
-        {{ firstName }}
-        <button (click)="deleteTeacher(id)">
-          <img class="h-5" src="assets/svg/trash.svg" />
-        </button>
+      <ng-template deleteButton let-item>
+        <app-list-item [id]="item.id" (listItemDelete)="deleteTeacher($event)">
+          {{ item.firstName }}
+        </app-list-item>
       </ng-template>
       <button
         class="rounded-sm border border-blue-500 bg-blue-300 p-2"
@@ -27,20 +24,12 @@ import { CardComponent } from '../../ui/card/card.component';
     </app-card>
   `,
   standalone: true,
-  imports: [CardComponent, NgTemplateOutlet],
+  imports: [CardComponent, NgTemplateOutlet, ListItemComponent],
 })
-export class TeacherCardComponent implements OnInit {
-  teachers: WritableSignal<Teacher[]> = signal([]);
+export class TeacherCardComponent {
+  teachers: Signal<Teacher[]> = this.store.teachers$;
 
-  constructor(
-    private http: FakeHttpService,
-    private store: TeacherStore,
-  ) {}
-
-  ngOnInit(): void {
-    this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
-    this.store.teachers$.subscribe((t) => this.teachers.set(t));
-  }
+  constructor(private store: TeacherStore) {}
 
   addTeacher() {
     this.store.addOne(randTeacher());
