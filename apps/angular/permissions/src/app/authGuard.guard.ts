@@ -1,16 +1,17 @@
 import { inject } from '@angular/core';
 import { Router, type CanActivateFn } from '@angular/router';
-import { UserStore } from './user.store';
+import { User } from './user.model';
 
 export const authGuardGuard: CanActivateFn = (route, state) => {
   //
-
-  const loggedRoleService = inject(UserStore);
-  const loggedUser = loggedRoleService.loggedUser();
+  // const loggedRoleService = inject(UserStore);
+  const loggedUserJSON = localStorage.getItem('loggedUser');
+  if (!loggedUserJSON) return true;
+  const loggedUser: User = JSON.parse(loggedUserJSON);
+  console.log('estoy en el guard', loggedUser, route.routeConfig?.path, state);
   const currentRoute = route.routeConfig?.path;
   const router = inject(Router);
   if (loggedUser?.isAdmin) return true;
-  console.log('estoy en el guard', loggedUser, route.routeConfig?.path);
 
   if (loggedUser?.name === 'manager' && currentRoute === 'enter') {
     router.navigateByUrl('/manager');

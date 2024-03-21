@@ -43,9 +43,7 @@ export class LoginComponent {
     this.userStore.user$.pipe().subscribe((p: User | undefined) => {
       if (p == undefined) return;
       this.userRole = { name: p.name, isAdmin: p?.isAdmin, roles: p.roles };
-      // let nuevoObjeto: User | undefined = {} as User | undefined;
-      // nuevoObjeto = {name:p.name, isAdmin:p?.isAdmin, roles:p.roles}
-      // this.userRole = nuevoObjeto;
+      localStorage.setItem('loggedUser', JSON.stringify(this.userRole));
     });
   }
 
