@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+import {
+  FakeHttpService,
+  randStudent,
+} from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
-import { CardType } from '../../model/card.model';
 import { CardComponent } from '../../ui/card/card.component';
 
 @Component({
@@ -9,7 +11,8 @@ import { CardComponent } from '../../ui/card/card.component';
   template: `
     <app-card
       [list]="students()"
-      [type]="cardType"
+      [imageUrl]="studentImage"
+      (addNewItem)="addNewStudent()"
       customClass="bg-light-green"></app-card>
   `,
   standalone: true,
@@ -24,7 +27,7 @@ import { CardComponent } from '../../ui/card/card.component';
 })
 export class StudentCardComponent implements OnInit {
   public students = this.store.students;
-  cardType = CardType.STUDENT;
+  studentImage = 'assets/img/student.webp';
 
   constructor(
     private http: FakeHttpService,
@@ -33,5 +36,9 @@ export class StudentCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
+  }
+
+  addNewStudent() {
+    this.store.addOne(randStudent());
   }
 }

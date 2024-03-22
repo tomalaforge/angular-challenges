@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CityStore } from '../../data-access/city.store';
-import { FakeHttpService } from '../../data-access/fake-http.service';
-import { CardType } from '../../model/card.model';
+import {
+  FakeHttpService,
+  randomCity,
+} from '../../data-access/fake-http.service';
 import { CardComponent } from '../../ui/card/card.component';
 
 @Component({
@@ -9,7 +11,8 @@ import { CardComponent } from '../../ui/card/card.component';
   template: `
     <app-card
       [list]="cities()"
-      [type]="cardType"
+      [imageUrl]="cityImage"
+      (addNewItem)="addNewCity()"
       customClass="bg-light-green"></app-card>
   `,
   standalone: true,
@@ -24,7 +27,8 @@ import { CardComponent } from '../../ui/card/card.component';
 })
 export class CityCardComponent implements OnInit {
   public cities = this.store.cities;
-  cardType = CardType.CITY;
+
+  cityImage = 'assets/img/city.png';
   constructor(
     private http: FakeHttpService,
     private store: CityStore,
@@ -32,5 +36,9 @@ export class CityCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.http.fetchCities$.subscribe((s) => this.store.addAll(s));
+  }
+
+  addNewCity() {
+    this.store.addOne(randomCity());
   }
 }

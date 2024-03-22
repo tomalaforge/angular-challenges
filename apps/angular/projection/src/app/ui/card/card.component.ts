@@ -1,13 +1,5 @@
 import { NgFor, NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { CityStore } from '../../data-access/city.store';
-import {
-  randStudent,
-  randTeacher,
-  randomCity,
-} from '../../data-access/fake-http.service';
-import { StudentStore } from '../../data-access/student.store';
-import { TeacherStore } from '../../data-access/teacher.store';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CardType } from '../../model/card.model';
 import { ListItemComponent } from '../list-item/list-item.component';
 
@@ -17,18 +9,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
     <div
       class="flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4"
       [class]="customClass">
-      <img
-        *ngIf="type === CardType.TEACHER"
-        src="assets/img/teacher.png"
-        width="200px" />
-      <img
-        *ngIf="type === CardType.STUDENT"
-        src="assets/img/student.webp"
-        width="200px" />
-      <img
-        *ngIf="type === CardType.CITY"
-        src="assets/img/city.png"
-        width="200px" />
+      <img [src]="imageUrl" width="200px" />
 
       <section>
         <app-list-item
@@ -40,7 +21,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
 
       <button
         class="rounded-sm border border-blue-500 bg-blue-300 p-2"
-        (click)="addNewItem()">
+        (click)="addNewItemFunc()">
         Add
       </button>
     </div>
@@ -50,24 +31,14 @@ import { ListItemComponent } from '../list-item/list-item.component';
 })
 export class CardComponent {
   @Input() list: any[] | null = null;
+  @Input() imageUrl: any;
   @Input() type!: CardType;
   @Input() customClass = '';
+  @Output() addNewItem: EventEmitter<void> = new EventEmitter<void>();
 
   CardType = CardType;
 
-  constructor(
-    private teacherStore: TeacherStore,
-    private studentStore: StudentStore,
-    private cityStore: CityStore,
-  ) {}
-
-  addNewItem() {
-    if (this.type === CardType.TEACHER) {
-      this.teacherStore.addOne(randTeacher());
-    } else if (this.type === CardType.STUDENT) {
-      this.studentStore.addOne(randStudent());
-    } else if (this.type === CardType.CITY) {
-      this.cityStore.addOne(randomCity());
-    }
+  addNewItemFunc() {
+    this.addNewItem.emit();
   }
 }
