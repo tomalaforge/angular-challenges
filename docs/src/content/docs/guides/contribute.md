@@ -10,13 +10,13 @@ sidebar:
 
 You can contribute to this repository in many ways:
 
-🔥 Create a new challenge by following the intructions [here](/guides/create-challenge).
+🔥 Create a new challenge by following the instructions [here](/guides/create-challenge).
 
 🔥 Answer challenges and submit the results. (guide [here](/guides/resolve-challenge)).
 
-🔥 Comment on other's solutions by providing constructive and caring feedback.
+🔥 Comment on others' solutions by providing constructive and caring feedback.
 
-🔥 Correct typos or English mistakes within the documentation.
+🔥 Correct typos within the documentation.
 
 🔥 File an issue to suggest new challenge ideas or report a bug.
 
