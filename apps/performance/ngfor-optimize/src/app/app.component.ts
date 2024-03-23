@@ -50,7 +50,7 @@ export class AppComponent implements OnInit {
   }
 
   handleKey(event: any) {
-    if (event.keyCode === 13) {
+    if (event.keyCode === 13 && this.label.length) {
       this.personService.addPerson(this.label);
       this.label = '';
     }
