@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Signal } from '@angular/core';
 import {
   FakeHttpService,
   randStudent,
 } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
+import { Student } from '../../model/student.model';
 import { CardComponent } from '../../ui/card/card.component';
+import { ListItemRefDirective } from '../../ui/list-item/ListItemTemplateRef.directive';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-student-card',
@@ -13,7 +16,13 @@ import { CardComponent } from '../../ui/card/card.component';
       [list]="students()"
       [imageUrl]="studentImage"
       (addNewItem)="addNewStudent()"
-      customClass="bg-light-green"></app-card>
+      customClass="bg-light-green">
+      <ng-template listItemRef let-student>
+        <app-list-item (delete)="deleteStudent(student.id)">
+          {{ student.firstName }}
+        </app-list-item>
+      </ng-template>
+    </app-card>
   `,
   standalone: true,
   styles: [
@@ -23,10 +32,11 @@ import { CardComponent } from '../../ui/card/card.component';
       }
     `,
   ],
-  imports: [CardComponent],
+  imports: [CardComponent, ListItemComponent, ListItemRefDirective],
 })
 export class StudentCardComponent implements OnInit {
-  public students = this.store.students;
+  // public students = this.store.students;
+  students: Signal<Student[]> = this.store.students;
   studentImage = 'assets/img/student.webp';
 
   constructor(
@@ -40,5 +50,8 @@ export class StudentCardComponent implements OnInit {
 
   addNewStudent() {
     this.store.addOne(randStudent());
+  }
+  deleteStudent(id: number) {
+    this.store.deleteOne(id);
   }
 }

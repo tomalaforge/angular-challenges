@@ -5,6 +5,8 @@ import {
   randomCity,
 } from '../../data-access/fake-http.service';
 import { CardComponent } from '../../ui/card/card.component';
+import { ListItemRefDirective } from '../../ui/list-item/ListItemTemplateRef.directive';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-city-card',
@@ -13,17 +15,23 @@ import { CardComponent } from '../../ui/card/card.component';
       [list]="cities()"
       [imageUrl]="cityImage"
       (addNewItem)="addNewCity()"
-      customClass="bg-light-green"></app-card>
+      customClass="bg-light-blue">
+      <ng-template listItemRef let-city>
+        <app-list-item (delete)="deleteCity(city.id)">
+          {{ city.name }}
+        </app-list-item>
+      </ng-template>
+    </app-card>
   `,
   standalone: true,
   styles: [
     `
-      ::ng-deep .bg-light-green {
-        background-color: rgba(0, 250, 0, 0.1);
+      ::ng-deep .bg-light-blue {
+        background-color: rgba(0, 0, 255, 0.1);
       }
     `,
   ],
-  imports: [CardComponent],
+  imports: [CardComponent, ListItemComponent, ListItemRefDirective],
 })
 export class CityCardComponent implements OnInit {
   public cities = this.store.cities;
@@ -40,5 +48,8 @@ export class CityCardComponent implements OnInit {
 
   addNewCity() {
     this.store.addOne(randomCity());
+  }
+  deleteCity(id: number) {
+    this.store.deleteOne(id);
   }
 }
