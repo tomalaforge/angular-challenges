@@ -16,30 +16,30 @@ sidebar:
 
 ## Information
 
-Angular offer the static function [`ngTemplateContextGuard`](https://angular.io/guide/structural-directives#typing-the-directives-context) to strongly type structural directive.
+You can improve template type checking for custom directives by adding template guard properties to your directive definition. Angular offers the static function [`ngTemplateContextGuard`](https://angular.io/guide/structural-directives#typing-the-directives-context) to strongly type structural directives.
 
 However the context of **NgTemplateOutlet** type is **Object**. But with the help of the above guard, we can improve that behavior.
 
 ## Statement
 
-In this exercise, we want to learn how to strongly type our ng-template in our AppComponent.
+In this exercise, we want to learn how to strongly type our `ng-template` in our `AppComponent`.
 
 This exercise has two levels of complexity.
 
-### Level 1: known Interface
+### Level 1: Known Interface
 
 Currently we have the following piece of code.
 
 ![Unkown Person](../../../../assets/4/unknown-person.png 'Unkown Person')
 
-As we can see, name is of type "any". We want to infer the correct type.
+As we can see, `name` is of type `any`. We want to infer the correct type using the custom directive `PersonDirective`.
 
-### Level 2: generic Interface
+### Level 2: Generic Interface
 
 Currently we have the following piece of code.
 
 ![Unkown Student](../../../../assets/4/unknown-student.png 'Unkown Student')
 
-As we can see, student is of type "any". We want to infer the correct type.
+As we can see, `student` is of type `any`. We want to infer the correct type using the custom directive `ListDirective`.
 
-But in this part, we can pass to ListComponent, a list of **any object**. And we still want the correct type to be inferred.
+But in this part, we want to pass a list of **any object** to `ListComponent`. And we still want the correct type to be inferred.
