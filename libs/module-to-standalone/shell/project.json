@@ -14,14 +14,7 @@
       }
     },
     "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": [
-          "libs/module-to-standalone/shell/**/*.ts",
-          "libs/module-to-standalone/shell/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     }
   }
 }

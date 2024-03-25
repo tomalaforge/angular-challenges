@@ -68,14 +68,7 @@
       }
     },
     "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": [
-          "apps/angular/router-input/**/*.ts",
-          "apps/angular/router-input/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     }
   }
 }

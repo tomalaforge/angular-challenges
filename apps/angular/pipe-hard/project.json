@@ -68,13 +68,7 @@
       }
     },
     "lint": {
-      "executor": "@nx/eslint:lint",
-      "options": {
-        "lintFilePatterns": [
-          "apps/angular/pipe-hard/**/*.ts",
-          "apps/angular/pipe-hard/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     }
   },
   "tags": []
