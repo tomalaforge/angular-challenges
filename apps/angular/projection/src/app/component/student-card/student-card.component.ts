@@ -1,4 +1,9 @@
-import { Component, OnInit, Signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  Signal,
+} from '@angular/core';
 import {
   FakeHttpService,
   randStudent,
@@ -16,7 +21,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
       [list]="students()"
       [imageUrl]="studentImage"
       (addNewItem)="addNewStudent()"
-      customClass="bg-light-green">
+      class="bg-light-green">
       <ng-template listItemRef let-student>
         <app-list-item (delete)="deleteStudent(student.id)">
           {{ student.firstName }}
@@ -27,15 +32,15 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   standalone: true,
   styles: [
     `
-      ::ng-deep .bg-light-green {
+      .bg-light-green {
         background-color: rgba(0, 250, 0, 0.1);
       }
     `,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CardComponent, ListItemComponent, ListItemRefDirective],
 })
 export class StudentCardComponent implements OnInit {
-  // public students = this.store.students;
   students: Signal<Student[]> = this.store.students;
   studentImage = 'assets/img/student.webp';
 

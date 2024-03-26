@@ -22,7 +22,7 @@ import { ListItemRefDirective } from '../../ui/list-item/ListItemTemplateRef.dir
       [list]="teachers()"
       (addNewItem)="addTeacher()"
       [imageUrl]="teacherImage"
-      class="bg-light-green">
+      class="bg-light-red">
       <ng-template listItemRef let-teacher>
         <app-list-item (delete)="deleteTeacher(teacher.id)">
           {{ teacher.firstName }}
