@@ -11,17 +11,17 @@ const { data } = await getEntry('i18n', lang);
 <div class="action-footer">
   <a class="action-button" href="/subscription">
     <div>{data['buttons.email']}</div>
-    <Icon name="email" size="1rem" />
+    <Icon name="email"  />
   </a>
 
   <a class="action-button" href="https://github.com/tomalaforge/angular-challenges">
     <div>{data['buttons.star']}</div>
-    <Icon name="github" size="1rem" />
+    <Icon name="github"  />
   </a>
 
   <a class="action-button button-sponsor" href="https://github.com/sponsors/tomalaforge">
     <div>{data['buttons.sponsor']}</div>
-    <MyIcon name="heart" size="1rem" color="white" />
+    <MyIcon name="heart" fill="none" stroke="currentColor" color="white" />
   </a>
 </div>
 

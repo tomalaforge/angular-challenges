@@ -6,23 +6,27 @@ import Author from './Author.astro';
 import ChallengeFooter from './ChallengeFooter.astro';
 import CommentSection from './CommentSection.astro';
 import ContributorsFooter from './ContributorsFooter.astro';
+import AnswerNumber from './AnswerNumber.astro';
 
 const { lang } = Astro.props;
 const { data } = await getEntry('i18n', lang);
 const { challengeNumber } = Astro.props.entry.data;
 const author = Astro.props.entry.data.author ? await getEntry(Astro.props.entry.data.author) : null;
 const renderCommentSection = !Astro.props.entry.data.noCommentSection;
+
 ---
 
-{ challengeNumber && author &&
-<Author {...author.data} {data} /> }
+{ challengeNumber ? <div class="header-container">
+  { author ? <Author {...author.data} {data} /> : null}
+  <AnswerNumber {challengeNumber}/>
+</div> :null}
 
 <Default {...Astro.props}>
   <slot />
 </Default>
 
-{challengeNumber &&
-<ChallengeFooter {...Astro.props} />}
+{challengeNumber ?
+<ChallengeFooter {...Astro.props}  /> : null}
 
 { renderCommentSection &&
 <CommentSection {...Astro.props} /> }
@@ -30,9 +34,12 @@ const renderCommentSection = !Astro.props.entry.data.noCommentSection;
  <ContributorsFooter {...Astro.props} />
 
 <style>
-  .author {
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
     margin-top: -1rem;
-    font-size: var(--sl-text-xs);
-    color: var(--sl-color-gray-3);
+
   }
 </style>

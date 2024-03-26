@@ -9,14 +9,15 @@ interface Props {
 	class?: string;
 }
 
-const { name, label, size = '1em', color } = Astro.props;
+const { name, label, size = '1em', color, fill="currentColor", stroke="none", viewBox="0 0 24 24" } = Astro.props;
 const a11yAttrs = label ? ({ 'aria-label': label } as const) : ({ 'aria-hidden': 'true' } as const);
 ---
 
-<svg height="1em" viewBox="0 0 512 512"
+<svg height="1em" width="1em" {viewBox}
 	{...a11yAttrs}
 	class={Astro.props.class}
-	fill="currentColor"
+     {fill}
+     {stroke}
 	set:html={Icons[name]}
 />
 
@@ -27,5 +28,6 @@ const a11yAttrs = label ? ({ 'aria-label': label } as const) : ({ 'aria-hidden':
 		font-size: var(--sl-icon-size, 1em);
 		width: 1em;
 		height: 1em;
+    stroke-width: 2;
 	}
 </style>

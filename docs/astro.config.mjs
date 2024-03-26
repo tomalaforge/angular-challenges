@@ -93,6 +93,7 @@ export default defineConfig({
         TableOfContents: './src/components/TableOfContents.astro',
         PageTitle: './src/components/PageTitle.astro',
         MobileMenuFooter: './src/components/MobileMenuFooter.astro',
+        SiteTitle: './src/components/SiteTitle.astro',
       },
       defaultLocale: 'root',
       locales,
