@@ -22,8 +22,8 @@ import { ListItemRefDirective } from '../list-item/list-item.directive';
   standalone: true,
   imports: [ListItemComponent, NgTemplateOutlet, NgStyle],
 })
-export class CardComponent {
-  @Input() list: { id: number }[] | null = null;
+export class CardComponent<T extends { id: number }> {
+  @Input() list: T[] | null = null;
   @Input() backgroundColor = '';
   @ContentChild(ListItemRefDirective, { read: TemplateRef })
   deleteButton!: TemplateRef<unknown>;

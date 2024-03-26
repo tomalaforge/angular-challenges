@@ -5,6 +5,7 @@ import { StudentStore } from '../../data-access/student.store';
 import { Student } from '../../model/student.model';
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
+import { ListItemRefDirective } from '../../ui/list-item/list-item.directive';
 
 @Component({
   selector: 'app-student-card',
@@ -12,7 +13,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
     <app-card [list]="students()" backgroundColor="rgba(0, 250, 0, 0.1)">
       <img src="assets/img/student.webp" width="200px" />
       <ng-template deleteButton let-item>
-        <app-list-item [id]="item.id" (listItemDelete)="deleteStudent($event)">
+        <app-list-item (listItemDelete)="deleteStudent(item.id)">
           {{ item.firstName }}
         </app-list-item>
       </ng-template>
@@ -24,7 +25,12 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
     </app-card>
   `,
   standalone: true,
-  imports: [CardComponent, NgTemplateOutlet, ListItemComponent],
+  imports: [
+    CardComponent,
+    NgTemplateOutlet,
+    ListItemComponent,
+    ListItemRefDirective,
+  ],
 })
 export class StudentCardComponent {
   students: Signal<Student[]> = this.store.students$;

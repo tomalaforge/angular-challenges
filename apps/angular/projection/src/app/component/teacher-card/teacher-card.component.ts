@@ -5,6 +5,7 @@ import { TeacherStore } from '../../data-access/teacher.store';
 import { Teacher } from '../../model/teacher.model';
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
+import { ListItemRefDirective } from '../../ui/list-item/list-item.directive';
 
 @Component({
   selector: 'app-teacher-card',
@@ -12,7 +13,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
     <app-card [list]="teachers()" backgroundColor="rgba(250, 0, 0, 0.1)">
       <img src="assets/img/teacher.png" width="200px" />
       <ng-template deleteButton let-item>
-        <app-list-item [id]="item.id" (listItemDelete)="deleteTeacher($event)">
+        <app-list-item (listItemDelete)="deleteTeacher(item.id)">
           {{ item.firstName }}
         </app-list-item>
       </ng-template>
@@ -24,7 +25,12 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
     </app-card>
   `,
   standalone: true,
-  imports: [CardComponent, NgTemplateOutlet, ListItemComponent],
+  imports: [
+    CardComponent,
+    NgTemplateOutlet,
+    ListItemComponent,
+    ListItemRefDirective,
+  ],
 })
 export class TeacherCardComponent {
   teachers: Signal<Teacher[]> = this.store.teachers$;
