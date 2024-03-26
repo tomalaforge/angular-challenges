@@ -1,61 +1,45 @@
-import { NgFor, NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { randStudent, randTeacher } from '../../data-access/fake-http.service';
-import { StudentStore } from '../../data-access/student.store';
-import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
+import { NgTemplateOutlet } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ContentChild,
+  EventEmitter,
+  Input,
+  Output,
+  TemplateRef,
+} from '@angular/core';
+import { ListItemRefDirective } from '../list-item/ListItemTemplateRef.directive';
 import { ListItemComponent } from '../list-item/list-item.component';
 
 @Component({
   selector: 'app-card',
   template: `
-    <div
-      class="flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4"
-      [class]="customClass">
-      <img
-        *ngIf="type === CardType.TEACHER"
-        src="assets/img/teacher.png"
-        width="200px" />
-      <img
-        *ngIf="type === CardType.STUDENT"
-        src="assets/img/student.webp"
-        width="200px" />
-
-      <section>
-        <app-list-item
-          *ngFor="let item of list"
-          [name]="item.firstName"
-          [id]="item.id"
-          [type]="type"></app-list-item>
-      </section>
-
-      <button
-        class="rounded-sm border border-blue-500 bg-blue-300 p-2"
-        (click)="addNewItem()">
-        Add
-      </button>
-    </div>
+    <ng-content select="img"></ng-content>
+    <section>
+      @for (item of list; track item.id) {
+        <ng-template
+          [ngTemplateOutlet]="listItemTemplateRef"
+          [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
+      }
+    </section>
+    <button
+      class="rounded-sm border border-blue-500 bg-blue-300 p-2"
+      (click)="add.emit()">
+      Add
+    </button>
   `,
   standalone: true,
-  imports: [NgIf, NgFor, ListItemComponent],
+  imports: [ListItemComponent, NgTemplateOutlet],
+  host: {
+    class: 'border-2 border-black rounded-md p-4 w-fit flex flex-col gap-3',
+  },
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CardComponent {
-  @Input() list: any[] | null = null;
-  @Input() type!: CardType;
-  @Input() customClass = '';
+export class CardComponent<T extends { id: number }> {
+  @Input() list: T[] | null = null;
 
-  CardType = CardType;
+  @Output() add = new EventEmitter<void>();
 
-  constructor(
-    private teacherStore: TeacherStore,
-    private studentStore: StudentStore,
-  ) {}
-
-  addNewItem() {
-    if (this.type === CardType.TEACHER) {
-      this.teacherStore.addOne(randTeacher());
-    } else if (this.type === CardType.STUDENT) {
-      this.studentStore.addOne(randStudent());
-    }
-  }
+  @ContentChild(ListItemRefDirective, { read: TemplateRef })
+  listItemTemplateRef!: TemplateRef<{ $implicit: T }>;
 }
