@@ -4,7 +4,7 @@ const response = await fetch(`https://api.github.com/search/issues?q=repo:tomala
 const { total_count } = await response.json();
 ---
 
-<div class="answer-text">Answered by {total_count} people</div>
+{total_count ? <div class="answer-text">Answered by {total_count} people</div> : null }
 
 <style>
   .answer-text {

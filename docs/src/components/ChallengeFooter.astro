@@ -11,18 +11,26 @@ const authorLink = `https://github.com/tomalaforge/angular-challenges/pulls?q=la
 const communityLink = `https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A${challengeNumber}+label%3Aanswer+sort%3Areactions-%2B1-desc`;
 const npxCommand = `npx nx serve ${command}`;
 
-const response = await fetch(`https://api.github.com/search/issues?q=repo:tomalaforge/angular-challenges+is:pr+label:%22${challengeNumber}%22+label:%22answer%22`);
-const { total_count, items } = await response.json();
-
-let count = 1;
-while(total_count > count*30) {
-  const response = await fetch(`https://api.github.com/search/issues?q=repo:tomalaforge/angular-challenges+is:pr+label:%22${challengeNumber}%22+label:%22answer%22&page=${count}`);
-  const { items: new_items } = await response.json();
-  if(new_items && new_items.length === 0) break;
+let items = [];
+let page = 1;
+let error = false;
+try {
+while (true) {
+  const response = await fetch(`https://api.github.com/search/issues?q=repo:tomalaforge/angular-challenges+is:pr+label:%22${challengeNumber}%22+label:%22answer%22&per_page=100&page=${page}`);
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+  const { items: new_items, total_count } = await response.json();
+  if (!new_items || new_items.length === 0) break;
   items.push(...new_items);
-  count++;
-}
 
+  if(total_count < page * 100) break;
+
+  page++;
+}
+} catch (e) {
+  error = true;
+}
 ---
 
 <div class="separator"></div>
@@ -62,7 +70,7 @@ while(total_count > count*30) {
 <div class="article-footer">
   <a
     href={communityLink}>
-    ❖ {total_count} {data['challenge.footer.communityAnswers']}*
+    ❖ {items.length > 0 ? items.length : ''} {data['challenge.footer.communityAnswers']}*
   </a>
   <a
     href={authorLink}>
@@ -83,6 +91,7 @@ while(total_count > count*30) {
     <VideoButton {...videoLink} {...Astro.props} />}
 </div>
 
+{error ? null :
 <div class="solution-container">
   <div>Answered by</div>
   {(items ?? []).map((item) => (
@@ -95,7 +104,7 @@ while(total_count > count*30) {
       class="avatar"
     />
   ))}
-</div>
+</div>}
 
 <div class="footer-note">
   * {data['challenge.footer.upvoteAnswer']}
