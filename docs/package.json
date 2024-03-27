@@ -11,8 +11,11 @@
   },
   "dependencies": {
     "@astrojs/starlight": "^0.15.1",
+    "@astrojs/svelte": "^5.2.0",
     "@fontsource/ibm-plex-serif": "^5.0.8",
     "astro": "^4.0.0",
-    "sharp": "^0.32.5"
+    "sharp": "^0.32.5",
+    "svelte": "^4.2.12",
+    "typescript": "^5.4.3"
   }
 }
