@@ -31,12 +31,12 @@
 
 {#if !error && !loading}
   <div class="github">
-    <a class="category" href="https://github.com/tomalaforge/angular-challenges">
+    <a class="category star" href="https://github.com/tomalaforge/angular-challenges">
       <slot name="star"/>
       <div>{stargazersCount}</div>
     </a>
 
-    <div class="category fork">
+    <div class="category">
       <slot name="fork"/>
       <div>{forksCount}</div>
     </div>
@@ -48,7 +48,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-left: var(--sl-nav-gap)
+    margin-left: var(--sl-nav-gap);
   }
 
   .category {
@@ -56,6 +56,15 @@
     align-items: center;
     font-size: 12px;
     gap: 0.25rem;
+  }
+
+  .star {
+    color: var(--sl-color-text);
+    text-decoration: none;
+  }
+
+  .star:hover {
+    color: var(--sl-color-accent-high);
   }
 
 </style>

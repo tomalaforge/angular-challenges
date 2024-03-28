@@ -37,7 +37,7 @@
 </script>
 
 {#if $isLoaded}
-  <div class="solution-container">
+  <div class="solution-container" id="answers">
     <div>Answered by</div>
     {#each $data as { user }}
       <img

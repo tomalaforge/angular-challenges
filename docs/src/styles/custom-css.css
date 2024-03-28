@@ -32,6 +32,10 @@
   --color-chip-border: rgb(33, 38, 45);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 .github-success-btn {
   border: 2px solid rgba(240, 246, 252, 0.1);
   border-radius: 6px;
