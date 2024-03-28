@@ -6,7 +6,7 @@ import Author from './Author.astro';
 import ChallengeFooter from './ChallengeFooter.astro';
 import CommentSection from './CommentSection.astro';
 import ContributorsFooter from './ContributorsFooter.astro';
-import AnswerNumber from './AnswerNumber.astro';
+import AnswerNumber from './github/AnswerNumber.svelte';
 
 const { lang } = Astro.props;
 const { data } = await getEntry('i18n', lang);
@@ -18,7 +18,7 @@ const renderCommentSection = !Astro.props.entry.data.noCommentSection;
 
 { challengeNumber ? <div class="header-container">
   { author ? <Author {...author.data} {data} /> : null}
-  <AnswerNumber {challengeNumber}/>
+  <AnswerNumber client:load/>
 </div> :null}
 
 <Default {...Astro.props}>

@@ -1,17 +1,6 @@
 ---
-import { getEntry } from 'astro:content';
-import type { Props } from '@astrojs/starlight/props';
 import Default from '@astrojs/starlight/components/SiteTitle.astro';
-import MyIcon from './MyIcon.astro';
-const { challengeNumber } = Astro.props.entry.data;
-const { lang } = Astro.props;
-const { data } = await getEntry('i18n', lang);
-
-const response = await fetch(`https://api.github.com/repos/tomalaforge/angular-challenges`);
-const { stargazers_count, forks } = await response.json();
-
-
-
+import GitHubStats from './GitHubStats.svelte';
 
 ---
 
@@ -19,34 +8,6 @@ const { stargazers_count, forks } = await response.json();
   <slot />
 </Default>
 
-<div class="github">
-  <a class="category" href="https://github.com/tomalaforge/angular-challenges">
-    <MyIcon name="star" />
-    <div>{stargazers_count}</div>
-  </a>
+<GitHubStats client:load />
 
-  <div class="category fork">
-    <MyIcon name="fork" viewBox="0 0 16 16" />
-    <div>{forks}</div>
-  </div>
-</div>
 
-<style>
-  .github {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-left: var(--sl-nav-gap)
-  }
-
-  .category {
-    display: flex;
-    align-items: center;
-    font-size: 12px;
-    gap: 0.25rem;
-  }
-
-  .fork {
-    //margin-top: -5px;
-  }
-</style>
