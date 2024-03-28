@@ -1,6 +1,7 @@
 ---
 import Default from '@astrojs/starlight/components/SiteTitle.astro';
 import GitHubStats from './GitHubStats.svelte';
+import MyIcon from './MyIcon.astro';
 
 ---
 
@@ -8,6 +9,9 @@ import GitHubStats from './GitHubStats.svelte';
   <slot />
 </Default>
 
-<GitHubStats client:load />
+<GitHubStats client:load >
+  <MyIcon name="star" slot="star" />
+  <MyIcon name="fork" viewBox="0 0 16 16" slot="fork"/>
+</GitHubStats>
 
 

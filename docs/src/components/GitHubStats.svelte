@@ -1,5 +1,4 @@
 <script>
-  import MyIcon from './MyIcon.astro';
   import { onMount } from 'svelte';
 
   let error = false;
@@ -33,12 +32,12 @@
 {#if !error && !loading}
   <div class="github">
     <a class="category" href="https://github.com/tomalaforge/angular-challenges">
-      <MyIcon name="star" />
+      <slot name="star"/>
       <div>{stargazersCount}</div>
     </a>
 
     <div class="category fork">
-      <MyIcon name="fork" viewBox="0 0 16 16" />
+      <slot name="fork"/>
       <div>{forksCount}</div>
     </div>
   </div>
