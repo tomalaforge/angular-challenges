@@ -37,7 +37,7 @@ Feel free to leave your feedback in the comments.
 
 ## Statement
 
-- The project manager decides to implement a `memo` function to replace some unnecessary pipes. Refactor the `PluralPipe` to a memo function with the help of this [article](https://itnext.io/its-ok-to-use-function-calls-in-angular-templates-ffdd12b0789e)
+- The project manager decides to implement a `memo` function to replace some unnecessary function calls in templates. Refactor the `getDateString()` function with a memo function, checkout this [article](https://itnext.io/its-ok-to-use-function-calls-in-angular-templates-ffdd12b0789e)
 
 :::note
 Do you already know the [PluralPipe](https://angular.io/api/common/I18nPluralPipe)? It’s a cool way of pluralize values.
