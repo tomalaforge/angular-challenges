@@ -1,6 +1,6 @@
 <script>
   import { onMount } from 'svelte';
-  import { data, error, isLoaded, isLoading, totalCount } from './github-store';
+  import { data, error, isLoaded, isLoading, token, totalCount } from './github-store';
 
   export let challengeNumber;
 
@@ -36,18 +36,22 @@
 
 </script>
 
+token: {$token}
 {#if $isLoaded}
   <div class="solution-container" id="answers">
     <div>Answered by</div>
-    {#each $data as { user }}
+    {#each $data as { user, html_url }}
+      <a href={html_url} target="_blank">
       <img
         loading="lazy"
         src={user.avatar_url}
         width="30"
         height="30"
         alt=""
+        title={user.login}
         class="avatar"
       />
+      </a>
     {/each}
   </div>
 {/if}

@@ -31,15 +31,15 @@
 
 {#if !error && !loading}
   <div class="github">
-    <a class="category star" href="https://github.com/tomalaforge/angular-challenges">
+    <a class="category" href="https://github.com/tomalaforge/angular-challenges" target="_blank">
       <slot name="star"/>
       <div>{stargazersCount}</div>
     </a>
 
-    <div class="category">
+    <a class="category" href="https://github.com/tomalaforge/angular-challenges/fork" target="_blank">
       <slot name="fork"/>
       <div>{forksCount}</div>
-    </div>
+    </a>
   </div>
 {/if}
 
@@ -56,14 +56,11 @@
     align-items: center;
     font-size: 12px;
     gap: 0.25rem;
-  }
-
-  .star {
     color: var(--sl-color-text);
     text-decoration: none;
   }
 
-  .star:hover {
+  .category:hover {
     color: var(--sl-color-accent-high);
   }
 
