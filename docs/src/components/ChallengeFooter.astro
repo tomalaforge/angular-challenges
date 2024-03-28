@@ -16,7 +16,7 @@ let page = 1;
 let error = false;
 try {
 while (true) {
-  const response = await fetch(`https://api.github.com/search/issues?q=repo:tomalaforge/angular-challenges+is:pr+label:%22${challengeNumber}%22+label:%22answer%22&per_page=100&page=${page}`);
+  const response = await fetch(`https://api.github.com/search/issues?q=repo:tomalaforge/angular-challenges+is:pr+label:"${challengeNumber}"+label:"answer"&per_page=100&page=${page}`);
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }
