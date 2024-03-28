@@ -16,7 +16,7 @@ sidebar:
 
 This is the fourth and last of four `@Pipe()` challenges, the goal of this series is to master pipes in Angular. But this part isn’t really about pipes, but it’ll help to better understand the concept of pipes. For those who crave for maximum performance. And less boilerplate.
 
-https://giphy.com/gifs/h24Y1pZIGKXzG
+![giphy](https://github.com/svenson95/angular-challenges/assets/46655156/234bc9d3-70bc-4424-9bc6-065ea96ddd79)
 
 A self written memo function is another option to using function calls in the template or `Pipe`’s. The memo function will help you in cases when you call functions in the template and pass the same value to it, and not use it with different parameters - that will break the “cache” of the memo function.
 
@@ -24,7 +24,7 @@ The memo function will cache stuff per instance, and not per usage.
 
 If the parameters have changed, we call the function again with the new parameters and save its result, and if not, we return the old value. This is an improvement because we can avoid boilerplate and use a JavaScript way of handling this issue.
 
-img
+<img width="400" alt="Functions in Template - 1" src="https://github.com/svenson95/angular-challenges/assets/46655156/2e929c6e-ffd0-4353-873c-f8b941f86ba1">
 
 ## Conclusion
 
