@@ -5,8 +5,8 @@
   // Function to redirect the user to GitHub's signup page
   async function redirectToGitHubSignup() {
     // token.set('test-token');
-    // window.location.href = `/auth/authorize?redirect_uri=${window.location.href}&test=dklsfj`;
-    await fetch(`/auth/authorize?redirect_uri=${window.location.href}&state=jsqhd&client_id=Iv1.711903007f608691`)
+    window.location.href = `/auth/authorize`;
+    // await fetch(`/auth/authorize?redirect_uri=${window.location.href}&state=jsqhd&client_id=Iv1.711903007f608691`)
   }
 
   onMount(() => {
