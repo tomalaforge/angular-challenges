@@ -1,0 +1,10 @@
+<app-card [list]="teachers()" class="bg-[#fa00001a]" (addItem)="addTeacher()">
+  <card-img>
+    <img src="assets/img/student.webp" alt="teacher" width="200px" />
+  </card-img>
+  <ng-template rowRef let-teacher>
+    <app-list-item (deleteItem)="deleteTeacher(teacher.id)">
+      {{ teacher.firstName }}
+    </app-list-item>
+  </ng-template>
+</app-card>

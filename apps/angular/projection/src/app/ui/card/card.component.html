@@ -1,0 +1,11 @@
+<ng-content select="card-img"></ng-content>
+@for (item of list; track item.id) {
+  <ng-template
+    [ngTemplateOutlet]="rowTemplate"
+    [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
+}
+<button
+  class="rounded-sm border border-blue-500 bg-blue-300 p-2"
+  (click)="addItem.emit()">
+  Add
+</button>
