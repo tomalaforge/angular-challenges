@@ -1,0 +1,1 @@
+export const type = <T>(): T => undefined as T;
