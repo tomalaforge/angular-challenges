@@ -1,38 +1,61 @@
 <script>
-  import { loadToken, test } from './github-store';
+  import GitHubStats from './GitHubStats.svelte';
+  import { loadToken, token } from './github-store';
   import { onMount } from 'svelte';
 
-  // Function to redirect the user to GitHub's signup page
-  async function redirectToGitHubSignup() {
-    // token.set('test-token');
-    window.location.href = `/auth/authorize`;
-    // await fetch(`/auth/authorize?redirect_uri=${window.location.href}&state=jsqhd&client_id=Iv1.711903007f608691`)
-  }
 
   onMount(() => {
-    loadToken();
+    const searchParams = new URLSearchParams(window.location.search);
+    const t = searchParams.get('token');
+    if(t) {
+      token.set(t);
+      window.location.href = `${window.location.origin}${window.location.pathname}`;
+    } else {
+      loadToken();
+    }
   });
 
 </script>
 
-{$test}
-<button on:click={redirectToGitHubSignup}>
-  Sign Up for GitHub
-</button>
+{#if !$token}
+  <a href={`/auth/authorize?redirect_uri=${window.location.href}`}>
+    <slot name="github"/>
+    <span class="github-sign-in">Sign in</span>
+  </a>
+{:else}
+  <GitHubStats>
+    <slot name="fullStar" slot="fullStar"/>
+    <slot name="star" slot="star"/>
+    <slot name="fork" slot="fork"/>
+  </GitHubStats>
+{/if}
 
 
 <style>
-  button {
-    background-color: #2ea44f;
+  a {
+    background-color: #238636;
+    display: flex;
+    gap: 0.25rem;
+    text-decoration: none;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 8px 8px;
     cursor: pointer;
-    font-size: 16px;
     border-radius: 5px;
+    align-items: center;
+    height: fit-content;
+    font-size:14px;
+    line-height: 14px;
+    margin-left: var(--sl-nav-gap);
   }
 
-  button:hover {
+  a:hover {
     background-color: #218838;
+  }
+
+  @media (width < 450px) {
+    .github-sign-in {
+      display: none;
+    }
   }
 </style>

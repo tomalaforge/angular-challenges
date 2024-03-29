@@ -15,20 +15,18 @@ export const isLoaded = derived(
 const TOKEN_KEY = 'TOKEN';
 
 export function loadToken() {
-  // Get the current value from localStorage if it exists, otherwise use the startValue
-  const persistedValue = localStorage.getItem(TOKEN_KEY);
-  if (persistedValue) {
-    token.set(JSON.parse(persistedValue));
-    return;
+  const persistedToken = localStorage.getItem(TOKEN_KEY);
+  if (persistedToken) {
+    token.set(JSON.parse(persistedToken));
   }
-
-  token.set('API call');
 }
 
 token.subscribe((value) => {
   if (value) {
+    if (value === 'delete') {
+      localStorage.removeItem(TOKEN_KEY);
+      return;
+    }
     localStorage.setItem(TOKEN_KEY, JSON.stringify(value));
   }
 });
-
-export const test = writable('test');

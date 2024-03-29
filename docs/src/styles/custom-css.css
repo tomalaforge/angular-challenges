@@ -58,11 +58,13 @@ html {
 }
 
 a.action,
+.button-star,
 .article-footer > a,
 .action-footer > a.action-button {
   transition: var(--button-transition);
 
   &:hover {
+    cursor: pointer;
     opacity: var(--button-hover-opacity);
     transition: var(--button-transition);
 
@@ -188,4 +190,9 @@ details {
 
 .body:where(.astro-v5tidmuc) {
   height: 100%;
+}
+
+
+.astro-kmkmnagf {
+  align-items: center;
 }

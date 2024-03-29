@@ -1,6 +1,7 @@
 import starlight from '@astrojs/starlight';
 import { defineConfig } from 'astro/config';
 import svelte from '@astrojs/svelte';
+import vercel from '@astrojs/vercel/serverless';
 
 export const locales = {
   root: {
@@ -66,7 +67,7 @@ export default defineConfig({
     //     ru: 'Leaderboard'
     //   }
     // },
-      {
+    {
       label: 'Challenges',
       autogenerate: {
         directory: 'challenges'
@@ -109,5 +110,7 @@ export default defineConfig({
     },
     defaultLocale: 'root',
     locales
-  }), svelte()]
+  }), svelte()],
+  output: "hybrid",
+  adapter: vercel()
 });
