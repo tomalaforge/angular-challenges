@@ -3,7 +3,6 @@ import { fromHexString } from '../../utils/encrypt';
 export const prerender = false;
 
 const GITHUB_OAUTH_ACCESS_TOKEN_URL = 'https://github.com/login/oauth/access_token';
-const TOKEN_VALIDITY_PERIOD = 1000 * 60 * 60 * 24 * 365; // 1 year;
 
 export async function GET({ url, redirect, cookies}) {
 
@@ -16,8 +15,6 @@ export async function GET({ url, redirect, cookies}) {
   const { GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET } = import.meta.env;
 
   const redirectUrl = new URL(fromHexString(state));
-
-  console.log('Authorized', GITHUB_CLIENT_ID);
 
   if (error && error === 'access_denied') {
     redirect(redirectUrl.href, 302);
@@ -51,14 +48,11 @@ export async function GET({ url, redirect, cookies}) {
         status: 503
       }
     )
-    return;
   }
 
-  // cookies.set('token', accessToken, { expires: new Date(Date.now() + TOKEN_VALIDITY_PERIOD), secure: true, httpOnly: true, path: '/' });
   cookies.set('refresh', refreshToken, { secure: true, httpOnly: true, path: '/' });
 
   redirectUrl.searchParams.set('token', accessToken);
-  // redirectUrl.searchParams.set('refresh', refreshToken);
 
   return redirect(redirectUrl.href, 302);
 }

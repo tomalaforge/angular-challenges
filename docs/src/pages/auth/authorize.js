@@ -8,13 +8,11 @@ export async function GET({url, redirect}) {
 
   const myUrl = new URL(url);
   const params = new URLSearchParams(myUrl.search);
-  const redirectUrl = params.get('redirect_uri');
+  const redirect_uri = params.get('redirect_uri');
 
   const { GITHUB_CLIENT_ID } = import.meta.env;
 
-
-  const redirect_uri = 'http://localhost:4321/auth/authorized'
-  const state =  toHexString(redirectUrl);
+  const state =  toHexString(redirect_uri);
 
   const oauthParams = new URLSearchParams({ client_id:GITHUB_CLIENT_ID , redirect_uri, state });
   return redirect(`${GITHUB_OAUTH_AUTHORIZE_URL}?${oauthParams}`, 302)
