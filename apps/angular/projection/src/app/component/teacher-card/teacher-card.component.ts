@@ -1,40 +1,55 @@
-import { Component, OnInit } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
+import {
+  FakeHttpService,
+  randTeacher,
+} from '../../data-access/fake-http.service';
 import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
-import { Teacher } from '../../model/teacher.model';
 import { CardComponent } from '../../ui/card/card.component';
+import { ListItemDirective } from '../../ui/list-item/list-item-directive';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-teacher-card',
   template: `
-    <app-card
-      [list]="teachers"
-      [type]="cardType"
-      customClass="bg-light-red"></app-card>
+    <app-card [list]="teachers()" (add)="addTeacher()" class="bg-light-red">
+      <img src="/assets/img/teacher.png" width="200px" alt="teacher" />
+      <ng-template listItemRef let-teacher>
+        <app-list-item (delete)="deleteTeacher(teacher.id)">
+          {{ teacher.firstName }}
+        </app-list-item>
+      </ng-template>
+    </app-card>
   `,
   styles: [
     `
-      ::ng-deep .bg-light-red {
-        background-color: rgba(250, 0, 0, 0.1);
+      .bg-light-red {
+        background-color: lemonchiffon;
       }
     `,
   ],
   standalone: true,
-  imports: [CardComponent],
+  imports: [CardComponent, ListItemComponent, ListItemDirective],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TeacherCardComponent implements OnInit {
-  teachers: Teacher[] = [];
-  cardType = CardType.TEACHER;
-
-  constructor(
-    private http: FakeHttpService,
-    private store: TeacherStore,
-  ) {}
+  private _http = inject(FakeHttpService);
+  private _store = inject(TeacherStore);
+  teachers = this._store.teachers;
 
   ngOnInit(): void {
-    this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
+    this._http.fetchTeachers$.subscribe((t) => this._store.addAll(t));
+  }
 
-    this.store.teachers$.subscribe((t) => (this.teachers = t));
+  addTeacher(): void {
+    this._store.addOne(randTeacher());
+  }
+
+  deleteTeacher(id: number): void {
+    this._store.deleteOne(id);
   }
 }
