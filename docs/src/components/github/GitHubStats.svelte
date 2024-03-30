@@ -53,7 +53,11 @@
 
   async function fetchStats() {
     try {
-      const response = await fetch(`https://api.github.com/repos/tomalaforge/angular-challenges`);
+      const response = await fetch(`https://api.github.com/repos/tomalaforge/angular-challenges`, {
+        headers: {
+          Authorization: `token ${$token}`
+        }
+      });
       if (!response.ok) {
         if (response.status === 401) {
           const refresh = await fetch('/auth/refresh');
