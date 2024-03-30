@@ -87,10 +87,10 @@
 
 <style>
   .box {
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
     justify-items: center;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
+    gap: 1rem;
     margin-top: 2rem;
   }
 </style>
