@@ -60,7 +60,7 @@ html {
 a.action,
 .button-star,
 .article-footer > a,
-.action-footer > a.action-button {
+.button-hover > a.action-button {
   transition: var(--button-transition);
 
   &:hover {
