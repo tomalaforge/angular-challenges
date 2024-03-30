@@ -2,6 +2,7 @@
 import VideoButton from './VideoButton.astro';
 import ClipboardCopy from './ClipboardCopy.astro';
 import { getEntry } from 'astro:content';
+import AnsweredUser from './github/AnsweredUser.svelte';
 
 const { lang } = Astro.props;
 const { author, challengeNumber, title, blogLink, videoLink, command } = Astro.props.entry.data;
@@ -10,6 +11,7 @@ const { data } = await getEntry('i18n', lang);
 const authorLink = `https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A${challengeNumber}+label%3A"answer+author"`;
 const communityLink = `https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A${challengeNumber}+label%3Aanswer+sort%3Areactions-%2B1-desc`;
 const npxCommand = `npx nx serve ${command}`;
+
 ---
 
 <div class="separator"></div>
@@ -70,6 +72,8 @@ const npxCommand = `npx nx serve ${command}`;
     <VideoButton {...videoLink} {...Astro.props} />}
 </div>
 
+<AnsweredUser client:load {challengeNumber} />
+
 <div class="footer-note">
   * {data['challenge.footer.upvoteAnswer']}
 </div>
@@ -93,5 +97,6 @@ const npxCommand = `npx nx serve ${command}`;
     gap: 0.25rem;
     margin-top: 3rem;
   }
+
 </style>
 

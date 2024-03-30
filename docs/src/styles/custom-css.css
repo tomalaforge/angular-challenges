@@ -32,6 +32,10 @@
   --color-chip-border: rgb(33, 38, 45);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 .github-success-btn {
   border: 2px solid rgba(240, 246, 252, 0.1);
   border-radius: 6px;
@@ -54,11 +58,13 @@
 }
 
 a.action,
+.button-star,
 .article-footer > a,
 .action-footer > a.action-button {
   transition: var(--button-transition);
 
   &:hover {
+    cursor: pointer;
     opacity: var(--button-hover-opacity);
     transition: var(--button-transition);
 
@@ -184,4 +190,9 @@ details {
 
 .body:where(.astro-v5tidmuc) {
   height: 100%;
+}
+
+
+.astro-kmkmnagf {
+  align-items: center;
 }
