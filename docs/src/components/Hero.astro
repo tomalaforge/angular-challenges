@@ -1,21 +1,22 @@
 ---
 import Default from '@astrojs/starlight/components/Hero.astro';
-import { Icon } from '@astrojs/starlight/components';
 import MyIcon from './MyIcon.astro';
 
-const sponsors = ['ddotx'];
+
+const sponsorFetch = await fetch('https://ghs.vercel.app/v2/sponsors/tomalaforge');
+const { sponsors } = await sponsorFetch.json();
 ---
 
 <div class="sponsor-header button-hover">
     <p>Big thanks to the people supporting this project:
-    {sponsors.map((sponsor: string) => (
-      <a href=`https://github.com/${sponsor}`>
+    {sponsors.past.map(({username, avatar}) => (
+      <a href=`https://github.com/${username}`>
         <img
           loading="lazy"
-          src={`https://github.com/${sponsor}.png?size=80`}
+          src={avatar}
           width="40"
           height="40"
-          alt={sponsor}
+          alt={username}
           class="avatar"
         />
       </a>
