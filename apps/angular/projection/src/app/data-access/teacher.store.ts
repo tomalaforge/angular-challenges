@@ -10,11 +10,9 @@ export class TeacherStore {
   addAll(teachers: Teacher[]) {
     this.teachers.set(teachers);
   }
-
   addOne(teacher: Teacher) {
     this.teachers.update((teachers) => [...teachers, teacher]);
   }
-
   deleteOne(id: number) {
     this.teachers.update((teachers) => teachers.filter((val) => val.id !== id));
   }
