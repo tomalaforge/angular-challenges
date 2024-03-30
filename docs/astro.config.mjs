@@ -54,19 +54,19 @@ export default defineConfig({
         ru: 'Руководство'
       }
     },
-    //   {
-    //   label: 'Leaderboard',
-    //   autogenerate: {
-    //     directory: 'leaderboard',
-    //     collapsed: true
-    //   },
-    //   translations: {
-    //     es: 'Leaderboard',
-    //     fr: 'Leaderboard',
-    //     pt: 'Leaderboard',
-    //     ru: 'Leaderboard'
-    //   }
-    // },
+      {
+      label: 'Leaderboard',
+      autogenerate: {
+        directory: 'leaderboard',
+        collapsed: true
+      },
+      translations: {
+        es: 'Leaderboard',
+        fr: 'Leaderboard',
+        pt: 'Leaderboard',
+        ru: 'Leaderboard'
+      }
+    },
     {
       label: 'Challenges',
       autogenerate: {

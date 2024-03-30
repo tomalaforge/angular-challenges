@@ -1,10 +1,17 @@
 <script>
-  import { onMount } from 'svelte';
   import UserBox from './UserBox.svelte';
+  import Spinner from './Spinner.svelte';
+  import { token } from '../github/github-store';
 
   let users = [];
   let loading = true;
   let error = null;
+
+  token.subscribe(token => {
+    if (token) {
+      fetchGitHubUsers();
+    }
+  })
 
   async function fetchGitHubUsers() {
     try {
@@ -12,7 +19,11 @@
       let page = 1;
 
       while (true) {
-        const response = await fetch(`https://api.github.com/search/issues?q=repo:tomalaforge/angular-challenges+is:pr+label:%22answer%22&per_page=200&page=${page}`);
+        const response = await fetch(`https://api.github.com/search/issues?q=repo:tomalaforge/angular-challenges+is:pr+label:%22answer%22&per_page=200&page=${page}`, {
+          headers: {
+            Authorization: `token ${$token}`
+          }
+        });
         if (!response.ok) {
           throw new Error('API rate limit exceeded. Please try again in a few minutes.');
         }
@@ -58,13 +69,10 @@
 
   }
 
-  onMount(() => {
-    fetchGitHubUsers();
-  });
 </script>
 
 {#if loading}
-  <p>Loading...</p>
+  <Spinner />
 {:else if error}
   <p>Error: {error}</p>
 {:else}
@@ -84,6 +92,7 @@
     justify-items: center;
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
+    margin-top: 2rem;
   }
 
   .challenge-number {

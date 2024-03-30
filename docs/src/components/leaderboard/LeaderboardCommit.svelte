@@ -1,10 +1,17 @@
 <script>
-  import { onMount } from 'svelte';
   import UserBox from './UserBox.svelte';
+  import Spinner from './Spinner.svelte';
+  import { token } from '../github/github-store';
 
   let users = [];
   let loading = true;
   let error = null;
+
+  token.subscribe(token => {
+    if (token) {
+      fetchGitHubUsers();
+    }
+  })
 
   async function fetchGitHubUsers() {
     try {
@@ -12,7 +19,11 @@
       let page = 1;
 
       while (true) {
-        const response = await fetch(`https://api.github.com/search/issues?q=repo:tomalaforge/angular-challenges+is:pr+no:label&per_page=100&page=${page}`);
+        const response = await fetch(`https://api.github.com/search/issues?q=repo:tomalaforge/angular-challenges+is:pr+no:label&per_page=100&page=${page}`,{
+          headers: {
+            Authorization: `token ${$token}`
+          }
+        });
         if (!response.ok) {
           throw new Error('API rate limit exceeded. Please try again in a few minutes.');
         }
@@ -49,7 +60,7 @@
         avatar: pr.avatar,
         count: pr.count,
         challengeNumber: pr.challengeNumber
-      })).filter((r) => r.login !== 'allcontributors[bot]').sort((a, b) => b.count - a.count);
+      })).filter((r) => r.login !== 'allcontributors[bot]' && r.login !== 'tomalaforge').sort((a, b) => b.count - a.count);
 
     } catch (e) {
       error = e.message;
@@ -58,14 +69,10 @@
     }
 
   }
-
-  onMount(() => {
-    fetchGitHubUsers();
-  });
 </script>
 
 {#if loading}
-  <p>Loading...</p>
+  <Spinner />
 {:else if error}
   <p>Error: {error}</p>
 {:else}
@@ -84,5 +91,6 @@
     justify-items: center;
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
+    margin-top: 2rem;
   }
 </style>
