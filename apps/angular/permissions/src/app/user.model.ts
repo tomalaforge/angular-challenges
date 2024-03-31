@@ -52,3 +52,45 @@ export const everyone: User = {
   isAdmin: false,
   roles: [],
 };
+export interface RoleWeight {
+  name: string;
+  route: string;
+  weight: number;
+}
+export const RolesWeight: RoleWeight[] = [
+  {
+    name: 'enter',
+    route: 'enter',
+    weight: 0,
+  },
+  {
+    name: 'manager',
+    route: 'manager',
+    weight: 1,
+  },
+  {
+    name: 'readerandwriter',
+    route: 'readerandwriter',
+    weight: 2,
+  },
+  {
+    name: 'reader',
+    route: 'reader',
+    weight: 3,
+  },
+  {
+    name: 'writer',
+    route: 'writer',
+    weight: 3,
+  },
+  {
+    name: 'client',
+    route: 'client',
+    weight: 4,
+  },
+  {
+    name: 'everyone',
+    route: 'everyone',
+    weight: 5,
+  },
+];

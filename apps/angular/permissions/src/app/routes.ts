@@ -23,14 +23,6 @@ export const APP_ROUTES = [
     canActivate: [authGuardGuard],
   },
   {
-    path: 'manager',
-    loadComponent: () =>
-      import('./dashboard/manager.component').then(
-        (m) => m.ManagerDashboardComponent,
-      ),
-    canActivate: [authGuardGuard],
-  },
-  {
     path: 'reader',
     loadComponent: () =>
       import('./dashboard/reader.component').then(
