@@ -1,6 +1,7 @@
 import { derived, writable } from 'svelte/store';
 
 export const token = writable<string | null>(null);
+export const isConnected = writable(false);
 
 export const isLoading = writable(true);
 export const error = writable(false);
@@ -18,6 +19,9 @@ export function loadToken() {
   const persistedToken = localStorage.getItem(TOKEN_KEY);
   if (persistedToken) {
     token.set(JSON.parse(persistedToken));
+    isConnected.set(true);
+  } else {
+    isConnected.set(false);
   }
 }
 

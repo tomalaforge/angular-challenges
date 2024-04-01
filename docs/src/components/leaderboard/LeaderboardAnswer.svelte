@@ -1,7 +1,7 @@
 <script>
   import UserBox from './UserBox.svelte';
   import Spinner from './Spinner.svelte';
-  import { token } from '../github/github-store';
+  import { isConnected, token } from '../github/github-store';
 
   let users = [];
   let loading = true;
@@ -11,7 +11,7 @@
     if (token) {
       fetchGitHubUsers();
     }
-  })
+  });
 
   async function fetchGitHubUsers() {
     try {
@@ -47,7 +47,7 @@
           }
         });
 
-        if(total_count < page * 100) {
+        if (total_count < page * 100) {
           break;
         }
 
@@ -71,22 +71,30 @@
 
 </script>
 
-{#if loading}
-  <Spinner />
-{:else if error}
-  <p>Error: {error}</p>
+{#if !$isConnected}
+  <div class="important-block not-connected">Log in to Github to see the list</div>
 {:else}
-  <div class="box not-content">
-    {#each users as { avatar, count, login,challengeNumber }, index}
-      <UserBox {avatar} {login} {index}>
-        {count} Answers
-        <div slot="addon" class="challenge-number">{challengeNumber.join(', ')}</div>
-      </UserBox>
-    {/each}
-  </div>
+  {#if loading}
+    <Spinner />
+  {:else if error}
+    <p>Error: {error}</p>
+  {:else}
+    <div class="box not-content">
+      {#each users as { avatar, count, login, challengeNumber }, index}
+        <UserBox {avatar} {login} {index}>
+          {count} Answers
+          <div slot="addon" class="challenge-number">{challengeNumber.join(', ')}</div>
+        </UserBox>
+      {/each}
+    </div>
+  {/if}
 {/if}
 
 <style>
+  .not-connected {
+    margin-top: 1rem;
+  }
+
   .box {
     display: flex;
     flex-wrap: wrap;
