@@ -1,12 +1,12 @@
 import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import {
   Component,
-  ContentChild,
   Directive,
   EventEmitter,
   Input,
   Output,
   TemplateRef,
+  contentChild,
 } from '@angular/core';
 import { ListItemComponent } from '../list-item/list-item.component';
 
@@ -37,9 +37,10 @@ export class RowRefDirective {}
 })
 export class CardComponent<T extends { id: number }> {
   @Input() list: T[] | null = null;
-  @ContentChild(RowRefDirective, { read: TemplateRef })
-  rowTemplate!: TemplateRef<{
-    $implicit: T;
-  }>;
+  rowTemplate = contentChild.required(RowRefDirective, { read: TemplateRef });
+  // @ContentChild(RowRefDirective, { read: TemplateRef })
+  // rowTemplate!: TemplateRef<{
+  //   $implicit: T;
+  // }>;
   @Output() addItem = new EventEmitter<void>();
 }

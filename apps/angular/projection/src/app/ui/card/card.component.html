@@ -1,7 +1,7 @@
 <ng-content select="card-img"></ng-content>
 @for (item of list; track item.id) {
   <ng-template
-    [ngTemplateOutlet]="rowTemplate"
+    [ngTemplateOutlet]="rowTemplate.call(item)"
     [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
 }
 <button
