@@ -59,8 +59,8 @@ export class PersonListComponent {
 
   label = '';
 
-  handleKey(event: any) {
-    if (event.keyCode === 13) {
+  handleKey(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
       this.names?.unshift(this.label);
       this.label = '';
     }

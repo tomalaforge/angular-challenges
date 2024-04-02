@@ -1,6 +1,7 @@
 import starlight from '@astrojs/starlight';
 import { defineConfig } from 'astro/config';
 import svelte from '@astrojs/svelte';
+import vercel from '@astrojs/vercel/serverless';
 
 export const locales = {
   root: {
@@ -53,20 +54,20 @@ export default defineConfig({
         ru: 'Руководство'
       }
     },
-    //   {
-    //   label: 'Leaderboard',
-    //   autogenerate: {
-    //     directory: 'leaderboard',
-    //     collapsed: true
-    //   },
-    //   translations: {
-    //     es: 'Leaderboard',
-    //     fr: 'Leaderboard',
-    //     pt: 'Leaderboard',
-    //     ru: 'Leaderboard'
-    //   }
-    // },
       {
+      label: 'Leaderboard',
+      autogenerate: {
+        directory: 'leaderboard',
+        collapsed: true
+      },
+      translations: {
+        es: 'Leaderboard',
+        fr: 'Leaderboard',
+        pt: 'Leaderboard',
+        ru: 'Leaderboard'
+      }
+    },
+    {
       label: 'Challenges',
       autogenerate: {
         directory: 'challenges'
@@ -105,9 +106,12 @@ export default defineConfig({
       TableOfContents: './src/components/TableOfContents.astro',
       PageTitle: './src/components/PageTitle.astro',
       MobileMenuFooter: './src/components/MobileMenuFooter.astro',
-      SiteTitle: './src/components/SiteTitle.astro'
+      SiteTitle: './src/components/SiteTitle.astro',
+      Hero: './src/components/Hero.astro'
     },
     defaultLocale: 'root',
     locales
-  }), svelte()]
+  }), svelte()],
+  output: "hybrid",
+  adapter: vercel()
 });

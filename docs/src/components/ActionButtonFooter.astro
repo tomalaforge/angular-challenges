@@ -6,9 +6,10 @@ import { getEntry } from 'astro:content';
 
 const { lang } = Astro.props;
 const { data } = await getEntry('i18n', lang);
+
 ---
 
-<div class="action-footer">
+<div class="action-footer button-hover">
   <a class="action-button" href="/subscription">
     <div>{data['buttons.email']}</div>
     <Icon name="email"  />
@@ -37,7 +38,6 @@ const { data } = await getEntry('i18n', lang);
     text-decoration: none;
     font-size: var(--sl-text-sm) !important;
     border: 1px solid;
-    font-size: var(--sl-text-base);
     padding: 0.4rem 0.8rem;
   }
 
