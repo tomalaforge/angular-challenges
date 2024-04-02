@@ -2,9 +2,16 @@
   [list]="store.data()"
   prop="firstName"
   customClass="bg-light-red"
-  (onDeleteItem)="deleteTeacher($event)"
   (onAddItem)="addTeacher()">
   <ng-template cardHeaderTemplate>
     <img src="assets/img/teacher.png" width="200px" />
+  </ng-template>
+
+  <ng-template cardContentTemplate let-item>
+    <app-list-item (onDeleteItem)="deleteTeacher(item.id)">
+      <ng-template #itemContentTemplate>
+        <div>{{ item.firstName }}</div>
+      </ng-template>
+    </app-list-item>
   </ng-template>
 </app-card>

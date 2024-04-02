@@ -1,15 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import {
-  Component,
-  ContentChild,
-  TemplateRef,
-  input,
-  output,
-} from '@angular/core';
-
-type ListItem = {
-  id: number;
-};
+import { Component, ContentChild, TemplateRef, output } from '@angular/core';
 
 @Component({
   selector: 'app-list-item',
@@ -17,14 +7,13 @@ type ListItem = {
   standalone: true,
   imports: [NgTemplateOutlet],
 })
-export class ListItemComponent<T extends ListItem> {
-  item = input.required<T>();
-  onDeleteItem = output<number>();
+export class ListItemComponent {
+  onDeleteItem = output();
 
   @ContentChild('itemContentTemplate')
   itemContentTemplate!: TemplateRef<void>;
 
-  delete(id: number) {
-    this.onDeleteItem.emit(id);
+  deleteItem() {
+    this.onDeleteItem.emit();
   }
 }

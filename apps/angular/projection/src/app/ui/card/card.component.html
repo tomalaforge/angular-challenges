@@ -13,11 +13,9 @@
 
     <section>
       @for (item of list(); track item.id) {
-        <app-list-item [item]="item" (onDeleteItem)="deleteItem($event)">
-          <ng-template #itemContentTemplate>
-            <div>{{ item[prop()] }}</div>
-          </ng-template>
-        </app-list-item>
+        <ng-template
+          [ngTemplateOutlet]="contentTemplate.templateRef"
+          [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
       } @empty {
         Empty list of card items
       }
