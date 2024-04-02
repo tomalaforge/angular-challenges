@@ -1,31 +1,34 @@
 import { Component, OnInit } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+import {
+  FakeHttpService,
+  randStudent,
+} from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
-import { CardType } from '../../model/card.model';
+import { ListItemTemplateDirective } from '../../directive/list-item-template.directive';
 import { Student } from '../../model/student.model';
 import { CardComponent } from '../../ui/card/card.component';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-student-card',
   template: `
     <app-card
       [list]="students"
-      [type]="cardType"
-      customClass="bg-light-green"></app-card>
+      customClass="bg-light-green"
+      (onAddNewItem)="addItem()"
+      headerImageUrl="assets/img/student.webp">
+      <ng-template appListItemTemplate let-item>
+        <app-list-item [id]="item.id" (onDelete)="deleteItem(item.id)">
+          {{ item.firstName }}
+        </app-list-item>
+      </ng-template>
+    </app-card>
   `,
   standalone: true,
-  styles: [
-    `
-      ::ng-deep .bg-light-green {
-        background-color: rgba(0, 250, 0, 0.1);
-      }
-    `,
-  ],
-  imports: [CardComponent],
+  imports: [CardComponent, ListItemComponent, ListItemTemplateDirective],
 })
 export class StudentCardComponent implements OnInit {
   students: Student[] = [];
-  cardType = CardType.STUDENT;
 
   constructor(
     private http: FakeHttpService,
@@ -36,5 +39,13 @@ export class StudentCardComponent implements OnInit {
     this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
 
     this.store.students$.subscribe((s) => (this.students = s));
+  }
+
+  addItem(): void {
+    this.store.addOne(randStudent());
+  }
+
+  deleteItem(id: number): void {
+    this.store.deleteOne(id);
   }
 }
