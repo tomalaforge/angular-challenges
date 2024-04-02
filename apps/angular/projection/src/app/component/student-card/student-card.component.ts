@@ -1,40 +1,62 @@
-import { Component, OnInit } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { FakeHttpService, randStudent } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
-import { CardType } from '../../model/card.model';
 import { Student } from '../../model/student.model';
 import { CardComponent } from '../../ui/card/card.component';
+import { AsyncPipe } from '@angular/common';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-student-card',
   template: `
     <app-card
-      [list]="students"
-      [type]="cardType"
-      customClass="bg-light-green"></app-card>
+      [list]="students$ | async"
+      [customClass]="'bg-light-green'"
+      [listTemplateRef]="listTemplateRef"
+      (delete)="delete($event)">
+   
+      <img cardImage
+        src="assets/img/student.webp"
+        width="200px" /> 
+
+        <button cardActionButton
+        class="rounded-sm border border-blue-500 bg-blue-300 p-2"
+        (click)="addNewStudent()">
+        Add
+      </button>
+    </app-card>
+
+    <ng-template #listTemplateRef let-item>
+        <p>{{item.firstName}}</p>
+    </ng-template>
   `,
   standalone: true,
   styles: [
     `
-      ::ng-deep .bg-light-green {
+      .bg-light-green {
         background-color: rgba(0, 250, 0, 0.1);
       }
     `,
   ],
-  imports: [CardComponent],
+  imports: [CardComponent, AsyncPipe],
+  encapsulation: ViewEncapsulation.None
 })
 export class StudentCardComponent implements OnInit {
-  students: Student[] = [];
-  cardType = CardType.STUDENT;
+  students$: Observable<Student[]> = this.store.students$;
 
   constructor(
     private http: FakeHttpService,
     private store: StudentStore,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
+  }
 
-    this.store.students$.subscribe((s) => (this.students = s));
+  addNewStudent() {
+    this.store.addOne(randStudent());
+  }
+  delete(id: number) {
+    this.store.deleteOne(id);
   }
 }
