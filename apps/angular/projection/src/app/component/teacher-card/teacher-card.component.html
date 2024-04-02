@@ -1,0 +1,10 @@
+<app-card
+  [list]="store.data()"
+  prop="firstName"
+  customClass="bg-light-red"
+  (onDeleteItem)="deleteTeacher($event)"
+  (onAddItem)="addTeacher()">
+  <ng-template cardHeaderTemplate>
+    <img src="assets/img/teacher.png" width="200px" />
+  </ng-template>
+</app-card>

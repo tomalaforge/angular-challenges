@@ -1,0 +1,35 @@
+<ng-container [ngTemplateOutlet]="cardWrapper"></ng-container>
+<ng-template #cardWrapper>
+  <div
+    class="flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4"
+    [class]="customClass()">
+    <ng-container
+      [ngTemplateOutlet]="
+        headerTemplate?.templateRef || defaultHeaderTemplate
+      "></ng-container>
+    <ng-template #defaultHeaderTemplate>
+      This is the default card header
+    </ng-template>
+
+    <section>
+      @for (item of list(); track item.id) {
+        <app-list-item [item]="item" (onDeleteItem)="deleteItem($event)">
+          <ng-template #itemContentTemplate>
+            <div>{{ item[prop()] }}</div>
+          </ng-template>
+        </app-list-item>
+      } @empty {
+        Empty list of card items
+      }
+    </section>
+
+    <ng-container [ngTemplateOutlet]="defaultFooterTemplate"></ng-container>
+    <ng-template #defaultFooterTemplate>
+      <button
+        class="rounded-sm border border-blue-500 bg-blue-300 p-2"
+        (click)="addNewItem()">
+        Add
+      </button>
+    </ng-template>
+  </div>
+</ng-template>
