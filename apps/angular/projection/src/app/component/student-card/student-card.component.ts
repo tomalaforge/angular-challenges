@@ -1,4 +1,9 @@
-import { Component, OnInit, inject, ChangeDetectionStrategy } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+} from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import {
   FakeHttpService,
@@ -18,7 +23,10 @@ import { type } from '../../utils/type-helper';
       <img src="assets/img/student.webp" width="200px" />
 
       <ng-template [listItem]="type" let-item="item">
-        <app-list-item [name]="item.firstName" (deleted)="delete(item.id)" />
+        <app-list-item (deleted)="delete(item.id)">
+          {{ item.firstName }} {{ item.lastName }} ->
+          {{ item.mainTeacher.subject }}
+        </app-list-item>
       </ng-template>
     </app-card>
   `,

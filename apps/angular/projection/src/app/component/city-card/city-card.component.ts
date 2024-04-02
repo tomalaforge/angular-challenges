@@ -1,4 +1,9 @@
-import { Component, OnInit, inject, ChangeDetectionStrategy } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+} from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CityStore } from '../../data-access/city.store';
 import {
@@ -18,7 +23,9 @@ import { type } from '../../utils/type-helper';
       <img src="assets/img/city.png" width="200px" />
 
       <ng-template [listItem]="type" let-item="item">
-        <app-list-item [name]="item.name" (deleted)="delete(item.id)" />
+        <app-list-item (deleted)="delete(item.id)">
+          {{ item.name }} ({{ item.country }})
+        </app-list-item>
       </ng-template>
     </app-card>
   `,

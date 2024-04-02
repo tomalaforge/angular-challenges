@@ -1,15 +1,20 @@
-import { Component, OnInit, inject, ChangeDetectionStrategy } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+} from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import {
   FakeHttpService,
   randTeacher,
 } from '../../data-access/fake-http.service';
 import { TeacherStore } from '../../data-access/teacher.store';
+import { Teacher } from '../../model/teacher.model';
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
-import { type } from '../../utils/type-helper';
-import { Teacher } from '../../model/teacher.model';
 import { ListItemDirective } from '../../ui/list-item/list-item.directive';
+import { type } from '../../utils/type-helper';
 
 @Component({
   selector: 'app-teacher-card',
@@ -18,7 +23,9 @@ import { ListItemDirective } from '../../ui/list-item/list-item.directive';
       <img src="assets/img/teacher.png" width="200px" />
 
       <ng-template [listItem]="type" let-item="item">
-        <app-list-item [name]="item.firstName" (deleted)="delete(item.id)" />
+        <app-list-item (deleted)="delete(item.id)">
+          {{ item.subject }}: {{ item.firstName }} {{ item.lastName }}
+        </app-list-item>
       </ng-template>
     </app-card>
   `,
