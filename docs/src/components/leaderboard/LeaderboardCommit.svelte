@@ -1,10 +1,17 @@
 <script>
-  import { onMount } from 'svelte';
   import UserBox from './UserBox.svelte';
+  import Spinner from './Spinner.svelte';
+  import { isConnected, token } from '../github/github-store';
 
   let users = [];
   let loading = true;
   let error = null;
+
+  token.subscribe(token => {
+    if (token) {
+      fetchGitHubUsers();
+    }
+  });
 
   async function fetchGitHubUsers() {
     try {
@@ -12,7 +19,11 @@
       let page = 1;
 
       while (true) {
-        const response = await fetch(`https://api.github.com/search/issues?q=repo:tomalaforge/angular-challenges+is:pr+no:label&per_page=100&page=${page}`);
+        const response = await fetch(`https://api.github.com/search/issues?q=repo:tomalaforge/angular-challenges+is:pr+no:label&per_page=100&page=${page}`, {
+          headers: {
+            Authorization: `token ${$token}`
+          }
+        });
         if (!response.ok) {
           throw new Error('API rate limit exceeded. Please try again in a few minutes.');
         }
@@ -36,7 +47,7 @@
           }
         });
 
-        if(total_count < page * 100) {
+        if (total_count < page * 100) {
           break;
         }
 
@@ -49,7 +60,7 @@
         avatar: pr.avatar,
         count: pr.count,
         challengeNumber: pr.challengeNumber
-      })).filter((r) => r.login !== 'allcontributors[bot]').sort((a, b) => b.count - a.count);
+      })).filter((r) => r.login !== 'allcontributors[bot]' && r.login !== 'tomalaforge').sort((a, b) => b.count - a.count);
 
     } catch (e) {
       error = e.message;
@@ -58,31 +69,36 @@
     }
 
   }
-
-  onMount(() => {
-    fetchGitHubUsers();
-  });
 </script>
 
-{#if loading}
-  <p>Loading...</p>
-{:else if error}
-  <p>Error: {error}</p>
+{#if !$isConnected}
+  <div class="important-block not-connected">Log in to Github to see the list</div>
 {:else}
-  <div class="box not-content">
-    {#each users as { avatar, count, login }, index}
-      <UserBox {avatar} {login} {index}>
-        {count} PRs merged
-      </UserBox>
-    {/each}
-  </div>
+  {#if loading}
+    <Spinner />
+  {:else if error}
+    <p>Error: {error}</p>
+  {:else}
+    <div class="box not-content">
+      {#each users as { avatar, count, login }, index}
+        <UserBox {avatar} {login} {index}>
+          {count} PRs merged
+        </UserBox>
+      {/each}
+    </div>
+  {/if}
 {/if}
 
 <style>
+  .not-connected {
+    margin-top: 1rem;
+  }
+
   .box {
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
     justify-items: center;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
+    gap: 1rem;
+    margin-top: 2rem;
   }
 </style>

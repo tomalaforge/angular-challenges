@@ -1,18 +1,27 @@
 <script>
-  import { onMount } from 'svelte';
-  import { data, error, isLoaded, isLoading, totalCount } from './github-store';
+  import { data, error, isLoaded, isLoading, token, totalCount } from './github-store';
 
   export let challengeNumber;
 
   let page = 1;
 
+  token.subscribe(token => {
+    if (token) {
+      fetchTotalCount();
+    }
+  })
+
   async function fetchTotalCount() {
     isLoading.set(true);
     try {
       while (true) {
-        const response = await fetch(`https://api.github.com/search/issues?q=repo:tomalaforge/angular-challenges+is:pr+label:"${challengeNumber}"+label:"answer"&per_page=100&page=${page}`);
+        const response = await fetch(`https://api.github.com/search/issues?q=repo:tomalaforge/angular-challenges+is:pr+label:"${challengeNumber}"+label:"answer"&per_page=100&page=${page}`, {
+          headers: {
+            Authorization: `Bearer ${$token}`,
+          },
+        });
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error('Failed to fetch data');
         }
         const { items: new_items, total_count } = await response.json();
         if (!new_items || new_items.length === 0) break;
@@ -30,24 +39,23 @@
     }
   }
 
-  onMount(() => {
-    fetchTotalCount();
-  });
-
 </script>
 
 {#if $isLoaded}
   <div class="solution-container" id="answers">
     <div>Answered by</div>
-    {#each $data as { user }}
+    {#each $data as { user, html_url }}
+      <a href={html_url} target="_blank">
       <img
         loading="lazy"
         src={user.avatar_url}
         width="30"
         height="30"
         alt=""
+        title={user.login}
         class="avatar"
       />
+      </a>
     {/each}
   </div>
 {/if}

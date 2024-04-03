@@ -34,9 +34,8 @@
     border: 1px solid var(--sl-color-gray-3);
     border-radius: 5px;
     align-items: center;
-    width: 100%;
-    max-width: 300px;
     justify-content: space-between;
+    width: 100%;
   }
 
   .user-info {
@@ -63,10 +62,6 @@
     font-size: 24px;
     color: red;
     line-height: 24px;
-    max-width: 150px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
   }
 
   .count {

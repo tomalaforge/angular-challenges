@@ -1,10 +1,17 @@
 <script>
-  import { onMount } from 'svelte';
   import UserBox from './UserBox.svelte';
+  import Spinner from './Spinner.svelte';
+  import { isConnected, token } from '../github/github-store';
 
   let users = [];
   let loading = true;
   let error = null;
+
+  token.subscribe(token => {
+    if (token) {
+      fetchGitHubUsers();
+    }
+  });
 
   async function fetchGitHubUsers() {
     try {
@@ -12,7 +19,11 @@
       let page = 1;
 
       while (true) {
-        const response = await fetch(`https://api.github.com/search/issues?q=repo:tomalaforge/angular-challenges+is:pr+label:%22answer%22&per_page=200&page=${page}`);
+        const response = await fetch(`https://api.github.com/search/issues?q=repo:tomalaforge/angular-challenges+is:pr+label:%22answer%22&per_page=200&page=${page}`, {
+          headers: {
+            Authorization: `token ${$token}`
+          }
+        });
         if (!response.ok) {
           throw new Error('API rate limit exceeded. Please try again in a few minutes.');
         }
@@ -36,7 +47,7 @@
           }
         });
 
-        if(total_count < page * 100) {
+        if (total_count < page * 100) {
           break;
         }
 
@@ -58,32 +69,38 @@
 
   }
 
-  onMount(() => {
-    fetchGitHubUsers();
-  });
 </script>
 
-{#if loading}
-  <p>Loading...</p>
-{:else if error}
-  <p>Error: {error}</p>
+{#if !$isConnected}
+  <div class="important-block not-connected">Log in to Github to see the list</div>
 {:else}
-  <div class="box not-content">
-    {#each users as { avatar, count, login,challengeNumber }, index}
-      <UserBox {avatar} {login} {index}>
-        {count} Answers
-        <div slot="addon" class="challenge-number">{challengeNumber.join(', ')}</div>
-      </UserBox>
-    {/each}
-  </div>
+  {#if loading}
+    <Spinner />
+  {:else if error}
+    <p>Error: {error}</p>
+  {:else}
+    <div class="box not-content">
+      {#each users as { avatar, count, login, challengeNumber }, index}
+        <UserBox {avatar} {login} {index}>
+          {count} Answers
+          <div slot="addon" class="challenge-number">{challengeNumber.join(', ')}</div>
+        </UserBox>
+      {/each}
+    </div>
+  {/if}
 {/if}
 
 <style>
+  .not-connected {
+    margin-top: 1rem;
+  }
+
   .box {
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
     justify-items: center;
-    grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
+    margin-top: 2rem;
   }
 
   .challenge-number {
