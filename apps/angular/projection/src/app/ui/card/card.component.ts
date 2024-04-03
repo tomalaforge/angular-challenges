@@ -1,4 +1,4 @@
-import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -33,7 +33,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
   host: {
     class: 'flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4',
   },
-  imports: [NgIf, NgFor, ListItemComponent, NgTemplateOutlet],
+  imports: [ListItemComponent, NgTemplateOutlet],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardComponent<T extends { id: number }> {
@@ -41,6 +41,8 @@ export class CardComponent<T extends { id: number }> {
   image = input<string | null>(null);
   addItem = output<void>();
 
-  @ContentChild(ListItemRefDirective, { read: TemplateRef })
+  @ContentChild(ListItemRefDirective, { static: false, read: TemplateRef })
   listItemTemplate!: TemplateRef<{ $implicit: T }>;
+
+  // listItemTemplate = contentChild<TemplateRef<{ $implicit: T }>>('listItemRef')
 }
