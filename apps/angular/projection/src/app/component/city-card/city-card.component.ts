@@ -11,6 +11,7 @@ import { CardComponent } from '../../ui/card/card.component';
     <app-card
       [list]="cities"
       [type]="cardType"
+      [image]="image"
       customClass="bg-light-red"></app-card>
   `,
   standalone: true,
@@ -18,6 +19,7 @@ import { CardComponent } from '../../ui/card/card.component';
 })
 export class CityCardComponent implements OnInit {
   cities: City[] = [];
+  image = 'city.png';
   cardType = CardType.CITY;
 
   constructor(

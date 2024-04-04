@@ -11,6 +11,7 @@ import { CardComponent } from '../../ui/card/card.component';
     <app-card
       [list]="teachers"
       [type]="cardType"
+      [image]="image"
       customClass="bg-light-red"></app-card>
   `,
   styles: [
@@ -26,6 +27,7 @@ import { CardComponent } from '../../ui/card/card.component';
 export class TeacherCardComponent implements OnInit {
   teachers: Teacher[] = [];
   cardType = CardType.TEACHER;
+  image = 'teacher.png';
 
   constructor(
     private http: FakeHttpService,
