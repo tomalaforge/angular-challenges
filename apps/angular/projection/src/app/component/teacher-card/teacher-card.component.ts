@@ -1,5 +1,7 @@
 import { NgOptimizedImage } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { switchMap, tap } from 'rxjs';
 import {
   FakeHttpService,
   randTeacher,
@@ -14,26 +16,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-teacher-card',
-  template: `
-    <app-card
-      [list]="teachers"
-      (addOneEventEmitter)="addTeacher()"
-      class="bg-light-red">
-      <img
-        img-src
-        ngSrc="assets/img/teacher.png"
-        width="200"
-        height="200"
-        alt="teacher image" />
-
-      <ng-template appCardListItem let-item>
-        <app-list-item
-          [id]="item.id"
-          [name]="item.firstName"
-          (deleteEventEmitter)="delete(item.id)" />
-      </ng-template>
-    </app-card>
-  `,
+  templateUrl: './teacher-card.component.html',
   styles: [
     `
       .bg-light-red {
@@ -49,19 +32,19 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
     NgOptimizedImage,
   ],
 })
-export class TeacherCardComponent implements OnInit {
-  teachers: Teacher[] = [];
+export class TeacherCardComponent {
+  public teachers: Signal<Array<Teacher>> = toSignal(
+    this.http.fetchTeachers$.pipe(
+      tap((s) => this.store.addAll(s)),
+      switchMap(() => this.store.teachers$),
+    ),
+    { initialValue: [] as Teacher[] },
+  );
 
   constructor(
     private http: FakeHttpService,
     private store: TeacherStore,
   ) {}
-
-  ngOnInit(): void {
-    this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
-
-    this.store.teachers$.subscribe((t) => (this.teachers = t));
-  }
 
   public addTeacher(): void {
     this.store.addOne(randTeacher());

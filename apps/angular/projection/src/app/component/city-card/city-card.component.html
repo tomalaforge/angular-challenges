@@ -1,0 +1,17 @@
+<app-card
+  [list]="cities()"
+  (addOneEventEmitter)="addCity()"
+  class="bg-light-yellow">
+  <img
+    img-src
+    ngSrc="assets/img/city.png"
+    width="200"
+    height="200"
+    alt="city image" />
+  <ng-template appCardListItem let-item>
+    <app-list-item
+      [id]="item.id"
+      [name]="item.name"
+      (deleteEventEmitter)="delete(item.id)" />
+  </ng-template>
+</app-card>

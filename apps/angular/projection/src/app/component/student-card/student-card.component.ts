@@ -1,5 +1,7 @@
 import { NgOptimizedImage } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { switchMap, tap } from 'rxjs';
 import {
   FakeHttpService,
   randStudent,
@@ -14,25 +16,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-student-card',
-  template: `
-    <app-card
-      [list]="students"
-      (addOneEventEmitter)="addStudent()"
-      class="bg-light-green">
-      <img
-        img-src
-        ngSrc="assets/img/student.webp"
-        width="200"
-        height="200"
-        alt="student image" />
-      <ng-template appCardListItem let-item>
-        <app-list-item
-          [id]="item.id"
-          [name]="item.firstName"
-          (deleteEventEmitter)="delete(item.id)" />
-      </ng-template>
-    </app-card>
-  `,
+  templateUrl: './student-card.component.html',
   standalone: true,
   styles: [
     `
@@ -41,7 +25,6 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
       }
     `,
   ],
-
   imports: [
     CardComponent,
     ListItemComponent,
@@ -49,19 +32,19 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
     NgOptimizedImage,
   ],
 })
-export class StudentCardComponent implements OnInit {
-  students: Student[] = [];
+export class StudentCardComponent {
+  public students: Signal<Array<Student>> = toSignal(
+    this.http.fetchStudents$.pipe(
+      tap((s) => this.store.addAll(s)),
+      switchMap(() => this.store.students$),
+    ),
+    { initialValue: [] as Student[] },
+  );
 
   constructor(
     private http: FakeHttpService,
     private store: StudentStore,
   ) {}
-
-  ngOnInit(): void {
-    this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
-
-    this.store.students$.subscribe((s) => (this.students = s));
-  }
 
   public addStudent(): void {
     this.store.addOne(randStudent());
