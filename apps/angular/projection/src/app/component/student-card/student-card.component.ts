@@ -16,11 +16,12 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
     <app-card class="bg-light-green" (addMoreEvent)="addOne()">
       <img src="assets/img/student.webp" width="200px" />
       <section>
-        <app-list-item
-          (deleteEvent)="removeOne($event)"
-          *ngFor="let item of students"
-          [name]="item.firstName"
-          [id]="item.id"></app-list-item>
+        @for (item of students; track item.id) {
+          <app-list-item
+            (deleteEvent)="removeOne($event)"
+            [name]="item.firstName"
+            [id]="item.id"></app-list-item>
+        }
       </section>
     </app-card>
   `,

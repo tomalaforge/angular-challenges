@@ -1,4 +1,9 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Output,
+} from '@angular/core';
 import { ListItemComponent } from '../list-item/list-item.component';
 
 @Component({
@@ -15,6 +20,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
   `,
   standalone: true,
   imports: [ListItemComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     class:
       'background flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4',

@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 
 @Component({
   selector: 'app-list-item',
@@ -9,6 +15,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
     </button>
   `,
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     class: 'border-grey-300 flex justify-between border px-2 py-1',
   },

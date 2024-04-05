@@ -1,5 +1,6 @@
 import { NgForOf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { of } from 'rxjs';
 import { CityStore } from '../../data-access/city.store';
 import {
   FakeHttpService,
@@ -16,11 +17,12 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
     <app-card (addMoreEvent)="addOne()">
       <img src="assets/img/city.png" width="200px" />
       <section>
-        <app-list-item
-          (deleteEvent)="removeOne($event)"
-          *ngFor="let item of cities"
-          [name]="item.name"
-          [id]="item.id"></app-list-item>
+        @for (item of cities; track item.name) {
+          <app-list-item
+            (deleteEvent)="removeOne($event)"
+            [name]="item.name"
+            [id]="item.id"></app-list-item>
+        }
       </section>
     </app-card>
   `,
@@ -48,4 +50,6 @@ export class CityCardComponent implements OnInit, Card {
   removeOne(id: number) {
     this.store.deleteOne(id);
   }
+
+  protected readonly of = of;
 }
