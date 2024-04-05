@@ -5,6 +5,7 @@ import {
   FakeHttpService,
   randomCity,
 } from '../../data-access/fake-http.service';
+import { Card } from '../../model/card';
 import { City } from '../../model/city.model';
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
@@ -12,19 +13,21 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
 @Component({
   selector: 'app-city-card',
   template: `
-    <app-card customClass="bg-light-green" (addMoreEvent)="addOne()">
+    <app-card (addMoreEvent)="addOne()">
       <img src="assets/img/city.png" width="200px" />
-      <app-list-item
-        (deleteEvent)="remove($event)"
-        *ngFor="let item of cities"
-        [name]="item.name"
-        [id]="item.id"></app-list-item>
+      <section>
+        <app-list-item
+          (deleteEvent)="removeOne($event)"
+          *ngFor="let item of cities"
+          [name]="item.name"
+          [id]="item.id"></app-list-item>
+      </section>
     </app-card>
   `,
   standalone: true,
   imports: [CardComponent, ListItemComponent, NgForOf],
 })
-export class CityCardComponent implements OnInit {
+export class CityCardComponent implements OnInit, Card {
   cities: City[] = [];
 
   constructor(
@@ -42,7 +45,7 @@ export class CityCardComponent implements OnInit {
     this.store.addOne(randomCity());
   }
 
-  remove(id: number) {
+  removeOne(id: number) {
     this.store.deleteOne(id);
   }
 }

@@ -5,6 +5,7 @@ import {
   randStudent,
 } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
+import { Card } from '../../model/card';
 import { Student } from '../../model/student.model';
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
@@ -12,13 +13,15 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
 @Component({
   selector: 'app-student-card',
   template: `
-    <app-card customClass="bg-light-green" (addMoreEvent)="addOne()">
+    <app-card class="bg-light-green" (addMoreEvent)="addOne()">
       <img src="assets/img/student.webp" width="200px" />
-      <app-list-item
-        (deleteEvent)="remove($event)"
-        *ngFor="let item of students"
-        [name]="item.firstName"
-        [id]="item.id"></app-list-item>
+      <section>
+        <app-list-item
+          (deleteEvent)="removeOne($event)"
+          *ngFor="let item of students"
+          [name]="item.firstName"
+          [id]="item.id"></app-list-item>
+      </section>
     </app-card>
   `,
   standalone: true,
@@ -31,7 +34,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   ],
   imports: [CardComponent, ListItemComponent, NgForOf],
 })
-export class StudentCardComponent implements OnInit {
+export class StudentCardComponent implements OnInit, Card {
   students: Student[] = [];
 
   constructor(
@@ -49,7 +52,7 @@ export class StudentCardComponent implements OnInit {
     this.store.addOne(randStudent());
   }
 
-  remove(id: number) {
+  removeOne(id: number) {
     this.store.deleteOne(id);
   }
 }
