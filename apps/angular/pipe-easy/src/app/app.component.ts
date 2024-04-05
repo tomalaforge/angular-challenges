@@ -1,21 +1,21 @@
-import { NgFor } from '@angular/common';
+import { NgFor, TitleCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
+import { ComputationPipe } from './computation.pipe';
 
 @Component({
   standalone: true,
-  imports: [NgFor],
+  imports: [NgFor, ComputationPipe, TitleCasePipe],
   selector: 'app-root',
   template: `
-    <div *ngFor="let person of persons; let index = index">
-      {{ heavyComputation(person, index) }}
-    </div>
+    @for (person of persons; track person; let index = $index) {
+      <div>
+        {{ person | customPipe: index | titlecase }}
+      </div>
+    } @empty {
+      <div>There is no data</div>
+    }
   `,
 })
 export class AppComponent {
   persons = ['toto', 'jack'];
-
-  heavyComputation(name: string, index: number) {
-    // very heavy computation
-    return `${name} - ${index}`;
-  }
 }
