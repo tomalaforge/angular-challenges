@@ -1,0 +1,12 @@
+@for (todo of todoStore.todoEntities(); track todo.id) {
+  <app-list-item
+    (onDelete)="delete(todo)"
+    (onUpdate)="update(todo)"
+    [loadingState]="todo.loadingState">
+    <ng-template #itemContentTemplate>
+      <div>{{ todo.title }}</div>
+    </ng-template>
+  </app-list-item>
+} @empty {
+  <div id="no-todos-available">There are no todos available.</div>
+}

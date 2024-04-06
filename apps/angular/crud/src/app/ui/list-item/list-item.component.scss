@@ -1,0 +1,13 @@
+.wrapper {
+  display: flex;
+  margin-bottom: 15px;
+
+  .loader {
+    display: inline-block;
+    height: 25px;
+  }
+
+  .error {
+    color: lightcoral;
+  }
+}

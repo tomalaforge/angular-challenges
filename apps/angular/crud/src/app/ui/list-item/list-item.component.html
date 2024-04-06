@@ -1,0 +1,26 @@
+<ng-container *ngrxLet="loadingState() | loadingStatePipe as state">
+  <div class="wrapper">
+    <ng-container [ngTemplateOutlet]="itemContentTemplate"></ng-container>
+
+    <div>
+      <button
+        id="btn-update"
+        (click)="onUpdate.emit()"
+        [disabled]="state.loading">
+        Update
+      </button>
+      <button
+        id="btn-delete"
+        (click)="onDelete.emit()"
+        [disabled]="state.loading">
+        Delete
+      </button>
+    </div>
+
+    @if (state.loading) {
+      <app-loader class="loader"></app-loader>
+    } @else if (state.error) {
+      <div class="error">{{ state.error }}</div>
+    }
+  </div>
+</ng-container>
