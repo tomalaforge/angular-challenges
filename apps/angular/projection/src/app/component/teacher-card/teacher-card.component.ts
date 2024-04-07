@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FakeHttpService } from '../../data-access/fake-http.service';
 import { TeacherStore } from '../../data-access/teacher.store';
 import { CardType } from '../../model/card.model';
@@ -11,15 +11,17 @@ import { CardComponent } from '../../ui/card/card.component';
     <app-card
       [list]="teachers"
       [type]="cardType"
-      customClass="bg-light-red"></app-card>
+      [imageSrc]="'assets/img/teacher.png'"
+      [customClass]="'bg-light-red'"></app-card>
   `,
   styles: [
     `
-      ::ng-deep .bg-light-red {
+      .bg-light-red {
         background-color: rgba(250, 0, 0, 0.1);
       }
     `,
   ],
+  encapsulation: ViewEncapsulation.None,
   standalone: true,
   imports: [CardComponent],
 })
