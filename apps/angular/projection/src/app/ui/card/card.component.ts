@@ -1,4 +1,4 @@
-import { NgTemplateOutlet } from '@angular/common';
+import { NgOptimizedImage, NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   TemplateRef,
@@ -15,7 +15,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
     <div
       class="flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4"
       [class]="customClass()">
-      <img headerImage [src]="headerImageUrl()" width="200px" />
+      <img [ngSrc]="headerImageUrl()" width="200" height="200" priority />
 
       <section>
         @for (item of list(); track item.id) {
@@ -35,7 +35,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
     </div>
   `,
   standalone: true,
-  imports: [ListItemComponent, NgTemplateOutlet],
+  imports: [ListItemComponent, NgTemplateOutlet, NgOptimizedImage],
 })
 export class CardComponent<T extends { id: number }> {
   list = input<T[] | null>(null);
