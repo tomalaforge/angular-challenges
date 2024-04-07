@@ -1,4 +1,4 @@
-import { Component, input, output } from '@angular/core';
+import { Component, output } from '@angular/core';
 
 @Component({
   selector: 'app-list-item',
@@ -6,7 +6,7 @@ import { Component, input, output } from '@angular/core';
     <div class="border-grey-300 flex justify-between border px-2 py-1">
       <ng-content></ng-content>
 
-      <button (click)="onDelete.emit(id())">
+      <button (click)="onDelete.emit()">
         <img class="h-5" src="assets/svg/trash.svg" />
       </button>
     </div>
@@ -14,6 +14,5 @@ import { Component, input, output } from '@angular/core';
   standalone: true,
 })
 export class ListItemComponent {
-  id = input.required<number>();
-  onDelete = output<number>();
+  onDelete = output();
 }

@@ -18,7 +18,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
       (onAddNewItem)="addItem()"
       headerImageUrl="assets/img/city.png">
       <ng-template appListItemTemplate let-item>
-        <app-list-item [id]="item.id" (onDelete)="deleteItem(item.id)">
+        <app-list-item (onDelete)="deleteItem(item.id)">
           {{ item.name }}
         </app-list-item>
       </ng-template>
