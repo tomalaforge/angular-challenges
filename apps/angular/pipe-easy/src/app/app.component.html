@@ -1,0 +1,5 @@
+@for (person of persons; track person; let index = $index) {
+  <div>
+    {{ person | stringSeperator: { keys: [index] } }}
+  </div>
+}
