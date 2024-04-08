@@ -3,7 +3,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { tap } from 'rxjs';
 import { FakeHttpService, randTeacher } from '../data-access/fake-http.service';
 import { TeacherStore } from '../data-access/teacher.store';
-import { CardComponent } from '../ui/card.component';
+import { CardComponent, ItemDirective } from '../ui/card.component';
 import { ListItemComponent } from '../ui/list-item.component';
 
 @Component({
@@ -15,11 +15,11 @@ import { ListItemComponent } from '../ui/list-item.component';
       class="bg-light-red">
       <img src="assets/img/teacher.png" width="200px" />
 
-      <ng-template #itemRef let-item>
-        <app-list-item
-          [label]="item.firstName"
-          [id]="item.id"
-          (delete)="store.deleteOne(item.id)"></app-list-item>
+      <!-- <ng-template *appItem="store.teachers() as item"> -->
+      <ng-template [appItem]="store.teachers()" let-item="item">
+        <app-list-item [id]="item.id" (delete)="store.deleteOne(item.id)">
+          {{ item.firstName }}
+        </app-list-item>
       </ng-template>
     </app-card>
   `,
@@ -31,7 +31,7 @@ import { ListItemComponent } from '../ui/list-item.component';
     `,
   ],
   standalone: true,
-  imports: [CardComponent, ListItemComponent],
+  imports: [CardComponent, ListItemComponent, ItemDirective],
 })
 export class TeacherCardComponent {
   private http = inject(FakeHttpService);

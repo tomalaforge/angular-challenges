@@ -3,7 +3,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { tap } from 'rxjs';
 import { FakeHttpService } from '../data-access/fake-http.service';
 import { StudentStore } from '../data-access/student.store';
-import { CardComponent } from '../ui/card.component';
+import { CardComponent, ItemDirective } from '../ui/card.component';
 import { ListItemComponent } from '../ui/list-item.component';
 import { randStudent } from './../data-access/fake-http.service';
 
@@ -16,11 +16,10 @@ import { randStudent } from './../data-access/fake-http.service';
       class="bg-light-green">
       <img src="assets/img/student.webp" width="200px" />
 
-      <ng-template #itemRef let-item>
-        <app-list-item
-          [label]="item.firstName"
-          [id]="item.id"
-          (delete)="store.deleteOne(item.id)"></app-list-item>
+      <ng-template [appItem]="store.students()" let-item>
+        <app-list-item [id]="item.id" (delete)="store.deleteOne(item.id)">
+          {{ item.firstName }}
+        </app-list-item>
       </ng-template>
     </app-card>
   `,
@@ -32,7 +31,7 @@ import { randStudent } from './../data-access/fake-http.service';
       }
     `,
   ],
-  imports: [CardComponent, ListItemComponent],
+  imports: [CardComponent, ListItemComponent, ItemDirective],
 })
 export class StudentCardComponent {
   private http = inject(FakeHttpService);

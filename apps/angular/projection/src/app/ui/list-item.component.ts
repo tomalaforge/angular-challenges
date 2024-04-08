@@ -8,8 +8,8 @@ import {
 @Component({
   selector: 'app-list-item',
   template: `
-    {{ label() }}
-    <button (click)="delete.emit(id())">
+    <ng-content />
+    <button (click)="delete.emit()">
       <img class="h-5" src="assets/svg/trash.svg" />
     </button>
   `,
@@ -21,6 +21,5 @@ import {
 })
 export class ListItemComponent {
   id = input.required<number>();
-  label = input.required<string>();
-  delete = output<number>();
+  delete = output<void>();
 }

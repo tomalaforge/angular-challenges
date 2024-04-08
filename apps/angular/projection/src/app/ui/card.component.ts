@@ -2,10 +2,33 @@ import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  Directive,
+  Input,
+  TemplateRef,
   contentChild,
   input,
   output,
 } from '@angular/core';
+
+interface ItemContext<T> {
+  $implicit: T;
+  item: T; // Required to support *options syntax as that does not use $implicit
+}
+
+@Directive({
+  selector: 'ng-template[appItem]',
+  standalone: true,
+})
+export class ItemDirective<T> {
+  @Input({ required: true }) appItem!: T[];
+
+  static ngTemplateContextGuard<TContext>(
+    dir: ItemDirective<TContext>,
+    ctx: unknown,
+  ): ctx is ItemContext<TContext> {
+    return true;
+  }
+}
 
 @Component({
   selector: 'app-card',
@@ -17,7 +40,7 @@ import {
         <ng-template
           *ngTemplateOutlet="
             itemTemplateRef();
-            context: { $implicit: item }
+            context: { item, $implicit: item }
           "></ng-template>
       }
     </section>
@@ -29,14 +52,14 @@ import {
     </button>
   `,
   standalone: true,
-  imports: [NgTemplateOutlet],
+  imports: [NgTemplateOutlet, ItemDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     class: 'flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4',
   },
 })
-export class CardComponent {
-  list = input<any[] | null>(null);
+export class CardComponent<T extends { id: number }> {
+  list = input<T[] | null>(null);
   addItem = output<void>();
-  itemTemplateRef = contentChild<any>('itemRef');
+  itemTemplateRef = contentChild.required(ItemDirective, { read: TemplateRef });
 }
