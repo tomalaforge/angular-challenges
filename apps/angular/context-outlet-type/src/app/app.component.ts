@@ -1,29 +1,33 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ListComponent } from './list.component';
-import { PersonComponent } from './person.component';
+import { ListComponent, ListDirective } from './list.component';
+import { PersonComponent, PersonDirective } from './person.component';
 
 @Component({
   standalone: true,
-  imports: [NgTemplateOutlet, PersonComponent, ListComponent],
+  imports: [
+    NgTemplateOutlet,
+    PersonComponent,
+    ListComponent,
+    ListDirective,
+    PersonDirective,
+  ],
   selector: 'app-root',
   template: `
     <person [person]="person">
-      <ng-template #personRef let-name let-age="age">
-        {{ name }}: {{ age }}
-      </ng-template>
+      <div *appPerson="person">{{ person.name }}: {{ person.age }}</div>
     </person>
 
     <list [list]="students">
-      <ng-template #listRef let-student let-i="index">
+      <div *appList="students as student; index as i">
         {{ student.name }}: {{ student.age }} - {{ i }}
-      </ng-template>
+      </div>
     </list>
 
     <list [list]="cities">
-      <ng-template #listRef let-city let-i="index">
+      <div *appList="cities as city; index as i">
         {{ city.name }}: {{ city.country }} - {{ i }}
-      </ng-template>
+      </div>
     </list>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
