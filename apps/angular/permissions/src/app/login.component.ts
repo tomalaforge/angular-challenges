@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ButtonComponent } from './button.component';
 import { InformationComponent } from './information.component';
+import { HasRoleDirective, HasRoleSuperAdminDirective } from './role.directive';
 import {
+  Role,
   admin,
   client,
   everyone,
@@ -15,7 +17,13 @@ import { UserStore } from './user.store';
 
 @Component({
   standalone: true,
-  imports: [InformationComponent, RouterLink, ButtonComponent],
+  imports: [
+    InformationComponent,
+    RouterLink,
+    ButtonComponent,
+    HasRoleDirective,
+    HasRoleSuperAdminDirective,
+  ],
   selector: 'app-login',
   template: `
     <header class="flex items-center gap-3">
@@ -31,12 +39,22 @@ import { UserStore } from './user.store';
 
     <app-information></app-information>
 
-    <button app-button class="mt-10" routerLink="enter">
-      Enter application
-    </button>
+    <ng-container *appHasRole="[Role.MANAGER]">
+      <button app-button class="mt-10" routerLink="enter">
+        Enter application
+      </button>
+    </ng-container>
+
+    <ng-container *appHasRoleSuperAdmin>
+      <button app-button class="mt-10" routerLink="enter">
+        Enter application Master !
+      </button>
+    </ng-container>
   `,
 })
 export class LoginComponent {
+  readonly Role = Role;
+
   constructor(private userStore: UserStore) {}
 
   admin() {
