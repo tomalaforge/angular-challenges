@@ -1,21 +1,19 @@
-import { NgFor } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { HeavyComputationPipe } from './heavy-compuation.pipe';
 
 @Component({
   standalone: true,
-  imports: [NgFor],
+  imports: [HeavyComputationPipe],
   selector: 'app-root',
   template: `
-    <div *ngFor="let person of persons; let index = index">
-      {{ heavyComputation(person, index) }}
-    </div>
+    @for (person of persons; track index; let index = $index) {
+      <div>
+        {{ person | heavyComputation: index }}
+      </div>
+    }
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
   persons = ['toto', 'jack'];
-
-  heavyComputation(name: string, index: number) {
-    // very heavy computation
-    return `${name} - ${index}`;
-  }
 }
