@@ -1,19 +1,21 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ItemComponent } from './item.component';
 import { LOADING } from './loading.token';
-import { Todo, TodoService } from './todo.service';
+import { TodoService } from './todo.service';
 
 @Component({
   standalone: true,
-  imports: [MatProgressSpinnerModule],
+  imports: [MatProgressSpinnerModule, ItemComponent],
   selector: 'app-root',
   template: `
-    @for (todo of todos(); track todo.id; let index = $index) {
-      <div>
-        {{ todo.title }}
-        <button (click)="update(todo, index)">Update</button>
-        <button (click)="delete(todo)">Delete</button>
-      </div>
+    @for (todo of service.todos(); track todo.id; let index = $index) {
+      <app-item
+        [loading]="service.todoIdsPending.has(todo.id)"
+        [todo]="todo"
+        [index]="index"
+        (delete)="service.deleteTodo(todo)"
+        (update)="service.updateTodo(todo, index)" />
     }
 
     @if (loading()) {
@@ -32,12 +34,9 @@ import { Todo, TodoService } from './todo.service';
       }
     `,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-  private service = inject(TodoService);
-  todos = this.service.todos;
+  protected service = inject(TodoService);
   loading = inject(LOADING);
-
-  update = (todo: Todo, index: number) => this.service.updateTodo(todo, index);
-  delete = (todo: Todo) => this.service.deleteTodo(todo);
 }

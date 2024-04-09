@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, effect, inject, signal } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { randText } from '@ngneat/falso';
-import { Subject, exhaustMap, map, tap } from 'rxjs';
+import { Subject, exhaustMap, map, merge, tap } from 'rxjs';
 
 export interface Todo {
   userId: number;
@@ -18,69 +18,60 @@ export class TodoService {
   private delete = new Subject<{ todo: Todo }>();
 
   todos = signal<Todo[]>([]);
+  todoIdsPending = new Set<number>();
+
+  private load$ = this.http
+    .get<Todo[]>('https://jsonplaceholder.typicode.com/todos')
+    .pipe(tap((todos) => this.todos.set(todos)));
+
+  private delete$ = this.delete.asObservable().pipe(
+    tap(({ todo }) => this.todoIdsPending.add(todo.id)),
+    exhaustMap(({ todo }) =>
+      this.http
+        .delete<Todo>(`https://jsonplaceholder.typicode.com/todos/${todo.id}`)
+        .pipe(map(() => todo.id)),
+    ),
+    tap((deletedTodoId) =>
+      this.todos.update((todos) => todos.filter((t) => t.id !== deletedTodoId)),
+    ),
+    tap((id) => this.todoIdsPending.delete(id)),
+  );
+
+  private update$ = this.update.asObservable().pipe(
+    tap(({ todo }) => this.todoIdsPending.add(todo.id)),
+    exhaustMap(({ todo, index }) => {
+      return this.http
+        .put<Todo>(
+          `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
+          JSON.stringify({
+            todo: todo.id,
+            title: randText(),
+            body: todo.title,
+            userId: todo.userId,
+          }),
+          {
+            headers: {
+              'Content-type': 'application/json; charset=UTF-8',
+            },
+          },
+        )
+        .pipe(map((todo) => ({ todo, index })));
+    }),
+    map(({ todo, index }) => {
+      // todos.with(index, todo) new syntax not working here :(
+      this.todos.update((todos) =>
+        todos.slice(0, index).concat(todo, todos.slice(index + 1)),
+      );
+
+      return todo.id;
+    }),
+    tap((id) => this.todoIdsPending.delete(id)),
+  );
 
   constructor() {
-    this.http
-      .get<Todo[]>('https://jsonplaceholder.typicode.com/todos')
-      .pipe(tap((todos) => this.todos.set(todos)))
+    merge(this.load$, this.update$, this.delete$)
       .pipe(takeUntilDestroyed())
       .subscribe();
-
-    this.update
-      .asObservable()
-      .pipe(
-        exhaustMap(({ todo, index }) => {
-          return this.http
-            .put<Todo>(
-              `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
-              JSON.stringify({
-                todo: todo.id,
-                title: randText(),
-                body: todo.title,
-                userId: todo.userId,
-              }),
-              {
-                headers: {
-                  'Content-type': 'application/json; charset=UTF-8',
-                },
-              },
-            )
-            .pipe(map((todo) => ({ todo, index })));
-        }),
-        tap(({ todo: newTodo, index }) =>
-          this.todos.update((todos) => {
-            // todos.with(index, newTodo) new syntax not working here :(
-            return todos
-              .slice(0, index)
-              .concat(newTodo, todos.slice(index + 1));
-          }),
-        ),
-        takeUntilDestroyed(),
-      )
-      .subscribe();
-
-    this.delete
-      .asObservable()
-      .pipe(
-        exhaustMap(({ todo }) =>
-          this.http
-            .delete<Todo>(
-              `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
-            )
-            .pipe(map(() => ({ id: todo.id }))),
-        ),
-        tap(({ id: deletedTodoId }) =>
-          this.todos.update((todos) =>
-            todos.filter((t) => t.id !== deletedTodoId),
-          ),
-        ),
-        takeUntilDestroyed(),
-      )
-      .subscribe();
-
-    effect(() => {
-      //   console.log(this.todos());
-    });
   }
 
   updateTodo(todo: Todo, index: number) {
