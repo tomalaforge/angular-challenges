@@ -1,14 +1,13 @@
+import { AdminDashboardComponent } from './dashboard/admin.component';
+import { LoginComponent } from './login.component';
+
 export const APP_ROUTES = [
   {
     path: '',
-    loadComponent: () =>
-      import('./login.component').then((m) => m.LoginComponent),
+    loadComponent: () => LoginComponent,
   },
   {
     path: 'enter',
-    loadComponent: () =>
-      import('./dashboard/admin.component').then(
-        (m) => m.AdminDashboardComponent,
-      ),
+    loadComponent: () => AdminDashboardComponent,
   },
 ];
