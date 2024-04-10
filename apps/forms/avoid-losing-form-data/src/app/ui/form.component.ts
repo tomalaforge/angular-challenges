@@ -1,5 +1,12 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  output,
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { distinctUntilChanged, map, tap } from 'rxjs';
 
 @Component({
   selector: 'app-form',
@@ -52,6 +59,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
       <div class="mt-4">
         <button
+          (keyup.enter)="onSubmit()"
           [disabled]="form.invalid"
           type="submit"
           class="inline-block w-full rounded-lg border bg-gray-50 px-5 py-3 font-medium text-gray-900 disabled:cursor-not-allowed disabled:bg-gray-300 sm:w-auto">
@@ -63,16 +71,33 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormComponent {
-  private fb = inject(FormBuilder);
+  hasValues = output<boolean>();
 
-  form = this.fb.nonNullable.group({
+  #fb = inject(FormBuilder);
+
+  form = this.#fb.nonNullable.group({
     name: ['', { validators: [Validators.required] }],
     email: ['', [Validators.required, Validators.email]], // other syntax
     phone: '',
     message: '',
   });
 
+  constructor() {
+    this.form.statusChanges
+      .pipe(
+        map((form) => Object.values(form)),
+        map((values) => values.map((v) => v.trim()).some((v) => v.length)),
+        distinctUntilChanged(),
+        tap((hasValues) => this.hasValues.emit(hasValues)),
+        takeUntilDestroyed(),
+      )
+      .subscribe();
+  }
+
   onSubmit() {
-    if (this.form.valid) this.form.reset();
+    if (this.form.valid) {
+      this.form.reset();
+      alert('Form submitted!');
+    }
   }
 }
