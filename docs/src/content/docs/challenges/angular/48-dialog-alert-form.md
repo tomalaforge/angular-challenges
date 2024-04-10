@@ -32,17 +32,13 @@ Here's the feature expressed as a user story (functional expectation)
 - If the input text has been pre-filled, then an alert dialog box opens.
 - Otherwise, the user navigates normally.
 
-2. The alert dialog box must be clear and concise, stating: "Caution! You have unsaved information. Do you want to continue and lose them?" with the following button labels:
-
-- Continue without saving
-- Stay on page
-
+2. The content of dialog.component.ts must be use for your dialog box content
 3. The appearance and behavior of the alert dialog box must comply with W3C conventions, see [alert dialog pattern](https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/)
 4. Maximize the use of the new concepts and syntax in the latest version of Angular.
-5. (Bonus) : Try to adopt a declarative approach (for dialog opening, for example).
 
 <details>
     <summary>Tips 🤫 (if you really need it and after careful consideration)</summary>
-    Use the Material CDK Dialog - https://material.angular.io/cdk/dialog/overview
-    Use the CanDeactivate guard - https://angular.io/api/router/CanDeactivate (use new functionnal approach).
+    - Use the Material CDK Dialog or Overlay - https://material.angular.io/cdk/ (dont forget to add @import '@angular/cdk/overlay-prebuilt.css' in style.sccss)
+    <br>
+    - Use the CanDeactivate guard - https://angular.io/api/router/CanDeactivate (use new functionnal approach).
 </details>
