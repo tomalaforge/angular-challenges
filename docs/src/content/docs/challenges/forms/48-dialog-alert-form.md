@@ -1,11 +1,11 @@
 ---
-title: 🟠 Save your form&#39;s bacon: with the navigation alert
+title: 🟠 Save the form data with the navigation alert
 description: Challenge 48 is about Bob 🧙‍♂️ the product owner, he wants to develop a new feature in response to customer complaints about losing form input information.
 author: timothy-alcaide
 contributors:
-  - Timothy Alcaide
+  - alcaidio
 challengeNumber: 48
-command: angular-dialog-alert-form
+command: form-dialog-alert
 sidebar:
   order: 121
   badge: New

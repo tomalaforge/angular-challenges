@@ -1,26 +1,26 @@
 {
-  "name": "angular-dialog-alert-form",
+  "name": "form-dialog-alert",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "app",
-  "sourceRoot": "apps/angular/dialog-alert-form/src",
+  "sourceRoot": "apps/forms/form-dialog-alert/src",
   "tags": [],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/angular/dialog-alert-form",
-        "index": "apps/angular/dialog-alert-form/src/index.html",
-        "browser": "apps/angular/dialog-alert-form/src/main.ts",
+        "outputPath": "dist/apps/forms/form-dialog-alert",
+        "index": "apps/forms/form-dialog-alert/src/index.html",
+        "browser": "apps/forms/form-dialog-alert/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/angular/dialog-alert-form/tsconfig.app.json",
+        "tsConfig": "apps/forms/form-dialog-alert/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
-          "apps/angular/dialog-alert-form/src/favicon.ico",
-          "apps/angular/dialog-alert-form/src/assets"
+          "apps/forms/form-dialog-alert/src/favicon.ico",
+          "apps/forms/form-dialog-alert/src/assets"
         ],
-        "styles": ["apps/angular/dialog-alert-form/src/styles.scss"],
+        "styles": ["apps/forms/form-dialog-alert/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
@@ -51,10 +51,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "buildTarget": "angular-dialog-alert-form:build:production"
+          "buildTarget": "form-dialog-alert:build:production"
         },
         "development": {
-          "buildTarget": "angular-dialog-alert-form:build:development"
+          "buildTarget": "form-dialog-alert:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -62,7 +62,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "buildTarget": "angular-dialog-alert-form:build"
+        "buildTarget": "form-dialog-alert:build"
       }
     },
     "lint": {
