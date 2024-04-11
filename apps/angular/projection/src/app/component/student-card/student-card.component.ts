@@ -8,18 +8,16 @@ import { CardComponent } from '../../ui/card/card.component';
 @Component({
   selector: 'app-student-card',
   template: `
-    <app-card [list]="students" [type]="cardType" customClass="bg-light-green">
+    <app-card
+      [customClass]="'bg-green-300'"
+      [list]="students"
+      [type]="cardType"
+      customClass="bg-light-green">
       <img style="width:200px;" showImg src="../../assets/img/student.webp" />
     </app-card>
   `,
   standalone: true,
-  styles: [
-    `
-      ::ng-deep .bg-light-green {
-        background-color: rgba(0, 250, 0, 0.1);
-      }
-    `,
-  ],
+  styles: [``],
   imports: [CardComponent],
 })
 export class StudentCardComponent implements OnInit {
