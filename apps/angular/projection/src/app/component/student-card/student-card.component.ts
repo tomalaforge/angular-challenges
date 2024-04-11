@@ -8,10 +8,9 @@ import { CardComponent } from '../../ui/card/card.component';
 @Component({
   selector: 'app-student-card',
   template: `
-    <app-card
-      [list]="students"
-      [type]="cardType"
-      customClass="bg-light-green"></app-card>
+    <app-card [list]="students" [type]="cardType" customClass="bg-light-green">
+      <img style="width:200px;" showImg src="../../assets/img/student.webp" />
+    </app-card>
   `,
   standalone: true,
   styles: [
