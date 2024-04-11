@@ -1,4 +1,4 @@
-# Save the form data with the navigation alert
+# Avoid losing form data
 
 > author: [Timothy Alcaide](https://github.com/alcaidio)
 
