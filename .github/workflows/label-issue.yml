@@ -13,6 +13,6 @@ jobs:
 
       - name: add labels
         uses: actions-ecosystem/action-add-labels@v1
-        if: ${{ contains( fromJson('[ "tomalaforge" ]'), github.actor ) }}
+        if: ${{ contains( fromJson('[ "tomalaforge" ]'), github.actor ) && startsWith(github.event.pull_request.title, 'Answer') }}
         with:
           labels: supporter
