@@ -1,28 +1,59 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  inject,
   input,
-  output,
 } from '@angular/core';
-import { Todo } from './todo.service';
+import { injectMutation } from '@tanstack/angular-query-experimental';
+import { lastValueFrom } from 'rxjs';
+import { Todo, TodosApiService } from './todos-api.service';
 
 @Component({
   standalone: true,
   selector: 'app-item',
   template: `
     <div>
-      {{ todo().title }}
-      <button (click)="update.emit({ todo: todo(), index: index() })">
-        Update
+      @if (update.isError() || delete.isError()) {
+        <span>An error occur!</span>
+      } @else {
+        <span>{{ todo().title }}</span>
+      }
+
+      <button (click)="update.mutate(todo())">
+        @if (update.isPending()) {
+          <span>Updating...</span>
+        } @else {
+          <span>Update</span>
+        }
       </button>
-      <button (click)="delete.emit(todo())">Delete</button>
+      <button (click)="delete.mutate(todo().id)">
+        @if (delete.isPending()) {
+          <span>Deleting...</span>
+        } @else {
+          <span>Delete</span>
+        }
+      </button>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ItemComponent {
   todo = input.required<Todo>();
-  index = input.required<number>();
-  update = output<{ todo: Todo; index: number }>();
-  delete = output<Todo>();
+
+  #api = inject(TodosApiService);
+
+  update = injectMutation((client) => ({
+    mutationFn: (todo: Todo) => lastValueFrom(this.#api.updateTodo$(todo)),
+    onSuccess: () => {
+      client.invalidateQueries({ queryKey: ['todos'] });
+    },
+  }));
+
+  delete = injectMutation((client) => ({
+    mutationFn: (todoId: number) =>
+      lastValueFrom(this.#api.deleteTodo$(todoId)),
+    onSuccess: () => {
+      client.invalidateQueries({ queryKey: ['todos'] });
+    },
+  }));
 }

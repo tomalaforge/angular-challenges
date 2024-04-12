@@ -1,13 +1,13 @@
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 import { ApplicationConfig } from '@angular/core';
-import { httpErrorInterceptor, httpPendingInterceptor } from './interceptors';
-import { provideGlobalLoading } from './loading.token';
+import {
+  QueryClient,
+  provideAngularQuery,
+} from '@tanstack/angular-query-experimental';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideHttpClient(
-      withInterceptors([httpPendingInterceptor, httpErrorInterceptor]),
-    ),
-    provideGlobalLoading(),
+    provideHttpClient(withFetch()),
+    provideAngularQuery(new QueryClient()),
   ],
 };
