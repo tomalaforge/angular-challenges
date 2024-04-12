@@ -13,7 +13,7 @@ jobs:
 
       - name: add labels
         uses: actions-ecosystem/action-add-labels@v1
-        if: ${{ contains( fromJson('[ "tomalaforge", "alcaidio" , "svenson95", "jdegand", "DeveshChau", "stillst", "wandri", "webbomj", "kabrunko-dev" ]'), github.actor ) && startsWith(github.event.pull_request.title, 'Answer') }}
+        if: ${{ contains( fromJson('[ "tomalaforge", "alcaidio" , "svenson95", "jdegand", "DeveshChau", "stillst", "wandri", "webbomj", "kabrunko-dev", "Sanjar1304"]'), github.actor ) && startsWith(github.event.pull_request.title, 'Answer') }}
         with:
           labels: supporter
   add_answers:
