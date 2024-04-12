@@ -1,51 +1,41 @@
-import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { randText } from '@ngneat/falso';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ItemComponent } from './item.component';
+import { LOADING } from './loading.token';
+import { TodoService } from './todo.service';
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [MatProgressSpinnerModule, ItemComponent],
   selector: 'app-root',
   template: `
-    <div *ngFor="let todo of todos">
-      {{ todo.title }}
-      <button (click)="update(todo)">Update</button>
-    </div>
+    @for (todo of service.todos(); track todo.id; let index = $index) {
+      <app-item
+        [todo]="todo"
+        [index]="index"
+        (delete)="service.deleteTodo(todo)"
+        (update)="service.updateTodo(todo, index)" />
+    }
+
+    @if (globalLoading()) {
+      <div class="spinner">
+        <mat-spinner></mat-spinner>
+      </div>
+    }
   `,
-  styles: [],
+  styles: [
+    `
+      .spinner {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    `,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent implements OnInit {
-  todos!: any[];
-
-  constructor(private http: HttpClient) {}
-
-  ngOnInit(): void {
-    this.http
-      .get<any[]>('https://jsonplaceholder.typicode.com/todos')
-      .subscribe((todos) => {
-        this.todos = todos;
-      });
-  }
-
-  update(todo: any) {
-    this.http
-      .put<any>(
-        `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
-        JSON.stringify({
-          todo: todo.id,
-          title: randText(),
-          body: todo.body,
-          userId: todo.userId,
-        }),
-        {
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-          },
-        },
-      )
-      .subscribe((todoUpdated: any) => {
-        this.todos[todoUpdated.id - 1] = todoUpdated;
-      });
-  }
+export class AppComponent {
+  protected service = inject(TodoService);
+  globalLoading = inject(LOADING);
 }
