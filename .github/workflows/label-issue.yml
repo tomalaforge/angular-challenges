@@ -2,10 +2,10 @@ name: Add Labels
 
 on:
   pull_request:
-    types: [opened, edited, synchronize]
+    types: [ opened, edited, synchronize ]
 
 jobs:
-  add_labels:
+  add_supporters:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -13,6 +13,17 @@ jobs:
 
       - name: add labels
         uses: actions-ecosystem/action-add-labels@v1
-        if: ${{ contains( fromJson('[ "tomalaforge" ]'), github.actor ) && startsWith(github.event.pull_request.title, 'Answer') }}
+        if: ${{ contains( fromJson('[ "tomalaforge", "alcaidio" , "svenson95", "jdegand", "DeveshChau", "stillst", "wandri", "webbomj", "kabrunko-dev" ]'), github.actor ) && startsWith(github.event.pull_request.title, 'Answer') }}
         with:
           labels: supporter
+  add_answers:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: add labels
+        uses: actions-ecosystem/action-add-labels@v1
+        if: ${{ startsWith(github.event.pull_request.title, 'Answer') }}
+        with:
+          labels: answer
