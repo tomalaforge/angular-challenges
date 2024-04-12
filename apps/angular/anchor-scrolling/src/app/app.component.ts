@@ -11,6 +11,6 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   test() {
-    console.log('test');
+    console.log('test 2');
   }
 }
