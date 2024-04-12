@@ -1,17 +1,19 @@
-name: Label supporter
+name: Add Labels
 
 on:
-  issues:
+  pull_request:
     types: [opened, edited]
 
 jobs:
-  add_label_tier_1:
+  add_labels:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions-ecosystem/action-add-labels@v1.1.0
-        if:
-          ${{ contains( fromJson('[ "tomalaforge" ]'), github.actor ) }}
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: add labels
+        uses: actions-ecosystem/action-add-labels@v1
+        if: ${{ contains( fromJson('[ "tomalaforge" ]'), github.actor ) }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           labels: supporter
