@@ -3,7 +3,7 @@ title: 🟠 Вложенные компоненты
 description: Задание 18 посвящено тестированию вложенных компонентов
 author: thomas-laforge
 contributors:
-  - tomalaforge
+  - Dinozavvvr
 challengeNumber: 18
 command: testing-nested
 sidebar:

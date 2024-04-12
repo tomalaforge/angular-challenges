@@ -4,8 +4,7 @@ description: Задача 38 посвященя изучению заверше�
 author: devesh-chaudhari
 command: rxjs-catch-error
 contributors:
-  - DeveshChau
-  - tomalaforge
+  - Dinozavvvr
 challengeNumber: 38
 sidebar:
   order: 14

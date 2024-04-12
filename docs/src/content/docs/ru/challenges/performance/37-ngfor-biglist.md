@@ -3,8 +3,7 @@ title: 🟠 Оптимизация больших списков
 description: Задание 37 посвящено изучению того, как виртуализация оптимизирует рендеринг больших списков
 author: thomas-laforge
 contributors:
-  - tomalaforge
-  - jdegand
+  - Dinozavvvr
 challengeNumber: 37
 command: performance-ngfor-biglist
 sidebar:

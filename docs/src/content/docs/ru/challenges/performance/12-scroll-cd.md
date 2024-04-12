@@ -3,7 +3,7 @@ title: 🟠 Оптимизация обнаружения изменений
 description: Задание 12 посвящено оптимизации количества циклов обнаружения изменений при прокрутке
 author: thomas-laforge
 contributors:
-  - tomalaforge
+  - Dinozavvvr
 challengeNumber: 12
 command: performance-scroll-cd
 sidebar:

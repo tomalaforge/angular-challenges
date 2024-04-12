@@ -3,7 +3,7 @@ title: 🟠 Роутер
 description: Задача 17 посвящена тестрированию Роутера
 author: thomas-laforge
 contributors:
-  - tomalaforge
+  - Dinozavvvr
 challengeNumber: 17
 command: testing-router-outlet
 sidebar:

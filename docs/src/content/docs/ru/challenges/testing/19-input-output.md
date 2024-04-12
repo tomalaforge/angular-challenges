@@ -3,10 +3,7 @@ title: 🟠 Ввод Вывод
 description: Задача 19 посвящена тестированию Ввода и Вывода
 author: thomas-laforge
 contributors:
-  - tomalaforge
-  - tomer953
-  - svenson95
-  - jdegand
+  - Dinozavvvr
 challengeNumber: 19
 command: testing-input-output
 sidebar:

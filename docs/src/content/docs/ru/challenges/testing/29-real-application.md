@@ -3,9 +3,7 @@ title: 🔴 Приложение из реальной жизни
 description: Задача 29 посвящена тестированию приложения из реальной жизни
 author: thomas-laforge
 contributors:
-  - tomalaforge
-  - tomer953
-  - svenson95
+  - Dinozavvvr
 challengeNumber: 29
 command: testing-todos-list
 sidebar:
