@@ -84,12 +84,15 @@ In the description section, you can add questions, troubles you encountered, or 
 
 You can now click on <span class="github-success-btn">Create pull request</span>.
 
-<div class="important-block">To continue providing valuable feedback and reviews, <a href="https://github.com/sponsors/tomalaforge">support the project on Github</a>: 
+## Get a review
+
+To continue providing valuable feedback and reviews, <a href="https://github.com/sponsors/tomalaforge">support the project on Github</a>:
+
 <ul>
 <li>$5 per review</li>
 <li>$25 for lifetime reviews</li>
+<li>Create a challenge/Contribute for lifetime reviews</li>
 </ul>
-</div>
 
 :::note
 Everyone is welcome to comment and read other PRs.
