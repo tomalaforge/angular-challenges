@@ -1,5 +1,5 @@
 <app-card
-  [list]="students()"
+  [list]="students() ?? []"
   (addOneEventEmitter)="addStudent()"
   class="bg-light-green">
   <img

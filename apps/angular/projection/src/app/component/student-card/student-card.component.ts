@@ -1,13 +1,11 @@
 import { NgOptimizedImage } from '@angular/common';
-import { Component, Signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { switchMap, tap } from 'rxjs';
+import { Component } from '@angular/core';
+import { tap } from 'rxjs';
 import {
   FakeHttpService,
   randStudent,
 } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
-import { Student } from '../../model/student.model';
 import {
   CardComponent,
   CardListItemDirective,
@@ -33,18 +31,14 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   ],
 })
 export class StudentCardComponent {
-  public students: Signal<Array<Student>> = toSignal(
-    this.http.fetchStudents$.pipe(
-      tap((s) => this.store.addAll(s)),
-      switchMap(() => this.store.students$),
-    ),
-    { initialValue: [] as Student[] },
-  );
+  public students = this.store.students;
 
   constructor(
     private http: FakeHttpService,
     private store: StudentStore,
-  ) {}
+  ) {
+    this.http.fetchStudents$.pipe(tap((s) => this.store.addAll(s))).subscribe();
+  }
 
   public addStudent(): void {
     this.store.addOne(randStudent());

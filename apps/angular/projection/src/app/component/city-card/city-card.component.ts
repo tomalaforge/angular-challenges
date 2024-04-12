@@ -1,13 +1,11 @@
 import { NgOptimizedImage } from '@angular/common';
-import { Component, Signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { switchMap, tap } from 'rxjs';
+import { Component } from '@angular/core';
+import { tap } from 'rxjs';
 import { CityStore } from '../../data-access/city.store';
 import {
   FakeHttpService,
   randomCity,
 } from '../../data-access/fake-http.service';
-import { City } from '../../model/city.model';
 import {
   CardComponent,
   CardListItemDirective,
@@ -33,18 +31,14 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   ],
 })
 export class CityCardComponent {
-  public cities: Signal<Array<City>> = toSignal(
-    this.http.fetchCities$.pipe(
-      tap((s) => this.store.addAll(s)),
-      switchMap(() => this.store.cities$),
-    ),
-    { initialValue: [] as City[] },
-  );
+  public cities = this.store.cities;
 
   constructor(
     private http: FakeHttpService,
     private store: CityStore,
-  ) {}
+  ) {
+    this.http.fetchCities$.pipe(tap((s) => this.store.addAll(s))).subscribe();
+  }
 
   public addCity(): void {
     this.store.addOne(randomCity());
