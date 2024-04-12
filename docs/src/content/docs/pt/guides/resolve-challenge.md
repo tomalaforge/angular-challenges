@@ -82,9 +82,12 @@ Na seção de descrição, você pode adicionar perguntas, problemas que encontr
 
 Agora você pode clicar em <span class="github-success-btn">Create pull request</span>.
 
-Eu o lerei e comentarei <b>quando tiver algum tempo livre.</b>
-
-<p class="important-block">Não se preocupe se sua resposta não for revisada imediatamente. Estou fazendo isso de <b>graça</b> e durante meu <b>tempo livre</b>. Se você quiser me ajudar, você pode fazê-lo <a href="https://github.com/sponsors/tomalaforge">me patrocinando no GitHub</a>. Isso mostrará que meu trabalho é de grande ajuda para você e seu time.</p>
+<div class="important-block">Para continuar brindando comentarios y reseñas valiosas, ahora solo revisaré a aquellos que apoyen <a href="https://github.com/sponsors/tomalaforge">el proyecto en GitHub</a>.
+<ul>
+<li>$5 por reseña</li>
+<li>$25 por reseñas de por vida</li>
+</ul>
+</div>
 
 :::note[Nota]
 Todo mundo é bem-vindo para comentar e ver outros PRs.
