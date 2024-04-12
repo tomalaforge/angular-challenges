@@ -1,4 +1,4 @@
-import { Component, NgModule } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -12,13 +12,7 @@ import { RouterModule } from '@angular/router';
       Create User
     </button>
   `,
+  standalone: true,
+  imports: [RouterModule],
 })
 export class DashboardComponent {}
-
-@NgModule({
-  imports: [
-    RouterModule.forChild([{ path: '', component: DashboardComponent }]),
-  ],
-  declarations: [DashboardComponent],
-})
-export class DashboardModule {}
