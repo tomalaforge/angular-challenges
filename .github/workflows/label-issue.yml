@@ -2,7 +2,7 @@ name: Add Labels
 
 on:
   pull_request:
-    types: [opened, edited]
+    types: [opened, edited, synchronize]
 
 jobs:
   add_labels:
@@ -15,5 +15,4 @@ jobs:
         uses: actions-ecosystem/action-add-labels@v1
         if: ${{ contains( fromJson('[ "tomalaforge" ]'), github.actor ) }}
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
           labels: supporter
