@@ -1,7 +1,7 @@
 import { Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 @Component({
-  selector: 'nav-button',
+  selector: 'app-nav-button',
   standalone: true,
   template: `
     <a [routerLink]="href()">

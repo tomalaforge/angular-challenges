@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NavButtonComponent } from './nav-button.component';
+import { ScrollService } from './scroll.service';
 
 @Component({
   standalone: true,
@@ -8,13 +9,13 @@ import { NavButtonComponent } from './nav-button.component';
   selector: 'app-foo',
   template: `
     Welcome to foo page
-    <nav-button [routerLink]="'home'" class="fixed left-1/2 top-3">
+    <app-nav-button [routerLink]="'home'" class="fixed left-1/2 top-3">
       Home Page
-    </nav-button>
+    </app-nav-button>
     <div
       id="section1"
       class="h-screen bg-blue-200"
-      (click)="scrollTo('section2')">
+      (click)="this.scroll.scrollTo('section2')">
       section 1
       <button class="m-2 block w-fit rounded-md border border-red-500 p-4">
         Section 2
@@ -23,7 +24,7 @@ import { NavButtonComponent } from './nav-button.component';
     <div
       id="section2"
       class="h-screen bg-red-200"
-      (click)="scrollTo('section1')">
+      (click)="this.scroll.scrollTo('section1')">
       section 2
       <button class="m-2 block w-fit rounded-md border border-red-500 p-4">
         Section 1
@@ -32,10 +33,5 @@ import { NavButtonComponent } from './nav-button.component';
   `,
 })
 export class FooComponent {
-  scrollTo(anchor: string) {
-    const element = document.getElementById(anchor);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  }
+  scroll = inject(ScrollService);
 }
