@@ -3,6 +3,8 @@ import { derived, writable } from 'svelte/store';
 export const token = writable<string | null>(null);
 export const isConnected = writable(false);
 
+export const username = writable(null);
+
 export const isLoading = writable(true);
 export const error = writable(false);
 export const data = writable<any[]>([]);
