@@ -1,5 +1,4 @@
-import { ViewportScroller } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NavButtonComponent } from './nav-button.component';
 
@@ -33,8 +32,6 @@ import { NavButtonComponent } from './nav-button.component';
   `,
 })
 export class FooComponent {
-  scroller = inject(ViewportScroller);
-
   scrollTo(anchor: string) {
     const element = document.getElementById(anchor);
     if (element) {
