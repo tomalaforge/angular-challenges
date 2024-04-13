@@ -1,1 +1,2 @@
-export * from './lib/contact-feature.module';
+import { contactRoutes } from './lib/contact-feature.routes';
+export default contactRoutes;

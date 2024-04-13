@@ -1,6 +1,10 @@
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { AppModule } from './app/app.module';
+import { importProvidersFrom } from '@angular/core';
+import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
+import { provideRouter } from '@angular/router';
+import { AppComponent } from './app/app.component';
+// eslint-disable-next-line @nx/enforce-module-boundaries
+import { appRoutes } from '../../../../libs/module-to-standalone/shell/src/lib/main-shell.routes';
 
-platformBrowserDynamic()
-  .bootstrapModule(AppModule)
-  .catch((err) => console.error(err));
+bootstrapApplication(AppComponent, {
+  providers: [importProvidersFrom(BrowserModule), provideRouter(appRoutes)],
+}).catch((err) => console.error(err));

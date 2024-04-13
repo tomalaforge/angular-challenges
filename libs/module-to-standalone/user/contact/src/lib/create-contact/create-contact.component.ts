@@ -1,4 +1,4 @@
-import { Component, NgModule } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -12,13 +12,7 @@ import { RouterModule } from '@angular/router';
       Back
     </button>
   `,
+  standalone: true,
+  imports: [RouterModule],
 })
-export class CreateContactComponent {}
-
-@NgModule({
-  imports: [
-    RouterModule.forChild([{ path: '', component: CreateContactComponent }]),
-  ],
-  declarations: [CreateContactComponent],
-})
-export class CreateContactModule {}
+export default class CreateContactComponent {}
