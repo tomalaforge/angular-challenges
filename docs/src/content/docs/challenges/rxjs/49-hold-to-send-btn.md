@@ -23,24 +23,24 @@ So you're going to take over from him.
 
 > "As a user, I would like to save something by holding down the button for a certain amount of time."
 
-Here the prototype made by Lucie :
+Here the prototype made by Lucie:
 
 ![prototype gif](../../../../../../docs/src/assets/rxjs/49/prototype.gif)
 
 ## Acceptance Criteria
 
 1. We should be able to configure a maintenance duration in milliseconds.
-2. Pressing and holding the button triggers the countdown on "mousedown" event.
-3. On "mouseleave" or "mouseup" events, the progress bar is reset to 0.
+2. Pressing and holding the button triggers the countdown on the `mousedown` event.
+3. On `mouseleave` or `mouseup` events, the progress bar is reset to 0.
 4. The progress bar representing the remaining relative time should reflect the remaining time.
-5. Simulates a backup request when the hold time is over (console log or alert).
+5. Simulates a backend request when the hold time is over (console log or alert).
 6. You must maximize the use of RxJS operators and be as declarative as possible.
 
 <details>
     <summary>Tips 🤫 (if you really need it and after careful consideration)</summary>
     <ul>
-      <li>Create the `HolddableDirective`</li>
-      <li>Use `TemplateRef` and `fromEvent` from rxjs to catch events OR `@HostListener`</li>
-      <li>Perhaps the following rxjs operators can help you: interval, takeUntil, switchmap, takeWhile/retry...</li>
+      <li>Create the `HoldableDirective`</li>
+      <li>Use `TemplateRef` and `fromEvent` from RxJS to catch events or `@HostListener`</li>
+      <li>Perhaps the following RxJS operators can help you: interval, takeUntil, switchMap, takeWhile/retry...</li>
     </ul>
 </details>
