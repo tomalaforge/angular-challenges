@@ -1,7 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { StudentStore } from '../../data-access/student.store';
-import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
+import { DeleteService } from '../../data-access/delete-service';
 
 @Component({
   selector: 'app-list-item',
@@ -18,18 +16,11 @@ import { CardType } from '../../model/card.model';
 export class ListItemComponent {
   @Input() id!: number;
   @Input() name!: string;
-  @Input() type!: CardType;
+  @Input() deleteService!: DeleteService;
 
-  constructor(
-    private teacherStore: TeacherStore,
-    private studentStore: StudentStore,
-  ) {}
+  constructor() {}
 
   delete(id: number) {
-    if (this.type === CardType.TEACHER) {
-      this.teacherStore.deleteOne(id);
-    } else if (this.type === CardType.STUDENT) {
-      this.studentStore.deleteOne(id);
-    }
+    this.deleteService.deleteOne(id);
   }
 }

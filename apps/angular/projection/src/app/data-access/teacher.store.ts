@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Teacher } from '../model/teacher.model';
+import { DeleteService } from './delete-service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class TeacherStore {
+export class TeacherStore implements DeleteService {
   private teachers = new BehaviorSubject<Teacher[]>([]);
   teachers$ = this.teachers.asObservable();
 

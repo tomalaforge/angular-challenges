@@ -16,12 +16,14 @@ import { Teacher, subject } from '../model/teacher.model';
 
 const factoryTeacher = incrementalNumber();
 
-export const randTeacher = () => ({
-  id: factoryTeacher(),
-  firstName: randFirstName(),
-  lastName: randLastName(),
-  subject: rand(subject),
-});
+export const randTeacher = (): Teacher => {
+  const teacher = new Teacher();
+  teacher.id = factoryTeacher();
+  teacher.firstName = randFirstName();
+  teacher.lastName = randLastName();
+  teacher.subject = rand(subject);
+  return teacher;
+};
 
 const teachers: Teacher[] = [
   randTeacher(),
@@ -32,13 +34,15 @@ const teachers: Teacher[] = [
 
 const factoryStudent = incrementalNumber();
 
-export const randStudent = (): Student => ({
-  id: factoryStudent(),
-  firstName: randFirstName(),
-  lastName: randLastName(),
-  mainTeacher: teachers[randNumber({ max: teachers.length - 1 })],
-  school: randWord(),
-});
+export const randStudent = (): Student => {
+  const student = new Student();
+  student.id = factoryStudent();
+  student.firstName = randFirstName();
+  student.lastName = randLastName();
+  student.mainTeacher = teachers[randNumber({ max: teachers.length - 1 })];
+  student.school = randWord();
+  return student;
+};
 
 const students: Student[] = [
   randStudent(),
@@ -50,11 +54,13 @@ const students: Student[] = [
 
 const factoryCity = incrementalNumber();
 
-export const randomCity = (): City => ({
-  id: factoryCity(),
-  name: randCity(),
-  country: randCountry(),
-});
+export const randomCity = (): City => {
+  const city = new City();
+  city.id = factoryCity();
+  city.name = randCity();
+  city.country = randCountry();
+  return city;
+};
 
 const cities = [randomCity(), randomCity(), randomCity()];
 

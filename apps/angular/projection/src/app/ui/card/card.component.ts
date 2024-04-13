@@ -1,9 +1,7 @@
-import { NgFor, NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { randStudent, randTeacher } from '../../data-access/fake-http.service';
-import { StudentStore } from '../../data-access/student.store';
-import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
+import { NgFor } from '@angular/common';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { DeleteService } from '../../data-access/delete-service';
+import { CardModel } from '../../model/card-model';
 import { ListItemComponent } from '../list-item/list-item.component';
 
 @Component({
@@ -11,22 +9,15 @@ import { ListItemComponent } from '../list-item/list-item.component';
   template: `
     <div
       class="flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4"
-      [class]="customClass">
-      <img
-        *ngIf="type === CardType.TEACHER"
-        src="assets/img/teacher.png"
-        width="200px" />
-      <img
-        *ngIf="type === CardType.STUDENT"
-        src="assets/img/student.webp"
-        width="200px" />
+      [style.background-color]="backGroundColor">
+      <img [src]="iconPath" width="200px" />
 
       <section>
         <app-list-item
           *ngFor="let item of list"
-          [name]="item.firstName"
+          [name]="item.displayName"
           [id]="item.id"
-          [type]="type"></app-list-item>
+          [deleteService]="deleteService"></app-list-item>
       </section>
 
       <button
@@ -37,25 +28,19 @@ import { ListItemComponent } from '../list-item/list-item.component';
     </div>
   `,
   standalone: true,
-  imports: [NgIf, NgFor, ListItemComponent],
+  imports: [NgFor, ListItemComponent],
 })
 export class CardComponent {
-  @Input() list: any[] | null = null;
-  @Input() type!: CardType;
-  @Input() customClass = '';
+  @Input() list: CardModel[] | null = null;
+  @Input() deleteService!: DeleteService;
+  @Input() iconPath!: string;
+  @Input() backGroundColor!: string;
 
-  CardType = CardType;
+  @Output() objectAdded = new EventEmitter<string>();
 
-  constructor(
-    private teacherStore: TeacherStore,
-    private studentStore: StudentStore,
-  ) {}
+  constructor() {}
 
   addNewItem() {
-    if (this.type === CardType.TEACHER) {
-      this.teacherStore.addOne(randTeacher());
-    } else if (this.type === CardType.STUDENT) {
-      this.studentStore.addOne(randStudent());
-    }
+    this.objectAdded.emit();
   }
 }

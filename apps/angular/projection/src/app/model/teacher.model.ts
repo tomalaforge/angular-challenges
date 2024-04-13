@@ -1,3 +1,5 @@
+import { CardModel } from './card-model';
+
 export const subject = [
   'Sciences',
   'History',
@@ -7,9 +9,13 @@ export const subject = [
 ] as const;
 export type Subject = (typeof subject)[number];
 
-export interface Teacher {
-  id: number;
-  firstName: string;
-  lastName: string;
-  subject: Subject;
+export class Teacher implements CardModel {
+  id!: number;
+  firstName!: string;
+  lastName!: string;
+  subject!: Subject;
+
+  get displayName(): string {
+    return this.firstName;
+  }
 }
