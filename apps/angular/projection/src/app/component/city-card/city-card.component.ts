@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { CityStore } from '../../data-access/city.store';
 import {
   FakeHttpService,
@@ -13,7 +14,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   selector: 'app-city-card',
   template: `
     <app-card
-      [list]="cities"
+      [list]="cities()"
       [type]="cardType"
       (add)="addNew()"
       customClass="bg-light-red">
@@ -32,7 +33,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   imports: [CardComponent, ListItemComponent],
 })
 export class CityCardComponent implements OnInit {
-  cities: City[] = [];
+  cities = toSignal<City[]>(this.store.cities$);
   cardType = CardType.CITY;
 
   constructor(
@@ -42,8 +43,6 @@ export class CityCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.http.fetchCities$.subscribe((s) => this.store.addAll(s));
-
-    this.store.cities$.subscribe((s) => (this.cities = s));
   }
   addNew() {
     this.store.addOne(randomCity());

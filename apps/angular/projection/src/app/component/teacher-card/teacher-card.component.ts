@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import {
   FakeHttpService,
   randTeacher,
@@ -13,7 +14,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   selector: 'app-teacher-card',
   template: `
     <app-card
-      [list]="teachers"
+      [list]="teachers()"
       [type]="cardType"
       (add)="addNew()"
       customClass="bg-light-red">
@@ -34,7 +35,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   imports: [CardComponent, ListItemComponent],
 })
 export class TeacherCardComponent implements OnInit {
-  teachers: Teacher[] = [];
+  teachers = toSignal<Teacher[]>(this.store.teachers$);
   cardType = CardType.TEACHER;
 
   constructor(
@@ -44,8 +45,6 @@ export class TeacherCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
-
-    this.store.teachers$.subscribe((t) => (this.teachers = t));
   }
 
   addNew() {

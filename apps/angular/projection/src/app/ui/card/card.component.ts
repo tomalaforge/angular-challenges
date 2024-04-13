@@ -48,7 +48,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
   imports: [NgFor, ListItemComponent, NgTemplateOutlet],
 })
 export class CardComponent {
-  @Input() list: any[] | null = null;
+  @Input() list!: any[] | undefined;
   @Input() type!: CardType;
   @Input() customClass = '';
   @Output() add = new EventEmitter();
