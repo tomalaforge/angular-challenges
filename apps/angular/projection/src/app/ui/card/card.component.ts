@@ -1,44 +1,43 @@
-import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  ContentChild,
-  EventEmitter,
-  Input,
-  Output,
+  contentChild,
+  input,
+  output,
   TemplateRef,
 } from '@angular/core';
+import { CardRowDirective } from './card-row.directive';
 
 @Component({
   selector: 'app-card',
   template: `
-    <ng-content select="img"></ng-content>
+    <ng-content select="img" />
 
     <section>
-      <ng-container *ngFor="let item of list">
+      @for (item of items(); track item.id) {
         <ng-template
-          [ngTemplateOutlet]="rowTemplate"
+          [ngTemplateOutlet]="rowTemplate()"
           [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
-      </ng-container>
+      }
     </section>
 
     <button
-      class="border border-blue-500 bg-blue-300 p-2 rounded-sm"
+      class="rounded-sm border border-blue-500 bg-blue-300 p-2"
       (click)="add.emit()">
       Add
     </button>
   `,
   standalone: true,
-  imports: [NgIf, NgFor, NgTemplateOutlet],
+  imports: [NgTemplateOutlet],
   host: {
     class: 'border-2 border-black rounded-md p-4 w-fit flex flex-col gap-3',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CardComponent<T> {
-  @Input() list: T[] | null = null;
-  @Output() add = new EventEmitter<void>();
+export class CardComponent<T extends { id: number }> {
+  items = input.required<T[]>();
+  add = output();
 
-  @ContentChild('rowRef', { read: TemplateRef })
-  rowTemplate!: TemplateRef<{ $implicit: T }>;
+  rowTemplate = contentChild.required(CardRowDirective, { read: TemplateRef });
 }
