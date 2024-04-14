@@ -1,27 +1,26 @@
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {
   FakeHttpService,
   randStudent,
 } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
+import { CardRowDirective } from '../../ui/card/card-row.directive';
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-student-card',
-  template: `<app-card
-    [list]="students$ | async"
-    (add)="addStudent()"
-    class="bg-light-green"
-  >
-    <img src="assets/img/student.webp" width="200px" />
-    <ng-template #rowRef let-student>
-      <app-list-item (delete)="deleteStudent(student.id)">
-        {{ student.firstname }}
-      </app-list-item>
-    </ng-template>
-  </app-card>`,
+  template: `
+    <app-card [items]="students()" (add)="addStudent()" class="bg-light-green">
+      <img src="assets/img/student.webp" width="200px" />
+      <ng-template [cardRow]="students()" let-student>
+        <app-list-item (delete)="deleteStudent(student.id)">
+          {{ student.firstName }}
+        </app-list-item>
+      </ng-template>
+    </app-card>
+  `,
   standalone: true,
   styles: [
     `
@@ -30,15 +29,16 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
       }
     `,
   ],
-  imports: [CardComponent, ListItemComponent, AsyncPipe],
+  imports: [CardComponent, ListItemComponent, AsyncPipe, CardRowDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class StudentCardComponent implements OnInit {
-  students$ = this.store.students$;
+export class StudentCardComponent {
+  private http = inject(FakeHttpService);
+  private store = inject(StudentStore);
 
-  constructor(private http: FakeHttpService, private store: StudentStore) {}
+  students = this.store.students;
 
-  ngOnInit(): void {
+  constructor() {
     this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
   }
 

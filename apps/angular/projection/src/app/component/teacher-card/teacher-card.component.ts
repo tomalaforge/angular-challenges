@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {
   FakeHttpService,
   randTeacher,
@@ -14,9 +14,9 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   template: `
     <app-card [items]="teachers()" class="bg-light-red" (add)="addTeacher()">
       <img src="assets/img/teacher.png" width="200px" />
-      <ng-template cardRow let-teacher>
+      <ng-template [cardRow]="teachers()" let-teacher>
         <app-list-item (delete)="deleteTeacher(teacher.id)">
-          {{ teacher.firstname }}
+          {{ teacher.firstName }}
         </app-list-item>
       </ng-template>
     </app-card>
@@ -32,15 +32,13 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   imports: [ListItemComponent, AsyncPipe, CardRowDirective, CardComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TeacherCardComponent implements OnInit {
+export class TeacherCardComponent {
+  private http = inject(FakeHttpService);
+  private store = inject(TeacherStore);
+
   teachers = this.store.teachers;
 
-  constructor(
-    private http: FakeHttpService,
-    private store: TeacherStore,
-  ) {}
-
-  ngOnInit(): void {
+  constructor() {
     this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
   }
 
