@@ -1,27 +1,23 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { injectQuery } from '@tanstack/angular-query-experimental';
-import { lastValueFrom } from 'rxjs';
 import { TodoItemComponent } from './todo-item.component';
-import { todoKeys } from './todo.factory';
-import { Todo } from './todo.model';
-import { TodoService } from './todo.service';
+import { injectAllTodos } from './todo.query';
 
 @Component({
   standalone: true,
   imports: [MatProgressSpinnerModule, TodoItemComponent],
   selector: 'app-todos',
   template: `
-    @switch (todos.status()) {
+    @switch (todosQuery.status()) {
       @case ('pending') {
         <mat-spinner [diameter]="20" color="blue" />
       }
       @case ('error') {
-        Error has occured: {{ todos.error() }}
+        Error has occured: {{ todosQuery.error() }}
       }
       @default {
         <div class="todo-container">
-          @for (todo of todos.data(); track todo.id) {
+          @for (todo of todosQuery.data(); track todo.id) {
             <app-todo-item [todo]="todo" />
           }
         </div>
@@ -39,12 +35,5 @@ import { TodoService } from './todo.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TodosComponent {
-  private todoService = inject(TodoService);
-
-  todos = injectQuery(() => ({
-    queryKey: todoKeys.all,
-    queryFn: async (): Promise<Array<Todo>> => {
-      return lastValueFrom(this.todoService.getAllTodo());
-    },
-  }));
+  todosQuery = injectAllTodos();
 }
