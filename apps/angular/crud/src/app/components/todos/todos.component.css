@@ -1,0 +1,8 @@
+.todos{
+    list-style:decimal;
+}
+.todo{
+    padding: 0.5rem;
+    border-bottom: 2px solid salmon;
+    width: fit-content;
+}

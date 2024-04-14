@@ -1,5 +1,20 @@
 import { HttpClientModule } from '@angular/common/http';
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import {
+  ApplicationConfig,
+  ErrorHandler,
+  importProvidersFrom,
+} from '@angular/core';
+import { ErrorHandlerService } from './services/error-handler.service';
+
+import {
+  provideAngularQuery,
+  QueryClient,
+} from '@tanstack/angular-query-experimental';
+
 export const appConfig: ApplicationConfig = {
-  providers: [importProvidersFrom(HttpClientModule)],
+  providers: [
+    importProvidersFrom(HttpClientModule),
+    provideAngularQuery(new QueryClient()),
+    { provide: ErrorHandler, useClass: ErrorHandlerService },
+  ],
 };

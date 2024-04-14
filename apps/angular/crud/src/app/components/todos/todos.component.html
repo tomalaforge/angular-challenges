@@ -1,0 +1,14 @@
+@if (todoStore.query.isFetched()) {
+<ol class="todos">
+    @for (todo of todoStore.query.data(); track todo.title) {
+    <li class="todo" title="{{todo.title}}" id="{{todo.id}}">
+        {{ todo.title }}
+        <button (click)="update(todo)">Update</button>
+        <button (click)="delete(todo.id)">Delete</button>
+    </li>
+    }
+</ol>
+}
+@if(todoStore.query.error()){
+<p style="color: red;">An error occured..</p>
+}
