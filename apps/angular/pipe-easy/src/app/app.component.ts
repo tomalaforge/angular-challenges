@@ -1,10 +1,10 @@
-import { NgFor, TitleCasePipe } from '@angular/common';
+import { TitleCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { ComputationPipe } from './computation.pipe';
 
 @Component({
   standalone: true,
-  imports: [NgFor, ComputationPipe, TitleCasePipe],
+  imports: [ComputationPipe, TitleCasePipe],
   selector: 'app-root',
   template: `
     @for (person of persons; track persons; let index = $index) {
