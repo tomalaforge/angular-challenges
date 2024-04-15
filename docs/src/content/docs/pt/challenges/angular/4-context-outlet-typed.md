@@ -30,7 +30,7 @@ Este exercício tem dois níveis de complexidade.
 
 Atualmente nós temos o seguinte trecho de código.
 
-![Unkown Person](../../../../assets/4/unknown-person.png 'Unkown Person')
+![Unkown Person](../../../../../assets/4/unknown-person.png 'Unkown Person')
 
 Como podemos ver, `name` é do tipo `any`. Queremos inferir o tipo correto usando a diretiva personalizada `PersonDirective`.
 
@@ -38,7 +38,7 @@ Como podemos ver, `name` é do tipo `any`. Queremos inferir o tipo correto usand
 
 No momento presente, temos o seguinte trecho de código.
 
-![Unkown Student](../../../../assets/4/unknown-student.png 'Unkown Student')
+![Unkown Student](../../../../../assets/4/unknown-student.png 'Unkown Student')
 
 Como podemos ver, `student` é do tipo `any`. Queremos inferir o tipo correto usando a diretiva personalizada `ListDirective`.
 
