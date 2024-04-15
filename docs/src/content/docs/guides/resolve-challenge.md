@@ -95,7 +95,9 @@ To continue providing valuable feedback and reviews, <a href="https://github.com
 </ul>
 
 :::note
-Everyone is welcome to comment and read other PRs.
+You should still submit your PR to join the list of answered challenges. And you can still be reviewed by a community member. 🔥
+
+Everyone is welcome to comment and read other PRs. 💪
 :::
 
 :::tip[OSS champion]

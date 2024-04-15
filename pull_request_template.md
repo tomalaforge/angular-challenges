@@ -10,4 +10,4 @@
   - Create one of more challenges
   - Have many valuable contributions to the project
 
-Alternatively, you can still submit your PR to join the list of answered challenges.
+Alternatively, you can still submit your PR to join the list of answered challenges or to be reviewed by a community member. 🔥
