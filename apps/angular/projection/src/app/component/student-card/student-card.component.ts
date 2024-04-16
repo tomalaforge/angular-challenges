@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FakeHttpService } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
@@ -11,9 +12,10 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   template: `
     <app-card
       [list]="students"
-      [type]="cardType"
       [itemTemplate]="itemTemplate"
-      customClass="bg-light-green" />
+      customClass="bg-light-green">
+      <img ngSrc="assets/img/student.webp" width="200" height="200" priority />
+    </app-card>
 
     <ng-template #itemTemplate let-item>
       <app-list-item [name]="item.firstName" [id]="item.id" [type]="cardType" />
@@ -27,7 +29,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
       }
     `,
   ],
-  imports: [CardComponent, ListItemComponent],
+  imports: [NgOptimizedImage, CardComponent, ListItemComponent],
 })
 export class StudentCardComponent implements OnInit {
   students: Student[] = [];
