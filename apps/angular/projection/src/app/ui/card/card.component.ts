@@ -1,9 +1,5 @@
-import { NgFor, NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { randStudent, randTeacher } from '../../data-access/fake-http.service';
-import { StudentStore } from '../../data-access/student.store';
-import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
+import { NgFor } from '@angular/common';
+import { Component, input, output } from '@angular/core';
 import { ListItemComponent } from '../list-item/list-item.component';
 
 @Component({
@@ -11,51 +7,34 @@ import { ListItemComponent } from '../list-item/list-item.component';
   template: `
     <div
       class="flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4"
-      [class]="customClass">
-      <img
-        *ngIf="type === CardType.TEACHER"
-        src="assets/img/teacher.png"
-        width="200px" />
-      <img
-        *ngIf="type === CardType.STUDENT"
-        src="assets/img/student.webp"
-        width="200px" />
-
+      [class]="customClass()">
+      <div style="width: 200px;">
+        <ng-content select="[image]"></ng-content>
+      </div>
       <section>
-        <app-list-item
-          *ngFor="let item of list"
-          [name]="item.firstName"
-          [id]="item.id"
-          [type]="type"></app-list-item>
+        @for (item of list(); track item.id) {
+          <app-list-item [name]="item.firstName || item.name" [id]="item.id">
+            <button (click)="deleteItem.emit(item.id)" delete>
+              <img class="h-5" src="assets/svg/trash.svg" />
+            </button>
+          </app-list-item>
+        }
       </section>
 
       <button
         class="rounded-sm border border-blue-500 bg-blue-300 p-2"
-        (click)="addNewItem()">
+        (click)="this.addNewItem.emit()">
         Add
       </button>
     </div>
   `,
   standalone: true,
-  imports: [NgIf, NgFor, ListItemComponent],
+  imports: [NgFor, ListItemComponent],
 })
 export class CardComponent {
-  @Input() list: any[] | null = null;
-  @Input() type!: CardType;
-  @Input() customClass = '';
+  list = input<any[] | null>(null);
+  customClass = input('');
 
-  CardType = CardType;
-
-  constructor(
-    private teacherStore: TeacherStore,
-    private studentStore: StudentStore,
-  ) {}
-
-  addNewItem() {
-    if (this.type === CardType.TEACHER) {
-      this.teacherStore.addOne(randTeacher());
-    } else if (this.type === CardType.STUDENT) {
-      this.studentStore.addOne(randStudent());
-    }
-  }
+  protected addNewItem = output<void>();
+  protected deleteItem = output<number>();
 }

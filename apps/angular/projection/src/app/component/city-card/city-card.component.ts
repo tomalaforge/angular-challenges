@@ -1,13 +1,40 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { CityStore } from '../../data-access/city.store';
+import { randomCity } from '../../data-access/fake-http.service';
+import { City } from '../../model/city.model';
+import { DataCardComponentBase, DataStoreBase } from '../../shared';
+import { CardComponent } from '../../ui/card/card.component';
 
 @Component({
   selector: 'app-city-card',
-  template: 'TODO City',
+  template: `
+    <app-card
+      [list]="data$ | async"
+      (addNewItem)="onAddNewItem()"
+      (deleteItem)="onDeleteItem($event)"
+      customClass="bg-light-green">
+      <img src="assets/img/city.png" image />
+    </app-card>
+  `,
   standalone: true,
-  imports: [],
+  providers: [
+    {
+      provide: DataStoreBase,
+      useClass: CityStore,
+    },
+  ],
+  imports: [CardComponent, AsyncPipe],
 })
-export class CityCardComponent implements OnInit {
-  constructor() {}
+export class CityCardComponent
+  extends DataCardComponentBase<City>
+  implements OnInit
+{
+  ngOnInit(): void {
+    this.http.fetchCities$.subscribe((t) => this.store.addAll(t));
+  }
 
-  ngOnInit(): void {}
+  override onAddNewItem(): void {
+    this.store.addOne(randomCity());
+  }
 }
