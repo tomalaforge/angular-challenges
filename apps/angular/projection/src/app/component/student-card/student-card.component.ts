@@ -1,6 +1,9 @@
 import { NgOptimizedImage } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+import {
+  FakeHttpService,
+  randStudent,
+} from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
 import { CardType } from '../../model/card.model';
 import { Student } from '../../model/student.model';
@@ -13,7 +16,8 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
     <app-card
       [list]="students"
       [itemTemplate]="itemTemplate"
-      customClass="bg-light-green">
+      customClass="bg-light-green"
+      (clickedAdd)="addStudent()">
       <img ngSrc="assets/img/student.webp" width="200" height="200" priority />
     </app-card>
 
@@ -44,5 +48,9 @@ export class StudentCardComponent implements OnInit {
     this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
 
     this.store.students$.subscribe((s) => (this.students = s));
+  }
+
+  protected addStudent() {
+    this.store.addOne(randStudent());
   }
 }
