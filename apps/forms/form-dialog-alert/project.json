@@ -1,0 +1,72 @@
+{
+  "name": "form-dialog-alert",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "app",
+  "sourceRoot": "apps/forms/form-dialog-alert/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:application",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/forms/form-dialog-alert",
+        "index": "apps/forms/form-dialog-alert/src/index.html",
+        "browser": "apps/forms/form-dialog-alert/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/forms/form-dialog-alert/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/forms/form-dialog-alert/src/favicon.ico",
+          "apps/forms/form-dialog-alert/src/assets"
+        ],
+        "styles": ["apps/forms/form-dialog-alert/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "form-dialog-alert:build:production"
+        },
+        "development": {
+          "buildTarget": "form-dialog-alert:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "form-dialog-alert:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

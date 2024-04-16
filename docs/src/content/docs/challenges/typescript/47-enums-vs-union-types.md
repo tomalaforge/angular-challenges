@@ -9,7 +9,6 @@ challengeNumber: 47
 command: typescript-enums-vs-union-types
 sidebar:
   order: 18
-  badge: New
 ---
 
 ## Information
