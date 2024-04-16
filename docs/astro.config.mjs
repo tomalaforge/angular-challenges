@@ -63,7 +63,7 @@ export default defineConfig({
       translations: {
         es: 'Leaderboard',
         fr: 'Leaderboard',
-        pt: 'Leaderboard',
+        pt: 'Tabela de Classificação',
         ru: 'Leaderboard'
       }
     },
