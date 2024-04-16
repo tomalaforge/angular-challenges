@@ -2,7 +2,7 @@ name: Add Labels
 
 on:
   pull_request:
-    types: [ opened, edited, synchronize ]
+    types: [ opened ]
 
 jobs:
   add_supporters:
