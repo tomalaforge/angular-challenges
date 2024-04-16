@@ -11,6 +11,5 @@ import { Component, input } from '@angular/core';
   standalone: true,
 })
 export class ListItemComponent {
-  id = input.required<number>();
   name = input.required<string>();
 }

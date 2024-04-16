@@ -13,7 +13,7 @@ import { CardComponent } from '../../ui/card/card.component';
       [list]="data$ | async"
       (addNewItem)="onAddNewItem()"
       (deleteItem)="onDeleteItem($event)"
-      customClass="bg-light-green">
+      [backgroundColor]="'rgba(250, 10, 250, 0.1)'">
       <img src="assets/img/city.png" image />
     </app-card>
   `,

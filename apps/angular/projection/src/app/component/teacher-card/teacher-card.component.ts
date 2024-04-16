@@ -13,17 +13,10 @@ import { CardComponent } from '../../ui/card/card.component';
       [list]="data$ | async"
       (addNewItem)="onAddNewItem()"
       (deleteItem)="onDeleteItem($event)"
-      customClass="bg-light-red">
+      [backgroundColor]="'rgba(250, 0, 0, 0.1)'">
       <img src="assets/img/teacher.png" image />
     </app-card>
   `,
-  styles: [
-    `
-      ::ng-deep .bg-light-red {
-        background-color: rgba(250, 0, 0, 0.1);
-      }
-    `,
-  ],
   providers: [
     {
       provide: DataStoreBase,
