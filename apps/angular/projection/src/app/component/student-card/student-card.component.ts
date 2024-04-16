@@ -4,6 +4,7 @@ import { StudentStore } from '../../data-access/student.store';
 import { CardType } from '../../model/card.model';
 import { Student } from '../../model/student.model';
 import { CardComponent } from '../../ui/card/card.component';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-student-card',
@@ -11,7 +12,12 @@ import { CardComponent } from '../../ui/card/card.component';
     <app-card
       [list]="students"
       [type]="cardType"
-      customClass="bg-light-green"></app-card>
+      [itemTemplate]="itemTemplate"
+      customClass="bg-light-green" />
+
+    <ng-template #itemTemplate let-item>
+      <app-list-item [name]="item.firstName" [id]="item.id" [type]="cardType" />
+    </ng-template>
   `,
   standalone: true,
   styles: [
@@ -21,7 +27,7 @@ import { CardComponent } from '../../ui/card/card.component';
       }
     `,
   ],
-  imports: [CardComponent],
+  imports: [CardComponent, ListItemComponent],
 })
 export class StudentCardComponent implements OnInit {
   students: Student[] = [];
