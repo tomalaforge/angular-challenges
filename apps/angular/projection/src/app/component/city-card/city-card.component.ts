@@ -15,7 +15,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
     <app-card
       [list]="cities"
       [itemTemplate]="itemTemplate"
-      class="bg-light-blue"
+      backgroundClass="bg-purple-200"
       (clickedAdd)="addCity()">
       <img ngSrc="assets/img/city.png" width="200" height="200" priority />
     </app-card>
@@ -29,13 +29,6 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   `,
   standalone: true,
   imports: [NgOptimizedImage, CardComponent, ListItemComponent],
-  styles: [
-    `
-      .bg-light-blue {
-        background-color: rgba(0, 0, 250, 0.1);
-      }
-    `,
-  ],
 })
 export class CityCardComponent implements OnInit {
   cities: City[] = [];

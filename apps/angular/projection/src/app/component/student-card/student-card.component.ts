@@ -16,7 +16,8 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
     <app-card
       [list]="students"
       [itemTemplate]="itemTemplate"
-      customClass="bg-light-green"
+      backgroundClass="bg-green-200"
+      class="bg-light-green"
       (clickedAdd)="addStudent()">
       <img ngSrc="assets/img/student.webp" width="200" height="200" priority />
     </app-card>
@@ -29,13 +30,6 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
     </ng-template>
   `,
   standalone: true,
-  styles: [
-    `
-      ::ng-deep .bg-light-green {
-        background-color: rgba(0, 250, 0, 0.1);
-      }
-    `,
-  ],
   imports: [NgOptimizedImage, CardComponent, ListItemComponent],
 })
 export class StudentCardComponent implements OnInit {

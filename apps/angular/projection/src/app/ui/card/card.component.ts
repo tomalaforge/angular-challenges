@@ -7,7 +7,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
   template: `
     <div
       class="flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4"
-      [class]="customClass()">
+      [class]="backgroundClass()">
       <ng-content></ng-content>
 
       <button
@@ -30,7 +30,8 @@ import { ListItemComponent } from '../list-item/list-item.component';
 })
 export class CardComponent<T extends { id: string | number }> {
   list = input<T[]>([]);
-  customClass = input('');
+
+  backgroundClass = input<`bg-${string}-${number}`>('bg-slate-100');
 
   itemTemplate = input<TemplateRef<unknown> | null>(null);
 

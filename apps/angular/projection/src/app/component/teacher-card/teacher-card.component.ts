@@ -16,6 +16,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
     <app-card
       [list]="teachers"
       [itemTemplate]="itemTemplate"
+      backgroundClass="bg-red-200"
       customClass="bg-light-red"
       (clickedAdd)="addTeacher()">
       <img ngSrc="assets/img/teacher.png" width="200" height="200" priority />
@@ -28,13 +29,6 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
         (clickedRemove)="removeTeacher($event)" />
     </ng-template>
   `,
-  styles: [
-    `
-      ::ng-deep .bg-light-red {
-        background-color: rgba(250, 0, 0, 0.1);
-      }
-    `,
-  ],
   standalone: true,
   imports: [NgOptimizedImage, CardComponent, ListItemComponent],
 })
