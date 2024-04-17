@@ -1,0 +1,19 @@
+<div class="relative flex h-max justify-center">
+  @if(this.loaderService.isLoading()){
+    <div class="fixed z-10 w-full">
+      <mat-progress-bar mode="indeterminate" value="40"></mat-progress-bar>
+    </div>
+  }
+  <div class="m-32">
+    <div class="mb-5 text-center text-3xl">Angular CRUD</div>
+    <div class="flex justify-between gap-5">
+      <div class="w-30vw mb-5 text-center text-xl">Title</div>
+      <div class="mb-5 text-center text-xl">Actions</div>
+    </div>
+    @for(todo of todos(); track todo.id){
+      <app-todo [todo]="todo"></app-todo>
+    } @empty {
+      <div class="flex justify-center text-xl">There is no todo</div>
+    }
+  </div>
+</div>

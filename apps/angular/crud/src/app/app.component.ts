@@ -1,51 +1,28 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { randText } from '@ngneat/falso';
+import { Component, inject, OnInit, WritableSignal } from '@angular/core';
+import { MatProgressBar } from '@angular/material/progress-bar';
+import { Store } from '@ngrx/store';
+
+import { ITodo } from './interfaces/ITodo';
+import { todoActions } from './states/todos/todo.actions';
+import { selectList } from './states/todos/todo.reducer';
+import { LoaderService } from './ui/loader/loader.service';
+import { TodoComponent } from './ui/todo/todo.component';
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatProgressBar, TodoComponent],
   selector: 'app-root',
-  template: `
-    <div *ngFor="let todo of todos">
-      {{ todo.title }}
-      <button (click)="update(todo)">Update</button>
-    </div>
-  `,
+  templateUrl: './app.component.html',
   styles: [],
 })
 export class AppComponent implements OnInit {
-  todos!: any[];
+  public loaderService = inject(LoaderService);
+  private store = inject(Store);
 
-  constructor(private http: HttpClient) {}
+  todos = this.store.selectSignal(selectList) as WritableSignal<ITodo[]>;
 
   ngOnInit(): void {
-    this.http
-      .get<any[]>('https://jsonplaceholder.typicode.com/todos')
-      .subscribe((todos) => {
-        this.todos = todos;
-      });
-  }
-
-  update(todo: any) {
-    this.http
-      .put<any>(
-        `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
-        JSON.stringify({
-          todo: todo.id,
-          title: randText(),
-          body: todo.body,
-          userId: todo.userId,
-        }),
-        {
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-          },
-        },
-      )
-      .subscribe((todoUpdated: any) => {
-        this.todos[todoUpdated.id - 1] = todoUpdated;
-      });
+    this.store.dispatch(todoActions.loadTodosAction());
   }
 }

@@ -1,0 +1,20 @@
+
+<div class="flex items-center justify-between gap-5 p-2 hover:bg-slate-200">
+  <div class="w-30vw align-middle">
+    {{todo.title}}
+  </div>
+  <div class="flex gap-3">
+    <button class="bg-blue-500 hover:bg-blue-700 text-white  py-2 px-4 rounded-full hover:shadow-lg
+      {{loaderService.isLoading() ? 'opacity-50 cursor-not-allowed' : ''}}"
+      (click)="updateTodo(todo)"
+      [disabled]="loaderService.isLoading()">
+      Update
+    </button>
+    <button class="bg-pink-500 hover:bg-pink-700 text-white  py-2 px-4 rounded-full hover:shadow-lg
+      {{loaderService.isLoading() ? 'opacity-50 cursor-not-allowed' : ''}}"
+      (click)="deleteTodo(todo)"
+      [disabled]="loaderService.isLoading()">
+      Delete
+    </button>
+  </div>
+</div>
