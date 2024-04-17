@@ -14,24 +14,7 @@ jobs:
       - name: Install dependencies
         run: npm i @actions/core @actions/github
 
-      - name: add supporter labels
-        uses: actions-ecosystem/action-add-labels@v1
-        if: ${{ contains( fromJson('[ "tomalaforge", "alcaidio" , "svenson95", "jdegand", "DeveshChau", "stillst", "wandri", "webbomj", "kabrunko-dev", "Sanjar1304"]'), github.actor ) && startsWith(github.event.pull_request.title, 'Answer') }}
-        with:
-          github_token: ${{ secrets.github_token }}
-          labels: supporter
-
-      - name: add answer labels
-        uses: actions-ecosystem/action-add-labels@v1
-        if: ${{ startsWith(github.event.pull_request.title, 'Answer') }}
-        with:
-          github_token: ${{ secrets.github_token }}
-          labels: answer
-
-      - name: Hello world action step
+      - name: Add labels
         uses: ./.github/github-action/
-        id: hello
         with:
-          who-to-greet: 'Mona the Octocat'
-      - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
