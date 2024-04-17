@@ -38,6 +38,8 @@ jobs:
       # you must check out the repository
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Install Dependencies
+        run: npm install @actions/core @actions/github
       - name: Hello world action step
         uses: ./.github/github-action/ # Uses an action in the root directory
         id: hello
