@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable, of } from 'rxjs';
-import { PendingChangesGuard } from '../guards/pending-changes.guard';
+import { ComponentCanDeactivate } from '../guards/pending-changes.guard';
 import { UnloadGuardDirective } from '../guards/unload-window.directive';
 import { AlertDialogComponent } from '../ui/dialog.component';
 import { FormComponent } from '../ui/form.component';
@@ -23,7 +23,7 @@ import { FormComponent } from '../ui/form.component';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class JoinComponent implements PendingChangesGuard {
+export class JoinComponent implements ComponentCanDeactivate {
   private dialog = inject(MatDialog);
   formComponent = viewChild(FormComponent);
 
