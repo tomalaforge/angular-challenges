@@ -14,7 +14,7 @@ async function run() {
 
     const match = title.match(/Answer:\s*(\d+)/);
     if (match) {
-      labels.push(parseInt(match[1], 10));
+      labels.push(String(parseInt(match[1], 10)));
     }
 
     const actor = github.context.actor;
