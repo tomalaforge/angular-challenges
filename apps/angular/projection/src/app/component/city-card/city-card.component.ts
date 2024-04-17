@@ -1,5 +1,5 @@
 import { NgOptimizedImage } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CityStore } from '../../data-access/city.store';
 import {
   FakeHttpService,
@@ -37,24 +37,22 @@ import { NgTemplateListItemDirective } from '../../ui/list-item/ng-template-list
   ],
 })
 export class CityCardComponent implements OnInit {
+  #http = inject(FakeHttpService);
+  #store = inject(CityStore);
+
   cities: City[] = [];
 
-  constructor(
-    private http: FakeHttpService,
-    private store: CityStore,
-  ) {}
-
   ngOnInit(): void {
-    this.http.fetchCities$.subscribe((cities) => this.store.addAll(cities));
+    this.#http.fetchCities$.subscribe((cities) => this.#store.addAll(cities));
 
-    this.store.cities$.subscribe((cities) => (this.cities = cities));
+    this.#store.cities$.subscribe((cities) => (this.cities = cities));
   }
 
   protected addCity() {
-    this.store.addOne(randomCity());
+    this.#store.addOne(randomCity());
   }
 
   protected removeCity(cityId: number) {
-    this.store.deleteOne(cityId);
+    this.#store.deleteOne(cityId);
   }
 }

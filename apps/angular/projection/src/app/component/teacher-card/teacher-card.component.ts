@@ -1,11 +1,10 @@
 import { NgOptimizedImage } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
   FakeHttpService,
   randTeacher,
 } from '../../data-access/fake-http.service';
 import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
 import { Teacher } from '../../model/teacher.model';
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
@@ -39,25 +38,24 @@ import { NgTemplateListItemDirective } from '../../ui/list-item/ng-template-list
   ],
 })
 export class TeacherCardComponent implements OnInit {
-  teachers: Teacher[] = [];
-  cardType = CardType.TEACHER;
+  #http = inject(FakeHttpService);
+  #store = inject(TeacherStore);
 
-  constructor(
-    private http: FakeHttpService,
-    private store: TeacherStore,
-  ) {}
+  teachers: Teacher[] = [];
 
   ngOnInit(): void {
-    this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
+    this.#http.fetchTeachers$.subscribe((teachers) =>
+      this.#store.addAll(teachers),
+    );
 
-    this.store.teachers$.subscribe((t) => (this.teachers = t));
+    this.#store.teachers$.subscribe((teachers) => (this.teachers = teachers));
   }
 
   protected addTeacher() {
-    this.store.addOne(randTeacher());
+    this.#store.addOne(randTeacher());
   }
 
   protected removeTeacher(teacherId: number) {
-    this.store.deleteOne(teacherId);
+    this.#store.deleteOne(teacherId);
   }
 }
