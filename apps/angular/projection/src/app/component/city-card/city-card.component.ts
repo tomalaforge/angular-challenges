@@ -8,6 +8,7 @@ import {
 import { City } from '../../model/city.model';
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
+import { NgTemplateListItemDirective } from '../../ui/list-item/ng-template-list-item.directive';
 
 @Component({
   selector: 'app-city-card',
@@ -20,7 +21,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
       <img ngSrc="assets/img/city.png" width="200" height="200" priority />
     </app-card>
 
-    <ng-template #itemTemplate let-item>
+    <ng-template listItem [infer]="cities" #itemTemplate let-item>
       <app-list-item
         [name]="item.name"
         [id]="item.id"
@@ -28,7 +29,12 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
     </ng-template>
   `,
   standalone: true,
-  imports: [NgOptimizedImage, CardComponent, ListItemComponent],
+  imports: [
+    NgOptimizedImage,
+    CardComponent,
+    ListItemComponent,
+    NgTemplateListItemDirective,
+  ],
 })
 export class CityCardComponent implements OnInit {
   cities: City[] = [];

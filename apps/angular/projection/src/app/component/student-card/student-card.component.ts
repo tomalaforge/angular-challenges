@@ -9,6 +9,7 @@ import { CardType } from '../../model/card.model';
 import { Student } from '../../model/student.model';
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
+import { NgTemplateListItemDirective } from '../../ui/list-item/ng-template-list-item.directive';
 
 @Component({
   selector: 'app-student-card',
@@ -22,15 +23,20 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
       <img ngSrc="assets/img/student.webp" width="200" height="200" priority />
     </app-card>
 
-    <ng-template #itemTemplate let-item>
+    <ng-template listItem [infer]="students" #itemTemplate let-student>
       <app-list-item
-        [name]="item.firstName"
-        [id]="item.id"
+        [name]="student.firstName"
+        [id]="student.id"
         (clickedRemove)="removeStudent($event)" />
     </ng-template>
   `,
   standalone: true,
-  imports: [NgOptimizedImage, CardComponent, ListItemComponent],
+  imports: [
+    NgOptimizedImage,
+    CardComponent,
+    ListItemComponent,
+    NgTemplateListItemDirective,
+  ],
 })
 export class StudentCardComponent implements OnInit {
   students: Student[] = [];
