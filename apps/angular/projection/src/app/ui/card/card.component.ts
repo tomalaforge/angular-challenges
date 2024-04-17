@@ -1,5 +1,5 @@
 import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
-import { Component, Input, TemplateRef, input, output } from '@angular/core';
+import { Component, TemplateRef, input, output } from '@angular/core';
 import { ListItemComponent } from '../list-item/list-item.component';
 
 @Component({
@@ -7,7 +7,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
   template: `
     <div
       class="flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4"
-      [class]="customClass">
+      [class]="customClass()">
       <ng-content></ng-content>
 
       <button
@@ -17,7 +17,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
       </button>
 
       <section>
-        @for (item of list; track item.id) {
+        @for (item of list(); track item.id) {
           <ng-container
             [ngTemplateOutlet]="itemTemplate()"
             [ngTemplateOutletContext]="{ $implicit: item }" />
@@ -29,8 +29,8 @@ import { ListItemComponent } from '../list-item/list-item.component';
   imports: [NgIf, NgFor, NgTemplateOutlet, ListItemComponent],
 })
 export class CardComponent<T extends { id: string | number }> {
-  @Input() list: T[] | null = null;
-  @Input() customClass = '';
+  list = input<T[]>([]);
+  customClass = input('');
 
   itemTemplate = input<TemplateRef<unknown> | null>(null);
 

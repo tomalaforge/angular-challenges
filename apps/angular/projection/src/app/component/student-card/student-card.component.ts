@@ -22,7 +22,10 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
     </app-card>
 
     <ng-template #itemTemplate let-item>
-      <app-list-item [name]="item.firstName" [id]="item.id" [type]="cardType" />
+      <app-list-item
+        [name]="item.firstName"
+        [id]="item.id"
+        (clickedRemove)="removeStudent($event)" />
     </ng-template>
   `,
   standalone: true,
@@ -52,5 +55,9 @@ export class StudentCardComponent implements OnInit {
 
   protected addStudent() {
     this.store.addOne(randStudent());
+  }
+
+  protected removeStudent(studentId: number) {
+    this.store.deleteOne(studentId);
   }
 }
