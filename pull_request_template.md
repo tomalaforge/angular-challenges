@@ -5,8 +5,8 @@
 ## Warning:
 
 - If you want feedback or review, you must support the project on GitHub:
-  - $5 per review
-  - $25 for lifetime reviews
+  - [$5 per review](https://github.com/sponsors/tomalaforge)
+  - [$25 for lifetime reviews](https://github.com/sponsors/tomalaforge)
   - Create one of more challenges
   - Have many valuable contributions to the project
 

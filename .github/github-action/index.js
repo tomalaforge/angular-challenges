@@ -1,6 +1,6 @@
 const github = require('@actions/github');
 const core = require('@actions/core');
-const contributors = require('./contributors');
+const { contributors } = require('./contributors');
 
 async function run() {
   try {
