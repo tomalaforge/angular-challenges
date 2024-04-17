@@ -2,7 +2,7 @@ name: Add Labels
 
 on:
   pull_request:
-    types: [ opened ]
+    types: [ opened, edited, synchronize ]
 
 jobs:
   add_supporters:
@@ -15,6 +15,7 @@ jobs:
         uses: actions-ecosystem/action-add-labels@v1
         if: ${{ contains( fromJson('[ "tomalaforge", "alcaidio" , "svenson95", "jdegand", "DeveshChau", "stillst", "wandri", "webbomj", "kabrunko-dev", "Sanjar1304"]'), github.actor ) && startsWith(github.event.pull_request.title, 'Answer') }}
         with:
+          github_token: ${{ secrets.github_token }}
           labels: supporter
   add_answers:
     runs-on: ubuntu-latest
@@ -26,4 +27,17 @@ jobs:
         uses: actions-ecosystem/action-add-labels@v1
         if: ${{ startsWith(github.event.pull_request.title, 'Answer') }}
         with:
+          github_token: ${{ secrets.github_token }}
           labels: answer
+  hello_world_job:
+    runs-on: ubuntu-latest
+    name: A job to say hello
+    steps:
+      - name: Hello world action step
+        id: hello
+        uses: ./add-label/
+        with:
+          who-to-greet: 'Mona the Octocat'
+      # Use the output from the `hello` step
+      - name: Get the output time
+        run: echo "The time was ${{ steps.hello.outputs.time }}"
