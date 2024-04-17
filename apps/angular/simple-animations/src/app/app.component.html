@@ -1,0 +1,21 @@
+<div class="mx-20 my-40 flex gap-5">
+  <section>
+    @for (item of state.paragraphItems; track $index) {
+      <div>
+        <app-paragraph
+          [data]="{ title: item.title, content: item.content }"></app-paragraph>
+      </div>
+    }
+  </section>
+
+  <section>
+    <span [@listAnimation]="state.listItems.length">
+      @for (item of state.listItems; track $index) {
+        <div class="list-item">
+          <span>{{ item.category }}</span>
+          <span>{{ item.description }}</span>
+        </div>
+      }
+    </span>
+  </section>
+</div>
