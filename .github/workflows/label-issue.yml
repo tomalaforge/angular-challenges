@@ -10,7 +10,8 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v2
-
+      - name: Install dependencies
+        run: npm i @actions/core @actions/github
       - name: add labels
         uses: actions-ecosystem/action-add-labels@v1
         if: ${{ contains( fromJson('[ "tomalaforge", "alcaidio" , "svenson95", "jdegand", "DeveshChau", "stillst", "wandri", "webbomj", "kabrunko-dev", "Sanjar1304"]'), github.actor ) && startsWith(github.event.pull_request.title, 'Answer') }}
@@ -38,7 +39,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Hello world action step
-        uses: ./github-action/ # Uses an action in the root directory
+        uses: ./.github/github-action/ # Uses an action in the root directory
         id: hello
         with:
           who-to-greet: 'Mona the Octocat'
