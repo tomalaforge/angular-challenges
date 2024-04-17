@@ -5,6 +5,10 @@ inputs:
     description: A GitHub token.
     required: false
     default: ${{ github.token }}
+  repo:
+    description: The owner and repository name.
+    required: false
+    default: ${{ github.repository }}
 runs:
   using: 'node20'
   main: 'index.js'

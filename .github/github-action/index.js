@@ -25,10 +25,7 @@ async function run() {
     const githubToken = core.getInput('github_token');
 
     const [owner, repo] = core.getInput('repo').split('/');
-    const number =
-      core.getInput('number') === ''
-        ? github.context.issue.number
-        : parseInt(core.getInput('number'));
+    const number = github.context.issue.number;
 
     const octokit = github.getOctokit(githubToken);
     await octokit.rest.issues.addLabels({

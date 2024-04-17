@@ -17,4 +17,4 @@ jobs:
       - name: Add labels
         uses: ./.github/github-action/
         with:
-          github_token: ${{ secrets.github_token }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
