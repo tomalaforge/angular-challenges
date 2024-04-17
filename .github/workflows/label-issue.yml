@@ -38,7 +38,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Hello world action step
-        uses: ./add-label/ # Uses an action in the root directory
+        uses: ./.github/workflows/add-label/ # Uses an action in the root directory
         id: hello
         with:
           who-to-greet: 'Mona the Octocat'
