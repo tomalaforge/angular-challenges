@@ -35,7 +35,7 @@ Here's the feature expressed as a user story with a functional expectation:
 <details>
     <summary>Tips 🤫 (if you really need it and after careful consideration)</summary>
     <ul>
-    <li>Use the Material CDK Dialog or Overlay - https://material.angular.io/cdk/ (dont forget to add `@import '@angular/cdk/overlay-prebuilt.css'` in `styles.scss`)</li>
-    <li>Use the `CanDeactivate` guard - https://angular.io/api/router/CanDeactivate in the new functional approach.</li>
+    <li>Use the [Material CDK](https://material.angular.io/cdk/) Dialog or Overlay - dont forget to add <code>@import '@angular/cdk/overlay-prebuilt.css'</code> in <code>styles.scss</code></li>
+    <li>Use the [CanDeactivate](https://angular.io/api/router/CanDeactivate) guard in the new functional approach.</li>
     </ul>
 </details>
