@@ -5,7 +5,7 @@ author: timothy-alcaide
 contributors:
   - alcaidio
 challengeNumber: 48
-command: form-dialog-alert
+command: avoid-losing-form-data
 sidebar:
   order: 121
   badge: New
