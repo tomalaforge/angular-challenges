@@ -16,7 +16,7 @@ sidebar:
 
 ## Information
 
-Structural directives are directives which change the DOM layout by adding and removing DOM elements. This is an important concept you'll need to improve your angular skills and knowledge. This will be the first part of this challenge. For more information check out the [official documentation](https://angular.io/guide/structural-directives).
+Structural directives are directives which change the DOM layout by adding and removing DOM elements. This is an important concept you'll need to improve your angular skills and knowledge. This will be the first part of this challenge. For more information check out the [official documentation](https://angular.dev/guide/directives/structural-directives).
 
 Guards like `CanActivate` or `CanMatch` are also very important, since you'll need it in the most application's you build. If you're not very familiar with route guards, check out this two articles.
 
