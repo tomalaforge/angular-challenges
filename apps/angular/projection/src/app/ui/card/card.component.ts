@@ -1,47 +1,49 @@
-import { NgFor, NgStyle } from '@angular/common';
+import { NgFor, NgStyle, NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  TemplateRef,
+  contentChild,
   input,
   output,
 } from '@angular/core';
-import { CardItem } from '../../model/card.model';
 import { ListItemComponent } from '../list-item/list-item.component';
 
 @Component({
   selector: 'app-card',
   template: `
-    <div
-      class="flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4"
-      [ngStyle]="{ 'background-color': backgroundColor() }">
-      <div class="card__image">
-        <ng-content select="[image]"></ng-content>
-      </div>
-      <section>
-        @for (item of list(); track item.id) {
-          <app-list-item [name]="item.name || ''">
-            <button (click)="deleteItem.emit(item.id)" delete>
-              <img class="h-5" src="assets/svg/trash.svg" />
-            </button>
-          </app-list-item>
-        }
-      </section>
-
-      <button
-        class="rounded-sm border border-blue-500 bg-blue-300 p-2"
-        (click)="this.addNewItem.emit()">
-        Add
-      </button>
-    </div>
+    <ng-content select="[cover]" />
+    <br />
+    <section>
+      @for (item of list(); track item.id) {
+        <ng-container
+          [ngTemplateOutlet]="listItemTmpl()"
+          [ngTemplateOutletContext]="{ $implicit: item }" />
+      }
+    </section>
+    <br />
+    <button
+      class="rounded-sm border border-blue-500 bg-blue-300 p-2"
+      (click)="this.addNewItem.emit()">
+      Add
+    </button>
   `,
+  styles: `
+    :host {
+      display: block;
+    }
+  `,
+  host: {
+    class: 'flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4',
+  },
   standalone: true,
-  imports: [NgFor, ListItemComponent, NgStyle],
+  imports: [NgFor, ListItemComponent, NgStyle, NgTemplateOutlet],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardComponent {
-  list = input<CardItem[] | null>([]);
-  backgroundColor = input<string>('');
+  list = input<any>([]);
+
+  listItemTmpl = contentChild.required('cardRow', { read: TemplateRef });
 
   protected addNewItem = output<void>();
-  protected deleteItem = output<number>();
 }

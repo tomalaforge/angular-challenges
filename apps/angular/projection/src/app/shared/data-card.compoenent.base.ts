@@ -1,14 +1,10 @@
 import { Directive } from '@angular/core';
-import { Observable, startWith } from 'rxjs';
 import { FakeHttpService } from '../data-access/fake-http.service';
-import { CardItem } from '../model/card.model';
 import { DataBase, DataStoreBase } from './data.store.base';
 
 @Directive()
 export abstract class DataCardComponentBase<T extends DataBase> {
-  abstract data$: Observable<CardItem[]>;
-
-  protected source$ = this.store.data$.pipe(startWith([]));
+  protected $data = this.store.$data;
 
   constructor(
     protected http: FakeHttpService,

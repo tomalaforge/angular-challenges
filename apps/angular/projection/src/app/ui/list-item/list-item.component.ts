@@ -5,12 +5,12 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   template: `
     <div class="border-grey-300 flex justify-between border px-2 py-1">
       {{ name() }}
-      <ng-content select="[delete]"></ng-content>
+      <ng-content select="[delete]" />
     </div>
   `,
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListItemComponent {
-  name = input.required<string>();
+  name = input<string>('');
 }

@@ -1,22 +1,21 @@
-import { BehaviorSubject } from 'rxjs';
+import { signal } from '@angular/core';
 
 export interface DataBase {
   id: number;
 }
 
 export abstract class DataStoreBase<T extends DataBase> {
-  private dataSubject = new BehaviorSubject<T[]>([]);
-  data$ = this.dataSubject.asObservable();
+  $data = signal<T[]>([]);
 
   addAll(data: T[]) {
-    this.dataSubject.next(data);
+    this.$data.set(data);
   }
 
   addOne(item: T) {
-    this.dataSubject.next([...this.dataSubject.value, item]);
+    this.$data.set([...this.$data(), item]);
   }
 
   deleteOne(id: number) {
-    this.dataSubject.next(this.dataSubject.value.filter((s) => s.id !== id));
+    this.$data.set(this.$data().filter((s) => s.id !== id));
   }
 }

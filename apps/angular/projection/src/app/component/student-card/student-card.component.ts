@@ -1,22 +1,28 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs';
 import { randStudent } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
-import { CardItem } from '../../model/card.model';
 import { Student } from '../../model/student.model';
 import { DataCardComponentBase, DataStoreBase } from '../../shared';
 import { CardComponent } from '../../ui/card/card.component';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-student-card',
   template: `
     <app-card
-      [list]="data$ | async"
+      [list]="$data()"
       (addNewItem)="onAddNewItem()"
-      (deleteItem)="onDeleteItem($event)"
-      [backgroundColor]="'rgba(0, 250, 0, 0.1)'">
-      <img src="assets/img/student.webp" style="width: 200px;" image />
+      style="background-color: rgba(0, 250, 0, 0.1);">
+      <img src="assets/img/student.webp" style="width: 200px;" cover />
+
+      <ng-template #cardRow let-item>
+        <app-list-item [name]="item.firstName">
+          <button (click)="onDeleteItem(item.id)" delete>
+            <img class="h-5" src="assets/svg/trash.svg" />
+          </button>
+        </app-list-item>
+      </ng-template>
     </app-card>
   `,
   providers: [
@@ -26,18 +32,12 @@ import { CardComponent } from '../../ui/card/card.component';
     },
   ],
   standalone: true,
-  imports: [CardComponent, AsyncPipe],
+  imports: [CardComponent, AsyncPipe, ListItemComponent],
 })
 export class StudentCardComponent
   extends DataCardComponentBase<Student>
   implements OnInit
 {
-  override data$ = this.source$.pipe(
-    map((response) =>
-      response.map(({ id, firstName }) => new CardItem(id, firstName)),
-    ),
-  );
-
   ngOnInit(): void {
     this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
   }
