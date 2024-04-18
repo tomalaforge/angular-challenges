@@ -14,7 +14,7 @@ import { CardComponent } from '../../ui/card/card.component';
       (addNewItem)="onAddNewItem()"
       (deleteItem)="onDeleteItem($event)"
       [backgroundColor]="'rgba(0, 250, 0, 0.1)'">
-      <img src="assets/img/student.webp" image />
+      <img src="assets/img/student.webp" style="width: 200px;" image />
     </app-card>
   `,
   providers: [

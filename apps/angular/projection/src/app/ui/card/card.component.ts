@@ -1,11 +1,10 @@
-import { NgFor, NgStyle } from '@angular/common';
+import { NgClass, NgFor, NgStyle } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   input,
   output,
 } from '@angular/core';
-import { HighlightDirective } from '../../shared/directives/highlight.directive';
 import { ListItemComponent } from '../list-item/list-item.component';
 
 @Component({
@@ -13,7 +12,8 @@ import { ListItemComponent } from '../list-item/list-item.component';
   template: `
     <div
       class="flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4"
-      [bgColor]="backgroundColor()">
+      [ngStyle]="{ 'background-color': backgroundColor() }"
+      [ngClass]="customClass()">
       <div class="card__image">
         <ng-content select="[image]"></ng-content>
       </div>
@@ -34,13 +34,8 @@ import { ListItemComponent } from '../list-item/list-item.component';
       </button>
     </div>
   `,
-  styles: `
-    .card__image {
-      width: 200px;
-    }
-  `,
   standalone: true,
-  imports: [NgFor, ListItemComponent, NgStyle, HighlightDirective],
+  imports: [NgFor, ListItemComponent, NgStyle, NgClass],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardComponent {
@@ -48,6 +43,7 @@ export class CardComponent {
     null,
   );
   backgroundColor = input<string>('');
+  customClass = input<string>('');
 
   protected addNewItem = output<void>();
   protected deleteItem = output<number>();
