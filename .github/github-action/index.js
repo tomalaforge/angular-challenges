@@ -5,12 +5,7 @@ const { contributors } = require('./contributors');
 async function run() {
   try {
     const title = github.context.payload.pull_request.title;
-    const labels = [];
-
-    if(!title.startsWith('Answer:')) {
-      return;
-    }
-    labels.push('answer');
+    const labels = ['answer'];
 
     const match = title.match(/Answer:\s*(\d+)/);
     if (match) {
