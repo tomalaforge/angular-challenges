@@ -16,7 +16,7 @@ sidebar:
 
 ## Information
 
-You can improve template type checking for custom directives by adding template guard properties to your directive definition. Angular offers the static function [`ngTemplateContextGuard`](https://angular.io/guide/structural-directives#typing-the-directives-context) to strongly type structural directives.
+You can improve template type checking for custom directives by adding template guard properties to your directive definition. Angular offers the static function [`ngTemplateContextGuard`](https://angular.dev/guide/directives/structural-directives#improving-template-type-checking-for-custom-directives) to strongly type structural directives.
 
 However the context of **NgTemplateOutlet** type is **Object**. But with the help of the above guard, we can improve that behavior.
 

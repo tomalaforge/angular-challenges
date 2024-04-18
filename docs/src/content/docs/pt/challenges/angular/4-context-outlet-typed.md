@@ -16,7 +16,7 @@ sidebar:
 
 ## Informação
 
-Você pode melhorar a verificação de tipo do template para diretivas personalizadas adicionando guardas de propriedades de template na definição de sua diretiva. Angular oferece a função estática [`ngTemplateContextGuard`](https://angular.io/guide/structural-directives#typing-the-directives-context) para tipar fortemente diretivas estruturais.
+Você pode melhorar a verificação de tipo do template para diretivas personalizadas adicionando guardas de propriedades de template na definição de sua diretiva. Angular oferece a função estática [`ngTemplateContextGuard`](https://angular.dev/guide/directives/structural-directives#improving-template-type-checking-for-custom-directives) para tipar fortemente diretivas estruturais.
 
 No entanto, o contexto do tipo do **NgTemplateOutlet** é **Object**. Mas com a a ajuda do guarda acima, podemos melhorar esse comportamento.
 

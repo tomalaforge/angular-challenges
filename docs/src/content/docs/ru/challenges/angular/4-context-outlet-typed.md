@@ -13,7 +13,7 @@ sidebar:
 
 ## Информация
 
-В Angular есть статическая функция [`ngTemplateContextGuard`](https://angular.io/guide/structural-directives#typing-the-directives-context) для строгой типизации структурных директив.
+В Angular есть статическая функция [`ngTemplateContextGuard`](https://angular.dev/guide/directives/structural-directives#improving-template-type-checking-for-custom-directives) для строгой типизации структурных директив.
 
 Однако, контекстом **NgTemplateOutlet** является **Object**. Но с помощью вышеупомянутой гарда, мы можем улучшить это поведение.
 
