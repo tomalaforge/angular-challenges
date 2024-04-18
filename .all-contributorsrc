@@ -240,6 +240,15 @@
       "contributions": [
         "translation-ru"
       ]
+    },
+    {
+      "login": "alcaidio",
+      "name": "Timothy Alcaide",
+      "avatar_url": "https://avatars.githubusercontent.com/u/17033036?v=4",
+      "profile": "https://twitter.com/alcaidio",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
