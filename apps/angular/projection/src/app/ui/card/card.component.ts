@@ -1,5 +1,10 @@
 import { NgFor, NgStyle } from '@angular/common';
-import { Component, input, output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  input,
+  output,
+} from '@angular/core';
 import { HighlightDirective } from '../../shared/directives/highlight.directive';
 import { ListItemComponent } from '../list-item/list-item.component';
 
@@ -36,6 +41,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
   `,
   standalone: true,
   imports: [NgFor, ListItemComponent, NgStyle, HighlightDirective],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardComponent {
   list = input<{ id: number; firstName?: string; name?: string }[] | null>(
