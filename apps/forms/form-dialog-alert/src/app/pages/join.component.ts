@@ -25,10 +25,10 @@ import { FormComponent } from '../ui/form.component';
 })
 export class JoinComponent implements ComponentCanDeactivate {
   private dialog = inject(MatDialog);
-  formComponent = viewChild(FormComponent);
+  private component = viewChild(FormComponent);
 
   canDeactivate(): boolean | Observable<boolean> {
-    if (this.formComponent()!.form.dirty) {
+    if (this.component()?.form.dirty) {
       const dialogRef = this.dialog.open(AlertDialogComponent, {
         disableClose: true,
       });
