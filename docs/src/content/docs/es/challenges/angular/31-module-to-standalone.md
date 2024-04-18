@@ -26,4 +26,4 @@ El objetivo de este desafío es migrar tu aplicación de componentes basados en 
 
 ## Nota
 
-También puedes probar el [esquema de Angular](https://angular.io/guide/standalone-migration) para migrar NgModule a componentes independientes. _(Dado que estamos usando nx, comienza tu comando con nx en lugar de ng)_
+También puedes probar el [esquema de Angular](https://angular.dev/reference/migrations/standalone) para migrar NgModule a componentes independientes. _(Dado que estamos usando nx, comienza tu comando con nx en lugar de ng)_
