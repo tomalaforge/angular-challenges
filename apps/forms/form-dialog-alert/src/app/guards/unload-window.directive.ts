@@ -8,6 +8,6 @@ export class UnloadGuardDirective {
 
   @HostListener('window:beforeunload')
   canDeactivate(): Observable<boolean> | boolean {
-    return !this.component.form?.dirty;
+    return !this.component.form.dirty;
   }
 }

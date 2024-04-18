@@ -5,7 +5,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ComponentCanDeactivate } from '../guards/pending-changes.guard';
 import { UnloadGuardDirective } from '../guards/unload-window.directive';
 import { AlertDialogComponent } from '../ui/dialog.component';
@@ -25,16 +25,15 @@ import { FormComponent } from '../ui/form.component';
 })
 export class JoinComponent implements ComponentCanDeactivate {
   private dialog = inject(MatDialog);
-  private component = viewChild(FormComponent);
+  private component = viewChild.required(FormComponent);
 
   canDeactivate(): boolean | Observable<boolean> {
-    if (this.component()?.form.dirty) {
-      const dialogRef = this.dialog.open(AlertDialogComponent, {
+    const dialogAction = this.dialog
+      .open(AlertDialogComponent, {
         disableClose: true,
-      });
-      return dialogRef.afterClosed();
-    } else {
-      return of(true);
-    }
+      })
+      .afterClosed();
+    const isDirty = this.component().form.dirty;
+    return isDirty ? dialogAction : true;
   }
 }
