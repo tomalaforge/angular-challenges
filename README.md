@@ -60,6 +60,9 @@ Check [all 48 challenges](https://angular-challenges.vercel.app/)
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/webbomj"><img src="https://avatars.githubusercontent.com/u/86595717?v=4?s=100" width="100px;" alt="Лапин Андрей (Lapin Andrey)"/><br /><sub><b>Лапин Андрей (Lapin Andrey)</b></sub></a><br /><a href="#translation-ru-webbomj" title="Translate in Russian">🇷🇺</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Dinozavvvr"><img src="https://avatars.githubusercontent.com/u/45518871?v=4?s=100" width="100px;" alt="Dinar Shagaliev"/><br /><sub><b>Dinar Shagaliev</b></sub></a><br /><a href="#translation-ru-Dinozavvvr" title="Translate in Russian">🇷🇺</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://twitter.com/alcaidio"><img src="https://avatars.githubusercontent.com/u/17033036?v=4?s=100" width="100px;" alt="Timothy Alcaide"/><br /><sub><b>Timothy Alcaide</b></sub></a><br /><a href="https://github.com/tomalaforge/angular-challenges/commits?author=alcaidio" title="Documentation">📖</a></td>
+    </tr>
   </tbody>
   <tfoot>
     <tr>
