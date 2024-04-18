@@ -1,10 +1,11 @@
-import { NgClass, NgFor, NgStyle } from '@angular/common';
+import { NgFor, NgStyle } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   input,
   output,
 } from '@angular/core';
+import { CardItem } from '../../model/card.model';
 import { ListItemComponent } from '../list-item/list-item.component';
 
 @Component({
@@ -12,14 +13,13 @@ import { ListItemComponent } from '../list-item/list-item.component';
   template: `
     <div
       class="flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4"
-      [ngStyle]="{ 'background-color': backgroundColor() }"
-      [ngClass]="customClass()">
+      [ngStyle]="{ 'background-color': backgroundColor() }">
       <div class="card__image">
         <ng-content select="[image]"></ng-content>
       </div>
       <section>
         @for (item of list(); track item.id) {
-          <app-list-item [name]="item.firstName || item.name || ''">
+          <app-list-item [name]="item.name || ''">
             <button (click)="deleteItem.emit(item.id)" delete>
               <img class="h-5" src="assets/svg/trash.svg" />
             </button>
@@ -35,15 +35,12 @@ import { ListItemComponent } from '../list-item/list-item.component';
     </div>
   `,
   standalone: true,
-  imports: [NgFor, ListItemComponent, NgStyle, NgClass],
+  imports: [NgFor, ListItemComponent, NgStyle],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardComponent {
-  list = input<{ id: number; firstName?: string; name?: string }[] | null>(
-    null,
-  );
+  list = input<CardItem[] | null>([]);
   backgroundColor = input<string>('');
-  customClass = input<string>('');
 
   protected addNewItem = output<void>();
   protected deleteItem = output<number>();

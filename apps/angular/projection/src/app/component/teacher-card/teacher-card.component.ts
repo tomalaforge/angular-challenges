@@ -1,7 +1,9 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { map } from 'rxjs';
 import { randTeacher } from '../../data-access/fake-http.service';
 import { TeacherStore } from '../../data-access/teacher.store';
+import { CardItem } from '../../model/card.model';
 import { Teacher } from '../../model/teacher.model';
 import { DataCardComponentBase, DataStoreBase } from '../../shared';
 import { CardComponent } from '../../ui/card/card.component';
@@ -30,6 +32,12 @@ export class TeacherCardComponent
   extends DataCardComponentBase<Teacher>
   implements OnInit
 {
+  override data$ = this.source$.pipe(
+    map((response) =>
+      response.map(({ id, firstName }) => new CardItem(id, firstName)),
+    ),
+  );
+
   ngOnInit(): void {
     this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
   }
