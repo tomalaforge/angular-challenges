@@ -45,6 +45,8 @@ age = signal(0)
 age = input<number>()
 ```
 
+You can read more about signal inputs [here](https://angular.dev/guide/signals/inputs).
+
 ## Statement
 
 In this small application, the goal is to refactor the `UserComponent` to utilize `SignalInput`.
