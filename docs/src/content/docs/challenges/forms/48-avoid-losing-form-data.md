@@ -4,8 +4,9 @@ description: Challenge 48 is about Bob 🧙‍♂️ the product owner, he wants
 author: timothy-alcaide
 contributors:
   - alcaidio
+  - svenson95
 challengeNumber: 48
-command: form-dialog-alert
+command: avoid-losing-form-data
 sidebar:
   order: 121
   badge: New

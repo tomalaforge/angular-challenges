@@ -1,26 +1,26 @@
 {
-  "name": "form-dialog-alert",
+  "name": "avoid-losing-form-data",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "app",
-  "sourceRoot": "apps/forms/form-dialog-alert/src",
+  "sourceRoot": "apps/forms/avoid-losing-form-data/src",
   "tags": [],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/forms/form-dialog-alert",
-        "index": "apps/forms/form-dialog-alert/src/index.html",
-        "browser": "apps/forms/form-dialog-alert/src/main.ts",
+        "outputPath": "dist/apps/forms/avoid-losing-form-data",
+        "index": "apps/forms/avoid-losing-form-data/src/index.html",
+        "browser": "apps/forms/avoid-losing-form-data/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/forms/form-dialog-alert/tsconfig.app.json",
+        "tsConfig": "apps/forms/avoid-losing-form-data/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
-          "apps/forms/form-dialog-alert/src/favicon.ico",
-          "apps/forms/form-dialog-alert/src/assets"
+          "apps/forms/avoid-losing-form-data/src/favicon.ico",
+          "apps/forms/avoid-losing-form-data/src/assets"
         ],
-        "styles": ["apps/forms/form-dialog-alert/src/styles.scss"],
+        "styles": ["apps/forms/avoid-losing-form-data/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
@@ -51,10 +51,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "buildTarget": "form-dialog-alert:build:production"
+          "buildTarget": "avoid-losing-form-data:build:production"
         },
         "development": {
-          "buildTarget": "form-dialog-alert:build:development"
+          "buildTarget": "avoid-losing-form-data:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -62,7 +62,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "buildTarget": "form-dialog-alert:build"
+        "buildTarget": "avoid-losing-form-data:build"
       }
     },
     "lint": {
