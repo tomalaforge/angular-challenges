@@ -20,10 +20,7 @@
           "apps/forms/form-dialog-alert/src/favicon.ico",
           "apps/forms/form-dialog-alert/src/assets"
         ],
-        "styles": [
-          "apps/forms/form-dialog-alert/src/styles.scss",
-          "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
-        ],
+        "styles": ["apps/forms/form-dialog-alert/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
