@@ -3,7 +3,7 @@
     (onDelete)="delete(todo)"
     (onUpdate)="update(todo)"
     [loadingState]="todo.loadingState">
-    <ng-template #itemContentTemplate>
+    <ng-template listItemContentTemplate>
       <div>{{ todo.title }}</div>
     </ng-template>
   </app-list-item>

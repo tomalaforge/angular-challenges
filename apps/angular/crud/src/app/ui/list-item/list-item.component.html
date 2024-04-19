@@ -1,16 +1,25 @@
 <ng-container *ngrxLet="loadingState() | loadingStatePipe as state">
-  <div class="wrapper">
-    <ng-container [ngTemplateOutlet]="itemContentTemplate"></ng-container>
+  <div class="mb-2 flex items-center">
+    <ng-container
+      [ngTemplateOutlet]="
+        itemContentTemplate?.templateRef || defaultItemContentTemplate
+      "></ng-container>
+
+    <ng-template #defaultItemContentTemplate>
+      This is the default item content template
+    </ng-template>
 
     <div>
       <button
         id="btn-update"
+        class="mx-1 rounded-full bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
         (click)="onUpdate.emit()"
         [disabled]="state.loading">
         Update
       </button>
       <button
         id="btn-delete"
+        class="rounded-full bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700"
         (click)="onDelete.emit()"
         [disabled]="state.loading">
         Delete
@@ -18,9 +27,9 @@
     </div>
 
     @if (state.loading) {
-      <app-loader class="loader"></app-loader>
+      <app-loader class="inline-block h-5"></app-loader>
     } @else if (state.error) {
-      <div class="error">{{ state.error }}</div>
+      <div class="text-red-600">{{ state.error }}</div>
     }
   </div>
 </ng-container>
