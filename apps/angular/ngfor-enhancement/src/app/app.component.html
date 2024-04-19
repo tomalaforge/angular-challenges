@@ -1,0 +1,7 @@
+<button style="display: block" (click)="addPerson()">Add</button>
+<button style="display: block" (click)="removePerson()">Remove</button>
+
+<div *ngFor="let person of persons; empty: emptyList">
+  {{ person.name }}
+</div>
+<ng-template #emptyList>The list is empty !!</ng-template>
