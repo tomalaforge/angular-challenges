@@ -1,11 +1,9 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { randTeacher } from '../../data-access/fake-http.service';
-import { TeacherStore } from '../../data-access/teacher.store';
-import { Teacher } from '../../model/teacher.model';
+import { TeacherStore, randTeacher } from '../../data-access';
+import { Teacher } from '../../model';
 import { DataCardComponentBase, DataStoreBase } from '../../shared';
-import { CardComponent } from '../../ui/card/card.component';
-import { ListItemComponent } from '../../ui/list-item/list-item.component';
+import { CardComponent, ListItemComponent } from '../../ui';
 
 @Component({
   selector: 'app-teacher-card',

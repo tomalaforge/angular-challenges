@@ -1,15 +1,13 @@
-import { Directive } from '@angular/core';
-import { FakeHttpService } from '../data-access/fake-http.service';
+import { Directive, inject } from '@angular/core';
+import { FakeHttpService } from '../data-access';
 import { DataBase, DataStoreBase } from './data.store.base';
 
 @Directive()
 export abstract class DataCardComponentBase<T extends DataBase> {
-  protected $data = this.store.$data;
+  protected http = inject(FakeHttpService);
+  protected store = inject(DataStoreBase<T>);
 
-  constructor(
-    protected http: FakeHttpService,
-    protected store: DataStoreBase<T>,
-  ) {}
+  protected $data = this.store.$data;
 
   abstract onAddNewItem(): void;
 
