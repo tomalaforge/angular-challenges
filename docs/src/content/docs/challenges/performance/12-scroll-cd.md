@@ -24,7 +24,7 @@ To have a better visualization of the problem, profile your application with Ang
 If you don't know how to use it, read [the performance introduction page](/challenges/performance/) first and come back after.
 :::
 
-You can learn more details about zone pollution and how to resolve it [here](https://angular.io/guide/change-detection-zone-pollution).
+You can learn more details about zone pollution and how to resolve it [here](https://angular.dev/best-practices/zone-pollution).
 
 The following video will explain more in-depth the issue of this application.
 
