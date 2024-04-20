@@ -12,7 +12,7 @@ sidebar:
 
 All Angular Challenges answers will be presented in the form of a pull request (PR). To view and follow them, navigate through the **Files Changes** page on GitHub. However, understanding and following this process may not be straightforward if you are not familiar with the interface. In many cases, you may prefer to check out the branch and review the solution in your preferred IDE.
 
-## Install the Github CLI
+## Install the GitHub CLI
 
 Follow the instructions for your operating system [here](https://github.com/cli/cli#installation).
 
