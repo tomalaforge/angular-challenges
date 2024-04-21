@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ButtonComponent } from './button.component';
 import { InformationComponent } from './information.component';
@@ -37,27 +37,27 @@ import { UserStore } from './user.store';
   `,
 })
 export class LoginComponent {
-  constructor(private userStore: UserStore) {}
+  userStore = inject(UserStore);
 
   admin() {
-    this.userStore.add(admin);
+    this.userStore.updateUser(admin);
   }
   manager() {
-    this.userStore.add(manager);
+    this.userStore.updateUser(manager);
   }
   reader() {
-    this.userStore.add(reader);
+    this.userStore.updateUser(reader);
   }
   writer() {
-    this.userStore.add(writer);
+    this.userStore.updateUser(writer);
   }
   readerWriter() {
-    this.userStore.add(readerAndWriter);
+    this.userStore.updateUser(readerAndWriter);
   }
   client() {
-    this.userStore.add(client);
+    this.userStore.updateUser(client);
   }
   everyone() {
-    this.userStore.add(everyone);
+    this.userStore.updateUser(everyone);
   }
 }

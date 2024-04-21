@@ -3,7 +3,7 @@ import { RouterLink } from '@angular/router';
 import { ButtonComponent } from '../button.component';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-dashboard-admin',
   standalone: true,
   imports: [RouterLink, ButtonComponent],
   template: `

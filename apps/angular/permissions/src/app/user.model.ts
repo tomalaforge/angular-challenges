@@ -1,5 +1,9 @@
 export type Role = 'MANAGER' | 'WRITER' | 'READER' | 'CLIENT';
 
+export const MANAGER: Role = 'MANAGER';
+export const WRITER: Role = 'WRITER';
+export const READER: Role = 'READER';
+export const CLIENT: Role = 'CLIENT';
 export interface User {
   name: string;
   isAdmin: boolean;
@@ -15,31 +19,31 @@ export const admin: User = {
 export const manager: User = {
   name: 'manager',
   isAdmin: false,
-  roles: ['MANAGER'],
+  roles: [MANAGER],
 };
 
 export const writer: User = {
   name: 'writer',
   isAdmin: false,
-  roles: ['WRITER'],
+  roles: [WRITER],
 };
 
 export const reader: User = {
   name: 'reader',
   isAdmin: false,
-  roles: ['READER'],
+  roles: [READER],
 };
 
 export const readerAndWriter: User = {
   name: 'reader',
   isAdmin: false,
-  roles: ['READER', 'WRITER'],
+  roles: [READER, WRITER],
 };
 
 export const client: User = {
   name: 'client',
   isAdmin: false,
-  roles: ['CLIENT'],
+  roles: [CLIENT],
 };
 
 export const everyone: User = {

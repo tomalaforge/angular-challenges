@@ -1,15 +1,59 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { User } from './user.model';
+import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
+import {
+  Role,
+  User,
+  admin,
+  client,
+  everyone,
+  manager,
+  reader,
+  readerAndWriter,
+  writer,
+} from './user.model';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class UserStore {
-  private user = new BehaviorSubject<User | undefined>(undefined);
-  user$ = this.user.asObservable();
+type UserState = {
+  authenticatedUser: User | null;
+  userRoles: User[];
+};
 
-  add(user: User) {
-    this.user.next(user);
-  }
-}
+export const initialState: UserState = {
+  authenticatedUser: null,
+  userRoles: [
+    admin,
+    manager,
+    reader,
+    writer,
+    client,
+    readerAndWriter,
+    everyone,
+  ],
+};
+
+export const UserStore = signalStore(
+  { providedIn: 'root' },
+  withState(initialState),
+  withMethods((state) => {
+    return {
+      updateUser: (user: User | null) => {
+        patchState(state, { authenticatedUser: user });
+      },
+      hasRoleSuperAdmin: (flag: boolean) => {
+        return state.authenticatedUser()?.isAdmin && flag;
+      },
+      hasRole: (roles: Role[]) => {
+        const userRoles = state.authenticatedUser()?.roles;
+
+        //everyone role
+        if (
+          !userRoles?.length &&
+          !roles.length &&
+          !state.authenticatedUser()?.isAdmin
+        ) {
+          return true;
+        }
+
+        return userRoles?.some((y) => roles.find((x) => x === y));
+      },
+    };
+  }),
+);
