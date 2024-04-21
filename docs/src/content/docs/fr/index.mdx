@@ -3,8 +3,6 @@ title: Bienvenue sur Angular Challenges
 description: Commence par résoudre ces défis et deviens un meilleur ingénieur FrontEnd Angular.
 template: splash
 noCommentSection: true
-banner:
-  content: J'aurai moins de temps libre dans les deux prochains mois, donc ne vous inquiétez pas si vos pull requests prennent du temps à être examinées.
 hero:
   tagline: Commence maintenant et deviens un expert Angular !
   image:
@@ -15,7 +13,7 @@ hero:
       icon: right-arrow
       variant: primary
     - text: Aller au dernier Challenge
-      link: /fr/challenges/angular/43-signal-input/
+      link: /fr/challenges/forms/48-avoid-losing-form-data/
       icon: rocket
     - text: Donne une étoile
       link: https://github.com/tomalaforge/angular-challenges
@@ -25,10 +23,15 @@ hero:
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 import MyIcon from '../../../components/MyIcon.astro';
+import SubscriptionForm from '../../../components/SubscriptionForm.astro';
 
 <CardGrid>
-<Card title="43 Défis">
-    Ce répertoire rassemble 43 défis liés à <b>Angular</b>, <b>Nx</b>, <b>RxJS</b>, <b>Ngrx</b> et <b>Typescript</b>. Ces défis portent sur des problèmes réels ou des fonctionnalités spécifiques pour améliorer vos compétences.
+<Card title="48 Défis">
+    Ce répertoire rassemble 48 Défis liés à <b>Angular</b>, <b>Nx</b>, <b>RxJS</b>, <b>Ngrx</b> et <b>Typescript</b>. Ces défis portent sur des problèmes réels ou des fonctionnalités spécifiques pour améliorer vos compétences.
+</Card>
+
+<Card title="Subscribe to get notify of latest challenges">
+  <SubscriptionForm isNote={false} lang="fr" />
 </Card>
 
 <Card title="Devenir un Mainteneur OSS">
@@ -66,7 +69,7 @@ import MyIcon from '../../../components/MyIcon.astro';
 
 <div class="article-footer">
   <a href="https://github.com/sponsors/tomalaforge" alt="Sponsor link">
-    <MyIcon name="fillHeart" size="1.2rem" color="white" />
+    <MyIcon name="heart" size="1.2rem" color="white" />
     Sponsoriser le Project
   </a>
 </div>

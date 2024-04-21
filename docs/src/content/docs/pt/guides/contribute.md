@@ -1,6 +1,8 @@
 ---
 title: Contribua
 description: Guia para contribuir
+contributors:
+  - kabrunko-dev
 sidebar:
   order: 4
 ---

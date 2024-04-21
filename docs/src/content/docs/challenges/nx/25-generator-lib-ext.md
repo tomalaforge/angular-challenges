@@ -2,6 +2,8 @@
 title: 🔴 Extend Lib Generator
 description: Challenge 25 is about creating a Nx generator to extend the built-in Library Generator
 author: thomas-laforge
+contributors:
+  - tomalaforge
 challengeNumber: 25
 sidebar:
   order: 207
@@ -32,7 +34,7 @@ You should only override the jest configuration is the `unitTestRunner` option i
 export default {
   displayName: '< libName >', // 👈 lib name
   preset: '../../../jest.preset.js', // 👈 be careful with the path
-  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/subscription-setup.ts'],
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

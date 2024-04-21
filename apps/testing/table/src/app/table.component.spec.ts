@@ -40,7 +40,7 @@ describe('AppComponent', () => {
     // await userEvent.click(okButton);
   });
 
-  // test('error message is shown if you click "Cancel" in the confirmation modal after submitting a name', async () => {
+  // subscription('error message is shown if you click "Cancel" in the confirmation modal after submitting a name', async () => {
   //   userEvent.setup();
   //   await render(AppComponent);
 
@@ -68,7 +68,7 @@ describe('AppComponent', () => {
   //   expect(errorText).toBeInTheDocument();
   // });
 
-  // test('confirm message is shown if you click "Confirm" in the confirmation modal after submitting a name', async () => {
+  // subscription('confirm message is shown if you click "Confirm" in the confirmation modal after submitting a name', async () => {
   //   userEvent.setup();
   //   await render(AppComponent);
 

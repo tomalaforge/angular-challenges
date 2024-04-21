@@ -1,6 +1,8 @@
 ---
 title: Começando
 description: Um guia de como começar com Desafios Angular.
+contributors:
+  - kabrunko-dev
 sidebar:
   order: 1
 ---
@@ -29,7 +31,7 @@ git clone https://github.com/[SEU_NOME_GITHUB]/angular-challenges.git
 :::note[Nota]
 Você pode achar a URL para clonar clicando no botão <span class="github-success-btn"><> Code</span> na sua <b>própria instância</b> do repositório do Desafios Angular.
 
-![Header of github workpspace](../../../../assets/header-github.png)
+![Header of GitHub workspace](../../../../assets/header-github.png)
 
 :::
 

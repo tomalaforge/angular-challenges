@@ -2,6 +2,8 @@
 title: 🟠 Pipe Wrapper para funciones
 description: El desafío 9 trata sobre la creación de un tubo para envolver funciones de componentes
 author: thomas-laforge
+contributors:
+  - ErickRodrCodes
 challengeNumber: 9
 command: angular-pipe-intermediate
 blogLink: https://medium.com/ngconf/boost-your-apps-performance-by-wrapping-your-functions-inside-a-pipe-7e889a901d1d

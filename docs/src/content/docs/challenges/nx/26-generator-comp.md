@@ -2,6 +2,10 @@
 title: 🟠 Component Generator
 description: Challenge 26 is about creating a Nx generator to create a custom component
 author: thomas-laforge
+contributors:
+  - tomalaforge
+  - tomer953
+  - Sagardevkota
 challengeNumber: 26
 sidebar:
   order: 116

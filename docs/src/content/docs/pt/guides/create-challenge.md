@@ -1,6 +1,8 @@
 ---
 title: Crie seu próprio desafio
 description: Guia para criar seu próprio desafio
+contributors:
+  - kabrunko-dev
 sidebar:
   order: 5
 ---

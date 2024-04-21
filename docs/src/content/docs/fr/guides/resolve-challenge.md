@@ -1,11 +1,13 @@
 ---
 title: Résoudre un Challenge
+contributors:
+  - tomalaforge
 description: Guide pour résoudre un challenge
 sidebar:
   order: 2
 ---
 
-Dans ce guide, vous apprendrez comment résoudre un challenge et soumettre une réponse sur le répertoire principal de Github.
+Dans ce guide, vous apprendrez comment résoudre un challenge et soumettre une réponse sur le répertoire principal de GitHub.
 
 ## Introduction
 
@@ -62,7 +64,7 @@ Maintenant, tout votre travail se trouve dans votre instance locale du dépôt d
 
 La prochaine étape est de vous rendre sur la page principale de Angular Challenges et de créer une nouvelle Pull Request.
 
-Github devrait afficher en en-tête une notification pour vous aider à créer la pull request.
+GitHub devrait afficher en en-tête une notification pour vous aider à créer la pull request.
 
 Si ce n'est pas le cas, vous avez soit mal effectué l'une des étapes précédentes, soit vous pouvez vous rendre sur l'onglet <b>Pull Request</b> et cliquer sur le bouton <span class="github-success-btn">New pull request</span>.
 
@@ -80,14 +82,20 @@ Dans la section de description, vous pouvez ajouter des questions, des problème
 
 Vous pouvez maintenant cliquer sur <span class="github-success-btn">Créer pull request</span>.
 
-Je la lirai et commenterai <b>quand j'aurai du temps libre.</b>
+## Avoir un Retour
 
-<p class="important-block">Ne vous inquiétez pas si votre réponse n'est pas examinée immédiatement. Je le fais <b>gratuitement</b> et pendant mon <b>temps libre</b>. Si vous souhaitez me soutenir, vous pouvez le faire en me <a href="https://github.com/sponsors/tomalaforge">sponsorisant sur github</a>. Cela validera que mon travail vous aide, vous ou votre équipe.</p>
+Pour continuer à donner des retours de qualités, <a href="https://github.com/sponsors/tomalaforge">sponsorise le project sur Github</a>:
+
+<ul>
+<li>$5 pour une review</li>
+<li>$25 pour des reviews a vie</li>
+<li>Créez un challenge/Contribuez pour des reviews à vie</li>
+</ul>
 
 :::note
 Tout le monde peut commenter ou lire les Pull Requests des autres participants.
 :::
 
 :::tip[Champion OSS]
-🔥 Une fois que vous avez terminé ce tutoriel, vous êtes prêt à contribuer à n'importe quel répertoire public Github et à soumettre une PR. C'est aussi simple que ça. 🔥
+🔥 Une fois que vous avez terminé ce tutoriel, vous êtes prêt à contribuer à n'importe quel répertoire public GitHub et à soumettre une PR. C'est aussi simple que ça. 🔥
 :::

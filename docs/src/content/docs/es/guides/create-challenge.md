@@ -1,6 +1,8 @@
 ---
 title: Crea tu propio desafío
 description: Guía para crear un desafío
+contributors:
+  - nelsongutidev
 sidebar:
   order: 5
 ---

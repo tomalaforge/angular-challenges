@@ -2,6 +2,8 @@
 title: 🟢 @RouterInput()
 description: Desafio 22 é sobre o uso do decorador @Input para recuperar parâmetros do roteador.
 author: thomas-laforge
+contributors:
+  - kabrunko-dev
 challengeNumber: 22
 command: angular-router-input
 blogLink: https://medium.com/ngconf/accessing-route-params-in-angular-1f8e12770617

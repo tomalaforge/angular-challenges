@@ -2,6 +2,8 @@
 title: 🔴 Interoperatividad Rxjs/Signal (Señales)
 description: El desafío 30 trata sobre aprender a mezclar señales con Rxjs
 author: thomas-laforge
+contributors:
+  - ErickRodrCodes
 challengeNumber: 30
 command: angular-interop-rxjs-signal
 sidebar:

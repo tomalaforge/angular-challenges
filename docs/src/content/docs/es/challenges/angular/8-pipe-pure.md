@@ -2,6 +2,9 @@
 title: 🟢 Pipe Puro
 description: El desafío 8 trata sobre la creación de un pipe puro
 author: thomas-laforge
+contributors:
+  - ErickRodrCodes
+  - kabrunko - dev
 challengeNumber: 8
 command: angular-pipe-easy
 blogLink: https://medium.com/ngconf/deep-dive-into-angular-pipes-c040588cd15d

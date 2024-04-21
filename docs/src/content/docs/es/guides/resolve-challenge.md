@@ -1,11 +1,14 @@
 ---
 title: Resolver un Desafío
 description: Guía para resolver un desafío
+contributors:
+  - nelsongutidev
+  - 1fbr
 sidebar:
   order: 2
 ---
 
-En esta guía, aprenderás cómo resolver un desafío y enviar una respuesta al repositorio principal de Github.
+En esta guía, aprenderás cómo resolver un desafío y enviar una respuesta al repositorio principal de GitHub.
 
 ## Introducción
 
@@ -85,5 +88,5 @@ Todos son bienvenidos a comentar y leer otros PR.
 :::
 
 :::tip[Campeón de OSS]
-🔥 Una vez que hayas completado este tutorial, estarás listo para contribuir a cualquier otro repositorio público de Github y enviar un PR. Es tan fácil como eso. 🔥
+🔥 Una vez que hayas completado este tutorial, estarás listo para contribuir a cualquier otro repositorio público de GitHub y enviar un PR. Es tan fácil como eso. 🔥
 :::

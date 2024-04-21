@@ -1,7 +1,8 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
+
 @Component({
-  selector: 'app-test',
+  selector: 'app-subscription',
   standalone: true,
   imports: [AsyncPipe],
   template: `

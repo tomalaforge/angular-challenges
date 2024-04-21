@@ -2,6 +2,8 @@
 title: <%= difficulty %> <%= title %>
 description: Challenge <%= challengeNumber %> is about ...
 author: <%= author %>
+contributors:
+  - tomalaforge
 challengeNumber: <%= challengeNumber %>
 command: <%= appProjectName %>
 sidebar:

@@ -2,6 +2,8 @@
 title: 🟢 Navegación con Anclas
 description: El desafío 21 trata sobre la navegación dentro de la página con anclas
 author: thomas-laforge
+contributors:
+  - ErickRodrCodes
 challengeNumber: 21
 command: angular-anchor-scrolling
 sidebar:

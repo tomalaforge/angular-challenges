@@ -16,6 +16,9 @@
   --color-btn: var(--sl-color-white);
   --color-chip: rgb(35, 38, 47);
   --color-chip-border: rgba(240, 246, 252, 0.1);
+
+  --button-transition: opacity 100ms ease-in-out;
+  --button-hover-opacity: 0.85;
 }
 
 :root[data-theme='light'],
@@ -27,6 +30,10 @@
   --color-btn: white;
   --color-chip: white;
   --color-chip-border: rgb(33, 38, 45);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 .github-success-btn {
@@ -48,6 +55,23 @@
   width: fit-content;
   gap: 6px;
   margin: 0px 2px;
+}
+
+a.action,
+.button-star,
+.article-footer > a,
+.button-hover > a.action-button {
+  transition: var(--button-transition);
+
+  &:hover {
+    cursor: pointer;
+    opacity: var(--button-hover-opacity);
+    transition: var(--button-transition);
+
+    &:not(.primary):not(.button-sponsor) {
+      opacity: 0.66;
+    }
+  }
 }
 
 .article-footer {
@@ -73,6 +97,10 @@
   align-items: center;
   margin-top: 0;
   background-color: var(--sl-color-accent-high);
+
+  &.action {
+    color: var(--color-btn);
+  }
 }
 
 .article-footer > a > p {
@@ -158,4 +186,13 @@ details {
   summary {
     cursor: pointer;
   }
+}
+
+.body:where(.astro-v5tidmuc) {
+  height: 100%;
+}
+
+
+.astro-kmkmnagf {
+  align-items: center;
 }

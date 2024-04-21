@@ -13,7 +13,7 @@ hero:
       icon: right-arrow
       variant: primary
     - text: Ir para o desafio mais recente
-      link: /pt/challenges/angular/43-signal-input/
+      link: /pt/challenges/forms/48-avoid-losing-form-data/
       icon: rocket
     - text: Dar uma estrela
       link: https://github.com/tomalaforge/angular-challenges
@@ -23,14 +23,21 @@ hero:
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 import MyIcon from '../../../components/MyIcon.astro';
+import SubscriptionForm from '../../../components/SubscriptionForm.astro';
 
 <CardGrid>
-  <Card title="43 Desafios">
-    Este repositório possui 43 desafios relacionados a <b>Angular</b>, <b>Nx</b>, <b>RxJS</b>,
+  <Card title="48 Desafios">
+    Este repositório possui 48 Desafios relacionados a <b>Angular</b>, <b>Nx</b>, <b>RxJS</b>,
     <b>Ngrx</b> e <b>Typescript</b>.
     Esses desafios são voltados para problemas reais ou funcionalidades específicas afim de
     melhorar suas habilidades.
   </Card>
+
+{' '}
+
+<Card title="Inscreva-se para ser notificado do desafio mais recente">
+  <SubscriptionForm isNote={false} lang="pt" />
+</Card>
 
 {' '}
 
@@ -78,7 +85,7 @@ import MyIcon from '../../../components/MyIcon.astro';
 
 <div class="article-footer">
   <a href="https://github.com/sponsors/tomalaforge" alt="Sponsor link">
-    <MyIcon name="fillHeart" size="1.2rem" color="white" />
+    <MyIcon name="heart" size="1.2rem" color="white" />
     Patrocine o Projeto
   </a>
 </div>

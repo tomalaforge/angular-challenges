@@ -2,6 +2,8 @@
 title: 🟠 Bug na Detecção de Mudanças
 description: Desafio 32 é sobre debuggar uma aplicação que tem um problema quando a detecção de mudanças é disparada
 author: thomas-laforge
+contributors:
+  - kabrunko-dev
 challengeNumber: 32
 command: angular-bug-cd
 blogLink: https://medium.com/ngconf/function-calls-inside-template-are-dangerous-15f9822a6629

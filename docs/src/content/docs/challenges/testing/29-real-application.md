@@ -2,13 +2,17 @@
 title: 🔴 Real-life Application
 description: Challenge 29 is about testing a real-life application
 author: thomas-laforge
+contributors:
+  - tomalaforge
+  - tomer953
+  - svenson95
 challengeNumber: 29
 command: testing-todos-list
 sidebar:
   order: 205
 ---
 
-## Information:
+## Information
 
 This application presents a greater challenge because it closely resembles a real-life application that you might encounter in your day-to-day activities as an Angular developer. What makes it more difficult is the need to handle asynchronous tasks and create appropriate mocks.
 

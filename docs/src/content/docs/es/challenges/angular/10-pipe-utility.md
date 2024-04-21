@@ -2,6 +2,8 @@
 title: 🔴 Pipe Wrapper para utilidades
 description: El desafío 10 trata sobre la creación de un pipe para envolver utilidades
 author: thomas-laforge
+contributors:
+  - ErickRodrCodes
 challengeNumber: 10
 command: angular-pipe-hard
 sidebar:

@@ -2,13 +2,18 @@
 title: 🟠 Input Output
 description: Challenge 19 is about testing inputs and ouputs
 author: thomas-laforge
+contributors:
+  - tomalaforge
+  - tomer953
+  - svenson95
+  - jdegand
 challengeNumber: 19
 command: testing-input-output
 sidebar:
   order: 110
 ---
 
-## Information:
+## Information
 
 We have a small counter application that increments or decrements a number. The `CounterComponent` takes an initial value as an `@Input` and emits the result of the counter as an `@Output` when we click on the **Send** button. Since we are testing our component as a black box, we only have access to our inputs and listen to the output values. <b>We should not rely on any internal implementation details!!!</b>
 

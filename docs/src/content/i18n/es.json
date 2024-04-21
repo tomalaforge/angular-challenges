@@ -19,11 +19,9 @@
   "page.previousLink": "Anterior",
   "page.nextLink": "Siguiente",
   "404.text": "Página no encontrada. Por favor revisa la URL o intenta utilizando la barra de búsqueda.",
-
   "expressiveCode.copyButtonCopied": "Copiado!",
   "expressiveCode.copyButtonTooltip": "Copiar al portapapeles",
   "expressiveCode.terminalWindowFallbackTitle": "Ventana de terminal",
-
   "pagefind.clear_search": "Borrar",
   "pagefind.load_more": "Cargar más resultados",
   "pagefind.search_label": "Buscar en este sitio",
@@ -34,31 +32,36 @@
   "pagefind.alt_search": "Sin resultados para tu búsqueda de [SEARCH_TERM]. Te estamos mostrando resultados para [DIFFERENT_TERM]",
   "pagefind.search_suggestion": "Sin resultados para tu búsqueda de [SEARCH_TERM]. Intenta alguna de las siguientes búsquedas:",
   "pagefind.searching": "Buscando [SEARCH_TERM]...",
-
   "page.title.challenge": "Reto",
   "author.createdBy": "Creado por",
+  "buttons.email": "Suscripción por correo",
   "buttons.star": "Danos una estrella",
   "buttons.sponsor": "Patrocínanos",
-
+  "buttons.clipboardCopy": "Copiado!",
   "note": "Nota",
   "running": "Inicia el proyecto ejecutando el siguiente comando:",
   "start": "El título de tu PR debe iniciar con",
   "reminder": "¡No lo olvides!",
-  "communityAnswers": "Respuestas de la Comunidad",
-  "authorAnswer": "Respuesta del Autor del Reto",
-  "blogPost": "Blog Post",
-
-  "challenge.footer": {
-    "note": "Nota",
-    "running": "Inicia el proyecto ejecutando el siguiente comando:",
-    "start": "El título de tu PR debe iniciar con",
-    "reminder": "¡No lo olvides!",
-    "communityAnswers": "Respuestas de la Comunidad",
-    "authorAnswer": "Respuesta del Autor del Reto",
-    "blogPost": "Blog Post",
-    "gettingStarted": {
-      "title": "Para realizar este desafío, comienza por leer: ",
-      "link": "Inicio"
-    }
-  }
+  "communityAnswers": "Respuestas de la comunidad",
+  "authorAnswer": "Respuesta del autor",
+  "blogPost": "Artículo",
+  "challenge.footer.note": "Nota",
+  "challenge.footer.running": "Inicia el proyecto ejecutando el siguiente comando:",
+  "challenge.footer.start": "El título de tu PR debe iniciar con",
+  "challenge.footer.reminder": "¡No lo olvides!",
+  "challenge.footer.communityAnswers": "Respuestas de la comunidad",
+  "challenge.footer.authorAnswer": "Respuesta del autor",
+  "challenge.footer.blogPost": "Artículo",
+  "challenge.footer.video": "Vídeo",
+  "challenge.footer.gettingStarted.title": "Para realizar este desafío, comienza por leer: ",
+  "challenge.footer.gettingStarted.link": "Inicio",
+  "challenge.footer.upvoteAnswer": "Puedes votar positivo una respuesta con un 👍 si te gusta",
+  "subscription.button": "Suscríbete",
+  "subscription.email": "usuario@gmail.com",
+  "subscription.note.title": "Notas",
+  "subscription.note.description": "Este correo se utilizará para informar acerca de nuevos retos",
+  "contributor.title": "Contributors",
+  "contributor.subtitle": "Thanks to all the contributors who have helped make this documentation better!",
+  "sponsors.description": "Big thanks to the people supporting this project: ",
+  "sponsors.joinButton": "Join the list"
 }

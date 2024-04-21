@@ -2,6 +2,11 @@
 title: 🟠 Effect vs Selector
 description: Challenge 2 is about learning the difference between effects and selectors in NgRx
 author: thomas-laforge
+contributors:
+  - tomalaforge
+  - tomer953
+  - svenson95
+  - jdegand
 challengeNumber: 2
 command: ngrx-effect-selector
 blogLink: https://medium.com/@thomas.laforge/ngrx-effect-vs-reducer-vs-selector-58337ab59043
@@ -9,7 +14,7 @@ sidebar:
   order: 113
 ---
 
-For this exercice, you will have a dashboard of activities displaying the name, the main teacher and a list of subtitutes.
+For this exercise, you will have a dashboard of activities displaying the name, the main teacher and a list of subtitutes.
 
 ## Information
 

@@ -2,6 +2,12 @@
 title: 🟢 Projection
 description: Challenge 1 is about learning how to project DOM element through components
 author: thomas-laforge
+contributors:
+  - tomalaforge
+  - jdegand
+  - dmmishchenko
+  - kabrunko-dev
+  - svenson95
 challengeNumber: 1
 command: angular-projection
 blogLink: https://medium.com/@thomas.laforge/create-a-highly-customizable-component-cc3a9805e4c5
@@ -40,4 +46,4 @@ While the application works, the developer experience is far from being optimal.
 
 - Try to work with the new built-in control flow syntax for loops and conditionals (documentation [here](https://angular.dev/guide/templates/control-flow))
 - Use the signal API to manage your components state (documentation [here](https://angular.dev/guide/signals))
-- To reference the template, use a directive instead of magic strings
+- To reference the template, use a directive instead of magic strings ([What is wrong with magic strings?](https://softwareengineering.stackexchange.com/a/365344))

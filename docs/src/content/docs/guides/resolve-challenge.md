@@ -1,11 +1,15 @@
 ---
 title: Resolve a Challenge
 description: Guide to resolve a challenge
+contributors:
+  - tomalaforge
+  - 1fbr
+  - gsgonzalez88
 sidebar:
   order: 2
 ---
 
-In this guide, you will learn how to resolve a challenge and submit an answer to the main Github repository.
+In this guide, you will learn how to resolve a challenge and submit an answer to the main GitHub repository.
 
 ## Introduction
 
@@ -62,7 +66,7 @@ Now, all your work is located insite your local instance of the Angular Challeng
 
 The next step is to go to the main [Angular Challenges page](https://github.com/tomalaforge/angular-challenges) and create a new Pull Request.
 
-Github should display a notification header to help you create the pull request.
+GitHub should display a notification header to help you create the pull request.
 
 If it's not the case, you either have done one of the previous steps incorrectly or you can go to the <b>Pull Request</b> tab and click the button <span class="github-success-btn">New pull request</span>.
 
@@ -80,14 +84,22 @@ In the description section, you can add questions, troubles you encountered, or 
 
 You can now click on <span class="github-success-btn">Create pull request</span>.
 
-I will read and comment on it <b>when I have some free time.</b>
+## Get a review
 
-<p class="important-block">Don't worry if your answer is not reviewed immediately. I'm doing it for <b>free</b> and during my <b>free time</b>. If you want to support me, you can do so by <a href="https://github.com/sponsors/tomalaforge">sponsoring me on github</a>. It will validate that my work is of great help for you or your team.</p>
+To continue providing valuable feedback and reviews, <a href="https://github.com/sponsors/tomalaforge">support the project on Github</a>:
+
+<ul>
+<li>$5 per review</li>
+<li>$25 for lifetime reviews</li>
+<li>Create a challenge/Contribute for lifetime reviews</li>
+</ul>
 
 :::note
-Everyone is welcome to comment and read other PRs.
+You should still submit your PR to join the list of answered challenges. And you can still be reviewed by a community member. 🔥
+
+Everyone is welcome to comment and read other PRs. 💪
 :::
 
 :::tip[OSS champion]
-🔥 Once you have completed this tutorial, you are ready to contribute to any other public Github repository and submit a PR. It is as easy as that. 🔥
+🔥 Once you have completed this tutorial, you are ready to contribute to any other public GitHub repository and submit a PR. It is as easy as that. 🔥
 :::
