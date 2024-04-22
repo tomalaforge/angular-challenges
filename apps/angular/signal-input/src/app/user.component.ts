@@ -5,6 +5,7 @@ import {
   Signal,
   computed,
   input,
+  numberAttribute,
 } from '@angular/core';
 
 type Category = 'Youth' | 'Junior' | 'Open' | 'Senior';
@@ -31,7 +32,7 @@ export class UserComponent {
   name = input.required<string>();
   lastName = input<string>();
   age = input(0, {
-    transform: (value: string): number => Number(value),
+    transform: numberAttribute,
   });
 
   fullName: Signal<string> = computed(
