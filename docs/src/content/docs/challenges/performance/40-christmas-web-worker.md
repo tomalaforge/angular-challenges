@@ -21,7 +21,7 @@ This application is basic. We click on the **Discover** button to reveal the sur
 
 Since JavaScript is single-threaded, when we perform a heavy task, the browser cannot update the UI or respond to mouse clicks or any events. To free the main thread, the goal is to isolate the heavy computation into a different thread. To do so, we will need to use web workers. Web workers can run any scripts in the background, in isolation from the main thread, allowing the browser to still provide your user with a good experience.
 
-In Angular, this technology is often underused, however, it's straightforward to create one. There is a schematic that you can find [here](https://angular.io/guide/web-worker).
+In Angular, this technology is often underused, however, it's straightforward to create one. There is a schematic that you can find [here](https://angular.dev/ecosystem/web-workers).
 
 ## Statement
 

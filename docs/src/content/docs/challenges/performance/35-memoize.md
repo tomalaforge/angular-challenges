@@ -14,7 +14,7 @@ sidebar:
 
 In Angular, <b>pure Pipes</b> are very powerful because the value is memoized, which means if the input value doesn't change, the `transform` function of the pipe is not recomputed, and the cached value is outputted.
 
-You can learn more about pipes in the [Angular documentation](https://angular.io/guide/pipes) and inside this [deep dive article](https://medium.com/ngconf/deep-dive-into-angular-pipes-c040588cd15d).
+You can learn more about pipes in the [Angular documentation](https://angular.dev/guide/pipes) and inside this [deep dive article](https://medium.com/ngconf/deep-dive-into-angular-pipes-c040588cd15d).
 
 In this challenge, we start with a button to load a list of people. Each person is associated with a number, and we will use the Fibonacci calculation to create a heavy computation that will slow down the application.
 

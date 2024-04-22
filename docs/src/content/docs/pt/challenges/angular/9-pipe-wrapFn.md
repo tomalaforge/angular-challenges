@@ -26,7 +26,7 @@ Um pipe **puro** é chamado apenas quando o valor muda.\
 Um pipe **impuro** é chamado em cada ciclo da mudança de deteccção.
 :::
 
-Há alguns pipes pré-definidos bem úteis como DatePipe, UpperCasePipe e CurrencyPipe. Para aprender mais sobre pipes em Angular, dê uma olhada na documentação da API [aqui](https://angular.io/guide/pipes).
+Há alguns pipes pré-definidos bem úteis como DatePipe, UpperCasePipe e CurrencyPipe. Para aprender mais sobre pipes em Angular, dê uma olhada na documentação da API [aqui](https://angular.dev/guide/pipes).
 
 ## Declaração
 
