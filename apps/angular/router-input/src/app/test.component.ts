@@ -1,18 +1,16 @@
-import { AsyncPipe } from '@angular/common';
-import { Component, Input as RouterInput } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-subscription',
   standalone: true,
-  imports: [AsyncPipe],
   template: `
-    <div>TestId: {{ testId }}</div>
-    <div>Permission: {{ permission }}</div>
-    <div>User: {{ user }}</div>
+    <div>TestId: {{ testId() }}</div>
+    <div>Permission: {{ permission() }}</div>
+    <div>User: {{ user() }}</div>
   `,
 })
 export default class TestComponent {
-  @RouterInput() testId!: string;
-  @RouterInput() permission!: string;
-  @RouterInput() user!: string;
+  testId = input.required<string>();
+  permission = input.required<string>();
+  user = input.required<string>();
 }
