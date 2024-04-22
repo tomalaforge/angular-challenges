@@ -25,7 +25,7 @@ So you're going to take over from him.
 
 Here the prototype made by Lucie:
 
-![prototype gif](../../../../../../docs/src/assets/rxjs/49/prototype.gif)
+![prototype gif](../../../../assets/rxjs/49/prototype.gif)
 
 ## Acceptance Criteria
 
