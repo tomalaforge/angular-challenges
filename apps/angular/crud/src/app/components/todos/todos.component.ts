@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { randText } from '@ngneat/falso';
 import { Todo } from '../../interfaces/todo.interface';
-import { OperationType } from '../../store/enums/actions.enum';
 import { TodoStore } from '../../store/todo/todo-store';
 
 @Component({
@@ -15,13 +14,12 @@ export class TodosComponent {
 
   update(todo: Todo) {
     todo = { ...todo, title: randText() };
-    this.todoStore.mutation.mutate({
-      type: OperationType.UPDATE,
+    this.todoStore.update.mutate({
       payload: todo,
     });
   }
 
   delete(id: number) {
-    this.todoStore.mutation.mutate({ type: OperationType.DELETE, payload: id });
+    this.todoStore.delete.mutate({ payload: id });
   }
 }

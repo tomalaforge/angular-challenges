@@ -5,10 +5,10 @@ import {
   injectQuery,
   injectQueryClient,
 } from '@tanstack/angular-query-experimental';
+import { lastValueFrom } from 'rxjs';
 import { Todo } from '../../interfaces/todo.interface';
 import { TodoService } from '../../services/todo.service';
-import { OperationType } from '../enums/actions.enum';
-import { TodoStateArgs } from './todo-args';
+import { TodoDeleteArgs, TodoUpdateArgs } from './todo-args';
 @Injectable({
   providedIn: 'root',
 })
@@ -19,48 +19,54 @@ export class TodoStore {
 
   public query = injectQuery(() => ({
     queryKey: [this.QUERY_KEY],
-    queryFn: () => this.todoService.get().toPromise(),
+    queryFn: () => lastValueFrom(this.todoService.get()),
   }));
 
-  mutation = injectMutation(() => ({
-    mutationFn: async (args: TodoStateArgs) => {
-      switch (args.type) {
-        case OperationType.UPDATE: {
-          return await this.todoService.update(args.payload).toPromise();
-        }
-        case OperationType.DELETE: {
-          return await this.todoService.delete(args.payload).toPromise();
-        }
-        case OperationType.GET: {
-          return await this.todoService.get().toPromise();
-        }
-      }
+  todos = injectMutation(() => ({
+    mutationFn: async () => {
+      return await lastValueFrom(this.todoService.get());
     },
-    onSuccess: (data, variables) => {
-      const currentTodos =
-        this.queryClient.getQueryData<Todo[]>([this.QUERY_KEY]) ?? [];
-      switch (variables.type) {
-        case OperationType.DELETE: {
-          return this.queryClient.setQueryData(
-            [this.QUERY_KEY],
-            this.deleteTodo(currentTodos, variables.payload),
-          );
-        }
-        case OperationType.UPDATE: {
-          return this.queryClient.setQueryData(
-            [this.QUERY_KEY],
-            this.updateTodo(currentTodos, variables.payload),
-          );
-        }
-        case OperationType.GET: {
-          return this.queryClient.setQueryData([this.QUERY_KEY], data);
-        }
-      }
+    onSuccess: (data) => {
+      return this.queryClient.setQueryData([this.QUERY_KEY], data);
     },
     onError: (error) => {
       console.error(error);
     },
   }));
+
+  update = injectMutation(() => ({
+    mutationFn: async (args: TodoUpdateArgs) => {
+      return await lastValueFrom(this.todoService.update(args.payload));
+    },
+    onSuccess: (_, variable) => {
+      return this.queryClient.setQueryData(
+        [this.QUERY_KEY],
+        this.updateTodo(this.currentTodos, variable.payload),
+      );
+    },
+    onError: (error) => {
+      console.error(error);
+    },
+  }));
+
+  delete = injectMutation(() => ({
+    mutationFn: async (args: TodoDeleteArgs) => {
+      return await lastValueFrom(this.todoService.delete(args.payload));
+    },
+    onSuccess: (_, variable) => {
+      return this.queryClient.setQueryData(
+        [this.QUERY_KEY],
+        this.deleteTodo(this.currentTodos, variable.payload),
+      );
+    },
+    onError: (error) => {
+      console.error(error);
+    },
+  }));
+
+  private get currentTodos() {
+    return this.queryClient.getQueryData<Todo[]>([this.QUERY_KEY]) ?? [];
+  }
 
   private deleteTodo(todos: Todo[], id: number) {
     return todos.filter((todo) => todo.id !== id);

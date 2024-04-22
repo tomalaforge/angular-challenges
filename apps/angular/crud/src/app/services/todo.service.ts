@@ -12,7 +12,7 @@ export class TodoService {
 
   get(): Observable<Todo[]> {
     // Added 1s fake delay
-    return this.http.get<Todo[]>(BASE_URL).pipe(delay(1000));
+    return this.http.get<Todo[]>(BASE_URL).pipe(delay(3000));
   }
 
   update(todo: Todo) {
@@ -22,14 +22,14 @@ export class TodoService {
       },
     };
 
-    return this.http.put<Todo>(
-      `${BASE_URL}/${todo.id}`,
-      JSON.stringify(todo),
-      headerOption,
-    );
+    return this.http
+      .put<Todo>(`${BASE_URL}/${todo.id}`, JSON.stringify(todo), headerOption)
+      .pipe(delay(1000));
   }
 
   delete(todoId: number) {
-    return this.http.delete(`${BASE_URL}/${todoId.toString()}`);
+    return this.http
+      .delete(`${BASE_URL}/${todoId.toString()}`)
+      .pipe(delay(1000));
   }
 }
