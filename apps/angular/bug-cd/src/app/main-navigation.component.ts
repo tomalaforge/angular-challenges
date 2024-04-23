@@ -49,11 +49,7 @@ export class NavigationComponent {
   imports: [NavigationComponent, NgIf, AsyncPipe, NgTemplateOutlet, MenusPipe],
   template: `
     @if (info$ | async; as info) {
-      @if (info) {
-        <app-nav [menus]="info | menus" />
-      } @else {
-        <app-nav [menus]="'' | menus" />
-      }
+      <app-nav [menus]="info | menus" />
     }
   `,
   host: {},
