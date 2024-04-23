@@ -37,26 +37,18 @@ export class EmptyNgForTemplateDirective<T> implements DoCheck {
   }
 
   updateView() {
-    if (this._isEmpty) {
-      if (this._viewRef) {
-        return;
-      }
-
-      if (this._emptyTemplate) {
-        this.viewContainer.clear();
-        this._viewRef = this.viewContainer.createEmbeddedView(
-          this._emptyTemplate,
-        );
-      }
-
-      return;
-    }
-
-    if (this._viewRef) {
+    //remove empty template only once when ngFor items exist and empty view has already been created
+    if (this._viewRef && !this._isEmpty) {
       const viewRefIndexToRemove = this.viewContainer.indexOf(this._viewRef);
       this.viewContainer.remove(viewRefIndexToRemove);
 
       this._viewRef = null;
     }
+
+    if (!this._isEmpty || this._viewRef || !this._emptyTemplate) {
+      return;
+    }
+
+    this._viewRef = this.viewContainer.createEmbeddedView(this._emptyTemplate);
   }
 }

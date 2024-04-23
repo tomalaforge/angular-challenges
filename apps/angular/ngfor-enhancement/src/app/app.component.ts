@@ -1,4 +1,4 @@
-import { NgFor, NgIf } from '@angular/common';
+import { NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { EmptyNgForTemplateDirective } from './empty-ng-for-template.directive';
 
@@ -9,7 +9,7 @@ interface Person {
 
 @Component({
   standalone: true,
-  imports: [NgFor, NgIf, EmptyNgForTemplateDirective],
+  imports: [NgFor, EmptyNgForTemplateDirective],
   selector: 'app-root',
   templateUrl: 'app.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
