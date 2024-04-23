@@ -1,7 +1,13 @@
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
-import { Component, Input, inject } from '@angular/core';
+import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  inject,
+} from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FakeServiceService } from './fake.service';
+import { MenusPipe } from './menus.pipe';
 
 interface MenuItem {
   path: string;
@@ -12,6 +18,7 @@ interface MenuItem {
   selector: 'app-nav',
   standalone: true,
   imports: [RouterLink, RouterLinkActive, NgFor],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <ng-container *ngFor="let menu of menus">
       <a
@@ -39,29 +46,21 @@ export class NavigationComponent {
 
 @Component({
   standalone: true,
-  imports: [NavigationComponent, NgIf, AsyncPipe],
+  imports: [NavigationComponent, NgIf, AsyncPipe, NgTemplateOutlet, MenusPipe],
   template: `
-    <ng-container *ngIf="info$ | async as info">
-      <ng-container *ngIf="info !== null; else noInfo">
-        <app-nav [menus]="getMenu(info)" />
-      </ng-container>
-    </ng-container>
-
-    <ng-template #noInfo>
-      <app-nav [menus]="getMenu('')" />
-    </ng-template>
+    @if (info$ | async; as info) {
+      @if (info) {
+        <app-nav [menus]="info | menus" />
+      } @else {
+        <app-nav [menus]="'' | menus" />
+      }
+    }
   `,
   host: {},
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainNavigationComponent {
   private fakeBackend = inject(FakeServiceService);
 
   readonly info$ = this.fakeBackend.getInfoFromBackend();
-
-  getMenu(prop: string) {
-    return [
-      { path: '/foo', name: `Foo ${prop}` },
-      { path: '/bar', name: `Bar ${prop}` },
-    ];
-  }
 }
