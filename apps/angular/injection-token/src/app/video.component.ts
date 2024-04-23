@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TimerContainerComponent } from './timer-container.component';
+import { provideTimer } from './timer.token';
 
 @Component({
   selector: 'app-video',
@@ -12,5 +13,6 @@ import { TimerContainerComponent } from './timer-container.component';
     </div>
     <timer-container />
   `,
+  providers: [provideTimer()],
 })
 export default class VideoComponent {}

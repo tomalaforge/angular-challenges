@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { TimerContainerComponent } from './timer-container.component';
+import { TIMER, provideTimer } from './timer.token';
 
 @Component({
   selector: 'app-phone',
@@ -12,5 +13,8 @@ import { TimerContainerComponent } from './timer-container.component';
     </div>
     <timer-container />
   `,
+  providers: [provideTimer(2000)],
 })
-export default class PhoneComponent {}
+export default class PhoneComponent {
+  timer = inject(TIMER);
+}
