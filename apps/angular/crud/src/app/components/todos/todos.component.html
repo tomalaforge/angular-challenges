@@ -1,6 +1,9 @@
-@if (todoStore.query.isFetched()) {
+@if(todoStore.query.isPending()){
+    <p>Loading.....</p>
+}
+@if (todoStore.query.isSuccess()) {
 <ol class="todos">
-    @for (todo of todoStore.query.data(); track todo.title) {
+    @for (todo of todoStore.query.data(); track todo.id) {
     <li class="todo" title="{{todo.title}}" id="{{todo.id}}">
         {{ todo.title }}
         <button (click)="update(todo)">Update</button>
@@ -9,6 +12,6 @@
     }
 </ol>
 }
-@if(todoStore.query.error()){
+@if(todoStore.query.isError()){
 <p style="color: red;">An error occured..</p>
 }

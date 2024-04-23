@@ -1,9 +1,5 @@
-import { HttpClientModule } from '@angular/common/http';
-import {
-  ApplicationConfig,
-  ErrorHandler,
-  importProvidersFrom,
-} from '@angular/core';
+import { provideHttpClient } from '@angular/common/http';
+import { ApplicationConfig, ErrorHandler } from '@angular/core';
 import { ErrorHandlerService } from './services/error-handler.service';
 
 import {
@@ -13,7 +9,7 @@ import {
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    importProvidersFrom(HttpClientModule),
+    provideHttpClient(),
     provideAngularQuery(new QueryClient()),
     { provide: ErrorHandler, useClass: ErrorHandlerService },
   ],
