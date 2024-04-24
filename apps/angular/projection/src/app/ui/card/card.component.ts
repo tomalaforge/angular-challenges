@@ -3,6 +3,7 @@ import { Component, ContentChild, Input } from '@angular/core';
 import { randStudent, randTeacher } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
 import { TeacherStore } from '../../data-access/teacher.store';
+import { ListItemTemplateDirective } from '../../directive/list-item-template-directive';
 import { CardType } from '../../model/card.model';
 import { ListItemComponent } from '../list-item/list-item.component';
 import { CardImageTemplateDirective } from './card-image-template.directive';
@@ -17,12 +18,14 @@ import { CardImageTemplateDirective } from './card-image-template.directive';
         [ngTemplateOutlet]="
           cardImageTemplate?.templateRef ?? null
         "></ng-container>
+
       <section>
-        <app-list-item
+        <ng-container
           *ngFor="let item of list"
-          [name]="item.firstName"
-          [id]="item.id"
-          [type]="type"></app-list-item>
+          [ngTemplateOutlet]="listItemTemplate?.templateRef ?? null"
+          [ngTemplateOutletContext]="{
+            $implicit: item
+          }"></ng-container>
       </section>
 
       <button
@@ -42,6 +45,9 @@ export class CardComponent {
 
   @ContentChild(CardImageTemplateDirective)
   cardImageTemplate?: CardImageTemplateDirective;
+  @ContentChild(ListItemTemplateDirective)
+  listItemTemplate?: ListItemTemplateDirective;
+
   CardType = CardType;
 
   constructor(
