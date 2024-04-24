@@ -1,14 +1,15 @@
 import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
+import { WrapperCallbackPipe } from './wrapper-callback.pipe';
 
 @Component({
   standalone: true,
-  imports: [NgFor],
+  imports: [NgFor, WrapperCallbackPipe],
   selector: 'app-root',
   template: `
     <div *ngFor="let person of persons; let index = index; let isFirst = first">
-      {{ showName(person.name, index) }}
-      {{ isAllowed(person.age, isFirst) }}
+      {{ person | wrapperCallback: { name: person.name, index } : showName }}
+      {{ person | wrapperCallback: { age: person.age, isFirst } : isAllowed }}
     </div>
   `,
 })
@@ -19,16 +20,15 @@ export class AppComponent {
     { name: 'John', age: 30 },
   ];
 
-  showName(name: string, index: number) {
-    // very heavy computation
-    return `${name} - ${index}`;
+  showName(param: { name: string; index: number }) {
+    return `${param.name} - ${param.index}`;
   }
 
-  isAllowed(age: number, isFirst: boolean) {
-    if (isFirst) {
+  isAllowed(param: { age: number; isFirst: boolean }) {
+    if (param.isFirst) {
       return 'always allowed';
     } else {
-      return age > 25 ? 'allowed' : 'declined';
+      return param.age > 25 ? 'allowed' : 'declined';
     }
   }
 }
