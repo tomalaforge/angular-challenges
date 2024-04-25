@@ -3,10 +3,10 @@ import { Component, ContentChild, Input } from '@angular/core';
 import { randStudent, randTeacher } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
 import { TeacherStore } from '../../data-access/teacher.store';
+import { CardImageTemplateDirective } from '../../directive/card-image-template.directive';
 import { ListItemTemplateDirective } from '../../directive/list-item-template-directive';
 import { CardType } from '../../model/card.model';
 import { ListItemComponent } from '../list-item/list-item.component';
-import { CardImageTemplateDirective } from './card-image-template.directive';
 
 @Component({
   selector: 'app-card',

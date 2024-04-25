@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FakeHttpService } from '../../data-access/fake-http.service';
 import { TeacherStore } from '../../data-access/teacher.store';
+import { CardImageTemplateDirective } from '../../directive/card-image-template.directive';
 import { ListItemTemplateDirective } from '../../directive/list-item-template-directive';
 import { CardType } from '../../model/card.model';
 import { Teacher } from '../../model/teacher.model';
-import { CardImageTemplateDirective } from '../../ui/card/card-image-template.directive';
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
