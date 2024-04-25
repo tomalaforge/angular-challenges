@@ -1,11 +1,4 @@
-import {
-  DestroyRef,
-  Directive,
-  HostListener,
-  inject,
-  input,
-  output,
-} from '@angular/core';
+import { Directive, HostListener, input, output } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import {
   Subject,
@@ -27,10 +20,9 @@ const DEFAULT_HOLD_TIME: Ms = 2000;
   exportAs: 'holdable',
 })
 export class HoldableDirective {
-  private readonly _destroyRef = inject(DestroyRef);
+  $period = input<Ms>(10, { alias: 'period' });
+  $max = input<Ms>(DEFAULT_HOLD_TIME, { alias: 'max' });
 
-  period = input<Ms>(10);
-  max = input<Ms>(DEFAULT_HOLD_TIME);
   active = output();
 
   private readonly _mousedownSubject = new Subject<void>();
@@ -40,11 +32,11 @@ export class HoldableDirective {
     this._mousedownSubject.pipe(
       switchMap(() =>
         merge(
-          interval(this.period()).pipe(
-            map((val) => val * this.period()),
-            takeWhile((time) => time < this.max(), true),
+          interval(this.$period()).pipe(
+            map((val) => val * this.$period()),
+            takeWhile((time) => time < this.$max(), true),
             map((time) => {
-              if (time >= this.max()) {
+              if (time >= this.$max()) {
                 this.active.emit();
                 return 0;
               }
