@@ -19,14 +19,13 @@ async function run() {
 
     const githubToken = core.getInput('github_token');
 
-    const [owner, repo] = core.getInput('repo').split('/');
-    const number = github.context.issue.number;
+    const number = github.context.payload.pull_request.number;
 
     const octokit = github.getOctokit(githubToken);
     await octokit.rest.issues.addLabels({
       labels,
-      owner,
-      repo,
+      owner: github.context.repo.owner,
+      repo: github.context.repo.repo,
       issue_number: number
     });
   } catch (e) {
