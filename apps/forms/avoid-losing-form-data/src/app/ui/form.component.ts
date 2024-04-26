@@ -83,7 +83,7 @@ export class FormComponent {
   });
 
   constructor() {
-    this.form.statusChanges
+    this.form.valueChanges
       .pipe(
         map((form) => Object.values(form)),
         map((values) => values.map((v) => v.trim()).some((v) => v.length)),
