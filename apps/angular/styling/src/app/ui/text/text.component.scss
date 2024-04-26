@@ -1,0 +1,28 @@
+@use 'sass:map';
+
+$text-themes: (
+  'error': (
+    font-size: 30px,
+    color: var(--color-red),
+  ),
+  'warning': (
+    font-size: 25px,
+    color: var(--color-orange),
+  ),
+  'blue': (
+    color: var(--color-blue),
+    font-size: 10px,
+  ),
+  'default': (
+    font-size: 10px,
+    color: var(--color-black),
+  ),
+);
+
+@each $theme, $themeType in $text-themes {
+  @each $prop, $value in $themeType {
+    :host-context(.#{$theme}-theme) .text-theme {
+      #{$prop}: $value;
+    }
+  }
+}
