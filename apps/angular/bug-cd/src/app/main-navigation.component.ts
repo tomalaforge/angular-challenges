@@ -1,7 +1,14 @@
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
-import { Component, Input, inject } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  inject,
+} from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FakeServiceService } from './fake.service';
+import { NavMenuPipe } from './nav-menu.pipe';
 
 interface MenuItem {
   path: string;
@@ -11,16 +18,17 @@ interface MenuItem {
 @Component({
   selector: 'app-nav',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, NgFor],
+  imports: [RouterLink, RouterLinkActive],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <ng-container *ngFor="let menu of menus">
+    @for (menu of menus; track menu) {
       <a
         class="rounded-md border px-4 py-2"
-        [routerLink]="menu.path"
-        routerLinkActive="isSelected">
+        routerLinkActive="isSelected"
+        [routerLink]="menu.path">
         {{ menu.name }}
       </a>
-    </ng-container>
+    }
   `,
   styles: [
     `
@@ -33,23 +41,34 @@ interface MenuItem {
     class: 'flex flex-col p-2 gap-2',
   },
 })
-export class NavigationComponent {
+export class NavigationComponent implements AfterViewInit {
   @Input() menus!: MenuItem[];
+
+  ngAfterViewInit(): void {
+    console.log(this.menus);
+  }
 }
 
 @Component({
   standalone: true,
-  imports: [NavigationComponent, NgIf, AsyncPipe],
+  imports: [NavigationComponent, AsyncPipe, NavMenuPipe],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <ng-container *ngIf="info$ | async as info">
+    <!-- <ng-container *ngIf="info$ | async as info">
       <ng-container *ngIf="info !== null; else noInfo">
-        <app-nav [menus]="getMenu(info)" />
+        <app-nav [menus]="info | navMenu" />
       </ng-container>
     </ng-container>
 
     <ng-template #noInfo>
-      <app-nav [menus]="getMenu('')" />
-    </ng-template>
+      <app-nav [menus]="'' | navMenu" />
+    </ng-template> -->
+
+    @if (info$ | async; as info) {
+      <app-nav [menus]="info | navMenu" />
+    } @else {
+      <app-nav [menus]="'' | navMenu" />
+    }
   `,
   host: {},
 })
@@ -58,6 +77,19 @@ export class MainNavigationComponent {
 
   readonly info$ = this.fakeBackend.getInfoFromBackend();
 
+  /**
+   * The change detection bug is caused by this template function,
+   * it is used to pass data to input property 'menus' of app-nav component,
+   * BUT it is a template function and it is called every time Angular change detection runs.
+   * As a result, 'menus' array input ref is changed every time causing the ngFor directive to
+   * rerender the elements. Inside ngFor there is 'routerLinkActive' directive where Angular source code
+   * is calling this.cdr.markForCheck inside a microTask, which triggers a new cd cycle.
+   * The new change detection cycle triggers getMenu function execution thus an infinite loop causing
+   * the application crash. The solution could be instead of relying on this kind of functions,
+   * creating a pure pipe where the results are memoized.
+   * @param prop
+   * @returns
+   */
   getMenu(prop: string) {
     return [
       { path: '/foo', name: `Foo ${prop}` },
