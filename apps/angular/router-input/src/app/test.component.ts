@@ -1,18 +1,16 @@
-import { AsyncPipe } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-subscription',
   standalone: true,
-  imports: [AsyncPipe],
   template: `
-    <div>TestId: {{ testId }}</div>
-    <div>Permission: {{ permission }}</div>
-    <div>User: {{ user }}</div>
+    <div>TestId: {{ testId() }}</div>
+    <div>Permission: {{ permission() }}</div>
+    <div>User: {{ user() }}</div>
   `,
 })
 export default class TestComponent {
-  @Input() testId!: string;
-  @Input() permission!: string;
-  @Input() user!: string;
+  testId = input.required();
+  permission = input.required();
+  user = input.required();
 }
