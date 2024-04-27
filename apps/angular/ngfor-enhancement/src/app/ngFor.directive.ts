@@ -7,7 +7,7 @@ import {
   TemplateRef,
   ViewContainerRef,
 } from '@angular/core';
-import { EmptyDirective } from './empty.directive';
+// import { EmptyDirective } from './empty.directive';
 
 @Directive({
   standalone: true,
@@ -20,7 +20,7 @@ export class NgForDirective<T> implements DoCheck {
   private emptyTemplateRef!: EmbeddedViewRef<unknown>;
 
   @Input() ngForOf: T[] = [];
-  @Input() ngForEmpty!: TemplateRef<EmptyDirective>;
+  @Input() ngForEmpty!: TemplateRef<unknown>;
 
   ngDoCheck(): void {
     if (this.emptyTemplateRef) {
