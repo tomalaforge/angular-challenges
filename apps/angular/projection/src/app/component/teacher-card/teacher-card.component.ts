@@ -15,7 +15,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   template: `
     <app-card
       [list]="teachers"
-      customClass="bg-light-red"
+      [bgColor]="'rgba(250, 0, 0, 0.1)'"
       (addNewItem)="onAddTeacherItemEvent()">
       <ng-template cardImageTemplate>
         <img src="assets/img/teacher.png" width="200px" />
@@ -29,13 +29,6 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
       </ng-template>
     </app-card>
   `,
-  styles: [
-    `
-      ::ng-deep .bg-light-red {
-        background-color: rgba(250, 0, 0, 0.1);
-      }
-    `,
-  ],
   standalone: true,
   imports: [
     CardComponent,

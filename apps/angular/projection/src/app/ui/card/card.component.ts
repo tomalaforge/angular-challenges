@@ -6,6 +6,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
+import { CardBgColorDirective } from '../../directive/card-background-color.directive';
 import { CardImageTemplateDirective } from '../../directive/card-image-template.directive';
 import { ListItemTemplateDirective } from '../../directive/list-item-template-directive';
 import { ListItemComponent } from '../list-item/list-item.component';
@@ -15,7 +16,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
   template: `
     <div
       class="flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4"
-      [class]="customClass">
+      [cardBgColor]="bgColor">
       <ng-container
         [ngTemplateOutlet]="
           cardImageTemplate?.templateRef ?? null
@@ -38,11 +39,17 @@ import { ListItemComponent } from '../list-item/list-item.component';
     </div>
   `,
   standalone: true,
-  imports: [NgIf, NgFor, NgTemplateOutlet, ListItemComponent],
+  imports: [
+    NgIf,
+    NgFor,
+    NgTemplateOutlet,
+    ListItemComponent,
+    CardBgColorDirective,
+  ],
 })
 export class CardComponent {
   @Input() list: any[] | null = null;
-  @Input() customClass = '';
+  @Input() bgColor = 'rgba(0,0,0,0)';
 
   @Output() addNewItem = new EventEmitter<void>();
 

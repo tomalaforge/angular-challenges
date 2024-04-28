@@ -4,6 +4,7 @@ import {
   randStudent,
 } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
+import { CardBgColorDirective } from '../../directive/card-background-color.directive';
 import { CardImageTemplateDirective } from '../../directive/card-image-template.directive';
 import { ListItemTemplateDirective } from '../../directive/list-item-template-directive';
 import { Student } from '../../model/student.model';
@@ -15,7 +16,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   template: `
     <app-card
       [list]="students"
-      customClass="bg-light-green"
+      [bgColor]="'rgba(0, 250, 0, 0.1)'"
       (addNewItem)="onAddStudentItem()">
       <ng-template cardImageTemplate>
         <img src="assets/img/student.webp" width="200px" />
@@ -30,18 +31,12 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
     </app-card>
   `,
   standalone: true,
-  styles: [
-    `
-      ::ng-deep .bg-light-green {
-        background-color: rgba(0, 250, 0, 0.1);
-      }
-    `,
-  ],
   imports: [
     CardComponent,
     CardImageTemplateDirective,
     ListItemComponent,
     ListItemTemplateDirective,
+    CardBgColorDirective,
   ],
 })
 export class StudentCardComponent implements OnInit {
