@@ -1,10 +1,18 @@
-import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { HoldableDirective } from './holdable.directive';
+import {
+  DEFAULT_HOLD_TIME_TOKEN,
+  HoldableDirective,
+} from './holdable.directive';
 
 @Component({
   standalone: true,
-  imports: [HoldableDirective, AsyncPipe],
+  imports: [HoldableDirective],
+  providers: [
+    {
+      provide: DEFAULT_HOLD_TIME_TOKEN,
+      useValue: 3000,
+    },
+  ],
   selector: 'app-root',
   template: `
     <main class="flex h-screen items-center justify-center">
@@ -18,9 +26,7 @@ import { HoldableDirective } from './holdable.directive';
           Hold me
         </button>
 
-        <progress
-          [value]="holdable.time() / (2000 / 100)"
-          [max]="100"></progress>
+        <progress [value]="holdable.progress()" [max]="100"></progress>
       </div>
     </main>
   `,

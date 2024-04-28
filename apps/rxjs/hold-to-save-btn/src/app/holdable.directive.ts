@@ -1,4 +1,12 @@
-import { Directive, HostListener, input, output } from '@angular/core';
+import {
+  Directive,
+  HostListener,
+  InjectionToken,
+  computed,
+  inject,
+  input,
+  output,
+} from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import {
   Subject,
@@ -12,7 +20,10 @@ import {
 
 type Ms = number;
 
-const DEFAULT_HOLD_TIME: Ms = 2000;
+const DEFAULT_HOLD_TIME: Ms = 1000 * 2;
+export const DEFAULT_HOLD_TIME_TOKEN = new InjectionToken<number>(
+  'default hold time',
+);
 
 @Directive({
   selector: '[appHoldable]',
@@ -20,13 +31,26 @@ const DEFAULT_HOLD_TIME: Ms = 2000;
   exportAs: 'holdable',
 })
 export class HoldableDirective {
+  private readonly _defaultHoldTime =
+    inject(DEFAULT_HOLD_TIME_TOKEN, {
+      optional: true,
+    }) ?? DEFAULT_HOLD_TIME;
+
   $period = input<Ms>(10, { alias: 'period' });
-  $max = input<Ms>(DEFAULT_HOLD_TIME, { alias: 'max' });
+  $max = input<Ms>(this._defaultHoldTime, { alias: 'max' });
 
   active = output();
 
   private readonly _mousedownSubject = new Subject<void>();
   private readonly _mouseupSubject = new Subject<void>();
+
+  @HostListener('mousedown') onMousedown() {
+    this._mousedownSubject.next();
+  }
+
+  @HostListener('mouseup') onMouseup() {
+    this._mouseupSubject.next();
+  }
 
   time = toSignal(
     this._mousedownSubject.pipe(
@@ -52,11 +76,5 @@ export class HoldableDirective {
     { initialValue: 0 },
   );
 
-  @HostListener('mousedown') onMousedown() {
-    this._mousedownSubject.next();
-  }
-
-  @HostListener('mouseup') onMouseup() {
-    this._mouseupSubject.next();
-  }
+  progress = computed(() => (this.time() / this.$max()) * 100);
 }
