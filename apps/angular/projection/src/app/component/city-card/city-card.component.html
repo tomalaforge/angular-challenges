@@ -1,0 +1,15 @@
+<app-card
+  [list]="cities"
+  [bgColor]="'rgba(60, 179, 113, 0.1)'"
+  (addNewItem)="onAddCityItem()">
+  <ng-template cardImageTemplate>
+    <img src="assets/img/city.png" width="200px" />
+  </ng-template>
+
+  <ng-template listItemTemplate let-item>
+    <app-list-item
+      [id]="item.id"
+      [name]="getCityName(item)"
+      (deleteItem)="onDeleteCityItem($event)"></app-list-item>
+  </ng-template>
+</app-card>
