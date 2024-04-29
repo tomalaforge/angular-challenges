@@ -4,11 +4,12 @@ import { ButtonComponent } from '../button.component';
 
 @Component({
   standalone: true,
-  imports: [RouterLink, ButtonComponent],
+  imports: [ButtonComponent, RouterLink],
   template: `
-    <p>Dashboard for Admin works!</p>
-    <button app-button routerLink="/">Logout</button>
+    <p>Dashboard for Reader and Writer works</p>
+    <button app-button routerLink="/">Log out</button>
   `,
+  styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AdminDashboardComponent {}
+export class ReaderWriterComponent {}

@@ -1,4 +1,9 @@
-export type Role = 'MANAGER' | 'WRITER' | 'READER' | 'CLIENT';
+export enum Role {
+  MANAGER = 'MANAGER',
+  WRITER = 'WRITER',
+  READER = 'READER',
+  CLIENT = 'CLIENT',
+}
 
 export interface User {
   name: string;
@@ -15,31 +20,31 @@ export const admin: User = {
 export const manager: User = {
   name: 'manager',
   isAdmin: false,
-  roles: ['MANAGER'],
+  roles: [Role.MANAGER],
 };
 
 export const writer: User = {
   name: 'writer',
   isAdmin: false,
-  roles: ['WRITER'],
+  roles: [Role.WRITER],
 };
 
 export const reader: User = {
   name: 'reader',
   isAdmin: false,
-  roles: ['READER'],
+  roles: [Role.READER],
 };
 
 export const readerAndWriter: User = {
   name: 'reader',
   isAdmin: false,
-  roles: ['READER', 'WRITER'],
+  roles: [Role.READER, Role.WRITER],
 };
 
 export const client: User = {
   name: 'client',
   isAdmin: false,
-  roles: ['CLIENT'],
+  roles: [Role.CLIENT],
 };
 
 export const everyone: User = {
