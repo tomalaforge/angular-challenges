@@ -1,13 +1,14 @@
 /* eslint-disable @angular-eslint/directive-selector */
 /* eslint-disable @angular-eslint/no-host-metadata-property */
+import { Directive, WritableSignal, forwardRef, signal } from '@angular/core';
+
 import {
   BUTTON_STATE_TOKEN,
   ButtonState,
 } from '@angular-challenges/decoupling/core';
-import { Directive, WritableSignal, signal } from '@angular/core';
 
 @Directive({
-  selector: 'button[btnDisabled]',
+  selector: 'button[btnDisabledOptimized]',
   standalone: true,
   host: {
     '(click)': 'toggleState()',
@@ -15,13 +16,13 @@ import { Directive, WritableSignal, signal } from '@angular/core';
   providers: [
     {
       provide: BUTTON_STATE_TOKEN,
-      //non secured approach to resolve 'BtnDisabledDirective' ref,
-      //because it might be undefined when injection mechanism tries to resolve it
-      useExisting: BtnDisabledDirective,
+      //by using forwardRef, we provide a more secure and optimized way of resolving the ref of 'BtnDisabledOptimizedDirective'
+      //in cases when BtnDisabledOptimizedDirective is not yet defined
+      useExisting: forwardRef(() => BtnDisabledOptimizedDirective),
     },
   ],
 })
-export class BtnDisabledDirective {
+export class BtnDisabledOptimizedDirective {
   state: WritableSignal<ButtonState> = signal('enabled');
 
   toggleState() {

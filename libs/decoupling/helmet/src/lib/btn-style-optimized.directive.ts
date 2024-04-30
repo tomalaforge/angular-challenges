@@ -10,14 +10,14 @@ import {
 } from '@angular/core';
 
 @Directive({
-  selector: 'button[hlm]',
+  selector: 'button[hlmOptimized]',
   standalone: true,
   host: {
     class:
       'border border-black p-4 rounded-md bg-white data-[state=disabled]:bg-gray-400 data-[state=disabled]:text-white',
   },
 })
-export class BtnHelmetDirective {
+export class BtnHelmetOptimizedDirective {
   btnState = inject(BUTTON_STATE_TOKEN, { self: true });
   public state = this.btnState?.state ?? signal('disabled').asReadonly();
   private renderer = inject(Renderer2);
