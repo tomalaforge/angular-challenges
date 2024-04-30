@@ -1,10 +1,9 @@
-import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { IsAllowedPipe, ShowNamePipe } from './wrapper.pipe';
 
 @Component({
   standalone: true,
-  imports: [NgFor, ShowNamePipe, IsAllowedPipe],
+  imports: [ShowNamePipe, IsAllowedPipe],
   selector: 'app-root',
   template: `
     @for (person of persons; track person) {
