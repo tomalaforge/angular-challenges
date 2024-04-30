@@ -3,30 +3,30 @@ import {
   ChangeDetectionStrategy,
   Component,
   ContentChild,
-  Input,
   TemplateRef,
+  input,
 } from '@angular/core';
+import { ListTemplateContext } from '../core/list.directive';
 
 @Component({
   selector: 'list',
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div *ngFor="let item of list; index as i">
+    @for (item of list(); track $index) {
       <ng-container
         *ngTemplateOutlet="
           listTemplateRef || emptyRef;
-          context: { $implicit: item, appList: item, index: i }
+          context: { $implicit: item, index: $index }
         "></ng-container>
-    </div>
-
-    <ng-template #emptyRef>No Template</ng-template>
+      <ng-template #emptyRef>No Template</ng-template>
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListComponent<TItem extends object> {
-  @Input() list!: TItem[];
+  list = input.required<TItem[]>();
 
   @ContentChild('listRef', { read: TemplateRef })
-  listTemplateRef!: TemplateRef<unknown>;
+  listTemplateRef!: TemplateRef<ListTemplateContext<TItem>>; //by providing the generic type 'ListTemplateContext' instead of unknown, context is strongly typed
 }
