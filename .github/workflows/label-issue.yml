@@ -2,10 +2,10 @@ name: Add Labels
 
 on:
   pull_request_target:
-    types: [ opened, edited, synchronize ]
+    types: [ opened ]
 
 jobs:
-  add_supporters:
+  add_labels:
     runs-on: ubuntu-latest
     if: ${{ startsWith(github.event.pull_request.title, 'Answer') }}
     steps:
