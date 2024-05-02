@@ -8,26 +8,31 @@ import {
   withEntities,
 } from '@ngrx/signals/entities';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { concatMap, pipe, switchMap } from 'rxjs';
+import { concatMap, pipe, switchMap, tap } from 'rxjs';
 import { TodoService } from './todo.service';
 import { Todo } from './types';
+import {
+  setError,
+  setLoaded,
+  setLoading,
+  withCallState,
+} from './util/call-state.feature';
 
 export const TodoStore = signalStore(
   withEntities<Todo>(),
+  withCallState(),
   withMethods((state, todoService = inject(TodoService)) => {
     return {
       load: rxMethod<void>(
         pipe(
+          tap(() => patchState(state, setLoading())),
           switchMap(() => {
             return todoService.todos.pipe(
               tapResponse({
-                next: (todos) => patchState(state, setAllEntities(todos)),
-                error: (error) => {
-                  console.log({ error });
+                next: (todos) => {
+                  patchState(state, setAllEntities(todos), setLoaded());
                 },
-                finalize: () => {
-                  console.log('done loading todos');
-                },
+                error: (error) => patchState(state, setError(error)),
               }),
             );
           }),
@@ -35,23 +40,21 @@ export const TodoStore = signalStore(
       ),
       update: rxMethod<Todo>(
         pipe(
+          tap(() => patchState(state, setLoading())),
           concatMap((todo) => {
             return todoService.update(todo).pipe(
               tapResponse({
-                next: (todoUpdated) =>
+                next: (todoUpdated) => {
                   patchState(
                     state,
                     updateEntity({
                       id: todoUpdated.id,
                       changes: todoUpdated,
                     }),
-                  ),
-                error: (error) => {
-                  console.log({ error });
+                    setLoaded(),
+                  );
                 },
-                finalize: () => {
-                  console.log(`done updating ${todo.id}`);
-                },
+                error: (error) => patchState(state, setError(error)),
               }),
             );
           }),
@@ -59,16 +62,14 @@ export const TodoStore = signalStore(
       ),
       delete: rxMethod<Todo>(
         pipe(
+          tap(() => patchState(state, setLoading())),
           concatMap((todo) => {
             return todoService.delete(todo).pipe(
               tapResponse({
-                next: () => patchState(state, removeEntity(todo.id)),
-                error: (error) => {
-                  console.log({ error });
+                next: () => {
+                  patchState(state, removeEntity(todo.id), setLoaded());
                 },
-                finalize: () => {
-                  console.log(`done updating ${todo.id}`);
-                },
+                error: (error) => patchState(state, setError(error)),
               }),
             );
           }),

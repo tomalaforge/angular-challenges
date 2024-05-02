@@ -6,12 +6,18 @@ import { TodoStore } from './todo.store';
   imports: [],
   selector: 'app-root',
   template: `
-    @for (todo of todoStore.entities(); track todo.id) {
-      <div>
-        {{ todo.title }}
-        <button (click)="todoStore.update(todo)">Update</button>
-        <button (click)="todoStore.delete(todo)">Delete</button>
-      </div>
+    @if (todoStore.loading()) {
+      <div>Loading</div>
+    } @else if (todoStore.error()) {
+      <div>{{ todoStore.error() }}</div>
+    } @else {
+      @for (todo of todoStore.entities(); track todo.id) {
+        <div>
+          {{ todo.title }}
+          <button (click)="todoStore.update(todo)">Update</button>
+          <button (click)="todoStore.delete(todo)">Delete</button>
+        </div>
+      }
     }
   `,
   styles: [],
