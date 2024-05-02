@@ -8,7 +8,7 @@ import {
   withEntities,
 } from '@ngrx/signals/entities';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { concatMap, pipe, switchMap, tap } from 'rxjs';
+import { pipe, switchMap, tap } from 'rxjs';
 import { TodoService } from './todo.service';
 import { Todo } from './types';
 import {
@@ -38,43 +38,18 @@ export const TodoStore = signalStore(
           }),
         ),
       ),
-      update: rxMethod<Todo>(
-        pipe(
-          tap(() => patchState(state, setLoading())),
-          concatMap((todo) => {
-            return todoService.update(todo).pipe(
-              tapResponse({
-                next: (todoUpdated) => {
-                  patchState(
-                    state,
-                    updateEntity({
-                      id: todoUpdated.id,
-                      changes: todoUpdated,
-                    }),
-                    setLoaded(),
-                  );
-                },
-                error: (error) => patchState(state, setError(error)),
-              }),
-            );
+      update(updatedTodo: Todo) {
+        patchState(
+          state,
+          updateEntity({
+            id: updatedTodo.id,
+            changes: updatedTodo,
           }),
-        ),
-      ),
-      delete: rxMethod<Todo>(
-        pipe(
-          tap(() => patchState(state, setLoading())),
-          concatMap((todo) => {
-            return todoService.delete(todo).pipe(
-              tapResponse({
-                next: () => {
-                  patchState(state, removeEntity(todo.id), setLoaded());
-                },
-                error: (error) => patchState(state, setError(error)),
-              }),
-            );
-          }),
-        ),
-      ),
+        );
+      },
+      delete(todo: Todo) {
+        patchState(state, removeEntity(todo.id));
+      },
     };
   }),
   withHooks({

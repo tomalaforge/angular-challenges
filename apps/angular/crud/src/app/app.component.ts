@@ -1,10 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { TodoItemComponent } from './todo-item.component';
 import { TodoStore } from './todo.store';
 
 @Component({
   standalone: true,
-  imports: [MatProgressSpinner],
+  imports: [MatProgressSpinner, TodoItemComponent],
   selector: 'app-root',
   template: `
     @if (todoStore.loading()) {
@@ -13,11 +14,7 @@ import { TodoStore } from './todo.store';
       <div>{{ todoStore.error() }}</div>
     } @else {
       @for (todo of todoStore.entities(); track todo.id) {
-        <div>
-          {{ todo.title }}
-          <button (click)="todoStore.update(todo)">Update</button>
-          <button (click)="todoStore.delete(todo)">Delete</button>
-        </div>
+        <app-todo-item [todo]="todo" />
       }
     }
   `,
