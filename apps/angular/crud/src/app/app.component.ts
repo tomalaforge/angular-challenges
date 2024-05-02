@@ -1,13 +1,14 @@
 import { Component, inject } from '@angular/core';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { TodoStore } from './todo.store';
 
 @Component({
   standalone: true,
-  imports: [],
+  imports: [MatProgressSpinner],
   selector: 'app-root',
   template: `
     @if (todoStore.loading()) {
-      <div>Loading</div>
+      <mat-progress-spinner class="example-margin" mode="indeterminate" />
     } @else if (todoStore.error()) {
       <div>{{ todoStore.error() }}</div>
     } @else {
