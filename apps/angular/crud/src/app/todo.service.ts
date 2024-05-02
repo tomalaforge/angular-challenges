@@ -32,8 +32,12 @@ export class TodoService {
       )
       .subscribe((todoUpdated: Todo) => {
         this.todos.update((todos) => {
-          todos[todoUpdated.id - 1] = todoUpdated;
-          return todos;
+          const index = todos.findIndex((t) => t.id === todoUpdated.id);
+          return [
+            ...todos.slice(0, index),
+            todoUpdated,
+            ...todos.slice(index + 1),
+          ];
         });
       });
   }
