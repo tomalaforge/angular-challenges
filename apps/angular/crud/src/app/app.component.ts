@@ -10,6 +10,7 @@ import { TodoService } from './todo.service';
       <div>
         {{ todo.title }}
         <button (click)="todoService.update(todo)">Update</button>
+        <button (click)="todoService.delete(todo)">Delete</button>
       </div>
     }
   `,
