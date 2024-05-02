@@ -4,10 +4,10 @@ import { RouterModule } from '@angular/router';
 import { ForbiddenComponent } from './forbidden.component';
 
 @NgModule({
-  declarations: [ForbiddenComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([{ path: '', component: ForbiddenComponent }]),
+    ForbiddenComponent,
   ],
 })
 export class ForbiddenModule {}
