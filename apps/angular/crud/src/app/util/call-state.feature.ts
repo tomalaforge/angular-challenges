@@ -30,6 +30,8 @@ export function setError(error: unknown): { callState: CallState } {
   let errorMsg = 'An error occurred';
   if (error instanceof HttpErrorResponse) {
     errorMsg = error.message;
+  } else if (typeof error === 'string') {
+    errorMsg = error;
   }
   return { callState: { error: errorMsg } };
 }

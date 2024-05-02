@@ -21,7 +21,7 @@ import {
 export const TodoItemStore = signalStore(
   withCallState(),
   withComputed(({ error, loading }) => ({
-    onHold: computed(() => loading() || error()),
+    onHold: computed(() => !!(loading() || error())),
   })),
   withMethods(
     (
