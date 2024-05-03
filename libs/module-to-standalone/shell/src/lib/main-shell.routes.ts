@@ -1,4 +1,5 @@
 import { IsAuthorizedGuard } from '@angular-challenges/module-to-standalone/admin/shared';
+import { provideToken } from '@angular-challenges/module-to-standalone/core/providers';
 import { Route } from '@angular/router';
 
 export const appRoutes: Route[] = [
@@ -22,8 +23,9 @@ export const appRoutes: Route[] = [
     path: 'user',
     loadChildren: () =>
       import('@angular-challenges/module-to-standalone/user/shell').then(
-        (m) => m.UserShellModule,
+        (m) => m.userShellRoutes,
       ),
+    providers: [provideToken('user-token')],
   },
 
   {
