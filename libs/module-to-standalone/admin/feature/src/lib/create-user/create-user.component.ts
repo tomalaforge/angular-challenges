@@ -1,5 +1,5 @@
-import { Component, NgModule } from '@angular/core';
-import { RouterLink, RouterModule } from '@angular/router';
+import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'lib-create-user',
@@ -15,12 +15,4 @@ import { RouterLink, RouterModule } from '@angular/router';
   standalone: true,
   imports: [RouterLink],
 })
-export class CreateUserComponent {}
-
-@NgModule({
-  imports: [
-    RouterModule.forChild([{ path: '', component: CreateUserComponent }]),
-    CreateUserComponent,
-  ],
-})
-export class CreateUserModule {}
+export default class CreateUserComponent {}

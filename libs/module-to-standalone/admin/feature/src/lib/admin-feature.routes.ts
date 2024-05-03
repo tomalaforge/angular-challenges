@@ -3,14 +3,10 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    loadChildren: () =>
-      import('./dashboard/dashboard.component').then((m) => m.DashboardModule),
+    loadComponent: () => import('./dashboard/dashboard.component'),
   },
   {
     path: 'create-user',
-    loadChildren: () =>
-      import('./create-user/create-user.component').then(
-        (m) => m.CreateUserModule,
-      ),
+    loadComponent: () => import('./create-user/create-user.component'),
   },
 ];
