@@ -15,7 +15,7 @@ export const appRoutes: Route[] = [
     canActivate: [IsAuthorizedGuard],
     loadChildren: () =>
       import('@angular-challenges/module-to-standalone/admin/feature').then(
-        (m) => m.AdminFeatureModule,
+        (m) => m.routes,
       ),
   },
   {
