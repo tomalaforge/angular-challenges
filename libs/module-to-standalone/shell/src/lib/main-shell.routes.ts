@@ -13,7 +13,7 @@ export const appRoutes: Route[] = [
   },
   {
     path: 'admin',
-    canActivate: [IsAuthorizedGuard],
+    canMatch: [IsAuthorizedGuard],
     loadChildren: () =>
       import('@angular-challenges/module-to-standalone/admin/feature').then(
         (m) => m.routes,
@@ -29,7 +29,7 @@ export const appRoutes: Route[] = [
   },
 
   {
-    path: 'forbidden',
+    path: 'admin',
     loadComponent: () =>
       import('@angular-challenges/module-to-standalone/forbidden').then(
         (m) => m.ForbiddenComponent,
