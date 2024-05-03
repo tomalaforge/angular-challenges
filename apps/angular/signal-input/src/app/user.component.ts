@@ -2,8 +2,8 @@ import { TitleCasePipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   input,
-  OnChanges,
 } from '@angular/core';
 
 type Category = 'Youth' | 'Junior' | 'Open' | 'Senior';
@@ -19,23 +19,20 @@ const ageToCategory = (age: number): Category => {
   standalone: true,
   imports: [TitleCasePipe],
   template: `
-    {{ fullName | titlecase }} plays tennis in the {{ category }} category!!
+    {{ fullName() | titlecase }} plays tennis in the {{ category() }} category!!
   `,
   host: {
     class: 'text-xl text-green-800',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserComponent implements OnChanges {
-  readonly name = input.required<string>();
-  readonly lastName = input<string>();
-  readonly age = input<string>();
+export class UserComponent {
+  name = input.required<string>();
+  lastName = input('');
+  category = input.required({
+    alias: 'age',
+    transform: (age: string): Category => ageToCategory(Number(age) ?? 0),
+  });
 
-  fullName = '';
-  category: Category = 'Junior';
-
-  ngOnChanges(): void {
-    this.fullName = `${this.name()} ${this.lastName() ?? ''}`;
-    this.category = ageToCategory(Number(this.age()) ?? 0);
-  }
+  fullName = computed(() => `${this.name()} ${this.lastName()}`);
 }
