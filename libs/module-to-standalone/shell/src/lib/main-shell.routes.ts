@@ -30,9 +30,9 @@ export const appRoutes: Route[] = [
 
   {
     path: 'forbidden',
-    loadChildren: () =>
+    loadComponent: () =>
       import('@angular-challenges/module-to-standalone/forbidden').then(
-        (m) => m.ForbiddenModule,
+        (m) => m.ForbiddenComponent,
       ),
   },
 ];
