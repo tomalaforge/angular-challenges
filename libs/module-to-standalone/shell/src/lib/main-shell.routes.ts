@@ -7,32 +7,24 @@ export const appRoutes: Route[] = [
   {
     path: 'home',
     loadComponent: () =>
-      import('@angular-challenges/module-to-standalone/home').then(
-        (m) => m.HomeComponent,
-      ),
+      import('@angular-challenges/module-to-standalone/home'),
   },
   {
     path: 'admin',
     canMatch: [IsAuthorizedGuard],
     loadChildren: () =>
-      import('@angular-challenges/module-to-standalone/admin/feature').then(
-        (m) => m.routes,
-      ),
+      import('@angular-challenges/module-to-standalone/admin/feature'),
   },
   {
     path: 'user',
     loadChildren: () =>
-      import('@angular-challenges/module-to-standalone/user/shell').then(
-        (m) => m.userShellRoutes,
-      ),
+      import('@angular-challenges/module-to-standalone/user/shell'),
     providers: [provideToken('user-token')],
   },
 
   {
     path: 'admin',
     loadComponent: () =>
-      import('@angular-challenges/module-to-standalone/forbidden').then(
-        (m) => m.ForbiddenComponent,
-      ),
+      import('@angular-challenges/module-to-standalone/forbidden'),
   },
 ];

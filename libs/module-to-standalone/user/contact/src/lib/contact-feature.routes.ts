@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 
-export const routes: Routes = [
+const routes: Routes = [
   {
     path: '',
     loadComponent: () => import('./dashboard/dashboard.component'),
@@ -10,3 +10,5 @@ export const routes: Routes = [
     loadComponent: () => import('./create-contact/create-contact.component'),
   },
 ];
+
+export default routes;
