@@ -1,40 +1,51 @@
-import { Component, OnInit } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+} from '@angular/core';
+import {
+  FakeHttpService,
+  randStudent,
+} from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
-import { CardType } from '../../model/card.model';
-import { Student } from '../../model/student.model';
 import { CardComponent } from '../../ui/card/card.component';
+import { ListItemRefDirective } from '../../ui/list-item/list-item-ref.directive';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-student-card',
   template: `
     <app-card
-      [list]="students"
-      [type]="cardType"
-      customClass="bg-light-green"></app-card>
+      [list]="students()"
+      (addNewItem)="addStudent()"
+      class="bg-light-green">
+      <img src="assets/img/student.webp" width="200px" />
+      <ng-template listItemRef let-item>
+        <app-list-item (deleteItem)="deleteStudent(item.id)">
+          {{ item.firstName }}
+        </app-list-item>
+      </ng-template>
+    </app-card>
   `,
   standalone: true,
-  styles: [
-    `
-      ::ng-deep .bg-light-green {
-        background-color: rgba(0, 250, 0, 0.1);
-      }
-    `,
-  ],
-  imports: [CardComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [CardComponent, ListItemComponent, ListItemRefDirective],
 })
 export class StudentCardComponent implements OnInit {
-  students: Student[] = [];
-  cardType = CardType.STUDENT;
-
-  constructor(
-    private http: FakeHttpService,
-    private store: StudentStore,
-  ) {}
+  private readonly http = inject(FakeHttpService);
+  readonly store = inject(StudentStore);
+  readonly students = this.store.students;
 
   ngOnInit(): void {
     this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
+  }
 
-    this.store.students$.subscribe((s) => (this.students = s));
+  addStudent(): void {
+    this.store.addOne(randStudent());
+  }
+
+  deleteStudent(id: number): void {
+    this.store.deleteOne(id);
   }
 }
