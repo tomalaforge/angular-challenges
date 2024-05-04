@@ -20,7 +20,10 @@
           "apps/forms/avoid-losing-form-data/src/favicon.ico",
           "apps/forms/avoid-losing-form-data/src/assets"
         ],
-        "styles": ["apps/forms/avoid-losing-form-data/src/styles.scss"],
+        "styles": [
+          "apps/forms/avoid-losing-form-data/src/styles.scss",
+          "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+        ],
         "scripts": []
       },
       "configurations": {
