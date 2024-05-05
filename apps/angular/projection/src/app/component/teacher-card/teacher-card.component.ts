@@ -1,17 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+import {
+  FakeHttpService,
+  randTeacher,
+} from '../../data-access/fake-http.service';
 import { TeacherStore } from '../../data-access/teacher.store';
 import { CardType } from '../../model/card.model';
 import { Teacher } from '../../model/teacher.model';
 import { CardComponent } from '../../ui/card/card.component';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-teacher-card',
   template: `
     <app-card
-      [list]="teachers"
+      [items]="teachers"
       [type]="cardType"
-      customClass="bg-light-red"></app-card>
+      customClass="bg-light-red"
+      (addNewRow)="addNewRow()">
+      <img img-top src="assets/img/teacher.png" width="200px" />
+
+      <ng-template #rowRef let-item>
+        <app-list-item (deleteItem)="deleteRow(item?.id)">
+          {{ item?.firstName }}
+        </app-list-item>
+      </ng-template>
+    </app-card>
   `,
   styles: [
     `
@@ -21,7 +34,7 @@ import { CardComponent } from '../../ui/card/card.component';
     `,
   ],
   standalone: true,
-  imports: [CardComponent],
+  imports: [CardComponent, ListItemComponent],
 })
 export class TeacherCardComponent implements OnInit {
   teachers: Teacher[] = [];
@@ -36,5 +49,13 @@ export class TeacherCardComponent implements OnInit {
     this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
 
     this.store.teachers$.subscribe((t) => (this.teachers = t));
+  }
+
+  addNewRow() {
+    this.store.addOne(randTeacher());
+  }
+
+  deleteRow(id: number) {
+    this.store.deleteOne(id);
   }
 }
