@@ -29,13 +29,11 @@ export class TodosService {
   }
 
   getTodos() {
-    this.http
-      .get<Todo[]>(this.url)
-      .pipe(catchError(this.handleError))
-      .subscribe((todos) => {
-        this.todos.set(todos);
-        this.loading.set(false);
-      });
+    return this.http.get<Todo[]>(this.url).pipe(catchError(this.handleError));
+    // .subscribe((todos) => {
+    //   this.todos.set(todos);
+    //   this.loading.set(false);
+    // });
   }
 
   updateTodo(todo: Todo) {

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { TodosService } from './app.service';
+import { TodosStore } from './app.store';
 
 export interface Todo {
   id: number;
@@ -15,35 +15,47 @@ export interface Todo {
   imports: [CommonModule, MatProgressSpinnerModule],
   selector: 'app-root',
   template: `
-    @if (loading()) {
-      <mat-spinner></mat-spinner>
-    } @else {
-      @for (todo of todos(); track $index) {
-        <div>
-          {{ todo.title }}
-          <button (click)="update(todo)">Update</button>
-          <button (click)="deleteTodo(todo)">Delete</button>
-        </div>
-      }
+    @if (isLoading()) {
+      <div class="global-spinner">
+        <h1>Loading...</h1>
+        <mat-spinner></mat-spinner>
+      </div>
+    }
+    @for (todo of todos(); track $index) {
+      <div>
+        {{ todo.title }}
+        <button (click)="update(todo)">Update</button>
+        <button (click)="deleteTodo(todo)">Delete</button>
+      </div>
     }
   `,
-  styles: [],
+  styles: `
+    .global-spinner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: absolute;
+      top: 30%;
+      left: 50%;
+    }
+  `,
+  providers: [TodosStore],
 })
 export class AppComponent implements OnInit {
-  todosService = inject(TodosService);
+  store = inject(TodosStore);
 
-  todos = this.todosService.todos;
-  loading = this.todosService.loading;
+  todos = this.store.todos;
+  isLoading = this.store.isLoading;
 
   ngOnInit(): void {
-    this.todosService.getTodos();
+    this.store.loadAll();
   }
 
   update(todo: Todo) {
-    this.todosService.updateTodo(todo);
+    // this.todosService.updateTodo(todo);
   }
 
   deleteTodo(todo: Todo) {
-    this.todosService.deleteTodo(todo);
+    // this.todosService.deleteTodo(todo);
   }
 }
