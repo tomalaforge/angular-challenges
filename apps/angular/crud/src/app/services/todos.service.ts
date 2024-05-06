@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
 import { randText } from '@ngneat/falso';
 import { catchError, throwError } from 'rxjs';
-import { Todo } from './app.component';
+import { Todo } from '../interfaces/todo.interface';
 
 @Injectable({ providedIn: 'root' })
 export class TodosService {

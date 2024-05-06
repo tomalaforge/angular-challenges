@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { TodosService } from './app.service';
+import { TodosService } from './todos.service';
 
 describe('TodosService', () => {
   let todosService: TodosService;

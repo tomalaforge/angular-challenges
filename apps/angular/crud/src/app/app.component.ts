@@ -1,18 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { TodosStore } from './app.store';
-
-export interface Todo {
-  id: number;
-  title: string;
-  body: string;
-  userId: number;
-}
+import { ItemComponent } from './components/item.component';
+import { Todo } from './interfaces/todo.interface';
+import { TodosStore } from './stores/todos.store';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, MatProgressSpinnerModule],
+  imports: [CommonModule, MatProgressSpinnerModule, ItemComponent],
   selector: 'app-root',
   template: `
     @if (isLoading()) {
@@ -22,11 +17,10 @@ export interface Todo {
       </div>
     }
     @for (todo of todos(); track $index) {
-      <div>
-        {{ todo.title }}
-        <button (click)="update(todo)">Update</button>
-        <button (click)="deleteTodo(todo)">Delete</button>
-      </div>
+      <app-item
+        [todo]="todo"
+        (updateTodo)="update($event)"
+        (deleteTodo)="deleteTodo($event)"></app-item>
     }
   `,
   styles: `

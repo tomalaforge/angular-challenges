@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
-import { Todo } from './app.component';
-import { TodosService } from './app.service';
+import { Todo } from '../interfaces/todo.interface';
+import { TodosService } from '../services/todos.service';
 
 type TodosState = {
   todos: Todo[];
