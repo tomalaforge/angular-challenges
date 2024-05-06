@@ -19,7 +19,7 @@ Las declaraciones de tipos permanecerán en ingles, asi como los nombres de los 
 
 :::
 
-Angular ofrece la function estática [`ngTemplateContextGuard`](https://angular.io/guide/structural-directives#typing-the-directives-context) para reforzar el tipo de una directiva estructural.
+Angular ofrece la function estática [`ngTemplateContextGuard`](https://angular.dev/guide/directives/structural-directives#improving-template-type-checking-for-custom-directives) para reforzar el tipo de una directiva estructural.
 
 Sin embargo, el contexto de **NgTemplateOutlet** es de tipo **Object**. Con la ayuda de la guardia mencionada anteriormente, podemos mejorar ese comportamiento.
 

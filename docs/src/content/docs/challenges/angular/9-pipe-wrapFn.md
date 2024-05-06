@@ -29,7 +29,7 @@ A **pure** pipe is only called when the value changes.\
 A **impure** pipe is called every change detection cycle.
 :::
 
-There are some useful predefined pipes like the DatePipe, UpperCasePipe and CurrencyPipe. To learn more about pipes in Angular, check the API documentation [here](https://angular.io/guide/pipes).
+There are some useful predefined pipes like the DatePipe, UpperCasePipe and CurrencyPipe. To learn more about pipes in Angular, check the API documentation [here]https://angular.dev/guide/pipes).
 
 ## Statement
 

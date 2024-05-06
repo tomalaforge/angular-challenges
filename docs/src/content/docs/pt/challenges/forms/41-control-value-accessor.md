@@ -12,7 +12,7 @@ sidebar:
 
 ## Informação
 
-Neste desafio, o objetivo é criar um campo personalizado de formulário que use a Form API do Angular `ControlValueAccessor`. Você pode achar a documentação [aqui](https://angular.io/api/forms/ControlValueAccessor). A interface é crucial para criar controles personalizados de formulário que interaja de forma transparente com a API dos formulários do Angular.
+Neste desafio, o objetivo é criar um campo personalizado de formulário que use a Form API do Angular `ControlValueAccessor`. Você pode achar a documentação [aqui](https://angular.dev/api/forms/ControlValueAccessor). A interface é crucial para criar controles personalizados de formulário que interaja de forma transparente com a API dos formulários do Angular.
 
 ## Declaração
 

@@ -26,7 +26,7 @@ También podemos usar la <b>Angular DevTool</b> para perfilar nuestra aplicació
 Si no sabes cómo usarlo, lee primero [la página de introducción al rendimiento](/es/challenges/performance/) y vuelve después.
 :::
 
-Si necesitas más información sobre `NgFor`, te invito a leer primero la [documentación](https://angular.io/api/common/NgFor).
+Si necesitas más información sobre `NgFor`, te invito a leer primero la [documentación](https://angular.dev/api/common/NgFor).
 
 ## Enunciado
 

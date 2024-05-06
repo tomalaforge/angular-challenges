@@ -14,7 +14,7 @@ sidebar:
 
 En este desafío, exploraremos las diferencias e impactos de usar `ChangeDetectionStrategy.Default` versus `ChangeDetectionStrategy.OnPush`.
 
-Puedes leer la [documentación de Angular](https://angular.io/guide/change-detection-skipping-subtrees) para aprender más sobre las diferencias entre estas estrategias.
+Puedes leer la [documentación de Angular](https://angular.dev/best-practices/skipping-subtrees) para aprender más sobre las diferencias entre estas estrategias.
 
 En este desafío, todos los componentes comienzan con la estrategia `Default`. Cuando escribas letras dentro del campo de entrada, notarás que todos los componentes se resaltan en naranja.
 
