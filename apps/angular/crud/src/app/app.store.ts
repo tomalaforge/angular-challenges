@@ -22,5 +22,25 @@ export const TodosStore = signalStore(
         patchState(store, { todos, isLoading: false });
       });
     },
+    async updateTodo(todo: Todo): Promise<void> {
+      patchState(store, { isLoading: true });
+      todosService.updateTodo(todo).subscribe((updatedTodo) => {
+        patchState(store, (state) => ({
+          todos: state.todos.map((todo) =>
+            todo.id === updatedTodo.id ? updatedTodo : todo,
+          ),
+          isLoading: false,
+        }));
+      });
+    },
+    async deleteTodo(deletedTodo: Todo): Promise<void> {
+      patchState(store, { isLoading: true });
+      todosService.deleteTodo(deletedTodo).subscribe(() => {
+        patchState(store, (state) => ({
+          todos: state.todos.filter((todo) => todo.id !== deletedTodo.id),
+          isLoading: false,
+        }));
+      });
+    },
   })),
 );

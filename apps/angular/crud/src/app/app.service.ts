@@ -30,15 +30,10 @@ export class TodosService {
 
   getTodos() {
     return this.http.get<Todo[]>(this.url).pipe(catchError(this.handleError));
-    // .subscribe((todos) => {
-    //   this.todos.set(todos);
-    //   this.loading.set(false);
-    // });
   }
 
   updateTodo(todo: Todo) {
-    this.loading.set(true);
-    this.http
+    return this.http
       .put<Todo>(
         `${this.url}/${todo.id}`,
         JSON.stringify({
@@ -53,27 +48,12 @@ export class TodosService {
           },
         },
       )
-      .pipe(catchError(this.handleError))
-      .subscribe((todoUpdated: Todo) => {
-        this.todos.update((todos) =>
-          todos.map((todo) =>
-            todo.id === todoUpdated.id ? todoUpdated : todo,
-          ),
-        );
-        this.loading.set(false);
-      });
+      .pipe(catchError(this.handleError));
   }
 
   deleteTodo(deletedTodo: Todo) {
-    this.loading.set(true);
-    this.http
-      .delete<void>(`${this.url}/${deletedTodo.id}`)
-      .pipe(catchError(this.handleError))
-      .subscribe(() => {
-        this.todos.update((todos) =>
-          todos.filter((todo) => todo.id !== deletedTodo.id),
-        );
-        this.loading.set(false);
-      });
+    return this.http
+      .delete<Todo>(`${this.url}/${deletedTodo.id}`)
+      .pipe(catchError(this.handleError));
   }
 }

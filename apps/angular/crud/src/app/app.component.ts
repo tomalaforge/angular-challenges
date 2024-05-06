@@ -52,10 +52,10 @@ export class AppComponent implements OnInit {
   }
 
   update(todo: Todo) {
-    // this.todosService.updateTodo(todo);
+    this.store.updateTodo(todo);
   }
 
   deleteTodo(todo: Todo) {
-    // this.todosService.deleteTodo(todo);
+    this.store.deleteTodo(todo);
   }
 }
