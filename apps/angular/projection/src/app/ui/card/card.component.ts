@@ -45,7 +45,6 @@ export class CardComponent<T> {
 
   @ContentChild('rowRef', { read: TemplateRef })
   rowTemplate!: TemplateRef<{ $implicit: T }>;
-
   CardType = CardType;
 
   constructor() {}
