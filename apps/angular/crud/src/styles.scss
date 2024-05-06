@@ -8,3 +8,23 @@ body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 20px;
+  max-width: 50rem;
+  align-items: center;
+  margin: 0.5rem;
+
+  &:hover {
+    background-color: #e2e0e0ef;
+  }
+
+  .list-item-actions {
+    align-items: center;
+    display: flex;
+    column-gap: 1rem;
+    justify-content: space-between;
+  }
+}

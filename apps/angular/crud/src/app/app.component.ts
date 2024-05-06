@@ -1,51 +1,48 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { randText } from '@ngneat/falso';
+import { Component, OnInit, inject } from '@angular/core';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { TodoStore } from './data-access/todos.store';
+import { Todo } from './model/todo.model';
+import { TodoListItemComponent } from './todo-list-item.component';
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TodoListItemComponent, MatProgressSpinnerModule],
   selector: 'app-root',
   template: `
-    <div *ngFor="let todo of todos">
-      {{ todo.title }}
-      <button (click)="update(todo)">Update</button>
-    </div>
+    @if (loading()) {
+      <mat-spinner [diameter]="32"></mat-spinner>
+    } @else {
+      @for (todo of todos(); track todo.id) {
+        <div>
+          <app-todo-list-item
+            [todo]="todo"
+            [isSaving]="savingTodos().includes(todo.id)"
+            (updateTodoEvent)="update($event)"
+            (deleteTodoEvent)="delete($event)"></app-todo-list-item>
+        </div>
+      } @empty {
+        There are no Todo's.
+      }
+    }
   `,
   styles: [],
 })
 export class AppComponent implements OnInit {
-  todos!: any[];
-
-  constructor(private http: HttpClient) {}
+  readonly store = inject(TodoStore);
+  readonly loading = this.store.loadingApp;
+  readonly todos = this.store.todos;
+  readonly savingTodos = this.store.savingTodos;
 
   ngOnInit(): void {
-    this.http
-      .get<any[]>('https://jsonplaceholder.typicode.com/todos')
-      .subscribe((todos) => {
-        this.todos = todos;
-      });
+    this.store.loadAll();
   }
 
-  update(todo: any) {
-    this.http
-      .put<any>(
-        `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
-        JSON.stringify({
-          todo: todo.id,
-          title: randText(),
-          body: todo.body,
-          userId: todo.userId,
-        }),
-        {
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-          },
-        },
-      )
-      .subscribe((todoUpdated: any) => {
-        this.todos[todoUpdated.id - 1] = todoUpdated;
-      });
+  update(todo: Todo) {
+    this.store.update(todo.id);
+  }
+
+  delete(todo: Todo) {
+    this.store.delete(todo.id);
   }
 }
