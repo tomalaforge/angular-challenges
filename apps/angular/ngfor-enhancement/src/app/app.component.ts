@@ -1,5 +1,5 @@
-import { NgFor, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { NgForEmptyDirective } from './ng-for-empty.directive';
 
 interface Person {
   name: string;
@@ -7,14 +7,14 @@ interface Person {
 
 @Component({
   standalone: true,
-  imports: [NgFor, NgIf],
+  imports: [NgForEmptyDirective],
   selector: 'app-root',
   template: `
-    <ng-container *ngIf="persons.length > 0; else emptyList">
-      <div *ngFor="let person of persons">
-        {{ person.name }}
-      </div>
-    </ng-container>
+    <div><button (click)="addPerson()">Add</button></div>
+    <div *ngForEmpty="let person of persons; empty: emptyList">
+      {{ person.name }}
+      <button (click)="removePerson(person)">Remove</button>
+    </div>
     <ng-template #emptyList>The list is empty !!</ng-template>
   `,
   styles: [],
@@ -22,4 +22,12 @@ interface Person {
 })
 export class AppComponent {
   persons: Person[] = [];
+
+  addPerson() {
+    this.persons = [...this.persons, { name: 'Person ' + this.persons.length }];
+  }
+
+  removePerson(person: Person) {
+    this.persons = this.persons.filter((p) => p !== person);
+  }
 }
