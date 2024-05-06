@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { slideInAnimation, staggerInAnimation } from './app.animations';
 
 @Component({
   standalone: true,
@@ -17,9 +18,10 @@ import { Component } from '@angular/core';
       }
     }
   `,
+  animations: [slideInAnimation, staggerInAnimation],
   template: `
     <div class="mx-20 my-40 flex gap-5">
-      <section>
+      <section @slideIn>
         <div>
           <h3>2008</h3>
           <p>
@@ -51,38 +53,24 @@ import { Component } from '@angular/core';
         </div>
       </section>
 
-      <section>
-        <div class="list-item">
-          <span>Name:</span>
-          <span>Samuel</span>
-        </div>
-
-        <div class="list-item">
-          <span>Age:</span>
-          <span>28</span>
-        </div>
-
-        <div class="list-item">
-          <span>Birthdate:</span>
-          <span>02.11.1995</span>
-        </div>
-
-        <div class="list-item">
-          <span>City:</span>
-          <span>Berlin</span>
-        </div>
-
-        <div class="list-item">
-          <span>Language:</span>
-          <span>English</span>
-        </div>
-
-        <div class="list-item">
-          <span>Like Pizza:</span>
-          <span>Hell yeah</span>
-        </div>
+      <section [@staggerIn]="data.length">
+        @for (item of data; track item.label; let i = $index) {
+          <div class="list-item">
+            <span>{{ item.label }}</span>
+            <span>{{ item.value }}</span>
+          </div>
+        }
       </section>
     </div>
   `,
 })
-export class AppComponent {}
+export class AppComponent {
+  readonly data = [
+    { label: 'Name', value: 'Samuel' },
+    { label: 'Age', value: '28' },
+    { label: 'Birthdate', value: '02.11.1995' },
+    { label: 'City', value: 'Berlin' },
+    { label: 'Language', value: 'English' },
+    { label: 'Like Pizza', value: 'Hell yeah' },
+  ];
+}
