@@ -18,23 +18,42 @@ export const TodosStore = signalStore(
   withMethods((store, todosService = inject(TodosService)) => ({
     async loadAll(): Promise<void> {
       patchState(store, { isLoading: true });
-      todosService.getTodos().subscribe((todos) => {
+      todosService.getTodos().subscribe((todosResult) => {
+        const todos = todosResult.map((todo) => {
+          return { ...todo, updating: false };
+        });
         patchState(store, { todos, isLoading: false });
       });
     },
-    async updateTodo(todo: Todo): Promise<void> {
-      patchState(store, { isLoading: true });
-      todosService.updateTodo(todo).subscribe((updatedTodo) => {
+    async updateTodo(todoToUpdate: Todo): Promise<void> {
+      patchState(store, (state) => ({
+        todos: state.todos.map((todo) =>
+          todo.id === todoToUpdate.id
+            ? { ...todoToUpdate, updating: true }
+            : todo,
+        ),
+        isLoading: true,
+      }));
+      todosService.updateTodo(todoToUpdate).subscribe((updatedTodo) => {
         patchState(store, (state) => ({
           todos: state.todos.map((todo) =>
-            todo.id === updatedTodo.id ? updatedTodo : todo,
+            todo.id === updatedTodo.id
+              ? { ...updatedTodo, updating: false }
+              : todo,
           ),
           isLoading: false,
         }));
       });
     },
     async deleteTodo(deletedTodo: Todo): Promise<void> {
-      patchState(store, { isLoading: true });
+      patchState(store, (state) => ({
+        todos: state.todos.map((todo) =>
+          todo.id === deletedTodo.id
+            ? { ...deletedTodo, updating: true }
+            : todo,
+        ),
+        isLoading: true,
+      }));
       todosService.deleteTodo(deletedTodo).subscribe(() => {
         patchState(store, (state) => ({
           todos: state.todos.filter((todo) => todo.id !== deletedTodo.id),

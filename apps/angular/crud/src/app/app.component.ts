@@ -37,7 +37,6 @@ import { TodosStore } from './stores/todos.store';
 })
 export class AppComponent implements OnInit {
   store = inject(TodosStore);
-
   todos = this.store.todos;
   isLoading = this.store.isLoading;
 

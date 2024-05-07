@@ -3,4 +3,5 @@ export interface Todo {
   title: string;
   body: string;
   userId: number;
+  updating?: boolean;
 }

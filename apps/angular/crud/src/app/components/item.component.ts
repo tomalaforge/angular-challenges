@@ -9,8 +9,10 @@ import { Todo } from '../interfaces/todo.interface';
   template: `
     <div>
       {{ todo().title }}
-      <button (click)="update()">Update</button>
-      <button (click)="deletingTodo()">Delete</button>
+      <button [disabled]="todo().updating" (click)="update()">Update</button>
+      <button [disabled]="todo().updating" (click)="deletingTodo()">
+        Delete
+      </button>
     </div>
   `,
 })
