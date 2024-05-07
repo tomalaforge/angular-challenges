@@ -1,26 +1,26 @@
 {
-  "name": "angular-function-call-effect",
+  "name": "signal-function-call-effect",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "app",
-  "sourceRoot": "apps/angular/function-call-effect/src",
+  "sourceRoot": "apps/signal/51-function-call-effect/src",
   "tags": [],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/angular/function-call-effect",
-        "index": "apps/angular/function-call-effect/src/index.html",
-        "browser": "apps/angular/function-call-effect/src/main.ts",
+        "outputPath": "dist/apps/signal/51-function-call-effect",
+        "index": "apps/signal/51-function-call-effect/src/index.html",
+        "browser": "apps/signal/51-function-call-effect/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/angular/function-call-effect/tsconfig.app.json",
+        "tsConfig": "apps/signal/51-function-call-effect/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
-          "apps/angular/function-call-effect/src/favicon.ico",
-          "apps/angular/function-call-effect/src/assets"
+          "apps/signal/51-function-call-effect/src/favicon.ico",
+          "apps/signal/51-function-call-effect/src/assets"
         ],
-        "styles": ["apps/angular/function-call-effect/src/styles.scss"],
+        "styles": ["apps/signal/51-function-call-effect/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
@@ -51,10 +51,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "buildTarget": "angular-function-call-effect:build:production"
+          "buildTarget": "signal-function-call-effect:build:production"
         },
         "development": {
-          "buildTarget": "angular-function-call-effect:build:development"
+          "buildTarget": "signal-function-call-effect:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -62,7 +62,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "buildTarget": "angular-function-call-effect:build"
+        "buildTarget": "signal-function-call-effect:build"
       }
     },
     "lint": {

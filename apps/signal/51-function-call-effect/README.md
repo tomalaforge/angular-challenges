@@ -5,7 +5,7 @@
 ### Run Application
 
 ```bash
-npx nx serve angular-function-call-effect
+npx nx serve signal-function-call-effect
 ```
 
 ### Documentation and Instruction
