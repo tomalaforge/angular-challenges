@@ -8,7 +8,6 @@ challengeNumber: 49
 command: rxjs-hold-to-save-btn
 sidebar:
   order: 19
-  badge: New
 ---
 
 ## Context
