@@ -15,4 +15,5 @@ const sponsors = ['ddotx', 'LMFinney'];
 
 module.exports = {
   contributors,
+  sponsors,
 };

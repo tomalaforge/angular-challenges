@@ -7,7 +7,7 @@ async function run() {
     const title = github.context.payload.pull_request.title;
     const labels = ['answer'];
 
-    const match = title.match(/Answer:\s*(\d+)/);
+    const match = title.match(/Answer(:?)\s*(\d+)/);
     if (match) {
       labels.push(String(parseInt(match[1], 10)));
     }
