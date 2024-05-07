@@ -28,6 +28,10 @@ export class AppComponent {
 
   constructor() {
     effect(() => {
+      console.log(this.name());
+      console.log(this.age());
+      console.log(this.address());
+
       if (this.name() || this.age() || this.address()) {
         alert('Checkbox was checked');
       }
