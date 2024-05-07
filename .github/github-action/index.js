@@ -1,6 +1,6 @@
 const github = require('@actions/github');
 const core = require('@actions/core');
-const { contributors } = require('./contributors');
+const { contributors, sponsors } = require('./contributors');
 
 async function run() {
   try {
@@ -13,7 +13,13 @@ async function run() {
     }
 
     const actor = github.context.actor;
-    if(contributors.includes(actor)) {
+    if (contributors.includes(actor)) {
+      labels.push('contributor');
+      labels.push('to be reviewed');
+    }
+
+    if (sponsors.includes(actor)) {
+      labels.push('sponsor');
       labels.push('to be reviewed');
     }
 
@@ -26,7 +32,7 @@ async function run() {
       labels,
       owner: github.context.repo.owner,
       repo: github.context.repo.repo,
-      issue_number: number
+      issue_number: number,
     });
   } catch (e) {
     if (e instanceof Error) {
