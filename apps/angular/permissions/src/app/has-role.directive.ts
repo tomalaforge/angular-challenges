@@ -6,7 +6,6 @@ import {
   TemplateRef,
   ViewContainerRef,
 } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { Role } from './user.model';
 import { UserStore } from './user.store';
 
@@ -19,30 +18,24 @@ export class HasRoleDirective {
   readonly hasRole = input<Role[] | Role>();
   readonly hasRoleSuperAdmin = input<boolean>(false);
 
-  readonly userStore = inject(UserStore);
+  private readonly userStore = inject(UserStore);
   private readonly vcr = inject(ViewContainerRef);
+  private readonly templateRef = inject(TemplateRef);
 
-  constructor(templateRef: TemplateRef<any>) {
-    const user = toSignal(this.userStore.user$);
-
+  constructor() {
     effect(() => {
+      const user = this.userStore.user();
       this.vcr.clear();
       if (this.hasRoleSuperAdmin()) {
-        if (user()?.isAdmin) {
-          this.vcr.createEmbeddedView(templateRef);
+        if (user?.isAdmin) {
+          this.vcr.createEmbeddedView(this.templateRef);
+        }
+      } else if (this.hasRole()) {
+        if (this.userStore.matches(this.hasRole())) {
+          this.vcr.createEmbeddedView(this.templateRef);
         }
       } else {
-        const hasRole = this.hasRole();
-        if (hasRole) {
-          const userRoles = user()?.roles ?? [];
-          const roles = Array.isArray(hasRole) ? hasRole : [hasRole];
-          const matches = roles.some((role) => userRoles.includes(role));
-          if (matches) {
-            this.vcr.createEmbeddedView(templateRef);
-          }
-        } else {
-          this.vcr.createEmbeddedView(templateRef);
-        }
+        this.vcr.createEmbeddedView(this.templateRef);
       }
     });
   }
