@@ -30,12 +30,17 @@ export class HasRoleDirective {
         if (user?.isAdmin) {
           this.vcr.createEmbeddedView(this.templateRef);
         }
-      } else if (this.hasRole()) {
-        if (this.userStore.matches(this.hasRole())) {
+      } else {
+        // separating the else and if so that we don't have to handle
+        // undefined in the user store method
+        const roles = this.hasRole();
+        if (roles) {
+          if (this.userStore.matches(roles)) {
+            this.vcr.createEmbeddedView(this.templateRef);
+          }
+        } else {
           this.vcr.createEmbeddedView(this.templateRef);
         }
-      } else {
-        this.vcr.createEmbeddedView(this.templateRef);
       }
     });
   }
