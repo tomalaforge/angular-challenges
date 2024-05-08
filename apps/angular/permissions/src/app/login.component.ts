@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ButtonComponent } from './button.component';
 import { InformationComponent } from './information.component';
@@ -37,7 +37,7 @@ import { UserStore } from './user.store';
   `,
 })
 export class LoginComponent {
-  constructor(private userStore: UserStore) {}
+  readonly userStore = inject(UserStore);
 
   admin() {
     this.userStore.add(admin);
