@@ -1,10 +1,13 @@
 /* eslint-disable @angular-eslint/component-selector */
 import { Component, Input } from '@angular/core';
+import { RouterModule } from '@angular/router';
+
 @Component({
   selector: 'nav-button',
   standalone: true,
+  imports: [RouterModule],
   template: `
-    <a [href]="href">
+    <a [routerLink]="href" (click)="scrollTo(anchor)">
       <ng-content></ng-content>
     </a>
   `,
@@ -14,4 +17,14 @@ import { Component, Input } from '@angular/core';
 })
 export class NavButtonComponent {
   @Input() href = '';
+  @Input() anchor?: string = undefined;
+
+  scrollTo(anchor: string | undefined) {
+    if (anchor) {
+      const element = document.getElementById(anchor);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  }
 }
