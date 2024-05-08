@@ -15,11 +15,9 @@ export class UserStore {
   }
 
   matches(matchRoles: Role[] | Role) {
-    if (this.isAdmin()) {
-      return true;
-    }
-    return this.matchesRole(
-      Array.isArray(matchRoles) ? matchRoles : [matchRoles],
+    return (
+      this.isAdmin() ||
+      this.matchesRole(Array.isArray(matchRoles) ? matchRoles : [matchRoles])
     );
   }
 
