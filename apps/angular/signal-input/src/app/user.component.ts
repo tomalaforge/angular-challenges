@@ -4,6 +4,7 @@ import {
   Component,
   computed,
   input,
+  numberAttribute,
 } from '@angular/core';
 
 type Category = 'Youth' | 'Junior' | 'Open' | 'Senior';
@@ -29,10 +30,8 @@ const ageToCategory = (age: number): Category => {
 export class UserComponent {
   name = input.required<string>();
   lastName = input('');
-  category = input.required({
-    alias: 'age',
-    transform: (age: string): Category => ageToCategory(Number(age) ?? 0),
-  });
+  age = input.required({ transform: numberAttribute });
 
+  category = computed(() => ageToCategory(this.age()));
   fullName = computed(() => `${this.name()} ${this.lastName()}`);
 }
