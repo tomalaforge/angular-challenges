@@ -1,7 +1,7 @@
 import { TOKEN } from '@angular-challenges/module-to-standalone/core/providers';
 import { AuthorizationService } from '@angular-challenges/module-to-standalone/core/service';
 import { AsyncPipe } from '@angular/common';
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 @Component({
   selector: 'lib-home',
@@ -25,8 +25,6 @@ import { Component, Inject } from '@angular/core';
   imports: [AsyncPipe],
 })
 export default class HomeComponent {
-  constructor(
-    public authorizeService: AuthorizationService,
-    @Inject(TOKEN) public token: string,
-  ) {}
+  readonly token = inject(TOKEN);
+  readonly authorizeService = inject(AuthorizationService);
 }
