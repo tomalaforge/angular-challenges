@@ -54,7 +54,7 @@ import { slideInAnimation, staggerInAnimation } from './app.animations';
       </section>
 
       <section [@staggerIn]="data.length">
-        @for (item of data; track item.label; let i = $index) {
+        @for (item of data; track item.label) {
           <div class="list-item">
             <span>{{ item.label }}</span>
             <span>{{ item.value }}</span>
