@@ -2,9 +2,9 @@
 import Default from '@astrojs/starlight/components/Hero.astro';
 import MyIcon from './MyIcon.astro';
 import { getEntry } from 'astro:content';
+import SponsorUser from './github/SponsorUser.svelte';
 
-const sponsorFetch = await fetch('https://ghs.vercel.app/v2/sponsors/tomalaforge');
-const { sponsors } = await sponsorFetch.json();
+
 
 const { lang } = Astro.props;
 const { data } = await getEntry('i18n', lang);
@@ -12,18 +12,7 @@ const { data } = await getEntry('i18n', lang);
 
 <div class="sponsor-header button-hover">
     <p>{data['sponsors.description']}
-    {sponsors.past.map(({username, avatar}) => (
-      <a href=`https://github.com/${username}`>
-        <img
-          loading="lazy"
-          src={avatar}
-          width="40"
-          height="40"
-          alt={username}
-          class="avatar"
-        />
-      </a>
-    ))}
+      <SponsorUser client:load />
     </p>
   <a class="action-button" href="https://github.com/sponsors/tomalaforge">
     <div>{data['sponsors.joinButton']}</div>
@@ -55,14 +44,6 @@ const { data } = await getEntry('i18n', lang);
 
   .sponsor-line a {
     display: inline-block;
-  }
-
-  .avatar {
-    border-radius: 50%;
-    width: 30px;
-    height: auto;
-    vertical-align: middle;
-    margin-right: 0.5rem;
   }
 
   .action-button {
