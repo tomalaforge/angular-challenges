@@ -1,11 +1,12 @@
 import { NgFor } from '@angular/common';
 import {
   Directive,
-  DoCheck,
+  effect,
   EmbeddedViewRef,
   inject,
   input,
   TemplateRef,
+  untracked,
   ViewContainerRef,
 } from '@angular/core';
 
@@ -15,21 +16,26 @@ import {
   standalone: true,
   hostDirectives: [{ directive: NgFor, inputs: ['ngForOf:ngForEmptyOf'] }],
 })
-export class NgForEmptyDirective<T> implements DoCheck {
+export class NgForEmptyDirective<T> {
   private readonly vcr = inject(ViewContainerRef);
   readonly ngForEmptyOf = input.required<T[] | undefined>();
   readonly ngForEmptyEmpty = input.required<TemplateRef<any>>();
 
   private ref?: EmbeddedViewRef<unknown>;
 
-  ngDoCheck(): void {
-    this.ref?.destroy();
-
-    if (!this.ngForEmptyOf()?.length) {
-      this.ref = this.vcr.createEmbeddedView(this.ngForEmptyEmpty());
-    } else {
+  constructor() {
+    effect(() => {
       this.ref?.destroy();
-    }
+
+      if (!this.ngForEmptyOf()?.length) {
+        this.ref = this.vcr.createEmbeddedView(
+          // Use untracked, because we don't expect the templateRef to change
+          untracked(() => this.ngForEmptyEmpty()),
+        );
+      } else {
+        this.ref?.destroy();
+      }
+    });
   }
 }
 
