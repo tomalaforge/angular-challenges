@@ -6,9 +6,9 @@ import { IndexedPipe } from './indexed.pipe';
   imports: [IndexedPipe],
   selector: 'app-root',
   template: `
-    @for (person of persons; track person; let index = $index) {
+    @for (person of persons; track person) {
       <div>
-        {{ person | indexed: index }}
+        {{ person | indexed: $index }}
       </div>
     }
   `,
