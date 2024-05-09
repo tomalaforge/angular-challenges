@@ -26,12 +26,12 @@ import { UserStore } from './user.store';
       <button app-button (click)="writer()">Writer</button>
       <button app-button (click)="readerWriter()">Reader and Writer</button>
       <button app-button (click)="client()">Client</button>
-      <button app-button (click)="everyone()">Everyone</button>
+      <button app-button (click)="everyone()">No Role</button>
     </header>
 
     <app-information></app-information>
 
-    <button app-button class="mt-10" routerLink="enter">
+    <button app-button class=" mt-10" routerLink="enter">
       Enter application
     </button>
   `,

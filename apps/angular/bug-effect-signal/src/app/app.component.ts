@@ -28,7 +28,17 @@ export class AppComponent {
 
   constructor() {
     effect(() => {
-      if (this.name() || this.age() || this.address()) {
+      if (this.name()) {
+        alert('Checkbox was checked');
+      }
+    });
+    effect(() => {
+      if (this.age()) {
+        alert('Checkbox was checked');
+      }
+    });
+    effect(() => {
+      if (this.address()) {
         alert('Checkbox was checked');
       }
     });
