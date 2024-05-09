@@ -1,9 +1,10 @@
 import { Component, signal } from '@angular/core';
+import { FxnCallPipe } from './fxnCall.pipe';
 import { PersonUtils } from './person.utils';
 
 @Component({
   standalone: true,
-  imports: [],
+  imports: [FxnCallPipe],
   selector: 'app-root',
   template: `
     @for (activity of activities(); track activity.name) {
@@ -11,8 +12,8 @@ import { PersonUtils } from './person.utils';
         {{ activity.name }} :
         @for (person of persons(); track person.name) {
           <div>
-            {{ showName(person.name, $index) }}
-            {{ isAllowed(person.age, $first, activity.minimumAge) }}
+            {{ showName | fxnCall: person.name : $index }}
+            {{ isAllowed | fxnCall: person.age : $first : activity.minimumAge }}
           </div>
         }
       </div>
