@@ -8,9 +8,12 @@ const contributors = [
   'wandri',
   'webbomj',
   'kabrunko-dev',
-  'Sanjar1304'
+  'Sanjar1304',
 ];
 
+const sponsors = ['ddotx', 'LMFinney'];
+
 module.exports = {
-  contributors
+  contributors,
+  sponsors,
 };

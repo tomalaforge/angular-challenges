@@ -24,7 +24,7 @@ Para tener una mejor visualización del problema, perfila tu aplicación con Ang
 Si no sabes cómo usarlo, lee [la página de introducción al rendimiento](/es/challenges/performance/) primero y vuelve después.
 :::
 
-Puedes obtener más detalles sobre la contaminación de la zona y cómo resolverla [aquí](https://angular.io/guide/change-detection-zone-pollution).
+Puedes obtener más detalles sobre la contaminación de la zona y cómo resolverla [aquí](https://angular.dev/best-practices/zone-pollution).
 
 El siguiente video explicará más a fondo el problema de esta aplicación.
 

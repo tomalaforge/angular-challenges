@@ -20,7 +20,7 @@ Animações bem desenhadas pode fazer sua aplicação mais divertida e direta pa
 - Movimento aumenta bastante a experiência do usuário, uma vez que animações dão a usuários a change de detectar as respostas da aplicação para suas ações.
 - Boas animações intuitivamente chama a atenção do usuário para onde é necessário.
 
-Eu recomendaria você ler a [documentação oficial](https://angular.io/guide/animations) Você aprenderá tudo o que é necessário para completar o desafio com sucesso.
+Eu recomendaria você ler a [documentação oficial](https://angular.dev/guide/animations) Você aprenderá tudo o que é necessário para completar o desafio com sucesso.
 
 Caso contrário, olhe este [exemplo funcional](https://svenson95.github.io/ng-xmp-animations/) e o [repositório git](https://github.com/svenson95/ng-xmp-animations) para se inspirar.
 

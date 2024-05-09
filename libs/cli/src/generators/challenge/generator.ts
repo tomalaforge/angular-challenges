@@ -120,7 +120,9 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
 
   for (const lang of ['en', 'es', 'fr', 'pt', 'ru']) {
     const docs = tree
-      .read(`./docs/src/content/docs/${lang === 'en' ? '' : lang}/index.mdx`)
+      .read(
+        `./docs/src/content/docs/${lang === 'en' ? '' : `${lang}/`}index.mdx`,
+      )
       .toString();
 
     const regex = new RegExp(
