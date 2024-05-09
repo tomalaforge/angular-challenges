@@ -16,6 +16,8 @@ sidebar:
 
 In this basic exercise, we aim to display an alert whenever at least one checkbox is checked. In this app you are in the process of buying a MacBook, which can be upgraded with some extras, like more drive space, more RAM or a better GPU.
 
+<img width="889" alt="Bildschirmfoto 2024-05-09 um 08 57 57" src="https://github.com/svenson95/angular-challenges/assets/46655156/d78f42a5-9064-4a33-bb8c-c0433bd6966d">
+
 ## Statement
 
 The actual implementation doesn't work as expected, your task is to fix the issue. Your team exposed a bug, there is a alert to be shown if atleast one of the three checkboxes is checked. But if the first one is checked, the other two checkboxes gets checked without displaying the alert. Why does this happen?
