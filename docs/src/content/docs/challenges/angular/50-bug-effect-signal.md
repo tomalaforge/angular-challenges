@@ -14,7 +14,7 @@ sidebar:
 
 ## Information
 
-In this basic exercise, we aim to display an alert whenever at least one checkbox is checked. In this app you are in the process of buying a MacBook, which can be upgraded with some extras, like more drive space, more RAM or a better GPU.
+In this basic exercise, we aim to display an alert whenever at least one checkbox is checked. You are in the process of buying a MacBook, which can be upgraded with some extras, like more drive space, more RAM or a better GPU.
 
 <img width="889" alt="Bildschirmfoto 2024-05-09 um 08 57 57" src="https://github.com/svenson95/angular-challenges/assets/46655156/d78f42a5-9064-4a33-bb8c-c0433bd6966d">
 
@@ -26,7 +26,7 @@ The objective of this challenge is to understand the issue and fix the problem, 
 
 ## Acceptance Criteria
 
-To ensure this feature works properly, fix the bug and try this out to reproduce the bug, if it's still there.
+To ensure this feature works properly, try this out to reproduce the bug after solving the challenge, to check if the bug is gone.
 
 - Check box 1 (Alert should be shown)
 - Check box 2 (Alert should be shown)
