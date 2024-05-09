@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
-import { IsAllowedPipe, ShowNamePipe } from './wrapper.pipe';
+import { WrapperPipe } from './wrapper.pipe';
 
 @Component({
   standalone: true,
-  imports: [ShowNamePipe, IsAllowedPipe],
+  imports: [WrapperPipe],
   selector: 'app-root',
   template: `
     @for (person of persons; track person) {
       <div>
-        {{ person.name | showName: $index }}
-        {{ person.age | isAllowed: $index === 0 }}
+        {{ showName | wrapperFn: person.name : $index }}
+        {{ isAllowed | wrapperFn: person.age : $first }}
       </div>
     } @empty {
       <div>there is no person</div>
@@ -25,4 +25,12 @@ export class AppComponent {
     { name: 'Hitler', age: 35 },
     { name: 'Stalin', age: 20 },
   ];
+
+  public showName(name: string, index: number) {
+    return `${name} - ${index}`;
+  }
+
+  public isAllowed(age: number, isFirst: boolean) {
+    return isFirst ? 'always allowed' : age > 25 ? 'allowed' : 'declined';
+  }
 }

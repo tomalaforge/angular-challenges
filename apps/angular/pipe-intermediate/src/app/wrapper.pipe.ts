@@ -1,21 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'showName',
+  name: 'wrapperFn',
   standalone: true,
 })
-export class ShowNamePipe implements PipeTransform {
-  transform(name: string, index: number): string {
-    return `${name} - ${index}`;
-  }
-}
-
-@Pipe({
-  name: 'isAllowed',
-  standalone: true,
-})
-export class IsAllowedPipe implements PipeTransform {
-  transform(age: number, isFirst: boolean): string {
-    return isFirst ? 'always allowed' : age > 25 ? 'allowed' : 'declined';
+export class WrapperPipe implements PipeTransform {
+  transform<T>(func: (...arg: any[]) => T, ...args: any[]): T {
+    return func(...args);
   }
 }
