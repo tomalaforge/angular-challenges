@@ -11,25 +11,42 @@ import { FormsModule } from '@angular/forms';
   imports: [FormsModule],
   selector: 'app-root',
   template: `
-    Show Dialog if one checkbox is checked
-    <input type="checkbox" [(ngModel)]="name" />
-    Name
-    <input type="checkbox" [(ngModel)]="age" />
-    Age
-    <input type="checkbox" [(ngModel)]="address" />
-    Address
+    <section class="flex gap-5">
+      <p>MacBook</p>
+      <p>1999,99 €</p>
+    </section>
+
+    <section>
+      <p>Extras:</p>
+
+      <div>
+        <input type="checkbox" [(ngModel)]="drive" />
+        +500 GB drive-space
+      </div>
+      <div>
+        <input type="checkbox" [(ngModel)]="ram" />
+        +4 GB RAM
+      </div>
+      <div>
+        <input type="checkbox" [(ngModel)]="gpu" />
+        Better GPU
+      </div>
+    </section>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-  name = model(false);
-  age = model(false);
-  address = model(false);
+  drive = model(false);
+  ram = model(false);
+  gpu = model(false);
 
   constructor() {
+    /* 
+      Explain for your junior team mate why this bug occurs ...
+    */
     effect(() => {
-      if (this.name() || this.age() || this.address()) {
-        alert('Checkbox was checked');
+      if (this.drive() || this.ram() || this.gpu()) {
+        alert('Price increased!');
       }
     });
   }
