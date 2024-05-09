@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TIMER_STATE } from './data';
+import { getTimerProvider } from './data';
 import { TimerContainerComponent } from './timer-container.component';
 
 @Component({
@@ -13,6 +13,6 @@ import { TimerContainerComponent } from './timer-container.component';
     </div>
     <timer-container />
   `,
-  providers: [{ provide: TIMER_STATE, useValue: 2000 }],
+  providers: [getTimerProvider(2000)],
 })
 export default class PhoneComponent {}
