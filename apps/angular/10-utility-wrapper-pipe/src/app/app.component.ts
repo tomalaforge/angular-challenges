@@ -1,9 +1,10 @@
 import { Component, signal } from '@angular/core';
 import { PersonUtils } from './person.utils';
+import { PersonFnPipe } from './personFn.pipe';
 
 @Component({
   standalone: true,
-  imports: [],
+  imports: [PersonFnPipe],
   selector: 'app-root',
   template: `
     @for (activity of activities(); track activity.name) {
@@ -11,8 +12,10 @@ import { PersonUtils } from './person.utils';
         {{ activity.name }} :
         @for (person of persons(); track person.name) {
           <div>
-            {{ showName(person.name, $index) }}
-            {{ isAllowed(person.age, $first, activity.minimumAge) }}
+            {{ 'showName' | personFn: person.name : $index }}
+            {{
+              'isAllowed' | personFn: person.age : $first : activity.minimumAge
+            }}
           </div>
         }
       </div>
