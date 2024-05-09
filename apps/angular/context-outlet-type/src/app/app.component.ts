@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { ListComponent } from './list.component';
 import { PersonComponent } from './person.component';
 
@@ -8,19 +8,19 @@ import { PersonComponent } from './person.component';
   imports: [NgTemplateOutlet, PersonComponent, ListComponent],
   selector: 'app-root',
   template: `
-    <person [person]="person">
+    <person [person]="person()">
       <ng-template #personRef let-name let-age="age">
         {{ name }}: {{ age }}
       </ng-template>
     </person>
 
-    <list [list]="students">
+    <list [list]="students()">
       <ng-template #listRef let-student let-i="index">
         {{ student.name }}: {{ student.age }} - {{ i }}
       </ng-template>
     </list>
 
-    <list [list]="cities">
+    <list [list]="cities()">
       <ng-template #listRef let-city let-i="index">
         {{ city.name }}: {{ city.country }} - {{ i }}
       </ng-template>
@@ -29,18 +29,18 @@ import { PersonComponent } from './person.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-  person = {
+  person = signal({
     name: 'toto',
     age: 3,
-  };
+  });
 
-  students = [
+  students = signal([
     { name: 'toto', age: 3 },
     { name: 'titi', age: 4 },
-  ];
+  ]);
 
-  cities = [
+  cities = signal([
     { name: 'Paris', country: 'France' },
     { name: 'Berlin', country: 'Germany' },
-  ];
+  ]);
 }

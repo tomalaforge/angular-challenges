@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, ContentChild, Input, TemplateRef } from '@angular/core';
+import { Component, contentChild, input, TemplateRef } from '@angular/core';
 
 interface Person {
   name: string;
@@ -13,16 +13,17 @@ interface Person {
   template: `
     <ng-container
       *ngTemplateOutlet="
-        personTemplateRef || emptyRef;
-        context: { $implicit: person.name, age: person.age }
-      "></ng-container>
+        personTemplateRef() || emptyRef;
+        context: { $implicit: person().name, age: person().age }
+      " />
 
     <ng-template #emptyRef>No Template</ng-template>
   `,
 })
 export class PersonComponent {
-  @Input() person!: Person;
+  person = input.required<Person>();
 
-  @ContentChild('#personRef', { read: TemplateRef })
-  personTemplateRef!: TemplateRef<unknown>;
+  readonly personTemplateRef = contentChild.required('personRef', {
+    read: TemplateRef,
+  });
 }
