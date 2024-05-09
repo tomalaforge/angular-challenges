@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, Input as RouterInput } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Photo } from '../photo.model';
 
@@ -8,22 +8,22 @@ import { Photo } from '../photo.model';
   standalone: true,
   imports: [DatePipe, RouterLink],
   template: `
-    <img src="{{ photo.url_m }}" alt="{{ photo.title }}" class="image" />
+    <img src="{{ photo().url_m }}" alt="{{ photo().title }}" class="image" />
     <p>
       <span class="font-bold">Title:</span>
-      {{ photo.title }}
+      {{ photo().title }}
     </p>
     <p>
       <span class="font-bold">Owner:</span>
-      {{ photo.ownername }}
+      {{ photo().ownername }}
     </p>
     <p>
       <span class="font-bold">Date:</span>
-      {{ photo.datetaken | date }}
+      {{ photo().datetaken | date }}
     </p>
     <p>
       <span class="font-bold">Tags:</span>
-      {{ photo.tags }}
+      {{ photo().tags }}
     </p>
 
     <button
@@ -37,9 +37,7 @@ import { Photo } from '../photo.model';
   },
 })
 export default class DetailComponent {
-  @RouterInput({
-    required: true,
-    transform: (value: string) => JSON.parse(decodeURIComponent(value)),
-  })
-  photo!: Photo;
+  photo = input.required({
+    transform: (value: string): Photo => JSON.parse(decodeURIComponent(value)),
+  });
 }
