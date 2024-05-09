@@ -1,8 +1,11 @@
 /* eslint-disable @angular-eslint/directive-selector */
 /* eslint-disable @angular-eslint/no-host-metadata-property */
+import {
+  BUTTON_STATE,
+  ButtonSignalState,
+  ButtonState,
+} from '@angular-challenges/decoupling/core';
 import { Directive, WritableSignal, signal } from '@angular/core';
-
-export type ButtonState = 'enabled' | 'disabled';
 
 @Directive({
   selector: 'button[btnDisabled]',
@@ -10,11 +13,19 @@ export type ButtonState = 'enabled' | 'disabled';
   host: {
     '(click)': 'toggleState()',
   },
+  providers: [
+    {
+      provide: BUTTON_STATE,
+      useExisting: BtnDisabledDirective,
+    },
+  ],
 })
-export class BtnDisabledDirective {
+export class BtnDisabledDirective implements ButtonSignalState {
   state: WritableSignal<ButtonState> = signal('enabled');
 
   toggleState() {
-    this.state.set(this.state() === 'enabled' ? 'disabled' : 'enabled');
+    this.state.update((state) =>
+      state === 'enabled' ? 'disabled' : 'enabled',
+    );
   }
 }
