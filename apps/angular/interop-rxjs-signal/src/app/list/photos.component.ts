@@ -1,4 +1,3 @@
-import { AsyncPipe } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
@@ -14,7 +13,6 @@ import { PhotosStore } from './photos.store';
   selector: 'app-photos',
   standalone: true,
   imports: [
-    AsyncPipe,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatProgressBarModule,
