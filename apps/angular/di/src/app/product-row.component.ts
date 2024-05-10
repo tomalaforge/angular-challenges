@@ -9,9 +9,9 @@ import { Product } from './product.model';
   selector: 'tr[product-row]',
   template: `
     <td>{{ product().name }}</td>
-    <td>{{ product().priceA | currency | async }}</td>
-    <td>{{ product().priceB | currency | async }}</td>
-    <td>{{ product().priceC | currency | async }}</td>
+    <td>{{ (product().priceA | currency)() }}</td>
+    <td>{{ (product().priceB | currency)() }}</td>
+    <td>{{ (product().priceC | currency)() }}</td>
   `,
   imports: [AsyncPipe, CurrencyPipe],
   providers: [CurrencyService],
@@ -24,7 +24,7 @@ export class ProductRowComponent {
     effect(
       () => {
         const code = this.product().currencyCode;
-        this.currencyService.patchState({ code });
+        this.currencyService.code.set(code);
       },
       // I think this is safe because the value used to set the state doesn't
       // come from the service, but is there a better way?
