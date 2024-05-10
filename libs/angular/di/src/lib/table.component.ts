@@ -1,29 +1,31 @@
-import { NgFor, NgTemplateOutlet } from '@angular/common';
-import { Component, ContentChild, Input, TemplateRef } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
+import { Component, TemplateRef, contentChild, input } from '@angular/core';
 
 @Component({
   selector: 'table',
   standalone: true,
-  imports: [NgTemplateOutlet, NgFor],
+  imports: [NgTemplateOutlet],
   template: `
     <thead>
-      <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
+      <ng-container *ngTemplateOutlet="headerTemplate()"></ng-container>
     </thead>
-    <tbody *ngFor="let item of items">
-      <ng-container
-        *ngTemplateOutlet="
-          bodyTemplate;
-          context: { $implicit: item }
-        "></ng-container>
-    </tbody>
+    @for (item of items(); track $index) {
+      <tbody>
+        <ng-container
+          *ngTemplateOutlet="
+            bodyTemplate();
+            context: { $implicit: item }
+          "></ng-container>
+      </tbody>
+    }
   `,
 })
 export class TableComponent<T> {
-  @Input() items!: T[];
+  items = input.required<T[]>();
 
-  @ContentChild('header', { read: TemplateRef })
-  headerTemplate!: TemplateRef<void>;
+  headerTemplate = contentChild.required('header', {
+    read: TemplateRef,
+  });
 
-  @ContentChild('body', { read: TemplateRef })
-  bodyTemplate!: TemplateRef<{ $implicit: T }>;
+  bodyTemplate = contentChild.required('body', { read: TemplateRef });
 }
