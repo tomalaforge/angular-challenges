@@ -1,8 +1,8 @@
 import { TableComponent } from '@angular-challenges/angular/di';
 import { AsyncPipe } from '@angular/common';
 import { Component, Directive } from '@angular/core';
-import { CodeDirective } from './code.directive';
 import { CurrencyPipe } from './currency.pipe';
+import { ProductRowComponent } from './product-row.component';
 import { Product, products } from './product.model';
 
 interface ProductContext {
@@ -26,10 +26,10 @@ export class ProductDirective {
   standalone: true,
   imports: [
     AsyncPipe,
-    CodeDirective,
     CurrencyPipe,
     ProductDirective,
     TableComponent,
+    ProductRowComponent,
   ],
   selector: 'app-root',
   template: `
@@ -42,12 +42,7 @@ export class ProductDirective {
         </tr>
       </ng-template>
       <ng-template #body product let-product>
-        <tr [code]="product.currencyCode">
-          <td>{{ product.name }}</td>
-          <td>{{ product.priceA | currency | async }}</td>
-          <td>{{ product.priceB | currency | async }}</td>
-          <td>{{ product.priceC | currency | async }}</td>
-        </tr>
+        <tr product-row [product]="product"></tr>
       </ng-template>
     </table>
   `,
