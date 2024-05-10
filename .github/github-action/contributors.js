@@ -1,5 +1,4 @@
 const contributors = [
-  'tomalaforge',
   'alcaidio',
   'svenson95',
   'jdegand',
