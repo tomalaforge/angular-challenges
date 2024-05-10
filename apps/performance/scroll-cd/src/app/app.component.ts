@@ -1,14 +1,16 @@
-import { AsyncPipe, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  HostListener,
+  NgZone,
+  inject,
   signal,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { distinctUntilChanged, fromEvent, map } from 'rxjs';
 
 @Component({
   standalone: true,
-  imports: [NgIf, AsyncPipe],
+  imports: [],
   selector: 'app-root',
   template: `
     <div>Top</div>
@@ -39,12 +41,25 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
+  // We're not yet to full signal-based components...
   displayButton = signal(false);
 
-  @HostListener('window:scroll', ['$event'])
-  onScroll() {
-    const pos = window.pageYOffset;
-    this.displayButton.set(pos > 50);
+  private readonly ngZone = inject(NgZone);
+
+  // inspired by https://blog.simplified.courses/the-danger-of-angular-host-listeners/
+  constructor() {
+    this.ngZone.runOutsideAngular(() => {
+      fromEvent(window, 'scroll')
+        .pipe(
+          map(() => 50 < window.scrollY),
+          distinctUntilChanged(),
+          takeUntilDestroyed(),
+        )
+        .subscribe({
+          next: (display) =>
+            this.ngZone.run(() => this.displayButton.set(display)),
+        });
+    });
   }
 
   goToTop() {
