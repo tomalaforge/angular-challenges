@@ -2,6 +2,10 @@ import { provideHttpClient } from '@angular/common/http';
 import { ApplicationConfig } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
+import {
+  QueryClient,
+  provideQueryClient,
+} from '@tanstack/angular-query-experimental';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -24,6 +28,15 @@ export const appConfig: ApplicationConfig = {
         },
       ],
       withComponentInputBinding(),
+    ),
+    provideQueryClient(
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            staleTime: 1000 * 60 * 5,
+          },
+        },
+      }),
     ),
   ],
 };
