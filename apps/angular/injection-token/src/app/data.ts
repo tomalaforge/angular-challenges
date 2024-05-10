@@ -6,6 +6,10 @@ export const TIMER_STATE = new InjectionToken<number>('TimerState', {
   factory: () => DEFAULT_TIMER,
 });
 
-export function getTimerProvider(useValue: number) {
-  return { provide: TIMER_STATE, useValue };
+/**
+ * Provide a timer value with type safety.
+ * @param timer The timer value in ms
+ */
+export function provideTimer(timer: number) {
+  return { provide: TIMER_STATE, useValue: timer };
 }
