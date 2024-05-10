@@ -1,14 +1,14 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { RouterLinkWithHref } from '@angular/router';
-import { provideComponentStore } from '@ngrx/component-store';
-import { debounceTime, distinctUntilChanged, skipWhile, tap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, startWith } from 'rxjs';
 import { Photo } from '../photo.model';
-import { PhotoStore } from './photos.store';
+import { PhotosStore } from './photos.store';
 
 @Component({
   selector: 'app-photos',
@@ -33,7 +33,7 @@ import { PhotoStore } from './photos.store';
         placeholder="find a photo" />
     </mat-form-field>
 
-    @if (vm$ | async; as vm) {
+    @if (vm(); as vm) {
       <section class="flex flex-col">
         <section class="flex items-center gap-3">
           <button
@@ -55,55 +55,51 @@ import { PhotoStore } from './photos.store';
         @if (vm.loading) {
           <mat-progress-bar mode="query" class="mt-5" />
         }
-        @if (vm.photos && vm.photos.length > 0) {
-          <ul class="flex flex-wrap gap-4">
-            @for (photo of vm.photos; track photo.id) {
-              <li>
-                <a routerLink="detail" [queryParams]="{ photo: encode(photo) }">
-                  <img
-                    src="{{ photo.url_q }}"
-                    alt="{{ photo.title }}"
-                    class="image" />
-                </a>
-              </li>
-            }
-          </ul>
-        } @else {
-          <div>No Photos found. Type a search word.</div>
-        }
+        <ul class="flex flex-wrap gap-4">
+          @for (photo of vm.photos; track photo.id) {
+            <li>
+              <a routerLink="detail" [queryParams]="{ photo: encode(photo) }">
+                <img
+                  src="{{ photo.url_q }}"
+                  alt="{{ photo.title }}"
+                  class="image" />
+              </a>
+            </li>
+          } @empty {
+            <div>No Photos found. Type a search word.</div>
+          }
+        </ul>
         <footer class="text-red-500">
           {{ vm.error }}
         </footer>
       </section>
     }
   `,
-  providers: [provideComponentStore(PhotoStore)],
+  providers: [PhotosStore],
   host: {
     class: 'p-5 block',
   },
 })
 export default class PhotosComponent implements OnInit {
-  store = inject(PhotoStore);
-  readonly vm$ = this.store.vm$.pipe(
-    tap(({ search }) => {
-      if (!this.formInit) {
-        this.search.setValue(search);
-        this.formInit = true;
-      }
-    }),
+  store = inject(PhotosStore);
+  readonly vm = this.store.vm;
+
+  // This approach for initializing the value seems clearer than using formInit
+  search = new FormControl<string>(this.store.searchTerm(), {
+    nonNullable: true,
+  });
+  // Now this is the only rxjs part (outside the http call). We need rxjs
+  // here, because signals don't have the concept of time-based debouncing or
+  // distinctUntilChanged, and because forms aren't signal-based.
+  private searchValue = this.search.valueChanges.pipe(
+    startWith(this.search.value),
+    debounceTime(300),
+    distinctUntilChanged(),
+    takeUntilDestroyed(),
   );
 
-  private formInit = false;
-  search = new FormControl<string>('', { nonNullable: true });
-
   ngOnInit(): void {
-    this.store.search(
-      this.search.valueChanges.pipe(
-        skipWhile(() => !this.formInit),
-        debounceTime(300),
-        distinctUntilChanged(),
-      ),
-    );
+    this.searchValue.subscribe((search) => this.store.search(search));
   }
 
   encode(photo: Photo) {
