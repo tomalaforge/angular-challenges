@@ -1,6 +1,10 @@
 import { AsyncPipe, NgIf } from '@angular/common';
-import { Component, HostListener } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  HostListener,
+  signal,
+} from '@angular/core';
 
 @Component({
   standalone: true,
@@ -10,7 +14,9 @@ import { BehaviorSubject } from 'rxjs';
     <div>Top</div>
     <div>Middle</div>
     <div>Bottom</div>
-    <button (click)="goToTop()" *ngIf="displayButton$ | async">Top</button>
+    @if (displayButton()) {
+      <button (click)="goToTop()">Top</button>
+    }
   `,
   styles: [
     `
@@ -30,17 +36,15 @@ import { BehaviorSubject } from 'rxjs';
       }
     `,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-  title = 'scroll-cd';
-
-  private displayButtonSubject = new BehaviorSubject<boolean>(false);
-  displayButton$ = this.displayButtonSubject.asObservable();
+  displayButton = signal(false);
 
   @HostListener('window:scroll', ['$event'])
   onScroll() {
     const pos = window.pageYOffset;
-    this.displayButtonSubject.next(pos > 50);
+    this.displayButton.set(pos > 50);
   }
 
   goToTop() {
