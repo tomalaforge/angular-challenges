@@ -87,6 +87,10 @@
           {
             "value": "forms",
             "label": "Forms"
+          },
+          {
+            "value": "signal",
+            "label": "Signal"
           }
         ]
       }
@@ -112,5 +116,5 @@
     }
   },
   "additionalProperties": false,
-  "required": ["name", "title", "author", "challengeDifficulty", "category"]
+  "required": ["title", "author", "challengeDifficulty", "category"]
 }

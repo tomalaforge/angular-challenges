@@ -3,13 +3,7 @@ import {
   E2eTestRunner,
   UnitTestRunner,
 } from '@nx/angular/generators';
-import {
-  formatFiles,
-  generateFiles,
-  names,
-  Tree,
-  updateJson,
-} from '@nx/devkit';
+import { formatFiles, generateFiles, Tree, updateJson } from '@nx/devkit';
 import { Linter } from '@nx/eslint';
 import { join } from 'path';
 import { getProjectDir } from '../../utils/normalize';
@@ -81,7 +75,7 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
 
   generateFiles(tree, join(__dirname, 'files', 'readme'), appDirectory, {
     tmpl: '',
-    projectName: names(name).name,
+    projectName: name,
     appProjectName,
     title: options.title,
     challengeNumber,
@@ -94,7 +88,7 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
     `./docs/src/content/docs/challenges/${options.category}`,
     {
       tmpl: '',
-      projectName: names(name).name,
+      projectName: name,
       appProjectName,
       author: options.author,
       title: options.title,
@@ -142,9 +136,7 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
     );
     const replacedLink = replaced.replace(
       linkRegex,
-      `link: /${lang}/challenges/${options.category}/${challengeNumber}-${
-        names(name).name
-      }/\n`,
+      `link: /${lang}/challenges/${options.category}/${challengeNumber}-${name}/\n`,
     );
 
     tree.write(
