@@ -1,0 +1,36 @@
+{
+  "name": "angular-master-dependency-injection",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/angular/16-master-dependency-injection/src",
+  "prefix": "lib",
+  "tags": [],
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:ng-packagr-lite",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "project": "apps/angular/16-master-dependency-injection/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "apps/angular/16-master-dependency-injection/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "apps/angular/16-master-dependency-injection/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/angular/16-master-dependency-injection/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

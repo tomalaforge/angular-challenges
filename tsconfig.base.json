@@ -15,7 +15,6 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@angular-challenges/angular/di": ["libs/angular/di/src/index.ts"],
       "@angular-challenges/cli": ["libs/cli/src/index.ts"],
       "@angular-challenges/custom-plugin": ["libs/custom-plugin/src/index.ts"],
       "@angular-challenges/decoupling/brain": [
@@ -79,6 +78,9 @@
       ],
       "@tomalaforge/ngrx-callstate-store": [
         "libs/shared/ngrx-callstate-store/src/index.ts"
+      ],
+      "angular-master-dependency-injection": [
+        "apps/angular/16-master-dependency-injection/src/index.ts"
       ]
     }
   },
