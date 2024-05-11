@@ -1,10 +1,9 @@
 /* eslint-disable */
 export default {
-  displayName: 'angular-projection',
+  displayName: 'anchor-navigation-anchor-navigation',
   preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  globals: {},
-  coverageDirectory: '../../../coverage/apps/angular/projection',
+  coverageDirectory: '../../../coverage/apps/angular/21-anchor-navigation',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

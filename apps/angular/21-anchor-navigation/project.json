@@ -1,25 +1,25 @@
 {
-  "name": "angular-anchor-scrolling",
+  "name": "angular-anchor-navigation",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "apps/angular/anchor-scrolling/src",
+  "sourceRoot": "apps/angular/21-anchor-navigation/src",
   "prefix": "app",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/angular/anchor-scrolling",
-        "index": "apps/angular/anchor-scrolling/src/index.html",
-        "main": "apps/angular/anchor-scrolling/src/main.ts",
+        "outputPath": "dist/apps/angular/21-anchor-navigation",
+        "index": "apps/angular/21-anchor-navigation/src/index.html",
+        "main": "apps/angular/21-anchor-navigation/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/angular/anchor-scrolling/tsconfig.app.json",
+        "tsConfig": "apps/angular/21-anchor-navigation/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
-          "apps/angular/anchor-scrolling/src/favicon.ico",
-          "apps/angular/anchor-scrolling/src/assets"
+          "apps/angular/21-anchor-navigation/src/favicon.ico",
+          "apps/angular/21-anchor-navigation/src/assets"
         ],
-        "styles": ["apps/angular/anchor-scrolling/src/styles.scss"],
+        "styles": ["apps/angular/21-anchor-navigation/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
@@ -53,10 +53,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "buildTarget": "angular-anchor-scrolling:build:production"
+          "buildTarget": "angular-anchor-navigation:build:production"
         },
         "development": {
-          "buildTarget": "angular-anchor-scrolling:build:development"
+          "buildTarget": "angular-anchor-navigation:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -64,7 +64,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "buildTarget": "angular-anchor-scrolling:build"
+        "buildTarget": "angular-anchor-navigation:build"
       }
     },
     "lint": {
@@ -74,7 +74,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/angular/anchor-scrolling/jest.config.ts"
+        "jestConfig": "apps/angular/21-anchor-navigation/jest.config.ts"
       }
     }
   },

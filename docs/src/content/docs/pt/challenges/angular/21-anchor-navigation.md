@@ -5,7 +5,7 @@ author: thomas-laforge
 contributors:
   - kabrunko-dev
 challengeNumber: 21
-command: angular-anchor-scrolling
+command: angular-anchor-navigation
 sidebar:
   order: 4
 ---

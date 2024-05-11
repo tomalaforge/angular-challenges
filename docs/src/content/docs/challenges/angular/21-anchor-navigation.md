@@ -6,7 +6,7 @@ contributors:
   - tomalaforge
   - tomer953
 challengeNumber: 21
-command: angular-anchor-scrolling
+command: angular-anchor-navigation
 sidebar:
   order: 4
 ---
