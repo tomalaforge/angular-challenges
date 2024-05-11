@@ -5,7 +5,7 @@ author: thomas-laforge
 contributors:
   - Dinozavvvr
 challengeNumber: 17
-command: testing-router-outlet
+command: testing-router
 sidebar:
   order: 108
 ---

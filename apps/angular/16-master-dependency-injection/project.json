@@ -1,36 +1,77 @@
 {
   "name": "angular-master-dependency-injection",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
   "sourceRoot": "apps/angular/16-master-dependency-injection/src",
-  "prefix": "lib",
-  "tags": [],
-  "projectType": "library",
+  "prefix": "app",
   "targets": {
     "build": {
-      "executor": "@nx/angular:ng-packagr-lite",
-      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
       "options": {
-        "project": "apps/angular/16-master-dependency-injection/ng-package.json"
+        "outputPath": "dist/apps/angular/16-master-dependency-injection",
+        "index": "apps/angular/16-master-dependency-injection/src/index.html",
+        "main": "apps/angular/16-master-dependency-injection/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/angular/16-master-dependency-injection/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/angular/16-master-dependency-injection/src/favicon.ico",
+          "apps/angular/16-master-dependency-injection/src/assets"
+        ],
+        "styles": [
+          "apps/angular/16-master-dependency-injection/src/styles.scss"
+        ],
+        "scripts": []
       },
       "configurations": {
         "production": {
-          "tsConfig": "apps/angular/16-master-dependency-injection/tsconfig.lib.prod.json"
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
         },
         "development": {
-          "tsConfig": "apps/angular/16-master-dependency-injection/tsconfig.lib.json"
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
         }
       },
       "defaultConfiguration": "production"
     },
-    "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "angular-master-dependency-injection:build:production"
+        },
+        "development": {
+          "buildTarget": "angular-master-dependency-injection:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "jestConfig": "apps/angular/16-master-dependency-injection/jest.config.ts"
+        "buildTarget": "angular-master-dependency-injection:build"
       }
     },
     "lint": {
       "executor": "@nx/eslint:lint"
     }
-  }
+  },
+  "tags": []
 }

@@ -1,7 +1,13 @@
-# angular-master-dependency-injection
+# Master Dependancy Injection
 
-This library was generated with [Nx](https://nx.dev).
+> author: thomas-laforge
 
-## Running unit tests
+### Run Application
 
-Run `nx test angular-master-dependency-injection` to execute the unit tests.
+```bash
+npx nx serve angular-master-dependency-injection
+```
+
+### Documentation and Instruction
+
+Challenge documentation is [here](https://angular-challenges.vercel.app/challenges/angular/16-di/).

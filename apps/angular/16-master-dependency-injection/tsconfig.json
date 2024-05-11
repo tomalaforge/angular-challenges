@@ -13,10 +13,10 @@
   "include": [],
   "references": [
     {
-      "path": "./tsconfig.lib.json"
+      "path": "./tsconfig.app.json"
     },
     {
-      "path": "./tsconfig.spec.json"
+      "path": "./tsconfig.editor.json"
     }
   ],
   "extends": "../../../tsconfig.base.json",
