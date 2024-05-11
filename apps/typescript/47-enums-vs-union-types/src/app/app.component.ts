@@ -41,16 +41,16 @@ enum Direction {
   `,
   styles: `
     section {
-      @apply flex flex-col mx-auto my-5 w-fit gap-2 items-center;
+      @apply mx-auto my-5 flex w-fit flex-col items-center gap-2;
 
       > div {
         @apply flex w-fit gap-5;
       }
     }
 
-     button {
+    button {
       @apply rounded-md border px-4 py-2;
-     }
+    }
   `,
 })
 export class AppComponent {

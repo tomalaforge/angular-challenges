@@ -40,17 +40,26 @@ function findPreviousChallengeFilePath(tree, path, number) {
 }
 
 export async function challengeGenerator(tree: Tree, options: Schema) {
+  const challengeNumberPath = 'challenge-number.json';
+  const challengeNumberJson = JSON.parse(
+    tree.read(challengeNumberPath).toString(),
+  );
+  const challengeNumber = challengeNumberJson.total + 1;
+  const difficulty = options.challengeDifficulty;
+
+  const name = options.title.toLowerCase().split(' ').join('-');
+
+  const order = challengeNumberJson[difficulty] + 1;
+
   const { appProjectName, appDirectory } = getProjectDir(
-    options.name,
+    name,
     `apps/${options.category}`,
   );
 
-  const difficulty = options.challengeDifficulty;
-
   await applicationGenerator(tree, {
     ...options,
-    name: `${options.category}-${options.name}`,
-    directory: `apps/${options.category}/${options.name}`,
+    name: `${options.category}-${name}`,
+    directory: `apps/${options.category}/${challengeNumber}-${name}`,
     style: 'scss',
     routing: false,
     inlineStyle: true,
@@ -65,13 +74,6 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
     projectNameAndRootFormat: 'as-provided',
   });
 
-  const challengeNumberPath = 'challenge-number.json';
-  const challengeNumberJson = JSON.parse(
-    tree.read(challengeNumberPath).toString(),
-  );
-  const challengeNumber = challengeNumberJson.total + 1;
-  const order = challengeNumberJson[difficulty] + 1;
-
   generateFiles(tree, join(__dirname, 'files', 'app'), appDirectory, {
     tmpl: '',
   });
@@ -79,7 +81,7 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
 
   generateFiles(tree, join(__dirname, 'files', 'readme'), appDirectory, {
     tmpl: '',
-    projectName: names(options.name).name,
+    projectName: names(name).name,
     appProjectName,
     title: options.title,
     challengeNumber,
@@ -92,7 +94,7 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
     `./docs/src/content/docs/challenges/${options.category}`,
     {
       tmpl: '',
-      projectName: names(options.name).name,
+      projectName: names(name).name,
       appProjectName,
       author: options.author,
       title: options.title,
@@ -141,7 +143,7 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
     const replacedLink = replaced.replace(
       linkRegex,
       `link: /${lang}/challenges/${options.category}/${challengeNumber}-${
-        names(options.name).name
+        names(name).name
       }/\n`,
     );
 

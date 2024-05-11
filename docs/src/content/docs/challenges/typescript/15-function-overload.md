@@ -5,7 +5,7 @@ author: thomas-laforge
 contributors:
   - tomalaforge
 challengeNumber: 15
-command: typescript-overload
+command: typescript-function-overload
 blogLink: https://medium.com/ngconf/function-overloading-in-typescript-8236706b2c05
 sidebar:
   order: 115

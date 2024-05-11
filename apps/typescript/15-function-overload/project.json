@@ -1,29 +1,25 @@
 {
-  "name": "nx-static-dynamic-import",
+  "name": "typescript-function-overload",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
+  "sourceRoot": "apps/typescript/15-function-overload/src",
   "prefix": "app",
-  "sourceRoot": "apps/nx/static-dynamic-import/src",
-  "tags": [],
   "targets": {
     "build": {
-      "executor": "@angular-devkit/build-angular:application",
+      "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/nx/static-dynamic-import",
-        "index": "apps/nx/static-dynamic-import/src/index.html",
-        "browser": "apps/nx/static-dynamic-import/src/main.ts",
+        "outputPath": "dist/apps/typescript/15-function-overload",
+        "index": "apps/typescript/15-function-overload/src/index.html",
+        "main": "apps/typescript/15-function-overload/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/nx/static-dynamic-import/tsconfig.app.json",
+        "tsConfig": "apps/typescript/15-function-overload/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
-          "apps/nx/static-dynamic-import/src/favicon.ico",
-          "apps/nx/static-dynamic-import/src/assets"
+          "apps/typescript/15-function-overload/src/favicon.ico",
+          "apps/typescript/15-function-overload/src/assets"
         ],
-        "styles": [
-          "apps/nx/static-dynamic-import/src/styles.scss",
-          "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
-        ],
+        "styles": ["apps/typescript/15-function-overload/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
@@ -40,13 +36,15 @@
               "maximumError": "4kb"
             }
           ],
-          "outputHashing": "all",
-          "sourceMap": true
+          "outputHashing": "all"
         },
         "development": {
+          "buildOptimizer": false,
           "optimization": false,
+          "vendorChunk": true,
           "extractLicenses": false,
-          "sourceMap": true
+          "sourceMap": true,
+          "namedChunks": true
         }
       },
       "defaultConfiguration": "production"
@@ -55,10 +53,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "buildTarget": "nx-static-dynamic-import:build:production"
+          "buildTarget": "typescript-function-overload:build:production"
         },
         "development": {
-          "buildTarget": "nx-static-dynamic-import:build:development"
+          "buildTarget": "typescript-function-overload:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -66,12 +64,12 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "buildTarget": "nx-static-dynamic-import:build"
+        "buildTarget": "typescript-function-overload:build"
       }
     },
     "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"]
+      "executor": "@nx/eslint:lint"
     }
-  }
+  },
+  "tags": []
 }

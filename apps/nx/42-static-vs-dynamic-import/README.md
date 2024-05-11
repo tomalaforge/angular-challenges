@@ -5,7 +5,7 @@
 ### Run Application
 
 ```bash
-npx nx serve nx-static-dynamic-import
+npx nx serve nx-static-vs-dynamic-import
 ```
 
 ### Documentation and Instruction

@@ -6,16 +6,6 @@
   "type": "object",
   "cli": "nx",
   "properties": {
-    "name": {
-      "description": "The name of the application. (should be in kebab case)",
-      "type": "string",
-      "$default": {
-        "$source": "argv",
-        "index": 0
-      },
-      "x-prompt": "What name would you like to use for the application?",
-      "pattern": "^[a-zA-Z].*$"
-    },
     "title": {
       "description": "Title of your challenge.",
       "type": "string",

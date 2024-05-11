@@ -5,7 +5,7 @@ author: thomas-laforge
 contributors:
   - tomalaforge
 challengeNumber: 42
-command: nx-static-dynamic-import
+command: nx-static-vs-dynamic-import
 sidebar:
   order: 15
 ---

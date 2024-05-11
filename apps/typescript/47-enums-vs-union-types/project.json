@@ -3,24 +3,24 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "app",
-  "sourceRoot": "apps/typescript/enums-vs-union-types/src",
+  "sourceRoot": "apps/typescript/47-enums-vs-union-types/src",
   "tags": [],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/typescript/enums-vs-union-types",
-        "index": "apps/typescript/enums-vs-union-types/src/index.html",
-        "browser": "apps/typescript/enums-vs-union-types/src/main.ts",
+        "outputPath": "dist/apps/typescript/47-enums-vs-union-types",
+        "index": "apps/typescript/47-enums-vs-union-types/src/index.html",
+        "browser": "apps/typescript/47-enums-vs-union-types/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/typescript/enums-vs-union-types/tsconfig.app.json",
+        "tsConfig": "apps/typescript/47-enums-vs-union-types/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
-          "apps/typescript/enums-vs-union-types/src/favicon.ico",
-          "apps/typescript/enums-vs-union-types/src/assets"
+          "apps/typescript/47-enums-vs-union-types/src/favicon.ico",
+          "apps/typescript/47-enums-vs-union-types/src/assets"
         ],
-        "styles": ["apps/typescript/enums-vs-union-types/src/styles.scss"],
+        "styles": ["apps/typescript/47-enums-vs-union-types/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
