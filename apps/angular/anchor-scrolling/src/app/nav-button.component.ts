@@ -1,10 +1,11 @@
 /* eslint-disable @angular-eslint/component-selector */
+import { ViewportScroller } from '@angular/common';
 import { Component, Input } from '@angular/core';
 @Component({
   selector: 'nav-button',
   standalone: true,
   template: `
-    <a [href]="href">
+    <a title="navigation button" (click)="onScrollTo()">
       <ng-content></ng-content>
     </a>
   `,
@@ -13,5 +14,12 @@ import { Component, Input } from '@angular/core';
   },
 })
 export class NavButtonComponent {
-  @Input() href = '';
+  @Input() scrollTo?: string;
+  constructor(private _viewPort: ViewportScroller) {}
+
+  public onScrollTo(): void {
+    if (this.scrollTo) {
+      this._viewPort.scrollToAnchor(this.scrollTo);
+    }
+  }
 }
