@@ -1,0 +1,17 @@
+@for (todo of todos(); track todo){
+  <div>
+    {{ todo.title }}
+    <button (click)="update(todo)">Update</button>
+    <button (click)="delete(todo.id)">Delete</button>
+  </div>
+}
+@defer (){
+
+}
+@loading(minimum 13s){
+  <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+}
+@error {
+  <div>Something went wrong</div>
+}
+
