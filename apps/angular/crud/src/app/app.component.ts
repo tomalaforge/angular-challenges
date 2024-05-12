@@ -1,51 +1,70 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { randText } from '@ngneat/falso';
+import { tap } from 'rxjs';
+import { Todo } from './models/todo.interface';
+import { TodoService } from './services/todo.service';
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatProgressSpinnerModule],
   selector: 'app-root',
   template: `
-    <div *ngFor="let todo of todos">
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+
+    <div *ngFor="let todo of todos()">
       {{ todo.title }}
       <button (click)="update(todo)">Update</button>
+      <button (click)="delete(todo.id)">Delete</button>
     </div>
   `,
   styles: [],
 })
 export class AppComponent implements OnInit {
-  todos!: any[];
-
-  constructor(private http: HttpClient) {}
+  todos = signal<Todo[]>([]);
+  isLoading!: boolean;
+  todoService = inject(TodoService);
 
   ngOnInit(): void {
-    this.http
-      .get<any[]>('https://jsonplaceholder.typicode.com/todos')
+    this.todoService
+      .getTodos()
+      .pipe(tap(() => (this.isLoading = true)))
       .subscribe((todos) => {
-        this.todos = todos;
+        this.todos.set(todos);
+        this.isLoading = false;
       });
   }
 
-  update(todo: any) {
-    this.http
-      .put<any>(
-        `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
-        JSON.stringify({
-          todo: todo.id,
-          title: randText(),
-          body: todo.body,
-          userId: todo.userId,
-        }),
-        {
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-          },
-        },
-      )
-      .subscribe((todoUpdated: any) => {
-        this.todos[todoUpdated.id - 1] = todoUpdated;
+  delete(id: number) {
+    this.todoService
+      .deleteTodo(id)
+      .pipe(tap(() => (this.isLoading = true)))
+      .subscribe(() => {
+        this.todos.set([...this.todos().filter((todo) => todo.id !== id)]);
+
+        this.isLoading = false;
+      });
+  }
+
+  update(todo: Todo) {
+    const todoUpdated = JSON.stringify({
+      todo: todo.id,
+      title: randText(),
+      userId: todo.userId,
+    });
+
+    this.todoService
+      .updateTodo(String(todo.id), todoUpdated)
+      .pipe(tap(() => (this.isLoading = true)))
+      .subscribe((todoUpdated: Todo) => {
+        this.todos.set([
+          ...this.todos().map((todo) =>
+            todo.id === todoUpdated.id ? todoUpdated : todo,
+          ),
+        ]);
+
+        this.isLoading = false;
       });
   }
 }
