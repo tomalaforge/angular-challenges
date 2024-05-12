@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { BehaviorSubject } from 'rxjs';
 import { Student } from '../model/student.model';
 
@@ -6,18 +7,20 @@ import { Student } from '../model/student.model';
   providedIn: 'root',
 })
 export class StudentStore {
-  private students = new BehaviorSubject<Student[]>([]);
-  students$ = this.students.asObservable();
+  private studentsSubject = new BehaviorSubject<Student[]>([]);
+  students = toSignal(this.studentsSubject.asObservable());
 
   addAll(students: Student[]) {
-    this.students.next(students);
+    this.studentsSubject.next(students);
   }
 
   addOne(student: Student) {
-    this.students.next([...this.students.value, student]);
+    this.studentsSubject.next([...this.studentsSubject.value, student]);
   }
 
   deleteOne(id: number) {
-    this.students.next(this.students.value.filter((s) => s.id !== id));
+    this.studentsSubject.next(
+      this.studentsSubject.value.filter((s) => s.id !== id),
+    );
   }
 }

@@ -1,0 +1,18 @@
+<app-card
+  [list]="teachers() ?? []"
+  (addOneEventEmitter)="addTeacher()"
+  class="bg-light-red">
+  <img
+    img-src
+    ngSrc="assets/img/teacher.png"
+    width="200"
+    height="200"
+    alt="teacher image" />
+
+  <ng-template appCardListItem let-item>
+    <app-list-item
+      [id]="item.id"
+      [name]="item.firstName"
+      (deleteEventEmitter)="delete(item.id)" />
+  </ng-template>
+</app-card>
