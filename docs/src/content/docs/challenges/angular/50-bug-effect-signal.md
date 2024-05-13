@@ -35,4 +35,4 @@ To ensure this feature works properly, fix the bug and try this out to reproduce
 
 ## Bonus Challenge
 
-- Try to implement this feature with a `computed` signal `isPriceIncreased`, use this signal in a `effect` to determine, if the alert should be shown or not.
+- Try to implement this feature with a `computed` signal.
