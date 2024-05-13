@@ -6,42 +6,28 @@ import { Component } from '@angular/core';
   standalone: true,
   styles: [
     `
-      :host-context(.colorblue) .colorfuente {
+      :host-context(.styleblue15) .colorfuente {
         color: blue;
-      }
-      :host-context(.size15) .tamanyofuente {
         font-size: 15px;
       }
-      :host-context(.colordefault) .colorfuente {
+      :host-context(.styledefault) .colorfuente {
         color: black;
-      }
-      :host-context(.sizedefault) .tamanyofuente {
         font-size: 10px;
       }
-      :host-context(.errorcolor) .colorfuente {
+      :host-context(.styleerror) .colorfuente {
         color: red;
-      }
-      :host-context(.errorsize) .tamanyofuente {
         font-size: 30px;
       }
-      :host-context(.warningcolor) .colorfuente {
+      :host-context(.stylewarning) .colorfuente {
         color: orange;
-      }
-      :host-context(.warningsize) .tamanyofuente {
         font-size: 25px;
       }
     `,
   ],
   template: `
-    <!-- <p style="font-size: {{ font }}px; color: {{ color }}">
-      <ng-content></ng-content>
-    </p> -->
     <p class="tamanyofuente colorfuente">
       <ng-content></ng-content>
     </p>
   `,
 })
-export class TextComponent {
-  // @Input() font = 10;
-  // @Input() color = 'black';
-}
+export class TextComponent {}

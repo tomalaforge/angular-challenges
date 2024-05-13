@@ -8,15 +8,10 @@ import { TextComponent } from './text.component';
   standalone: true,
   imports: [TextStaticComponent, TextComponent],
   template: `
-    <div class="colorblue size15">
-      <!--
-        <static-text type="error"></static-text>
-        <static-text type="warning"></static-text>
-        <text [font]="15" color="blue">This is a blue text</text>
-      -->
-      <static-text class="colordefault sizedefault"></static-text>
-      <static-text class="errorcolor errorsize"></static-text>
-      <static-text class="warningcolor warningsize"></static-text>
+    <div class="styleblue15">
+      <static-text class="styledefault"></static-text>
+      <static-text class="styleerror"></static-text>
+      <static-text class="stylewarning"></static-text>
       <text>This is a blue text</text>
     </div>
   `,
