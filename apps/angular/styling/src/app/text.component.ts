@@ -6,26 +6,30 @@ import { Component } from '@angular/core';
   standalone: true,
   styles: [
     `
-      :host-context(.styleblue15) .colorfuente {
-        color: blue;
-        font-size: 15px;
+      :host-context(.styleblue15) {
+        --color-elegido: blue;
+        --tamaño-elegido: 15px;
       }
-      :host-context(.styledefault) .colorfuente {
-        color: black;
-        font-size: 10px;
+      :host-context(.styledefault) {
+        --color-elegido: black;
+        --tamaño-elegido: 10px;
       }
-      :host-context(.styleerror) .colorfuente {
-        color: red;
-        font-size: 30px;
+      :host-context(.styleerror) {
+        --color-elegido: red;
+        --tamaño-elegido: 30px;
       }
-      :host-context(.stylewarning) .colorfuente {
-        color: orange;
-        font-size: 25px;
+      :host-context(.stylewarning) {
+        --color-elegido: orange;
+        --tamaño-elegido: 25px;
+      }
+      .element {
+        font-size: var(--tamaño-elegido);
+        color: var(--color-elegido);
       }
     `,
   ],
   template: `
-    <p class="tamanyofuente colorfuente">
+    <p class="element">
       <ng-content></ng-content>
     </p>
   `,
