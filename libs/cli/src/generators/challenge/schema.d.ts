@@ -6,4 +6,5 @@ export interface Schema {
   addTest?: boolean;
   skipPackageJson?: boolean;
   rootProject?: boolean;
+  challengeNumber?: number;
 }

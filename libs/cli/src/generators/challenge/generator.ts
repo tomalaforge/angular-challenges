@@ -38,7 +38,8 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
   const challengeNumberJson = JSON.parse(
     tree.read(challengeNumberPath).toString(),
   );
-  const challengeNumber = challengeNumberJson.total + 1;
+  const challengeNumber =
+    options.challengeNumber ?? challengeNumberJson.total + 1;
   const difficulty = options.challengeDifficulty;
 
   const name = options.title.toLowerCase().split(' ').join('-');

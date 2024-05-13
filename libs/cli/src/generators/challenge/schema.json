@@ -95,6 +95,10 @@
         ]
       }
     },
+    "challengeNumber": {
+      "description": "Specify a challenge number (If you don't, the challenge number will be set automatically)",
+      "type": "number"
+    },
     "addTest": {
       "description": "add spec files.",
       "type": "boolean",
