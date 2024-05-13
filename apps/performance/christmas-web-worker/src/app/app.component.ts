@@ -1,11 +1,11 @@
-import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { PercentPipe } from '@angular/common';
+import { Component, computed, inject, signal } from '@angular/core';
 import { HeavyCalculationService } from './heavy-calculation.service';
 import { UnknownPersonComponent } from './unknown-person/unknown-person.component';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, UnknownPersonComponent],
+  imports: [PercentPipe, UnknownPersonComponent],
   providers: [HeavyCalculationService],
   selector: 'app-root',
   template: `
@@ -15,18 +15,35 @@ import { UnknownPersonComponent } from './unknown-person/unknown-person.componen
       (click)="discover()">
       Discover
     </button>
-    <div class="p-1 text-white">Progress: {{ loadingPercentage() }}%</div>
+    <div class="p-1 text-white">
+      Progress: {{ loadingPercentage() / 100 | percent: '1.1-1' }}
+    </div>
   `,
   host: {
     class: `flex flex-col h-screen w-screen bg-[#1f75c0]`,
   },
 })
 export class AppComponent {
+  private readonly workerLoadingPercentage = signal(0);
   private heavyCalculationService = inject(HeavyCalculationService);
-
-  readonly loadingPercentage = this.heavyCalculationService.loadingPercentage;
+  // Use which value is available (trying the worker first)
+  readonly loadingPercentage = computed(
+    () =>
+      this.workerLoadingPercentage() ||
+      this.heavyCalculationService.loadingPercentage(),
+  );
 
   discover() {
-    this.heavyCalculationService.startLoading();
+    if (typeof Worker !== 'undefined') {
+      // Create a new
+      const worker = new Worker(
+        new URL('./heavy-calculation.worker', import.meta.url),
+      );
+      worker.onmessage = ({ data }) => this.workerLoadingPercentage.set(data);
+      worker.postMessage('irrelevant message');
+    } else {
+      // Web workers are not supported in this environment.
+      this.heavyCalculationService.startLoading();
+    }
   }
 }
