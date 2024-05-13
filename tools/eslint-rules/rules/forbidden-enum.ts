@@ -14,7 +14,7 @@
  * https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin/src/rules
  */
 
-import { ESLintUtils } from '@typescript-eslint/utils';
+import { ESLintUtils, TSESTree } from '@typescript-eslint/utils';
 
 // NOTE: The rule will be available in ESLint configs as "@nx/workspace/forbidden-enum"
 export const RULE_NAME = 'forbidden-enum';
@@ -28,10 +28,21 @@ export const rule = ESLintUtils.RuleCreator(() => __filename)({
       recommended: 'recommended',
     },
     schema: [],
-    messages: {},
+    messages: {
+      ['forbidden-enum']: 'Enums are forbidden - use union types instead',
+    },
   },
   defaultOptions: [],
   create(context) {
-    return {};
+    return {
+      TSEnumDeclaration: (node: TSESTree.TSEnumDeclaration) => {
+        if (node.members) {
+          return context.report({
+            node,
+            messageId: 'forbidden-enum',
+          });
+        }
+      },
+    };
   },
 });

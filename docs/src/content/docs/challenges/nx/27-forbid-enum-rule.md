@@ -20,7 +20,7 @@ You will also need to write tests to verify the rule's functionality.
 
 The `tools/eslint-rules` folder contains the starter code for this challenge.
 
-To test the rule inside your project, add `"@nrwl/nx/workspace/forbidden-enum": "error"` to the `eslintrc.json`. You can navigate to Challenge 47, `Enums vs. Union Types', and you should immediately see an error.
+To test the rule inside your project, add `"@nx/workspace/forbidden-enum": "error"` to the `eslintrc.json`. You can navigate to Challenge 47, `Enums vs. Union Types', and you should immediately see an error.
 
 To assist you with AST (Abstract Syntax Tree) definitions, you can visit the [AST Explorer](https://astexplorer.net/) and use `JavaScript`, `@typescript-eslint/parser`, and `ESLint-v8` as the transformation methods. However, please note that you will only get the `type` information there. The transformation function may not work for TypeScript types since the editor is in JavaScript.
 

@@ -24,7 +24,8 @@
           {
             "allowStatic": true
           }
-        ]
+        ],
+        "@nx/workspace/forbidden-enum": "error"
       }
     },
     {
