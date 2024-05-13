@@ -1,21 +1,20 @@
-import { NgFor, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, ContentChild, Input, TemplateRef } from '@angular/core';
 
 @Component({
   selector: 'table',
   standalone: true,
-  imports: [NgTemplateOutlet, NgFor],
+  imports: [NgTemplateOutlet],
   template: `
     <thead>
       <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
     </thead>
-    <tbody *ngFor="let item of items">
-      <ng-container
-        *ngTemplateOutlet="
-          bodyTemplate;
-          context: { $implicit: item }
-        "></ng-container>
-    </tbody>
+    @for (item of items; track $index) {
+      <tbody>
+        <ng-container
+          *ngTemplateOutlet="bodyTemplate; context: { $implicit: item }" />
+      </tbody>
+    }
   `,
 })
 export class TableComponent<T> {
