@@ -82,6 +82,9 @@
       ],
       "angular-master-dependency-injection": [
         "apps/angular/16-master-dependency-injection/src/index.ts"
+      ],
+      "static-dynamic-import/user": [
+        "libs/static-dynamic-import/user/src/index.ts"
       ]
     }
   },
