@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 
+import {
+  User,
+  UserComponent,
+} from '@angular-challenges/static-dynamic-import/user';
 import { MatTableModule } from '@angular/material/table';
 import { randCountry, randFirstName, randLastName } from '@ngneat/falso';
-import { UserComponent } from './user.component';
-import type { User } from './user.model';
 
 export const randUser = (): User => ({
   name: randFirstName(),

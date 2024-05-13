@@ -2,7 +2,7 @@
   "name": "static-dynamic-import-user",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/static-dynamic-import/user/src",
-  "prefix": "lib",
+  "prefix": "sdi",
   "tags": [],
   "projectType": "library",
   "targets": {

@@ -1,1 +1,2 @@
-export * from './lib/static-dynamic-import-user/static-dynamic-import-user.component';
+export { UserComponent } from './lib/user.component';
+export type { User } from './lib/user.model';

@@ -1,7 +1,7 @@
 import {
   UserComponent,
   type User,
-} from '@angular-challenges/static-dynamic-import/users';
+} from '@angular-challenges/static-dynamic-import/user';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
