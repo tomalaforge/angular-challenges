@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { randText } from '@ngneat/falso';
 import { tap } from 'rxjs';
 import { Todo } from './models/todo.interface';
 import { TodoService } from './services/todo.service';
@@ -48,14 +47,8 @@ export class AppComponent implements OnInit {
   }
 
   update(todo: Todo) {
-    const todoUpdated = JSON.stringify({
-      todo: todo.id,
-      title: randText(),
-      userId: todo.userId,
-    });
-
     this.todoService
-      .updateTodo(String(todo.id), todoUpdated)
+      .updateTodo(String(todo.id), todo)
       .pipe(tap(() => (this.isLoading = true)))
       .subscribe((todoUpdated: Todo) => {
         this.todos.set([
