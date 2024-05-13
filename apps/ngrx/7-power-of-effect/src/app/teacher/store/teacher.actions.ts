@@ -1,4 +1,4 @@
-import { Teacher } from '@angular-challenges/ngrx-notification/model';
+import { Teacher } from '@angular-challenges/power-of-effect/model';
 import { createActionGroup, props } from '@ngrx/store';
 
 export const teacherActions = createActionGroup({

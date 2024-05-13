@@ -2,7 +2,7 @@ import {
   randSchool,
   randStudent,
   randTeacher,
-} from '@angular-challenges/ngrx-notification/model';
+} from '@angular-challenges/power-of-effect/model';
 import { Injectable, inject } from '@angular/core';
 import { randCompanyName, randFirstName } from '@ngneat/falso';
 import { concatLatestFrom } from '@ngrx/effects';

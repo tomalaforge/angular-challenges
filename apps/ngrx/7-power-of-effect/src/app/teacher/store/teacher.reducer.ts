@@ -1,4 +1,4 @@
-import { Teacher } from '@angular-challenges/ngrx-notification/model';
+import { Teacher } from '@angular-challenges/power-of-effect/model';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
 import { teacherActions } from './teacher.actions';

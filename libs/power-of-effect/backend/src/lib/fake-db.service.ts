@@ -2,7 +2,7 @@ import {
   School,
   Student,
   Teacher,
-} from '@angular-challenges/ngrx-notification/model';
+} from '@angular-challenges/power-of-effect/model';
 import { Injectable } from '@angular/core';
 import { randNumber } from '@ngneat/falso';
 import { ComponentStore } from '@ngrx/component-store';

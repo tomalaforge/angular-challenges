@@ -1,4 +1,4 @@
-import { FakeBackendService } from '@angular-challenges/ngrx-notification/backend';
+import { FakeBackendService } from '@angular-challenges/power-of-effect/backend';
 import { APP_INITIALIZER, ApplicationConfig, inject } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';

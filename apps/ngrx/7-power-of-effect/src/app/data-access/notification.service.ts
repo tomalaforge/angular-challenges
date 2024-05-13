@@ -1,10 +1,10 @@
-import { PushService } from '@angular-challenges/ngrx-notification/backend';
+import { PushService } from '@angular-challenges/power-of-effect/backend';
 import {
   isSchool,
   isStudent,
   isTeacher,
   Push,
-} from '@angular-challenges/ngrx-notification/model';
+} from '@angular-challenges/power-of-effect/model';
 import { inject, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { filter } from 'rxjs';

@@ -1,4 +1,4 @@
-import { Student } from '@angular-challenges/ngrx-notification/model';
+import { Student } from '@angular-challenges/power-of-effect/model';
 import { createActionGroup, props } from '@ngrx/store';
 
 export const studentActions = createActionGroup({

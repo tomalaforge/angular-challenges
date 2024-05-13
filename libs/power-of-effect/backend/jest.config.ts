@@ -1,10 +1,10 @@
 /* eslint-disable */
 export default {
-  displayName: 'ngrx-notification-backend',
+  displayName: 'power-of-effect-backend',
   preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {},
-  coverageDirectory: '../../../coverage/libs/ngrx-notification/backend',
+  coverageDirectory: '../../../coverage/libs/power-of-effect/backend',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

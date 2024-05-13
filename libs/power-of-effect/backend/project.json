@@ -1,15 +1,15 @@
 {
-  "name": "ngrx-notification-backend",
+  "name": "power-of-effect-backend",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "sourceRoot": "libs/ngrx-notification/backend/src",
+  "sourceRoot": "libs/power-of-effect/backend/src",
   "prefix": "lib",
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "libs/ngrx-notification/backend/jest.config.ts"
+        "jestConfig": "libs/power-of-effect/backend/jest.config.ts"
       }
     },
     "lint": {

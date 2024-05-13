@@ -1,4 +1,4 @@
-import { FakeBackendService } from '@angular-challenges/ngrx-notification/backend';
+import { FakeBackendService } from '@angular-challenges/power-of-effect/backend';
 import { inject, Injectable } from '@angular/core';
 import { take } from 'rxjs';
 

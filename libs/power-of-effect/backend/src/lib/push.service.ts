@@ -1,4 +1,4 @@
-import { Push } from '@angular-challenges/ngrx-notification/model';
+import { Push } from '@angular-challenges/power-of-effect/model';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 

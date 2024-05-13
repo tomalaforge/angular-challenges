@@ -1,4 +1,4 @@
-import { School } from '@angular-challenges/ngrx-notification/model';
+import { School } from '@angular-challenges/power-of-effect/model';
 import { Injectable } from '@angular/core';
 import {
   ComponentStore,
