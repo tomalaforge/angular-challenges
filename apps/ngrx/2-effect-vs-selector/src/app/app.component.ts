@@ -6,8 +6,8 @@ import {
 } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ActivityType, Person } from './store/activity/activity.model';
-import { selectActivities } from './store/activity/activity.selectors';
-import { selectAllTeachersByActivityType } from './store/status/status.selectors';
+import { activityFeature } from './store/activity/activity.reducer';
+import { statusFeature } from './store/status/status.reducer';
 
 @Component({
   selector: 'app-root',
@@ -54,9 +54,11 @@ import { selectAllTeachersByActivityType } from './store/status/status.selectors
 export class AppComponent {
   private store = inject(Store);
 
-  activities = this.store.selectSignal(selectActivities);
+  activities = this.store.selectSignal(activityFeature.selectActivities);
 
   getAllTeachersForActivityType(type: ActivityType): Signal<Person[]> {
-    return this.store.selectSignal(selectAllTeachersByActivityType(type));
+    return this.store.selectSignal(
+      statusFeature.selectAllTeachersByActivityType(type),
+    );
   }
 }

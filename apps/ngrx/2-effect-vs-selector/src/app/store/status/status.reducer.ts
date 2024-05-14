@@ -1,9 +1,7 @@
-import { createReducer, on } from '@ngrx/store';
+import { createFeature, createReducer, createSelector, on } from '@ngrx/store';
 import { ActivityType, Person } from '../activity/activity.model';
 import * as StatusActions from './status.actions';
 import { Status } from './status.model';
-
-export const statusFeatureKey = 'status';
 
 export interface StatusState {
   statuses: Status[];
@@ -15,15 +13,28 @@ export const initialState: StatusState = {
   teachersMap: new Map(),
 };
 
-export const statusReducer = createReducer(
-  initialState,
-  on(StatusActions.loadStatusesSuccess, (state, { statuses }): StatusState => {
-    const map = new Map();
-    statuses.forEach((s) => map.set(s.name, s.teachers));
-    return {
-      ...state,
-      statuses,
-      teachersMap: map,
-    };
+export const statusFeature = createFeature({
+  name: 'status',
+  reducer: createReducer(
+    initialState,
+    on(
+      StatusActions.loadStatusesSuccess,
+      (state, { statuses }): StatusState => {
+        const map = new Map();
+        statuses.forEach((s) => map.set(s.name, s.teachers));
+        return {
+          ...state,
+          statuses,
+          teachersMap: map,
+        };
+      },
+    ),
+  ),
+  extraSelectors: ({ selectTeachersMap }) => ({
+    selectAllTeachersByActivityType: (name: ActivityType) =>
+      createSelector(
+        selectTeachersMap,
+        (teachersMap) => teachersMap.get(name) ?? [],
+      ),
   }),
-);
+});

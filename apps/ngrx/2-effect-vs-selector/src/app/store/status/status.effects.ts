@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType, OnInitEffects } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
 import { combineLatest, concatMap, map } from 'rxjs';
-import { selectActivities } from '../activity/activity.selectors';
-import { selectUser } from '../user/user.selectors';
+import { activityFeature } from '../activity/activity.reducer';
+import { userFeature } from '../user/user.reducer';
 import * as StatusActions from './status.actions';
 import { Status } from './status.model';
 
@@ -14,8 +14,8 @@ export class StatusEffects implements OnInitEffects {
       ofType(StatusActions.loadStatuses),
       concatMap(() =>
         combineLatest([
-          this.store.select(selectUser),
-          this.store.select(selectActivities),
+          this.store.select(userFeature.selectUser),
+          this.store.select(activityFeature.selectActivities),
         ]).pipe(
           map(([user, activities]): Status[] => {
             if (user?.isAdmin) {
