@@ -4,7 +4,6 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
 import { provideEffects } from '@ngrx/effects';
 import { provideState, provideStore } from '@ngrx/store';
-import { NotificationService } from './data-access/notification.service';
 import { ROUTES } from './routes';
 import { StudentEffects } from './student/store/student.effects';
 import { studentFeature } from './student/store/student.reducer';
@@ -24,14 +23,6 @@ export const appConfig: ApplicationConfig = {
       useFactory: () => {
         const service = inject(FakeBackendService);
         return () => service.start();
-      },
-    },
-    {
-      provide: APP_INITIALIZER,
-      multi: true,
-      useFactory: () => {
-        const service = inject(NotificationService);
-        return () => service.init();
       },
     },
     provideAnimations(),
