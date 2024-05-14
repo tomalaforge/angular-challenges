@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType, OnInitEffects } from '@ngrx/effects';
+import { Action } from '@ngrx/store';
 import { of } from 'rxjs';
 import { catchError, concatMap, map } from 'rxjs/operators';
 import * as UserActions from './user.actions';
 import { UserService } from './user.service';
 
 @Injectable()
-export class UserEffects {
+export class UserEffects implements OnInitEffects {
   loadUsers$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(UserActions.loadUsers),
@@ -23,4 +24,8 @@ export class UserEffects {
     private actions$: Actions,
     private userService: UserService,
   ) {}
+
+  ngrxOnInitEffects(): Action {
+    return UserActions.loadUsers();
+  }
 }
