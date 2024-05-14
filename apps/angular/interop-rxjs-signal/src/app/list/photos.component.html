@@ -1,0 +1,59 @@
+<h2 class="mb-2 text-xl">Photos</h2>
+
+<mat-form-field appearance="fill">
+  <mat-label>Search</mat-label>
+  <input
+    type="text"
+    matInput
+    [formControl]="search"
+    placeholder="find a photo" />
+</mat-form-field>
+
+<ng-container>
+  <section
+    class="flex flex-col"
+    *ngrxLet="store.loadingState() | loadingStatePipe as loadingState">
+    <section class="flex items-center gap-3">
+      <button
+        [disabled]="store.filter.page() === 1"
+        [class.bg-gray-400]="store.filter.page() === 1"
+        class="rounded-md border p-3 text-xl"
+        (click)="store.previousPage()">
+        <
+      </button>
+      <button
+        [disabled]="store.endOfPage()"
+        [class.bg-gray-400]="store.endOfPage()"
+        class="rounded-md border p-3 text-xl"
+        (click)="store.nextPage()">
+        >
+      </button>
+      Page :{{ store.filter.page() }} / {{ store.pages() }}
+    </section>
+
+    @if (loadingState.loading) {
+      <mat-progress-bar mode="query" class="mt-5"></mat-progress-bar>
+    }
+
+    <ul class="flex flex-wrap gap-4">
+      @for (photo of store.photos(); track photo.id) {
+        <li>
+          <a routerLink="detail" [queryParams]="{ photo: encode(photo) }">
+            <img
+              src="{{ photo.url_q }}"
+              alt="{{ photo.title }}"
+              class="image" />
+          </a>
+        </li>
+      } @empty {
+        <div>No Photos found. Type a search word.</div>
+      }
+    </ul>
+
+    @if (loadingState.error) {
+      <footer class="text-red-500">
+        {{ loadingState.error }}
+      </footer>
+    }
+  </section>
+</ng-container>
