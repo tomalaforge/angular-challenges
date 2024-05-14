@@ -8,7 +8,7 @@ contributors:
   - svenson95
   - jdegand
 challengeNumber: 2
-command: ngrx-effect-selector
+command: ngrx-effect-vs-selector
 blogLink: https://medium.com/@thomas.laforge/ngrx-effect-vs-reducer-vs-selector-58337ab59043
 sidebar:
   order: 113

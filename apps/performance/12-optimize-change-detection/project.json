@@ -1,0 +1,84 @@
+{
+  "name": "performance-optimize-change-detection",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/performance/12-optimize-change-detection/src",
+  "prefix": "app",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/performance/12-optimize-change-detection",
+        "index": "apps/performance/12-optimize-change-detection/src/index.html",
+        "main": "apps/performance/12-optimize-change-detection/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/performance/12-optimize-change-detection/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/performance/12-optimize-change-detection/src/favicon.ico",
+          "apps/performance/12-optimize-change-detection/src/assets"
+        ],
+        "styles": [
+          "apps/performance/12-optimize-change-detection/src/styles.scss"
+        ],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "performance-optimize-change-detection:build:production"
+        },
+        "development": {
+          "buildTarget": "performance-optimize-change-detection:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "performance-optimize-change-detection:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/performance/12-optimize-change-detection/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}

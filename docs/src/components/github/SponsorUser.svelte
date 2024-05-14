@@ -13,7 +13,7 @@
 </script>
 
 {#each sponsors as { username, avatar }}
-  <a href={`https://github.com/${username}`}>
+  <a href={`https://github.com/${username}`} class="link-avatar">
     <img
       loading="lazy"
       src={avatar}
@@ -26,6 +26,10 @@
 {/each}
 
 <style>
+  .link-avatar {
+    text-decoration: auto;
+  }
+
   .avatar {
     border-radius: 50%;
     width: 30px;

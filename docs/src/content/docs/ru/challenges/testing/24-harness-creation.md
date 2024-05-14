@@ -5,7 +5,7 @@ author: thomas-laforge
 contributors:
   - Dinozavvvr
 challengeNumber: 24
-command: testing-create-harness
+command: testing-harness-creation
 sidebar:
   order: 112
 ---
