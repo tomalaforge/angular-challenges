@@ -1,13 +1,13 @@
-import { AsyncPipe, NgFor } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   OnInit,
+  Signal,
   inject,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { loadActivities } from './store/activity/activity.actions';
-import { ActivityType } from './store/activity/activity.model';
+import { ActivityType, Person } from './store/activity/activity.model';
 import { selectActivities } from './store/activity/activity.selectors';
 import { loadStatuses } from './store/status/status.actions';
 import { selectAllTeachersByActivityType } from './store/status/status.selectors';
@@ -16,24 +16,25 @@ import { loadUsers } from './store/user/user.actions';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [NgFor, AsyncPipe],
+  imports: [],
   template: `
     <h1>Activity Board</h1>
     <section>
-      <div class="card" *ngFor="let activity of activities$ | async">
-        <h2>Activity Name: {{ activity.name }}</h2>
-        <p>Main teacher: {{ activity.teacher.name }}</p>
-        <span>All teachers available for : {{ activity.type }} are</span>
-        <ul>
-          <li
-            *ngFor="
-              let teacher of getAllTeachersForActivityType$(activity.type)
-                | async
-            ">
-            {{ teacher.name }}
-          </li>
-        </ul>
-      </div>
+      @for (activity of activities(); track activity.id) {
+        <div class="card">
+          <h2>Activity Name: {{ activity.name }}</h2>
+          <p>Main teacher: {{ activity.teacher.name }}</p>
+          <span>All teachers available for : {{ activity.type }} are</span>
+          <ul>
+            @for (
+              teacher of getAllTeachersForActivityType(activity.type)();
+              track teacher.id
+            ) {
+              <li>{{ teacher.name }}</li>
+            }
+          </ul>
+        </div>
+      }
     </section>
   `,
   styles: [
@@ -47,9 +48,7 @@ import { loadUsers } from './store/user/user.actions';
       .card {
         display: flex;
         flex-direction: column;
-        border: solid;
-        border-width: 1px;
-        border-color: black;
+        border: 1px solid black;
         padding: 2px;
       }
     `,
@@ -59,7 +58,7 @@ import { loadUsers } from './store/user/user.actions';
 export class AppComponent implements OnInit {
   private store = inject(Store);
 
-  activities$ = this.store.select(selectActivities);
+  activities = this.store.selectSignal(selectActivities);
 
   ngOnInit(): void {
     this.store.dispatch(loadActivities());
@@ -67,6 +66,7 @@ export class AppComponent implements OnInit {
     this.store.dispatch(loadStatuses());
   }
 
-  getAllTeachersForActivityType$ = (type: ActivityType) =>
-    this.store.select(selectAllTeachersByActivityType(type));
+  getAllTeachersForActivityType(type: ActivityType): Signal<Person[]> {
+    return this.store.selectSignal(selectAllTeachersByActivityType(type));
+  }
 }
