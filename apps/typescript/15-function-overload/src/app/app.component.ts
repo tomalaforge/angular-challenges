@@ -9,7 +9,8 @@ import { createVehicle } from './vehicle.utils';
 export class AppComponent {
   car = createVehicle('car', 'diesel');
   moto = createVehicle('moto', 'diesel');
-  bus = createVehicle('bus', undefined, 20);
-  boat = createVehicle('boat', undefined, 300, true);
+  bus = createVehicle('bus', 20, true);
+  // was it intentional to have the boolean argument on the wrong vehicle?
+  boat = createVehicle('boat', 300);
   bicycle = createVehicle('bicycle');
 }
