@@ -26,6 +26,10 @@ export interface Activity {
   teacher: Person;
 }
 
+export interface ActivityTeachers extends Activity {
+  eligibleTeachers: Person[];
+}
+
 const factoryPerson = incrementalNumber();
 
 export const randPerson = () => ({

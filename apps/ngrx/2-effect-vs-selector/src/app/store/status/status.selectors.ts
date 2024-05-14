@@ -1,5 +1,10 @@
 import { createSelector } from '@ngrx/store';
-import { Activity, ActivityType } from '../activity/activity.model';
+import {
+  Activity,
+  ActivityTeachers,
+  ActivityType,
+  Person,
+} from '../activity/activity.model';
 import { activityFeature } from '../activity/activity.reducer';
 import { User } from '../user/user.model';
 import { userFeature } from '../user/user.reducer';
@@ -27,10 +32,18 @@ const selectStatuses = createSelector(
   },
 );
 
-export const selectAllTeachersByActivityType = (name: ActivityType) =>
-  createSelector(selectStatuses, (statuses) => {
-    const teachersMap = new Map();
-    statuses.forEach((s) => teachersMap.set(s.name, s.teachers));
+const selectTeachersMap = createSelector(selectStatuses, (statuses) => {
+  const teachersMap = new Map<ActivityType, Person[]>();
+  statuses.forEach((s) => teachersMap.set(s.name, s.teachers));
+  return teachersMap;
+});
 
-    return teachersMap.get(name) ?? [];
-  });
+export const selectActivities = createSelector(
+  activityFeature.selectActivities,
+  selectTeachersMap,
+  (activities, teachersMap): ActivityTeachers[] =>
+    activities.map((activity) => ({
+      ...activity,
+      eligibleTeachers: teachersMap.get(activity.type) ?? [],
+    })),
+);

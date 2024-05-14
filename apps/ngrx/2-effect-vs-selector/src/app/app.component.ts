@@ -1,13 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  Signal,
   inject,
+  Signal,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { ActivityType, Person } from './store/activity/activity.model';
-import { activityFeature } from './store/activity/activity.reducer';
-import { selectAllTeachersByActivityType } from './store/status/status.selectors';
+import { ActivityTeachers } from './store/activity/activity.model';
+import { selectActivities } from './store/status/status.selectors';
 
 @Component({
   selector: 'app-root',
@@ -22,10 +21,7 @@ import { selectAllTeachersByActivityType } from './store/status/status.selectors
           <p>Main teacher: {{ activity.teacher.name }}</p>
           <span>All teachers available for : {{ activity.type }} are</span>
           <ul>
-            @for (
-              teacher of getAllTeachersForActivityType(activity.type)();
-              track teacher.id
-            ) {
+            @for (teacher of activity.eligibleTeachers; track teacher.id) {
               <li>{{ teacher.name }}</li>
             }
           </ul>
@@ -54,9 +50,6 @@ import { selectAllTeachersByActivityType } from './store/status/status.selectors
 export class AppComponent {
   private store = inject(Store);
 
-  activities = this.store.selectSignal(activityFeature.selectActivities);
-
-  getAllTeachersForActivityType(type: ActivityType): Signal<Person[]> {
-    return this.store.selectSignal(selectAllTeachersByActivityType(type));
-  }
+  activities: Signal<ActivityTeachers[]> =
+    this.store.selectSignal(selectActivities);
 }
