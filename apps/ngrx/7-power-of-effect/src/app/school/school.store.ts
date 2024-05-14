@@ -6,15 +6,18 @@ import {
   OnStoreInit,
   tapResponse,
 } from '@ngrx/component-store';
+import { Store } from '@ngrx/store';
 import { filter, pipe, switchMap } from 'rxjs';
 import { HttpService } from '../data-access/http.service';
 import { PUSH_TOKEN } from '../push-token';
+import { schoolActions } from './school.actions';
 
 @Injectable()
 export class SchoolStore
   extends ComponentStore<{ schools: School[] }>
   implements OnStoreInit, OnStateInit
 {
+  private readonly store = inject(Store);
   readonly schools$ = this.select((state) => state.schools);
 
   constructor(private httpService: HttpService) {
@@ -51,7 +54,10 @@ export class SchoolStore
         filter(Boolean),
         filter(isSchool),
         tapResponse({
-          next: this.upsertSchool,
+          next: (school) => {
+            this.upsertSchool(school);
+            this.store.dispatch(schoolActions.addOneSchool({ school }));
+          },
           error: (_) => _, // not handling the error
         }),
       ),
