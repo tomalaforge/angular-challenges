@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MatMiniFabButton } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -95,6 +96,7 @@ import { MatSliderModule } from '@angular/material/slider';
     MatCheckboxModule,
     MatSliderModule,
     MatIconModule,
+    MatMiniFabButton,
   ],
 })
 export class ChildComponent {
