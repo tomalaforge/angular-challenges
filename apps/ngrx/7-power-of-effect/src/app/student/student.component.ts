@@ -1,7 +1,7 @@
 /* eslint-disable @angular-eslint/component-selector */
 import { Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { StudentSelectors } from './store/student.selectors';
+import { studentFeature } from './store/student.reducer';
 
 @Component({
   standalone: true,
@@ -28,6 +28,5 @@ import { StudentSelectors } from './store/student.selectors';
   ],
 })
 export class StudentComponent {
-  private store = inject(Store);
-  students = this.store.selectSignal(StudentSelectors.selectStudents);
+  students = inject(Store).selectSignal(studentFeature.selectStudents);
 }

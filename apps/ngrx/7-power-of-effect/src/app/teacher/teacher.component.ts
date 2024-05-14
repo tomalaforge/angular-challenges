@@ -1,8 +1,8 @@
 /* eslint-disable @angular-eslint/component-selector */
 import { NgFor } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { TeacherSelectors } from './store/teacher.selectors';
+import { teacherFeature } from './store/teacher.reducer';
 
 @Component({
   standalone: true,
@@ -29,7 +29,5 @@ import { TeacherSelectors } from './store/teacher.selectors';
   ],
 })
 export class TeacherComponent {
-  teacher = this.store.selectSignal(TeacherSelectors.selectTeachers);
-
-  constructor(private store: Store) {}
+  teacher = inject(Store).selectSignal(teacherFeature.selectTeachers);
 }
