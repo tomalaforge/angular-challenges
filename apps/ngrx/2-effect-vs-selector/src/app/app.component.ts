@@ -7,7 +7,7 @@ import {
 import { Store } from '@ngrx/store';
 import { ActivityType, Person } from './store/activity/activity.model';
 import { activityFeature } from './store/activity/activity.reducer';
-import { statusFeature } from './store/status/status.reducer';
+import { selectAllTeachersByActivityType } from './store/status/status.selectors';
 
 @Component({
   selector: 'app-root',
@@ -57,8 +57,6 @@ export class AppComponent {
   activities = this.store.selectSignal(activityFeature.selectActivities);
 
   getAllTeachersForActivityType(type: ActivityType): Signal<Person[]> {
-    return this.store.selectSignal(
-      statusFeature.selectAllTeachersByActivityType(type),
-    );
+    return this.store.selectSignal(selectAllTeachersByActivityType(type));
   }
 }
