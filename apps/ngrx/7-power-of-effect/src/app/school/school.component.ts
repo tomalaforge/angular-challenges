@@ -1,19 +1,19 @@
 /* eslint-disable @angular-eslint/component-selector */
-import { AsyncPipe, NgFor } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { provideComponentStore } from '@ngrx/component-store';
 import { SchoolStore } from './school.store';
 
 @Component({
   standalone: true,
-  imports: [NgFor, AsyncPipe],
+  imports: [AsyncPipe],
   providers: [provideComponentStore(SchoolStore)],
   selector: 'school',
   template: `
     <h3>SCHOOL</h3>
-    <div *ngFor="let school of school$ | async">
-      {{ school.name }} - {{ school.version }}
-    </div>
+    @for (school of school$ | async; track school.id) {
+      <div>{{ school.name }} - {{ school.version }}</div>
+    }
   `,
   styles: [
     `
