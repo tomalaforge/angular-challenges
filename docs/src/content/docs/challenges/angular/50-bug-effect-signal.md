@@ -4,6 +4,7 @@ description: Challenge 50 is about understanding why an effect is not triggered.
 author: thomas-laforge
 contributors:
   - tomalaforge
+  - svenson95
 challengeNumber: 50
 command: angular-bug-effect-signal
 sidebar:
@@ -13,10 +14,27 @@ sidebar:
 
 ## Information
 
-In this basic exercise, we aim to display an alert whenever at least one checkbox is checked.
+In this basic exercise, we aim to display an alert whenever at least one checkbox is checked. You are in the process of buying a MacBook, which can be upgraded with some extras, like more drive space, more RAM or a better GPU.
+
+<img width="889" alt="Bildschirmfoto 2024-05-09 um 08 57 57" src="https://github.com/svenson95/angular-challenges/assets/46655156/d78f42a5-9064-4a33-bb8c-c0433bd6966d">
 
 ## Statement
 
-The alert correctly triggers when clicking on each checkbox separately. However, if you first click on one checkbox and then click on a second one, the alert fails to appear. Why does this happen?
+The actual implementation doesn't work as expected, your task is to fix the issue. Your team exposed a bug, there is a alert to be shown if atleast one of the three checkboxes is checked. But if the first one is checked, the other two checkboxes gets checked without displaying the alert. Why does this happen?
 
-The objective of this challenge is to understand and correct the issue preventing the alert from appearing when the second checkbox is clicked.
+The objective of this challenge is to understand the issue and fix the problem, preventing the alert from appearing when the second checkbox is clicked.
+
+## Acceptance Criteria
+
+To ensure this feature works properly, try this out to reproduce the bug after solving the challenge, to check if the bug is gone.
+
+- Check box 1 (Alert should be shown)
+- Check box 2 (Alert should be shown)
+- Uncheck box 1
+- Check box 3 (Alert should be shown)
+- Uncheck box 2
+- Uncheck box 3
+
+## Bonus Challenge
+
+- Try to implement this feature with a `computed` signal.
