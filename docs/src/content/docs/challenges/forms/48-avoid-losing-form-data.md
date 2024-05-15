@@ -9,7 +9,6 @@ challengeNumber: 48
 command: forms-avoid-losing-form-data
 sidebar:
   order: 121
-  badge: New
 ---
 
 ## Context
