@@ -1,1 +1,4 @@
-export { BtnDisabledDirective } from './lib/button-disabled.directive';
+export {
+  BtnDisabledDirective,
+  ButtonState,
+} from './lib/button-disabled.directive';
