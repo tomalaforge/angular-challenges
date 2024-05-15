@@ -1,12 +1,12 @@
 ---
-title: 🟢 Bug in Effect ?
+title: 🟢 Bug in Effect
 description: Challenge 50 is about understanding why an effect is not triggered.
 author: thomas-laforge
 contributors:
   - tomalaforge
   - svenson95
 challengeNumber: 50
-command: angular-bug-effect-signal
+command: signal-bug-in-effect
 sidebar:
   order: 19
   badge: New

@@ -5,7 +5,7 @@
 ### Run Application
 
 ```bash
-npx nx serve angular-bug-effect-signal
+npx nx serve signal-bug-in-effect
 ```
 
 ### Documentation and Instruction

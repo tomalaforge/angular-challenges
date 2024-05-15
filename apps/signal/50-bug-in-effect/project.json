@@ -1,26 +1,26 @@
 {
-  "name": "angular-bug-effect-signal",
+  "name": "signal-bug-in-effect",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "app",
-  "sourceRoot": "apps/angular/bug-effect-signal/src",
+  "sourceRoot": "apps/signal/50-bug-in-effect/src",
   "tags": [],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/angular/bug-effect-signal",
-        "index": "apps/angular/bug-effect-signal/src/index.html",
-        "browser": "apps/angular/bug-effect-signal/src/main.ts",
+        "outputPath": "dist/apps/signal/50-bug-in-effect",
+        "index": "apps/signal/50-bug-in-effect/src/index.html",
+        "browser": "apps/signal/50-bug-in-effect/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/angular/bug-effect-signal/tsconfig.app.json",
+        "tsConfig": "apps/signal/50-bug-in-effect/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
-          "apps/angular/bug-effect-signal/src/favicon.ico",
-          "apps/angular/bug-effect-signal/src/assets"
+          "apps/signal/50-bug-in-effect/src/favicon.ico",
+          "apps/signal/50-bug-in-effect/src/assets"
         ],
-        "styles": ["apps/angular/bug-effect-signal/src/styles.scss"],
+        "styles": ["apps/signal/50-bug-in-effect/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
@@ -51,10 +51,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "buildTarget": "angular-bug-effect-signal:build:production"
+          "buildTarget": "signal-bug-in-effect:build:production"
         },
         "development": {
-          "buildTarget": "angular-bug-effect-signal:build:development"
+          "buildTarget": "signal-bug-in-effect:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -62,7 +62,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "buildTarget": "angular-bug-effect-signal:build"
+        "buildTarget": "signal-bug-in-effect:build"
       }
     },
     "lint": {
