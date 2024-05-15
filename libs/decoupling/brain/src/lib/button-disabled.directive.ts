@@ -1,12 +1,20 @@
 /* eslint-disable @angular-eslint/directive-selector */
 /* eslint-disable @angular-eslint/no-host-metadata-property */
+import {
+  BUTTON_STATE_TOKEN,
+  ButtonState,
+} from '@angular-challenges/decoupling/core';
 import { Directive, WritableSignal, signal } from '@angular/core';
-
-export type ButtonState = 'enabled' | 'disabled';
 
 @Directive({
   selector: 'button[btnDisabled]',
   standalone: true,
+  providers: [
+    {
+      provide: BUTTON_STATE_TOKEN,
+      useExisting: BtnDisabledDirective,
+    },
+  ],
   host: {
     '(click)': 'toggleState()',
   },
