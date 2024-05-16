@@ -1,10 +1,6 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  effect,
-  model,
-} from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {ChangeDetectionStrategy, Component, computed, effect, model} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+
 
 @Component({
   standalone: true,
@@ -20,15 +16,15 @@ import { FormsModule } from '@angular/forms';
       <p>Extras:</p>
 
       <div>
-        <input type="checkbox" [(ngModel)]="drive" />
+        <input type="checkbox" [(ngModel)]="drive"/>
         +500 GB drive-space
       </div>
       <div>
-        <input type="checkbox" [(ngModel)]="ram" />
+        <input type="checkbox" [(ngModel)]="ram"/>
         +4 GB RAM
       </div>
       <div>
-        <input type="checkbox" [(ngModel)]="gpu" />
+        <input type="checkbox" [(ngModel)]="gpu"/>
         Better GPU
       </div>
     </section>
@@ -40,13 +36,28 @@ export class AppComponent {
   ram = model(false);
   gpu = model(false);
 
+
   constructor() {
-    /* 
-      Explain for your junior team mate why this bug occurs ...
-    */
+    const componentsComputed = computed(() => ({
+      drive: this.drive(),
+      ram: this.ram(),
+      gpu: this.gpu(),
+    }), {
+      equal: (prev, next) => {
+        if ((prev.drive !== next.drive && next.drive) ||
+          (prev.ram !== next.ram && next.ram) ||
+          (prev.gpu !== next.gpu && next.gpu)) {
+          return false;
+        }
+        return !(!next.drive && !next.ram && !next.gpu);
+
+      },
+    });
+
     effect(() => {
-      if (this.drive() || this.ram() || this.gpu()) {
-        alert('Price increased!');
+      const {drive, ram, gpu} = componentsComputed();
+      if (drive || ram || gpu) {
+        alert('Price increased');
       }
     });
   }
