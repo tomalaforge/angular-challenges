@@ -8,8 +8,17 @@ import {
   numberAttribute,
   output,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { fromEvent, merge } from 'rxjs';
+import {
+  filter,
+  fromEvent,
+  interval,
+  map,
+  merge,
+  switchMap,
+  take,
+  takeUntil,
+  tap,
+} from 'rxjs';
 
 @Directive({
   standalone: true,
@@ -21,35 +30,32 @@ export class HoldableDirective {
   readonly appHoldableDone = output<void>();
   private readonly nativeElement = inject(ElementRef).nativeElement;
 
-  timer: number | null = null;
-
   constructor() {
-    merge(
+    const reset = merge(
       fromEvent(this.nativeElement, 'mouseup'),
       fromEvent(this.nativeElement, 'mouseleave'),
-    )
-      .pipe(takeUntilDestroyed())
-      .subscribe(() => this.resetTimer());
+    ).pipe(tap(() => this.appHoldableTime.emit(0)));
 
     fromEvent(this.nativeElement, 'mousedown')
-      .pipe(takeUntilDestroyed())
-      .subscribe(() => this.startTimer());
-  }
-
-  startTimer() {
-    const startTime = Date.now();
-    this.timer = setInterval(() => {
-      const elapsed = Date.now() - startTime;
-      this.appHoldableTime.emit(elapsed);
-      if (elapsed >= this.appHoldable()) {
-        clearInterval(this.timer ?? 0);
-        this.appHoldableDone.emit();
-      }
-    }, 10);
-  }
-
-  resetTimer() {
-    this.appHoldableTime.emit(0);
-    clearInterval(this.timer ?? 0);
+      .pipe(
+        switchMap(() =>
+          interval(10).pipe(
+            // convert from index to 10ms increments
+            map((i) => i * 10),
+            tap((elapsed) => this.appHoldableTime.emit(elapsed)),
+            // cancel if the user releases the mouse button or leaves the element
+            takeUntil(reset),
+            // accept one last value after the holdable time has passed
+            filter((elapsed) => this.appHoldable() <= elapsed),
+            take(1),
+            // when we're done, emit the done event and reset progress
+            tap(() => {
+              this.appHoldableDone.emit();
+              this.appHoldableTime.emit(0);
+            }),
+          ),
+        ),
+      )
+      .subscribe();
   }
 }
