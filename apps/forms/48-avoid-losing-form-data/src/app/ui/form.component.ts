@@ -77,7 +77,7 @@ export class FormComponent {
     startWith(this.form.value),
     // not using this.form.dirty because it doesn't handle the user clearing
     // the form manually
-    map((value) => Object.values(value).some((v) => !!v)),
+    map((value) => Object.values(value).some((v) => !!v.trim())),
   );
   hasValues = toSignal(this.hasValues$);
 

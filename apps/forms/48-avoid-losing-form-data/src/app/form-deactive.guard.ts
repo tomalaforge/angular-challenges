@@ -1,12 +1,15 @@
+import { Dialog } from '@angular/cdk/dialog';
+import { inject } from '@angular/core';
+import { AlertDialogComponent } from './ui/dialog.component';
+
 export interface FormDeactivateCheck {
   hasUnsavedChanges: () => boolean;
 }
 
 export function FormDeactivateGuard(component: FormDeactivateCheck) {
   if (component.hasUnsavedChanges()) {
-    return window.confirm(
-      'There are unsaved changes! Are you sure you want to leave?',
-    );
+    return inject(Dialog).open(AlertDialogComponent, { disableClose: true })
+      .closed;
   }
 
   return true;
