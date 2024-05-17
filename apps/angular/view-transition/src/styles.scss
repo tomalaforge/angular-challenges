@@ -2,3 +2,53 @@
 @tailwind components;
 @tailwind utilities;
 
+.app-header {
+  view-transition-name: app-header;
+}
+
+.transition {
+  .profile-thumb {
+    view-transition-name: profile-thumb;
+  }
+
+  .budge-thumb {
+    view-transition-name: budge-thumb;
+  }
+
+  .post-details {
+    view-transition-name: post-details;
+  }
+
+  .post-image {
+    view-transition-name: post-image;
+  }
+}
+
+::view-transition-old(post-image),
+::view-transition-new(post-image) {
+  /* Prevent the default animation,  
+  so both views remain opacity:1 throughout the transition */
+  animation: none;
+  /* Use normal blending,
+  so the new view sits on top and obscures the old view */
+  mix-blend-mode: normal;
+  /* Make the height the same as the group,
+  meaning the view size might not match its aspect-ratio. */
+  height: 100%;
+  /* Clip any overflow of the view */
+  overflow: clip;
+}
+
+/* The old view is the blog list post image */
+::view-transition-old(post-image) {
+  /* Maintain the aspect ratio of the view,
+  by shrinking it to fit within the bounds of the element */
+  object-fit: contain;
+}
+
+/* The new view is the selected post image */
+::view-transition-new(post-image) {
+  /* Maintain the aspect ratio of the view,
+  by growing it to cover the bounds of the element */
+  object-fit: cover;
+}
