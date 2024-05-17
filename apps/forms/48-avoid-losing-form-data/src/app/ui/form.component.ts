@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { map, startWith } from 'rxjs';
 
 @Component({
   selector: 'app-form',
@@ -71,6 +73,13 @@ export class FormComponent {
     phone: '',
     message: '',
   });
+  private hasValues$ = this.form.valueChanges.pipe(
+    startWith(this.form.value),
+    // not using this.form.dirty because it doesn't handle the user clearing
+    // the form manually
+    map((value) => Object.values(value).some((v) => !!v)),
+  );
+  hasValues = toSignal(this.hasValues$);
 
   onSubmit() {
     if (this.form.valid) this.form.reset();
