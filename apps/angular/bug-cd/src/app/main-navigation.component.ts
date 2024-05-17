@@ -1,5 +1,11 @@
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
-import { Component, Input, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  input,
+} from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FakeServiceService } from './fake.service';
 
@@ -11,16 +17,16 @@ interface MenuItem {
 @Component({
   selector: 'app-nav',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, NgFor],
+  imports: [RouterLink, RouterLinkActive],
   template: `
-    <ng-container *ngFor="let menu of menus">
+    @for (menu of menus(); track menu.path) {
       <a
         class="rounded-md border px-4 py-2"
         [routerLink]="menu.path"
         routerLinkActive="isSelected">
         {{ menu.name }}
       </a>
-    </ng-container>
+    }
   `,
   styles: [
     `
@@ -32,31 +38,25 @@ interface MenuItem {
   host: {
     class: 'flex flex-col p-2 gap-2',
   },
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavigationComponent {
-  @Input() menus!: MenuItem[];
+  menus = input<MenuItem[]>([]);
 }
 
 @Component({
   standalone: true,
-  imports: [NavigationComponent, NgIf, AsyncPipe],
+  imports: [NavigationComponent],
   template: `
-    <ng-container *ngIf="info$ | async as info">
-      <ng-container *ngIf="info !== null; else noInfo">
-        <app-nav [menus]="getMenu(info)" />
-      </ng-container>
-    </ng-container>
-
-    <ng-template #noInfo>
-      <app-nav [menus]="getMenu('')" />
-    </ng-template>
+    <app-nav [menus]="menus()"></app-nav>
   `,
   host: {},
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainNavigationComponent {
-  private fakeBackend = inject(FakeServiceService);
-
-  readonly info$ = this.fakeBackend.getInfoFromBackend();
+  private readonly fakeBackend = inject(FakeServiceService);
+  readonly info$ = toSignal(this.fakeBackend.getInfoFromBackend());
+  readonly menus = computed(() => this.getMenu(this.info$() ?? ''));
 
   getMenu(prop: string) {
     return [
