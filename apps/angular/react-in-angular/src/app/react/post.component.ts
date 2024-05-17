@@ -1,6 +1,12 @@
-import { Component, EventEmitter, input, Output } from '@angular/core';
+import { Component, EventEmitter, input, OnInit, Output } from '@angular/core';
+import { initReactPostComponent } from './ReactPost';
 
-type Post = { title: string; description: string; pictureLink: string };
+export type Post = {
+  id: number;
+  title: string;
+  description: string;
+  pictureLink: string;
+};
 
 @Component({
   standalone: true,
@@ -10,8 +16,14 @@ type Post = { title: string; description: string; pictureLink: string };
   `,
   styles: [''],
 })
-export class PostComponent {
+export class PostComponent implements OnInit {
   post = input<Post | undefined>(undefined);
   isSelected = input<boolean>(false);
   @Output() selectPost = new EventEmitter<void>();
+
+  ngOnInit(): void {
+    initReactPostComponent(this.post(), () => {
+      this.selectPost.emit();
+    });
+  }
 }

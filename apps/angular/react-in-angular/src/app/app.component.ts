@@ -13,6 +13,7 @@ type Post = { title: string; description: string };
         @for (post of posts; track post.title) {
           <div class="rounded-lg bg-gray-100 p-4">
             <app-post
+              id="{{ 'app-post-' + post.id }}"
               (selectPost)="selectPost(post)"
               [post]="post"
               [isSelected]="post.title === selectedPost()?.title"></app-post>
@@ -32,6 +33,7 @@ type Post = { title: string; description: string };
 export class AppComponent {
   readonly posts = [
     {
+      id: 1,
       title: 'A Deep Dive into Angular',
       description:
         "Explore Angular's core features, its evolution, and best practices in development for creating dynamic, efficient web applications in our comprehensive guide.",
@@ -39,6 +41,7 @@ export class AppComponent {
         'https://images.unsplash.com/photo-1471958680802-1345a694ba6d',
     },
     {
+      id: 2,
       title: 'The Perfect Combination',
       description:
         'Unveil the power of combining Angular & React in web development, maximizing efficiency and flexibility for building scalable, sophisticated applications.',
@@ -46,6 +49,7 @@ export class AppComponent {
         'https://images.unsplash.com/photo-1518717202715-9fa9d099f58a',
     },
     {
+      id: 3,
       title: 'Taking Angular to the Next Level',
       description:
         "Discover how integrating React with Angular elevates web development, blending Angular's structure with React's UI prowess for advanced applications.",
@@ -57,6 +61,7 @@ export class AppComponent {
   readonly selectedPost = signal<Post | null>(null);
 
   selectPost(post: Post) {
+    console.log('select post');
     this.selectedPost.set(post);
   }
 }

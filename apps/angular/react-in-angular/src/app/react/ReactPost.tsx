@@ -1,27 +1,57 @@
 // import React from 'react';
 
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import { Post } from './post.component';
+
 export default function ReactPost(props: {
-  title?: string,
-  description?: string,
-  pictureLink?: string,
-  selected?: boolean,
-  handleClick: () => void
+  title?: string;
+  description?: string;
+  pictureLink?: string;
+  selected?: boolean;
+  handleClick: () => void;
 }) {
   return (
     <div className={props.selected ? 'bg-blue-100' : 'bg-white'}>
-      <div className="max-w-sm rounded overflow-hidden shadow-lg">
-        <img className="w-full h-32 object-cover" src={props.pictureLink} alt={props.title}></img>
-        <div className="px-6 py-4 flex flex-col gap-2">
-          <div className="font-bold text-xl mb-2">{props.title}</div>
-          <p className="text-gray-700 text-base">
-            {props.description}
-          </p>
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                  onClick={props.handleClick}>
+      <div className="max-w-sm overflow-hidden rounded shadow-lg">
+        <img
+          width={200}
+          height={50}
+          className="h-32 w-full object-cover"
+          src={props.pictureLink}
+          alt={props.title}></img>
+        <div className="flex flex-col gap-2 px-6 py-4">
+          <div className="mb-2 text-xl font-bold">{props.title}</div>
+          <p className="text-base text-gray-700">{props.description}</p>
+          <button
+            className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
+            onClick={props.handleClick}>
             Select
           </button>
         </div>
       </div>
     </div>
+  );
+}
+
+export function initReactPostComponent(
+  post: Post | undefined,
+  onPostSelectedCallback: () => void,
+) {
+  if (!post) {
+    return;
+  }
+
+  createRoot(
+    document.getElementById(`app-post-${post.id}`) as HTMLElement,
+  ).render(
+    <React.StrictMode>
+      <ReactPost
+        title={post.title}
+        description={post.description}
+        pictureLink={post.pictureLink}
+        handleClick={onPostSelectedCallback}
+      />
+    </React.StrictMode>,
   );
 }
