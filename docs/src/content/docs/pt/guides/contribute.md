@@ -9,9 +9,9 @@ sidebar:
 
 Você pode contribuir para este repositório das seguintes maneiras:
 
-🔥 Criar um novo desafio seguindo as instruções [aqui](/pt-br/guides/create-challenge).
+🔥 Criar um novo desafio seguindo as instruções [aqui](/pt/guides/create-challenge).
 
-🔥 Responder desafios e submeter sua resposta (guia [aqui](/pt-br/guides/resolve-challenge)).
+🔥 Responder desafios e submeter sua resposta (guia [aqui](/pt/guides/resolve-challenge)).
 
 🔥 Comentar as soluções de outras pessoas dando feedback construtivo e solidário.
 

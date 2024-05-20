@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "**/*.ts",
+    "../../../libs/power-of-effect/backend/src/lib/fake-backend.service.ts"
+  ],
+  "compilerOptions": {
+    "types": []
+  }
+}
