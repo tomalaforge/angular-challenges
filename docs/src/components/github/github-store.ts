@@ -31,6 +31,7 @@ token.subscribe((value) => {
   if (value) {
     if (value === 'delete') {
       localStorage.removeItem(TOKEN_KEY);
+      token.set(null);
       return;
     }
     localStorage.setItem(TOKEN_KEY, JSON.stringify(value));
