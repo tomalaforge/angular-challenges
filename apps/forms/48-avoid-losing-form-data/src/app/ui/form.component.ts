@@ -1,5 +1,11 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, HostListener, OnInit, inject } from '@angular/core';
+import {
+  FormGroup,
+  FormGroupDirective,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { DialogService } from '../core/dialog.service';
+import { AlertDialogComponent } from './dialog.component';
 
 @Component({
   selector: 'app-form',
@@ -7,48 +13,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
   imports: [ReactiveFormsModule],
   template: `
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4">
-      <div>
-        <label class="sr-only" for="name">Name</label>
-        <input
-          class="w-full rounded-lg border-gray-200 p-3 text-sm"
-          placeholder="Name"
-          type="text"
-          formControlName="name"
-          id="name" />
-      </div>
-
-      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <div>
-          <label class="sr-only" for="email">Email</label>
-          <input
-            class="w-full rounded-lg border-gray-200 p-3 text-sm"
-            placeholder="Email address"
-            type="email"
-            formControlName="email"
-            id="email" />
-        </div>
-
-        <div>
-          <label class="sr-only" for="phone">Phone</label>
-          <input
-            class="w-full rounded-lg border-gray-200 p-3 text-sm"
-            placeholder="Phone Number"
-            type="tel"
-            formControlName="phone"
-            id="phone" />
-        </div>
-      </div>
-
-      <div>
-        <label class="sr-only" for="message">Message</label>
-
-        <textarea
-          class="w-full rounded-lg border-gray-200 p-3 text-sm"
-          placeholder="Message"
-          rows="8"
-          formControlName="message"
-          id="message"></textarea>
-      </div>
+      <ng-content />
 
       <div class="mt-4">
         <button
@@ -60,19 +25,56 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
       </div>
     </form>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  //TODO check alternatives using OnPush change detection strategy
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FormComponent {
-  private fb = inject(FormBuilder);
+export class FormComponent implements OnInit {
+  form!: FormGroup;
+  submitted = false;
 
-  form = this.fb.nonNullable.group({
-    name: ['', { validators: [Validators.required] }],
-    email: ['', [Validators.required, Validators.email]], // other syntax
-    phone: '',
-    message: '',
-  });
+  protected readonly rootFormGroup = inject(FormGroupDirective);
+  private readonly dialogService = inject(DialogService);
+
+  @HostListener('window:beforeunload')
+  canUnloadPage() {
+    return this.formCanBeDeactivated();
+  }
+
+  ngOnInit(): void {
+    this.form = this.rootFormGroup.control;
+  }
 
   onSubmit() {
-    if (this.form.valid) this.form.reset();
+    if (this.form.valid) {
+      this.form.reset();
+      this.submitted = true;
+    }
+  }
+
+  canDeactivate() {
+    return !this.formCanBeDeactivated()
+      ? this.dialogService.showDialog(AlertDialogComponent, {
+          role: 'alertdialog',
+          disableClose: true,
+          ariaLabelledBy: 'dialog-title',
+          ariaDescribedBy: 'dialog-content',
+        })
+      : this.formCanBeDeactivated();
+  }
+
+  private formCanBeDeactivated() {
+    if (this.submitted && !this.form.dirty) {
+      return true;
+    }
+
+    const notEmptyFormControls = Object.values(this.form.getRawValue()).filter(
+      (v) => v && v !== '',
+    );
+
+    if (!notEmptyFormControls.length) {
+      return true;
+    }
+
+    return false;
   }
 }
