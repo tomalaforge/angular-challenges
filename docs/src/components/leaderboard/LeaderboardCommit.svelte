@@ -1,11 +1,12 @@
 <script>
   import UserBox from './UserBox.svelte';
   import Spinner from './Spinner.svelte';
-  import { isConnected, token } from '../github/github-store';
+  import { isConnected, token, username } from '../github/github-store';
 
   let users = [];
   let loading = true;
   let error = null;
+  let isUsernamePresent = false;
 
   token.subscribe(token => {
     if (token) {
@@ -55,6 +56,8 @@
 
       }
 
+      isUsernamePresent = Object.keys(prCounts).some((value) => value === $username);
+
       users = Object.entries(prCounts).map(([login, pr]) => ({
         login,
         avatar: pr.avatar,
@@ -74,6 +77,11 @@
 {#if !$isConnected}
   <div class="important-block not-connected">Log in to Github to see the list</div>
 {:else}
+  {#if isUsernamePresent}
+    <div class="link-username">
+      <a href={`#${$username}`}>Check my position</a>
+    </div>
+  {/if}
   {#if loading}
     <Spinner />
   {:else if error}
@@ -94,11 +102,18 @@
     margin-top: 1rem;
   }
 
+  .link-username {
+    margin-top: 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+
   .box {
     display: flex;
     flex-wrap: wrap;
     justify-items: center;
     gap: 1rem;
-    margin-top: 2rem;
+    margin-top: 0.5rem;
   }
 </style>
