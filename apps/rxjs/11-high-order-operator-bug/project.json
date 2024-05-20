@@ -1,0 +1,76 @@
+{
+  "name": "rxjs-high-order-operator-bug",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/rxjs/11-high-order-operator-bug/src",
+  "prefix": "app",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/rxjs/11-high-order-operator-bug",
+        "index": "apps/rxjs/11-high-order-operator-bug/src/index.html",
+        "main": "apps/rxjs/11-high-order-operator-bug/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/rxjs/11-high-order-operator-bug/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/rxjs/11-high-order-operator-bug/src/favicon.ico",
+          "apps/rxjs/11-high-order-operator-bug/src/assets"
+        ],
+        "styles": ["apps/rxjs/11-high-order-operator-bug/src/styles.scss"],
+        "scripts": [],
+        "allowedCommonJsDependencies": ["seedrandom"]
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "rxjs-high-order-operator-bug:build:production"
+        },
+        "development": {
+          "buildTarget": "rxjs-high-order-operator-bug:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "rxjs-high-order-operator-bug:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  },
+  "tags": []
+}
