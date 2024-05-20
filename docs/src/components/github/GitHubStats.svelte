@@ -84,6 +84,9 @@
             const data = await refresh.json();
             token.set(data.token);
             return;
+          } else {
+            token.set('delete');
+            throw new Error('Failed to refresh token');
           }
         } else {
           throw new Error('Failed to fetch data');
