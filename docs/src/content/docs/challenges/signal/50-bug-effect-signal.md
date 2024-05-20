@@ -9,7 +9,6 @@ challengeNumber: 50
 command: signal-bug-in-effect
 sidebar:
   order: 19
-  badge: New
 ---
 
 ## Information
