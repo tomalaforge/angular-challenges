@@ -1,10 +1,12 @@
 <script>
- export let avatar;
+  import { username } from '../github/github-store';
+
+  export let avatar;
  export let login;
  export let index;
 </script>
 
-<div class="user-box">
+<div class={`user-box ${login === $username ? 'own-box' : ''}`} id={login === $username ? $username: index}>
   <div class="user-info">
     <img src={avatar} alt="" width="40" height="40" class="avatar" />
     <div class="name-box">
@@ -36,6 +38,10 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
+  }
+
+  .own-box {
+    border: 1px solid red;
   }
 
   .user-info {

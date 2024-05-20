@@ -1,0 +1,21 @@
+name: Add Labels
+
+on:
+  pull_request_target:
+    types: [ opened ]
+
+jobs:
+  add_labels:
+    runs-on: ubuntu-latest
+    if: ${{ startsWith(github.event.pull_request.title, 'Answer') }}
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm i @actions/core @actions/github
+
+      - name: Add labels
+        uses: ./.github/github-action/
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}

@@ -12,7 +12,7 @@ sidebar:
 
 ## Information
 
-In this challenge, the goal is to create a custom form field that is using the Form API of Angular `ControlValueAccessor`. You can find the documentation [here](https://angular.io/api/forms/ControlValueAccessor). This interface is crucial for creating custom form controls that can interact seamlessly with Angular's forms API.
+In this challenge, the goal is to create a custom form field that is using the Form API of Angular `ControlValueAccessor`. You can find the documentation [here](https://angular.dev/api/forms/ControlValueAccessor). This interface is crucial for creating custom form controls that can interact seamlessly with Angular's forms API.
 
 ## Statement
 

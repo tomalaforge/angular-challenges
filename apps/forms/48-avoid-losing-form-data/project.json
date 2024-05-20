@@ -1,0 +1,75 @@
+{
+  "name": "forms-avoid-losing-form-data",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "app",
+  "sourceRoot": "apps/forms/48-avoid-losing-form-data/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:application",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/forms/48-avoid-losing-form-data",
+        "index": "apps/forms/48-avoid-losing-form-data/src/index.html",
+        "browser": "apps/forms/48-avoid-losing-form-data/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/forms/48-avoid-losing-form-data/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/forms/48-avoid-losing-form-data/src/favicon.ico",
+          "apps/forms/48-avoid-losing-form-data/src/assets"
+        ],
+        "styles": [
+          "apps/forms/48-avoid-losing-form-data/src/styles.scss",
+          "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+        ],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "forms-avoid-losing-form-data:build:production"
+        },
+        "development": {
+          "buildTarget": "forms-avoid-losing-form-data:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "forms-avoid-losing-form-data:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}
