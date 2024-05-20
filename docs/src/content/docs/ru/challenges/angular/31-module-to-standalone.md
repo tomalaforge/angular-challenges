@@ -26,4 +26,4 @@ sidebar:
 
 ## Примечание
 
-Вы также можете протестировать [Angular schematic](https://angular.io/guide/standalone-migration) для переноса NgModule на автономные компоненты. _(Поскольку мы используем nx, начните свою команду с nx вместо ng)_
+Вы также можете протестировать [Angular schematic](https://angular.dev/reference/migrations/standalone) для переноса NgModule на автономные компоненты. _(Поскольку мы используем nx, начните свою команду с nx вместо ng)_

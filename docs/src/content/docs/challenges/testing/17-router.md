@@ -5,7 +5,7 @@ author: thomas-laforge
 contributors:
   - tomalaforge
 challengeNumber: 17
-command: testing-router-outlet
+command: testing-router
 sidebar:
   order: 108
 ---

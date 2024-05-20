@@ -26,4 +26,4 @@ The goal of this challenge is to migrate your application from module based comp
 
 ## Note
 
-You can also test the [Angular schematic](https://angular.io/guide/standalone-migration) to migrate NgModule to Standalone components. _(Since we are using nx, start your command with nx instead of ng)_
+You can also test the [Angular schematic](https://angular.dev/reference/migrations/standalone) to migrate NgModule to Standalone components. _(Since we are using nx, start your command with nx instead of ng)_

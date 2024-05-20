@@ -61,5 +61,7 @@
   "subscription.note.title": "Notas",
   "subscription.note.description": "Este correo se utilizará para informar acerca de nuevos retos",
   "contributor.title": "Contributors",
-  "contributor.subtitle": "Thanks to all the contributors who have helped make this documentation better!"
+  "contributor.subtitle": "Thanks to all the contributors who have helped make this documentation better!",
+  "sponsors.description": "Big thanks to the people supporting this project: ",
+  "sponsors.joinButton": "Join the list"
 }
