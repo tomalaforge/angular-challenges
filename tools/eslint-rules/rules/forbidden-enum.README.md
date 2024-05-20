@@ -1,12 +1,6 @@
-# Custom Eslint Rule
+# Custom ESLint Rule
 
 > author: thomas-laforge
-
-### Run Application
-
-```bash
-npx nx serve eslint-rules
-```
 
 ### Documentation and Instruction
 
