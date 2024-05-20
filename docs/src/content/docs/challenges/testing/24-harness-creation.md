@@ -7,7 +7,7 @@ contributors:
   - tomer953
   - jdegand
 challengeNumber: 24
-command: testing-create-harness
+command: testing-harness-creation
 sidebar:
   order: 112
 ---

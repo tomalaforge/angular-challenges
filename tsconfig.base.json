@@ -15,7 +15,6 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@angular-challenges/angular/di": ["libs/angular/di/src/index.ts"],
       "@angular-challenges/cli": ["libs/cli/src/index.ts"],
       "@angular-challenges/custom-plugin": ["libs/custom-plugin/src/index.ts"],
       "@angular-challenges/decoupling/brain": [
@@ -58,15 +57,16 @@
       "@angular-challenges/module-to-standalone/user/shell": [
         "libs/module-to-standalone/user/shell/src/index.ts"
       ],
-      "@angular-challenges/ngrx-notification/backend": [
-        "libs/ngrx-notification/backend/src/index.ts"
+      "@angular-challenges/power-of-effect/backend": [
+        "libs/power-of-effect/backend/src/index.ts"
       ],
-      "@angular-challenges/ngrx-notification/model": [
-        "libs/ngrx-notification/model/src/index.ts"
+      "@angular-challenges/power-of-effect/model": [
+        "libs/power-of-effect/model/src/index.ts"
       ],
       "@angular-challenges/shared/directives": [
         "libs/shared/directives/src/index.ts"
       ],
+      "@angular-challenges/shared/ui": ["libs/shared/ui/src/index.ts"],
       "@angular-challenges/shared/utils": ["libs/shared/utils/src/index.ts"],
       "@angular-challenges/static-dynamic-import/users": [
         "libs/static-dynamic-import/users/src/index.ts"
@@ -79,6 +79,9 @@
       ],
       "@tomalaforge/ngrx-callstate-store": [
         "libs/shared/ngrx-callstate-store/src/index.ts"
+      ],
+      "angular-master-dependency-injection": [
+        "apps/angular/16-master-dependency-injection/src/index.ts"
       ]
     }
   },
