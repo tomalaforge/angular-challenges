@@ -22,5 +22,7 @@
   "subscription.note.title": "Примечание",
   "subscription.note.description": "Этот email будет использоваться только для сообщений о новых испытаниях",
   "contributor.title": "Контрибьюторы",
-  "contributor.subtitle": "Спасибо всем контрибьюторам которые помогли сделать эту документацию лучше!"
+  "contributor.subtitle": "Спасибо всем контрибьюторам которые помогли сделать эту документацию лучше!",
+  "sponsors.description": "Big thanks to the people supporting this project: ",
+  "sponsors.joinButton": "Join the list"
 }

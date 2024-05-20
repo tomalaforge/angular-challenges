@@ -1,0 +1,75 @@
+{
+  "name": "angular-typed-context-outlet",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/angular/4-typed-context-outlet/src",
+  "prefix": "app",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/angular/4-typed-context-outlet",
+        "index": "apps/angular/4-typed-context-outlet/src/index.html",
+        "main": "apps/angular/4-typed-context-outlet/src/main.ts",
+        "polyfills": "apps/angular/4-typed-context-outlet/src/polyfills.ts",
+        "tsConfig": "apps/angular/4-typed-context-outlet/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/angular/4-typed-context-outlet/src/favicon.ico",
+          "apps/angular/4-typed-context-outlet/src/assets"
+        ],
+        "styles": ["apps/angular/4-typed-context-outlet/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "angular-typed-context-outlet:build:production"
+        },
+        "development": {
+          "buildTarget": "angular-typed-context-outlet:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "angular-typed-context-outlet:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  },
+  "tags": []
+}

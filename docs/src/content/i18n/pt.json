@@ -21,6 +21,8 @@
   "subscription.email": "usuario@gmail.com",
   "subscription.note.title": "Notas",
   "subscription.note.description": "Este email será apenas usado para enviar atualizações de novos desafios",
-  "contributor.title": "Contributors",
-  "contributor.subtitle": "Thanks to all the contributors who have helped make this documentation better!"
+  "contributor.title": "Contribuidores",
+  "contributor.subtitle": "Obrigado a todos os contribuidores que ajudaram a melhorar esta documentação!",
+  "sponsors.description": "Muito obrigado as pessoas que apoiam este projeto: ",
+  "sponsors.joinButton": "Juntar-se à lista"
 }
