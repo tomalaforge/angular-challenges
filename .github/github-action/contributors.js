@@ -10,7 +10,7 @@ const contributors = [
   'Sanjar1304',
 ];
 
-const sponsors = ['ddotx', 'LMFinney'];
+const sponsors = ['ddotx', 'LMFinney', 'alannelucq'];
 
 module.exports = {
   contributors,
