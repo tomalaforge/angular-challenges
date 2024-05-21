@@ -13,6 +13,3 @@ export class UserService {
 
 // https://blog.angular-university.io/angular-signals/
 // https://marmicode.io/blog/angular-signals-and-custom-render-strategies
-
-// This doesn't seem correct but it appears to work fine
-// I envisioned using an effect or using the untracked inside log function
