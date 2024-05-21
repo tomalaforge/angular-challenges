@@ -1,0 +1,77 @@
+{
+  "name": "angular-master-dependency-injection",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/angular/16-master-dependency-injection/src",
+  "prefix": "app",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/angular/16-master-dependency-injection",
+        "index": "apps/angular/16-master-dependency-injection/src/index.html",
+        "main": "apps/angular/16-master-dependency-injection/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/angular/16-master-dependency-injection/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/angular/16-master-dependency-injection/src/favicon.ico",
+          "apps/angular/16-master-dependency-injection/src/assets"
+        ],
+        "styles": [
+          "apps/angular/16-master-dependency-injection/src/styles.scss"
+        ],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "angular-master-dependency-injection:build:production"
+        },
+        "development": {
+          "buildTarget": "angular-master-dependency-injection:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "angular-master-dependency-injection:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  },
+  "tags": []
+}

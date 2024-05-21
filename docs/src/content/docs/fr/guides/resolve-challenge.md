@@ -82,9 +82,15 @@ Dans la section de description, vous pouvez ajouter des questions, des problème
 
 Vous pouvez maintenant cliquer sur <span class="github-success-btn">Créer pull request</span>.
 
-Je la lirai et commenterai <b>quand j'aurai du temps libre.</b>
+## Avoir un Retour
 
-<p class="important-block">Ne vous inquiétez pas si votre réponse n'est pas examinée immédiatement. Je le fais <b>gratuitement</b> et pendant mon <b>temps libre</b>. Si vous souhaitez me soutenir, vous pouvez le faire en me <a href="https://github.com/sponsors/tomalaforge">sponsorisant sur GitHub</a>. Cela validera que mon travail vous aide, vous ou votre équipe.</p>
+Pour continuer à donner des retours de qualités, <a href="https://github.com/sponsors/tomalaforge">sponsorise le project sur Github</a>:
+
+<ul>
+<li>$5 pour une review</li>
+<li>$25 pour des reviews a vie</li>
+<li>Créez un challenge/Contribuez pour des reviews à vie</li>
+</ul>
 
 :::note
 Tout le monde peut commenter ou lire les Pull Requests des autres participants.

@@ -1,0 +1,18 @@
+name: updates Labels
+
+on:
+  pull_request_target:
+    types: [ edited ]
+
+jobs:
+  add_labels:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.label.name == 'sponsor' || github.event.label.name == 'contributor' }}
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: Add labels
+        uses: actions-ecosystem/action-add-labels@v1
+        with:
+          labels: to be reviewed/update
