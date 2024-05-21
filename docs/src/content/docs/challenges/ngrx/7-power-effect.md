@@ -7,7 +7,7 @@ contributors:
   - tomer953
   - jdegand
 challengeNumber: 7
-command: ngrx-notification
+command: ngrx-power-of-effect
 sidebar:
   order: 206
 ---

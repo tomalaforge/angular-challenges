@@ -1,0 +1,74 @@
+{
+  "name": "angular-decoupling-components",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "app",
+  "sourceRoot": "apps/angular/33-decoupling-components/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/angular/33-decoupling-components",
+        "index": "apps/angular/33-decoupling-components/src/index.html",
+        "main": "apps/angular/33-decoupling-components/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/angular/33-decoupling-components/tsconfig.app.json",
+        "assets": [
+          "apps/angular/33-decoupling-components/src/favicon.ico",
+          "apps/angular/33-decoupling-components/src/assets"
+        ],
+        "styles": ["apps/angular/33-decoupling-components/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "angular-decoupling-components:build:production"
+        },
+        "development": {
+          "buildTarget": "angular-decoupling-components:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "angular-decoupling-components:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

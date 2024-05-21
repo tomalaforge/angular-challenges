@@ -20,7 +20,7 @@ Well-designed animations can make your application more fun and straightforward 
 - Motion greatly enhances the user experience, so animations give users a chance to detect the application's response to their actions.
 - Good animations intuitively call the user's attention to where it is needed.
 
-I would recommend you read the [official documentation](https://angular.io/guide/animations). You will learn everything that is necessary to successfully complete the challenge.
+I would recommend you read the [official documentation](https://angular.dev/guide/animations). You will learn everything that is necessary to successfully complete the challenge.
 
 Otherwise look at this [working example](https://svenson95.github.io/ng-xmp-animations/) and [git repo](https://github.com/svenson95/ng-xmp-animations) to get inspired.
 

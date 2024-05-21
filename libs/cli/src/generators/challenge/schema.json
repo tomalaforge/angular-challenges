@@ -6,16 +6,6 @@
   "type": "object",
   "cli": "nx",
   "properties": {
-    "name": {
-      "description": "The name of the application. (should be in kebab case)",
-      "type": "string",
-      "$default": {
-        "$source": "argv",
-        "index": 0
-      },
-      "x-prompt": "What name would you like to use for the application?",
-      "pattern": "^[a-zA-Z].*$"
-    },
     "title": {
       "description": "Title of your challenge.",
       "type": "string",
@@ -93,9 +83,21 @@
           {
             "value": "typescript",
             "label": "Typescript"
+          },
+          {
+            "value": "forms",
+            "label": "Forms"
+          },
+          {
+            "value": "signal",
+            "label": "Signal"
           }
         ]
       }
+    },
+    "challengeNumber": {
+      "description": "Specify a challenge number (If you don't, the challenge number will be set automatically)",
+      "type": "number"
     },
     "addTest": {
       "description": "add spec files.",
@@ -118,5 +120,5 @@
     }
   },
   "additionalProperties": false,
-  "required": ["name", "title", "author", "challengeDifficulty", "category"]
+  "required": ["title", "author", "challengeDifficulty", "category"]
 }

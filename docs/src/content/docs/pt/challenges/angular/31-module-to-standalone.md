@@ -26,4 +26,4 @@ O objetivo deste desafio é migrar sua aplicação de componentes baseados em m�
 
 ## Nota
 
-Você também pode testar o [Angular schematic](https://angular.io/guide/standalone-migration) para migrar NgModule para componentes Standalone. _(Como estamos usando nx, comece seu comando com nx ao invés de ng)_
+Você também pode testar o [Angular schematic](https://angular.dev/reference/migrations/standalone) para migrar NgModule para componentes Standalone. _(Como estamos usando nx, comece seu comando com nx ao invés de ng)_
