@@ -19,9 +19,9 @@ sidebar:
 
 En Angular, la proyección de contenido es una técnica poderosa para crear componentes altamente personalizables. Utilizar y comprender los conceptos de <b>ng-content</b> y <b>ngTemplateOutlet</b> puede mejorar significativamente su capacidad para crear componentes reutilizables.
 
-Puedes aprender todo sobre <b>ng-content</b> [aquí](https://angular.io/guide/content-projection#projecting-content-in-more-complex-environments) desde la proyección simple hasta las más complejas.
+Puedes aprender todo sobre <b>ng-content</b> [aquí](https://angular.dev/guide/components/content-projection) desde la proyección simple hasta las más complejas.
 
-Para aprender sobre <b>ngTemplateOutlet</b>, puedes encontrar la documentación de la API [aquí](https://angular.io/api/common/NgTemplateOutlet) junto con algunos ejemplos básicos.
+Para aprender sobre <b>ngTemplateOutlet</b>, puedes encontrar la documentación de la API [aquí](https://angular.dev/api/common/NgTemplateOutlet) junto con algunos ejemplos básicos.
 
 Con estas dos herramientas en la mano, ahora estás listo para asumir el desafío.
 

@@ -1,5 +1,5 @@
 <script>
-  import { token } from './github-store';
+  import { token, username } from './github-store';
 
   let error = false;
   let loading = true;
@@ -12,6 +12,7 @@
     if (token) {
       fetchStats();
       isStar();
+      getUser();
     }
   });
 
@@ -25,7 +26,6 @@
       });
       if (response.ok) {
         isStarByUser = !isStarByUser;
-        console.log('Starred', isStarByUser);
       }
     } catch (e) {
       console.error(e);
@@ -50,6 +50,25 @@
     }
   }
 
+  async function getUser() {
+    try {
+      const response = await fetch(`https://api.github.com/user`, {
+        method: 'GET',
+        headers: {
+          Authorization: `token ${$token}`
+        }
+      });
+      if (response.ok) {
+        const { login } = await response.json();
+        username.set(login);
+      }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      loadingStar = false;
+    }
+  }
+
 
   async function fetchStats() {
     try {
@@ -65,6 +84,9 @@
             const data = await refresh.json();
             token.set(data.token);
             return;
+          } else {
+            token.set('delete');
+            throw new Error('Failed to refresh token');
           }
         } else {
           throw new Error('Failed to fetch data');
