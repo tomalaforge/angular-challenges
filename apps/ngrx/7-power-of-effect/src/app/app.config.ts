@@ -4,7 +4,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
 import { provideEffects } from '@ngrx/effects';
 import { provideState, provideStore } from '@ngrx/store';
-import { AppEffects } from './app.effects';
+import * as appEffects from './app.effects';
 import { ROUTES } from './routes';
 import { StudentEffects } from './student/store/student.effects';
 import { studentFeature } from './student/store/student.reducer';
@@ -16,7 +16,7 @@ export const appConfig: ApplicationConfig = {
     provideStore(),
     provideState(studentFeature),
     provideState(teacherFeature),
-    provideEffects([AppEffects, TeacherEffects, StudentEffects]),
+    provideEffects([appEffects, TeacherEffects, StudentEffects]),
     provideRouter(ROUTES),
     {
       provide: APP_INITIALIZER,

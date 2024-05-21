@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, tap } from 'rxjs';
@@ -7,13 +7,9 @@ import { schoolActions } from './school/school.actions';
 import { studentActions } from './student/store/student.actions';
 import { teacherActions } from './teacher/store/teacher.actions';
 
-@Injectable()
-export class AppEffects {
-  private actions$ = inject(Actions);
-  private snackbar = inject(MatSnackBar);
-
-  schoolUpdated$ = createEffect(() =>
-    this.actions$.pipe(
+export const schoolUpserted = createEffect(
+  (actions$ = inject(Actions)) =>
+    actions$.pipe(
       ofType(schoolActions.addOneSchool),
       map((action) => {
         if (action.school.version === 0) {
@@ -24,10 +20,12 @@ export class AppEffects {
       }),
       map((message) => appApiActions.alert({ message })),
     ),
-  );
+  { functional: true },
+);
 
-  studentUpdated$ = createEffect(() =>
-    this.actions$.pipe(
+export const studentUpserted = createEffect(
+  (actions$ = inject(Actions)) =>
+    actions$.pipe(
       ofType(studentActions.addOneStudent),
       map((action) => {
         if (action.student.version === 0) {
@@ -38,10 +36,12 @@ export class AppEffects {
       }),
       map((message) => appApiActions.alert({ message })),
     ),
-  );
+  { functional: true },
+);
 
-  teacherUpdated$ = createEffect(() =>
-    this.actions$.pipe(
+export const teacherUpserted = createEffect(
+  (actions$ = inject(Actions)) =>
+    actions$.pipe(
       ofType(teacherActions.addOneTeacher),
       map((action) => {
         if (action.teacher.version === 0) {
@@ -52,18 +52,18 @@ export class AppEffects {
       }),
       map((message) => appApiActions.alert({ message })),
     ),
-  );
+  { functional: true },
+);
 
-  displayAlerts$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(appApiActions.alert),
-        tap(({ message }) =>
-          this.snackbar.open(message, 'close', {
-            duration: 500,
-          }),
-        ),
+export const displayAlerts = createEffect(
+  (actions$ = inject(Actions), snackbar = inject(MatSnackBar)) =>
+    actions$.pipe(
+      ofType(appApiActions.alert),
+      tap(({ message }) =>
+        snackbar.open(message, 'close', {
+          duration: 500,
+        }),
       ),
-    { dispatch: false },
-  );
-}
+    ),
+  { functional: true, dispatch: false },
+);
