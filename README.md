@@ -63,6 +63,7 @@ Check [all 51 challenges](https://angular-challenges.vercel.app/)
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Dinozavvvr"><img src="https://avatars.githubusercontent.com/u/45518871?v=4?s=100" width="100px;" alt="Dinar Shagaliev"/><br /><sub><b>Dinar Shagaliev</b></sub></a><br /><a href="#translation-ru-Dinozavvvr" title="Translate in Russian">🇷🇺</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/vimulatus"><img src="https://avatars.githubusercontent.com/u/63696128?v=4?s=100" width="100px;" alt="Vimulatus"/><br /><sub><b>Vimulatus</b></sub></a><br /><a href="https://github.com/tomalaforge/angular-challenges/commits?author=vimulatus" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/alannelucq"><img src="https://avatars.githubusercontent.com/u/44091408?v=4?s=100" width="100px;" alt="Arthur LANNELUCQ"/><br /><sub><b>Arthur LANNELUCQ</b></sub></a><br /><a href="#translation-fr-alannelucq" title="Translate in French">🇫🇷</a></td>
     </tr>
   </tbody>
   <tfoot>
