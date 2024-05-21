@@ -26,6 +26,7 @@ import { PostHeaderComponent } from './post-header.component';
         class="absolute left-2 top-2 z-20 rounded-md border bg-white p-2">
         Back
       </button>
+      <!-- Add priority here to remove a warning in the browser -->
       <img
         [ngSrc]="post().image"
         alt=""
