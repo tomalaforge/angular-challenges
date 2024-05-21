@@ -15,13 +15,14 @@ import { SearchFieldComponent } from './search-field.component';
       {{ title | titlecase }}
     </h1>
 
-    <app-search-field (searchFieldOutput)="addName($event)"></app-search-field>
+    <app-search-field (searchFieldOutput)="addName($event)" />
 
     <mat-list class="flex w-full">
-      <div *ngIf="names?.length === 0" class="empty-list-label">Empty list</div>
-      <app-person
-        [name]="name"
-        *ngFor="let name of names; let index = index; trackBy: userByName" />
+      @for (name of names; track $index) {
+        <app-person [name]="name" />
+      } @empty {
+        Empty list
+      }
       <mat-divider *ngIf="names?.length !== 0"></mat-divider>
     </mat-list>
   `,
