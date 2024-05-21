@@ -1,0 +1,75 @@
+{
+  "name": "angular-wrap-function-pipe",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/angular/9-wrap-function-pipe/src",
+  "prefix": "app",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/angular/9-wrap-function-pipe",
+        "index": "apps/angular/9-wrap-function-pipe/src/index.html",
+        "main": "apps/angular/9-wrap-function-pipe/src/main.ts",
+        "polyfills": "apps/angular/9-wrap-function-pipe/src/polyfills.ts",
+        "tsConfig": "apps/angular/9-wrap-function-pipe/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/angular/9-wrap-function-pipe/src/favicon.ico",
+          "apps/angular/9-wrap-function-pipe/src/assets"
+        ],
+        "styles": ["apps/angular/9-wrap-function-pipe/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "angular-wrap-function-pipe:build:production"
+        },
+        "development": {
+          "buildTarget": "angular-wrap-function-pipe:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "angular-wrap-function-pipe:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  },
+  "tags": []
+}

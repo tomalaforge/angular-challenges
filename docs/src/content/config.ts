@@ -8,6 +8,7 @@ const authors = defineCollection({
     twitter: z.string().url().optional(),
     linkedin: z.string().url().optional(),
     github: z.string().url().optional(),
+    youtube: z.string().url().optional(),
   }),
 });
 
@@ -60,6 +61,8 @@ const i18n = defineCollection({
         'subscription.note.description': z.string(),
         'contributor.title': z.string(),
         'contributor.subtitle': z.string(),
+        'sponsors.description': z.string(),
+        'sponsors.joinButton': z.string(),
       })
       .partial(),
   }),

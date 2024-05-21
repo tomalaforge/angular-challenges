@@ -8,7 +8,7 @@ contributors:
   - kabrunko-dev
   - svenson95
 challengeNumber: 3
-command: angular-ngfor-enhancement
+command: angular-directive-enhancement
 blogLink: https://medium.com/@thomas.laforge/ngfor-enhancement-716b44656a6c
 sidebar:
   order: 101
