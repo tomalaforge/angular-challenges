@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+progress {
+  @apply h-4 w-full rounded-full bg-gray-200;
+}
+progress::-webkit-progress-bar {
+  @apply rounded-full bg-gray-200;
+}
+
+progress::-webkit-progress-value {
+  @apply rounded-full bg-indigo-600;
+}
