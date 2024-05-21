@@ -1,6 +1,6 @@
 import { CDFlashingDirective } from '@angular-challenges/shared/directives';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatListModule } from '@angular/material/list';
 import { PersonComponent } from './person.component';
@@ -12,13 +12,13 @@ import { SearchFieldComponent } from './search-field.component';
   standalone: true,
   template: `
     <h1 cd-flash class="text-center font-semibold" title="Title">
-      {{ title | titlecase }}
+      {{ title() | titlecase }}
     </h1>
 
     <app-search-field (searchFieldOutput)="addName($event)" />
 
     <mat-list class="flex w-full">
-      @for (name of names; track $index) {
+      @for (name of names(); track $index) {
         <app-person [name]="name" />
       } @empty {
         Empty list
@@ -39,13 +39,13 @@ import { SearchFieldComponent } from './search-field.component';
   ],
 })
 export class PersonListComponent {
-  @Input() names: string[] = [];
-  @Input() title = '';
+  names = input<string[]>([]);
+  title = input<string>('');
   public index = 0;
   public name = '';
 
   addName(value: string) {
-    this.names?.unshift(value);
+    this.names().unshift(value);
   }
 
   userByName(index: number, name: string) {
