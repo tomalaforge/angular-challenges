@@ -101,6 +101,15 @@
       ]
     },
     {
+      "login": "alcaidio",
+      "name": "Timothy Alcaide",
+      "avatar_url": "https://avatars.githubusercontent.com/u/17033036?v=4",
+      "profile": "https://twitter.com/alcaidio",
+      "contributions": [
+        "challenge"
+      ]
+    },
+    {
       "login": "alan-bio",
       "name": "Alan Dragicevich",
       "avatar_url": "https://avatars.githubusercontent.com/u/31838230?v=4",
@@ -230,6 +239,24 @@
       "profile": "https://github.com/webbomj",
       "contributions": [
         "translation-ru"
+      ]
+    },
+    {
+      "login": "Dinozavvvr",
+      "name": "Dinar Shagaliev",
+      "avatar_url": "https://avatars.githubusercontent.com/u/45518871?v=4",
+      "profile": "https://github.com/Dinozavvvr",
+      "contributions": [
+        "translation-ru"
+      ]
+    },
+    {
+      "login": "vimulatus",
+      "name": "Vimulatus",
+      "avatar_url": "https://avatars.githubusercontent.com/u/63696128?v=4",
+      "profile": "https://github.com/vimulatus",
+      "contributions": [
+        "doc"
       ]
     }
   ],

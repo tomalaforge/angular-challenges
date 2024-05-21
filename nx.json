@@ -30,6 +30,11 @@
         "{workspaceRoot}/tools/eslint-rules/**/*"
       ],
       "cache": true
+    },
+    "@angular-devkit/build-angular:application": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
     }
   },
   "namedInputs": {
@@ -52,10 +57,10 @@
   },
   "generators": {
     "@nx/angular:application": {
-      "style": "scss",
-      "linter": "eslint",
-      "unitTestRunner": "none",
       "e2eTestRunner": "none",
+      "linter": "eslint",
+      "style": "scss",
+      "unitTestRunner": "none",
       "inlineStyle": "true",
       "inlineTemplate": "true",
       "prefix": "app",
