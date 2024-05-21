@@ -1,10 +1,10 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, untracked } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
   name = signal('Thomas');
 
   log(message: string) {
-    console.log(`${this.name()}: ${message}`);
+    console.log(`${untracked(() => this.name())}: ${message}`);
   }
 }
