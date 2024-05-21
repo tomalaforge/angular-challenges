@@ -1,5 +1,9 @@
 import { ApplicationConfig } from '@angular/core';
-import { provideRouter, withComponentInputBinding } from '@angular/router';
+import {
+  provideRouter,
+  withComponentInputBinding,
+  withViewTransitions,
+} from '@angular/router';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -12,6 +16,7 @@ export const appConfig: ApplicationConfig = {
         },
       ],
       withComponentInputBinding(),
+      withViewTransitions(),
     ),
   ],
 };
