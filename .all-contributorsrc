@@ -258,6 +258,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "alannelucq",
+      "name": "Arthur LANNELUCQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/44091408?v=4",
+      "profile": "https://github.com/alannelucq",
+      "contributions": [
+        "translation-fr"
+      ]
     }
   ],
   "contributorsPerLine": 7,
