@@ -2,12 +2,12 @@ import { Injectable, signal, untracked } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-  name = untracked(signal('Thomas'));
+  name = signal('Thomas');
 
   // name is considered a dependency by Angular
 
   log(message: string) {
-    console.log(`${this.name}: ${message}`);
+    console.log(untracked(() => this.name()) + ':' + message);
   }
 }
 
