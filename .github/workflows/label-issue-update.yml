@@ -8,8 +8,8 @@ jobs:
   update_labels:
     runs-on: ubuntu-latest
     if: |
-      contains(github.event.issue.labels.*.name, 'sponsor') ||
-      contains(github.event.issue.labels.*.name, 'contributor')
+      contains(github.event.pull_request.labels.*.name, 'sponsor') ||
+      contains(github.event.pull_request.labels.*.name, 'contributor')
     steps:
       - name: checkout
         uses: actions/checkout@v2
