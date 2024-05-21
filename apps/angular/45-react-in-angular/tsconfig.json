@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "jsx": "react",
     "target": "es2022",
     "useDefineForClassFields": false,
     "esModuleInterop": true,

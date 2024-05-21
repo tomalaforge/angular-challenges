@@ -1,17 +1,24 @@
-import { Component, EventEmitter, input, Output } from '@angular/core';
-
-type Post = { title: string; description: string; pictureLink: string };
+import { Component, computed, input, output } from '@angular/core';
+import { Post, ReactPostParams } from './ReactPost';
+import { RenderReactDirective } from './render-react.directive';
 
 @Component({
   standalone: true,
   selector: 'app-post',
   template: `
-    <div></div>
+    <div appRenderReact [props]="postParams()"></div>
   `,
-  styles: [''],
+  imports: [RenderReactDirective],
 })
 export class PostComponent {
-  post = input<Post | undefined>(undefined);
-  isSelected = input<boolean>(false);
-  @Output() selectPost = new EventEmitter<void>();
+  post = input.required<Post>();
+  isSelected = input.required<boolean>();
+  selectPost = output();
+  postParams = computed<ReactPostParams>(() => {
+    return {
+      ...this.post(),
+      selected: this.isSelected(),
+      handleClick: () => this.selectPost.emit(),
+    };
+  });
 }
