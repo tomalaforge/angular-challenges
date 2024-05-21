@@ -40,8 +40,8 @@ export class ActionsComponent {
 
   constructor() {
     effect(() => {
-      const name = untracked(() => this.userService.name());
-      console.log(`${name}: ${this.action() ?? 'No action selected'}`);
+      const action = this.action();
+      untracked(() => this.userService.log(action ?? 'No action selected'));
     });
   }
 }
