@@ -5,9 +5,11 @@ on:
     types: [ edited ]
 
 jobs:
-  add_labels:
+  update_labels:
     runs-on: ubuntu-latest
-    if: ${{ github.event.label.name == 'sponsor' || github.event.label.name == 'contributor' }}
+    if: |
+      contains(github.event.issue.labels.*.name, 'sponsor') ||
+      contains(github.event.issue.labels.*.name, 'contributor')
     steps:
       - name: checkout
         uses: actions/checkout@v2
