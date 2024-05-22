@@ -8,9 +8,9 @@ import { <%= className %>Store } from './<%= fileName %>.store';
   standalone: true,
   imports: [LetDirective],
   providers: [provideComponentStore(<%= className %>Store)],
-  template: `
+<% if (inlineTemplate) { %>template: `
     <ng-container *ngrxLet="vm$ as vm">// do things</ng-container>
-  `,
+  `,<% } else { %>templateUrl: './<%= fileName %>.component.html',<% } %>
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class <%= className %>Component {
