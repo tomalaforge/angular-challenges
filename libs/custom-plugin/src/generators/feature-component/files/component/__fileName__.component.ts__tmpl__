@@ -1,0 +1,21 @@
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { LetDirective } from '@ngrx/component';
+import { provideComponentStore } from '@ngrx/component-store';
+import { <%= className %>Store } from './<%= fileName %>.store';
+
+@Component({
+  selector: 'app-<%= name %>',
+  standalone: true,
+  imports: [LetDirective],
+  providers: [provideComponentStore(<%= className %>Store)],
+  template: `
+    <ng-container *ngrxLet="vm$ as vm">// do things</ng-container>
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class <%= className %>Component {
+  private <%= propertyName %>Store = inject(<%= className %>Store);
+
+  readonly vm$ = this.<%= propertyName %>Store.vm$;
+}
+

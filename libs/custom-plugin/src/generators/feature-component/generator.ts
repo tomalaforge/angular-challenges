@@ -2,6 +2,7 @@ import {
   addProjectConfiguration,
   formatFiles,
   generateFiles,
+  names,
   Tree,
 } from '@nx/devkit';
 import * as path from 'path';
@@ -11,6 +12,7 @@ export async function featureComponentGenerator(
   tree: Tree,
   options: FeatureComponentGeneratorSchema,
 ) {
+  const componentNames = names(options.name);
   const projectRoot = `libs/${options.name}`;
   addProjectConfiguration(tree, options.name, {
     root: projectRoot,
@@ -18,7 +20,10 @@ export async function featureComponentGenerator(
     sourceRoot: `${projectRoot}/src`,
     targets: {},
   });
-  generateFiles(tree, path.join(__dirname, 'files'), projectRoot, options);
+  generateFiles(tree, path.join(__dirname, 'files'), projectRoot, {
+    ...componentNames,
+    tmpl: '',
+  });
   await formatFiles(tree);
 }
 
