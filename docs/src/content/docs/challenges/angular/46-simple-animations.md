@@ -12,7 +12,7 @@ sidebar:
 
 ## Information
 
-This is the first of two animation challenges, the goal of this series is to master animations in Angular.
+This is the first of two animation challenges. The goal of this series is to master animations in Angular.
 
 Well-designed animations can make your application more fun and straightforward to use, but they aren't just cosmetic. Animations can improve your application and user experience in a number of ways:
 
@@ -22,7 +22,7 @@ Well-designed animations can make your application more fun and straightforward 
 
 I would recommend you read the [official documentation](https://angular.dev/guide/animations). You will learn everything that is necessary to successfully complete the challenge.
 
-Otherwise look at this [working example](https://svenson95.github.io/ng-xmp-animations/) and [git repo](https://github.com/svenson95/ng-xmp-animations) to get inspired.
+Otherwise, look at this [working example](https://svenson95.github.io/ng-xmp-animations/) and [git repo](https://github.com/svenson95/ng-xmp-animations) to get inspired.
 
 ## Statement
 

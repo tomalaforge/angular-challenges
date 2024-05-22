@@ -1,6 +1,6 @@
 ---
 title: 🟢 @RouterInput()
-description: Challenge 22 is about using the @Input decorator to retreive router params.
+description: Challenge 22 is about using the @Input decorator to retrieve router params.
 author: thomas-laforge
 contributors:
   - tomalaforge

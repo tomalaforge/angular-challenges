@@ -1,6 +1,6 @@
 ---
 title: 🟠 InjectionToken
-description: Challenge 39 is about learning the power of dependancy injection
+description: Challenge 39 is about learning the power of dependency injection
 author: thomas-laforge
 contributors:
   - tomalaforge

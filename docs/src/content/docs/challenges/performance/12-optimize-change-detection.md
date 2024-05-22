@@ -37,4 +37,4 @@ Your goal for this challenge is to avoid all unnecessary change detection cycles
 
 ## Constraint:
 
-You cannot opt-out of Zone.js globally. If this code is part of a large project and you opt out of Zone.js, you will break your application without any doubt.
+You cannot opt out of Zone.js globally. If this code is part of a large project, and you opt out of Zone.js, you will break your application without any doubt.

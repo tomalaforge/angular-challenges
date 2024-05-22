@@ -57,7 +57,7 @@ npm i --save-dev @types/react @types/react-dom
 
 <details>
   <summary>Hint 2 - Initialization</summary>
-  Create a react root with `createRoot(...)`
+  Create a React root with `createRoot(...)`
 </details>
 
 <details>
@@ -76,5 +76,5 @@ npm i --save-dev @types/react @types/react-dom
 
 <details>
   <summary>Hint 4 - Design</summary>
-  Do not forget to allow the react file in Tailwind.
+  Do not forget to allow the React file in Tailwind.
 </details>

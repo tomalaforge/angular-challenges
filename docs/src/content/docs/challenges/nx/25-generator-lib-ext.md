@@ -21,9 +21,9 @@ The goal of this challenge is to create a generator that extends the default lib
 
 You can either use all the default parameters of the Nx library generator or choose to modify some and keep others as defaults. The choice is yours.
 
-## Constraints:
+## Constraints
 
-You should only override the jest configuration is the `unitTestRunner` option is set at `JEST`, and you should only update the eslint configuration if the `linter` is set to `eslint`.
+You should only override the jest configuration is the `unitTestRunner` option is set at `jest`, and you should only update the eslint configuration if the `linter` is set to `eslint`.
 
 ---
 
@@ -52,4 +52,4 @@ export default {
 
 `eslintrc.json`
 
-add this rule `"@typescript-eslint/member-ordering": "off"` inside the rules properties of ts files.
+Add the rule `"@typescript-eslint/member-ordering": "off"` inside the rules properties of ts files.

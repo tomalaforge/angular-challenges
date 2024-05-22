@@ -10,7 +10,7 @@ sidebar:
   order: 114
 ---
 
-Let's dive inside the wonderful word of RxJs.
+Let's dive inside the wonderful word of RxJS.
 
 This challenge is inspired by a real-life example.
 
@@ -18,9 +18,9 @@ This challenge is inspired by a real-life example.
 
 ### User Story
 
-We need a button for each `Topic`. When we click on it, we delete all objects with this `Topic` in our database _(Fake DB in our case)_. Finally we display **All [topic] have been deleted** is everything was deleted successfully or **Error: deletion of some [topic] failed** if some deletions failed
+We need a button for each `Topic`. When we click on it, we delete all objects with this `Topic` in our database _(Fake DB in our case)_. Finally, we display **All [topic] have been deleted** if everything was deleted successfully or **Error: deletion of some [topic] failed** if some deletions failed
 
-### Constraints:
+### Constraints
 
 We can only pass one object to our DB for deletion at the time. The DB will respond true if the data was successfully deleted and false otherwise.
 
