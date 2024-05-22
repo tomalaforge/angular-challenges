@@ -1,8 +1,9 @@
 name: updates Labels
 
 on:
-  pull_request_target:
-    types: [ edited ]
+  push:
+    branches-ignore:
+      - main
 
 jobs:
   update_labels:
