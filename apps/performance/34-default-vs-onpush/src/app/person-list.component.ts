@@ -39,8 +39,8 @@ import { SearchFieldComponent } from './search-field.component';
   ],
 })
 export class PersonListComponent {
-  names = input<string[]>([]);
-  title = input<string>('');
+  readonly names = input<string[]>([]);
+  readonly title = input<string>('');
   public index = 0;
   public name = '';
 
