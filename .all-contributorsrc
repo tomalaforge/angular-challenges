@@ -267,6 +267,15 @@
       "contributions": [
         "translation-fr"
       ]
+    },
+    {
+      "login": "fixedmichal",
+      "name": "fixed_michal",
+      "avatar_url": "https://avatars.githubusercontent.com/u/26270192?v=4",
+      "profile": "https://github.com/fixedmichal",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
