@@ -8,7 +8,6 @@ challengeNumber: 51
 command: signal-function-call-effect
 sidebar:
   order: 20
-  badge: New
 ---
 
 ## Information
