@@ -1,0 +1,12 @@
+import { BASE_URL } from '@angular-challenges/fake-utils';
+import { HttpClient } from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
+import { <%= className %> } from './<%= fileName %>.model';
+
+@Injectable({ providedIn: 'root' })
+export class <%= className %>Service {
+  private http = inject(HttpClient);
+  private BASE_URL = inject(BASE_URL);
+
+  load<%= className %>s = () => this.http.get<<%= className %>[]>(`${this.BASE_URL}/<%= name %>s`);
+}

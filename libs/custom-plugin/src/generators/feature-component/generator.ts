@@ -13,6 +13,7 @@ export async function featureComponentGenerator(
   options: FeatureComponentGeneratorSchema,
 ) {
   const componentNames = names(options.name);
+  console.log(componentNames);
   const projectRoot = `libs/${options.name}`;
   addProjectConfiguration(tree, options.name, {
     root: projectRoot,
@@ -20,10 +21,19 @@ export async function featureComponentGenerator(
     sourceRoot: `${projectRoot}/src`,
     targets: {},
   });
-  generateFiles(tree, path.join(__dirname, 'files'), projectRoot, {
+  generateFiles(tree, path.join(__dirname, 'files/component'), projectRoot, {
     ...componentNames,
+    createService: options.createService,
     tmpl: '',
   });
+
+  if (options.createService) {
+    generateFiles(tree, path.join(__dirname, 'files/service'), projectRoot, {
+      ...componentNames,
+      tmpl: '',
+    });
+  }
+
   await formatFiles(tree);
 }
 

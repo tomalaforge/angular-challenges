@@ -24,9 +24,11 @@ const initialState: <%= className %>State = {
 @Injectable()
 export class <%= className %>Store
   extends ComponentStore<<%= className %>State>
-  implements OnStateInit, OnStoreInit
+  implements OnStateInit<% if (createService) { %>, OnStoreInit<% } %>
 {
+<% if (createService) { %>
   private <%= propertyName %>Service = inject(<%= className %>Service);
+<% } %>
 
   private readonly <%= propertyName %>s$ = this.select((state) => state.<%= propertyName %>s);
   private readonly loading$ = this.select((state) => state.loading);
@@ -45,6 +47,7 @@ export class <%= className %>Store
     this.setState(initialState);
   }
 
+<% if (createService) { %>
   ngrxOnStoreInit() {
     this.load<%= className %>s();
   }
@@ -62,4 +65,5 @@ export class <%= className %>Store
       ),
     ),
   );
+<% } %>
 }
