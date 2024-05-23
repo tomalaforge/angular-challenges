@@ -4,6 +4,7 @@ description: Challenge 18 is about testing nested components
 author: thomas-laforge
 contributors:
   - tomalaforge
+  - LMFinney
 challengeNumber: 18
 command: testing-nested-components
 sidebar:

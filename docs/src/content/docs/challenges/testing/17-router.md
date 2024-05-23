@@ -4,6 +4,7 @@ description: Challenge 17 is about testing the router
 author: thomas-laforge
 contributors:
   - tomalaforge
+  - LMFinney
 challengeNumber: 17
 command: testing-router
 sidebar:

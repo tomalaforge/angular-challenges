@@ -5,6 +5,7 @@ author: sven-brodny
 contributors:
   - svenson95
   - jdegand
+  - LMFinney
 challengeNumber: 47
 command: typescript-enums-vs-union-types
 sidebar:

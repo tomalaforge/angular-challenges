@@ -5,6 +5,7 @@ author: thomas-laforge
 contributors:
   - tomalaforge
   - jdegand
+  - LMFinney
 challengeNumber: 44
 command: angular-view-transition
 sidebar:

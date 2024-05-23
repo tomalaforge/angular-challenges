@@ -5,6 +5,7 @@ author: timothy-alcaide
 contributors:
   - alcaidio
   - svenson95
+  - LMFinney
 challengeNumber: 48
 command: forms-avoid-losing-form-data
 sidebar:

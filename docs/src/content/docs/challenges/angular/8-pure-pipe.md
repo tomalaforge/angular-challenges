@@ -7,6 +7,7 @@ contributors:
   - tomer953
   - kabrunko-dev
   - svenson95
+  - LMFinney
 challengeNumber: 8
 command: angular-pure-pipe
 blogLink: https://medium.com/ngconf/deep-dive-into-angular-pipes-c040588cd15d

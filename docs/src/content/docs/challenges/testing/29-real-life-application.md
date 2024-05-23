@@ -6,6 +6,7 @@ contributors:
   - tomalaforge
   - tomer953
   - svenson95
+  - LMFinney
 challengeNumber: 29
 command: testing-real-life-application
 sidebar:

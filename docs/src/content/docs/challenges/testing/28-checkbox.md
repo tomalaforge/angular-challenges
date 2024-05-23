@@ -6,6 +6,7 @@ contributors:
   - tomalaforge
   - tomer953
   - jdegand
+  - LMFinney
 challengeNumber: 28
 command: testing-checkbox
 sidebar:

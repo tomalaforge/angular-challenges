@@ -7,6 +7,7 @@ contributors:
   - tomer953
   - svenson95
   - jdegand
+  - LMFinney
 challengeNumber: 5
 command: angular-crud-application
 sidebar:

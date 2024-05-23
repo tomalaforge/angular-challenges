@@ -4,6 +4,7 @@ description: Challenge 14 is about race condition in Rxjs
 author: thomas-laforge
 contributors:
   - tomalaforge
+  - LMFinney
 challengeNumber: 14
 command: rxjs-race-condition
 sidebar:

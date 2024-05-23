@@ -6,6 +6,7 @@ contributors:
   - wandri
   - tomalaforge
   - jdegand
+  - LMFinney
 challengeNumber: 45
 command: angular-react-in-angular
 sidebar:

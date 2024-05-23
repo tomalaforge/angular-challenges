@@ -5,6 +5,7 @@ author: thomas-laforge
 contributors:
   - tomalaforge
   - svenson95
+  - LMFinney
 challengeNumber: 50
 command: signal-bug-in-effect
 sidebar:

@@ -7,6 +7,7 @@ contributors:
   - tomer953
   - kabrunko-dev
   - svenson95
+  - LMFinney
 challengeNumber: 9
 command: angular-wrap-function-pipe
 blogLink: https://medium.com/ngconf/boost-your-apps-performance-by-wrapping-your-functions-inside-a-pipe-7e889a901d1d

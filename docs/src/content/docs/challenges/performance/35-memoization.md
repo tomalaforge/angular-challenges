@@ -4,6 +4,7 @@ description: Challenge 35 is about learning how pure pipe works
 author: thomas-laforge
 contributors:
   - tomalaforge
+  - LMFinney
 challengeNumber: 35
 command: performance-memoization
 sidebar:

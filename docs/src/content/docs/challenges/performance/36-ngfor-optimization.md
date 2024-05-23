@@ -4,6 +4,7 @@ description: Challenge 36 is about learning how trackby works
 author: thomas-laforge
 contributors:
   - tomalaforge
+  - LMFinney
 challengeNumber: 36
 command: performance-ngfor-optimization
 sidebar:

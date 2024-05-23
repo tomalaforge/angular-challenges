@@ -6,6 +6,7 @@ contributors:
   - tomalaforge
   - tomer953
   - Sagardevkota
+  - LMFinney
 challengeNumber: 26
 sidebar:
   order: 116

@@ -4,6 +4,7 @@ description: Challenge 12 about optimizing the number of change detection cycle 
 author: thomas-laforge
 contributors:
   - tomalaforge
+  - LMFinney
 challengeNumber: 12
 command: performance-optimize-change-detection
 sidebar:

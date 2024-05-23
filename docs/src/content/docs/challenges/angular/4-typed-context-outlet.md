@@ -7,6 +7,7 @@ contributors:
   - tomer953
   - svenson95
   - jdegand
+  - LMFinney
 challengeNumber: 4
 command: angular-typed-context-outlet
 blogLink: https://medium.com/@thomas.laforge/ngtemplateoutlet-type-checking-5d2dcb07a2c6

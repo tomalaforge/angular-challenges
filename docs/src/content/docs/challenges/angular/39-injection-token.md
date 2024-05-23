@@ -5,6 +5,7 @@ author: thomas-laforge
 contributors:
   - tomalaforge
   - jdegand
+  - LMFinney
 challengeNumber: 39
 command: angular-injection-token
 sidebar:

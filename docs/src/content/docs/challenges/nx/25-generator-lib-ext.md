@@ -4,6 +4,7 @@ description: Challenge 25 is about creating a Nx generator to extend the built-i
 author: thomas-laforge
 contributors:
   - tomalaforge
+  - LMFinney
 challengeNumber: 25
 sidebar:
   order: 207

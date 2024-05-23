@@ -5,6 +5,7 @@ author: thomas-laforge
 contributors:
   - tomalaforge
   - jdegand
+  - LMFinney
 challengeNumber: 33
 command: angular-decoupling-components
 sidebar:

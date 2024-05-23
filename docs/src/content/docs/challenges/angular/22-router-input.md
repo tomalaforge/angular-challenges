@@ -6,6 +6,7 @@ contributors:
   - tomalaforge
   - tomer953
   - svenson95
+  - LMFinney
 challengeNumber: 22
 command: angular-router-input
 blogLink: https://medium.com/ngconf/accessing-route-params-in-angular-1f8e12770617

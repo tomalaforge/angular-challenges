@@ -6,6 +6,7 @@ contributors:
   - tomalaforge
   - tomer953
   - jdegand
+  - LMFinney
 challengeNumber: 32
 command: angular-change-detection-bug
 blogLink: https://medium.com/ngconf/function-calls-inside-template-are-dangerous-15f9822a6629

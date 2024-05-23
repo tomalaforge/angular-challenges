@@ -6,6 +6,7 @@ contributors:
   - tomalaforge
   - tomer953
   - kabrunko-dev
+  - LMFinney
 challengeNumber: 13
 command: angular-highly-customizable-css
 sidebar:

@@ -6,6 +6,7 @@ command: rxjs-catch-error
 contributors:
   - DeveshChau
   - tomalaforge
+  - LMFinney
 challengeNumber: 38
 sidebar:
   order: 14

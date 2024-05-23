@@ -4,6 +4,7 @@ description: You're tasked with implementing Lucie's button design, requiring ho
 author: timothy-alcaide
 contributors:
   - alcaidio
+  - LMFinney
 challengeNumber: 49
 command: rxjs-hold-to-save-button
 sidebar:

@@ -6,6 +6,7 @@ contributors:
   - tomalaforge
   - tomer953
   - svenson95
+  - LMFinney
 challengeNumber: 10
 command: angular-utility-wrapper-pipe
 sidebar:

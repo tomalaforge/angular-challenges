@@ -6,6 +6,7 @@ contributors:
   - tomalaforge
   - tomer953
   - jdegand
+  - LMFinney
 challengeNumber: 7
 command: ngrx-power-of-effect
 sidebar:
