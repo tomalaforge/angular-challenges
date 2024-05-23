@@ -1,6 +1,12 @@
 import { AsyncPipe, NgIf } from '@angular/common';
-import { Component, HostListener } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  NgZone,
+  OnInit,
+  inject,
+  signal,
+} from '@angular/core';
 
 @Component({
   standalone: true,
@@ -10,7 +16,9 @@ import { BehaviorSubject } from 'rxjs';
     <div>Top</div>
     <div>Middle</div>
     <div>Bottom</div>
-    <button (click)="goToTop()" *ngIf="displayButton$ | async">Top</button>
+    @if (displayButton()) {
+      <button (click)="goToTop()">Top</button>
+    }
   `,
   styles: [
     `
@@ -30,17 +38,27 @@ import { BehaviorSubject } from 'rxjs';
       }
     `,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'scroll-cd';
 
-  private displayButtonSubject = new BehaviorSubject<boolean>(false);
-  displayButton$ = this.displayButtonSubject.asObservable();
+  protected readonly displayButton = signal(false);
+  private readonly zone = inject(NgZone);
 
-  @HostListener('window:scroll', ['$event'])
-  onScroll() {
-    const pos = window.pageYOffset;
-    this.displayButtonSubject.next(pos > 50);
+  ngOnInit(): void {
+    this.zone.runOutsideAngular(() => {
+      window.addEventListener('scroll', () => {
+        const pos = window.scrollY;
+        this.toggleButton(pos > 50);
+      });
+    });
+  }
+
+  toggleButton(flag: boolean) {
+    this.zone.run(() => {
+      this.displayButton.set(flag);
+    });
   }
 
   goToTop() {
