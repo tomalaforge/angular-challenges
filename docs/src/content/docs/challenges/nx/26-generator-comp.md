@@ -55,7 +55,7 @@ export class UserComponent {
 
 ---
 
-`user.store.json`
+`user.store.ts`
 
 ```ts
 import { Injectable, inject } from '@angular/core';
