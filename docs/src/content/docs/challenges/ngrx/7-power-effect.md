@@ -1,11 +1,12 @@
 ---
 title: 🔴 Power of Effect
-description: Challenge 7 is about creating an Ngrx effect with another Rxjs Hot observable
+description: Challenge 7 is about creating an NgRx effect with another Rxjs Hot observable
 author: thomas-laforge
 contributors:
   - tomalaforge
   - tomer953
   - jdegand
+  - LMFinney
 challengeNumber: 7
 command: ngrx-power-of-effect
 sidebar:
@@ -28,11 +29,11 @@ Create an injection token to `inject` the push service inside each component. In
 
 _Eliminate_ the notification service. It is not extensible. Testing (not required for this challenge) the notification service would also be overly complicated. You would need to test each branching scenario. Injection tokens can easily be mocked.
 
-Since the notification service is global, all component lists update whether or not, a user is on that route. We need to decouple that logic. The notification messages should display only on their respective routes.
+Since the notification service is global, all component lists update, even if a user is not on that route. We need to decouple that logic. The notification messages should display only on their respective routes.
 
 ### Step 2
 
-Create one ngrx effect, or component store effect for each push type, and implement your logic.
+Create one NgRx effect or component store effect for each push type, and implement your logic.
 
 ### Step 3
 

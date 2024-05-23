@@ -4,6 +4,7 @@ description: You're tasked with implementing Lucie's button design, requiring ho
 author: timothy-alcaide
 contributors:
   - alcaidio
+  - LMFinney
 challengeNumber: 49
 command: rxjs-hold-to-save-button
 sidebar:
@@ -22,7 +23,7 @@ So you're going to take over from him.
 
 > "As a user, I would like to save something by holding down the button for a certain amount of time."
 
-Here the prototype made by Lucie:
+Here is the prototype made by Lucie:
 
 ![prototype gif](../../../../assets/rxjs/49/prototype.gif)
 

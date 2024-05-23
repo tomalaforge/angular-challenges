@@ -5,6 +5,7 @@ author: thomas-laforge
 contributors:
   - tomalaforge
   - svenson95
+  - LMFinney
 challengeNumber: 50
 command: signal-bug-in-effect
 sidebar:
@@ -19,9 +20,9 @@ In this basic exercise, we aim to display an alert whenever at least one checkbo
 
 ## Statement
 
-The actual implementation doesn't work as expected, your task is to fix the issue. Your team exposed a bug, there is a alert to be shown if atleast one of the three checkboxes is checked. But if the first one is checked, the other two checkboxes gets checked without displaying the alert. Why does this happen?
+The actual implementation doesn't work as expected, and your task is to fix a bug that your team discovered. An alert should be shown if at least one of the three checkboxes is checked (independent of any other checkboxes). But if the first one is checked, checking one or both of the other two checkboxes does not cause the alert to display. Why does this happen?
 
-The objective of this challenge is to understand the issue and fix the problem, preventing the alert from appearing when the second checkbox is clicked.
+The objective of this challenge is to understand the issue and fix the problem that prevents the alert from appearing when the second checkbox is clicked.
 
 ## Acceptance Criteria
 

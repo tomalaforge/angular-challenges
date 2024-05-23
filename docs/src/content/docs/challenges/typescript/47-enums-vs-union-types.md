@@ -5,6 +5,7 @@ author: sven-brodny
 contributors:
   - svenson95
   - jdegand
+  - LMFinney
 challengeNumber: 47
 command: typescript-enums-vs-union-types
 sidebar:
@@ -35,7 +36,7 @@ Enums are a concept borrowed from languages like C# and Java. TypeScript enums a
 Enums have some more pitfalls as well:
 
 - Non-const enums do not fit the concept of "a typed superset of JavaScript." They violate the concept by emitting global JavaScript objects that live in runtime with a syntax that is not compatible with JavaScript (JavaScript uses dynamic typing rather than static typing; enums are a form of static typing). Since JavaScript has no compilation step, there is little or no value in having static typing.
-- Const enums, in contrast, cannot be transpiled with Babel. But there are workarounds for this issue, e. g., using the `babel-plugin-const-enum` plugin. The TypeScript documentation about [const enums](https://www.typescriptlang.org/docs/handbook/enums.html#const-enums) says "_Do not use const enums at all_".
+- Const enums, in contrast, cannot be transpiled with Babel. But there are workarounds for this issue, e.g., using the `babel-plugin-const-enum` plugin. The TypeScript documentation about [const enums](https://www.typescriptlang.org/docs/handbook/enums.html#const-enums) says "_Do not use const enums at all_".
 - To use enums, you have to import them. If you want to use enum values in a template, you'll need to declare a variable in your component too.
 - Numeric enums are not type safe ...
 

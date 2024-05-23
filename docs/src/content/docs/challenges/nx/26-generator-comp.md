@@ -6,6 +6,7 @@ contributors:
   - tomalaforge
   - tomer953
   - Sagardevkota
+  - LMFinney
 challengeNumber: 26
 sidebar:
   order: 116
@@ -21,7 +22,7 @@ Generators are awesome tools that can help you and your team generate code more 
 
 The goal of this challenge is to create a generator that will create all the boilerplate of a component for you.
 
-Just below, you will have the end result of your generator for a `UserComponent` associated with a `@ngrx/component-store`.
+Below are the end result of your generator for a `UserComponent` associated with a `@ngrx/component-store`.
 
 ## Options
 

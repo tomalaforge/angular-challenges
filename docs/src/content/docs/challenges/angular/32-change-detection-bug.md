@@ -6,6 +6,7 @@ contributors:
   - tomalaforge
   - tomer953
   - jdegand
+  - LMFinney
 challengeNumber: 32
 command: angular-change-detection-bug
 blogLink: https://medium.com/ngconf/function-calls-inside-template-are-dangerous-15f9822a6629
@@ -19,7 +20,7 @@ This challenge is inspired by a real-life example that I simplified to create th
 
 ## Information
 
-In this small application, we have a navigation menu to route our application to either `BarComponent` or `FooComponent`. However our application is not loading and no errors are displayed inside the console.
+In this small application, we have a navigation menu to route our application to either `BarComponent` or `FooComponent`. However, our application is not loading and no errors are displayed inside the console.
 
 ## Statement
 

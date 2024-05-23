@@ -7,6 +7,7 @@ contributors:
   - tomer953
   - svenson95
   - jdegand
+  - LMFinney
 challengeNumber: 23
 command: testing-harness
 sidebar:
@@ -26,4 +27,4 @@ Documentation for Angular Material component is [here](https://material.angular.
 
 Test the functionality of `child.component.ts`, which consists of some inputs & checkboxes related to a `mat-slider`. Implement the prepared test suite, but feel free to include additional tests as well.
 
-**Note:** You are welcome to use Testing Library if you wish.
+**Note:** You are welcome to use [Angular Testing Library](https://testing-library.com/) if you wish.

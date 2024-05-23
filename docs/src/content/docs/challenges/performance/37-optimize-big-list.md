@@ -5,6 +5,7 @@ author: thomas-laforge
 contributors:
   - tomalaforge
   - jdegand
+  - LMFinney
 challengeNumber: 37
 command: performance-optimize-big-list
 sidebar:
@@ -13,7 +14,7 @@ sidebar:
 
 ## Information
 
-In this application, we will render a list of 100,000 individuals by clicking on the **loadList** button. If you open the Chrome developer panel by pressing **F12**, go to the <b>Source</b> tab, and expand the element to see the list, you will notice that all 100,000 elements are rendered in the DOM, even though we can only see about 20 elements in the viewport. This process takes a lot of time, which is why the application is very slow at displaying the list.
+In this application, we will render a list of 100,000 individuals by clicking on the **loadList** button. If you open the Chrome developer panel by pressing **F12**, go to the <b>Elements</b> tab, and expand the element to see the list, you will notice that all 100,000 elements are rendered in the DOM, even though we can only see about 20 elements in the viewport. This process takes a lot of time, which is why the application is very slow at displaying the list.
 
 We can use the <b>Angular DevTool</b> to profile our application and understand what is happening inside our application. I will show you how to do it inside the following video.
 

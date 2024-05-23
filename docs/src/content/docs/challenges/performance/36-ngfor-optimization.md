@@ -4,6 +4,7 @@ description: Challenge 36 is about learning how trackby works
 author: thomas-laforge
 contributors:
   - tomalaforge
+  - LMFinney
 challengeNumber: 36
 command: performance-ngfor-optimization
 sidebar:
@@ -12,7 +13,7 @@ sidebar:
 
 ## Information
 
-In this application, we have a list of individuals that we can add, delete or update. If you open the developer Chrome panel by pressing **F12**, go to he <b>source</b> tab, and expand the element to see the list, you will notice that each time, you add, delete or update a list item, the entire DOM elements are destroyed and initialized again. (See video below).
+In this application, we have a list of individuals that we can add, delete or update. If you open the developer Chrome panel by pressing **F12**, go to the <b>Elements</b> tab, and expand the element to see the list, you will notice that each time you add, delete or update a list item, all the DOM elements are destroyed and initialized again. (See video below).
 
 <video controls src="https://github.com/tomalaforge/angular-challenges/assets/30832608/71b90307-3ee3-42c0-a532-b67ce4f20bf6">
 </video>

@@ -5,6 +5,7 @@ author: thomas-laforge
 contributors:
   - tomalaforge
   - jdegand
+  - LMFinney
 challengeNumber: 44
 command: angular-view-transition
 sidebar:
@@ -13,9 +14,9 @@ sidebar:
 
 ## Information
 
-This is the second of two animation challenges, the goal of this series is to master animations in Angular.
+This is the second of two animation challenges. The goal of this series is to master animations in Angular.
 
-The View Transition API is a brand new API that provides a set of features that allow developers to control and manipulate the transitions and animations between views within an application.
+The View Transition API is a brand-new API that provides a set of features that allow developers to control and manipulate the transitions and animations between views within an application.
 It plays a pivotal role in enhancing the user experience (UX), bringing applications to life with engaging and captivating transitions to guide users through different pages or sections of the app.
 
 The goal of this challenge is to learn about and manipulate all types of transitions proposed by the API.

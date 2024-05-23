@@ -4,6 +4,7 @@ description: Challenge 35 is about learning how pure pipe works
 author: thomas-laforge
 contributors:
   - tomalaforge
+  - LMFinney
 challengeNumber: 35
 command: performance-memoization
 sidebar:
@@ -45,6 +46,6 @@ The goal of this challenge is to understand what is causing this latency and to 
 <details>
   <summary>Hint 1</summary>
 
-Use `Pipes` to memoize the Fibonnaci computation.
+Use `Pipes` to memoize the Fibonacci computation.
 
 </details>

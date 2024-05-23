@@ -6,6 +6,7 @@ contributors:
   - tomalaforge
   - tomer953
   - jdegand
+  - LMFinney
 challengeNumber: 28
 command: testing-checkbox
 sidebar:
@@ -14,9 +15,9 @@ sidebar:
 
 ## Information
 
-This application is very simple. It consists of a checkbox that enables or disables a button. The primary goal of this application is to become familiar with the debug API of Testing Library. Knowing how to debug your tests is a crucial tool you need to have in your toolkit.
+This application is very simple. It consists of a checkbox that enables or disables a button. The primary goal of this application is to become familiar with the debug API of [Angular Testing Library](https://testing-library.com/). Knowing how to debug your tests is a crucial tool you need to have in your toolkit.
 
-You can find the documentation about debugging in Testing Library [here](https://testing-library.com/docs/dom-testing-library/api-debugging#screenlogtestingplaygroundurl).
+You can find the documentation about debugging in Angular Testing Library [here](https://testing-library.com/docs/dom-testing-library/api-debugging#screenlogtestingplaygroundurl).
 
 The main functions to remember are as follows:
 

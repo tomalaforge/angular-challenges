@@ -4,6 +4,7 @@ description: Challenge 14 is about race condition in Rxjs
 author: thomas-laforge
 contributors:
   - tomalaforge
+  - LMFinney
 challengeNumber: 14
 command: rxjs-race-condition
 sidebar:
@@ -18,9 +19,9 @@ The goal of this application is to display a list of topics in a modal when a bu
 
 Correct your application to pass the test
 
-## Constraints:
+## Constraints
 
-- I can see you coming 🤣 => You CANNOT change the test (Test is working fine) 😳
+- I can see you coming 🤣 => You CANNOT change the test (the test is working fine) 😳
 - You CANNOT change the `fakeGetHttpTopic` method. A delay has been added to fake a slow network.
 
 ## Run the test

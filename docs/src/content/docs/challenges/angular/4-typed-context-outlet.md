@@ -7,6 +7,7 @@ contributors:
   - tomer953
   - svenson95
   - jdegand
+  - LMFinney
 challengeNumber: 4
 command: angular-typed-context-outlet
 blogLink: https://medium.com/@thomas.laforge/ngtemplateoutlet-type-checking-5d2dcb07a2c6
@@ -18,7 +19,7 @@ sidebar:
 
 You can improve template type checking for custom directives by adding template guard properties to your directive definition. Angular offers the static function [`ngTemplateContextGuard`](https://angular.dev/guide/directives/structural-directives#improving-template-type-checking-for-custom-directives) to strongly type structural directives.
 
-However the context of **NgTemplateOutlet** type is **Object**. But with the help of the above guard, we can improve that behavior.
+However, the context of **NgTemplateOutlet** type is **Object**. But with the help of the above guard, we can improve that behavior.
 
 ## Statement
 
@@ -28,17 +29,17 @@ This exercise has two levels of complexity.
 
 ### Level 1: Known Interface
 
-Currently we have the following piece of code.
+Currently, we have the following piece of code.
 
-![Unkown Person](../../../../assets/4/unknown-person.png 'Unkown Person')
+![Unknown Person](../../../../assets/4/unknown-person.png 'Unknown Person')
 
 As we can see, `name` is of type `any`. We want to infer the correct type using the custom directive `PersonDirective`.
 
 ### Level 2: Generic Interface
 
-Currently we have the following piece of code.
+Currently, we have the following piece of code.
 
-![Unkown Student](../../../../assets/4/unknown-student.png 'Unkown Student')
+![Unknown Student](../../../../assets/4/unknown-student.png 'Unknown Student')
 
 As we can see, `student` is of type `any`. We want to infer the correct type using the custom directive `ListDirective`.
 
