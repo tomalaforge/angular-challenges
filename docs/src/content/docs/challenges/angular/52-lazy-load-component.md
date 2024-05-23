@@ -3,7 +3,6 @@ title: 🟢 Lazy Load a Component
 description: Challenge 52 is about understanding how to lazy load a component in Angular.
 author: lance-finney
 contributors:
-  - tomalaforge
   - LMFinney
 challengeNumber: 52
 command: angular-lazy-load-component
@@ -39,5 +38,12 @@ You should be able to remove the `topLoaded` signal when you are done.
   <summary>Hint 2</summary>
 
 The new Angular feature will hide the `TopComponent` from view, but it will still be loaded in the initial bundle unless you change how both `AppComponent` and `TopComponent` are defined in their decorators. This challenge start with the old `NgModule`-based architecture, but you will need to change it to use the new feature.
+
+</details>
+
+<details>
+  <summary>Hint 3</summary>
+
+The new feature is [Deferrable Views](https://angular.dev/guide/defer), which provides several different triggers. One of them is ideal for this challenge.
 
 </details>
