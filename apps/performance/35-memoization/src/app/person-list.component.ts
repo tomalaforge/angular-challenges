@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Pipe, PipeTransform } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -15,6 +15,16 @@ const fibonacci = (num: number): number => {
   return fibonacci(num - 1) + fibonacci(num - 2);
 };
 
+@Pipe({
+  name: 'fibonacci',
+  standalone: true,
+})
+export class FibonacciPipe implements PipeTransform {
+  transform(value: number) {
+    return fibonacci(value);
+  }
+}
+
 @Component({
   selector: 'app-person-list',
   standalone: true,
@@ -25,6 +35,7 @@ const fibonacci = (num: number): number => {
     MatFormFieldModule,
     MatInputModule,
     MatChipsModule,
+    FibonacciPipe,
   ],
   template: `
     <h1 class="text-center font-semibold" title="Title">
@@ -40,12 +51,14 @@ const fibonacci = (num: number): number => {
     </mat-form-field>
 
     <mat-list class="flex w-full">
-      <mat-list-item *ngFor="let person of persons">
-        <div MatListItemLine class="flex justify-between">
-          <h3>{{ person.name }}</h3>
-          <mat-chip>{{ calculate(person.fib) }}</mat-chip>
-        </div>
-      </mat-list-item>
+      @for (person of persons; track $index) {
+        <mat-list-item>
+          <div MatListItemLine class="flex justify-between">
+            <h3>{{ person.name }}</h3>
+            <mat-chip>{{ person.fib | fibonacci }}</mat-chip>
+          </div>
+        </mat-list-item>
+      }
     </mat-list>
   `,
   host: {
@@ -58,6 +71,11 @@ export class PersonListComponent {
 
   label = '';
 
+  /**
+   * This template function causes the slow responsiveness
+   * of the application, by switching to the fibonacci pipe
+   * the overall performance of the app is improved drastically.
+   */
   calculate(num: number) {
     return fibonacci(num);
   }
