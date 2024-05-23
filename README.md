@@ -65,6 +65,7 @@ Check [all 51 challenges](https://angular-challenges.vercel.app/)
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/vimulatus"><img src="https://avatars.githubusercontent.com/u/63696128?v=4?s=100" width="100px;" alt="Vimulatus"/><br /><sub><b>Vimulatus</b></sub></a><br /><a href="https://github.com/tomalaforge/angular-challenges/commits?author=vimulatus" title="Documentation">📖</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/alannelucq"><img src="https://avatars.githubusercontent.com/u/44091408?v=4?s=100" width="100px;" alt="Arthur LANNELUCQ"/><br /><sub><b>Arthur LANNELUCQ</b></sub></a><br /><a href="#translation-fr-alannelucq" title="Translate in French">🇫🇷</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/fixedmichal"><img src="https://avatars.githubusercontent.com/u/26270192?v=4?s=100" width="100px;" alt="fixed_michal"/><br /><sub><b>fixed_michal</b></sub></a><br /><a href="https://github.com/tomalaforge/angular-challenges/issues?q=author%3Afixedmichal" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/LMFinney"><img src="https://avatars.githubusercontent.com/u/6683747?v=4?s=100" width="100px;" alt="Lance Finney"/><br /><sub><b>Lance Finney</b></sub></a><br /><a href="https://github.com/tomalaforge/angular-challenges/commits?author=LMFinney" title="Documentation">📖</a></td>
     </tr>
   </tbody>
   <tfoot>
