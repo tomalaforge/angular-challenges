@@ -10,11 +10,15 @@ import { UnknownPersonComponent } from './unknown-person/unknown-person.componen
   selector: 'app-root',
   template: `
     <unknown-person [step]="loadingPercentage()" class="relative grow" />
+
     <button
       class="my-3 w-fit self-center rounded-md border border-white px-4 py-2 text-2xl text-white"
+      [disabled]="isLoading()"
+      [hidden]="!isLoading() && loadingPercentage() === 100"
       (click)="discover()">
       Discover
     </button>
+
     <div class="p-1 text-white">Progress: {{ loadingPercentage() }}%</div>
   `,
   host: {
@@ -23,8 +27,8 @@ import { UnknownPersonComponent } from './unknown-person/unknown-person.componen
 })
 export class AppComponent {
   private heavyCalculationService = inject(HeavyCalculationService);
-
   readonly loadingPercentage = this.heavyCalculationService.loadingPercentage;
+  readonly isLoading = this.heavyCalculationService.isLoading;
 
   discover() {
     this.heavyCalculationService.startLoading();
