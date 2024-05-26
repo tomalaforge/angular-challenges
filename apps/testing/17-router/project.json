@@ -4,6 +4,7 @@
   "projectType": "application",
   "sourceRoot": "apps/testing/17-router/src",
   "prefix": "app",
+  "tags": [],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
@@ -67,25 +68,12 @@
         "buildTarget": "testing-router:build"
       }
     },
-    "lint": {
-      "executor": "@nx/eslint:lint"
-    },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
         "jestConfig": "apps/testing/17-router/jest.config.ts"
       }
-    },
-    "component-test": {
-      "executor": "@nx/cypress:cypress",
-      "options": {
-        "cypressConfig": "apps/testing/17-router/cypress.config.ts",
-        "testingType": "component",
-        "skipServe": true,
-        "devServerTarget": "testing-router:build"
-      }
     }
-  },
-  "tags": []
+  }
 }

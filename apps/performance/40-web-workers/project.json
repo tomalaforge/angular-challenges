@@ -64,9 +64,6 @@
       "options": {
         "browserTarget": "performance-web-workers:build"
       }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint"
     }
   }
 }

@@ -4,6 +4,7 @@
   "projectType": "application",
   "sourceRoot": "apps/angular/16-master-dependency-injection/src",
   "prefix": "app",
+  "tags": [],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
@@ -68,10 +69,6 @@
       "options": {
         "buildTarget": "angular-master-dependency-injection:build"
       }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint"
     }
-  },
-  "tags": []
+  }
 }

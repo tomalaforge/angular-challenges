@@ -4,6 +4,7 @@
   "projectType": "library",
   "sourceRoot": "libs/shared/utils/src",
   "prefix": "lib",
+  "tags": [],
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",
@@ -11,10 +12,6 @@
       "options": {
         "jestConfig": "libs/shared/utils/jest.config.ts"
       }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint"
     }
-  },
-  "tags": []
+  }
 }

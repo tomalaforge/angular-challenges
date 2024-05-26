@@ -3,8 +3,8 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/decoupling/helmet/src",
   "prefix": "lib",
-  "tags": ["type:hlm"],
   "projectType": "library",
+  "tags": ["type:hlm"],
   "targets": {
     "build": {
       "executor": "@nx/angular:ng-packagr-lite",
@@ -28,9 +28,6 @@
       "options": {
         "jestConfig": "libs/decoupling/helmet/jest.config.ts"
       }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint"
     }
   }
 }

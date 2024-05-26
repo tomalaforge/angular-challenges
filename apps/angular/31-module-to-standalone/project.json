@@ -66,9 +66,6 @@
       "options": {
         "buildTarget": "angular-module-to-standalone:build"
       }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint"
     }
   }
 }

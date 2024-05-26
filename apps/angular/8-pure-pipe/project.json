@@ -4,6 +4,7 @@
   "projectType": "application",
   "sourceRoot": "apps/angular/8-pure-pipe/src",
   "prefix": "app",
+  "tags": [],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
@@ -66,10 +67,6 @@
       "options": {
         "buildTarget": "angular-pure-pipe:build"
       }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint"
     }
-  },
-  "tags": []
+  }
 }

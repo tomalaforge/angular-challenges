@@ -70,9 +70,6 @@
       "options": {
         "buildTarget": "performance-default-vs-onpush:build"
       }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint"
     }
   }
 }

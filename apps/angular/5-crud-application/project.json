@@ -4,6 +4,7 @@
   "projectType": "application",
   "sourceRoot": "apps/angular/5-crud-application/src",
   "prefix": "app",
+  "tags": [],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
@@ -71,9 +72,6 @@
         "buildTarget": "angular-crud-application:build"
       }
     },
-    "lint": {
-      "executor": "@nx/eslint:lint"
-    },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
@@ -81,6 +79,5 @@
         "jestConfig": "apps/angular/5-crud-application/jest.config.ts"
       }
     }
-  },
-  "tags": []
+  }
 }

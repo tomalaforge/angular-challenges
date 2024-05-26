@@ -4,6 +4,7 @@
   "projectType": "library",
   "sourceRoot": "libs/shared/ngrx-callstate-store/src",
   "prefix": "lib",
+  "tags": [],
   "targets": {
     "build": {
       "executor": "@nx/angular:package",
@@ -27,10 +28,6 @@
       "options": {
         "jestConfig": "libs/shared/ngrx-callstate-store/jest.config.ts"
       }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint"
     }
-  },
-  "tags": []
+  }
 }

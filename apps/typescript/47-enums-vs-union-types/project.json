@@ -64,10 +64,6 @@
       "options": {
         "buildTarget": "typescript-enums-vs-union-types:build"
       }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"]
     }
   }
 }

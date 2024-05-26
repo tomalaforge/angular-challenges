@@ -4,6 +4,7 @@
   "projectType": "application",
   "sourceRoot": "apps/typescript/15-function-overload/src",
   "prefix": "app",
+  "tags": [],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
@@ -66,10 +67,6 @@
       "options": {
         "buildTarget": "typescript-function-overload:build"
       }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint"
     }
-  },
-  "tags": []
+  }
 }

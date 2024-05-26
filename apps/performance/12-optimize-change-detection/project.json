@@ -4,6 +4,7 @@
   "projectType": "application",
   "sourceRoot": "apps/performance/12-optimize-change-detection/src",
   "prefix": "app",
+  "tags": [],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
@@ -69,9 +70,6 @@
         "buildTarget": "performance-optimize-change-detection:build"
       }
     },
-    "lint": {
-      "executor": "@nx/eslint:lint"
-    },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
@@ -79,6 +77,5 @@
         "jestConfig": "apps/performance/12-optimize-change-detection/jest.config.ts"
       }
     }
-  },
-  "tags": []
+  }
 }

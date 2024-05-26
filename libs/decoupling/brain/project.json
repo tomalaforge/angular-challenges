@@ -3,8 +3,8 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/decoupling/brain/src",
   "prefix": "lib",
-  "tags": ["type:brain"],
   "projectType": "library",
+  "tags": ["type:brain"],
   "targets": {
     "build": {
       "executor": "@nx/angular:ng-packagr-lite",
@@ -28,9 +28,6 @@
       "options": {
         "jestConfig": "libs/decoupling/brain/jest.config.ts"
       }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint"
     }
   }
 }

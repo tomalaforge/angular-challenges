@@ -3,12 +3,11 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/static-dynamic-import/users/src",
   "prefix": "sdi",
-  "tags": [],
   "projectType": "library",
+  "tags": [],
   "targets": {
     "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"]
+      "inputs": ["{workspaceRoot}/tools/eslint-rules/**/*"]
     }
   }
 }

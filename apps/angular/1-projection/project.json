@@ -4,6 +4,7 @@
   "projectType": "application",
   "sourceRoot": "apps/angular/1-projection/src",
   "prefix": "app",
+  "tags": [],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
@@ -66,9 +67,6 @@
         "buildTarget": "angular-projection:build"
       }
     },
-    "lint": {
-      "executor": "@nx/eslint:lint"
-    },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
@@ -76,6 +74,5 @@
         "jestConfig": "apps/angular/1-projection/jest.config.ts"
       }
     }
-  },
-  "tags": []
+  }
 }

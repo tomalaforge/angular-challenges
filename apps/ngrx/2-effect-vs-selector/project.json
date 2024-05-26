@@ -4,6 +4,7 @@
   "projectType": "application",
   "sourceRoot": "apps/ngrx/2-effect-vs-selector/src",
   "prefix": "app",
+  "tags": [],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
@@ -68,9 +69,6 @@
         "buildTarget": "ngrx-effect-vs-selector:build"
       }
     },
-    "lint": {
-      "executor": "@nx/eslint:lint"
-    },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
@@ -78,6 +76,5 @@
         "jestConfig": "apps/ngrx/2-effect-vs-selector/jest.config.ts"
       }
     }
-  },
-  "tags": []
+  }
 }

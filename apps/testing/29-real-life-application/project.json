@@ -4,6 +4,7 @@
   "projectType": "application",
   "sourceRoot": "apps/testing/29-real-life-application/src",
   "prefix": "app",
+  "tags": [],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
@@ -70,25 +71,12 @@
         "buildTarget": "testing-real-life-application:build"
       }
     },
-    "lint": {
-      "executor": "@nx/eslint:lint"
-    },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
         "jestConfig": "apps/testing/29-real-life-application/jest.config.ts"
       }
-    },
-    "component-test": {
-      "executor": "@nx/cypress:cypress",
-      "options": {
-        "cypressConfig": "apps/testing/29-real-life-application/cypress.config.ts",
-        "testingType": "component",
-        "skipServe": true,
-        "devServerTarget": "testing-real-life-application:build"
-      }
     }
-  },
-  "tags": []
+  }
 }

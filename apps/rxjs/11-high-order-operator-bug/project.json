@@ -4,6 +4,7 @@
   "projectType": "application",
   "sourceRoot": "apps/rxjs/11-high-order-operator-bug/src",
   "prefix": "app",
+  "tags": [],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
@@ -67,10 +68,6 @@
       "options": {
         "buildTarget": "rxjs-high-order-operator-bug:build"
       }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint"
     }
-  },
-  "tags": []
+  }
 }

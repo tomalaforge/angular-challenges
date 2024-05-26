@@ -68,10 +68,6 @@
       "options": {
         "buildTarget": "nx-static-vs-dynamic-import:build"
       }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"]
     }
   }
 }

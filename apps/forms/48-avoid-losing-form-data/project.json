@@ -67,9 +67,6 @@
       "options": {
         "buildTarget": "forms-avoid-losing-form-data:build"
       }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint"
     }
   }
 }

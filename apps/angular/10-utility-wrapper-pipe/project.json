@@ -4,6 +4,7 @@
   "projectType": "application",
   "sourceRoot": "apps/angular/10-utility-wrapper-pipe/src",
   "prefix": "app",
+  "tags": [],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
@@ -66,10 +67,6 @@
       "options": {
         "buildTarget": "angular-utility-wrapper-pipe:build"
       }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint"
     }
-  },
-  "tags": []
+  }
 }

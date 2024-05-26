@@ -4,6 +4,7 @@
   "projectType": "application",
   "sourceRoot": "apps/testing/19-input-output/src",
   "prefix": "app",
+  "tags": [],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
@@ -67,25 +68,12 @@
         "buildTarget": "testing-input-output:build"
       }
     },
-    "lint": {
-      "executor": "@nx/eslint:lint"
-    },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
         "jestConfig": "apps/testing/19-input-output/jest.config.ts"
       }
-    },
-    "component-test": {
-      "executor": "@nx/cypress:cypress",
-      "options": {
-        "cypressConfig": "apps/testing/19-input-output/cypress.config.ts",
-        "testingType": "component",
-        "skipServe": true,
-        "devServerTarget": "testing-input-output:build"
-      }
     }
-  },
-  "tags": []
+  }
 }

@@ -64,10 +64,6 @@
       "options": {
         "buildTarget": "signal-signal-input:build"
       }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"]
     }
   }
 }

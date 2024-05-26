@@ -4,6 +4,7 @@
   "projectType": "application",
   "sourceRoot": "apps/angular/21-anchor-navigation/src",
   "prefix": "app",
+  "tags": [],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
@@ -67,9 +68,6 @@
         "buildTarget": "angular-anchor-navigation:build"
       }
     },
-    "lint": {
-      "executor": "@nx/eslint:lint"
-    },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
@@ -77,6 +75,5 @@
         "jestConfig": "apps/angular/21-anchor-navigation/jest.config.ts"
       }
     }
-  },
-  "tags": []
+  }
 }

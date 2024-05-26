@@ -70,9 +70,6 @@
       "options": {
         "buildTarget": "performance-memoization:build"
       }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint"
     }
   }
 }

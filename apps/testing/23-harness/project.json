@@ -73,9 +73,6 @@
       "options": {
         "jestConfig": "apps/testing/23-harness/jest.config.ts"
       }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint"
     }
   }
 }

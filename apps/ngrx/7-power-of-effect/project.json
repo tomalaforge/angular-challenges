@@ -4,6 +4,7 @@
   "projectType": "application",
   "sourceRoot": "apps/ngrx/7-power-of-effect/src",
   "prefix": "app",
+  "tags": [],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
@@ -70,10 +71,6 @@
       "options": {
         "buildTarget": "ngrx-power-of-effect:build"
       }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint"
     }
-  },
-  "tags": []
+  }
 }

@@ -66,9 +66,6 @@
       "options": {
         "buildTarget": "angular-decoupling-components:build"
       }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint"
     }
   }
 }

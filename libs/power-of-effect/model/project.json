@@ -4,6 +4,7 @@
   "projectType": "library",
   "sourceRoot": "libs/power-of-effect/model/src",
   "prefix": "lib",
+  "tags": [],
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",
@@ -11,10 +12,6 @@
       "options": {
         "jestConfig": "libs/power-of-effect/model/jest.config.ts"
       }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint"
     }
-  },
-  "tags": []
+  }
 }

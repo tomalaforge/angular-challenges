@@ -64,10 +64,6 @@
       "options": {
         "buildTarget": "angular-view-transition:build"
       }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"]
     }
   }
 }
