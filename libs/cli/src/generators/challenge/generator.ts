@@ -81,6 +81,21 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
     category: options.category,
   });
 
+  const authorFile = tree.read(
+    `./docs/src/content/authors/${options.author}.json`,
+  );
+  if (!authorFile) {
+    generateFiles(
+      tree,
+      join(__dirname, 'files', 'author'),
+      `./docs/src/content/authors/`,
+      {
+        tmpl: '',
+        authorName: options.author,
+      },
+    );
+  }
+
   generateFiles(
     tree,
     join(__dirname, 'files', 'docs'),

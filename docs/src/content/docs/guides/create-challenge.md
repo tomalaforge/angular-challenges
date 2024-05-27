@@ -28,15 +28,21 @@ Alternatively, you may utilize your IDE's [Nx Console extension](https://nx.dev/
   The title must be a maximum of 25 characters.
   :::
 
-- <b>challengeDifficulty</b>: The difficulty you think your challenge has. There are three difficulty levels : 🟢 easy / 🟠 medium / 🔴 hard
-- <b>name</b>: name of the Nx application.
+- <b>author</b>: Your name
   :::note
-  It must be written in **kebab-case**.
+  Your name should be in kebab-case. (e.g. john-doe)
   :::
-- <b>docRepository</b>: The category of your Challenge is Nx, Angular, Angular Performance, Rxjs, NgRx, Typescript, or Forms.
+  :::note
+  Don't forget to update your personal information inside the file at your name.
+  :::
+
+- <b>challengeDifficulty</b>: The difficulty you think your challenge has. There are three difficulty levels : 🟢 easy / 🟠 medium / 🔴 hard
+
+- <b>docRepository</b>: The category of your Challenge is Nx, Angular, Angular Performance, Rxjs, NgRx, Typescript, Forms or Signals.
 
 #### optional parameters
 
+- <b>challengeNumber</b>: You can specify a challenge number if a challenge is being submitted. (If empty, the number will be the next one).
 - <b>directory</b>: If you want your application to be located in a specific folder inside `apps`.
 - <b>addTest</b>: If you want to add test configuration.
 
