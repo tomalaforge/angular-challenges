@@ -38,6 +38,7 @@ import { availableBooks } from './book.model';
         id="bookName"
         name="bookName"
         [formControl]="searchBook"
+        matInput
         required />
       <div class="error" *ngIf="searchBook.errors">
         Search criteria is required!
@@ -48,6 +49,7 @@ import { availableBooks } from './book.model';
       routerLink="/shelf"
       [queryParams]="{ book: searchBook.value }"
       [disabled]="searchBook.errors"
+      mat-button
       routerLinkActive="router-link-active">
       Borrow
     </button>
