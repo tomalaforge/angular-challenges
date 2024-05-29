@@ -3,9 +3,10 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
-  Input,
   Output,
   inject,
+  input,
+  output,
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { HttpService } from './http.service';
@@ -27,12 +28,12 @@ export class InputComponent {
   selector: 'result',
   standalone: true,
   template: `
-    <p>Title is {{ title }}</p>
+    <p>Title is {{ title() }}</p>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ResultComponent {
-  @Input() title = '';
+  title = input<string>();
 }
 
 @Component({
@@ -44,7 +45,7 @@ export class ResultComponent {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonComponent {
-  @Output() validate = new EventEmitter();
+  validate = output();
 }
 
 @Component({
@@ -73,7 +74,9 @@ export class ErrorComponent {
     <app-input #input></app-input>
     <result [title]="input.title.value"></result>
     <app-button (validate)="submit(input.title.value)"></app-button>
-    <app-error *ngIf="showError"></app-error>
+    @if (showError) {
+      <app-error></app-error>
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
