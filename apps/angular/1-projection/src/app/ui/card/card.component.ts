@@ -3,7 +3,6 @@ import {
   Component,
   ContentChild,
   EventEmitter,
-  HostBinding,
   Input,
   Output,
   TemplateRef,
@@ -30,12 +29,13 @@ import { ListItemComponent } from '../list-item/list-item.component';
       Add
     </button>
   `,
+  host: {
+    class: 'flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4',
+  },
   standalone: true,
   imports: [NgTemplateOutlet, ListItemComponent],
 })
 export class CardComponent<T extends { id: number }> {
-  @HostBinding('class') private classses =
-    'flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4';
   @ContentChild('rowItem') rowItem!: TemplateRef<{ $implicit: T }>;
   @Input() list: T[] | null = null;
   @Output() addItem = new EventEmitter<number>();
