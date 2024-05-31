@@ -29,10 +29,10 @@ import { ListItemComponent } from '../list-item/list-item.component';
   standalone: true,
   imports: [NgIf, NgFor, ListItemComponent],
 })
-export class CardComponent {
+export class CardComponent<T extends { id: number; firstName: string }> {
   @HostBinding('class') private classses =
     'flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4';
-  @Input() list: any[] | null = null;
+  @Input() list: T[] | null = null;
   @Output() addItem = new EventEmitter<number>();
   @Output() deleteItem = new EventEmitter<number>();
 }
