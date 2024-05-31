@@ -8,6 +8,7 @@ import { SliderComponent } from './slider.component';
   template: `
     <h2>Slider 1: {{ slider1Value() }}</h2>
     <app-slider
+      id="default-slider"
       [step]="3"
       [minValue]="10"
       [maxValue]="30"

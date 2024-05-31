@@ -17,12 +17,14 @@ import { skip } from 'rxjs';
           </button>
           {{ minValue }}
           <mat-slider
+            id="slider"
             class="m-4"
             [max]="maxValue"
             [min]="minValue"
             [disabled]="disabled"
             [step]="step">
             <input
+              id="sliderThumb"
               matSliderThumb
               [value]="value()"
               (valueChange)="value.set($event)" />
