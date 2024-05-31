@@ -1,4 +1,4 @@
-import { NgFor, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   ContentChild,
@@ -15,13 +15,13 @@ import { ListItemComponent } from '../list-item/list-item.component';
   template: `
     <ng-content select="img"></ng-content>
     <section>
-      <ng-container *ngFor="let item of list">
+      @for (item of list; track item.id) {
         <ng-container
           *ngTemplateOutlet="
             rowItem;
             context: { $implicit: item }
           "></ng-container>
-      </ng-container>
+      }
     </section>
 
     <button
@@ -31,7 +31,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
     </button>
   `,
   standalone: true,
-  imports: [NgFor, NgTemplateOutlet, ListItemComponent],
+  imports: [NgTemplateOutlet, ListItemComponent],
 })
 export class CardComponent<T extends { id: number }> {
   @HostBinding('class') private classses =
