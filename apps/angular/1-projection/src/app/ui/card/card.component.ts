@@ -2,10 +2,9 @@ import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   ContentChild,
-  EventEmitter,
-  Input,
-  Output,
   TemplateRef,
+  input,
+  output,
 } from '@angular/core';
 import { ListItemComponent } from '../list-item/list-item.component';
 
@@ -14,7 +13,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
   template: `
     <ng-content select="img"></ng-content>
     <section>
-      @for (item of list; track item.id) {
+      @for (item of list(); track item.id) {
         <ng-container
           *ngTemplateOutlet="
             rowItem;
@@ -37,6 +36,6 @@ import { ListItemComponent } from '../list-item/list-item.component';
 })
 export class CardComponent<T extends { id: number }> {
   @ContentChild('rowItem') rowItem!: TemplateRef<{ $implicit: T }>;
-  @Input() list: T[] | null = null;
-  @Output() addItem = new EventEmitter<number>();
+  list = input.required<T[]>();
+  addItem = output();
 }
