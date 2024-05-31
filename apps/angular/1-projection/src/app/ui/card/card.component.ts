@@ -1,4 +1,4 @@
-import { NgFor, NgIf } from '@angular/common';
+import { NgFor } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -27,7 +27,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
     </button>
   `,
   standalone: true,
-  imports: [NgIf, NgFor, ListItemComponent],
+  imports: [NgFor, ListItemComponent],
 })
 export class CardComponent<T extends { id: number; firstName: string }> {
   @HostBinding('class') private classses =
