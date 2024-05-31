@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
   FakeHttpService,
   randTeacher,
@@ -33,11 +33,8 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
 })
 export class TeacherCardComponent implements OnInit {
   teachers: Teacher[] = [];
-
-  constructor(
-    private http: FakeHttpService,
-    private store: TeacherStore,
-  ) {}
+  private http = inject(FakeHttpService);
+  private store = inject(TeacherStore);
 
   ngOnInit(): void {
     this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
