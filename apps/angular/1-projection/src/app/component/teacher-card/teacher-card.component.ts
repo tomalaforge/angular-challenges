@@ -6,16 +6,19 @@ import {
 import { TeacherStore } from '../../data-access/teacher.store';
 import { Teacher } from '../../model/teacher.model';
 import { CardComponent } from '../../ui/card/card.component';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-teacher-card',
   template: `
-    <app-card
-      [list]="teachers"
-      class="bg-light-red"
-      (addItem)="onAddNewItem()"
-      (deleteItem)="onDeleteItem($event)">
+    <app-card [list]="teachers" class="bg-light-red" (addItem)="onAddNewItem()">
       <img src="assets/img/teacher.png" width="200px" />
+      <ng-template #rowItem let-item>
+        <app-list-item
+          [name]="item.firstName"
+          [id]="item.id"
+          (deleteItem)="onDeleteItem(item.id)"></app-list-item>
+      </ng-template>
     </app-card>
   `,
   styles: [
@@ -26,7 +29,7 @@ import { CardComponent } from '../../ui/card/card.component';
     `,
   ],
   standalone: true,
-  imports: [CardComponent],
+  imports: [CardComponent, ListItemComponent],
 })
 export class TeacherCardComponent implements OnInit {
   teachers: Teacher[] = [];

@@ -6,6 +6,7 @@ import {
 import { StudentStore } from '../../data-access/student.store';
 import { Student } from '../../model/student.model';
 import { CardComponent } from '../../ui/card/card.component';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-student-card',
@@ -13,9 +14,14 @@ import { CardComponent } from '../../ui/card/card.component';
     <app-card
       [list]="students"
       class="bg-light-green"
-      (addItem)="onAddNewItem()"
-      (deleteItem)="onDeleteItem($event)">
+      (addItem)="onAddNewItem()">
       <img src="assets/img/student.webp" width="200px" />
+      <ng-template #rowItem let-item>
+        <app-list-item
+          [name]="item.firstName"
+          [id]="item.id"
+          (deleteItem)="onDeleteItem(item.id)"></app-list-item>
+      </ng-template>
     </app-card>
   `,
   standalone: true,
@@ -26,7 +32,7 @@ import { CardComponent } from '../../ui/card/card.component';
       }
     `,
   ],
-  imports: [CardComponent],
+  imports: [CardComponent, ListItemComponent],
 })
 export class StudentCardComponent implements OnInit {
   students: Student[] = [];

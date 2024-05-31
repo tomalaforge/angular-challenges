@@ -1,10 +1,12 @@
-import { NgFor } from '@angular/common';
+import { NgFor, NgTemplateOutlet } from '@angular/common';
 import {
   Component,
+  ContentChild,
   EventEmitter,
   HostBinding,
   Input,
   Output,
+  TemplateRef,
 } from '@angular/core';
 import { ListItemComponent } from '../list-item/list-item.component';
 
@@ -13,11 +15,13 @@ import { ListItemComponent } from '../list-item/list-item.component';
   template: `
     <ng-content select="img"></ng-content>
     <section>
-      <app-list-item
-        *ngFor="let item of list"
-        [name]="item.firstName"
-        [id]="item.id"
-        (deleteItem)="deleteItem.emit($event)"></app-list-item>
+      <ng-container *ngFor="let item of list">
+        <ng-container
+          *ngTemplateOutlet="
+            rowItem;
+            context: { $implicit: item }
+          "></ng-container>
+      </ng-container>
     </section>
 
     <button
@@ -27,12 +31,12 @@ import { ListItemComponent } from '../list-item/list-item.component';
     </button>
   `,
   standalone: true,
-  imports: [NgFor, ListItemComponent],
+  imports: [NgFor, NgTemplateOutlet, ListItemComponent],
 })
-export class CardComponent<T extends { id: number; firstName: string }> {
+export class CardComponent<T extends { id: number }> {
   @HostBinding('class') private classses =
     'flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4';
+  @ContentChild('rowItem') rowItem!: TemplateRef<{ $implicit: T }>;
   @Input() list: T[] | null = null;
   @Output() addItem = new EventEmitter<number>();
-  @Output() deleteItem = new EventEmitter<number>();
 }
