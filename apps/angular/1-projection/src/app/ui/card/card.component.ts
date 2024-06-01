@@ -1,8 +1,8 @@
 import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
-  ContentChild,
   TemplateRef,
+  contentChild,
   input,
   output,
 } from '@angular/core';
@@ -17,7 +17,7 @@ import { RowItemDirective } from './row-item.directive';
       @for (item of list(); track item.id) {
         <ng-container
           *ngTemplateOutlet="
-            rowItem;
+            rowItem();
             context: { $implicit: item }
           "></ng-container>
       }
@@ -36,9 +36,11 @@ import { RowItemDirective } from './row-item.directive';
   imports: [NgTemplateOutlet, RowItemDirective, ListItemComponent],
 })
 export class CardComponent<T extends { id: number }> {
-  @ContentChild(RowItemDirective, { read: TemplateRef }) rowItem!: TemplateRef<{
-    $implicit: T;
-  }>;
+  rowItem = contentChild.required(RowItemDirective, {
+    read: TemplateRef<{
+      $implicit: T;
+    }>,
+  });
   list = input.required<T[]>();
   addItem = output();
 }
