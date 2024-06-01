@@ -4,7 +4,6 @@ import {
   randStudent,
 } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
-import { Student } from '../../model/student.model';
 import { CardComponent } from '../../ui/card/card.component';
 import { RowItemDirective } from '../../ui/card/row-item.directive';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
@@ -13,11 +12,11 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   selector: 'app-student-card',
   template: `
     <app-card
-      [list]="students"
+      [list]="students()"
       class="bg-light-green"
       (addItem)="onAddNewItem()">
       <img src="assets/img/student.webp" width="200px" />
-      <ng-template [rowItem]="students" let-item>
+      <ng-template [rowItem]="students()" let-item>
         <app-list-item
           [name]="item.firstName"
           (deleteItem)="onDeleteItem(item.id)"></app-list-item>
@@ -35,14 +34,13 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   imports: [CardComponent, RowItemDirective, ListItemComponent],
 })
 export class StudentCardComponent implements OnInit {
-  students: Student[] = [];
   private http = inject(FakeHttpService);
   private store = inject(StudentStore);
 
+  students = this.store.students;
+
   ngOnInit(): void {
     this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
-
-    this.store.students$.subscribe((s) => (this.students = s));
   }
 
   onAddNewItem() {
