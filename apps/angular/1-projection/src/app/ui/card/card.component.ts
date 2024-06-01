@@ -7,6 +7,7 @@ import {
   output,
 } from '@angular/core';
 import { ListItemComponent } from '../list-item/list-item.component';
+import { RowItemDirective } from './row-item.directive';
 
 @Component({
   selector: 'app-card',
@@ -32,10 +33,12 @@ import { ListItemComponent } from '../list-item/list-item.component';
     class: 'flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4',
   },
   standalone: true,
-  imports: [NgTemplateOutlet, ListItemComponent],
+  imports: [NgTemplateOutlet, RowItemDirective, ListItemComponent],
 })
 export class CardComponent<T extends { id: number }> {
-  @ContentChild('rowItem') rowItem!: TemplateRef<{ $implicit: T }>;
+  @ContentChild(RowItemDirective, { read: TemplateRef }) rowItem!: TemplateRef<{
+    $implicit: T;
+  }>;
   list = input.required<T[]>();
   addItem = output();
 }
