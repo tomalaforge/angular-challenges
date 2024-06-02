@@ -41,6 +41,16 @@ You can find the clone URL by clicking on the <span class="github-success-btn"><
 
 Open the project in any IDE of your choice.
 
+## (Alternately) Use GitHub Codespaces
+
+From your <b>own instance</b> of the Angular Challenges repository, click the code button and navigate to the codespaces tab.
+
+[Codespaces tab](../../../assets/codespaces.png)
+
+Click the `Create codespace on main` button, and you will navigate to a GitHub codespace.
+
+When the codespace initially runs, it will fail to install dependencies. You can skip the initial install with `ctrl c`. Once the initial installation process ends, you can install all dependencies.
+
 ## Install all dependencies
 
 ```bash
