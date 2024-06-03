@@ -5,6 +5,7 @@ import { TitleCasePipe } from '@angular/common';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatListModule } from '@angular/material/list';
 import { PersonCreateComponent } from './person-create.component';
+import { PersonItemComponent } from './person-item.component';
 
 @Component({
   selector: 'app-person-list',
@@ -18,13 +19,9 @@ import { PersonCreateComponent } from './person-create.component';
 
     <mat-list class="flex w-full">
       @for (name of names(); track $index) {
-        <mat-list-item cd-flash class="text-orange-500">
-          <div MatListItemLine class="flex justify-between">
-            <h3 title="Name">
-              {{ name }}
-            </h3>
-          </div>
-        </mat-list-item>
+        <app-person-item>
+          {{ name }}
+        </app-person-item>
       } @empty {
         <div class="empty-list-label">Empty list</div>
       }
@@ -43,6 +40,7 @@ import { PersonCreateComponent } from './person-create.component';
     MatChipsModule,
     CDFlashingDirective,
     PersonCreateComponent,
+    PersonItemComponent,
   ],
 })
 export class PersonListComponent {
