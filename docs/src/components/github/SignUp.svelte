@@ -53,6 +53,11 @@
     background-color: #218838;
   }
 
+  a :global(svg) {
+    --sl-icon-color: initial;
+  }
+
+
   @media (width < 450px) {
     .github-sign-in {
       display: none;
