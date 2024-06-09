@@ -1,6 +1,6 @@
 # lazy-load-component
 
-> author: thomas-laforge
+> author: lance-finney
 
 ### Run Application
 
