@@ -24,4 +24,5 @@ jobs:
           close-pr-message: 'This pull request was closed because it has been inactive for 5 days since being marked as stale.'
           only-pr-labels: 'answer'
           exempt-pr-labels: 'challenge-creation, long-term, to be reviewed'
+          remove-pr-stale-when-updated: true
           repo-token: ${{ secrets.GITHUB_TOKEN }}
