@@ -1,10 +1,10 @@
 ---
 title: 🟠 Big Signal Performance
-description: Challenge 52 is about performance while using big signal object
+description: Challenge 53 is about performance while using big signal object
 author: thomas-laforge
 contributors:
   - tomalaforge
-challengeNumber: 52
+challengeNumber: 53
 command: signal-big-signal-performance
 sidebar:
   order: 122

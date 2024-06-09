@@ -3,24 +3,24 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "app",
-  "sourceRoot": "apps/signal/52-big-signal-performance/src",
+  "sourceRoot": "apps/signal/53-big-signal-performance/src",
   "tags": [],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/signal/52-big-signal-performance",
-        "index": "apps/signal/52-big-signal-performance/src/index.html",
-        "browser": "apps/signal/52-big-signal-performance/src/main.ts",
+        "outputPath": "dist/apps/signal/53-big-signal-performance",
+        "index": "apps/signal/53-big-signal-performance/src/index.html",
+        "browser": "apps/signal/53-big-signal-performance/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/signal/52-big-signal-performance/tsconfig.app.json",
+        "tsConfig": "apps/signal/53-big-signal-performance/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
-          "apps/signal/52-big-signal-performance/src/favicon.ico",
-          "apps/signal/52-big-signal-performance/src/assets"
+          "apps/signal/53-big-signal-performance/src/favicon.ico",
+          "apps/signal/53-big-signal-performance/src/assets"
         ],
-        "styles": ["apps/signal/52-big-signal-performance/src/styles.scss"],
+        "styles": ["apps/signal/53-big-signal-performance/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
