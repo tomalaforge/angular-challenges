@@ -110,6 +110,16 @@
       ]
     },
     {
+      "login": "LMFinney",
+      "name": "Lance Finney",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6683747?v=4",
+      "profile": "https://github.com/LMFinney",
+      "contributions": [
+        "doc",
+        "challenge"
+      ]
+    },
+    {
       "login": "alan-bio",
       "name": "Alan Dragicevich",
       "avatar_url": "https://avatars.githubusercontent.com/u/31838230?v=4",
@@ -275,15 +285,6 @@
       "profile": "https://github.com/fixedmichal",
       "contributions": [
         "bug"
-      ]
-    },
-    {
-      "login": "LMFinney",
-      "name": "Lance Finney",
-      "avatar_url": "https://avatars.githubusercontent.com/u/6683747?v=4",
-      "profile": "https://github.com/LMFinney",
-      "contributions": [
-        "doc"
       ]
     },
     {
