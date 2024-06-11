@@ -8,7 +8,6 @@ challengeNumber: 52
 command: angular-lazy-load-component
 sidebar:
   order: 21
-  badge: New
 ---
 
 ## Information
