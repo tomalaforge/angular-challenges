@@ -4,6 +4,7 @@ description: Испытание 52 посвящено изучению лени�
 author: lance-finney
 contributors:
   - LMFinney
+  - stillst
 challengeNumber: 52
 command: angular-lazy-load-component
 sidebar:
