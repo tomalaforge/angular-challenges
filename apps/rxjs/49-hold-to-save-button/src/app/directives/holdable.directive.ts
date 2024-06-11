@@ -1,4 +1,5 @@
-import { Directive, ElementRef, inject, input, output } from '@angular/core';
+import { Directive, ElementRef, inject, input } from '@angular/core';
+import { outputFromObservable } from '@angular/core/rxjs-interop';
 import {
   filter,
   fromEvent,
@@ -7,7 +8,6 @@ import {
   merge,
   switchMap,
   takeUntil,
-  tap,
 } from 'rxjs';
 
 @Directive({
@@ -16,42 +16,27 @@ import {
 })
 export class HoldableDirective {
   appHoldable = input(1000);
-  btnHoldableTime = output<number>();
-  btnHoldableFinished = output<void>();
   saveBtnElementRef = inject(ElementRef).nativeElement;
-
-  constructor() {
-    const setProgressToZeroOnMouseOut = merge(
-      fromEvent(this.saveBtnElementRef, 'mouseup'),
-      fromEvent(this.saveBtnElementRef, 'mouseleave'),
-    ).pipe(
-      tap(() => {
-        this.btnHoldableTime.emit(0);
-      }),
-    );
-
-    const destroy$ = interval(10).pipe(
-      map((elapsed) => elapsed * 10),
-      filter((elapsed) => elapsed > this.appHoldable()),
-    );
-
-    fromEvent(this.saveBtnElementRef, 'mousedown')
-      .pipe(
-        switchMap(() =>
-          interval(10).pipe(
-            map((elapsed) => elapsed * 10),
-            tap((elapsed) => this.btnHoldableTime.emit(elapsed)),
-            takeUntil(setProgressToZeroOnMouseOut),
-            takeUntil(destroy$),
-            tap((elapsed) => {
-              if (elapsed >= this.appHoldable()) {
-                this.btnHoldableFinished.emit();
-                this.btnHoldableTime.emit(0);
-              }
-            }),
-          ),
-        ),
-      )
-      .subscribe();
-  }
+  //mouse out stream
+  setProgressToZeroOnMouseOut$ = merge(
+    fromEvent(this.saveBtnElementRef, 'mouseup'),
+    fromEvent(this.saveBtnElementRef, 'mouseleave'),
+  );
+  mouseOut = outputFromObservable(this.setProgressToZeroOnMouseOut$);
+  //button is held stream
+  holdStream$ = fromEvent(this.saveBtnElementRef, 'mousedown').pipe(
+    switchMap(() =>
+      interval(10).pipe(
+        map((elapsed) => elapsed * 10),
+        takeUntil(this.setProgressToZeroOnMouseOut$),
+        filter((elapsed) => elapsed <= this.appHoldable()),
+      ),
+    ),
+  );
+  progressInHold = outputFromObservable(this.holdStream$);
+  //completed stream
+  finishedHoldStream$ = this.holdStream$.pipe(
+    filter((elapsed) => elapsed >= this.appHoldable()),
+  );
+  btnHoldableFinished = outputFromObservable(this.finishedHoldStream$);
 }

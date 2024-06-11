@@ -11,8 +11,9 @@ import { HoldableDirective } from './directives/holdable.directive';
         class="flex w-full max-w-screen-sm flex-col items-center gap-y-8 p-4">
         <button
           [appHoldable]="MAX_TIME"
-          (btnHoldableTime)="elapsed.set($event)"
+          (progressInHold)="elapsed.set($event)"
           (btnHoldableFinished)="onSend()"
+          (mouseOut)="elapsed.set(0)"
           class="rounded bg-indigo-600 px-4 py-2 font-bold text-white transition-colors ease-in-out hover:bg-indigo-700">
           Hold me
         </button>
@@ -27,6 +28,7 @@ export class AppComponent {
   elapsed = signal(0);
   MAX_TIME = 1000;
   onSend() {
+    this.elapsed.set(0);
     console.log('Save it!');
   }
 }
