@@ -7,7 +7,7 @@
   onMount(async () => {
     const sponsorFetch = await fetch('https://ghs.vercel.app/v2/sponsors/tomalaforge');
     const data = await sponsorFetch.json();
-    sponsors = data.sponsors.past;
+    sponsors = data.sponsors.current;
   });
 
 </script>
