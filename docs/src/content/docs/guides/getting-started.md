@@ -50,7 +50,11 @@ From your <b>own instance</b> of the Angular Challenges repository, click the co
 
 Click the `Create codespace on main` button, and you will navigate to a GitHub codespace.
 
-When the codespace initially runs, it will fail to install dependencies. You can skip the initial install with `ctrl c`. Once the initial installation process ends, you can install all dependencies.
+If you never used a GitHub codespace before, I would recommend you try this short interactive [GitHub Skills Tutorial](https://github.com/skills/code-with-codespaces).
+
+When you navigate to the codespace, there will be a prompt to install the recommended `VS Code` plugins. If you plan on creating a challenge, you can use `Nx plugin` to generate the starter code. Either way, the codespace will install the dependencies, and you can create a new branch, tackle any challenge, and create a pull request.
+
+Once you are finished, remember to pause or delete your codespace. If you don't, GitHub will automatically pause an idle codespace after 30 minutes. You do have a generous amount of free codespace time per month, but it is still important not to waste your allotment.
 
 ## Install all dependencies
 
