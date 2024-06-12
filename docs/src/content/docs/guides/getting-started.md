@@ -42,6 +42,25 @@ You can find the clone URL by clicking on the <span class="github-success-btn"><
 
 Open the project in any IDE of your choice.
 
+## Install all dependencies
+
+```bash
+npm ci
+```
+
+## Choose a challenge
+
+Your project is now up and running. The only remaining step is to choose a challenge 🚀
+
+Each challenge consists of:
+
+- <b>Name</b>: indicating what the challenge is about.
+- <b>Number</b>: order of creation. The number doesn't have any particular meaning but helps for reference in GitHub Pull Request section.
+- <b>Badge</b>: helps visualize the degree of difficulty. It's entirely subjective 😅
+  - 🟢 easy
+  - 🟠 medium
+  - 🔴 difficult
+
 ## (Alternately) Use GitHub Codespaces
 
 From your <b>own instance</b> of the Angular Challenges repository, click the code button and navigate to the codespaces tab.
@@ -61,22 +80,3 @@ Once you are finished, remember to pause or delete your codespace. If you don't,
 In the GitHub codespace, copy and paste will be blocked until you give permission.
 
 The GitHub codespace uses port forwarding to serve the projects. Click the prompt after running `npx serve` to navigate to `localhost:4200`.
-
-## Install all dependencies
-
-```bash
-npm ci
-```
-
-## Choose a challenge
-
-Your project is now up and running. The only remaining step is to choose a challenge 🚀
-
-Each challenge consists of:
-
-- <b>Name</b>: indicating what the challenge is about.
-- <b>Number</b>: order of creation. The number doesn't have any particular meaning but helps for reference in GitHub Pull Request section.
-- <b>Badge</b>: helps visualize the degree of difficulty. It's entirely subjective 😅
-  - 🟢 easy
-  - 🟠 medium
-  - 🔴 difficult
