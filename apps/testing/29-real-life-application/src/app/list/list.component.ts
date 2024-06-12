@@ -24,40 +24,7 @@ import { RowComponent } from './ui/row.component';
     MatInputModule,
     LetDirective,
   ],
-  template: `
-    <h2 class="mb-2 text-xl">Tickets</h2>
-
-    <mat-form-field appearance="fill">
-      <mat-label>Search</mat-label>
-      <input
-        type="text"
-        matInput
-        [formControl]="search"
-        placeholder="write an article" />
-    </mat-form-field>
-
-    <ng-container *ngrxLet="vm$ as vm">
-      <app-add
-        [loading]="vm.loading"
-        (addTicket)="ticketStore.addTicket($event)"></app-add>
-
-      <mat-progress-bar
-        mode="query"
-        *ngIf="vm.loading"
-        class="mt-5"></mat-progress-bar>
-      <ul class="flex max-w-3xl flex-col gap-4">
-        <app-row
-          *ngFor="let t of vm.tickets"
-          [ticket]="t"
-          [users]="vm.users"
-          (assign)="ticketStore.assignTicket($event)"
-          (closeTicket)="ticketStore.done($event)"></app-row>
-      </ul>
-      <footer class="text-red-500">
-        {{ vm.error }}
-      </footer>
-    </ng-container>
-  `,
+  templateUrl: './list.component.html',
   providers: [provideComponentStore(TicketStore)],
   host: {
     class: 'p-5 block',
