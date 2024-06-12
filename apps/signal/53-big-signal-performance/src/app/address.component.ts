@@ -8,9 +8,9 @@ import { UserStore } from './user.service';
   template: `
     <div cd-flash class="m-4 block border border-gray-500 p-4">
       Address:
-      <div>Street: {{ userService.user().address.street }}</div>
-      <div>ZipCode: {{ userService.user().address.zipCode }}</div>
-      <div>City: {{ userService.user().address.city }}</div>
+      <div>Street: {{ userService.street() }}</div>
+      <div>ZipCode: {{ userService.zipCode() }}</div>
+      <div>City: {{ userService.city() }}</div>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
