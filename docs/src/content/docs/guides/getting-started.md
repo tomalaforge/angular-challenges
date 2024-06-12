@@ -52,9 +52,15 @@ Click the `Create codespace on main` button, and you will navigate to a GitHub c
 
 If you never used a GitHub codespace before, I would recommend you try this short interactive [GitHub Skills Tutorial](https://github.com/skills/code-with-codespaces).
 
-When you navigate to the codespace, there will be a prompt to install the recommended `VS Code` plugins. If you plan on creating a challenge, you can use `Nx plugin` to generate the starter code. Either way, the codespace will install the dependencies, and you can create a new branch, tackle any challenge, and create a pull request.
+When you navigate to the codespace, there will be a prompt to install the recommended `VS Code` plugins. If you plan on creating a challenge, you can use the `Nx plugin` to generate the starter code. Either way, the codespace will install the dependencies, and you can create a new branch, tackle any challenge, and create a pull request.
+
+When you push to a branch, you do have to provide a GitHub token.
 
 Once you are finished, remember to pause or delete your codespace. If you don't, GitHub will automatically pause an idle codespace after 30 minutes. You do have a generous amount of free codespace time per month, but it is still important not to waste your allotment.
+
+In the GitHub codespace, copy and paste will be blocked unitl you give permission.
+
+The GitHub codespace uses port forwarding to serve the projects. Click the prompt after running `npx serve` to navigate to `localhost:4200`.
 
 ## Install all dependencies
 
