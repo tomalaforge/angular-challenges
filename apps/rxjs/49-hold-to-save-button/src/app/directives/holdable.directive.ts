@@ -36,7 +36,7 @@ export class HoldableDirective {
   progressInHold = outputFromObservable(this.holdStream$);
   //completed stream
   finishedHoldStream$ = this.holdStream$.pipe(
-    filter((elapsed) => elapsed >= this.appHoldable()),
+    filter((elapsed) => elapsed === this.appHoldable()),
   );
   btnHoldableFinished = outputFromObservable(this.finishedHoldStream$);
 }
