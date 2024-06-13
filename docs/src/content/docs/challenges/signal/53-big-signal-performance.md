@@ -4,6 +4,7 @@ description: Challenge 53 is about performance while using big signal object
 author: thomas-laforge
 contributors:
   - tomalaforge
+  - jdegand
 challengeNumber: 53
 command: signal-big-signal-performance
 sidebar:
@@ -13,11 +14,12 @@ sidebar:
 
 ## Information
 
-In this challenge, you can imagine a big application where you store your user state inside a service and you use this service to use your user anywhere in your application.
-The issue is when you update one property of your user, the entire application is updating.
+For this challenge, you can imagine a large-scale application where you use a service to save and retrieve your user state at any time within the application.
 
-I added the `CDFlashingDirective` to vizualise when one component is rerendering.
+The problem is that updating a single user property updates the entire application.
+
+I added the `CDFlashingDirective` to visualize when one component is rendering.
 
 ## Statement
 
-With Signal, you can now be more fine-grained in what the UI is rerendering. The goal of this challenge is to understand why everything is rerendering and you refactor the application to be more performante.
+With signals, you can now be more fine-grained in what the UI is rendering. The goal of this challenge is to understand why everything is re-rendering and to refactor the application to be more performant.
