@@ -67,13 +67,13 @@ export class UserFormComponent {
   form = new FormGroup({
     name: new FormControl(this.userStore.name(), { nonNullable: true }),
     address: new FormGroup({
-      street: new FormControl(this.userStore.address().street, {
+      street: new FormControl(this.userStore.address.street(), {
         nonNullable: true,
       }),
-      zipCode: new FormControl(this.userStore.address().zipCode, {
+      zipCode: new FormControl(this.userStore.address.zipCode(), {
         nonNullable: true,
       }),
-      city: new FormControl(this.userStore.address().city, {
+      city: new FormControl(this.userStore.address.city(), {
         nonNullable: true,
       }),
     }),
