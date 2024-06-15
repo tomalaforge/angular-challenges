@@ -6,13 +6,17 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 @Component({
   standalone: true,
   template: `
-    <div role="alert" class="rounded-xl border border-gray-100 bg-white p-5">
-      <h3 class="block text-xl font-medium text-red-600">
+    <div
+      class="rounded-xl border border-gray-100 bg-white p-5"
+      role="alertdialog"
+      aria-labelledby="alert-title"
+      aria-describedby="alert-description">
+      <h3 id="alert-title" class="block text-xl font-medium text-red-600">
         You have unsaved information!
       </h3>
-
-      <p class="mt-1 text-gray-700">Do you want to continue and lose them?</p>
-
+      <p id="alert-description" class="mt-1 text-gray-700">
+        Do you want to continue and lose them?
+      </p>
       <div class="mt-4 flex gap-2">
         <button
           (click)="dialogRef.close(true)"
