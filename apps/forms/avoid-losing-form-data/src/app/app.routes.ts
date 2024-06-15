@@ -1,4 +1,5 @@
 import { Route } from '@angular/router';
+import { AskBeforeLeaveDirtyForm } from './guards/ask-before-leave-dirty-form';
 import { JoinComponent } from './pages/join.component';
 import { PageComponent } from './pages/page.component';
 
@@ -11,6 +12,7 @@ export const appRoutes: Route[] = [
   {
     path: 'form',
     loadComponent: () => JoinComponent,
+    canDeactivate: [AskBeforeLeaveDirtyForm],
   },
   {
     path: 'page-1',
