@@ -79,4 +79,4 @@ Once you are finished, remember to pause or delete your codespace. If you don't,
 
 In the GitHub codespace, copy and paste will be blocked until you give permission.
 
-The GitHub codespace uses port forwarding to serve the projects. Click the prompt after running `npx serve` to navigate to `localhost:4200`.
+The GitHub codespace uses port forwarding to serve the projects. Click the prompt after running `npx nx serve [project-name]` to navigate to `localhost:4200`.
