@@ -1,7 +1,7 @@
 /* eslint-disable @angular-eslint/component-selector */
 import { AsyncPipe, NgFor } from '@angular/common';
 import { Component, Input, inject } from '@angular/core';
-import { BehaviorSubject, take } from 'rxjs';
+import { BehaviorSubject, skip } from 'rxjs';
 import { AppService } from './app.service';
 import { TopicType } from './localDB.service';
 
@@ -24,14 +24,12 @@ export class ButtonDeleteComponent {
   deleteTopic() {
     this.service
       .deleteOldTopics(this.topic)
-      .pipe(take(1))
-      .subscribe((result) =>
-        this.message$$.next(
-          result
-            ? `All ${this.topic} have been deleted`
-            : `Error: deletion of some ${this.topic} failed`,
-        ),
-      );
+      .pipe(skip(1))
+      .subscribe({
+        next: () => this.message$$.next(`All ${this.topic} have been deleted`),
+        error: () =>
+          this.message$$.next(`Error: deletion of some ${this.topic} failed`),
+      });
   }
 }
 

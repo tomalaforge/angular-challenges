@@ -1,5 +1,13 @@
 import { inject, Injectable } from '@angular/core';
-import { merge, mergeMap, Observable, of, take } from 'rxjs';
+import {
+  merge,
+  mergeMap,
+  Observable,
+  of,
+  switchMap,
+  take,
+  throwError,
+} from 'rxjs';
 import { LocalDBService, TopicType } from './localDB.service';
 
 @Injectable({ providedIn: 'root' })
@@ -15,7 +23,13 @@ export class AppService {
         topicToDelete.length > 0
           ? topicToDelete
               .map((t) => this.dbService.deleteOneTopic(t.id))
-              .reduce((acc, curr) => merge(acc, curr), of(true))
+              .reduce((acc, curr) => {
+                return merge(acc, curr).pipe(
+                  switchMap((x) =>
+                    !x ? throwError(() => new Error('error occured')) : of(x),
+                  ),
+                );
+              }, of(true))
           : of(true),
       ),
     );
