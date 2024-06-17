@@ -9,7 +9,6 @@ challengeNumber: 53
 command: signal-big-signal-performance
 sidebar:
   order: 122
-  badge: New
 ---
 
 ## Information
