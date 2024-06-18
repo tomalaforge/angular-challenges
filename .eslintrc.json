@@ -6,6 +6,7 @@
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {
+        "@nx/workspace/forbidden-enum": "error",
         "@nx/enforce-module-boundaries": [
           "error",
           {

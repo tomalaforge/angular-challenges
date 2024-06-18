@@ -28,10 +28,20 @@ export const rule = ESLintUtils.RuleCreator(() => __filename)({
       recommended: 'recommended',
     },
     schema: [],
-    messages: {},
+    messages: {
+      forbiddenEnum:
+        'Using enums is not recommended. Prefer converting enums to union types.',
+    },
   },
   defaultOptions: [],
   create(context) {
-    return {};
+    return {
+      TSEnumDeclaration(node) {
+        context.report({
+          node,
+          messageId: 'forbiddenEnum',
+        });
+      },
+    };
   },
 });

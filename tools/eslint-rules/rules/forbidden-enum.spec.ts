@@ -6,6 +6,18 @@ const ruleTester = new TSESLint.RuleTester({
 });
 
 ruleTester.run(RULE_NAME, rule, {
-  valid: [`const example = true;`],
-  invalid: [],
+  valid: [
+    `type Currency = 'USD' | 'EUR';`,
+    `type Difficulty = 'easy' | 'normal';`,
+  ],
+  invalid: [
+    {
+      code: `const enum Currency { USD = 'USD', EUR = 'EUR'};`,
+      errors: [{ messageId: 'forbiddenEnum' }],
+    },
+    {
+      code: `enum Difficulty { EASY = 'easy', NORMAL = 'normal'};`,
+      errors: [{ messageId: 'forbiddenEnum' }],
+    },
+  ],
 });
