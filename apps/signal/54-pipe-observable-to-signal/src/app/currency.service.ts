@@ -10,9 +10,9 @@ export interface Currency {
 export const currency: Currency[] = [
   { name: 'Euro', code: 'EUR', symbol: '€' },
   { name: 'Dollar US', code: 'USD', symbol: 'US$' },
-  { name: 'Dollar Autralien', code: 'AUD', symbol: 'AU$' },
-  { name: 'Livre Sterling', code: 'GBP', symbol: '£' },
-  { name: 'Dollar Canadien', code: 'CAD', symbol: 'CAD' },
+  { name: 'Dollar Australian', code: 'AUD', symbol: 'AU$' },
+  { name: 'Pound Sterling', code: 'GBP', symbol: '£' },
+  { name: 'Dollar Canadian', code: 'CAD', symbol: 'CAD' },
 ];
 
 @Injectable()
