@@ -1,8 +1,8 @@
 import { Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { User } from './user.model';
 
 import { Component } from '@angular/core';
+import { User } from './user.model';
 @Component({
   selector: 'sdi-user',
   standalone: true,
