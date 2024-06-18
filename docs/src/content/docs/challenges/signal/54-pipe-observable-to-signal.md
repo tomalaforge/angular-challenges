@@ -4,6 +4,7 @@ description: Challenge 54 is about refactoring an application using observable t
 author: thomas-laforge
 contributors:
   - tomalaforge
+  - LMFinney
 challengeNumber: 54
 command: signal-pipe-observable-to-signal
 sidebar:
@@ -17,6 +18,6 @@ We have a legacy application that is using observables to store a state. Signals
 
 ## Statement
 
-So the goal of this challenge is to refactor the following application to be a fully signal based application.
+So, the goal of this challenge is to refactor the following application to be a fully signal-based application. When you are done, neither the pipe nor the service should import RxJS.
 
-Be careful along the way, everything might not work as you wish.
+Be careful along the way; everything might not work as you wish.
