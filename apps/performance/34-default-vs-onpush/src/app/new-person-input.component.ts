@@ -33,6 +33,7 @@ export class NewPersonInputComponent {
   public label!: string;
 
   public addName = output<string>();
+
   handleKey(event: KeyboardEvent) {
     if (event.key === 'Enter') {
       this.addName.emit(this.label);

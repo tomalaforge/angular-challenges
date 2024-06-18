@@ -29,30 +29,10 @@ import { PersonElementComponent } from './person-element.component';
     <h1 cd-flash class="text-center font-semibold" title="Title">
       {{ title | titlecase }}
     </h1>
-
-    <!--    <mat-form-field class="w-4/5" cd-flash>
-      <input
-        placeholder="Add one member to the list"
-        matInput
-        type="text"
-        [(ngModel)]="label"
-        (keydown)="handleKey($event)" />
-    </mat-form-field>-->
-
     <app-new-person-input (addName)="names.unshift($event)" />
     <mat-list class="flex w-full">
       <div *ngIf="names?.length === 0" class="empty-list-label">Empty list</div>
       <app-person-element *ngFor="let name of names" [name]="name" />
-      <!--      <mat-list-item
-
-        cd-flash
-        class="text-orange-500">
-        <div MatListItemLine class="flex justify-between">
-          <h3 title="Name">
-            {{ name }}
-          </h3>
-        </div>
-      </mat-list-item>-->
       <mat-divider *ngIf="names?.length !== 0"></mat-divider>
     </mat-list>
   `,
