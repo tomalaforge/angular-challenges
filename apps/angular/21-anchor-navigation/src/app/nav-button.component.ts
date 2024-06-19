@@ -4,7 +4,7 @@ import { Component, Input } from '@angular/core';
   selector: 'nav-button',
   standalone: true,
   template: `
-    <a [href]="href">
+    <a [href]="fragment ? '#' + fragment : routerLink">
       <ng-content></ng-content>
     </a>
   `,
@@ -13,5 +13,6 @@ import { Component, Input } from '@angular/core';
   },
 })
 export class NavButtonComponent {
-  @Input() href = '';
+  @Input() routerLink: string = '';
+  @Input() fragment: string = '';
 }
