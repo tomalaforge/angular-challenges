@@ -4,9 +4,8 @@
   <section>
     <app-list-item
       *ngFor="let item of list"
-      [name]="item.firstname"
+      [name]="item.firstname || item.name"
       [id]="item.id"
-      [type]="type"
       (deleteItem)="onDeleteItem($event)"
     >
     </app-list-item>

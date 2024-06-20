@@ -1,12 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { StudentStore } from '../../data-access/student.store';
-import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
 
 @Component({
   selector: 'app-list-item',
   template: `
-    <div class="border-grey-300 flex justify-between border px-2 py-1">
+    <div class="border border-grey-300 py-1 px-2 flex justify-between">
       {{ name }}
       <button (click)="onDeleteItem(id)">
         <img class="h-5" src="assets/svg/trash.svg" />
@@ -18,13 +15,7 @@ import { CardType } from '../../model/card.model';
 export class ListItemComponent {
   @Input() id!: number;
   @Input() name!: string;
-  @Input() type!: CardType;
   @Output() deleteItem = new EventEmitter<number>();
-
-  constructor(
-    private teacherStore: TeacherStore,
-    private studentStore: StudentStore,
-  ) {}
 
   onDeleteItem(id: number) {
     this.deleteItem.emit(id);
