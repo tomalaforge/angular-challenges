@@ -1,13 +1,11 @@
 import { TableComponent } from '@angular-challenges/shared/ui';
-import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { CurrencyPipe } from './currency.pipe';
 import { ProductRowComponent } from './product-row.component';
 import { products } from './product.model';
 
 @Component({
   standalone: true,
-  imports: [AsyncPipe, CurrencyPipe, TableComponent, ProductRowComponent],
+  imports: [TableComponent, ProductRowComponent],
   selector: 'app-root',
   template: `
     <table [items]="products">
