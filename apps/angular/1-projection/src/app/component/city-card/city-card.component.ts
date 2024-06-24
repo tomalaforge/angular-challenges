@@ -11,10 +11,10 @@ import {
   selector: 'app-city-card',
   template: ` <app-card
     [list]="cities"
-    customClass="bg-light-green"
+    customClass="bg-light-pink"
     (addItem)="addNewItem()"
     (deleteItem)="deleteItem($event)">
-    <img src="assets/img/student.webp" width="200px" />
+    <img src="assets/img/city.jpg" width="200px" />
   </app-card>`,
   standalone: true,
   imports: [CardComponent],
