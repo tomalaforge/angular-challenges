@@ -4,6 +4,7 @@ import {
   effect,
   inject,
   signal,
+  untracked,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UserService } from './user.service';
@@ -39,7 +40,17 @@ export class ActionsComponent {
 
   constructor() {
     effect(() => {
-      this.userService.log(this.action() ?? 'No action selected');
+      const action = this.action();
+
+      /**
+       * UserService log method reads 'name' signal and this is why
+       * the effect is being called also when a new profile is selected.
+       * Using untracked, 'name' signal is removed as current effect's
+       * dependency and it is only executed when 'action' signal is changed.
+       */
+      untracked(() => {
+        this.userService.log(action ?? 'No action selected');
+      });
     });
   }
 }
