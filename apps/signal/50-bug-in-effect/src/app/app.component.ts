@@ -41,13 +41,42 @@ export class AppComponent {
   gpu = model(false);
 
   constructor() {
-    /* 
-      Explain for your junior team mate why this bug occurs ...
-    */
-    effect(() => {
+    /*
+     ** The bug occurs because of the short-circuit typescript's evalutation.
+     ** When drive checkbox is clicked the effect is called and only the first part
+     ** of the if statement is executed (this.drive()) and because this.drive() yields true,
+     ** the other 2 statements are not evaluated.
+     ** Because the nature of the effect is to be called when an already read signal(in this case drive singal)
+     ** is changed, it is executed only when this.drive() is unchecked.
+     ** In addition, if ram signal is checked initially and because it the second part of if condition,
+     ** when ONLY either drive or ram signals are checked/unchecked the effect will be executed.
+     */
+    /*effect(() => {
       if (this.drive() || this.ram() || this.gpu()) {
         alert('Price increased!');
       }
+    });*/
+
+    effect(() => {
+      if (this.drive()) {
+        this.displayAlert();
+      }
     });
+
+    effect(() => {
+      if (this.ram()) {
+        this.displayAlert();
+      }
+    });
+
+    effect(() => {
+      if (this.gpu()) {
+        this.displayAlert();
+      }
+    });
+  }
+
+  private displayAlert() {
+    alert('Price increased!');
   }
 }
