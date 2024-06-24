@@ -6,18 +6,25 @@ import {
   FakeHttpService,
   randomCity,
 } from '../../data-access/fake-http.service';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-city-card',
   template: ` <app-card
     [list]="cities"
     customClass="bg-light-pink"
-    (addItem)="addNewItem()"
-    (deleteItem)="deleteItem($event)">
+    (addItem)="addNewItem()">
     <img src="assets/img/city.jpg" width="200px" />
+    <ng-template #rowRef let-city>
+      <app-list-item
+        [id]="city.id"
+        [name]="city.name"
+        (deleteItem)="deleteItem($event)">
+      </app-list-item>
+    </ng-template>
   </app-card>`,
   standalone: true,
-  imports: [CardComponent],
+  imports: [CardComponent, ListItemComponent],
 })
 export class CityCardComponent implements OnInit {
   cities: City[] = [];

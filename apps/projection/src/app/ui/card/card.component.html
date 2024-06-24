@@ -1,16 +1,11 @@
 <div class="border-2 border-black rounded-md p-4 w-fit flex flex-col gap-3" [class]="customClass">
   <ng-content select="img"></ng-content>
-
-  <section>
-    <app-list-item
-      *ngFor="let item of list"
-      [name]="item.firstname || item.name"
-      [id]="item.id"
-      (deleteItem)="onDeleteItem($event)"
-    >
-    </app-list-item>
-  </section>
-
+  <ng-container *ngFor="let item of list">
+    <ng-template
+      [ngTemplateOutlet]="rowTemplate"
+      [ngTemplateOutletContext]="{ $implicit: item }"
+    ></ng-template>
+  </ng-container>
   <button
     class="border border-blue-500 bg-blue-300 p-2 rounded-sm"
     (click)="onAddItem()"
