@@ -7,7 +7,7 @@ import { UserStore } from './user.service';
   standalone: true,
   template: `
     <div cd-flash class="m-4 block border border-gray-500 p-4">
-      Note: {{ userService.user().note }}
+      Note: {{ userService.note() }}
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
