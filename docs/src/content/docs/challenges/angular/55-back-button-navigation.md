@@ -3,7 +3,6 @@ title: 🟠 Back-Button-Navigation
 description: Challenge 55 is about overriding browser back button navigation
 author: Ioannis-Tsironis
 contributors:
-  - tomalaforge
 challengeNumber: 55
 command: angular-back-button-navigation
 sidebar:
