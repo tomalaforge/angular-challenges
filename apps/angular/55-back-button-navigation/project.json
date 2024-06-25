@@ -22,7 +22,10 @@
             "input": "apps/angular/55-back-button-navigation/public"
           }
         ],
-        "styles": ["apps/angular/55-back-button-navigation/src/styles.scss"],
+        "styles": [
+          "apps/angular/55-back-button-navigation/src/styles.scss",
+          "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+        ],
         "scripts": []
       },
       "configurations": {
