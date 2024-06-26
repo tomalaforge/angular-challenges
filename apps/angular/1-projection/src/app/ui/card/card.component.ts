@@ -34,7 +34,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
 export class CardComponent<T extends { id: number }> {
   @ContentChild('rowRef', { read: TemplateRef })
   rowTemplate!: TemplateRef<{ $implicit: T }>;
-  @Input() list: any[] | null = null;
+  @Input() list: T[] | null = null;
   @Input() customClass = '';
   @Output() addItem: EventEmitter<void> = new EventEmitter<void>();
 

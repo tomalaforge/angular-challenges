@@ -1,5 +1,6 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { concatMap, tap } from 'rxjs';
 import { CityStore } from '../../data-access/city.store';
 import {
@@ -13,7 +14,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   selector: 'app-city-card',
   template: `
     <app-card
-      [list]="cities$ | async"
+      [list]="cities()"
       customClass="bg-light-pink"
       (addItem)="addNewItem()">
       <img src="assets/img/city.jpg" width="200px" />
@@ -32,9 +33,12 @@ export class CityCardComponent {
   private store = inject(CityStore);
   private http = inject(FakeHttpService);
 
-  cities$ = this.http.fetchCities$.pipe(
-    tap((cities) => this.store.addAll(cities)),
-    concatMap(() => this.store.cities$),
+  cities = toSignal(
+    this.http.fetchCities$.pipe(
+      tap((cities) => this.store.addAll(cities)),
+      concatMap(() => this.store.cities$),
+    ),
+    { initialValue: null },
   );
 
   addNewItem() {

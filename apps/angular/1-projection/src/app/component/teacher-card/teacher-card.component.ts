@@ -1,5 +1,6 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { concatMap, tap } from 'rxjs';
 import {
   FakeHttpService,
@@ -13,7 +14,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   selector: 'app-teacher-card',
   template: `
     <app-card
-      [list]="teachers$ | async"
+      [list]="teachers()"
       (addItem)="onAddItem()"
       customClass="bg-light-red">
       <ng-template #rowRef let-teacher>
@@ -31,9 +32,12 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
 export class TeacherCardComponent {
   private store = inject(TeacherStore);
   private http = inject(FakeHttpService);
-  teachers$ = this.http.fetchTeachers$.pipe(
-    tap((teachers) => this.store.addAll(teachers)),
-    concatMap(() => this.store.teachers$),
+  teachers = toSignal(
+    this.http.fetchTeachers$.pipe(
+      tap((teachers) => this.store.addAll(teachers)),
+      concatMap(() => this.store.teachers$),
+    ),
+    { initialValue: null },
   );
 
   onAddItem() {

@@ -1,5 +1,6 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { concatMap, tap } from 'rxjs';
 import {
   FakeHttpService,
@@ -13,7 +14,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   selector: 'app-student-card',
   template: `
     <app-card
-      [list]="students$ | async"
+      [list]="students()"
       customClass="bg-light-green"
       (addItem)="addNewItem()">
       <img src="assets/img/student.webp" width="200px" />
@@ -31,9 +32,12 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
 export class StudentCardComponent {
   private store = inject(StudentStore);
   private http = inject(FakeHttpService);
-  students$ = this.http.fetchStudents$.pipe(
-    tap((students) => this.store.addAll(students)),
-    concatMap(() => this.store.students$),
+  students = toSignal(
+    this.http.fetchStudents$.pipe(
+      tap((students) => this.store.addAll(students)),
+      concatMap(() => this.store.students$),
+    ),
+    { initialValue: null },
   );
 
   addNewItem() {
