@@ -28,6 +28,21 @@ interface Boat {
 
 type Vehicle = Bicycle | Car | Moto | Bus | Boat;
 
+export function createVehicle(type: 'bicycle'): Bicycle;
+export function createVehicle(type: 'car', fuel: Fuel): Car;
+export function createVehicle(type: 'moto', fuel: Fuel): Moto;
+export function createVehicle(
+  type: 'boat',
+  fuel: Fuel | undefined,
+  capacity: number,
+): Boat;
+export function createVehicle(
+  type: 'bus',
+  fuel: Fuel | undefined,
+  capacity: number,
+  isPublicTransport: boolean,
+): Bus;
+
 export function createVehicle(
   type: VehicleType,
   fuel?: Fuel,
