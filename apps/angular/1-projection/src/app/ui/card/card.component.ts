@@ -8,6 +8,7 @@ import {
   TemplateRef,
 } from '@angular/core';
 import { ListItemComponent } from '../list-item/list-item.component';
+import { ListItem } from '../list-item/list-item.directive';
 
 @Component({
   selector: 'app-card',
@@ -32,7 +33,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
   imports: [NgIf, NgFor, ListItemComponent, NgTemplateOutlet],
 })
 export class CardComponent<T extends { id: number }> {
-  @ContentChild('rowRef', { read: TemplateRef })
+  @ContentChild(ListItem, { read: TemplateRef })
   rowTemplate!: TemplateRef<{ $implicit: T }>;
   @Input() list: T[] | null = null;
   @Input() customClass = '';

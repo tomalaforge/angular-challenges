@@ -9,6 +9,7 @@ import {
 import { TeacherStore } from '../../data-access/teacher.store';
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
+import { ListItem } from '../../ui/list-item/list-item.directive';
 
 @Component({
   selector: 'app-teacher-card',
@@ -17,7 +18,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
       [list]="teachers()"
       (addItem)="onAddItem()"
       customClass="bg-light-red">
-      <ng-template #rowRef let-teacher>
+      <ng-template listItem let-teacher>
         <app-list-item
           [id]="teacher.id"
           [name]="teacher.firstname"
@@ -27,7 +28,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
     </app-card>
   `,
   standalone: true,
-  imports: [CardComponent, ListItemComponent, AsyncPipe],
+  imports: [CardComponent, ListItemComponent, AsyncPipe, ListItem],
 })
 export class TeacherCardComponent {
   private store = inject(TeacherStore);

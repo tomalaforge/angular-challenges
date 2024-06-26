@@ -9,6 +9,7 @@ import {
 } from '../../data-access/fake-http.service';
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
+import { ListItem } from '../../ui/list-item/list-item.directive';
 
 @Component({
   selector: 'app-city-card',
@@ -18,7 +19,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
       customClass="bg-light-pink"
       (addItem)="addNewItem()">
       <img src="assets/img/city.jpg" width="200px" />
-      <ng-template #rowRef let-city>
+      <ng-template listItem let-city>
         <app-list-item
           [id]="city.id"
           [name]="city.name"
@@ -27,7 +28,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
     </app-card>
   `,
   standalone: true,
-  imports: [CardComponent, ListItemComponent, AsyncPipe],
+  imports: [CardComponent, ListItemComponent, AsyncPipe, ListItem],
 })
 export class CityCardComponent {
   private store = inject(CityStore);

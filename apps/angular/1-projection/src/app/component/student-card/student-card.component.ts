@@ -9,6 +9,7 @@ import {
 import { StudentStore } from '../../data-access/student.store';
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
+import { ListItem } from '../../ui/list-item/list-item.directive';
 
 @Component({
   selector: 'app-student-card',
@@ -18,7 +19,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
       customClass="bg-light-green"
       (addItem)="addNewItem()">
       <img src="assets/img/student.webp" width="200px" />
-      <ng-template #rowRef let-student>
+      <ng-template listItem let-student>
         <app-list-item
           [id]="student.id"
           [name]="student.firstname"
@@ -27,7 +28,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
     </app-card>
   `,
   standalone: true,
-  imports: [CardComponent, ListItemComponent, AsyncPipe],
+  imports: [CardComponent, ListItemComponent, AsyncPipe, ListItem],
 })
 export class StudentCardComponent {
   private store = inject(StudentStore);
