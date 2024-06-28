@@ -11,9 +11,9 @@ import { SchoolStore } from './school.store';
   selector: 'school',
   template: `
     <h3>SCHOOL</h3>
-    <div *ngFor="let school of school$ | async">
-      {{ school.name }} - {{ school.version }}
-    </div>
+    @for (school of school$ | async; track $index) {
+      <div>{{ school.name }} - {{ school.version }}</div>
+    }
   `,
   styles: [
     `
