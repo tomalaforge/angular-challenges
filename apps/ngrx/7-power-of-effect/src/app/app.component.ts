@@ -1,7 +1,5 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { appActions } from './app.actions';
 
 @Component({
   standalone: true,
@@ -31,10 +29,4 @@ import { appActions } from './app.actions';
     `,
   ],
 })
-export class AppComponent implements OnInit {
-  private store = inject(Store);
-
-  ngOnInit(): void {
-    this.store.dispatch(appActions.initApp());
-  }
-}
+export class AppComponent {}
