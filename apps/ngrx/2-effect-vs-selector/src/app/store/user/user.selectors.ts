@@ -7,3 +7,8 @@ export const selectUser = createSelector(
   selectUserState,
   (state) => state.user,
 );
+
+export const isUserAdmin = createSelector(
+  selectUserState,
+  (state) => state.user?.isAdmin,
+);
