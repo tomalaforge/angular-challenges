@@ -9,7 +9,6 @@ challengeNumber: 54
 command: signal-pipe-observable-to-signal
 sidebar:
   order: 210
-  badge: New
 ---
 
 ## Information
