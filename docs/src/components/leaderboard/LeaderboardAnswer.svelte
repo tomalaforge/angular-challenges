@@ -7,6 +7,7 @@
   let loading = true;
   let error = null;
   let isUsernamePresent = false;
+      let globalCount = 0;
 
   token.subscribe(token => {
     if (token) {
@@ -33,6 +34,8 @@
         if (!items || items.length === 0) {
           break;
         }
+
+        globalCount = globalCount + items.length;
 
         items.forEach(pr => {
           const userLogin = pr.user.login;
@@ -76,6 +79,7 @@
 {#if !$isConnected}
   <div class="important-block not-connected">Log in to Github to see the list</div>
 {:else}
+🔥Total Answers: <span class="global-count">{ globalCount }</span>
   {#if isUsernamePresent}
     <div class="link-username">
       <a href={`#${$username}`}>Check my position</a>
@@ -100,6 +104,11 @@
 <style>
   .not-connected {
     margin-top: 1rem;
+  }
+
+  .global-count {
+    color: red;
+    font-size: 20px;
   }
 
   .link-username {
