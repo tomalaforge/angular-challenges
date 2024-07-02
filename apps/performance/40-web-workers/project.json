@@ -20,7 +20,8 @@
           "apps/performance/40-web-workers/src/assets"
         ],
         "styles": ["apps/performance/40-web-workers/src/styles.scss"],
-        "scripts": []
+        "scripts": [],
+        "webWorkerTsConfig": "apps/performance/40-web-workers/tsconfig.worker.json"
       },
       "configurations": {
         "production": {
