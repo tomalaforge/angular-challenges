@@ -18,8 +18,8 @@ const factoryTeacher = incrementalNumber();
 
 export const randTeacher = () => ({
   id: factoryTeacher(),
-  firstName: randFirstName(),
-  lastName: randLastName(),
+  firstname: randFirstName(),
+  lastname: randLastName(),
   subject: rand(subject),
 });
 
@@ -34,8 +34,8 @@ const factoryStudent = incrementalNumber();
 
 export const randStudent = (): Student => ({
   id: factoryStudent(),
-  firstName: randFirstName(),
-  lastName: randLastName(),
+  firstname: randFirstName(),
+  lastname: randLastName(),
   mainTeacher: teachers[randNumber({ max: teachers.length - 1 })],
   school: randWord(),
 });

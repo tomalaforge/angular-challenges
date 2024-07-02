@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.bg-light-pink {
+  background-color: rgba(220, 128, 252, 0.84);
+}
+
+.bg-light-red {
+  background-color: rgba(250, 0, 0, 0.1);
+}
+
+.bg-light-green {
+  background-color: rgba(0, 250, 0, 0.1);
+}

@@ -1,40 +1,51 @@
-import { Component, OnInit } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+import { AsyncPipe } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { concatMap, tap } from 'rxjs';
+import {
+  FakeHttpService,
+  randTeacher,
+} from '../../data-access/fake-http.service';
 import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
-import { Teacher } from '../../model/teacher.model';
 import { CardComponent } from '../../ui/card/card.component';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
+import { ListItem } from '../../ui/list-item/list-item.directive';
 
 @Component({
   selector: 'app-teacher-card',
   template: `
     <app-card
-      [list]="teachers"
-      [type]="cardType"
-      customClass="bg-light-red"></app-card>
+      [list]="teachers()"
+      (addItem)="onAddItem()"
+      customClass="bg-light-red">
+      <ng-template listItem let-teacher>
+        <app-list-item
+          [id]="teacher.id"
+          [name]="teacher.firstname"
+          (deleteItem)="onDeleteItem($event)"></app-list-item>
+      </ng-template>
+      <img src="assets/img/teacher.png" width="200px" />
+    </app-card>
   `,
-  styles: [
-    `
-      ::ng-deep .bg-light-red {
-        background-color: rgba(250, 0, 0, 0.1);
-      }
-    `,
-  ],
   standalone: true,
-  imports: [CardComponent],
+  imports: [CardComponent, ListItemComponent, AsyncPipe, ListItem],
 })
-export class TeacherCardComponent implements OnInit {
-  teachers: Teacher[] = [];
-  cardType = CardType.TEACHER;
+export class TeacherCardComponent {
+  private store = inject(TeacherStore);
+  private http = inject(FakeHttpService);
+  teachers = toSignal(
+    this.http.fetchTeachers$.pipe(
+      tap((teachers) => this.store.addAll(teachers)),
+      concatMap(() => this.store.teachers$),
+    ),
+    { initialValue: null },
+  );
 
-  constructor(
-    private http: FakeHttpService,
-    private store: TeacherStore,
-  ) {}
+  onAddItem() {
+    this.store.addOne(randTeacher());
+  }
 
-  ngOnInit(): void {
-    this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
-
-    this.store.teachers$.subscribe((t) => (this.teachers = t));
+  onDeleteItem(id: number) {
+    this.store.deleteOne(id);
   }
 }

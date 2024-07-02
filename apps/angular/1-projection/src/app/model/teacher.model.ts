@@ -9,7 +9,7 @@ export type Subject = (typeof subject)[number];
 
 export interface Teacher {
   id: number;
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  lastname: string;
   subject: Subject;
 }

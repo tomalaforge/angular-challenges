@@ -13,11 +13,11 @@ export class CityStore {
     this.cities.next(cities);
   }
 
-  addOne(student: City) {
-    this.cities.next([...this.cities.value, student]);
+  addOne(city: City) {
+    this.cities.next([...this.cities.value, city]);
   }
 
   deleteOne(id: number) {
-    this.cities.next(this.cities.value.filter((s) => s.id !== id));
+    this.cities.next(this.cities.value.filter((t) => t.id !== id));
   }
 }
