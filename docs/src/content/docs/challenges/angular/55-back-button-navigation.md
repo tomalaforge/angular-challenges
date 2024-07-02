@@ -44,10 +44,14 @@ Some Typescript design patterns, in combination with the Angular features, could
 
 <details>
   <summary>Hint 1</summary>
-  Use the `CanDeactivate` functional guard 
+
+Use the `CanDeactivate` functional guard
+
 </details>
 
 <details>
   <summary>Hint 2</summary>
-  Material Design dialog documentation can be found [here](https://material.angular.io/components/dialog/overview)
+
+Material Design dialog documentation can be found [here](https://material.angular.io/components/dialog/overview)
+
 </details>
