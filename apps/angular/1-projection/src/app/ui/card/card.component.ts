@@ -1,4 +1,4 @@
-import { NgFor, NgIf } from '@angular/common';
+import { NgFor } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { randStudent, randTeacher } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
@@ -12,28 +12,25 @@ import { ListItemComponent } from '../list-item/list-item.component';
     <div
       class="flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4"
       [class]="customClass">
-      <!-- 
+      <ng-content />
       <section>
-        <app-list-item
-          *ngFor="let item of list"
-          [name]="item.firstName"
-          [id]="item.id"
-          [type]="type"></app-list-item>
+        <ng-container *ngFor="let item of list">
+          <app-list-item [item]="item" [type]="type"></app-list-item>
+        </ng-container>
       </section>
 
       <button
         class="rounded-sm border border-blue-500 bg-blue-300 p-2"
         (click)="addNewItem()">
         Add
-      </button> -->
-      <ng-content />
+      </button>
     </div>
   `,
   standalone: true,
-  imports: [NgIf, NgFor, ListItemComponent],
+  imports: [NgFor, ListItemComponent],
 })
 export class CardComponent {
-  @Input() list: unknown[] | null = null;
+  @Input() list: any[] | null = null;
   @Input() type!: CardType;
   @Input() customClass = '';
 

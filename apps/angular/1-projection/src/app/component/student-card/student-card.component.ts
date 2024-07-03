@@ -11,7 +11,6 @@ import { CardComponent } from '../../ui/card/card.component';
     <app-card [list]="students" [type]="cardType" customClass="bg-light-green">
       <div>
         <img src="assets/img/student.webp" width="200px" />
-        <p>content goes here</p>
       </div>
     </app-card>
   `,
