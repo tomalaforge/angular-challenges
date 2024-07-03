@@ -12,6 +12,10 @@ import { DialogComponent } from '../dialog/dialog.component';
 export class SimpleActionComponent {
   readonly #dialog = inject(MatDialog);
 
+  canDeactivate(): boolean {
+    return false;
+  }
+
   openDialog(): void {
     this.#dialog.open(DialogComponent, {
       width: '250px',

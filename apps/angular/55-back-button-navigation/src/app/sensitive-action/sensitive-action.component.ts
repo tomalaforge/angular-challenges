@@ -12,6 +12,11 @@ import { DialogComponent } from '../dialog/dialog.component';
 export class SensitiveActionComponent {
   readonly #dialog = inject(MatDialog);
 
+  canDeactivate(): boolean {
+    confirm('Are you sure?');
+    return false;
+  }
+
   openDialog(): void {
     this.#dialog.open(DialogComponent, {
       width: '250px',
