@@ -1,21 +1,17 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CityStore } from '../../data-access/city.store';
 import {
   FakeHttpService,
   randomCity,
 } from '../../data-access/fake-http.service';
-import { CardType } from '../../model/card.model';
-import { City } from '../../model/city.model';
+import { CardRowDirective } from '../../ui/card/card-row.directive';
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-city-card',
   template: `
-    <app-card
-      [list]="cities()"
-      [listTemplate]="listTemplate"
-      customClass="bg-light-red">
+    <app-card [list]="cities()" customClass="bg-light-red">
       <img ngProjectAs="image" src="assets/img/city.png" width="200px" />
       <button
         ngProjectAs="addBtn"
@@ -23,32 +19,27 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
         (click)="addNewItem()">
         Add
       </button>
+      <ng-template [cardRow]="cities()" let-item>
+        <app-list-item>
+          {{ item.name }}
+          <button ngProjectAs="deleteBtn" (click)="delete(item.id)">
+            <img class="h-5" src="assets/svg/trash.svg" />
+          </button>
+        </app-list-item>
+      </ng-template>
     </app-card>
-
-    <ng-template #listTemplate let-item>
-      <app-list-item>
-        {{ item.name }}
-        <button ngProjectAs="deleteBtn" (click)="delete(item.id)">
-          <img class="h-5" src="assets/svg/trash.svg" />
-        </button>
-      </app-list-item>
-    </ng-template>
   `,
   standalone: true,
-  imports: [CardComponent, ListItemComponent],
+  imports: [CardComponent, ListItemComponent, CardRowDirective],
 })
 export class CityCardComponent implements OnInit {
-  cities = signal<City[]>([]);
-  cardType = CardType.CITY;
+  private http = inject(FakeHttpService);
+  private store = inject(CityStore);
 
-  constructor(
-    private http: FakeHttpService,
-    private store: CityStore,
-  ) {}
+  cities = this.store.cities;
 
   ngOnInit(): void {
     this.http.fetchCities$.subscribe((t) => this.store.addAll(t));
-    this.store.cities$.subscribe((t) => this.cities.set(t));
   }
 
   addNewItem() {

@@ -1,5 +1,12 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, Input, TemplateRef } from '@angular/core';
+import {
+  Component,
+  contentChild,
+  input,
+  Input,
+  TemplateRef,
+} from '@angular/core';
+import { CardRowDirective } from './card-row.directive';
 
 @Component({
   selector: 'app-card',
@@ -9,12 +16,10 @@ import { Component, Input, TemplateRef } from '@angular/core';
       [class]="customClass">
       <ng-content select="image"></ng-content>
       <section>
-        @for (item of list; track $index) {
-          <ng-container
-            *ngTemplateOutlet="
-              listTemplate;
-              context: { $implicit: item }
-            "></ng-container>
+        @for (item of list(); track $index) {
+          <ng-template
+            [ngTemplateOutlet]="rowTemplate()"
+            [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
         }
       </section>
       <ng-content select="addBtn"></ng-content>
@@ -23,8 +28,8 @@ import { Component, Input, TemplateRef } from '@angular/core';
   standalone: true,
   imports: [NgTemplateOutlet],
 })
-export class CardComponent {
-  @Input() list: any[] | null = null;
+export class CardComponent<T extends { id: number }> {
+  list = input.required<T[]>();
   @Input() customClass = '';
-  @Input() listTemplate: TemplateRef<any> | null = null;
+  rowTemplate = contentChild.required(CardRowDirective, { read: TemplateRef });
 }
