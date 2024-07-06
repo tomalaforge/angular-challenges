@@ -9,7 +9,7 @@ import {
 import { BaseDialogComponent } from '../base-dialog';
 
 @Component({
-  selector: 'app-confirm-dialog-dialog',
+  selector: 'app-confirm-dialog',
   templateUrl: './confirm-dialog.component.html',
   standalone: true,
   imports: [

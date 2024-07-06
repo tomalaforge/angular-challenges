@@ -1,1 +1,19 @@
-<h2 mat-dialog-title>Confirm Dialog</h2>
+<h2 mat-dialog-title>Confirm Action</h2>
+<mat-dialog-content>
+  Are you sure you want to perform this action?
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button
+    mat-button
+    mat-dialog-close
+    (click)="dialogService.closeActiveDialog()">
+    No
+  </button>
+  <button
+    mat-button
+    mat-dialog-close
+    cdkFocusInitial
+    (click)="dialogService.closeAll()">
+    Yes
+  </button>
+</mat-dialog-actions>

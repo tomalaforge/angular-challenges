@@ -17,7 +17,7 @@ import { DialogService } from './dialog.service';
 })
 export class BaseDialogComponent implements AfterContentInit {
   readonly #data = inject<DialogData>(MAT_DIALOG_DATA);
-  readonly #dialogService = inject(DialogService);
+  protected readonly dialogService = inject(DialogService);
 
   ngAfterContentInit(): void {
     this.initStrategy();
@@ -28,6 +28,6 @@ export class BaseDialogComponent implements AfterContentInit {
       ? this.#data?.strategy?.type
       : 'default';
 
-    this.#dialogService.setStrategy(strategyType);
+    this.dialogService.setStrategy(strategyType);
   }
 }

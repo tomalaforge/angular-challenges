@@ -66,6 +66,12 @@ export class DialogService {
     this.#dialog.getDialogById(activeDialog.id)?.close();
   }
 
+  closeAll() {
+    this.#dialogsStrategyState.splice(0, this.#dialogsStrategyState.length);
+
+    this.#dialog.closeAll();
+  }
+
   getActiveDialog() {
     return this.#dialogsStrategyState.find((d) => d.active);
   }

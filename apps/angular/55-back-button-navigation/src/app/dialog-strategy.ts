@@ -34,7 +34,6 @@ export class ConfirmDialogStrategy extends DialogStrategy {
   override onBackBrowserNavigation(): boolean {
     this.dialogService.openDialog(ConfirmDialogComponent, {
       width: '250px',
-      data: { strategy: { type: 'default' } },
       closeOnNavigation: false,
     });
 
