@@ -65,7 +65,7 @@
         avatar: pr.avatar,
         count: pr.count,
         challengeNumber: pr.challengeNumber.sort((a, b) => a - b),
-      })).filter((r) => r.login !== 'allcontributors[bot]').sort((a, b) => b.count - a.count);
+      })).filter((r) => r.login !== 'allcontributors[bot]' && r.login !== 'tomalaforge').sort((a, b) => b.count - a.count);
 
     } catch (e) {
       error = e.message;
