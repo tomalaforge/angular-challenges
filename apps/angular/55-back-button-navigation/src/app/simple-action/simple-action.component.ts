@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
+import { CanComponentDeactivate } from '../guards/simpleactivationguard.guard';
 
 @Component({
   standalone: true,
@@ -9,7 +10,7 @@ import { DialogComponent } from '../dialog/dialog.component';
   selector: 'app-simple-action',
   templateUrl: './simple-action.component.html',
 })
-export class SimpleActionComponent {
+export class SimpleActionComponent implements CanComponentDeactivate {
   readonly #dialog = inject(MatDialog);
 
   canDeactivate(): boolean {
