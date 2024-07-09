@@ -1,0 +1,35 @@
+import { Injectable, inject } from '@angular/core';
+import { ComponentStore, OnStateInit, OnStoreInit, tapResponse } from '@ngrx/component-store';
+import { <%= className %> } from './<%= fileName %>.model';
+
+export interface <%= className %>State {
+  <%= propertyName %>s: <%= className %>[];
+  loading: boolean;
+  error?: string;
+}
+
+const initialState: <%= className %>State = {
+  <%= propertyName %>s: [],
+  loading: false,
+  error: undefined,
+};
+
+@Injectable()
+export class <%= className %>Store extends ComponentStore<<%= className %>State> implements OnStateInit {  
+  private readonly <%= propertyName %>s$ = this.select((state) => state.<%= propertyName %>s);
+  private readonly loading$ = this.select((state) => state.loading);
+  private readonly error$ = this.select((state) => state.error);
+
+  readonly vm$ = this.select(
+    {
+      <%= propertyName %>s: this.<%= propertyName %>s$,
+      loading: this.loading$,
+      error: this.error$,
+    },
+    { debounce: true },
+  );
+
+  ngrxOnStateInit() {
+    this.setState(initialState);
+  }
+}

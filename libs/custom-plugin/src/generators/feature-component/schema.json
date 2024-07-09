@@ -6,12 +6,22 @@
   "properties": {
     "name": {
       "type": "string",
-      "description": "",
+      "description": "The component name.",
       "$default": {
         "$source": "argv",
         "index": 0
       },
       "x-prompt": "What name would you like to use?"
+    },
+    "createService": {
+      "type": "boolean",
+      "description": "The http service related to component store.",
+      "default": true
+    },
+    "inlineTemplate": {
+      "type": "boolean",
+      "description": "A flag indicating if component template will be placed inline or within an external html file.",
+      "default": false
     }
   },
   "required": ["name"]
