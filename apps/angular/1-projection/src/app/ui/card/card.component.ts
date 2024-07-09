@@ -38,7 +38,7 @@ export class CardComponent<T extends { id: number }> {
   items = input.required<T[]>();
   add = output<void>();
 
-  rowTemplate = contentChild.required(CardRowDirective<T>, {
+  rowTemplate = contentChild.required(CardRowDirective, {
     read: TemplateRef,
   });
 }

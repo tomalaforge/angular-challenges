@@ -14,7 +14,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   template: `
     <app-card class="bg-light-red" [items]="teachers()" (add)="addTeacher()">
       <img src="assets/img/teacher.png" width="200px" />
-      <ng-template [cardRow]="teachers()" let-teacher>
+      <ng-template cardRow let-teacher>
         <app-list-item (delete)="deleteTeacher(teacher.id)">
           {{ teacher.firstName }}
         </app-list-item>

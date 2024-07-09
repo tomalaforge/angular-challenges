@@ -14,7 +14,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   template: `
     <app-card [items]="cities()" class="bg-light-blue" (add)="addCity()">
       <img src="assets/img/city.png" width="200px" />
-      <ng-template [cardRow]="cities()" let-city>
+      <ng-template cardRow let-city>
         <app-list-item (delete)="deleteCity(city.id)">
           {{ city.name }}
         </app-list-item>
