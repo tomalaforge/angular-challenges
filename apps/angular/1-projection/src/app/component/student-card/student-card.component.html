@@ -1,0 +1,8 @@
+<app-card class="bg-light-green" [items]="students()" (add)="addStudent()">
+  <img src="assets/img/student.webp" width="200px" />
+  <ng-template cardRow let-student>
+    <app-list-item (delete)="deleteStudent(student.id)">
+      {{ student.firstName }}
+    </app-list-item>
+  </ng-template>
+</app-card>

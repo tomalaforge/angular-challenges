@@ -1,0 +1,13 @@
+
+<!-- picture-->
+<ng-content select="img"></ng-content>
+<section>
+  @for(item of items(); track item.id) {
+    <ng-template
+      [ngTemplateOutlet]="rowTemplate()"
+      [ngTemplateOutletContext]="{$implicit:item}">
+    ></ng-template>
+  }
+</section>
+
+<button class="" (click)="add.emit()">Add</button>
