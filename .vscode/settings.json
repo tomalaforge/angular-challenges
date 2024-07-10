@@ -2,5 +2,25 @@
   "eslint.validate": [
     "json"
   ],
-  "cSpell.language": "en,es-ES"
+  "cSpell.language": "en,es-ES",
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#99c5fa",
+    "activityBar.background": "#99c5fa",
+    "activityBar.foreground": "#15202b",
+    "activityBar.inactiveForeground": "#15202b99",
+    "activityBarBadge.background": "#f52a86",
+    "activityBarBadge.foreground": "#e7e7e7",
+    "commandCenter.border": "#15202b99",
+    "sash.hoverBorder": "#99c5fa",
+    "statusBar.background": "#68aaf8",
+    "statusBar.foreground": "#15202b",
+    "statusBarItem.hoverBackground": "#378ff6",
+    "statusBarItem.remoteBackground": "#68aaf8",
+    "statusBarItem.remoteForeground": "#15202b",
+    "titleBar.activeBackground": "#68aaf8",
+    "titleBar.activeForeground": "#15202b",
+    "titleBar.inactiveBackground": "#68aaf899",
+    "titleBar.inactiveForeground": "#15202b99"
+  },
+  "peacock.color": "#68aaf8"
 }
