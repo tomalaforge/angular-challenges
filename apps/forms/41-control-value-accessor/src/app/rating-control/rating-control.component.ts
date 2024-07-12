@@ -55,6 +55,7 @@ export class RatingControlComponent implements ControlValueAccessor {
       this.value = index + 1;
     }
     this.onChange?.(this.value);
+    this.onTouched();
   }
 
   validate(control: AbstractControl): ValidationErrors | null {
