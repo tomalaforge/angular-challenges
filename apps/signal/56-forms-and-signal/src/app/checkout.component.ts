@@ -15,6 +15,7 @@ import { products } from './products';
     <h2 class="mb-1 w-full bg-gray-400 p-2 text-white">Checkout</h2>
     <button
       routerLink="/order"
+      [queryParams]="{ quantity: quantity() }"
       queryParamsHandling="merge"
       class="mb-5 text-blue-400">
       < back to order
