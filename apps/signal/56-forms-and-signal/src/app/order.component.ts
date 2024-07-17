@@ -8,7 +8,6 @@ import {
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { map } from 'rxjs';
 import { products } from './products';
 
 @Component({
@@ -59,14 +58,12 @@ import { products } from './products';
 export default class OrderComponent {
   private route = inject(ActivatedRoute);
 
-  query$ = this.route.queryParams.pipe(map((q) => q['quantity'] as number));
-  productId = input('1');
-  quantity$ = this.query$.pipe(map((q) => q ?? 1));
+  quantityControl = this.route.snapshot.queryParams['quantity'] ?? 1;
 
-  quantityControl = toSignal(this.quantity$, { initialValue: 1 });
+  productId = input.required<string>();
 
   form = new FormGroup({
-    quantity: new FormControl(this.quantityControl(), { nonNullable: true }),
+    quantity: new FormControl(this.quantityControl, { nonNullable: true }),
   });
 
   price = computed(
