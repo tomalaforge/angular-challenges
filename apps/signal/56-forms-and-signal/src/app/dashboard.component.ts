@@ -16,7 +16,7 @@ import { products } from './products';
             <button
               class="w-20 rounded-full border bg-blue-500 p-2 text-white"
               routerLink="/order"
-              [queryParams]="{ productId: product.id }">
+              [queryParams]="{ productId: product.id, quantity: 1 }">
               Buy
             </button>
           </div>
