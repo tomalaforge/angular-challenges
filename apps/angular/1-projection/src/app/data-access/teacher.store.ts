@@ -1,23 +1,35 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { inject, Injectable, signal, WritableSignal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { tap } from 'rxjs';
 import { Teacher } from '../model/teacher.model';
+import { FakeHttpService, randTeacher } from './fake-http.service';
 
-@Injectable({
-  providedIn: 'root',
-})
+interface Store {
+  $teachers: WritableSignal<Teacher[]>;
+}
+
+@Injectable()
 export class TeacherStore {
-  private teachers = new BehaviorSubject<Teacher[]>([]);
-  teachers$ = this.teachers.asObservable();
+  private readonly _http = inject(FakeHttpService);
+  private readonly _state: Store = {
+    $teachers: signal<Teacher[]>([]),
+  };
 
-  addAll(teachers: Teacher[]) {
-    this.teachers.next(teachers);
+  $fetchTeachers = toSignal(
+    this._http.fetchTeachers$.pipe(
+      tap((t: Teacher[]) => this._state.$teachers.set(t)),
+    ),
+  );
+
+  readonly $teachers = this._state.$teachers.asReadonly();
+
+  addOne(): void {
+    this._state.$teachers.update((t: Teacher[]) => [...t, randTeacher()]);
   }
 
-  addOne(teacher: Teacher) {
-    this.teachers.next([...this.teachers.value, teacher]);
-  }
-
-  deleteOne(id: number) {
-    this.teachers.next(this.teachers.value.filter((t) => t.id !== id));
+  deleteOne(id: number): void {
+    this._state.$teachers.set(
+      this.$teachers().filter((t: Teacher) => t.id !== id),
+    );
   }
 }

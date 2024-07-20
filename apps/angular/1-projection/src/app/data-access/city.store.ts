@@ -1,23 +1,33 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { inject, Injectable, signal, WritableSignal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { tap } from 'rxjs';
 import { City } from '../model/city.model';
+import { FakeHttpService, randomCity } from './fake-http.service';
 
-@Injectable({
-  providedIn: 'root',
-})
+interface Store {
+  $cities: WritableSignal<City[]>;
+}
+
+@Injectable()
 export class CityStore {
-  private cities = new BehaviorSubject<City[]>([]);
-  cities$ = this.cities.asObservable();
+  private readonly _http = inject(FakeHttpService);
+  private readonly _store: Store = {
+    $cities: signal<City[]>([]),
+  };
 
-  addAll(cities: City[]) {
-    this.cities.next(cities);
+  $fetchCities = toSignal(
+    this._http.fetchCities$.pipe(
+      tap((t: City[]) => this._store.$cities.set(t)),
+    ),
+  );
+
+  readonly $cities = this._store.$cities.asReadonly();
+
+  addOne(): void {
+    this._store.$cities.update((c: City[]) => [...c, randomCity()]);
   }
 
-  addOne(student: City) {
-    this.cities.next([...this.cities.value, student]);
-  }
-
-  deleteOne(id: number) {
-    this.cities.next(this.cities.value.filter((s) => s.id !== id));
+  deleteOne(id: number): void {
+    this._store.$cities.set(this.$cities().filter((c: City) => c.id !== id));
   }
 }
