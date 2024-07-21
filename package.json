@@ -33,7 +33,7 @@
     "@ngrx/store": "18.0.1",
     "@nx/angular": "19.5.0",
     "@swc/helpers": "0.5.12",
-    "@tanstack/angular-query-experimental": "^5.12.1",
+    "@tanstack/angular-query-experimental": "^5.51.9",
     "rxjs": "7.8.1",
     "tailwindcss": "3.4.3",
     "tslib": "^2.3.0",

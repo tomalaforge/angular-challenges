@@ -72,7 +72,7 @@ importers:
         specifier: 0.5.12
         version: 0.5.12
       '@tanstack/angular-query-experimental':
-        specifier: ^5.12.1
+        specifier: ^5.51.9
         version: 5.51.9(@angular/common@18.1.1(@angular/core@18.1.1(rxjs@7.8.1)(zone.js@0.14.2))(rxjs@7.8.1))(@angular/core@18.1.1(rxjs@7.8.1)(zone.js@0.14.2))
       rxjs:
         specifier: 7.8.1
