@@ -1,8 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { injectQuery } from '@tanstack/angular-query-experimental';
+import { TodoQueryService } from './queries/todo-query.service';
 import { TodoItemComponent } from './todo-item/todo-item.component';
-import { TodosService } from './todos.service';
 
 @Component({
   standalone: true,
@@ -30,9 +29,5 @@ import { TodosService } from './todos.service';
   `,
 })
 export class AppComponent {
-  private service = inject(TodosService);
-  todos = injectQuery(() => ({
-    queryKey: ['todos'],
-    queryFn: () => this.service.getTodos(),
-  }));
+  todos = inject(TodoQueryService);
 }

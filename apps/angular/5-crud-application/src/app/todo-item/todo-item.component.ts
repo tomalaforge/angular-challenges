@@ -3,12 +3,11 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
-  inject,
   Input,
 } from '@angular/core';
-import { injectMutation } from '@tanstack/angular-query-experimental';
+import { DeleteTodoService } from '../mutations/delete-todo.service';
+import { UpdateTodoService } from '../mutations/update-todo.service';
 import { Todo } from '../todo';
-import { TodosService } from '../todos.service';
 
 @Component({
   selector: 'app-todo-item',
@@ -34,23 +33,12 @@ import { TodosService } from '../todos.service';
 })
 export class TodoItemComponent {
   @Input({ required: true }) todo!: Todo;
-  private service = inject(TodosService);
-  update = injectMutation<Todo, Error, Todo>((client) => ({
-    mutationFn: (todo: Todo) => this.service.updateTodo(todo),
-    onSuccess(data) {
-      client.setQueryData<Todo[]>(['todos'], (prev) =>
-        prev?.map((t) => (t.id === data.id ? data : t)),
-      );
-    },
-  }));
-  delete = injectMutation<void, Error, number>((client) => ({
-    mutationFn: (todoId) => this.service.deleteTodo(todoId),
-    onSuccess(_, todoId) {
-      client.setQueryData<Todo[]>(['todos'], (prev) =>
-        prev?.filter((t) => t.id !== todoId),
-      );
-    },
-  }));
+  private update: UpdateTodoService;
+  private delete: DeleteTodoService;
+  constructor() {
+    this.update = new UpdateTodoService();
+    this.delete = new DeleteTodoService();
+  }
   isOperationInProgress = computed(
     () => this.update.isPending() || this.delete.isPending(),
   );
