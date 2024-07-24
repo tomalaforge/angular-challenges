@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+import { FakeHttpService, randStudent } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
 import { CardType } from '../../model/card.model';
 import { Student } from '../../model/student.model';
@@ -12,10 +12,18 @@ import { CardComponent } from '../../ui/card/card.component';
       [list]="students"
       [type]="cardType"
       [imgTemplate]="studentImg"
+      [actionTemplate]="studentAction"
       customClass="bg-light-green">
     </app-card>
     <ng-template #studentImg>
       <img src="assets/img/student.webp" width="200px" />
+    </ng-template>
+    <ng-template #studentAction>
+      <button
+        class="rounded-sm border border-blue-500 bg-blue-300 p-2"
+        (click)="addNewItem()">
+        Add
+      </button>
     </ng-template>
   `,
   standalone: true,
@@ -41,5 +49,9 @@ export class StudentCardComponent implements OnInit {
     this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
 
     this.store.students$.subscribe((s) => (this.students = s));
+  }
+
+  addNewItem() {
+    this.store.addOne(randStudent());
   }
 }
