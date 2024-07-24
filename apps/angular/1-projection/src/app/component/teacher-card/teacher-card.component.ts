@@ -3,6 +3,7 @@ import { FakeHttpService, randTeacher } from '../../data-access/fake-http.servic
 import { TeacherStore } from '../../data-access/teacher.store';
 import { Teacher } from '../../model/teacher.model';
 import { CardComponent } from '../../ui/card/card.component';
+import { ListItemComponent } from "../../ui/list-item/list-item.component";
 
 @Component({
   selector: 'app-teacher-card',
@@ -10,6 +11,7 @@ import { CardComponent } from '../../ui/card/card.component';
     <app-card
       [list]="teachers"
       [imgTemplate]="teacherImg"
+      [itemTemplate]="teacherItem"
       [actionTemplate]="teacherAction"
       (deleteItemEvent)="delete($event)"
       customClass="bg-light-red">
@@ -18,6 +20,13 @@ import { CardComponent } from '../../ui/card/card.component';
       <img
         src="assets/img/teacher.png"
         width="200px" />
+    </ng-template>
+    <ng-template let-item #teacherItem>
+      <app-list-item
+        [id]="item.id"
+        [name]="item.firstName"
+        (deleteItemEvent)="delete($event)">
+      </app-list-item>
     </ng-template>
     <ng-template #teacherAction>
       <button
@@ -35,7 +44,7 @@ import { CardComponent } from '../../ui/card/card.component';
     `,
   ],
   standalone: true,
-  imports: [CardComponent],
+  imports: [CardComponent, ListItemComponent],
 })
 export class TeacherCardComponent implements OnInit {
   teachers: Teacher[] = [];

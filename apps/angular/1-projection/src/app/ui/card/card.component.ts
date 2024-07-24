@@ -11,12 +11,13 @@ import { ListItemComponent } from '../list-item/list-item.component';
       <ng-container [ngTemplateOutlet]="imgTemplate"></ng-container>      
 
       <section>
-        <app-list-item
+        <ng-container
           *ngFor="let item of list"
-          [name]="item.firstName"
-          [id]="item.id"
-          (deleteItemEvent)="deleteItem($event)"  
-        ></app-list-item>
+        >
+          <ng-container
+            [ngTemplateOutlet]="itemTemplate"
+            [ngTemplateOutletContext]="{$implicit:item}"]></ng-container>
+        </ng-container>
       </section>
 
       <ng-container [ngTemplateOutlet]="actionTemplate"></ng-container>
@@ -30,6 +31,7 @@ export class CardComponent {
   @Input() list: any[] | null = null;
   @Input() customClass = '';
   @Input() imgTemplate! : TemplateRef<any>;
+  @Input() itemTemplate! : TemplateRef<any>;
   @Input() actionTemplate! : TemplateRef<any>;
 
   @Output() deleteItemEvent = new EventEmitter<number>();

@@ -11,16 +11,18 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
     <app-card
       [list]="students"
       [imgTemplate]="studentImg"
+      [itemTemplate]="studentItem"
       [actionTemplate]="studentAction"
-      (deleteItemEvent)="delete($event)"
       customClass="bg-light-green">
     </app-card>
     <ng-template #studentImg>
       <img src="assets/img/student.webp" width="200px" />
     </ng-template>
-    <ng-template>
-      <app-list-item>
-
+    <ng-template let-item #studentItem>
+      <app-list-item 
+        [name]="item.firstName"
+        [id]="item.id"
+        (deleteItemEvent)="delete($event)">
       </app-list-item>
     </ng-template>
     <ng-template #studentAction>
