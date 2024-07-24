@@ -33,10 +33,4 @@ export class CardComponent {
   @Input() imgTemplate! : TemplateRef<any>;
   @Input() itemTemplate! : TemplateRef<any>;
   @Input() actionTemplate! : TemplateRef<any>;
-
-  @Output() deleteItemEvent = new EventEmitter<number>();
-
-  deleteItem(id:number){
-    this.deleteItemEvent.emit(id)
-  }
 }

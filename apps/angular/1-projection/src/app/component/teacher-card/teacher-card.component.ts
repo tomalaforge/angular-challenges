@@ -13,7 +13,6 @@ import { ListItemComponent } from "../../ui/list-item/list-item.component";
       [imgTemplate]="teacherImg"
       [itemTemplate]="teacherItem"
       [actionTemplate]="teacherAction"
-      (deleteItemEvent)="delete($event)"
       customClass="bg-light-red">
     </app-card>
     <ng-template #teacherImg>
