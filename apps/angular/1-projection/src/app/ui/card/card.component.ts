@@ -1,6 +1,5 @@
 import { NgFor, NgIf, CommonModule } from '@angular/common';
-import { Component, Input, TemplateRef } from '@angular/core';
-import { CardType } from '../../model/card.model';
+import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
 import { ListItemComponent } from '../list-item/list-item.component';
 
 @Component({
@@ -16,7 +15,8 @@ import { ListItemComponent } from '../list-item/list-item.component';
           *ngFor="let item of list"
           [name]="item.firstName"
           [id]="item.id"
-          [type]="type"></app-list-item>
+          (deleteItemEvent)="deleteItem($event)"  
+        ></app-list-item>
       </section>
 
       <ng-container [ngTemplateOutlet]="actionTemplate"></ng-container>
@@ -28,10 +28,13 @@ import { ListItemComponent } from '../list-item/list-item.component';
 })
 export class CardComponent {
   @Input() list: any[] | null = null;
-  @Input() type!: CardType;
   @Input() customClass = '';
   @Input() imgTemplate! : TemplateRef<any>;
   @Input() actionTemplate! : TemplateRef<any>;
 
-  CardType = CardType;
+  @Output() deleteItemEvent = new EventEmitter<number>();
+
+  deleteItem(id:number){
+    this.deleteItemEvent.emit(id)
+  }
 }
