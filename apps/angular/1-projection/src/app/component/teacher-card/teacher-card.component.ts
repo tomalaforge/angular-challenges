@@ -11,7 +11,14 @@ import { CardComponent } from '../../ui/card/card.component';
     <app-card
       [list]="teachers"
       [type]="cardType"
-      customClass="bg-light-red"></app-card>
+      [imgTemplate]="teacherImg"
+      customClass="bg-light-red">
+    </app-card>
+    <ng-template #teacherImg>
+      <img
+        src="assets/img/teacher.png"
+        width="200px" />
+    </ng-template>
   `,
   styles: [
     `
