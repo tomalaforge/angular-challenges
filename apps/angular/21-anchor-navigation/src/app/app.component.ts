@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, RouterOutlet } from '@angular/router';
 
 @Component({
   standalone: true,
@@ -9,4 +9,19 @@ import { RouterOutlet } from '@angular/router';
     <router-outlet></router-outlet>
   `,
 })
-export class AppComponent {}
+export class AppComponent implements OnInit {
+  constructor(private activatedRouter: ActivatedRoute) {}
+  ngOnInit(): void {
+    this.activatedRouter.fragment.subscribe((fragment) => {
+      if (fragment) {
+        this.goToElement(fragment);
+      }
+    });
+  }
+
+  goToElement(selector: string | null) {
+    if (selector && document) {
+      document.getElementById(selector)?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+}
