@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FakeHttpService, randTeacher } from '../../data-access/fake-http.service';
 import { TeacherStore } from '../../data-access/teacher.store';
 import { Teacher } from '../../model/teacher.model';
@@ -24,7 +24,7 @@ import { ListItemComponent } from "../../ui/list-item/list-item.component";
       <app-list-item
         [id]="item.id"
         [name]="item.firstName"
-        (deleteItemEvent)="delete($event)">
+        (deleteItemEvent)="deleteItem($event)">
       </app-list-item>
     </ng-template>
     <ng-template #teacherAction>
@@ -36,9 +36,8 @@ import { ListItemComponent } from "../../ui/list-item/list-item.component";
     </ng-template>
   `,
   styles: [
-    `
-      ::ng-deep .bg-light-red {
-        background-color: rgba(250, 0, 0, 0.1);
+    ` app-card {
+        --bgColor: rgba(250, 0, 0, 0.1);
       }
     `,
   ],
@@ -47,15 +46,11 @@ import { ListItemComponent } from "../../ui/list-item/list-item.component";
 })
 export class TeacherCardComponent implements OnInit {
   teachers: Teacher[] = [];
-
-  constructor(
-    private http: FakeHttpService,
-    private store: TeacherStore,
-  ) {}
+  http = inject(FakeHttpService);
+  store = inject(TeacherStore);
 
   ngOnInit(): void {
     this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
-
     this.store.teachers$.subscribe((t) => (this.teachers = t));
   }
 
@@ -63,7 +58,7 @@ export class TeacherCardComponent implements OnInit {
     this.store.addOne(randTeacher());
   }
 
-  delete(id: number){
+  deleteItem(id: number){
     this.store.deleteOne(id);
   }
 }

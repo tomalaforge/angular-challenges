@@ -12,8 +12,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
       [list]="students"
       [imgTemplate]="studentImg"
       [itemTemplate]="studentItem"
-      [actionTemplate]="studentAction"
-      customClass="bg-light-green">
+      [actionTemplate]="studentAction">
     </app-card>
     <ng-template #studentImg>
       <img src="assets/img/student.webp" width="200px" />
@@ -22,7 +21,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
       <app-list-item 
         [name]="item.firstName"
         [id]="item.id"
-        (deleteItemEvent)="delete($event)">
+        (deleteItemEvent)="deleteItem($event)">
       </app-list-item>
     </ng-template>
     <ng-template #studentAction>
@@ -35,9 +34,8 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   `,
   standalone: true,
   styles: [
-    `
-      ::ng-deep .bg-light-green {
-        background-color: rgba(0, 250, 0, 0.1);
+    ` app-card {
+      --bgColor: rgba(0, 250, 0, 0.1);
       }
     `,
   ],
@@ -61,7 +59,7 @@ export class StudentCardComponent implements OnInit {
     this.store.addOne(randStudent());
   }
 
-  delete(id: number) {
+  deleteItem(id: number) {
     this.store.deleteOne(id);
   }
 }

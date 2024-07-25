@@ -6,6 +6,7 @@ export const subject = [
   'Sport',
 ] as const; //This is known as a "const assertion" => readonly tuple type, with literal strings
             //A const assertion tells the compiler to infer the narrowest* or most specific type it can for an expression
+            //https://stackoverflow.com/questions/55230653/whats-the-difference-between-typescript-const-assertions-and-declarations
 
 //(typeof subject) is Array<"Sciences" | "History" | "English" |...> 
 //Subject is equivalent to (Array<"Sciences" | "History" | "English" |...>)[number]
