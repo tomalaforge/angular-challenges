@@ -1,5 +1,5 @@
-import { NgFor, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { MyForDirective } from './my.directive';
 
 interface Person {
   name: string;
@@ -7,14 +7,12 @@ interface Person {
 
 @Component({
   standalone: true,
-  imports: [NgFor, NgIf],
+  imports: [MyForDirective],
   selector: 'app-root',
   template: `
-    <ng-container *ngIf="persons.length > 0; else emptyList">
-      <div *ngFor="let person of persons">
-        {{ person.name }}
-      </div>
-    </ng-container>
+    <div *myFor="let person of persons; let index = index; empty: emptyList">
+      {{ person.name }} - {{ index }}
+    </div>
     <ng-template #emptyList>The list is empty !!</ng-template>
   `,
   styles: [],
