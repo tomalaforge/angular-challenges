@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  effect,
   input,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -45,7 +46,7 @@ import { products } from './products';
       </div>
       <button
         routerLink="/checkout"
-        [queryParams]="{ quantity: quantity() }"
+        [queryParams]="{ quantity: updatedQuantity() }"
         queryParamsHandling="merge"
         class="w-full rounded-full border bg-blue-500 p-2 text-white">
         Checkout
@@ -63,10 +64,23 @@ export default class OrderComponent {
   price = computed(
     () => products.find((p) => p.id === this.productId())?.price ?? 0,
   );
-  quantity = toSignal(this.form.controls.quantity.valueChanges, {
+  updatedQuantity = toSignal(this.form.controls.quantity.valueChanges, {
     initialValue: this.form.getRawValue().quantity,
   });
-  totalWihoutVat = computed(() => Number(this.price()) * this.quantity());
+  totalWihoutVat = computed(
+    () => Number(this.price()) * this.updatedQuantity(),
+  );
   vat = computed(() => this.totalWihoutVat() * 0.21);
   total = computed(() => this.totalWihoutVat() + this.vat());
+
+  quantity = input<number>();
+
+  constructor() {
+    effect(() => {
+      const q = this.quantity();
+      if (q) {
+        this.form.controls.quantity.patchValue(q);
+      }
+    });
+  }
 }
