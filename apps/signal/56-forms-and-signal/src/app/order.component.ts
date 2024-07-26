@@ -78,7 +78,7 @@ export default class OrderComponent {
   constructor() {
     effect(() => {
       const q = this.quantity();
-      console.log('d');
+
       if (q) {
         this.form.controls.quantity.patchValue(q);
       }
