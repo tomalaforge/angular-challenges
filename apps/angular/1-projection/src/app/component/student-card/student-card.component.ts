@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FakeHttpService, randStudent } from '../../data-access/fake-http.service';
+import { Component, inject, OnInit } from '@angular/core';
+import {
+  FakeHttpService,
+  randStudent,
+} from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
 import { Student } from '../../model/student.model';
 import { CardComponent } from '../../ui/card/card.component';
@@ -12,17 +15,15 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
       [list]="students"
       [imgTemplate]="studentImg"
       [itemTemplate]="studentItem"
-      [actionTemplate]="studentAction">
-    </app-card>
+      [actionTemplate]="studentAction"></app-card>
     <ng-template #studentImg>
       <img src="assets/img/student.webp" width="200px" />
     </ng-template>
     <ng-template let-item #studentItem>
-      <app-list-item 
+      <app-list-item
         [name]="item.firstName"
         [id]="item.id"
-        (deleteItemEvent)="deleteItem($event)">
-      </app-list-item>
+        (deleteItemEvent)="deleteItem($event)"></app-list-item>
     </ng-template>
     <ng-template #studentAction>
       <button
@@ -34,8 +35,9 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   `,
   standalone: true,
   styles: [
-    ` app-card {
-      --bgColor: rgba(0, 250, 0, 0.1);
+    `
+      app-card {
+        --bgColor: rgba(0, 250, 0, 0.1);
       }
     `,
   ],
@@ -43,15 +45,11 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
 })
 export class StudentCardComponent implements OnInit {
   students: Student[] = [];
-
-  constructor(
-    private http: FakeHttpService,
-    private store: StudentStore,
-  ) {}
+  http = inject(FakeHttpService);
+  store = inject(StudentStore);
 
   ngOnInit(): void {
     this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
-
     this.store.students$.subscribe((s) => (this.students = s));
   }
 
