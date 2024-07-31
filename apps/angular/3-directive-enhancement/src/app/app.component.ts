@@ -8,6 +8,7 @@ interface Person {
 @Component({
   standalone: true,
   selector: 'app-root',
+  imports: [NgForEmptyDirective],
   template: `
     <div
       *ngFor="let person of persons; empty: emptyList; ngForTrackBy: trackByFn">
@@ -15,7 +16,6 @@ interface Person {
     </div>
     <ng-template #emptyList>The list is empty !!</ng-template>
   `,
-  imports: [NgForEmptyDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
