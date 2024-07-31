@@ -1,21 +1,24 @@
-import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormatNamePipe } from './FormatNamePipe.pipe';
 
 @Component({
   standalone: true,
-  imports: [NgFor],
+  imports: [FormatNamePipe],
   selector: 'app-root',
   template: `
-    <div *ngFor="let person of persons; let index = index">
-      {{ heavyComputation(person, index) }}
-    </div>
+    @for (person of persons; track person + $index) {
+      <div>
+        {{ person | formatName: $index }}
+      </div>
+    } @empty {
+      <div>There are no names.</div>
+    }
   `,
 })
 export class AppComponent {
   persons = ['toto', 'jack'];
 
   heavyComputation(name: string, index: number) {
-    // very heavy computation
     return `${name} - ${index}`;
   }
 }
