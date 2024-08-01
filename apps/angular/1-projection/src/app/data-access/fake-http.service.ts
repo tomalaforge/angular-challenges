@@ -23,12 +23,7 @@ export const randTeacher = () => ({
   subject: rand(subject),
 });
 
-const teachers: Teacher[] = [
-  randTeacher(),
-  randTeacher(),
-  randTeacher(),
-  randTeacher(),
-];
+const teachers: Teacher[] = [randTeacher(), randTeacher(), randTeacher()];
 
 const factoryStudent = incrementalNumber();
 
@@ -40,13 +35,7 @@ export const randStudent = (): Student => ({
   school: randWord(),
 });
 
-const students: Student[] = [
-  randStudent(),
-  randStudent(),
-  randStudent(),
-  randStudent(),
-  randStudent(),
-];
+const students: Student[] = [randStudent(), randStudent(), randStudent()];
 
 const factoryCity = incrementalNumber();
 
