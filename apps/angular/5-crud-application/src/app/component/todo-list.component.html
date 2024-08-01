@@ -1,0 +1,25 @@
+<div class="container mx-auto my-10">
+  <h1 class="mb-4 text-center text-3xl font-semibold">To Do List</h1>
+  <div class="mx-auto md:w-1/2">
+    <div class="rounded-lg bg-white p-6 shadow-md">
+      @if (todoStore.loading()) {
+        <div class="flex justify-center">
+          <mat-spinner></mat-spinner>
+        </div>
+      } @else if (todoStore.error()) {
+        <span class="text-red-600">{{ todoStore.error() }}</span>
+      } @else {
+        <ul id="todo-list">
+          @for (todo of todoStore.todos(); track todo.id) {
+            <app-todo-list-item
+              [proccessedTodoId]="todoStore.proccessedTodoId()"
+              [errorMessage]="todoStore.proccessedTodoError()"
+              [todo]="todo"
+              (delete)="deleteTodo(todo.id)"
+              (update)="updateTodo(todo)"></app-todo-list-item>
+          }
+        </ul>
+      }
+    </div>
+  </div>
+</div>

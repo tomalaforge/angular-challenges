@@ -7,13 +7,13 @@
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@angular-devkit/build-angular:browser",
+      "executor": "@angular-devkit/build-angular:application",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/angular/5-crud-application",
         "index": "apps/angular/5-crud-application/src/index.html",
-        "main": "apps/angular/5-crud-application/src/main.ts",
-        "polyfills": "apps/angular/5-crud-application/src/polyfills.ts",
+        "browser": "apps/angular/5-crud-application/src/main.ts",
+        "polyfills": ["apps/angular/5-crud-application/src/polyfills.ts"],
         "tsConfig": "apps/angular/5-crud-application/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
@@ -44,9 +44,7 @@
           "outputHashing": "all"
         },
         "development": {
-          "buildOptimizer": false,
           "optimization": false,
-          "vendorChunk": true,
           "extractLicenses": false,
           "sourceMap": true,
           "namedChunks": true
