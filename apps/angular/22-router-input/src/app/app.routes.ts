@@ -6,7 +6,7 @@ export const appRoutes: Route[] = [
     loadComponent: () => import('./home.component'),
   },
   {
-    path: 'subscription/:testId',
+    path: 'subscription/:id',
     loadComponent: () => import('./test.component'),
     data: {
       permission: 'admin',
