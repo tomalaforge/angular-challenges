@@ -1,15 +1,6 @@
-export const subject = [
-  'Sciences',
-  'History',
-  'English',
-  'Maths',
-  'Sport',
-] as const;
-export type Subject = (typeof subject)[number];
+import { Subject } from '../types';
+import { Person } from './person.model';
 
-export interface Teacher {
-  id: number;
-  firstName: string;
-  lastName: string;
-  subject: Subject;
+export interface Teacher extends Person {
+  readonly subject: Subject;
 }

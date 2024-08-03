@@ -10,9 +10,11 @@ import {
   randWord,
 } from '@ngneat/falso';
 import { map, timer } from 'rxjs';
+
+import { subject } from '../constants';
 import { City } from '../model/city.model';
 import { Student } from '../model/student.model';
-import { Teacher, subject } from '../model/teacher.model';
+import { Teacher } from '../model/teacher.model';
 
 const factoryTeacher = incrementalNumber();
 

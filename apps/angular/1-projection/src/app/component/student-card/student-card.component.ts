@@ -1,40 +1,71 @@
-import { Component, OnInit } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+import { NgIf } from '@angular/common';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+
+import {
+  FakeHttpService,
+  randStudent,
+} from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
-import { CardType } from '../../model/card.model';
 import { Student } from '../../model/student.model';
 import { CardComponent } from '../../ui/card/card.component';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
+import { isStudentEntity } from '../../utils';
 
 @Component({
   selector: 'app-student-card',
   template: `
     <app-card
       [list]="students"
-      [type]="cardType"
-      customClass="bg-light-green"></app-card>
+      [listItemTemplate]="listItem"
+      (onAddNewItem)="addNewItem()">
+      <img avatar src="assets/img/student.webp" width="200px" />
+    </app-card>
+
+    <ng-template #listItem let-person>
+      <app-list-item
+        *ngIf="isStudentEntity(person)"
+        [name]="person.firstName"
+        [id]="person.id"
+        (onDeleteItem)="deleteItem($event)"></app-list-item>
+    </ng-template>
   `,
   standalone: true,
   styles: [
     `
-      ::ng-deep .bg-light-green {
-        background-color: rgba(0, 250, 0, 0.1);
+      :host {
+        --app-card-background: rgba(0, 250, 0, 0.1);
       }
     `,
   ],
-  imports: [CardComponent],
+  imports: [CardComponent, NgIf, ListItemComponent],
 })
 export class StudentCardComponent implements OnInit {
   students: Student[] = [];
-  cardType = CardType.STUDENT;
 
-  constructor(
-    private http: FakeHttpService,
-    private store: StudentStore,
-  ) {}
+  private readonly destroyRef = inject(DestroyRef);
+
+  private readonly http: FakeHttpService = inject(FakeHttpService);
+
+  private readonly store: StudentStore = inject(StudentStore);
 
   ngOnInit(): void {
-    this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
+    this.http.fetchStudents$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((students: Student[]) => this.store.addAll(students));
 
-    this.store.students$.subscribe((s) => (this.students = s));
+    this.store.students$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((students: Student[]) => (this.students = students));
   }
+
+  addNewItem(): void {
+    this.store.addOne(randStudent());
+  }
+
+  deleteItem(id: number): void {
+    this.store.deleteOne(id);
+  }
+
+  protected readonly isStudentEntity = isStudentEntity;
 }
