@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { CityStore } from '../../data-access/city.store';
 import {
   FakeHttpService,
@@ -25,11 +25,12 @@ import { CardComponent } from '../../ui/card/card.component';
   standalone: true,
   styles: [
     `
-      ::ng-deep .bg-light-blue {
+      .bg-light-blue {
         background-color: rgba(0, 0, 250, 0.1);
       }
     `,
   ],
+  encapsulation: ViewEncapsulation.None,
   imports: [CardComponent],
 })
 export class CityCardComponent implements OnInit {
