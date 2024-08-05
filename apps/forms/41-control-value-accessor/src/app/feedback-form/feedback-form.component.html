@@ -13,7 +13,7 @@
     [formControl]="feedbackForm.controls.email"
     placeholder="Email"
     type="email" />
-  <app-rating-control (ratingUpdated)="rating = $event"></app-rating-control>
+  <app-rating-control [formControl]="feedbackForm.controls.rating"></app-rating-control>
   <textarea
     class="feedback-form-control"
     [formControl]="feedbackForm.controls.comment"
@@ -21,9 +21,8 @@
   <button
     class="feedback-form-submit"
     type="submit"
-    [disabled]="
-      !feedbackForm.touched || rating === null || feedbackForm.invalid
-    ">
+    [disabled]="feedbackForm.invalid"
+  >
     Submit
   </button>
 </form>
