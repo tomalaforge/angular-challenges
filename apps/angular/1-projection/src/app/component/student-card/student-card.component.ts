@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FakeHttpService,
-  randStudent,
-} from '../../data-access/fake-http.service';
+import { FakeHttpService } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
 import { CardType } from '../../model/card.model';
 import { Student } from '../../model/student.model';
 import { CardComponent } from '../../ui/card/card.component';
-import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-student-card',
-  templateUrl: './student-card.component.html',
+  template: `
+    <app-card
+      [list]="students"
+      [type]="cardType"
+      customClass="bg-light-green"></app-card>
+  `,
   standalone: true,
   styles: [
     `
@@ -20,12 +21,12 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
       }
     `,
   ],
-  imports: [CardComponent, ListItemComponent],
+  imports: [CardComponent],
 })
 export class StudentCardComponent implements OnInit {
   students: Student[] = [];
   cardType = CardType.STUDENT;
-  addItemCallback = () => this.addItem();
+
   constructor(
     private http: FakeHttpService,
     private store: StudentStore,
@@ -33,14 +34,7 @@ export class StudentCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
+
     this.store.students$.subscribe((s) => (this.students = s));
-  }
-
-  addItem() {
-    this.store.addOne(randStudent());
-  }
-
-  deleteStudent(id: number) {
-    this.store.deleteOne(id);
   }
 }

@@ -1,9 +1,0 @@
-@if(loading){
-  @for(td of todos(); track td){
-    <app-to-do  [todo]="td" (todoChange)="updateTodo($event)" (todoDelete)="deleteTodo($event)"></app-to-do>
-  }
-}@else{
-  <div>
-    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
-  </div>
-}
