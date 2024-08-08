@@ -52,4 +52,6 @@ If the command doesn't work or fails, GitHub CLI will guide you through the proc
 
 🔥 You can now navigate through the solution locally and serve it to test it. 🔥
 
-<!-- gh repo set-default -->
+### Checkout with GitHub Codespaces
+
+You can checkout any **open** PR with GitHub Codespaces. After clicking the code button, you can navigate to the codespaces tab and click the green button to create a codespace on the PR's branch. After the codespace initializes, you can serve the app.
