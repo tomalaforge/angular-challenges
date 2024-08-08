@@ -7,7 +7,11 @@ import { Component, OnInit } from '@angular/core';
   imports: [],
 })
 export class CityCardComponent implements OnInit {
-  constructor() {}
+  constructor() {
+    console.log('test');
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('test');
+  }
 }
