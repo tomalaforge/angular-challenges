@@ -1,15 +1,17 @@
+import { AsyncPipe, NgFor } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  inject,
   OnInit,
+  inject,
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { take } from 'rxjs';
+import { BehaviorSubject, take } from 'rxjs';
 import { TopicModalComponent } from './topic-dialog.component';
 import { TopicService, TopicType } from './topic.service';
 
 @Component({
+  imports: [NgFor, AsyncPipe],
   standalone: true,
   selector: 'app-root',
   template: `
@@ -21,19 +23,22 @@ export class AppComponent implements OnInit {
   title = 'rxjs-race-condition';
   dialog = inject(MatDialog);
   topicService = inject(TopicService);
-  topics: TopicType[] = [];
+  topicSubject$ = new BehaviorSubject<TopicType[]>([]);
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.topicService
       .fakeGetHttpTopic()
       .pipe(take(1))
-      .subscribe((topics) => (this.topics = topics));
+      .subscribe((topics) => {
+        this.topicSubject$.next(topics);
+        //this.dialog.closeAll();
+      });
   }
 
   openTopicModal() {
     this.dialog.open(TopicModalComponent, {
       data: {
-        topics: this.topics,
+        topics$: this.topicSubject$,
       },
     });
   }
