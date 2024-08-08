@@ -15,6 +15,10 @@ import { TopComponent } from './top.component';
           #trigger>
           Load Top
         </button>
+      } @loading {
+        <div>Loading...</div>
+      } @error {
+        <div>Something went wrong</div>
       }
     </div>
   `,
