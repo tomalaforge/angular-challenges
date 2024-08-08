@@ -1,51 +1,33 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { randText } from '@ngneat/falso';
-
+import { Component, signal } from '@angular/core';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ToDoComponent } from '../components/to-do/to-do.component';
+import { TodoDetails } from '../model/user';
+import { CrudSpecialService } from '../services/crud-special.service';
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatProgressSpinnerModule, ToDoComponent],
   selector: 'app-root',
-  template: `
-    <div *ngFor="let todo of todos">
-      {{ todo.title }}
-      <button (click)="update(todo)">Update</button>
-    </div>
-  `,
+  templateUrl: './app.component.html',
   styles: [],
 })
-export class AppComponent implements OnInit {
-  todos!: any[];
+export class AppComponent {
+  public loading = true;
 
-  constructor(private http: HttpClient) {}
+  constructor(private todoService: CrudSpecialService) {}
 
-  ngOnInit(): void {
-    this.http
-      .get<any[]>('https://jsonplaceholder.typicode.com/todos')
-      .subscribe((todos) => {
-        this.todos = todos;
-      });
+  todos = this.todoService.allTodos;
+  todoList!: TodoDetails[];
+
+  updateTodo($event: TodoDetails) {
+    this.todoList = this.todos();
   }
 
-  update(todo: any) {
-    this.http
-      .put<any>(
-        `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
-        JSON.stringify({
-          todo: todo.id,
-          title: randText(),
-          body: todo.body,
-          userId: todo.userId,
-        }),
-        {
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-          },
-        },
-      )
-      .subscribe((todoUpdated: any) => {
-        this.todos[todoUpdated.id - 1] = todoUpdated;
-      });
+  deleteTodo($event: TodoDetails) {
+    //this.todoList = this.todos();
+    // const index = this.todoList.findIndex(td => td.id === $event.id);
+    // this.todoList.splice(index,1);
+    //this.todoList = [...this.todos().filter(g=> g.id !== $event.id)];
+    this.todos = signal([...this.todos().filter((g) => g.id !== $event.id)]);
   }
 }
