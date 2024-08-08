@@ -10,7 +10,7 @@ import { Todo, TodoService } from './todo.service';
   selector: 'app-root',
   template: `
     @if (loader()) {
-      <mat-spinner *ngIf="loader()"></mat-spinner>
+      <mat-spinner></mat-spinner>
     } @else {
       @for (todo of todos(); track todo.id) {
         <div>
