@@ -1,7 +1,7 @@
 <app-card
       [list]="teachers"
       [type]="cardType"
-      [addItemFn]="addItemCallback"
+      (addItem) = "addItem()"
       [listItemTemplate]="teacherListItem"
       customClass="bg-light-red">
         <img class="card-image" src="assets/img/teacher.png"  width="200px"/>
@@ -10,7 +10,6 @@
 <ng-template #teacherListItem let-item>
   <app-list-item
     [name]="item.firstName"
-    [id]="item.id"
     (delete)="deleteTeacher(item.id)">
   </app-list-item>
 </ng-template>

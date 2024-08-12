@@ -25,7 +25,6 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
 export class StudentCardComponent implements OnInit {
   students: Student[] = [];
   cardType = CardType.STUDENT;
-  addItemCallback = () => this.addItem();
   constructor(
     private http: FakeHttpService,
     private store: StudentStore,

@@ -16,9 +16,6 @@ import { City } from './../../model/city.model';
 })
 export class CityCardComponent implements OnInit {
   cityList: City[] = [];
-  addCityCallback = () => {
-    this.store.addOne(randomCity());
-  };
 
   constructor(
     private http: FakeHttpService,
@@ -30,6 +27,10 @@ export class CityCardComponent implements OnInit {
     this.store.cities$.subscribe((response) => {
       this.cityList = response;
     });
+  }
+
+  addCity() {
+    this.store.addOne(randomCity());
   }
 
   deleteCity(id: number) {

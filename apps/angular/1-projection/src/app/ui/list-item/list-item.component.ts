@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CardType } from '../../model/card.model';
 
 @Component({
   selector: 'app-list-item',
@@ -7,12 +6,8 @@ import { CardType } from '../../model/card.model';
   standalone: true,
 })
 export class ListItemComponent {
-  @Input() id!: number;
   @Input() name!: string;
-  @Input() type!: CardType;
-  @Output() delete: EventEmitter<any> = new EventEmitter();
-
-  @Input() callback!: () => void;
+  @Output() delete = new EventEmitter();
 
   deleteEmit() {
     this.delete.emit();

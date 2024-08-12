@@ -24,13 +24,14 @@ import { ListItemComponent } from './../../ui/list-item/list-item.component';
 export class TeacherCardComponent implements OnInit {
   teachers: Teacher[] = [];
   cardType = CardType.TEACHER;
-  addItemCallback = () => {
-    this.store.addOne(randTeacher());
-  };
   constructor(
     private http: FakeHttpService,
     private store: TeacherStore,
   ) {}
+
+  addItem() {
+    this.store.addOne(randTeacher());
+  }
 
   ngOnInit(): void {
     this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
