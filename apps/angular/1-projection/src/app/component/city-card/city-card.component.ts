@@ -6,7 +6,6 @@ import {
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
 import { CityStore } from './../../data-access/city.store';
-import { City } from './../../model/city.model';
 @Component({
   selector: 'app-city-card',
   templateUrl: './city-card.component.html',
@@ -15,8 +14,7 @@ import { City } from './../../model/city.model';
   styleUrl: './city-card.component.css',
 })
 export class CityCardComponent implements OnInit {
-  cityList: City[] = [];
-
+  cities$ = this.store.cities$;
   constructor(
     private http: FakeHttpService,
     private store: CityStore,
@@ -24,9 +22,6 @@ export class CityCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.http.fetchCities$.subscribe((r) => this.store.addAll(r));
-    this.store.cities$.subscribe((response) => {
-      this.cityList = response;
-    });
   }
 
   addCity() {

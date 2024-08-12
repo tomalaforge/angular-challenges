@@ -4,7 +4,7 @@ class="flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4"
 [class]="customClass">
   <ng-content></ng-content>
 <section>
-  @for(item of list; track item.id){
+  @for(item of list|async; track item.id){
 
     <ng-container [ngTemplateOutlet]="listItemTemplate" [ngTemplateOutletContext]="{ $implicit: item }"></ng-container>
   }

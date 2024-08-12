@@ -1,6 +1,5 @@
 <app-card
-    [list]="students"
-    [type]="cardType"
+    [list]="students$"
     (addItem)="addItem()"
     [listItemTemplate]="listItem"
     customClass="bg-light-green">

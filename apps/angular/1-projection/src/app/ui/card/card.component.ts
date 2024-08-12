@@ -1,4 +1,4 @@
-import { NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -7,6 +7,7 @@ import {
   TemplateRef,
 } from '@angular/core';
 //import { randStudent, randTeacher } from '../../data-access/fake-http.service';
+import { Observable } from 'rxjs';
 import { CardType } from '../../model/card.model';
 import { ListItemComponent } from '../list-item/list-item.component';
 
@@ -14,11 +15,10 @@ import { ListItemComponent } from '../list-item/list-item.component';
   selector: 'app-card',
   templateUrl: './card.component.html',
   standalone: true,
-  imports: [NgTemplateOutlet, ListItemComponent],
+  imports: [NgTemplateOutlet, ListItemComponent, AsyncPipe],
 })
 export class CardComponent {
-  @Input() list: any[] | null = null;
-  @Input() type!: CardType;
+  @Input() list!: Observable<any[]>;
   @Input() customClass = '';
   @Input() listItemTemplate!: TemplateRef<any>;
   @Output() addItem = new EventEmitter();

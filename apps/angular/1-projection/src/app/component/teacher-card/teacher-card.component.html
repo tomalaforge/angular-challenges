@@ -1,6 +1,5 @@
 <app-card
-      [list]="teachers"
-      [type]="cardType"
+      [list]="teachers$"
       (addItem) = "addItem()"
       [listItemTemplate]="teacherListItem"
       customClass="bg-light-red">
