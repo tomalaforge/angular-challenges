@@ -1,29 +1,34 @@
-import { DatePipe } from '@angular/common';
-import { Component, Input as RouterInput } from '@angular/core';
+import { DatePipe, NgOptimizedImage } from '@angular/common';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Photo } from '../photo.model';
 
 @Component({
   selector: 'app-photos',
   standalone: true,
-  imports: [DatePipe, RouterLink],
+  imports: [DatePipe, RouterLink, NgOptimizedImage],
   template: `
-    <img src="{{ photo.url_m }}" alt="{{ photo.title }}" class="image" />
+    <img
+      ngSrc="{{ photo().url_m }}"
+      alt="{{ photo().title }}"
+      class="image"
+      width="300"
+      height="300" />
     <p>
       <span class="font-bold">Title:</span>
-      {{ photo.title }}
+      {{ photo().title }}
     </p>
     <p>
       <span class="font-bold">Owner:</span>
-      {{ photo.ownername }}
+      {{ photo().ownername }}
     </p>
     <p>
       <span class="font-bold">Date:</span>
-      {{ photo.datetaken | date }}
+      {{ photo().datetaken | date }}
     </p>
     <p>
       <span class="font-bold">Tags:</span>
-      {{ photo.tags }}
+      {{ photo().tags }}
     </p>
 
     <button
@@ -35,11 +40,10 @@ import { Photo } from '../photo.model';
   host: {
     class: 'p-5 block',
   },
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class DetailComponent {
-  @RouterInput({
-    required: true,
+  photo = input.required<Photo, string>({
     transform: (value: string) => JSON.parse(decodeURIComponent(value)),
-  })
-  photo!: Photo;
+  });
 }
