@@ -19,15 +19,11 @@ export class AppComponent {
   todos = this.todoService.allTodos;
   todoList!: TodoDetails[];
 
-  updateTodo($event: TodoDetails) {
+  updateTodo() {
     this.todoList = this.todos();
   }
 
   deleteTodo($event: TodoDetails) {
-    //this.todoList = this.todos();
-    // const index = this.todoList.findIndex(td => td.id === $event.id);
-    // this.todoList.splice(index,1);
-    //this.todoList = [...this.todos().filter(g=> g.id !== $event.id)];
     this.todos = signal([...this.todos().filter((g) => g.id !== $event.id)]);
   }
 }

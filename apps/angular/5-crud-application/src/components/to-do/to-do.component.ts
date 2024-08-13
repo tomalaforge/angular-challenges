@@ -48,12 +48,6 @@ export class ToDoComponent implements OnInit {
       this.todo.title = todoUpdated.title;
       this.loading = false;
       this.todoChange.emit(this.todo);
-      this.emitUpdate();
     });
-  }
-
-  emitUpdate() {
-    this.todoChange.emit(this.todo);
-    //console.log(this.todo);
   }
 }

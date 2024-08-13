@@ -25,26 +25,39 @@ export class CrudSpecialService {
     initialValue: [] as TodoDetails[],
   });
   public updateTodo(todo: TodoDetails): Observable<TodoDetails> {
-    return this.http.put<TodoDetails>(
-      `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
-      JSON.stringify({
-        todo: todo.id,
-        title: todo.title,
-        body: todo,
-        userId: todo.userId,
-      }),
-      {
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
+    return this.http
+      .put<TodoDetails>(
+        `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
+        JSON.stringify({
+          todo: todo.id,
+          title: todo.title,
+          body: todo,
+          userId: todo.userId,
+        }),
+        {
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+          },
         },
-      },
-    ); //.pipe(retry(3), delay(100), catchError((error)=>{ console.error(error); return throwError(()=>error);}));
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => {
+          console.error(error);
+          return throwError(() => error);
+        }),
+      );
   }
 
   public deleteTodo(todo: TodoDetails): Observable<any> {
-    return this.http.delete(
-      `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
-    );
-    //.pipe(retry(3), catchError((error)=>{ console.error(error); return throwError(()=>error);}));
+    return this.http
+      .delete(`https://jsonplaceholder.typicode.com/todos/${todo.id}`)
+      .pipe(
+        retry(3),
+        catchError((error) => {
+          console.error(error);
+          return throwError(() => error);
+        }),
+      );
   }
 }
