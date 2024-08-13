@@ -40,14 +40,41 @@ export class AppComponent {
   ram = model(false);
   gpu = model(false);
 
+  //First solution
   constructor() {
-    /* 
-      Explain for your junior team mate why this bug occurs ...
-    */
     effect(() => {
-      if (this.drive() || this.ram() || this.gpu()) {
-        alert('Price increased!');
+      if (this.drive()) {
+        this.priceIncreasedAlert();
+      }
+    });
+    effect(() => {
+      if (this.ram()) {
+        this.priceIncreasedAlert();
+      }
+    });
+    effect(() => {
+      if (this.gpu()) {
+        this.priceIncreasedAlert();
       }
     });
   }
+
+  priceIncreasedAlert() {
+    alert('Price increased!');
+  }
+
+  //Second solution
+  // prev = 0
+  // sum = computed(() => {
+  //   return +this.drive() + +this.ram() + +this.gpu();
+  // });
+  //
+  // constructor() {
+  //   effect(() => {
+  //     if (this.prev < this.sum()) {
+  //       this.priceIncreasedAlert();
+  //     }
+  //     this.prev = this.sum()
+  //   });
+  // }
 }
