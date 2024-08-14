@@ -1,15 +1,23 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { User } from './user.model';
+import { computed, Injectable, signal, WritableSignal } from '@angular/core';
+import { Role, User } from './user.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserStore {
-  private user = new BehaviorSubject<User | undefined>(undefined);
-  user$ = this.user.asObservable();
+  #user: WritableSignal<User | undefined> = signal(undefined);
+  user$ = computed(() => this.#user());
 
   add(user: User) {
-    this.user.next(user);
+    this.#user.set(user);
+  }
+
+  hasRoles(inputRoles: Role | Role[] | undefined) {
+    if (!!inputRoles && inputRoles?.length > 0) {
+      const roles = inputRoles instanceof Array ? inputRoles : [inputRoles];
+      return roles.some((role) => this.user$()?.roles.includes(role));
+    } else {
+      return this.user$()?.isAdmin;
+    }
   }
 }

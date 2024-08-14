@@ -36,7 +36,7 @@ import { UserStore } from './user.store';
     </button>
   `,
 })
-export class LoginComponent {
+export default class LoginComponent {
   constructor(private userStore: UserStore) {}
 
   admin() {
