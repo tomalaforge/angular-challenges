@@ -1,8 +1,8 @@
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
-import { Component, inject, input } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { Component, inject, Input } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FakeServiceService } from './fake.service';
+import { WrapFnPipe } from './wrapFn.pipe';
 
 interface MenuItem {
   path: string;
@@ -14,7 +14,7 @@ interface MenuItem {
   standalone: true,
   imports: [RouterLink, RouterLinkActive, NgFor],
   template: `
-    @for (menu of menus(); track menu.name) {
+    @for (menu of menus; track menu.name) {
       <a
         class="rounded-md border px-4 py-2"
         [routerLink]="menu.path"
@@ -35,26 +35,29 @@ interface MenuItem {
   },
 })
 export class NavigationComponent {
-  menus = input<MenuItem[]>();
+  @Input() menus!: MenuItem[];
 }
 
 @Component({
   standalone: true,
-  imports: [NavigationComponent, NgIf, AsyncPipe],
+  imports: [NavigationComponent, NgIf, AsyncPipe, WrapFnPipe],
   template: `
-    @if (info$()) {
-      <app-nav [menus]="getMenu(info$())" />
+    @if (info$ | async; as info) {
+      @if (info !== null) {
+        <app-nav [menus]="getMenu | wrapFn: info" />
+      }
     } @else {
-      <app-nav [menus]="getMenu('loading...')" />
+      <!-- loading logic and error -->
+      <app-nav [menus]="getMenu | wrapFn: 'loading...'" />
     }
   `,
   host: {},
 })
 export class MainNavigationComponent {
   private fakeBackend = inject(FakeServiceService);
-  readonly info$ = toSignal(this.fakeBackend.getInfoFromBackend());
+  readonly info$ = this.fakeBackend.getInfoFromBackend();
 
-  getMenu(prop: string | undefined) {
+  getMenu(prop: string) {
     return [
       { path: '/foo', name: `Foo ${prop}` },
       { path: '/bar', name: `Bar ${prop}` },
