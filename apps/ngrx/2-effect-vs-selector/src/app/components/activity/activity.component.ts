@@ -7,9 +7,9 @@ import {
   OnInit,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Activity, Person } from '../../store/activity/activity.model';
-import { selectAllTeachersByActivityType } from '../../store/status/status.selectors';
+import { selectActivities } from '../../store/activity/activity.selectors';
 
 @Component({
   selector: 'app-activity',
@@ -34,8 +34,14 @@ export class ActivityComponent implements OnInit {
   teachers$!: Observable<Person[]>;
   ngOnInit() {
     console.log(this.activity);
-    this.teachers$ = this.store.select(
-      selectAllTeachersByActivityType(this.activity.type),
-    );
+    this.teachers$ = this.store
+      .select(selectActivities)
+      .pipe(
+        map((array) =>
+          array
+            .filter((activ) => activ.type === this.activity.type)
+            .map((activ) => activ.teacher),
+        ),
+      );
   }
 }

@@ -11,6 +11,8 @@ import { Status } from './status.model';
 export class StatusEffects implements OnInitEffects {
   ngrxOnInitEffects = StatusActions.loadStatuses;
 
+  //This status doesn't consume a service directly. This state is a direct dependency from the activities state.
+
   loadStatuses$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(StatusActions.loadStatuses),

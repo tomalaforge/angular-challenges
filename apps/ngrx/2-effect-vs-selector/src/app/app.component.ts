@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ActivityComponent } from './components/activity/activity.component';
 import { selectActivities } from './store/activity/activity.selectors';
+import { selectUser } from './store/user/user.selectors';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,16 @@ import { selectActivities } from './store/activity/activity.selectors';
   imports: [NgFor, AsyncPipe, ActivityComponent],
   template: `
     <h1>Activity Board</h1>
+    @if (user$ | async; as user) {
+      <div>
+        <h1>User Info</h1>
+        <p>
+          Name: {{ user.firstname }} {{ user.lastname }}
+          <br />
+          IsAdmin: {{ user.isAdmin }}
+        </p>
+      </div>
+    }
     <section>
       @for (activity of activities$ | async; track activity) {
         <app-activity [activity]="activity"></app-activity>
@@ -29,6 +40,6 @@ import { selectActivities } from './store/activity/activity.selectors';
 })
 export class AppComponent {
   private store = inject(Store);
-
+  user$ = this.store.select(selectUser);
   activities$ = this.store.select(selectActivities);
 }

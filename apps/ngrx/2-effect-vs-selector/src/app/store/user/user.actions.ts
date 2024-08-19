@@ -12,3 +12,11 @@ export const loadUsersFailure = createAction(
   '[User] Load Users Failure',
   props<{ error: unknown }>(),
 );
+
+export const updateUser = createAction('[User] Update User', props<User>());
+export const updateUsersSuccess = createAction('[User] Update User Success');
+
+export const updateUsersFailure = createAction(
+  '[User] Update User Failure',
+  props<{ error: unknown }>(),
+);
