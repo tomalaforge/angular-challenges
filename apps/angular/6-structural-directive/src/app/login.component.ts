@@ -12,6 +12,7 @@ import {
   writer,
 } from './user.model';
 import { UserStore } from './user.store';
+import { HasRoleDirective } from './role.directive';
 
 @Component({
   standalone: true,
