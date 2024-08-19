@@ -17,6 +17,9 @@ export const initialState: StatusState = {
 
 export const statusReducer = createReducer(
   initialState,
+  //The reducer is the element that is meant to tranform the state and keep the current one.
+  //If there should be no reducer that means that instead of making a whole store for statuses
+  //should this information be derived at component level??
   on(StatusActions.loadStatusesSuccess, (state, { statuses }): StatusState => {
     const map = new Map();
     statuses.forEach((s) => map.set(s.name, s.teachers));

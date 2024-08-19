@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType, OnInitEffects } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatest, concatMap, map } from 'rxjs';
 import { selectActivities } from '../activity/activity.selectors';
@@ -8,7 +8,9 @@ import * as StatusActions from './status.actions';
 import { Status } from './status.model';
 
 @Injectable()
-export class StatusEffects {
+export class StatusEffects implements OnInitEffects {
+  ngrxOnInitEffects = StatusActions.loadStatuses;
+
   loadStatuses$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(StatusActions.loadStatuses),

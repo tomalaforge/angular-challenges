@@ -1,0 +1,12 @@
+<div class="card">
+  <h2>Activity Name: {{ activity.name }}</h2>
+  <p>Main teacher: {{ activity.teacher.name }}</p>
+  <span>All teachers available for : {{ activity.type }} are</span>
+  <ul>
+    @for(teacher of teachers$ | async; track teacher){
+    <li>
+      {{ teacher.name }}
+    </li>
+  }
+  </ul>
+</div>
