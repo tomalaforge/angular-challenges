@@ -13,10 +13,7 @@ export const loadUsersFailure = createAction(
   props<{ error: unknown }>(),
 );
 
-export const updateUser = createAction('[User] Update User', props<User>());
-export const updateUsersSuccess = createAction('[User] Update User Success');
-
-export const updateUsersFailure = createAction(
-  '[User] Update User Failure',
-  props<{ error: unknown }>(),
+export const toggleUserIsAdmin = createAction(
+  '[User] Toggle Is Admin',
+  props<{ isAdmin: boolean }>(),
 );

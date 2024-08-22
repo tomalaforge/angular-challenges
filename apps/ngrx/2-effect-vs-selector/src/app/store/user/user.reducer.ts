@@ -16,4 +16,8 @@ export const userReducer = createReducer(
   initialState,
   on(UserActions.loadUsersSuccess, (state, { user }) => ({ ...state, user })),
   on(UserActions.loadUsersFailure, (state) => ({ ...state, user: undefined })),
+  on(UserActions.toggleUserIsAdmin, (state, { isAdmin }) => ({
+    ...state,
+    user: { ...state.user, isAdmin } as User,
+  })),
 );

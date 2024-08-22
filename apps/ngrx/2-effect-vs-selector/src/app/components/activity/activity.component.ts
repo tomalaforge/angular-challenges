@@ -9,7 +9,7 @@ import {
 import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
 import { Activity, Person } from '../../store/activity/activity.model';
-import { selectActivities } from '../../store/activity/activity.selectors';
+import { selectStatuses } from '../../store/status/status.selectors';
 
 @Component({
   selector: 'app-activity',
@@ -33,15 +33,12 @@ export class ActivityComponent implements OnInit {
   private store = inject(Store);
   teachers$!: Observable<Person[]>;
   ngOnInit() {
-    console.log(this.activity);
-    this.teachers$ = this.store
-      .select(selectActivities)
-      .pipe(
-        map((array) =>
-          array
-            .filter((activ) => activ.type === this.activity.type)
-            .map((activ) => activ.teacher),
-        ),
-      );
+    this.teachers$ = this.store.select(selectStatuses).pipe(
+      map((stat) => {
+        return (
+          stat.find((stat) => stat.name === this.activity.type)?.teachers ?? []
+        );
+      }),
+    );
   }
 }

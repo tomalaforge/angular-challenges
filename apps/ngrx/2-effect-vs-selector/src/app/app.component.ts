@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ActivityComponent } from './components/activity/activity.component';
 import { selectActivities } from './store/activity/activity.selectors';
+import { toggleUserIsAdmin } from './store/user/user.actions';
 import { selectUser } from './store/user/user.selectors';
 
 @Component({
@@ -19,6 +20,7 @@ import { selectUser } from './store/user/user.selectors';
           <br />
           IsAdmin: {{ user.isAdmin }}
         </p>
+        <button (click)="toggleIsAdmin(!user.isAdmin)">Toggle Is Admin</button>
       </div>
     }
     <section>
@@ -42,4 +44,7 @@ export class AppComponent {
   private store = inject(Store);
   user$ = this.store.select(selectUser);
   activities$ = this.store.select(selectActivities);
+  toggleIsAdmin(isAdmin: boolean) {
+    this.store.dispatch(toggleUserIsAdmin({ isAdmin }));
+  }
 }
