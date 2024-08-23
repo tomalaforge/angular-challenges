@@ -1,17 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  FakeHttpService,
+  randStudent,
+} from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
-import { CardType } from '../../model/card.model';
-import { Student } from '../../model/student.model';
 import { CardComponent } from '../../ui/card/card.component';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-student-card',
   template: `
     <app-card
-      [list]="students"
-      [type]="cardType"
-      customClass="bg-light-green"></app-card>
+      [list]="students$ | async"
+      (add)="addStudent()"
+      class="bg-light-green">
+      <img src="assets/img/student.webp" width="200px" />
+      <ng-template #rowRef let-student>
+        <app-list-item (delete)="deleteStudent(student.id)">
+          {{ student.firstname }}
+        </app-list-item>
+      </ng-template>
+    </app-card>
   `,
   standalone: true,
   styles: [
@@ -21,11 +31,11 @@ import { CardComponent } from '../../ui/card/card.component';
       }
     `,
   ],
-  imports: [CardComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [CardComponent, ListItemComponent, CommonModule],
 })
 export class StudentCardComponent implements OnInit {
-  students: Student[] = [];
-  cardType = CardType.STUDENT;
+  students$ = this.store.students$;
 
   constructor(
     private http: FakeHttpService,
@@ -34,7 +44,13 @@ export class StudentCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
+  }
 
-    this.store.students$.subscribe((s) => (this.students = s));
+  addStudent() {
+    this.store.addOne(randStudent());
+  }
+
+  deleteStudent(id: number) {
+    this.store.deleteOne(id);
   }
 }
