@@ -18,7 +18,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
       <img src="assets/img/student.webp" width="200px" />
       <ng-template #rowRef let-student>
         <app-list-item (delete)="deleteStudent(student.id)">
-          {{ student.firstname }}
+          {{ student.firstName }}
         </app-list-item>
       </ng-template>
     </app-card>

@@ -18,7 +18,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
       <img src="assets/img/teacher.png" width="200px" />
       <ng-template #rowRef let-teacher>
         <app-list-item (delete)="deleteTeacher(teacher.id)">
-          {{ teacher.firstname }}
+          {{ teacher.firstName }}
         </app-list-item>
       </ng-template>
     </app-card>
