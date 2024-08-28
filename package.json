@@ -30,6 +30,7 @@
     "@ngrx/effects": "18.0.1",
     "@ngrx/entity": "18.0.1",
     "@ngrx/router-store": "18.0.1",
+    "@ngrx/signals": "^18.0.2",
     "@ngrx/store": "18.0.1",
     "@nx/angular": "19.5.0",
     "@swc/helpers": "0.5.12",

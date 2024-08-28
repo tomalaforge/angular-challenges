@@ -4,6 +4,7 @@ import { JobComponent } from './job.component';
 import { NameComponent } from './name.component';
 import { NoteComponent } from './note.component';
 import { UserFormComponent } from './user-form.component';
+import { UserStore } from './user.service';
 
 @Component({
   standalone: true,
@@ -23,5 +24,6 @@ import { UserFormComponent } from './user-form.component';
     NoteComponent,
     UserFormComponent,
   ],
+  providers: [UserStore],
 })
 export class AppComponent {}

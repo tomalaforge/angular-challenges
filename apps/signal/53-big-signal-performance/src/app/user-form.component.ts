@@ -14,7 +14,7 @@ import { UserStore } from './user.service';
           class="rounded-md border border-gray-400"
           formControlName="name" />
       </div>
-      <div>
+      <section [formGroup]="form.controls.address">
         Address:
         <div>
           street:
@@ -34,25 +34,28 @@ import { UserStore } from './user.service';
             class="rounded-md border border-gray-400"
             formControlName="city" />
         </div>
-      </div>
+      </section>
       <div>
         note:
         <input
           class="rounded-md border border-gray-400"
           formControlName="note" />
       </div>
-      <div>
-        title:
-        <input
-          class="rounded-md border border-gray-400"
-          formControlName="title" />
-      </div>
-      <div>
-        salary:
-        <input
-          class="rounded-md border border-gray-400"
-          formControlName="salary" />
-      </div>
+      <section [formGroup]="form.controls.job">
+        <div>
+          title:
+          <input
+            class="rounded-md border border-gray-400"
+            formControlName="title" />
+        </div>
+        <div>
+          salary:
+          <input
+            class="rounded-md border border-gray-400"
+            type="number"
+            formControlName="salary" />
+        </div>
+      </section>
       <button class="w-fit border p-2">Submit</button>
     </form>
   `,
@@ -65,36 +68,28 @@ export class UserFormComponent {
   userStore = inject(UserStore);
 
   form = new FormGroup({
-    name: new FormControl(this.userStore.user().name, { nonNullable: true }),
-    street: new FormControl(this.userStore.user().address.street, {
-      nonNullable: true,
+    name: new FormControl(this.userStore.name(), { nonNullable: true }),
+    address: new FormGroup({
+      street: new FormControl(this.userStore.address().street, {
+        nonNullable: true,
+      }),
+      zipCode: new FormControl(this.userStore.address().zipCode, {
+        nonNullable: true,
+      }),
+      city: new FormControl(this.userStore.address().city, {
+        nonNullable: true,
+      }),
     }),
-    zipCode: new FormControl(this.userStore.user().address.zipCode, {
-      nonNullable: true,
+    job: new FormGroup({
+      title: new FormControl(this.userStore.job().title, { nonNullable: true }),
+      salary: new FormControl(this.userStore.job().salary, {
+        nonNullable: true,
+      }),
     }),
-    city: new FormControl(this.userStore.user().address.city, {
-      nonNullable: true,
-    }),
-    note: new FormControl(this.userStore.user().note, { nonNullable: true }),
-    title: new FormControl(this.userStore.user().title, { nonNullable: true }),
-    salary: new FormControl(this.userStore.user().salary, {
-      nonNullable: true,
-    }),
+    note: new FormControl(this.userStore.note(), { nonNullable: true }),
   });
 
   submit() {
-    this.userStore.user.update((u) => ({
-      ...u,
-      name: this.form.getRawValue().name,
-      address: {
-        ...u.address,
-        street: this.form.getRawValue().street,
-        zipCode: this.form.getRawValue().zipCode,
-        city: this.form.getRawValue().city,
-      },
-      note: this.form.getRawValue().note,
-      title: this.form.getRawValue().title,
-      salary: this.form.getRawValue().salary,
-    }));
+    this.userStore.update(this.form.getRawValue());
   }
 }
