@@ -2,6 +2,7 @@ import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  contentChild,
   input,
   output,
   TemplateRef,
@@ -15,7 +16,7 @@ import {
       <section>
         @for (item of items(); track item.id) {
           <ng-template
-            [ngTemplateOutlet]="rowTmp()"
+            [ngTemplateOutlet]="templateRef()"
             [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
         }
       </section>
@@ -33,7 +34,7 @@ import {
 })
 export class CardComponent<T> {
   items = input.required<any[]>();
-  rowTmp = input.required<TemplateRef<any>>();
 
+  templateRef = contentChild.required('entry', { read: TemplateRef });
   add = output<void>();
 }

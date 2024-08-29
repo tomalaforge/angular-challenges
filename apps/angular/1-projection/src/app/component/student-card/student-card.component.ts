@@ -10,13 +10,9 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
 @Component({
   selector: 'app-student-card',
   template: `
-    <app-card
-      [items]="students()"
-      [rowTmp]="listItemTemplate"
-      (add)="onAdd()"
-      class="bg-light-red">
+    <app-card [items]="students()" (add)="onAdd()" class="bg-light-red">
       <img src="../../../assets/img/student.webp" width="200px" />
-      <ng-template #listItemTemplate let-student>
+      <ng-template #entry let-student>
         <app-list-item (delete)="onDelete(student.id)">
           {{ student.firstName }}
         </app-list-item>

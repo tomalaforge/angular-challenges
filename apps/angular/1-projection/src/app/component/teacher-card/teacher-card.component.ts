@@ -10,13 +10,9 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
 @Component({
   selector: 'app-teacher-card',
   template: `
-    <app-card
-      [items]="teachers()"
-      [rowTmp]="listItemTemplate"
-      (add)="onAdd()"
-      class="bg-light-red">
+    <app-card [items]="teachers()" (add)="onAdd()" class="bg-light-red">
       <img src="../../../assets/img/teacher.png" width="200px" />
-      <ng-template #listItemTemplate let-teacher>
+      <ng-template #entry let-teacher>
         <app-list-item (delete)="onDelete(teacher.id)">
           {{ teacher.firstName }}
         </app-list-item>
