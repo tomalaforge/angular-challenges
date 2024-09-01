@@ -11,22 +11,23 @@ import {
   readerAndWriter,
   writer,
 } from './user.model';
-import { UserStore } from './user.store';
+import { UserService } from './user.service';
 
 @Component({
   standalone: true,
   imports: [InformationComponent, RouterLink, ButtonComponent],
+  providers: [UserService],
   selector: 'app-login',
   template: `
     <header class="flex items-center gap-3">
       Log as :
-      <button app-button (click)="admin()">Admin</button>
-      <button app-button (click)="manager()">Manager</button>
-      <button app-button (click)="reader()">Reader</button>
-      <button app-button (click)="writer()">Writer</button>
-      <button app-button (click)="readerWriter()">Reader and Writer</button>
-      <button app-button (click)="client()">Client</button>
-      <button app-button (click)="everyone()">Everyone</button>
+      <button (click)="userService.setUser(manager)">Set Manager</button>
+      <button (click)="userService.setUser(writer)">Set Writer</button>
+      <button (click)="userService.setUser(reader)">Set Reader</button>
+      <button (click)="userService.setUser(readerAndWriter)">Set Reader and Writer</button>
+      <button (click)="userService.setUser(client)">Set Client</button>
+      <button (click)="userService.setUser(admin)">Set Admin</button>
+      <button (click)="userService.setUser(everyone)">Set Everyone</button>
     </header>
 
     <app-information></app-information>
@@ -37,27 +38,5 @@ import { UserStore } from './user.store';
   `,
 })
 export class LoginComponent {
-  constructor(private userStore: UserStore) {}
-
-  admin() {
-    this.userStore.add(admin);
-  }
-  manager() {
-    this.userStore.add(manager);
-  }
-  reader() {
-    this.userStore.add(reader);
-  }
-  writer() {
-    this.userStore.add(writer);
-  }
-  readerWriter() {
-    this.userStore.add(readerAndWriter);
-  }
-  client() {
-    this.userStore.add(client);
-  }
-  everyone() {
-    this.userStore.add(everyone);
-  }
+  constructor(public userService: UserService) {}
 }
