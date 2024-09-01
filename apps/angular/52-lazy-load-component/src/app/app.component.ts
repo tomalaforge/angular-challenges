@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +10,7 @@ import { Component, signal } from '@angular/core';
         <app-placeholder />
         <button
           class="rounded-sm border border-blue-500 bg-blue-300 p-2"
-          (click)="topLoaded.set(true)">
+          (click)="loadTopComponent()">
           Load Top
         </button>
       }
@@ -19,4 +19,23 @@ import { Component, signal } from '@angular/core';
 })
 export class AppComponent {
   topLoaded = signal(false);
+
+  @ViewChild('container', { read: ViewContainerRef }) container!: ViewContainerRef;
+
+  ngOnInit() {
+    // Initialize the component container
+    if (this.topLoaded()) {
+      this.loadTopComponent();
+    }
+  }
+
+  async loadTopComponent() {
+    // Dynamically import the TopComponent
+    const { TopComponent } = await import('./top.component');
+
+    // Create a component factory for TopComponent
+    const componentFactory = this.container.createComponent(TopComponent);
+    this.topLoaded.set(true);
+  }
+
 }
