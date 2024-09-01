@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NavButtonComponent } from './nav-button.component';
 
 @Component({
@@ -6,15 +6,27 @@ import { NavButtonComponent } from './nav-button.component';
   imports: [NavButtonComponent],
   selector: 'app-home',
   template: `
-    <nav-button href="/foo" class="fixed left-1/2 top-3">Foo Page</nav-button>
-    <div id="top" class="h-screen bg-gray-500">
+    <nav-button [routerLink]="['/foo']" class="fixed left-1/2 top-3">Foo Page</nav-button>
+    <div #topSection id="top" class="h-screen bg-gray-500">
       Empty
-      <nav-button href="#bottom">Scroll Bottom</nav-button>
+      <nav-button (click)="scrollTo('bottomSection')">Scroll Bottom</nav-button>
     </div>
-    <div id="bottom" class="h-screen bg-blue-300">
+    <div  #bottomSection id="bottom" class="h-screen bg-blue-300">
       I want to scroll each
-      <nav-button href="#top">Scroll Top</nav-button>
+      <nav-button (click)="scrollTo('topSection')">Scroll Top</nav-button>
     </div>
   `,
 })
-export class HomeComponent {}
+export class HomeComponent {
+    // Using ViewChild to reference DOM elements
+    @ViewChild('topSection') topSection!: ElementRef;
+    @ViewChild('bottomSection') bottomSection!: ElementRef;
+
+    scrollTo(section: 'topSection' | 'bottomSection') {
+      const targetElement = this[section].nativeElement;
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+}
