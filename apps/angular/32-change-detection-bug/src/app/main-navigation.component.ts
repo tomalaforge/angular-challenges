@@ -59,9 +59,10 @@ export class MainNavigationComponent {
   readonly info$ = this.fakeBackend.getInfoFromBackend();
 
   getMenu(prop: string) {
+    const suffix = prop ? ` ${prop}` : ''; // Add a space only if prop is not empty
     return [
-      { path: '/foo', name: `Foo ${prop}` },
-      { path: '/bar', name: `Bar ${prop}` },
+      { path: '/foo', name: `Foo ${suffix}` },
+      { path: '/bar', name: `Bar ${suffix}` },
     ];
   }
 }
