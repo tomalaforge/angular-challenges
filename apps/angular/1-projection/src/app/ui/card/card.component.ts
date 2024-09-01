@@ -1,4 +1,4 @@
-import { NgFor, NgIf } from '@angular/common';
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { randStudent, randTeacher } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
@@ -12,19 +12,24 @@ import { ListItemComponent } from '../list-item/list-item.component';
     <div
       class="flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4"
       [class]="customClass">
-      <img
-        *ngIf="type === CardType.TEACHER"
-        src="assets/img/teacher.png"
-        width="200px" />
-      <img
-        *ngIf="type === CardType.STUDENT"
-        src="assets/img/student.webp"
-        width="200px" />
+
+      <ng-container
+        [ngTemplateOutlet]="getTemplate(type)">
+      </ng-container>
+
+      <!-- Teacher and Student templates -->
+      <ng-template #teacherTemplate>
+        <img src="assets/img/teacher.png" width="200px" />
+      </ng-template>
+
+      <ng-template #studentTemplate>
+        <img src="assets/img/student.webp" width="200px" />
+      </ng-template>
 
       <section>
         <app-list-item
           *ngFor="let item of list"
-          [name]="item.firstName"
+          [name]="item[key]"
           [id]="item.id"
           [type]="type"></app-list-item>
       </section>
@@ -37,12 +42,13 @@ import { ListItemComponent } from '../list-item/list-item.component';
     </div>
   `,
   standalone: true,
-  imports: [NgIf, NgFor, ListItemComponent],
+  imports: [NgFor, NgTemplateOutlet, ListItemComponent],
 })
 export class CardComponent {
   @Input() list: any[] | null = null;
   @Input() type!: CardType;
   @Input() customClass = '';
+  @Input() key!: string;
 
   CardType = CardType;
 
@@ -58,4 +64,9 @@ export class CardComponent {
       this.studentStore.addOne(randStudent());
     }
   }
+
+  getTemplate(type: CardType) {
+    return type === CardType.TEACHER ? this.teacherTemplate : this.studentTemplate;
+  }
+
 }
