@@ -9,25 +9,25 @@ export type StaticTextType = 'normal' | 'warning' | 'error';
   standalone: true,
   imports: [TextComponent],
   template: `
-    <text [font]="font" [color]="color">This is a static text</text>
+    <text [ngClass]="typeClass">This is a static text</text>
   `,
-})
-export class TextStaticComponent {
-  @Input() set type(type: StaticTextType) {
-    switch (type) {
-      case 'error': {
-        this.font = 30;
-        this.color = 'red';
-        break;
+   styles: [
+    `
+      .normal {
+        font-size: 10px;
+        color: black;
       }
-      case 'warning': {
-        this.font = 25;
-        this.color = 'orange';
-        break;
-      }
-    }
-  }
 
-  font = 10;
-  color = 'black';
-}
+      .error {
+        font-size: 30px;
+        color: red;
+      }
+
+      .warning {
+        font-size: 25px;
+        color: orange;
+      }
+    `,
+  ],
+})
+export class TextStaticComponent {}
