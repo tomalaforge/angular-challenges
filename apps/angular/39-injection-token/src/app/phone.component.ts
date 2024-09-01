@@ -10,7 +10,8 @@ import { TimerContainerComponent } from './timer-container.component';
       Phone Call Timer:
       <p class="italic">(should be 2000s)</p>
     </div>
-    <timer-container />
+    <!-- <timer-container   /> -->
+    <timer-container [timer]="2000"></timer-container>
   `,
 })
 export default class PhoneComponent {}

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TimerContainerComponent } from './timer-container.component';
+import { DEFAULT_TIMER } from './data';
 
 @Component({
   selector: 'app-video',
@@ -10,7 +11,9 @@ import { TimerContainerComponent } from './timer-container.component';
       Video Call Timer:
       <p class="italic">(should be the default 1000s)</p>
     </div>
-    <timer-container />
+    <timer-container [timer]="default" />
   `,
 })
-export default class VideoComponent {}
+export default class VideoComponent {
+  default = toSignal(interval(DEFAULT_TIMER))
+}

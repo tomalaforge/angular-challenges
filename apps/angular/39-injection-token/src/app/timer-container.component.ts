@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,Input } from '@angular/core';
 import { DEFAULT_TIMER } from './data';
 import { TimerComponent } from './timer.component';
 @Component({
@@ -17,5 +17,5 @@ import { TimerComponent } from './timer.component';
   },
 })
 export class TimerContainerComponent {
-  timer = DEFAULT_TIMER;
+  @Input() timer = DEFAULT_TIMER;
 }
