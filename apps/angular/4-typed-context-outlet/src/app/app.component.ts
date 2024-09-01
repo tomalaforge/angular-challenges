@@ -9,7 +9,7 @@ import { PersonComponent } from './person.component';
   selector: 'app-root',
   template: `
     <person [person]="person">
-      <ng-template #personRef let-name let-age="age">
+      <ng-template #personRef let-name="name" let-age="age">
         {{ name }}: {{ age }}
       </ng-template>
     </person>
