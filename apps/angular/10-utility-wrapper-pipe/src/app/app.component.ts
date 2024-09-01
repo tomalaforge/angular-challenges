@@ -1,6 +1,7 @@
 import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { PersonUtils } from './person.utils';
+import { WrapFnPipe } from './wrap-fn.pipe'; // Import the pipe
 
 @Component({
   standalone: true,
@@ -11,8 +12,9 @@ import { PersonUtils } from './person.utils';
       {{ activity.name }} :
       <div
         *ngFor="let person of persons; let index = index; let isFirst = first">
-        {{ showName(person.name, index) }}
-        {{ isAllowed(person.age, isFirst, activity.minimumAge) }}
+        {{ 'showName' | wrapFn:person.name:index }}
+        {{ 'isAllowed' | wrapFn:person.age:isFirst:activity.minimumAge }}
+
       </div>
     </div>
   `,
