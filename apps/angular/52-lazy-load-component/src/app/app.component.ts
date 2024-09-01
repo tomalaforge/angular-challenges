@@ -32,7 +32,6 @@ export class AppComponent {
   async loadTopComponent() {
     // Dynamically import the TopComponent
     const { TopComponent } = await import('./top.component');
-
     // Create a component factory for TopComponent
     const componentFactory = this.container.createComponent(TopComponent);
     this.topLoaded.set(true);

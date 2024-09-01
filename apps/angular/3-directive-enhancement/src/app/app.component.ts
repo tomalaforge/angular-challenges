@@ -10,11 +10,11 @@ interface Person {
   imports: [NgFor, NgIf],
   selector: 'app-root',
   template: `
-    <ng-container *ngIf="persons.length > 0; else emptyList">
+    <div *ngIf="persons.length > 0; else emptyList">
       <div *ngFor="let person of persons">
         {{ person.name }}
       </div>
-    </ng-container>
+    </div>
     <ng-template #emptyList>The list is empty !!</ng-template>
   `,
   styles: [],
