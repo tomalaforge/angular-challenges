@@ -1,83 +1,71 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, signal, computed } from '@angular/core';
 
-enum Difficulty {
-  EASY = 'easy',
-  NORMAL = 'normal',
-}
-
-enum Direction {
-  LEFT = 'left',
-  RIGHT = 'right',
-}
+// Union types for difficulty and direction
+type Difficulty = 'easy' | 'normal';
+type Direction = 'left' | 'right' | undefined;
 
 @Component({
   standalone: true,
-  imports: [],
   selector: 'app-root',
   template: `
     <section>
       <div>
-        <button mat-stroked-button (click)="difficulty.set(Difficulty.EASY)">
-          Easy
-        </button>
-        <button mat-stroked-button (click)="difficulty.set(Difficulty.NORMAL)">
-          Normal
-        </button>
+        <button mat-stroked-button (click)="setDifficulty('easy')">Easy</button>
+        <button mat-stroked-button (click)="setDifficulty('normal')">Normal</button>
       </div>
       <p>Selected Difficulty: {{ difficultyLabel() }}</p>
     </section>
 
     <section>
       <div>
-        <button mat-stroked-button (click)="direction.set(Direction.LEFT)">
-          Left
-        </button>
-        <button mat-stroked-button (click)="direction.set(Direction.RIGHT)">
-          Right
-        </button>
+        <button mat-stroked-button (click)="setDirection('left')">Left</button>
+        <button mat-stroked-button (click)="setDirection('right')">Right</button>
       </div>
       <p>{{ directionLabel() }}</p>
     </section>
   `,
-  styles: `
-    section {
-      @apply mx-auto my-5 flex w-fit flex-col items-center gap-2;
-
-      > div {
-        @apply flex w-fit gap-5;
+  styles: [
+    `
+      section {
+        margin: auto;
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
       }
-    }
-
-    button {
-      @apply rounded-md border px-4 py-2;
-    }
-  `,
+      section > div {
+        display: flex;
+        gap: 10px;
+      }
+      button {
+        padding: 10px 15px;
+        border-radius: 5px;
+        border: 1px solid;
+      }
+    `,
+  ],
 })
 export class AppComponent {
-  readonly Difficulty = Difficulty;
-  readonly difficulty = signal<Difficulty>(Difficulty.EASY);
+  // Signals for difficulty and direction
+  difficulty = signal<Difficulty>('easy');
+  direction = signal<Direction>(undefined);
 
-  readonly Direction = Direction;
-  readonly direction = signal<Direction | undefined>(undefined);
+  // Computed signal for difficulty label
+  difficultyLabel = computed(() => `Difficulty: ${this.difficulty()}`);
 
-  readonly difficultyLabel = computed<string>(() => {
-    switch (this.difficulty()) {
-      case Difficulty.EASY:
-        return Difficulty.EASY;
-      case Difficulty.NORMAL:
-        return Difficulty.NORMAL;
-    }
+  // Computed signal for direction label
+  directionLabel = computed(() => {
+    const direction = this.direction();
+    return direction ? `You chose to go ${direction}` : 'Choose a direction!';
   });
 
-  readonly directionLabel = computed<string>(() => {
-    const prefix = 'You chose to go';
-    switch (this.direction()) {
-      case Direction.LEFT:
-        return `${prefix} ${Direction.LEFT}`;
-      case Direction.RIGHT:
-        return `${prefix} ${Direction.RIGHT}`;
-      default:
-        return 'Choose a direction!';
-    }
-  });
+  // Methods to update signals
+  setDifficulty(level: Difficulty) {
+    this.difficulty.set(level);
+  }
+
+  setDirection(dir: Direction) {
+    this.direction.set(dir);
+  }
 }
