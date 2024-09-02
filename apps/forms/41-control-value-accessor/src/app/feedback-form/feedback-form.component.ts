@@ -27,6 +27,7 @@ export class FeedbackFormComponent {
       validators: Validators.required,
     }),
     comment: new FormControl(),
+    rating: new FormControl('', {}),
   });
 
   rating: string | null = null;
