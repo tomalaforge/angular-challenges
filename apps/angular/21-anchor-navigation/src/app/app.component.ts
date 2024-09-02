@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { ActivatedRoute, RouterOutlet } from '@angular/router';
 
 @Component({
   standalone: true,
@@ -9,4 +9,18 @@ import { RouterOutlet } from '@angular/router';
     <router-outlet></router-outlet>
   `,
 })
-export class AppComponent {}
+export class AppComponent {
+  constructor(private activatedRouter: ActivatedRoute) {}
+  ngOnInit(): void {
+    this.activatedRouter.fragment.subscribe((fragment) => {
+      if (fragment) {
+        this.scroll(fragment);
+      }
+    });
+  }
+
+  scroll(section: string) {
+    const element = document.getElementById(section);
+    if (element) element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
