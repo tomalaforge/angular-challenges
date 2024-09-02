@@ -26,8 +26,15 @@ import { PostHeaderComponent } from './post-header.component';
         class="absolute left-2 top-2 z-20 rounded-md border bg-white p-2">
         Back
       </button>
-      <img [ngSrc]="post().image" alt="" width="960" height="540" />
-      <h2 class="p-7 text-center text-5xl">{{ post().title }}</h2>
+      <!-- Add priority here to remove a warning in the browser -->
+      <img
+        [ngSrc]="post().image"
+        alt=""
+        width="960"
+        height="540"
+        class="blog-image"
+        [priority]="true" />
+      <h2 class="blog-title p-7 text-center text-5xl">{{ post().title }}</h2>
       <post-header [date]="post().date" class="mb-20" />
       @for (chapter of fakeTextChapter; track $index) {
         <p class="mt-6 px-3">{{ chapter }}</p>
@@ -35,7 +42,7 @@ import { PostHeaderComponent } from './post-header.component';
     </div>
   `,
   host: {
-    class: 'flex h-full justify-center',
+    class: 'flex h-full justify-center active',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

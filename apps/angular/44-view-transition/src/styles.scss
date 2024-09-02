@@ -1,3 +1,53 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.active {
+  .blog-title {
+    view-transition-name: blog-title;
+  }
+
+  .blog-description {
+    view-transition-name: blog-description;
+  }
+
+  .blog-date {
+    view-transition-name: blog-date;
+  }
+
+  .blog-author {
+    view-transition-name: blog-author;
+  }
+
+  .blog-author-photo {
+    view-transition-name: blog-author-photo;
+  }
+
+  .blog-angular-logo {
+    view-transition-name: blog-angular-logo;
+  }
+
+  .blog-image {
+    view-transition-name: blog-image;
+  }
+}
+
+.blog-header {
+  view-transition-name: blog-header;
+}
+
+@keyframes slide-down {
+  from { transform: translateY(-100px); }
+}
+
+@keyframes slide-up {
+  to { transform: translateY(-100px); }
+}
+
+::view-transition-old(blog-header) {
+  animation: 300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-up;
+}
+
+::view-transition-new(blog-header) {
+  animation: 300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-down;
+}
