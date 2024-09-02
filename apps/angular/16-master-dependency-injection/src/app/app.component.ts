@@ -4,6 +4,8 @@ import { Component, Directive } from '@angular/core';
 import { CurrencyPipe } from './currency.pipe';
 import { CurrencyService } from './currency.service';
 import { Product, products } from './product.model';
+import { CurrencyRowDirective } from './currency-row.directive';
+
 
 interface ProductContext {
   $implicit: Product;
@@ -37,7 +39,7 @@ export class ProductDirective {
         </tr>
       </ng-template>
       <ng-template #body product let-product>
-        <tr>
+        <tr currencyRow [productCurrency]="product.currency">
           <td>{{ product.name }}</td>
           <td>{{ product.priceA | currency | async }}</td>
           <td>{{ product.priceB | currency | async }}</td>
