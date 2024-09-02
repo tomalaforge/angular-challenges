@@ -1,51 +1,77 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { randText } from '@ngneat/falso';
+import { Component, OnInit, computed, signal } from '@angular/core';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ItemComponent } from './item.component';
+import { ITodo } from './todo.interface';
+import { TodoService } from './todo.service';
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ItemComponent, MatProgressSpinnerModule],
   selector: 'app-root',
+  providers: [],
   template: `
-    <div *ngFor="let todo of todos">
-      {{ todo.title }}
-      <button (click)="update(todo)">Update</button>
+    <div>
+      <mat-spinner *ngIf="loading()"></mat-spinner>
+      <app-item
+        *ngFor="let todo of todos()"
+        [todo]="todo"
+        (todoUpdated)="onTodoUpdated($event)"
+        (todoDeleted)="onTodoDeleted($event)"></app-item>
     </div>
   `,
   styles: [],
 })
 export class AppComponent implements OnInit {
-  todos!: any[];
+  // Signal to hold the list of todos
+  private todoList = signal<ITodo[]>([]);
 
-  constructor(private http: HttpClient) {}
+  // Computed signal to expose the list of todos
+  todos = computed(() => this.todoList());
+
+  loading = signal<boolean>(false);
+
+  constructor(
+    private todoService: TodoService,
+    private snackBar: MatSnackBar,
+  ) {}
 
   ngOnInit(): void {
-    this.http
-      .get<any[]>('https://jsonplaceholder.typicode.com/todos')
-      .subscribe((todos) => {
-        this.todos = todos;
-      });
+    this.fetchTodos();
   }
 
-  update(todo: any) {
-    this.http
-      .put<any>(
-        `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
-        JSON.stringify({
-          todo: todo.id,
-          title: randText(),
-          body: todo.body,
-          userId: todo.userId,
-        }),
-        {
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-          },
-        },
-      )
-      .subscribe((todoUpdated: any) => {
-        this.todos[todoUpdated.id - 1] = todoUpdated;
-      });
+  fetchTodos() {
+    this.loading.set(true);
+    this.todoService.getTodos().subscribe({
+      next: (todos) => {
+        this.todoList.set(todos);
+        this.loading.set(false);
+      },
+      error: (error) => {
+        this.loading.set(false);
+        this.showError(error.message);
+      },
+    });
+  }
+
+  onTodoUpdated(updatedTodo: ITodo) {
+    this.todoList.update((todos) =>
+      todos.map((t) => (t.id === updatedTodo.id ? updatedTodo : t)),
+    );
+  }
+
+  onTodoDeleted(deletedTodoId: number) {
+    this.todoList.update((todos) =>
+      todos.filter((t) => t.id !== deletedTodoId),
+    );
+  }
+
+  private showError(message: string): void {
+    console.log('message', message);
+    this.snackBar.open(message, 'Close', {
+      duration: 5000,
+      verticalPosition: 'top',
+    });
   }
 }
