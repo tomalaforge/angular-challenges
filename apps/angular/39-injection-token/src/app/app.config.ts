@@ -10,3 +10,16 @@ export const appConfig: ApplicationConfig = {
     ]),
   ],
 };
+
+export class TimerConfig {
+  /**
+   * Deault timer
+   */
+  DEFAULT_TIMER = 1000;
+
+  constructor(config?: Partial<TimerConfig>) {
+    if (config) {
+      Object.assign(this, config);
+    }
+  }
+}
