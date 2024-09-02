@@ -72,6 +72,11 @@ export class FormComponent {
     message: '',
   });
 
+  public get isFormEmpty(): boolean {
+    const formValues = this.form.value;
+    return Object.values(formValues).every((value) => !value);
+  }
+
   onSubmit() {
     if (this.form.valid) this.form.reset();
   }

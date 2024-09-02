@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
+import { IFormState } from '../ui/form-state';
 import { FormComponent } from '../ui/form.component';
 
 @Component({
@@ -7,7 +8,7 @@ import { FormComponent } from '../ui/form.component';
   template: `
     <section class="mx-auto	max-w-screen-sm">
       <div class="rounded-lg bg-white p-8 shadow-lg lg:p-12">
-        <app-form />
+        <app-form #formSelector />
       </div>
     </section>
   `,
