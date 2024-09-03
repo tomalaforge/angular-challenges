@@ -11,10 +11,13 @@ contributors:
 challengeNumber: 1
 command: angular-projection
 blogLink: https://medium.com/@thomas.laforge/create-a-highly-customizable-component-cc3a9805e4c5
-videoLink:
-  link: https://www.youtube.com/watch?v=npyEyUZxoIw&ab_channel=ArthurLannelucq
-  alt: Projection video by Arthur Lannelucq
-  flag: FR
+videoLinks:
+  - link: https://www.youtube.com/watch?v=npyEyUZxoIw&ab_channel=ArthurLannelucq
+    alt: Projection video by Arthur Lannelucq
+    flag: FR
+  - link: https://www.youtube.com/watch?v=yNrfvu7vTa4
+    alt: Projection video by Amos Lucian IsailaAmos Lucian Isaila
+    flag: ES
 sidebar:
   order: 1
 ---

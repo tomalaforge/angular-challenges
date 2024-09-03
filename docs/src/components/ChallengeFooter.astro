@@ -5,7 +5,7 @@ import { getEntry } from 'astro:content';
 import AnsweredUser from './github/AnsweredUser.svelte';
 
 const { lang } = Astro.props;
-const { author, challengeNumber, title, blogLink, videoLink, command } = Astro.props.entry.data;
+const { author, challengeNumber, title, blogLink, videoLinks, command } = Astro.props.entry.data;
 const { data } = await getEntry('i18n', lang);
 
 const authorLink = `https://github.com/tomalaforge/angular-challenges/pulls?q=label%3A${challengeNumber}+label%3A"answer+author"`;
@@ -70,8 +70,9 @@ const npxCommand = `npx nx serve ${command}`;
     </svg>
     {data['challenge.footer.blogPost']}
   </a>}
-  {videoLink &&
-    <VideoButton {...videoLink} {...Astro.props} />}
+  {videoLinks && videoLinks.map((videoLink) => (
+    <VideoButton {...videoLink} {...Astro.props} />
+  ))}
 </div>
 
 <AnsweredUser client:load {challengeNumber} />

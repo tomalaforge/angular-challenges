@@ -22,12 +22,14 @@ const docs = defineCollection({
         contributors: z.array(z.string()).optional(),
         command: z.string().optional(),
         blogLink: z.string().optional(),
-        videoLink: z
-          .object({
-            link: z.string(),
-            alt: z.string(),
-            flag: z.enum(['FR']).optional(),
-          })
+        videoLinks: z
+          .array(
+            z.object({
+              link: z.string(),
+              alt: z.string(),
+              flag: z.enum(['FR', 'ES']).optional(),
+            }),
+          )
           .optional(),
       }),
     })(ctx),
