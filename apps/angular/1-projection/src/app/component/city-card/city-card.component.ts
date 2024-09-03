@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  signal,
+  ViewEncapsulation,
+  WritableSignal,
+} from '@angular/core';
 import { CityStore } from '../../data-access/city.store';
 import {
   FakeHttpService,
@@ -12,7 +18,7 @@ import { CardComponent } from '../../ui/card/card.component';
   selector: 'app-city-card',
   template: `
     <app-card
-      [list]="cities"
+      [list]="cities()"
       [type]="cardType"
       customClass="bg-light-blue"
       (addItem)="addCity()"
@@ -32,7 +38,7 @@ import { CardComponent } from '../../ui/card/card.component';
   imports: [CardComponent],
 })
 export class CityCardComponent implements OnInit {
-  cities: City[] = [];
+  cities: WritableSignal<City[]> = signal([]);
   cardType = CardType.CITY;
 
   constructor(
@@ -43,7 +49,7 @@ export class CityCardComponent implements OnInit {
   ngOnInit(): void {
     this.http.fetchCities$.subscribe((c) => this.store.addAll(c));
 
-    this.store.cities$.subscribe((c) => (this.cities = c));
+    this.store.cities$.subscribe((c) => this.cities.set(c));
   }
 
   addCity() {

@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  signal,
+  ViewEncapsulation,
+  WritableSignal,
+} from '@angular/core';
 import {
   FakeHttpService,
   randStudent,
@@ -12,7 +18,7 @@ import { CardComponent } from '../../ui/card/card.component';
   selector: 'app-student-card',
   template: `
     <app-card
-      [list]="students"
+      [list]="students()"
       [type]="cardType"
       customClass="bg-light-green"
       (addItem)="addStudent()"
@@ -32,7 +38,7 @@ import { CardComponent } from '../../ui/card/card.component';
   imports: [CardComponent],
 })
 export class StudentCardComponent implements OnInit {
-  students: Student[] = [];
+  students: WritableSignal<Student[]> = signal([]);
   cardType = CardType.STUDENT;
 
   constructor(
@@ -43,7 +49,7 @@ export class StudentCardComponent implements OnInit {
   ngOnInit(): void {
     this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
 
-    this.store.students$.subscribe((s) => (this.students = s));
+    this.store.students$.subscribe((s) => this.students.set(s));
   }
 
   addStudent() {
