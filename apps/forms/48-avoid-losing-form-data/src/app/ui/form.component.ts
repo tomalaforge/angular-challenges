@@ -89,7 +89,7 @@ export class FormComponent {
       .pipe(filter((event) => event instanceof ValueChangeEvent))
       .subscribe((event) => {
         const unsavedChanges: boolean = Object.values(event.value).some(
-          (val) => val,
+          (val) => !!(val as string).trim(),
         );
         this.unsavedChange.emit(unsavedChanges);
       });
