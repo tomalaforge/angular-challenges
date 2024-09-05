@@ -21,9 +21,7 @@ export class JoinComponent {
   readonly dialog = inject(MatDialog);
 
   onUnsavedChange(unsavedChanges: boolean): void {
-    if (unsavedChanges) {
-      this.unsavedChanges = unsavedChanges;
-    }
+    this.unsavedChanges = unsavedChanges;
   }
 
   canDeactivate(): Observable<boolean> | boolean {
