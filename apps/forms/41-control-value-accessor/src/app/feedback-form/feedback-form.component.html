@@ -13,7 +13,17 @@
     [formControl]="feedbackForm.controls.email"
     placeholder="Email"
     type="email" />
-  <app-rating-control (ratingUpdated)="rating = $event"></app-rating-control>
+  <div class="enable-rating">
+    <label class="rating-chbk">Enable rating:</label>
+    <input
+      type="checkbox"
+      class="form-control"
+      (change)="onEnableRating($event)" />
+  </div>
+
+  <app-rating-control
+    [disabled]="disableRatingComponent"
+    [formControl]="feedbackForm.controls.rating"></app-rating-control>
   <textarea
     class="feedback-form-control"
     [formControl]="feedbackForm.controls.comment"
@@ -21,9 +31,7 @@
   <button
     class="feedback-form-submit"
     type="submit"
-    [disabled]="
-      !feedbackForm.touched || rating === null || feedbackForm.invalid
-    ">
+    [disabled]="!feedbackForm.touched || feedbackForm.invalid">
     Submit
   </button>
 </form>

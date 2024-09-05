@@ -4,8 +4,13 @@
   padding: 0 10px;
 
   &:hover {
-    .star {
+    .star:not([disabled='true']) {
       fill: #ffd055;
+      &:hover {
+        &:hover ~ .star {
+          fill: #d8d8d8;
+        }
+      }
     }
   }
 }

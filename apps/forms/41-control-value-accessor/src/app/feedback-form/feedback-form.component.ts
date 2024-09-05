@@ -18,7 +18,7 @@ export class FeedbackFormComponent {
   @Output()
   readonly feedBackSubmit: EventEmitter<Record<string, string | null>> =
     new EventEmitter<Record<string, string | null>>();
-
+  disableRatingComponent = true;
   readonly feedbackForm = new FormGroup({
     name: new FormControl('', {
       validators: Validators.required,
@@ -27,16 +27,27 @@ export class FeedbackFormComponent {
       validators: Validators.required,
     }),
     comment: new FormControl(),
+    rating: new FormControl({ value: '', disabled: true }),
   });
 
-  rating: string | null = null;
+  onEnableRating(event: Event): void {
+    const checked = (event.target as HTMLInputElement).checked;
+    if (checked) {
+      this.feedbackForm.controls.rating.enable();
+      this.feedbackForm.controls.rating.setValidators(Validators.required);
+    } else {
+      this.feedbackForm.controls.rating.disable();
+      this.disableRatingComponent = false;
+
+      this.feedbackForm.controls.rating.clearValidators();
+    }
+    this.feedbackForm.controls.rating.updateValueAndValidity();
+  }
 
   submitForm(): void {
-    this.feedBackSubmit.emit({
-      ...this.feedbackForm.value,
-      rating: this.rating,
-    });
-
+    const value = this.feedbackForm.value;
+    this.feedBackSubmit.emit(value);
+    console.log(value);
     this.feedbackForm.reset();
   }
 }
