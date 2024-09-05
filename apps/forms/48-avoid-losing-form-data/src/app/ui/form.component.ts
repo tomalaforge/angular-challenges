@@ -1,5 +1,16 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  output,
+} from '@angular/core';
+import {
+  FormBuilder,
+  ReactiveFormsModule,
+  Validators,
+  ValueChangeEvent,
+} from '@angular/forms';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-form',
@@ -64,6 +75,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 })
 export class FormComponent {
   private fb = inject(FormBuilder);
+  unsavedChange = output<boolean>();
 
   form = this.fb.nonNullable.group({
     name: ['', { validators: [Validators.required] }],
@@ -71,6 +83,17 @@ export class FormComponent {
     phone: '',
     message: '',
   });
+
+  constructor() {
+    this.form.events
+      .pipe(filter((event) => event instanceof ValueChangeEvent))
+      .subscribe((event) => {
+        const unsavedChanges: boolean = Object.values(event.value).some(
+          (val) => val,
+        );
+        this.unsavedChange.emit(unsavedChanges);
+      });
+  }
 
   onSubmit() {
     if (this.form.valid) this.form.reset();
