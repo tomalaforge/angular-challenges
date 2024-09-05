@@ -37,7 +37,8 @@
     "rxjs": "7.8.1",
     "tailwindcss": "3.4.3",
     "tslib": "^2.3.0",
-    "zone.js": "0.14.2"
+    "zone.js": "0.14.2",
+    "@ngrx/signals": "17.1.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "18.1.1",
