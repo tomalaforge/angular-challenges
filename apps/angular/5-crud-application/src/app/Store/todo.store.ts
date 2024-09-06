@@ -5,10 +5,12 @@ import { TodoService } from '../Service/todo.service';
 
 type TodosState = {
   todos: Todo[];
+  isLoading: boolean;
 };
 
 const initialState: TodosState = {
   todos: [],
+  isLoading: false,
 };
 
 export const TodosStore = signalStore(
@@ -21,16 +23,20 @@ export const TodosStore = signalStore(
       });
     },
     updateTodo(todo: Todo) {
+      patchState(store, { isLoading: true });
       todoService.updateTodo(todo).subscribe((todoUpdated) => {
         patchState(store, ({ todos }) => ({
           todos: todos.map((t) => (t.id === todoUpdated.id ? todoUpdated : t)),
+          isLoading: false,
         }));
       });
     },
     deleteTodo(todo: Todo) {
+      patchState(store, { isLoading: true });
       todoService.deleteTodo(todo).subscribe(() => {
         patchState(store, ({ todos }) => ({
           todos: todos.filter((t) => t.id !== todo.id),
+          isLoading: false,
         }));
       });
     },

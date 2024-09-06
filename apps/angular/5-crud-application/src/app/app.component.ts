@@ -1,19 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
+import { TodoItemComponent } from './Components/todo-item.component';
 import { Todo } from './Model/todo';
 import { TodosStore } from './Store/todo.store';
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TodoItemComponent],
   selector: 'app-root',
   template: `
     @for (todo of store.todos(); track todo.id) {
-      <div>
-        {{ todo.title }}
-        <button (click)="update(todo)">Update</button>
-        <button (click)="delete(todo)">Delete</button>
-      </div>
+      <app-todo-item
+        [todo]="todo"
+        (onUpdate)="update($event)"
+        (onDelete)="delete($event)"></app-todo-item>
     } @empty {
       <span>Loading...</span>
     }
