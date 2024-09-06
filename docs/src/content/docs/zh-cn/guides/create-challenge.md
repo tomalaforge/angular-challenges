@@ -1,6 +1,6 @@
 ---
-title: Create your own challenge
-description: Guide to create your own challenge
+title: 创建你自己的挑战
+description: 创建你自己的挑战指南
 contributors:
   - tomalaforge
   - gsgonzalez88
@@ -9,58 +9,60 @@ sidebar:
   order: 5
 ---
 
-You have an idea you want to share, an interesting bug you are struggling with in one of your private or side projects, or an Angular trick you discovered. All of these possibilities are a good starting point to create a challenge and share the solution with others.
+你有一个想法想要分享，你正在努力解决某个私人项目或业余项目中的一个有趣的bug，或者你发现的一个Angular技巧。所有这些可能性都是创建挑战并与他人分享解决方案的良好起点。
 
-How do you start creating these challenges?
+如何开始创造这些挑战?
 
-## Boilerplate Setup
+## 样板设置
 
-To streamline the process, I have created an Nx generator that will set up all the boilerplate for you. The easiest way to run it is by using the Nx console: go to the <b>Nx Console > generate > @angular-challenges/cli - challenge</b>.
+为了简化这个过程，我创建了一个Nx生成器，它将为您设置所有样板文件。运行它最简单的方法是使用Nx控制台:转到<b>Nx Console > generate > @angular-challenges/cli - challenge</b>。
 
-Alternatively, you may utilize your IDE's [Nx Console extension](https://nx.dev/getting-started/editor-setup) to generate the files.
+或者，你也可以利用IDE的 [Nx Console extension](https://nx.dev/getting-started/editor-setup)来生成文件
 
-### Parameters
+### 参数
 
-#### mandatory parameters
+#### 强制参数
 
-- <b>title</b>: The title you want to give to your challenge.
-  :::note
-  The title must be a maximum of 25 characters.
+- <b>title</b>: 你想给你的挑战的标题。
+  :::note[注意]
+  标题长度不能超过25个字符。
   :::
 
-- <b>author</b>: Your name
-  :::note
-  Your name should be in kebab-case. (e.g. john-doe)
-  :::
-  :::note
-  Don't forget to update your personal information inside the file at your name.
+- <b>author</b>: 你的名字
+
+  :::note[注意]
+  你的名字应该使用烤肉串格式(如： john-doe)
   :::
 
-- <b>challengeDifficulty</b>: The difficulty you think your challenge has. There are three difficulty levels : 🟢 easy / 🟠 medium / 🔴 hard
+  :::note[注意]
+  别忘了在以你名字命名的文件中更新你的个人信息
+  :::
 
-- <b>docRepository</b>: The category of your Challenge is Nx, Angular, Angular Performance, Rxjs, NgRx, Typescript, Forms or Signals.
+- <b>challengeDifficulty</b>:你认为你的挑战有多大的难度。有三个难度级别:🟢简单/🟠中等/🔴困难
 
-#### optional parameters
+- <b>docRepository</b>: 你挑战的类别是Nx、Angular、Angular性能、Rxjs、NgRx、Typescript、表单或信号。
 
-- <b>challengeNumber</b>: You can specify a challenge number if a challenge is being submitted. (If empty, the number will be the next one).
-- <b>directory</b>: If you want your application to be located in a specific folder inside `apps`.
-- <b>addTest</b>: If you want to add test configuration.
+#### 可选参数
 
-### What is created?
+- <b>challengeNumber</b>: 当有挑战提交时，可以指定挑战号。(如果为空，该数字将是下一个数字)。
+- <b>directory</b>: 如果您希望您的应用程序位于 `apps` 中的特定文件夹中。
+- <b>addTest</b>: 如果您想添加测试配置。
 
-- The generator will create all the files needed to have a new working application. All these files will be created inside `apps/${directory}/${name}`.
-- A Markdown file with minimal setup will be created inside `docs/src/content/docs/challenges/${docRepository}`.
+### 创建了什么?
 
-## Challenge Creation
+- 生成器将创建新应用程序运行所需的所有文件。所有这些文件都将创建在 `apps/${directory}/${name}` 中
+- 将在 `docs/src/content/docs/challenges/${docRepository}` 中创建一个带有最小设置的Markdown文件。
 
-The only thing left to do is create your challenge. 🚀
+## 创造挑战
 
-:::danger
-Don't forget to update the docs to introduce your challenge and provide your instructions.
+剩下唯一要做的就是创造挑战。 🚀
+
+:::danger[危险]
+不要忘记更新文档以介绍您的挑战并提供说明。
 :::
 
-It's your turn to act!!! 💪
+轮到你行动了!!💪
 
-## Solution Submission
+## 解决方案提交
 
-After one week or so, provide a pull request of your solution to your challenge.
+大约一周后，提供一个针对您的挑战的解决方案的pull request。
