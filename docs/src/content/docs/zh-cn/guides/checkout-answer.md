@@ -1,6 +1,6 @@
 ---
-title: Check out Somebody's Answer
-description: Guide to checking out someone else's answer.
+title: 查看某人的回答
+description: 查看某人的回答指南
 contributors:
   - tomalaforge
   - gsgonzalez88
@@ -10,48 +10,48 @@ sidebar:
   order: 3
 ---
 
-All Angular Challenges answers will be presented in the form of a pull request (PR). To view and follow them, navigate through the **Files Changes** page on GitHub. However, understanding and following this process may not be straightforward if you are not familiar with the interface. In many cases, you may prefer to check out the branch and review the solution in your preferred IDE.
+所有Angular Challenges的答案都将以pull request (PR)的形式呈现。要查看和跟踪它们，请浏览GitHub上的**文件更改**页面。但是，如果您不熟悉界面，理解和遵循此过程可能并不简单。在许多情况下，您可能更喜欢签出分支并在您首选的IDE中检查解决方案。
 
-## Install the GitHub CLI
+## 安装 GitHub CLI
 
-Follow the instructions for your operating system [here](https://github.com/cli/cli#installation).
+在[这里](https://github.com/cli/cli#installation)按照操作系统的说明操作。
 
-## Checkout a PR locally from someone else
+## 查看本地其他人的PR
 
-### Sync your repository
+### 同步存储库
 
-First, you need to synchronize your fork to ensure it is up-to-date with the forked repository.
+首先，您需要同步您的分支，以确保它与分支存储库是最新的。
 
-This can be achieved by clicking the **Sync fork** button on the main page of your fork.
+这可以通过点击你的分支主页上的**Sync fork**按钮来实现。
 
 ![Sync project header](../../../../assets/fork-sync.png)
 
-The image above shows that my branch is behind the main branch by 8 commits, and I need to synchronize it to be up to date.
+上图显示我的分支落后于主分支 8 个提交，我需要将其同步才能保持最新。
 
 ![Sync project update modal](../../../../assets/sync-fork-update.png)
 
-### Checkout locally
+### 本地检出查看
 
-Navigate to the PR you wish to check out locally and obtain its ID. You will find it in the title of the PR (as shown below).
+导航到你想在本地查看的PR并获取其ID。你可以在PR的标题中找到它(如下所示)。
 
 ![PR header](../../../../assets/PR-header.png)
 
-Next, go to any terminal within your project directory and run the following command:
+接下来，切换到项目目录中的任意终端，并运行以下命令:
 
 ```bash
 gh pr checkout <ID>
 ```
 
-If you don't remember the command, click on the Code button on the right side of the header, and you can easily copy/paste the command.
+如果你不记得这个命令，点击标题右侧的Code按钮，你可以轻松地复制/粘贴这个命令。
 
 ![PR code modal](../../../../assets/PR-code-btn-modal.png)
 
-:::note
-If the command doesn't work or fails, GitHub CLI will guide you through the process.
+:::note[注意]
+如果命令不起作用或失败，GitHub CLI会引导你完成整个过程。
 :::
 
-🔥 You can now navigate through the solution locally and serve it to test it. 🔥
+🔥您现在可以在本地浏览解决方案并提供服务以测试它。🔥
 
-### Checkout with GitHub Codespaces
+### 使用GitHub Codespaces检出查看
 
-You can checkout any **open** PR with GitHub Codespaces. After clicking the code button, you can navigate to the codespaces tab and click the green button to create a codespace on the PR's branch. After the codespace initializes, you can serve the app.
+你可以使用GitHub Codespaces查看任何**打开**的PR。点击code按钮后，你可以导航到codespaces标签，然后点击绿色按钮，在PR的分支上创建一个codesace。codespace初始化后，就可以启动应用了。
