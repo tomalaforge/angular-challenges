@@ -7,7 +7,7 @@
   "buttons.clipboardCopy": "已复制!",
   "challenge.footer.note": "注意",
   "challenge.footer.running": "通过执行启动项目:",
-  "challenge.footer.start": "您的 PR 标题必须以",
+  "challenge.footer.start": "您的 PR 标题开头必须是",
   "challenge.footer.reminder": "提醒",
   "challenge.footer.communityAnswers": "社区解决方案",
   "challenge.footer.authorAnswer": "作者的解决方案",
