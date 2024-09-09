@@ -10,12 +10,8 @@ import { TodosStore } from '../Store/todo.store';
   template: `
     <div>
       {{ todo().title }}
-      <button (click)="update(todo())" [disabled]="store.isLoading()">
-        Update
-      </button>
-      <button (click)="delete(todo())" [disabled]="store.isLoading()">
-        Delete
-      </button>
+      <button (click)="update(todo())">Update</button>
+      <button (click)="delete(todo())">Delete</button>
     </div>
   `,
   styles: [],
@@ -23,7 +19,6 @@ import { TodosStore } from '../Store/todo.store';
 export class TodoItemComponent {
   todo = input.required<Todo>();
   store = inject(TodosStore);
-  loading = false;
 
   onUpdate = output<Todo>();
   onDelete = output<Todo>();
