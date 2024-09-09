@@ -11,7 +11,15 @@ const contributors = [
   'tsironis13',
 ];
 
-const sponsors = ['ddotx', 'LMFinney', 'alannelucq', 'SidV2', 'fpalmab'];
+const sponsors = [
+  'ddotx',
+  'LMFinney',
+  'alannelucq',
+  'SidV2',
+  'fpalmab',
+  'CivilEngeneer',
+  'apalaio',
+];
 
 module.exports = {
   contributors,
