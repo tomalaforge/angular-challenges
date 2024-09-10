@@ -5,9 +5,9 @@ export const appRoutes: Route[] = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
     path: 'home',
-    loadChildren: () =>
+    loadComponent: () =>
       import('@angular-challenges/module-to-standalone/home').then(
-        (m) => m.ModuleToStandaloneHomeModule,
+        (m) => m.HomeComponent,
       ),
   },
   {
