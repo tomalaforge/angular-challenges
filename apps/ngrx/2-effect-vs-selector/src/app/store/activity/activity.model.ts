@@ -53,3 +53,10 @@ export const activities: Activity[] = [
   randActivity(),
   randActivity(),
 ];
+
+export interface EnhancedActivity {
+  name: string;
+  mainTeacher: Person;
+  type: ActivityType;
+  availableTeachers: Person[];
+}

@@ -1,18 +1,19 @@
-import { Injectable } from '@angular/core';
+import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, concatMap, map } from 'rxjs/operators';
-import * as ActivityActions from './activity.actions';
+import { AppActions } from '../app/app.actions';
+import { ActivityActions } from './activity.actions';
+import { Activity } from './activity.model';
 import { ActivityService } from './activity.service';
 
-@Injectable()
-export class ActivityEffects {
-  loadActivities$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(ActivityActions.loadActivities),
+export const loadActivities = createEffect(
+  (actions$ = inject(Actions), activityService = inject(ActivityService)) => {
+    return actions$.pipe(
+      ofType(AppActions.initApp),
       concatMap(() =>
-        this.ActivityService.fetchActivities().pipe(
-          map((activities) =>
+        activityService.fetchActivities().pipe(
+          map((activities: Activity[]) =>
             ActivityActions.loadActivitiesSuccess({ activities }),
           ),
           catchError((error) =>
@@ -21,10 +22,6 @@ export class ActivityEffects {
         ),
       ),
     );
-  });
-
-  constructor(
-    private actions$: Actions,
-    private ActivityService: ActivityService,
-  ) {}
-}
+  },
+  { functional: true },
+);

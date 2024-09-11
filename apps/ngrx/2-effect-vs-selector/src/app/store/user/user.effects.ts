@@ -1,26 +1,23 @@
-import { Injectable } from '@angular/core';
+import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, concatMap, map } from 'rxjs/operators';
-import * as UserActions from './user.actions';
+import { AppActions } from '../app/app.actions';
+import { UserActions } from './user.actions';
+import { User } from './user.model';
 import { UserService } from './user.service';
 
-@Injectable()
-export class UserEffects {
-  loadUsers$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(UserActions.loadUsers),
+export const loadUsers = createEffect(
+  (actions$ = inject(Actions), userService = inject(UserService)) => {
+    return actions$.pipe(
+      ofType(AppActions.initApp),
       concatMap(() =>
-        this.userService.fetchUser().pipe(
-          map((user) => UserActions.loadUsersSuccess({ user })),
+        userService.fetchUser().pipe(
+          map((user: User) => UserActions.loadUsersSuccess({ user })),
           catchError((error) => of(UserActions.loadUsersFailure({ error }))),
         ),
       ),
     );
-  });
-
-  constructor(
-    private actions$: Actions,
-    private userService: UserService,
-  ) {}
-}
+  },
+  { functional: true },
+);

@@ -1,6 +1,7 @@
 {
-  "eslint.validate": [
-    "json"
-  ],
-  "cSpell.language": "en,es-ES"
+  "eslint.validate": ["json"],
+  "cSpell.language": "en,es-ES",
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
+  }
 }
