@@ -1,3 +1,11 @@
+import {
+  animate,
+  query,
+  stagger,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 import { Component } from '@angular/core';
 
 @Component({
@@ -19,7 +27,7 @@ import { Component } from '@angular/core';
   `,
   template: `
     <div class="mx-20 my-40 flex gap-5">
-      <section>
+      <section @flyInOut>
         <div>
           <h3>2008</h3>
           <p>
@@ -51,7 +59,7 @@ import { Component } from '@angular/core';
         </div>
       </section>
 
-      <section>
+      <section [@animateList]>
         <div class="list-item">
           <span>Name:</span>
           <span>Samuel</span>
@@ -84,5 +92,27 @@ import { Component } from '@angular/core';
       </section>
     </div>
   `,
+  animations: [
+    trigger('flyInOut', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateX(-10%)' }),
+        animate(200),
+      ]),
+    ]),
+    trigger('animateList', [
+      transition(':enter', [
+        query('.list-item', [
+          style({ opacity: 0, transform: 'translateX(-10%)' }),
+          stagger(
+            100,
+            animate(
+              '250ms ease-in',
+              style({ opacity: 1, transform: 'translateX(0)' }),
+            ),
+          ),
+        ]),
+      ]),
+    ]),
+  ],
 })
 export class AppComponent {}
