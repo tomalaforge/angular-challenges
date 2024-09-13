@@ -1,6 +1,11 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { randStudent, randTeacher } from '../../data-access/fake-http.service';
+import { CityStore } from '../../data-access/city.store';
+import {
+  randomCity,
+  randStudent,
+  randTeacher,
+} from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
 import { TeacherStore } from '../../data-access/teacher.store';
 import { CardType } from '../../model/card.model';
@@ -10,7 +15,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
   selector: 'app-card',
   template: `
     <div
-      class="flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4"
+      class="mx-auto mt-2 flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4"
       [class]="customClass">
       <img
         *ngIf="type === CardType.TEACHER"
@@ -21,10 +26,15 @@ import { ListItemComponent } from '../list-item/list-item.component';
         src="assets/img/student.webp"
         width="200px" />
 
+      <img
+        *ngIf="type === CardType.CITY"
+        src="assets/img/city.png"
+        width="200px" />
+
       <section>
         <app-list-item
           *ngFor="let item of list"
-          [name]="item.firstName"
+          [name]="type === CardType.CITY ? item.name : item.firstName"
           [id]="item.id"
           [type]="type"></app-list-item>
       </section>
@@ -49,6 +59,7 @@ export class CardComponent {
   constructor(
     private teacherStore: TeacherStore,
     private studentStore: StudentStore,
+    private cityStore: CityStore,
   ) {}
 
   addNewItem() {
@@ -56,6 +67,8 @@ export class CardComponent {
       this.teacherStore.addOne(randTeacher());
     } else if (this.type === CardType.STUDENT) {
       this.studentStore.addOne(randStudent());
+    } else if (this.type === CardType.CITY) {
+      this.cityStore.addOne(randomCity());
     }
   }
 }

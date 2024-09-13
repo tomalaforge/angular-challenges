@@ -49,7 +49,7 @@
     "@angular/cli": "~18.1.0",
     "@angular/compiler-cli": "18.1.1",
     "@angular/language-service": "18.1.1",
-    "@commitlint/cli": "^17.2.0",
+    "@commitlint/cli": "^17.8.1",
     "@commitlint/config-conventional": "^17.2.0",
     "@cypress/webpack-dev-server": "3.8.0",
     "@hirez_io/observer-spy": "^2.2.0",
