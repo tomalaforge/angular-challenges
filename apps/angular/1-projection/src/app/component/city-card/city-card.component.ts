@@ -1,9 +1,9 @@
 import {
   Component,
   OnInit,
-  signal,
   ViewEncapsulation,
   WritableSignal,
+  signal,
 } from '@angular/core';
 import { CityStore } from '../../data-access/city.store';
 import {

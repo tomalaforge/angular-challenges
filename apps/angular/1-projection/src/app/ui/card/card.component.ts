@@ -39,6 +39,4 @@ export class CardComponent {
   @Output() delete = new EventEmitter<number>();
 
   CardType = CardType;
-
-  constructor() {}
 }
