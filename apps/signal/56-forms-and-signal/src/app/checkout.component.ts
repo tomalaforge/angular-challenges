@@ -3,6 +3,7 @@ import {
   Component,
   computed,
   input,
+  numberAttribute,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { products } from './products';
@@ -45,7 +46,7 @@ import { products } from './products';
 })
 export default class DashboardComponent {
   quantity = input(1);
-  productId = input('1');
+  productId = input.required({ transform: numberAttribute });
 
   product = computed(() =>
     products.find((product) => product.id === this.productId()),
