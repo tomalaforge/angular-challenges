@@ -41,6 +41,37 @@ export class AppComponent {
   ram = model(false);
   gpu = model(false);
 
+  // For some reason this was not working. When i check first checkbox, check second,
+  // then uncheck first and check again alert was not shown, prev.drive, next.drive
+  // were both true
+  //   effect(() => {
+  //     const { drive, ram, gpu } = componentsComputed();
+  //     if (drive || ram || gpu) {
+  //       alert('Price increased');
+  //     }
+  //   });
+
+  //   const componentsComputed = computed(
+  //     () => ({
+  //       drive: this.drive(),
+  //       ram: this.ram(),
+  //       gpu: this.gpu(),
+  //     }),
+  //     {
+  //       equal: (prev, next) => {
+  //         if (
+  //           (!Object.is(prev.drive, next.drive) && next.drive) ||
+  //           (!Object.is(prev.ram, next.ram) && next.ram) ||
+  //           (!Object.is(prev.gpu, next.gpu) && next.gpu)
+  //         ) {
+  //           return false;
+  //         }
+  //         return !(!next.drive && !next.ram && !next.gpu);
+  //       },
+  //     },
+  //   );
+  // }
+
   // Define computed values
   componentsComputed = computed(() => ({
     drive: this.drive(),
