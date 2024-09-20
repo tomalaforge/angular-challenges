@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   effect,
   model,
 } from '@angular/core';
@@ -40,14 +41,31 @@ export class AppComponent {
   ram = model(false);
   gpu = model(false);
 
+  // Define computed values
+  componentsComputed = computed(() => ({
+    drive: this.drive(),
+    ram: this.ram(),
+    gpu: this.gpu(),
+  }));
+
+  // Subscribe to changes
   constructor() {
-    /* 
-      Explain for your junior team mate why this bug occurs ...
-    */
+    let previousState = { drive: false, ram: false, gpu: false };
+
     effect(() => {
-      if (this.drive() || this.ram() || this.gpu()) {
-        alert('Price increased!');
+      const { drive, ram, gpu } = this.componentsComputed();
+
+      // Check if any checkbox is newly selected (going from false to true)
+      if (
+        (!previousState.drive && drive) ||
+        (!previousState.ram && ram) ||
+        (!previousState.gpu && gpu)
+      ) {
+        alert('Price increased');
       }
+
+      // Update previous state to the current state
+      previousState = { drive, ram, gpu };
     });
   }
 }
