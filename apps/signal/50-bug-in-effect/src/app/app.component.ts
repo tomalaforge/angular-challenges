@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  effect,
-  model,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, model } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -44,6 +38,12 @@ export class AppComponent {
   // For some reason this was not working. When i check first checkbox, check second,
   // then uncheck first and check again alert was not shown, prev.drive, next.drive
   // were both true
+  // Scenario to reproduce issue:
+  // Select drive checkbox
+  // Select ram checkbox
+  // Unselect ram checkbox
+  // Select ram checkbox
+  // constructor() {
   //   effect(() => {
   //     const { drive, ram, gpu } = componentsComputed();
   //     if (drive || ram || gpu) {
@@ -72,31 +72,31 @@ export class AppComponent {
   //   );
   // }
 
-  // Define computed values
-  componentsComputed = computed(() => ({
-    drive: this.drive(),
-    ram: this.ram(),
-    gpu: this.gpu(),
-  }));
+  // // Define computed values
+  // componentsComputed = computed(() => ({
+  //   drive: this.drive(),
+  //   ram: this.ram(),
+  //   gpu: this.gpu(),
+  // }));
 
-  // Subscribe to changes
-  constructor() {
-    let previousState = { drive: false, ram: false, gpu: false };
+  // // Subscribe to changes
+  // constructor() {
+  //   let previousState = { drive: false, ram: false, gpu: false };
 
-    effect(() => {
-      const { drive, ram, gpu } = this.componentsComputed();
+  //   effect(() => {
+  //     const { drive, ram, gpu } = this.componentsComputed();
 
-      // Check if any checkbox is newly selected (going from false to true)
-      if (
-        (!previousState.drive && drive) ||
-        (!previousState.ram && ram) ||
-        (!previousState.gpu && gpu)
-      ) {
-        alert('Price increased');
-      }
+  //     // Check if any checkbox is newly selected (going from false to true)
+  //     if (
+  //       (!previousState.drive && drive) ||
+  //       (!previousState.ram && ram) ||
+  //       (!previousState.gpu && gpu)
+  //     ) {
+  //       alert('Price increased');
+  //     }
 
-      // Update previous state to the current state
-      previousState = { drive, ram, gpu };
-    });
-  }
+  //     // Update previous state to the current state
+  //     previousState = { drive, ram, gpu };
+  //   });
+  // }
 }
