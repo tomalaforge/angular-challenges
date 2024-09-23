@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DeactivationCheck } from '../deactivation.guard';
@@ -28,8 +29,9 @@ export class SimpleActionComponent implements DeactivationCheck {
       closeOnNavigation: false,
     });
 
-    this.#dialogRef.afterClosed().subscribe(() => {
-      this.#dialogRef = undefined;
-    });
+    this.#dialogRef
+      .afterClosed()
+      .pipe(takeUntilDestroyed())
+      .subscribe(() => (this.#dialogRef = undefined));
   }
 }
