@@ -9,6 +9,7 @@ const contributors = [
   'kabrunko-dev',
   'Sanjar1304',
   'tsironis13',
+  'EnochGao',
 ];
 
 const sponsors = [
