@@ -100,6 +100,12 @@
         "openTargetName": "open-cypress",
         "componentTestingTargetName": "component-test"
       }
+    },
+    {
+      "plugin": "@nx/jest/plugin",
+      "options": {
+        "targetName": "test"
+      }
     }
   ]
 }
