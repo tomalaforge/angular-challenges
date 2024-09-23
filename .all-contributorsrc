@@ -318,6 +318,15 @@
         "doc",
         "translation-ch"
       ]
+    },
+    {
+      "login": "fpalmab",
+      "name": "Francisco Palma",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7729812?v=4",
+      "profile": "https://github.com/fpalmab",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
