@@ -33,7 +33,7 @@ import { products } from './products';
       </form>
       <div class="flex justify-between">
         <div>SubTotal</div>
-        <div>{{ totalWihoutVat() }} €</div>
+        <div>{{ totalWithoutVat() }} €</div>
       </div>
       <div class="flex justify-between">
         <div>VAT (21%)</div>
@@ -66,7 +66,7 @@ export default class OrderComponent {
   quantity = toSignal(this.form.controls.quantity.valueChanges, {
     initialValue: this.form.getRawValue().quantity,
   });
-  totalWihoutVat = computed(() => Number(this.price()) * this.quantity());
-  vat = computed(() => this.totalWihoutVat() * 0.21);
-  total = computed(() => this.totalWihoutVat() + this.vat());
+  totalWithoutVat = computed(() => Number(this.price()) * this.quantity());
+  vat = computed(() => this.totalWithoutVat() * 0.21);
+  total = computed(() => this.totalWithoutVat() + this.vat());
 }
