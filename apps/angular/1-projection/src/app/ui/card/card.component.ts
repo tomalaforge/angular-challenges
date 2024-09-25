@@ -1,6 +1,11 @@
-import { NgFor, NgIf } from '@angular/common';
+import { NgFor } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { randStudent, randTeacher } from '../../data-access/fake-http.service';
+import { CityStore } from '../../data-access/city.store';
+import {
+  randomCity,
+  randStudent,
+  randTeacher,
+} from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
 import { TeacherStore } from '../../data-access/teacher.store';
 import { CardType } from '../../model/card.model';
@@ -12,21 +17,17 @@ import { ListItemComponent } from '../list-item/list-item.component';
     <div
       class="flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4"
       [class]="customClass">
-      <img
-        *ngIf="type === CardType.TEACHER"
-        src="assets/img/teacher.png"
-        width="200px" />
-      <img
-        *ngIf="type === CardType.STUDENT"
-        src="assets/img/student.webp"
-        width="200px" />
+      <!-- the content within the app-card selector from parent component 
+       will be passed into CardComponent as ng-content -->
+      <ng-content></ng-content>
 
       <section>
-        <app-list-item
-          *ngFor="let item of list"
-          [name]="item.firstName"
-          [id]="item.id"
-          [type]="type"></app-list-item>
+        @for (item of list; track $index) {
+          <app-list-item
+            [name]="item.firstName || item.name"
+            [id]="item.id"
+            [type]="type"></app-list-item>
+        }
       </section>
 
       <button
@@ -37,18 +38,19 @@ import { ListItemComponent } from '../list-item/list-item.component';
     </div>
   `,
   standalone: true,
-  imports: [NgIf, NgFor, ListItemComponent],
+  imports: [NgFor, ListItemComponent],
 })
 export class CardComponent {
   @Input() list: any[] | null = null;
   @Input() type!: CardType;
-  @Input() customClass = '';
+  @Input() customClass: string = '';
 
   CardType = CardType;
 
   constructor(
     private teacherStore: TeacherStore,
     private studentStore: StudentStore,
+    private cityStore: CityStore,
   ) {}
 
   addNewItem() {
@@ -56,6 +58,8 @@ export class CardComponent {
       this.teacherStore.addOne(randTeacher());
     } else if (this.type === CardType.STUDENT) {
       this.studentStore.addOne(randStudent());
+    } else if (this.type === CardType.CITY) {
+      this.cityStore.addOne(randomCity());
     }
   }
 }
