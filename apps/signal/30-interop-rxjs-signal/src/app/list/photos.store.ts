@@ -18,7 +18,7 @@ const PHOTO_STATE_KEY = 'photo_search';
 
 export interface PhotoState {
   photos: Photo[];
-  search: string;
+  searchTerm: string;
   page: number;
   pages: number;
   loading: boolean;
@@ -27,7 +27,7 @@ export interface PhotoState {
 
 const initialState: PhotoState = {
   photos: [],
-  search: '',
+  searchTerm: '',
   page: 1,
   pages: 1,
   loading: false,
@@ -39,19 +39,6 @@ export const PhotoStore = signalStore(
   withComputed(({ page, pages }) => ({
     endOfPage: computed(() => page() === pages()),
   })),
-  withComputed(
-    ({ photos, search, page, pages, loading, error, endOfPage }) => ({
-      vm: computed(() => ({
-        photos: photos(),
-        search: search(),
-        page: page(),
-        pages: pages(),
-        loading: loading(),
-        error: error(),
-        endOfPage: endOfPage(),
-      })),
-    }),
-  ),
   withHooks({
     onInit(store) {
       const savedJSONState = localStorage.getItem(PHOTO_STATE_KEY);
@@ -72,10 +59,10 @@ export const PhotoStore = signalStore(
   withMethods((state, photoService = inject(PhotoService)) => ({
     searchPhotos: rxMethod<void>(
       pipe(
-        filter(() => state.search().length >= 3),
+        filter(() => state.searchTerm().length >= 3),
         tap(() => patchState(state, { loading: true, error: '' })),
         mergeMap(() => {
-          const searchTerm = state.search();
+          const searchTerm = state.searchTerm();
           const page = state.page();
           return photoService.searchPublicPhotos(searchTerm, page).pipe(
             tapResponse({
@@ -100,7 +87,7 @@ export const PhotoStore = signalStore(
   })),
   withMethods((state) => ({
     search(search: string) {
-      patchState(state, { search, page: 1 });
+      patchState(state, { searchTerm: search, page: 1 });
       state.searchPhotos();
     },
     nextPage() {

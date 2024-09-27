@@ -31,39 +31,39 @@ import { PhotoStore } from './photos.store';
       <input
         type="text"
         matInput
-        [formControl]="search"
+        [formControl]="searchTerm"
         placeholder="find a photo" />
     </mat-form-field>
 
-    @if (vm(); as vm) {
+    @if (store; as store) {
       <section class="flex flex-col">
         <section class="flex items-center gap-3">
           <button
-            [disabled]="vm.page === 1"
-            [class.bg-gray-400]="vm.page === 1"
+            [disabled]="store.page() === 1"
+            [class.bg-gray-400]="store.page() === 1"
             class="rounded-md border p-3 text-xl"
             (click)="store.previousPage()">
             <
           </button>
           <button
-            [disabled]="vm.endOfPage"
-            [class.bg-gray-400]="vm.endOfPage"
+            [disabled]="store.endOfPage()"
+            [class.bg-gray-400]="store.endOfPage()"
             class="rounded-md border p-3 text-xl"
             (click)="store.nextPage()">
             >
           </button>
-          Page :{{ vm.page }} / {{ vm.pages }}
+          Page :{{ store.page() }} / {{ store.pages() }}
         </section>
-        @if (vm.loading) {
+        @if (store.loading()) {
           <mat-progress-bar
             mode="query"
-            *ngIf="vm.loading"
+            *ngIf="store.loading()"
             class="mt-5"></mat-progress-bar>
         }
 
-        @if (vm.photos && vm.photos.length > 0) {
+        @if (store.photos() && store.photos().length > 0) {
           <ul class="flex flex-wrap gap-4">
-            @for (photo of vm.photos; track photo.id) {
+            @for (photo of store.photos(); track photo.id) {
               <li>
                 <a routerLink="detail" [queryParams]="{ photo: encode(photo) }">
                   <img
@@ -78,7 +78,7 @@ import { PhotoStore } from './photos.store';
           <div>No Photos found. Type a search word.</div>
         }
         <footer class="text-red-500">
-          {{ vm.error }}
+          {{ store.error() }}
         </footer>
       </section>
     }
@@ -90,10 +90,9 @@ import { PhotoStore } from './photos.store';
 })
 export default class PhotosComponent implements OnInit {
   store = inject(PhotoStore);
-  readonly vm = this.store.vm;
-  search = new FormControl(this.vm().search);
+  searchTerm = new FormControl(this.store.searchTerm());
 
-  private searchInput = this.search.valueChanges.pipe(
+  private searchInput = this.searchTerm.valueChanges.pipe(
     debounceTime(300),
     distinctUntilChanged(),
     takeUntilDestroyed(),
