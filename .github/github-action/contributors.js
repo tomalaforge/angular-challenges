@@ -20,6 +20,7 @@ const sponsors = [
   'fpalmab',
   'CivilEngeneer',
   'apalaio',
+  'amosISA',
 ];
 
 module.exports = {
