@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FakeHttpService } from '../../data-access/fake-http.service';
 import { TeacherStore } from '../../data-access/teacher.store';
 import { CardType } from '../../model/card.model';
@@ -11,12 +11,20 @@ import { CardComponent } from '../../ui/card/card.component';
     <app-card
       [list]="teachers"
       [type]="cardType"
-      customClass="bg-light-red"></app-card>
+      [headerTemplate]="teacherHeaderTemplate"
+      class="bg-light-red"></app-card>
+
+    <ng-template #teacherHeaderTemplate let-list="list">
+      <div class="teacher-header">
+        <img src="assets/img/teacher.png" alt="Teacher Image" width="200px" />
+      </div>
+    </ng-template>
   `,
   styles: [
     `
-      ::ng-deep .bg-light-red {
+      .bg-light-red {
         background-color: rgba(250, 0, 0, 0.1);
+        display: block;
       }
     `,
   ],
@@ -26,6 +34,8 @@ import { CardComponent } from '../../ui/card/card.component';
 export class TeacherCardComponent implements OnInit {
   teachers: Teacher[] = [];
   cardType = CardType.TEACHER;
+
+  @ViewChild('teacherHeaderTemplate') teacherHeaderTemplate!: TemplateRef<any>;
 
   constructor(
     private http: FakeHttpService,
