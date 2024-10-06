@@ -21,6 +21,7 @@ const sponsors = [
   'CivilEngeneer',
   'apalaio',
   'amosISA',
+  'michalgrzegorczyk-dev',
 ];
 
 module.exports = {
