@@ -28,7 +28,7 @@ In Angular, content projection is a powerful technique for creating highly custo
 
 You can learn all about <b>ng-content</b> [here](https://angular.dev/guide/components/content-projection) from simple projection to more complex ones.
 
-To learn about <b>ngTemplateOutlet</b>, you can find the API documentation [here](https://angular.io/api/common/NgTemplateOutlet) along with some basic examples.
+To learn about <b>ngTemplateOutlet</b>, you can find the API documentation [here](https://angular.dev/api/common/NgTemplateOutlet) along with some basic examples.
 
 With these two tools in hand, you are now ready to take on the challenge.
 
