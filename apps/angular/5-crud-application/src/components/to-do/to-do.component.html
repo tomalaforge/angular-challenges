@@ -1,0 +1,9 @@
+<div>
+  @if(!loading){
+    {{ todo.title }}
+    <button (click)="updateTodo()">Update</button>
+    <button (click)="deleteTodo()">Delete</button>
+  }@else{
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+  }
+</div>
