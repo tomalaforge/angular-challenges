@@ -327,6 +327,15 @@
       "contributions": [
         "bug"
       ]
+    },
+    {
+      "login": "michalgrzegorczyk-dev",
+      "name": "Michał Grzegorczyk",
+      "avatar_url": "https://avatars.githubusercontent.com/u/47832176?v=4",
+      "profile": "https://github.com/michalgrzegorczyk-dev",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
