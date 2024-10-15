@@ -3,3 +3,7 @@ export enum CardType {
   STUDENT,
   CITY,
 }
+
+export interface TemplateContext<TItem extends object> {
+  $implicit: TItem;
+}
