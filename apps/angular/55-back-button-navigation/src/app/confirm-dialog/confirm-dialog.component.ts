@@ -9,8 +9,8 @@ import {
 import { BaseDialogComponent } from '../base-dialog';
 
 @Component({
-  selector: 'app-dialog',
-  templateUrl: './dialog.component.html',
+  selector: 'app-confirm-dialog',
+  templateUrl: './confirm-dialog.component.html',
   standalone: true,
   imports: [
     MatButtonModule,
@@ -21,7 +21,7 @@ import { BaseDialogComponent } from '../base-dialog';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DialogComponent extends BaseDialogComponent {
+export class ConfirmDialogComponent extends BaseDialogComponent {
   constructor() {
     super();
   }
