@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  FakeHttpService,
+  randStudent,
+} from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
 import { CardType } from '../../model/card.model';
 import { Student } from '../../model/student.model';
@@ -11,16 +14,26 @@ import { CardComponent } from '../../ui/card/card.component';
     <app-card
       [list]="students"
       [type]="cardType"
-      customClass="bg-light-green"></app-card>
+      [image]="'assets/img/student.webp'"
+      [customClass]="
+        'flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4 bg-light-blue'
+      ">
+      <button
+        class="rounded-sm border border-blue-500 bg-blue-300 p-2"
+        (click)="add()">
+        Add
+      </button>
+    </app-card>
   `,
   standalone: true,
   styles: [
     `
-      ::ng-deep .bg-light-green {
-        background-color: rgba(0, 250, 0, 0.1);
+      .bg-light-blue {
+        background-color: rgba(0, 0, 250, 0.1);
       }
     `,
   ],
+  encapsulation: ViewEncapsulation.None,
   imports: [CardComponent],
 })
 export class StudentCardComponent implements OnInit {
@@ -36,5 +49,8 @@ export class StudentCardComponent implements OnInit {
     this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
 
     this.store.students$.subscribe((s) => (this.students = s));
+  }
+  public add() {
+    this.store.addOne(randStudent());
   }
 }
