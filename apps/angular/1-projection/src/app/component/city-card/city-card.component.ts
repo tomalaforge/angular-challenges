@@ -7,16 +7,20 @@ import {
 import { CardType } from '../../model/card.model';
 import { City } from '../../model/city.model';
 import { CardComponent } from '../../ui/card/card.component';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-city-card',
   template: `
-    <app-card [list]="cities" [type]="cityType" customClass="bg-light-blue">
+    <app-card [list]="cities" customClass="bg-light-blue">
       <img src="assets/img/city.png" width="200px" ngProjectAs="card-image" />
+      <ng-template #rowRef let-city>
+        <app-list-item [name]="city.name"></app-list-item>
+      </ng-template>
     </app-card>
   `,
   standalone: true,
-  imports: [CardComponent],
+  imports: [CardComponent, ListItemComponent],
 })
 export class CityCardComponent implements OnInit {
   cities: City[] = [];

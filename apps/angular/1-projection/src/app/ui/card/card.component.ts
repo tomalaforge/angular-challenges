@@ -1,6 +1,12 @@
-import { NgFor, NgIf } from '@angular/common';
-import { Component, Input, output } from '@angular/core';
-import { CardType } from '../../model/card.model';
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import {
+  Component,
+  ContentChild,
+  EventEmitter,
+  Input,
+  Output,
+  TemplateRef,
+} from '@angular/core';
 import { ListItemComponent } from '../list-item/list-item.component';
 
 @Component({
@@ -12,11 +18,11 @@ import { ListItemComponent } from '../list-item/list-item.component';
       <ng-content select="card-image"></ng-content>
 
       <section>
-        <app-list-item
-          *ngFor="let item of list"
-          [name]="item.firstName"
-          [id]="item.id"
-          [type]="type"></app-list-item>
+        <ng-container *ngFor="let item of list">
+          <ng-template
+            [ngTemplateOutlet]="rowTemplate"
+            [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
+        </ng-container>
       </section>
 
       <button
@@ -27,13 +33,11 @@ import { ListItemComponent } from '../list-item/list-item.component';
     </div>
   `,
   standalone: true,
-  imports: [NgIf, NgFor, ListItemComponent],
+  imports: [NgIf, NgFor, ListItemComponent, NgTemplateOutlet],
 })
-export class CardComponent {
-  @Input() list: any[] | null = null;
-  @Input() type!: CardType;
+export class CardComponent<T> {
+  @Input() list: T[] | null = null;
   @Input() customClass = '';
-  add = output();
-
-  CardType = CardType;
+  @ContentChild('rowRef') rowTemplate!: TemplateRef<{ $implicit: T }>;
+  @Output() add = new EventEmitter();
 }

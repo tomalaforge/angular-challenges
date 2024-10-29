@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
   FakeHttpService,
@@ -7,19 +8,22 @@ import { StudentStore } from '../../data-access/student.store';
 import { CardType } from '../../model/card.model';
 import { Student } from '../../model/student.model';
 import { CardComponent } from '../../ui/card/card.component';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-student-card',
   template: `
-    <app-card
-      [list]="students"
-      [type]="cardType"
-      customClass="bg-light-green"
-      (add)="onAdd()">
+    <app-card [list]="students" customClass="bg-light-green" (add)="onAdd()">
       <img
         src="assets/img/student.webp"
         width="200px"
         ngProjectAs="card-image" />
+      <ng-template #rowRef let-student>
+        <app-list-item
+          [name]="student.firstName"
+          [id]="student.id"
+          (delete)="onDelete($event)"></app-list-item>
+      </ng-template>
     </app-card>
   `,
   standalone: true,
@@ -30,7 +34,7 @@ import { CardComponent } from '../../ui/card/card.component';
       }
     `,
   ],
-  imports: [CardComponent],
+  imports: [CardComponent, NgTemplateOutlet, ListItemComponent],
 })
 export class StudentCardComponent implements OnInit {
   students: Student[] = [];
@@ -49,5 +53,9 @@ export class StudentCardComponent implements OnInit {
 
   onAdd() {
     this.store.addOne(randStudent());
+  }
+
+  onDelete(id: number) {
+    this.store.deleteOne(id);
   }
 }
