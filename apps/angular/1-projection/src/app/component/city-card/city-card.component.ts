@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CityStore } from '../../data-access/city.store';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+import {
+  FakeHttpService,
+  randomCity,
+} from '../../data-access/fake-http.service';
 import { CardType } from '../../model/card.model';
 import { City } from '../../model/city.model';
 import { CardComponent } from '../../ui/card/card.component';
@@ -28,5 +31,9 @@ export class CityCardComponent implements OnInit {
     this.http.fetchCities$.subscribe((c) => this.store.addAll(c));
 
     this.store.cities$.subscribe((c) => (this.cities = c));
+  }
+
+  onAdd() {
+    this.store.addOne(randomCity());
   }
 }
