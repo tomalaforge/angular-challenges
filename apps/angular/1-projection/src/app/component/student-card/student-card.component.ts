@@ -8,10 +8,12 @@ import { CardComponent } from '../../ui/card/card.component';
 @Component({
   selector: 'app-student-card',
   template: `
-    <app-card
-      [list]="students"
-      [type]="cardType"
-      customClass="bg-light-green"></app-card>
+    <app-card [list]="students" [type]="cardType" customClass="bg-light-green">
+      <img
+        src="assets/img/student.webp"
+        width="200px"
+        ngProjectAs="card-image" />
+    </app-card>
   `,
   standalone: true,
   styles: [
