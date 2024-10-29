@@ -11,11 +11,7 @@ import { CardComponent } from '../../ui/card/card.component';
 @Component({
   selector: 'app-teacher-card',
   template: `
-    <app-card
-      [list]="teachers"
-      [type]="cardType"
-      customClass="bg-light-red"
-      (add)="onAdd()">
+    <app-card [list]="teachers" customClass="bg-light-red" (add)="onAdd()">
       <img
         src="assets/img/teacher.png"
         width="200px"

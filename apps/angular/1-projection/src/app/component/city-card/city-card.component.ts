@@ -11,7 +11,7 @@ import { CardComponent } from '../../ui/card/card.component';
 @Component({
   selector: 'app-city-card',
   template: `
-    <app-card [list]="cities" [type]="cityType" customClass="bg-light-blue">
+    <app-card [list]="cities" customClass="bg-light-blue">
       <img src="assets/img/city.png" width="200px" ngProjectAs="card-image" />
     </app-card>
   `,
