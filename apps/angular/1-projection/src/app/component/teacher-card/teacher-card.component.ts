@@ -18,7 +18,10 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
         width="200px"
         ngProjectAs="card-image" />
       <ng-template #rowRef let-teacher>
-        <app-list-item [name]="teacher.firstName"></app-list-item>
+        <app-list-item
+          [name]="teacher.firstName"
+          [id]="teacher.id"
+          (delete)="onDelete($event)"></app-list-item>
       </ng-template>
     </app-card>
   `,
@@ -49,5 +52,9 @@ export class TeacherCardComponent implements OnInit {
 
   onAdd() {
     this.store.addOne(randTeacher());
+  }
+
+  onDelete(id: number) {
+    this.store.deleteOne(id);
   }
 }

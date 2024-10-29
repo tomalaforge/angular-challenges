@@ -15,7 +15,10 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
     <app-card [list]="cities" customClass="bg-light-blue">
       <img src="assets/img/city.png" width="200px" ngProjectAs="card-image" />
       <ng-template #rowRef let-city>
-        <app-list-item [name]="city.name"></app-list-item>
+        <app-list-item
+          [name]="city.name"
+          [id]="city.id"
+          (delete)="onDelete($event)"></app-list-item>
       </ng-template>
     </app-card>
   `,
@@ -39,5 +42,9 @@ export class CityCardComponent implements OnInit {
 
   onAdd() {
     this.store.addOne(randomCity());
+  }
+
+  onDelete(id: number) {
+    this.store.deleteOne(id);
   }
 }
