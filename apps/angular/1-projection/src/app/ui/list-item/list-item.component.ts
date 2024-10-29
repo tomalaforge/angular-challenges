@@ -1,6 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { StudentStore } from '../../data-access/student.store';
-import { TeacherStore } from '../../data-access/teacher.store';
 import { CardType } from '../../model/card.model';
 
 @Component({
@@ -20,9 +18,4 @@ export class ListItemComponent {
   @Input() name!: string;
   @Input() type!: CardType;
   @Output() delete = new EventEmitter();
-
-  constructor(
-    private teacherStore: TeacherStore,
-    private studentStore: StudentStore,
-  ) {}
 }

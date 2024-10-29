@@ -1,4 +1,4 @@
-import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgFor, NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   ContentChild,
@@ -33,7 +33,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
     </div>
   `,
   standalone: true,
-  imports: [NgIf, NgFor, ListItemComponent, NgTemplateOutlet],
+  imports: [NgFor, ListItemComponent, NgTemplateOutlet],
 })
 export class CardComponent<T> {
   @Input() list: T[] | null = null;
