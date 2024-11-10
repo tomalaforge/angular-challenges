@@ -1,5 +1,4 @@
 import { Component, computed, inject, OnInit } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { CityStore } from '../../data-access/city.store';
 import {
   FakeHttpService,
@@ -31,11 +30,10 @@ import { CardComponent } from '../../ui/card/card.component';
 export class CityCardComponent implements OnInit {
   private http = inject(FakeHttpService);
   private store = inject(CityStore);
-  cities = toSignal(this.store.cities$, { initialValue: [] });
   cityCards = computed(() =>
-    this.cities().map(
-      (value) => ({ id: value.id, name: value.name }) as CardModel,
-    ),
+    this.store
+      .cities()
+      .map((value) => ({ id: value.id, name: value.name }) as CardModel),
   );
 
   ngOnInit(): void {

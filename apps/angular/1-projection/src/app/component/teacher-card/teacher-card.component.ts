@@ -1,6 +1,5 @@
 import { NgStyle } from '@angular/common';
 import { Component, computed, inject, OnInit } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import {
   FakeHttpService,
   randTeacher,
@@ -32,11 +31,10 @@ import { CardComponent } from '../../ui/card/card.component';
 export class TeacherCardComponent implements OnInit {
   private http = inject(FakeHttpService);
   private store = inject(TeacherStore);
-  teachers = toSignal(this.store.teachers$, { initialValue: [] });
   teacherCards = computed(() =>
-    this.teachers().map(
-      (value) => ({ id: value.id, name: value.firstName }) as CardModel,
-    ),
+    this.store
+      .teachers()
+      .map((value) => ({ id: value.id, name: value.firstName }) as CardModel),
   );
 
   ngOnInit(): void {

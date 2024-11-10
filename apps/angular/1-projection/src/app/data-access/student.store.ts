@@ -1,23 +1,14 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { computed, Injectable } from '@angular/core';
 import { Student } from '../model/student.model';
+import { DataStore } from './data.store';
 
 @Injectable({
   providedIn: 'root',
 })
-export class StudentStore {
-  private students = new BehaviorSubject<Student[]>([]);
-  students$ = this.students.asObservable();
-
-  addAll(students: Student[]) {
-    this.students.next(students);
+export class StudentStore extends DataStore<Student> {
+  constructor() {
+    super();
   }
 
-  addOne(student: Student) {
-    this.students.next([...this.students.value, student]);
-  }
-
-  deleteOne(id: number) {
-    this.students.next(this.students.value.filter((s) => s.id !== id));
-  }
+  students = computed(() => this.entries());
 }
