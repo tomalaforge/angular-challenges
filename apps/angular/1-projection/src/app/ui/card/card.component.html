@@ -1,0 +1,21 @@
+<div
+  class="flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4"
+  [class]="customClass()">
+  <ng-content></ng-content>
+  <section>
+    @for (item of list(); track item.id) {
+      <app-list-item
+        [name]="item.name"
+        [id]="item.id"
+        (deleteItem)="deleteItem.emit($event)"
+      >
+      </app-list-item>
+    }
+  </section>
+
+  <button
+    class="rounded-sm border border-blue-500 bg-blue-300 p-2"
+    (click)="addNewItem.emit()">
+    Add
+  </button>
+</div>

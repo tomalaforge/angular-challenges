@@ -1,5 +1,4 @@
-export enum CardType {
-  TEACHER,
-  STUDENT,
-  CITY,
+export interface CardModel {
+  id: number;
+  name: string;
 }
