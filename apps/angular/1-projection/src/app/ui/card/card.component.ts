@@ -1,3 +1,4 @@
+import { NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -12,11 +13,14 @@ import { ListItemComponent } from '../list-item/list-item.component';
   templateUrl: 'card.component.html',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [ListItemComponent],
+  host: {
+    class: 'flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4',
+  },
+  imports: [ListItemComponent, NgClass],
 })
 export class CardComponent {
   list = input<CardModel[]>([]);
-  customClass = input<string>('');
   addNewItem = output<void>();
   deleteItem = output<number>();
+  customClass = input<string>('');
 }

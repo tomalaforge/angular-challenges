@@ -1,4 +1,5 @@
-import { Component, computed, OnInit } from '@angular/core';
+import { NgClass } from '@angular/common';
+import { Component, computed, inject, OnInit } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import {
   FakeHttpService,
@@ -15,32 +16,30 @@ import { CardComponent } from '../../ui/card/card.component';
       [list]="studentCards()"
       (addNewItem)="addStudent()"
       (deleteItem)="deleteStudent($event)"
-      customClass="bg-light-green">
-      <img src="assets/img/student.webp" width="200px" />
+      class="bg-light-green">
+      <img src="assets/img/student.webp" width="200px" alt="student" />
     </app-card>
   `,
   standalone: true,
   styles: [
     `
-      ::ng-deep .bg-light-green {
+      .bg-light-green {
         background-color: rgba(0, 250, 0, 0.1);
       }
     `,
   ],
-  imports: [CardComponent],
+  imports: [CardComponent, NgClass],
 })
 export class StudentCardComponent implements OnInit {
+  private http = inject(FakeHttpService);
+  private store = inject(StudentStore);
+
   students = toSignal(this.store.students$, { initialValue: [] });
   studentCards = computed(() =>
     this.students().map(
       (value) => ({ id: value.id, name: value.firstName }) as CardModel,
     ),
   );
-
-  constructor(
-    private http: FakeHttpService,
-    private store: StudentStore,
-  ) {}
 
   ngOnInit(): void {
     this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
