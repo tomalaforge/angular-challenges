@@ -22,6 +22,12 @@ describe('CounterComponent', () => {
           await render(CounterComponent);
         });
       });
+
+      describe('When clicking 3 times on increment button', () => {
+        test('Then counterValue is 11', async () => {
+          await render(CounterComponent);
+        });
+      });
     });
   });
 });
