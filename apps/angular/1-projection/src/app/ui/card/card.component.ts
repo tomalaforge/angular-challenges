@@ -1,12 +1,15 @@
-import { NgClass } from '@angular/common';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  contentChild,
   input,
   output,
+  TemplateRef,
 } from '@angular/core';
 import { CardModel } from '../../model/card.model';
 import { ListItemComponent } from '../list-item/list-item.component';
+import { CardRowDirective } from './card-row.directive';
 
 @Component({
   selector: 'app-card',
@@ -16,11 +19,11 @@ import { ListItemComponent } from '../list-item/list-item.component';
   host: {
     class: 'flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4',
   },
-  imports: [ListItemComponent, NgClass],
+  imports: [ListItemComponent, NgClass, NgTemplateOutlet],
 })
 export class CardComponent {
   list = input<CardModel[]>([]);
   addNewItem = output<void>();
-  deleteItem = output<number>();
   customClass = input<string>('');
+  rowTemplate = contentChild.required(CardRowDirective, { read: TemplateRef });
 }

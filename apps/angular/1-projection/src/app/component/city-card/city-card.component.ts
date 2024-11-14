@@ -5,20 +5,27 @@ import {
   randomCity,
 } from '../../data-access/fake-http.service';
 import { CardModel } from '../../model/card.model';
+import { CardRowDirective } from '../../ui/card/card-row.directive';
 import { CardComponent } from '../../ui/card/card.component';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-city-card',
   template: `
     <app-card
       [list]="cityCards()"
-      (addNewItem)="this.addItem()"
+      (addNewItem)="this.addCity()"
       class="bg-light-blue">
       <img src="assets/img/city.png" width="200px" alt="city" />
+      <ng-template [cardRow]="cityCards()" let-city>
+        <app-list-item [id]="city.id" (deleteItem)="this.deleteCity(city.id)">
+          {{ city.name }}
+        </app-list-item>
+      </ng-template>
     </app-card>
   `,
   standalone: true,
-  imports: [CardComponent],
+  imports: [CardComponent, ListItemComponent, CardRowDirective],
   styles: [
     `
       .bg-light-blue {
@@ -40,7 +47,11 @@ export class CityCardComponent implements OnInit {
     this.http.fetchCities$.subscribe((t) => this.store.addAll(t));
   }
 
-  addItem() {
+  addCity() {
     this.store.addOne(randomCity());
+  }
+
+  deleteCity(id: number) {
+    this.store.deleteOne(id);
   }
 }

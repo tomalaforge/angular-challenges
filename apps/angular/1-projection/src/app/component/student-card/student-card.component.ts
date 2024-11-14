@@ -6,7 +6,9 @@ import {
 } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
 import { CardModel } from '../../model/card.model';
+import { CardRowDirective } from '../../ui/card/card-row.directive';
 import { CardComponent } from '../../ui/card/card.component';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-student-card',
@@ -14,9 +16,15 @@ import { CardComponent } from '../../ui/card/card.component';
     <app-card
       [list]="studentCards()"
       (addNewItem)="addStudent()"
-      (deleteItem)="deleteStudent($event)"
       class="bg-light-green">
       <img src="assets/img/student.webp" width="200px" alt="student" />
+      <ng-template [cardRow]="studentCards()" let-city>
+        <app-list-item
+          [id]="city.id"
+          (deleteItem)="this.deleteStudent(city.id)">
+          {{ city.name }}
+        </app-list-item>
+      </ng-template>
     </app-card>
   `,
   standalone: true,
@@ -27,7 +35,7 @@ import { CardComponent } from '../../ui/card/card.component';
       }
     `,
   ],
-  imports: [CardComponent, NgClass],
+  imports: [CardComponent, NgClass, CardRowDirective, ListItemComponent],
 })
 export class StudentCardComponent implements OnInit {
   private http = inject(FakeHttpService);
