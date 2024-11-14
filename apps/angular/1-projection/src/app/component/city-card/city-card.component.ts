@@ -1,10 +1,9 @@
-import { Component, computed, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CityStore } from '../../data-access/city.store';
 import {
   FakeHttpService,
   randomCity,
 } from '../../data-access/fake-http.service';
-import { CardModel } from '../../model/card.model';
 import { CardRowDirective } from '../../ui/card/card-row.directive';
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
@@ -13,11 +12,11 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   selector: 'app-city-card',
   template: `
     <app-card
-      [list]="cityCards()"
+      [list]="cities()"
       (addNewItem)="this.addCity()"
       class="bg-light-blue">
       <img src="assets/img/city.png" width="200px" alt="city" />
-      <ng-template [cardRow]="cityCards()" let-city>
+      <ng-template [cardRow]="cities()" let-city>
         <app-list-item [id]="city.id" (deleteItem)="this.deleteCity(city.id)">
           {{ city.name }}
         </app-list-item>
@@ -37,11 +36,8 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
 export class CityCardComponent implements OnInit {
   private http = inject(FakeHttpService);
   private store = inject(CityStore);
-  cityCards = computed(() =>
-    this.store
-      .cities()
-      .map((value) => ({ id: value.id, name: value.name }) as CardModel),
-  );
+
+  cities = this.store.cities;
 
   ngOnInit(): void {
     this.http.fetchCities$.subscribe((t) => this.store.addAll(t));

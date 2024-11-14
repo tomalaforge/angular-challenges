@@ -1,11 +1,10 @@
 import { NgStyle } from '@angular/common';
-import { Component, computed, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
   FakeHttpService,
   randTeacher,
 } from '../../data-access/fake-http.service';
 import { TeacherStore } from '../../data-access/teacher.store';
-import { CardModel } from '../../model/card.model';
 import { CardRowDirective } from '../../ui/card/card-row.directive';
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
@@ -14,15 +13,15 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   selector: 'app-teacher-card',
   template: `
     <app-card
-      [list]="teacherCards()"
+      [list]="teachers()"
       (addNewItem)="this.addTeacher()"
       class="bg-light-red">
       <img src="assets/img/teacher.png" width="200px" alt="teacher" />
-      <ng-template [cardRow]="teacherCards()" let-teacher>
+      <ng-template [cardRow]="teachers()" let-teacher>
         <app-list-item
           [id]="teacher.id"
           (deleteItem)="this.deleteTeacher(teacher.id)">
-          {{ teacher.name }}
+          {{ teacher.firstName }}
         </app-list-item>
       </ng-template>
     </app-card>
@@ -40,11 +39,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
 export class TeacherCardComponent implements OnInit {
   private http = inject(FakeHttpService);
   private store = inject(TeacherStore);
-  teacherCards = computed(() =>
-    this.store
-      .teachers()
-      .map((value) => ({ id: value.id, name: value.firstName }) as CardModel),
-  );
+  teachers = this.store.teachers;
 
   ngOnInit(): void {
     this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));

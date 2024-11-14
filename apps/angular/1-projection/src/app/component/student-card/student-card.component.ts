@@ -1,11 +1,10 @@
 import { NgClass } from '@angular/common';
-import { Component, computed, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
   FakeHttpService,
   randStudent,
 } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
-import { CardModel } from '../../model/card.model';
 import { CardRowDirective } from '../../ui/card/card-row.directive';
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
@@ -14,15 +13,15 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   selector: 'app-student-card',
   template: `
     <app-card
-      [list]="studentCards()"
+      [list]="students()"
       (addNewItem)="addStudent()"
       class="bg-light-green">
       <img src="assets/img/student.webp" width="200px" alt="student" />
-      <ng-template [cardRow]="studentCards()" let-city>
+      <ng-template [cardRow]="students()" let-student>
         <app-list-item
-          [id]="city.id"
-          (deleteItem)="this.deleteStudent(city.id)">
-          {{ city.name }}
+          [id]="student.id"
+          (deleteItem)="this.deleteStudent(student.id)">
+          {{ student.firstName }}
         </app-list-item>
       </ng-template>
     </app-card>
@@ -41,11 +40,7 @@ export class StudentCardComponent implements OnInit {
   private http = inject(FakeHttpService);
   private store = inject(StudentStore);
 
-  studentCards = computed(() =>
-    this.store
-      .students()
-      .map((value) => ({ id: value.id, name: value.firstName }) as CardModel),
-  );
+  students = this.store.students;
 
   ngOnInit(): void {
     this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));

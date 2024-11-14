@@ -7,7 +7,6 @@ import {
   output,
   TemplateRef,
 } from '@angular/core';
-import { CardModel } from '../../model/card.model';
 import { ListItemComponent } from '../list-item/list-item.component';
 import { CardRowDirective } from './card-row.directive';
 
@@ -21,8 +20,8 @@ import { CardRowDirective } from './card-row.directive';
   },
   imports: [ListItemComponent, NgClass, NgTemplateOutlet],
 })
-export class CardComponent {
-  list = input<CardModel[]>([]);
+export class CardComponent<T extends { id: string }> {
+  list = input<T[]>([]);
   addNewItem = output<void>();
   customClass = input<string>('');
   rowTemplate = contentChild.required(CardRowDirective, { read: TemplateRef });
