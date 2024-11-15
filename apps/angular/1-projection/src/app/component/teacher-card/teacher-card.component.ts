@@ -1,4 +1,3 @@
-import { NgStyle } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import {
   FakeHttpService,
@@ -34,7 +33,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
     `,
   ],
   standalone: true,
-  imports: [CardComponent, NgStyle, CardRowDirective, ListItemComponent],
+  imports: [CardComponent, CardRowDirective, ListItemComponent],
 })
 export class TeacherCardComponent implements OnInit {
   private http = inject(FakeHttpService);
