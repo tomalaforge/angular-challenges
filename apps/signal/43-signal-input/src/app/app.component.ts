@@ -1,17 +1,18 @@
-import { JsonPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { UserComponent } from './user.component';
 
 @Component({
   standalone: true,
-  imports: [UserComponent, JsonPipe],
+  imports: [UserComponent],
   selector: 'app-root',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="flex flex-col gap-3">
       <div class="flex gap-2 ">
         Name:
         <input #name class="border" />
-        @if (showUser && !name.value) {
+
+        @if (showUser() && !name.value) {
           <div class="text-sm text-red-500">name required</div>
         }
       </div>
@@ -24,12 +25,13 @@ import { UserComponent } from './user.component';
         <input type="number" #age class="border" />
       </div>
       <button
-        (click)="showUser = true"
+        (click)="showUser.set(true)"
         class="w-fit rounded-md border border-blue-500 bg-blue-200 px-4 py-2">
         Submit
       </button>
     </div>
-    @if (showUser && !!name.value) {
+
+    @if (showUser() && !!name.value) {
       <app-user
         [name]="name.value"
         [lastName]="lastName.value"
@@ -41,5 +43,5 @@ import { UserComponent } from './user.component';
   },
 })
 export class AppComponent {
-  showUser = false;
+  readonly showUser = signal(false);
 }
