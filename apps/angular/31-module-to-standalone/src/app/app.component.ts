@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet, RouterLink],
   template: `
     <div class="flex gap-2">
       <button
@@ -20,7 +23,8 @@ import { Component } from '@angular/core';
         User
       </button>
     </div>
-    <router-outlet></router-outlet>
+
+    <router-outlet />
   `,
   host: {
     class: 'flex flex-col p-4 gap-3',
