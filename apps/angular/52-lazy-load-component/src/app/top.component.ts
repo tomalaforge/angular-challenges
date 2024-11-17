@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
   template: `
     I am a very heavy, expensive component that should be lazy loaded.
   `,
+  standalone: true,
   styles: `
     :host {
       display: grid;
