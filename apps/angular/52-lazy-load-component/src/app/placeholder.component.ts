@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
   template: `
     I'm a placeholder component.
   `,
+  standalone: true,
   styles: `
     :host {
       display: grid;
