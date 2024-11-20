@@ -29,8 +29,11 @@ export class StateService {
     this.restService.update(todo).subscribe((todoUpdated: Todo) => {
       this.todos.update((todos) => {
         const index = todos.findIndex((t) => t.id === todoUpdated.id);
-        todos[index] = todoUpdated;
-        return todos;
+        return [
+          ...todos.slice(0, index),
+          todoUpdated,
+          ...todos.slice(index + 1),
+        ];
       });
     });
   }
