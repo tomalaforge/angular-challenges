@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { randText } from '@ngneat/falso';
 import { delay, Observable } from 'rxjs';
-import { Todo } from './state/state.service';
+import { Todo } from './state/todo.model';
 
 const URL = 'https://jsonplaceholder.typicode.com/todos';
 
@@ -33,7 +33,7 @@ export class RestService {
     );
   }
 
-  delete(todo: Todo) {
-    return this.http.delete(`${URL}/${todo.id}`);
+  delete(id: number) {
+    return this.http.delete(`${URL}/${id}`);
   }
 }

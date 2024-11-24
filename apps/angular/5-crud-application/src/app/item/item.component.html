@@ -1,0 +1,11 @@
+<div class="list-item">
+  {{ todo().title }}
+  <div class="list-item-buttons">
+    <button #btnUpdate [disabled]="isUpdating" (click)="onAction('update')">
+      Update
+    </button>
+    <button #btnDelete [disabled]="isUpdating" (click)="onAction('delete')">
+      Delete
+    </button>
+  </div>
+</div>

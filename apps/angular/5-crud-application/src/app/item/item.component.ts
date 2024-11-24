@@ -2,49 +2,34 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  effect,
   input,
   output,
 } from '@angular/core';
-import { Todo } from '../state/state.service';
+import { Todo } from '../state/todo.model';
 
 @Component({
   selector: 'app-item',
   standalone: true,
   imports: [CommonModule],
-  template: `
-    <div class="list-item">
-      {{ todo().title }}
-      <div class="list-item-buttons">
-        <button [disabled]="isUpdating()" (click)="update.emit()">
-          Update
-        </button>
-        <button [disabled]="isUpdating()" (click)="delete.emit()">
-          Delete
-        </button>
-      </div>
-    </div>
-  `,
-  styles: `
-    .list-item {
-      display: flex;
-      width: 50%;
-      padding: 5px;
-      border: 1px solid #ccc;
-      margin: 10px;
-    }
-    .list-item-buttons {
-      margin-left: auto;
-
-      & button {
-        margin-left: 5px;
-      }
-    }
-  `,
+  templateUrl: './item.component.html',
+  styleUrls: ['./item.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ItemComponent {
+  constructor() {
+    effect(() => {
+      this.isUpdating = false;
+    });
+  }
+
   todo = input.required<Todo>();
-  isUpdating = input<boolean>();
   update = output<void>();
   delete = output<void>();
+  isUpdating = false;
+
+  onAction(action: 'update' | 'delete'): void {
+    this.isUpdating = true;
+    this[action].emit();
+  }
 }

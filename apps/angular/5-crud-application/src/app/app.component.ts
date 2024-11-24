@@ -2,11 +2,13 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { ItemComponent } from './item/item.component';
-import { StateService, Todo } from './state/state.service';
+import { Todo } from './state/todo.model';
+import { TodosStore } from './state/todos.store';
 
 @Component({
   standalone: true,
   imports: [CommonModule, MatProgressSpinner, ItemComponent],
+  providers: [TodosStore],
   selector: 'app-root',
   template: `
     @if (isLoading()) {
@@ -16,27 +18,27 @@ import { StateService, Todo } from './state/state.service';
         <app-item
           [todo]="todo"
           (update)="update(todo)"
-          (delete)="delete(todo)"></app-item>
+          (delete)="delete(todo.id)"></app-item>
       </div>
     }
   `,
   styles: [],
 })
 export class AppComponent implements OnInit {
-  private readonly stateService = inject(StateService);
+  private readonly todoStore = inject(TodosStore);
 
-  todos = this.stateService.todos;
-  isLoading = this.stateService.isLoading;
+  todos = this.todoStore.todos;
+  isLoading = this.todoStore.isLoading;
 
   ngOnInit(): void {
-    this.stateService.fetchData();
+    this.todoStore.fetchData();
   }
 
   update(todo: Todo) {
-    this.stateService.update(todo);
+    this.todoStore.update(todo);
   }
 
-  delete(todo: Todo) {
-    this.stateService.delete(todo);
+  delete(id: number) {
+    this.todoStore.delete(id);
   }
 }
