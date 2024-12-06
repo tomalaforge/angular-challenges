@@ -6,7 +6,6 @@ import { NoteComponent } from './note.component';
 import { UserFormComponent } from './user-form.component';
 
 @Component({
-  standalone: true,
   selector: 'app-root',
   template: `
     <name />

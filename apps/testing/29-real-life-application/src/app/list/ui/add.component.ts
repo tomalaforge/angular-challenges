@@ -12,7 +12,6 @@ import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-add',
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     MatFormFieldModule,

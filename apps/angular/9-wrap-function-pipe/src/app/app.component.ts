@@ -2,7 +2,6 @@ import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
-  standalone: true,
   imports: [NgFor],
   selector: 'app-root',
   template: `

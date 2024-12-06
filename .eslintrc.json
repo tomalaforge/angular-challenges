@@ -6,6 +6,7 @@
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {
+        "@angular-eslint/no-host-metadata-property": "off",
         "@nx/enforce-module-boundaries": [
           "error",
           {
@@ -17,12 +18,6 @@
                 "onlyDependOnLibsWithTags": ["*"]
               }
             ]
-          }
-        ],
-        "@angular-eslint/no-host-metadata-property": [
-          "error",
-          {
-            "allowStatic": true
           }
         ]
       }

@@ -13,7 +13,6 @@ import { CardComponent } from '../../ui/card/card.component';
       [type]="cardType"
       customClass="bg-light-green"></app-card>
   `,
-  standalone: true,
   styles: [
     `
       ::ng-deep .bg-light-green {

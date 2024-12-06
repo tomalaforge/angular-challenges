@@ -86,7 +86,6 @@ import { MatSliderModule } from '@angular/material/slider';
       }
     `,
   ],
-  standalone: true,
   imports: [
     MatCardModule,
     MatFormFieldModule,

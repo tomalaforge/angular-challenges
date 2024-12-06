@@ -36,7 +36,6 @@ import { ListItemComponent } from '../list-item/list-item.component';
       </button>
     </div>
   `,
-  standalone: true,
   imports: [NgIf, NgFor, ListItemComponent],
 })
 export class CardComponent {

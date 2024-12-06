@@ -5,7 +5,6 @@ import { provideComponentStore } from '@ngrx/component-store';
 import { SchoolStore } from './school.store';
 
 @Component({
-  standalone: true,
   imports: [NgFor, AsyncPipe],
   providers: [provideComponentStore(SchoolStore)],
   selector: 'school',

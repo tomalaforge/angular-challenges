@@ -5,7 +5,6 @@ import { Store } from '@ngrx/store';
 import { TeacherSelectors } from './store/teacher.selectors';
 
 @Component({
-  standalone: true,
   imports: [NgFor, AsyncPipe],
   selector: 'teacher',
   template: `

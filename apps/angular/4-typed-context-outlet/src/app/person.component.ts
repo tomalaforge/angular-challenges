@@ -7,7 +7,6 @@ interface Person {
 }
 
 @Component({
-  standalone: true,
   imports: [NgTemplateOutlet],
   selector: 'person',
   template: `
