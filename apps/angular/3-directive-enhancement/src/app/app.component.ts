@@ -6,7 +6,6 @@ interface Person {
 }
 
 @Component({
-  standalone: true,
   imports: [NgFor, NgIf],
   selector: 'app-root',
   template: `

@@ -11,7 +11,6 @@ enum Direction {
 }
 
 @Component({
-  standalone: true,
   imports: [],
   selector: 'app-root',
   template: `

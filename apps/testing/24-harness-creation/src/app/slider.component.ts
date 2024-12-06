@@ -48,7 +48,6 @@ import { skip } from 'rxjs';
       }
     `,
   ],
-  standalone: true,
   imports: [MatCardModule, MatSliderModule, MatIconModule, FormsModule],
 })
 export class SliderComponent implements OnInit {

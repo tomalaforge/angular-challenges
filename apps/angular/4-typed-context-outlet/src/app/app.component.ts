@@ -4,7 +4,6 @@ import { ListComponent } from './list.component';
 import { PersonComponent } from './person.component';
 
 @Component({
-  standalone: true,
   imports: [NgTemplateOutlet, PersonComponent, ListComponent],
   selector: 'app-root',
   template: `

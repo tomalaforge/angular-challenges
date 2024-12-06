@@ -1,21 +1,22 @@
-import { NgFor } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Pipe, PipeTransform } from '@angular/core';
 
+@Pipe({ name: 'compute', standalone: true })
+export class HeavyComputationPipe implements PipeTransform {
+  transform(name: string, index: number) {
+    return `${name} - ${index}`;
+  }
+}
 @Component({
-  standalone: true,
-  imports: [NgFor],
+  imports: [HeavyComputationPipe],
   selector: 'app-root',
   template: `
-    <div *ngFor="let person of persons; let index = index">
-      {{ heavyComputation(person, index) }}
-    </div>
+    @for (person of persons; track person) {
+      <div>
+        {{ person | compute: $index }}
+      </div>
+    }
   `,
 })
 export class AppComponent {
   persons = ['toto', 'jack'];
-
-  heavyComputation(name: string, index: number) {
-    // very heavy computation
-    return `${name} - ${index}`;
-  }
 }

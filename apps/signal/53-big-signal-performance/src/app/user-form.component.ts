@@ -4,7 +4,6 @@ import { UserStore } from './user.service';
 
 @Component({
   selector: 'user-form',
-  standalone: true,
   imports: [ReactiveFormsModule],
   template: `
     <form [formGroup]="form" (ngSubmit)="submit()" class="flex flex-col gap-4">

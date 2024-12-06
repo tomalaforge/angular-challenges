@@ -4,7 +4,6 @@ import { UserStore } from './user.store';
 
 @Component({
   selector: 'app-information',
-  standalone: true,
   imports: [CommonModule],
   template: `
     <h2 class="mt-10 text-xl">Information Panel</h2>

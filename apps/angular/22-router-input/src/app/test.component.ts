@@ -5,7 +5,6 @@ import { map } from 'rxjs';
 
 @Component({
   selector: 'app-subscription',
-  standalone: true,
   imports: [AsyncPipe],
   template: `
     <div>TestId: {{ testId$ | async }}</div>

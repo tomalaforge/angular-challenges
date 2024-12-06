@@ -2,7 +2,6 @@ import { Component, signal } from '@angular/core';
 import { SliderComponent } from './slider.component';
 
 @Component({
-  standalone: true,
   imports: [SliderComponent],
   selector: 'app-root',
   template: `

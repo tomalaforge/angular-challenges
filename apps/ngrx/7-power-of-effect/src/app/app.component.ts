@@ -4,7 +4,6 @@ import { Store } from '@ngrx/store';
 import { appActions } from './app.actions';
 
 @Component({
-  standalone: true,
   imports: [RouterOutlet, RouterLink],
   selector: 'app-root',
   template: `
