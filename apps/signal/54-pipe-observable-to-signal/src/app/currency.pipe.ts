@@ -1,4 +1,5 @@
 import { inject, Pipe, PipeTransform } from '@angular/core';
+import { map, Observable } from 'rxjs';
 import { CurrencyService } from './currency.service';
 
 @Pipe({
@@ -8,7 +9,7 @@ import { CurrencyService } from './currency.service';
 export class CurrencyPipe implements PipeTransform {
   currencyService = inject(CurrencyService);
 
-  transform(price: number): string {
-    return `${price}${this.currencyService.symbol()}`;
+  transform(price: number): Observable<string> {
+    return this.currencyService.symbol$.pipe(map((s) => `${price}${s}`));
   }
 }
