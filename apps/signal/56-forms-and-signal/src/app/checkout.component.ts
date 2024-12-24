@@ -43,9 +43,9 @@ import { products } from './products';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class CheckoutComponent {
-  quantity = input.required<number>();
-  productId = input.required<string>();
+export default class DashboardComponent {
+  quantity = input(1);
+  productId = input('1');
 
   product = computed(() =>
     products.find((product) => product.id === this.productId()),

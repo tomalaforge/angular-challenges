@@ -2,12 +2,11 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
-  inject,
   input,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { products } from './products';
 
 @Component({
@@ -56,23 +55,15 @@ import { products } from './products';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class OrderComponent {
-  #route = inject(ActivatedRoute);
-  form: FormGroup = new FormGroup({
-    quantity: new FormControl(
-      this.#route.snapshot.queryParams['quantity'] ?? 1,
-      { nonNullable: true },
-    ),
+  form = new FormGroup({
+    quantity: new FormControl(1, { nonNullable: true }),
   });
 
-  get quantityControl(): FormControl<number> {
-    return this.form.get('quantity') as FormControl<number>;
-  }
-
-  productId = input.required<string>();
+  productId = input('1');
   price = computed(
     () => products.find((p) => p.id === this.productId())?.price ?? 0,
   );
-  quantity = toSignal(this.quantityControl.valueChanges, {
+  quantity = toSignal(this.form.controls.quantity.valueChanges, {
     initialValue: this.form.getRawValue().quantity,
   });
   totalWihoutVat = computed(() => Number(this.price()) * this.quantity());
