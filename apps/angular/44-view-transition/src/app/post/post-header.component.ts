@@ -3,7 +3,6 @@ import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'post-header',
-  standalone: true,
   imports: [NgOptimizedImage],
   template: `
     <div class="relative">

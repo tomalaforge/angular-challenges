@@ -11,6 +11,10 @@ contributors:
 challengeNumber: 2
 command: ngrx-effect-vs-selector
 blogLink: https://medium.com/@thomas.laforge/ngrx-effect-vs-reducer-vs-selector-58337ab59043
+videoLinks:
+  - link: https://youtu.be/7fr6JBRocQM
+    alt: Effect vs selector video by Amos Lucian Isaila
+    flag: ES
 sidebar:
   order: 113
 ---

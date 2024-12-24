@@ -6,7 +6,6 @@ import { ThumbnailHeaderComponent } from './thumbnail-header.component';
 
 @Component({
   selector: 'blog-thumbnail',
-  standalone: true,
   imports: [NgOptimizedImage, ThumbnailHeaderComponent, RouterLinkWithHref],
   template: `
     <a [routerLink]="['post', post().id]">

@@ -11,7 +11,6 @@ import {
 @Component({
   selector: 'app-dialog-dialog',
   templateUrl: './dialog.component.html',
-  standalone: true,
   imports: [
     MatButtonModule,
     MatDialogActions,

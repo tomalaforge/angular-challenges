@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
       Back
     </button>
   `,
+  standalone: false,
 })
 export class CreateUserComponent {}
 

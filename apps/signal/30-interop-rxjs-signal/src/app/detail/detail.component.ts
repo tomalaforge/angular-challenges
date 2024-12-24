@@ -5,7 +5,6 @@ import { Photo } from '../photo.model';
 
 @Component({
   selector: 'app-photos',
-  standalone: true,
   imports: [DatePipe, RouterLink],
   template: `
     <img src="{{ photo.url_m }}" alt="{{ photo.title }}" class="image" />

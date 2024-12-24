@@ -9,7 +9,6 @@ import { DetailStore } from './detail.store';
 
 @Component({
   selector: 'app-detail',
-  standalone: true,
   imports: [
     MatButtonModule,
     RouterLink,

@@ -29,6 +29,10 @@
     "translation-ru": {
       "symbol": "🇷🇺",
       "description": "Translate in Russian"
+    },
+    "translation-ch": {
+      "symbol": "🇨🇳",
+      "description": "Translate in Chinese"
     }
   },
   "contributors": [
@@ -303,6 +307,34 @@
       "profile": "https://github.com/Tenessy",
       "contributions": [
         "bug"
+      ]
+    },
+    {
+      "login": "EnochGao",
+      "name": "Enoch Gao",
+      "avatar_url": "https://avatars.githubusercontent.com/u/41459067?v=4",
+      "profile": "https://enochgao.github.io/",
+      "contributions": [
+        "doc",
+        "translation-ch"
+      ]
+    },
+    {
+      "login": "fpalmab",
+      "name": "Francisco Palma",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7729812?v=4",
+      "profile": "https://github.com/fpalmab",
+      "contributions": [
+        "bug"
+      ]
+    },
+    {
+      "login": "michalgrzegorczyk-dev",
+      "name": "Michał Grzegorczyk",
+      "avatar_url": "https://avatars.githubusercontent.com/u/47832176?v=4",
+      "profile": "https://github.com/michalgrzegorczyk-dev",
+      "contributions": [
+        "doc"
       ]
     }
   ],

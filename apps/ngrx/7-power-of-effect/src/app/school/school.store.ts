@@ -1,10 +1,7 @@
 import { School } from '@angular-challenges/power-of-effect/model';
 import { Injectable } from '@angular/core';
-import {
-  ComponentStore,
-  OnStoreInit,
-  tapResponse,
-} from '@ngrx/component-store';
+import { ComponentStore, OnStoreInit } from '@ngrx/component-store';
+import { tapResponse } from '@ngrx/operators';
 import { pipe, switchMap } from 'rxjs';
 import { HttpService } from '../data-access/http.service';
 

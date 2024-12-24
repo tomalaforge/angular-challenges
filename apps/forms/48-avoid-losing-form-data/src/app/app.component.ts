@@ -3,7 +3,6 @@ import { RouterOutlet } from '@angular/router';
 import { NavComponent } from './ui/nav.component';
 
 @Component({
-  standalone: true,
   imports: [RouterOutlet, NavComponent],
   selector: 'app-root',
   template: `

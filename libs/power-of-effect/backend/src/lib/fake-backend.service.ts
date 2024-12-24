@@ -5,7 +5,7 @@ import {
 } from '@angular-challenges/power-of-effect/model';
 import { Injectable, inject } from '@angular/core';
 import { randCompanyName, randFirstName } from '@ngneat/falso';
-import { concatLatestFrom } from '@ngrx/effects';
+import { concatLatestFrom } from '@ngrx/operators';
 import { map, tap, timer } from 'rxjs';
 import { FakeDBService } from './fake-db.service';
 import { PushService } from './push.service';

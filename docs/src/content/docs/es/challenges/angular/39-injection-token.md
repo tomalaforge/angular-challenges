@@ -6,6 +6,10 @@ contributors:
   - nelsongutidev
 challengeNumber: 39
 command: angular-injection-token
+videoLinks:
+  - link: https://www.youtube.com/watch?v=ntggdQycFyc
+    alt: Injection Token by Arthur Lannelucq
+    flag: FR
 sidebar:
   order: 118
 ---

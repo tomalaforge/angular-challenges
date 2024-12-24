@@ -8,7 +8,6 @@ import {
 import { RatingControlComponent } from '../rating-control/rating-control.component';
 
 @Component({
-  standalone: true,
   imports: [RatingControlComponent, ReactiveFormsModule],
   selector: 'app-feedback-form',
   templateUrl: 'feedback-form.component.html',
