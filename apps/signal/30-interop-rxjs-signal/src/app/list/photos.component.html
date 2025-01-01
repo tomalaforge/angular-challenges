@@ -1,0 +1,54 @@
+<h2 class="mb-2 text-xl">Photos</h2>
+
+<mat-form-field appearance="fill">
+  <mat-label>Search</mat-label>
+  <input
+    type="text"
+    matInput
+    [formControl]="searchForm"
+    placeholder="find a photo" />
+</mat-form-field>
+
+<ng-container>
+  <section class="flex flex-col">
+    <section class="flex items-center gap-3">
+      <button
+        [disabled]="page() === 1"
+        [class.bg-gray-400]="page() === 1"
+        class="rounded-md border p-3 text-xl"
+        (click)="store.previousPage()">
+        <
+      </button>
+      <button
+        [disabled]="isLastPage()"
+        [class.bg-gray-400]="isLastPage()"
+        class="rounded-md border p-3 text-xl"
+        (click)="store.nextPage()">
+        >
+      </button>
+      Page :{{ page()}} / {{ pages() }}
+    </section>
+    <mat-progress-bar
+      mode="query"
+      *ngIf="loading()"
+      class="mt-5"></mat-progress-bar>
+    <ul
+      class="flex flex-wrap gap-4"
+      *ngIf="photos() && photos().length > 0; else noPhoto">
+      <li *ngFor="let photo of photos(); trackBy: trackById">
+        <a routerLink="detail" [queryParams]="{ photo: encode(photo) }">
+          <img
+            src="{{ photo.url_q }}"
+            alt="{{ photo.title }}"
+            class="image" />
+        </a>
+      </li>
+    </ul>
+    <ng-template #noPhoto>
+      <div>No Photos found. Type a search word.</div>
+    </ng-template>
+    <footer class="text-red-500">
+      {{ error() }}
+    </footer>
+  </section>
+</ng-container>
