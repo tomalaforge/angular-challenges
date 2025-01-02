@@ -4,7 +4,6 @@ import { PersonListComponent } from './person-list.component';
 import { RandomComponent } from './random.component';
 
 @Component({
-  standalone: true,
   imports: [PersonListComponent, RandomComponent],
   selector: 'app-root',
   template: `

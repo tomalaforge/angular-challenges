@@ -4,7 +4,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 
 @Component({
-  standalone: true,
   imports: [MatButtonModule, MatDialogModule],
   template: `
     <h1 mat-dialog-title>Profil</h1>

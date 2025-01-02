@@ -3,7 +3,6 @@ import { TimerContainerComponent } from './timer-container.component';
 
 @Component({
   selector: 'app-video',
-  standalone: true,
   imports: [TimerContainerComponent],
   template: `
     <div class="flex gap-2">

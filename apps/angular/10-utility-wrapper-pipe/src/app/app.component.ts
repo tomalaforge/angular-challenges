@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { PersonUtils } from './person.utils';
 
 @Component({
-  standalone: true,
   imports: [NgFor],
   selector: 'app-root',
   template: `

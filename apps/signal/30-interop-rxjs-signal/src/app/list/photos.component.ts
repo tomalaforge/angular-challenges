@@ -13,7 +13,6 @@ import { PhotoStore } from './photos.store';
 
 @Component({
   selector: 'app-photos',
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     MatFormFieldModule,

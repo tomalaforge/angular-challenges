@@ -5,7 +5,6 @@ import { TextComponent } from './text.component';
 
 @Component({
   selector: 'page',
-  standalone: true,
   imports: [TextStaticComponent, TextComponent],
   template: `
     <static-text></static-text>

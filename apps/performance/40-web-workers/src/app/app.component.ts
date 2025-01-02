@@ -4,7 +4,6 @@ import { HeavyCalculationService } from './heavy-calculation.service';
 import { UnknownPersonComponent } from './unknown-person/unknown-person.component';
 
 @Component({
-  standalone: true,
   imports: [CommonModule, UnknownPersonComponent],
   providers: [HeavyCalculationService],
   selector: 'app-root',
