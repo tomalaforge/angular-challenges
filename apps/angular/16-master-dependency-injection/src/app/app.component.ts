@@ -23,7 +23,6 @@ export class ProductDirective {
 }
 
 @Component({
-  standalone: true,
   imports: [TableComponent, CurrencyPipe, AsyncPipe, NgFor, ProductDirective],
   providers: [CurrencyService],
   selector: 'app-root',

@@ -1,5 +1,9 @@
 import { FakeBackendService } from '@angular-challenges/power-of-effect/backend';
-import { APP_INITIALIZER, ApplicationConfig, inject } from '@angular/core';
+import {
+  ApplicationConfig,
+  inject,
+  provideAppInitializer,
+} from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
 import { provideEffects } from '@ngrx/effects';
@@ -27,22 +31,20 @@ export const appConfig: ApplicationConfig = {
     provideStore(REDUCERS),
     provideEffects([TeacherEffects, StudentEffects]),
     provideRouter(ROUTES),
-    {
-      provide: APP_INITIALIZER,
-      multi: true,
-      useFactory: () => {
+    provideAppInitializer(() => {
+      const initializerFn = (() => {
         const service = inject(FakeBackendService);
         return () => service.start();
-      },
-    },
-    {
-      provide: APP_INITIALIZER,
-      multi: true,
-      useFactory: () => {
+      })();
+      return initializerFn();
+    }),
+    provideAppInitializer(() => {
+      const initializerFn = (() => {
         const service = inject(NotificationService);
         return () => service.init();
-      },
-    },
+      })();
+      return initializerFn();
+    }),
     provideAnimations(),
   ],
 };

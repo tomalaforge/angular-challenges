@@ -4,7 +4,6 @@ import { PostComponent } from './react/post.component';
 type Post = { title: string; description: string };
 
 @Component({
-  standalone: true,
   imports: [PostComponent],
   selector: 'app-root',
   template: `

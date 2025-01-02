@@ -12,7 +12,6 @@ import { PostHeaderComponent } from './post-header.component';
 
 @Component({
   selector: 'post',
-  standalone: true,
   imports: [
     ThumbnailHeaderComponent,
     NgOptimizedImage,

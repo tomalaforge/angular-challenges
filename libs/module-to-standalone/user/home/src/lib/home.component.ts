@@ -5,5 +5,6 @@ import { Component } from '@angular/core';
   template: `
     User Home component
   `,
+  standalone: false,
 })
 export class UserHomeComponent {}

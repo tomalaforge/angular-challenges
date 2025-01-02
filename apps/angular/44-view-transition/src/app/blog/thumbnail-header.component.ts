@@ -3,7 +3,6 @@ import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'thumbnail-header',
-  standalone: true,
   imports: [NgOptimizedImage],
   template: `
     <div class="flex gap-3">

@@ -5,7 +5,6 @@ import { RouterLink } from '@angular/router';
 import { availableBooks } from './book.model';
 
 @Component({
-  standalone: true,
   imports: [ReactiveFormsModule, RouterLink, NgFor, NgIf],
   styles: [
     `

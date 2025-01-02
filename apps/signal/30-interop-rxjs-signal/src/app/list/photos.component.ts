@@ -19,7 +19,6 @@ import { PhotosSignalStore } from './photos-signal.store';
 
 @Component({
   selector: 'app-photos',
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     MatFormFieldModule,

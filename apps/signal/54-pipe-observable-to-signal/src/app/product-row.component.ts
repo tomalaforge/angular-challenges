@@ -10,7 +10,6 @@ import { CurrencyService } from './currency.service';
 import { Product } from './product.model';
 
 @Component({
-  standalone: true,
   selector: 'tr[product-row]',
   template: `
     <td>{{ productInfo.name }}</td>

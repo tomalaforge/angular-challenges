@@ -9,7 +9,6 @@ import { FormsModule } from '@angular/forms';
 import { UserService } from './user.service';
 
 @Component({
-  standalone: true,
   imports: [FormsModule],
   selector: 'app-actions',
   template: `

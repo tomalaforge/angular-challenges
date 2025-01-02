@@ -3,7 +3,6 @@ import { BtnHelmetDirective } from '@angular-challenges/decoupling/helmet';
 import { Component } from '@angular/core';
 
 @Component({
-  standalone: true,
   imports: [BtnDisabledDirective, BtnHelmetDirective],
   selector: 'app-root',
   template: `
