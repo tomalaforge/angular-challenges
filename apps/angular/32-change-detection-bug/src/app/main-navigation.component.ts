@@ -10,7 +10,6 @@ interface MenuItem {
 
 @Component({
   selector: 'app-nav',
-  standalone: true,
   imports: [RouterLink, RouterLinkActive, NgFor],
   template: `
     <ng-container *ngFor="let menu of menus">
@@ -38,7 +37,6 @@ export class NavigationComponent {
 }
 
 @Component({
-  standalone: true,
   imports: [NavigationComponent, NgIf, AsyncPipe],
   template: `
     <ng-container *ngIf="info$ | async as info">

@@ -6,7 +6,6 @@ import { AppService } from './app.service';
 import { TopicType } from './localDB.service';
 
 @Component({
-  standalone: true,
   selector: 'button-delete-topic',
   imports: [AsyncPipe],
   template: `
@@ -36,7 +35,6 @@ export class ButtonDeleteComponent {
 }
 
 @Component({
-  standalone: true,
   imports: [AsyncPipe, NgFor, ButtonDeleteComponent],
   selector: 'app-root',
   template: `

@@ -4,7 +4,6 @@ import { products } from './products';
 
 @Component({
   selector: 'app-dashboard',
-  standalone: true,
   imports: [RouterLink],
   template: `
     <h2 class="mb-5 w-full bg-gray-400 p-2 text-white">List of Products</h2>

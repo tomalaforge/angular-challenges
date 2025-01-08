@@ -6,7 +6,6 @@ export type StaticTextType = 'normal' | 'warning' | 'error';
 
 @Component({
   selector: 'static-text',
-  standalone: true,
   imports: [TextComponent],
   template: `
     <text [font]="font" [color]="color">This is a static text</text>

@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { CounterComponent } from './counter.component';
 
 @Component({
-  standalone: true,
   imports: [CounterComponent],
   selector: 'app-root',
   template: `

@@ -4,7 +4,6 @@ import { ProductRowComponent } from './product-row.component';
 import { products } from './product.model';
 
 @Component({
-  standalone: true,
   imports: [TableComponent, ProductRowComponent],
   selector: 'app-root',
   template: `

@@ -4,7 +4,6 @@ import { ActionsComponent } from './action.component';
 import { UserService } from './user.service';
 
 @Component({
-  standalone: true,
   imports: [FormsModule, ActionsComponent],
   selector: 'app-root',
   template: `

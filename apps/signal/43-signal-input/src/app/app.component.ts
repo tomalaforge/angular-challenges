@@ -1,10 +1,8 @@
-import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { UserComponent } from './user.component';
 
 @Component({
-  standalone: true,
-  imports: [UserComponent, JsonPipe],
+  imports: [UserComponent],
   selector: 'app-root',
   template: `
     <div class="flex flex-col gap-3">

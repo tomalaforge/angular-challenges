@@ -14,7 +14,6 @@ import {
 import { UserStore } from './user.store';
 
 @Component({
-  standalone: true,
   imports: [InformationComponent, RouterLink, ButtonComponent],
   selector: 'app-login',
   template: `

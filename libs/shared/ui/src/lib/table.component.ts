@@ -3,7 +3,6 @@ import { Component, ContentChild, Input, TemplateRef } from '@angular/core';
 
 @Component({
   selector: 'table',
-  standalone: true,
   imports: [NgTemplateOutlet],
   template: `
     <thead>

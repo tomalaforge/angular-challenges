@@ -3,7 +3,8 @@ import type { Props } from '@astrojs/starlight/props';
 
 const {lang, locale} = Astro.props;
 
-const shortLang = lang.split('-')[0];
+// Chinese needs to `zh-CN`
+// const shortLang =lang.split('-')[0];
 ---
 
 <div class="separator"></div>
@@ -19,7 +20,7 @@ const shortLang = lang.split('-')[0];
         data-emit-metadata="0"
         data-input-position="bottom"
         data-theme="preferred_color_scheme"
-        data-lang={shortLang}
+        data-lang={lang}
         data-loading="lazy"
         crossorigin="anonymous"
         async>

@@ -9,7 +9,6 @@ import { BehaviorSubject } from 'rxjs';
 import { ErrorDialog } from './error.dialog';
 import { ProfilConfirmationDialog } from './profil-confirmation.dialog';
 @Component({
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     MatDialogModule,
