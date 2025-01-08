@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  effect,
   input,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -33,7 +34,7 @@ import { products } from './products';
       </form>
       <div class="flex justify-between">
         <div>SubTotal</div>
-        <div>{{ totalWihoutVat() }} €</div>
+        <div>{{ totalWithoutVat() }} €</div>
       </div>
       <div class="flex justify-between">
         <div>VAT (21%)</div>
@@ -60,13 +61,23 @@ export default class OrderComponent {
   });
 
   productId = input('1');
+  quantity = input(1);
   price = computed(
     () => products.find((p) => p.id === this.productId())?.price ?? 0,
   );
-  quantity = toSignal(this.form.controls.quantity.valueChanges, {
+
+  quantityValue = toSignal(this.form.controls.quantity.valueChanges, {
     initialValue: this.form.getRawValue().quantity,
   });
-  totalWihoutVat = computed(() => Number(this.price()) * this.quantity());
-  vat = computed(() => this.totalWihoutVat() * 0.21);
-  total = computed(() => this.totalWihoutVat() + this.vat());
+
+  totalWithoutVat = computed(() => Number(this.price()) * this.quantityValue());
+  vat = computed(() => this.totalWithoutVat() * 0.21);
+  total = computed(() => this.totalWithoutVat() + this.vat());
+
+  constructor() {
+    effect(() => {
+      const quantityFromUrl = this.quantity();
+      this.form.controls.quantity.setValue(quantityFromUrl);
+    });
+  }
 }
