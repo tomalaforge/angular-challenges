@@ -1,0 +1,79 @@
+---
+title: 欢迎来到 Angular 挑战
+description: 从解决这些挑战开始，成为一名更好的Angular前端工程师.
+template: splash
+noCommentSection: true
+hero:
+  tagline: 现在就开始成为Angular专家吧!
+  image:
+    file: ../../../assets/angular-challenge.webp
+  actions:
+    - text: 开始
+      link: /zh-cn/guides/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: 进入最新的挑战
+      link: /zh-cn/challenges/signal/56-forms-and-signal/
+      icon: rocket
+    - text: 给个星星
+      link: https://github.com/tomalaforge/angular-challenges
+      icon: github
+      variant: secondary
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+import MyIcon from '../../../components/MyIcon.astro';
+
+import SubscriptionForm from '../../../components/SubscriptionForm.astro';
+
+<CardGrid>
+<Card title="56 挑战">
+    该存储库包含与<b>Angular</b>, <b>Nx</b>, <b>RxJS</b>, <b>Ngrx</b>和<b>Typescript</b>相关的56个挑战。这些挑战围绕现实生活中的问题或特定功能，旨在提升您的技能。
+</Card>
+
+<Card title="订阅以获取最新挑战的通知">
+  <SubscriptionForm isNote={false} />
+</Card>
+
+<Card title="成为开源软件维护者">
+  这个存储库的一个目标是<b>降低进入开放源码软件（OSS）的门槛</b>。通过参与这些挑战，您将学习如何开始为其他任何开源项目做出贡献
+</Card>
+
+<Card title="与他人共同学习">
+  学习和实践一个新的框架总是具有挑战性的。这些挑战提供了实际使用案例，可以让你将所学的知识应用到实际中。
+  任何人都可以发表评论或提供帮助。
+  <b>
+    独自学习固然很棒，但与他人一起学习会让你走得更远。
+  </b>
+</Card>
+
+<Card title="贡献">
+  你有任何问题、有趣的bug或者想法吗？不要犹豫，{' '}不要浪费任何时间<b>创造属于你自己的挑战</b>。
+</Card>
+
+<Card title="为面试做好准备">
+  通过完成这些挑战，您将为前端面试中可能出现的任何技术问题做好准备
+</Card>
+
+<Card title="赞助">
+    这个项目是免费的，并且希望能够长期保持免费。然而，所有工作都是在我的业余时间完成的，包括创建挑战和审核合并请求（PR）。<b>赞助可以支持我，并有助于项目的成长。</b>
+</Card>
+</CardGrid>
+
+---
+
+<div class="article-footer">
+  <a
+    class="action"
+    href="https://github.com/sponsors/tomalaforge"
+    alt="Sponsor link">
+    <MyIcon name="heart" size="1.2rem" color="white" />
+    赞助这个项目
+  </a>
+</div>
+
+<div class="main-page-footer">
+  由{' '}
+  <a href="https://github.com/tomalaforge?tab=repositories">Thomas Laforge</a>
+  创建 - 由🌟 <a href="https://starlight.astro.build/">Starlight</a>驱动
+</div>

@@ -12,7 +12,6 @@ import { products } from './products';
 
 @Component({
   selector: 'app-order',
-  standalone: true,
   imports: [RouterLink, ReactiveFormsModule],
   template: `
     <h2 class="mb-5 w-full bg-gray-400 p-2 text-white">Order</h2>
@@ -80,4 +79,5 @@ export default class OrderComponent {
       this.form.controls.quantity.setValue(quantityFromUrl);
     });
   }
+
 }

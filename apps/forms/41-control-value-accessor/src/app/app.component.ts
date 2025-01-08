@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FeedbackFormComponent } from './feedback-form/feedback-form.component';
 
 @Component({
-  standalone: true,
   imports: [FeedbackFormComponent],
   selector: 'app-root',
   template: `

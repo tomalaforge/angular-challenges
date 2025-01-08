@@ -7,12 +7,12 @@
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@angular-devkit/build-angular:application",
+      "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/angular/1-projection",
         "index": "apps/angular/1-projection/src/index.html",
-        "browser": "apps/angular/1-projection/src/main.ts",
+        "main": "apps/angular/1-projection/src/main.ts",
         "polyfills": ["apps/angular/1-projection/src/polyfills.ts"],
         "tsConfig": "apps/angular/1-projection/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
@@ -41,7 +41,9 @@
           "outputHashing": "all"
         },
         "development": {
+          "buildOptimizer": false,
           "optimization": false,
+          "vendorChunk": true,
           "extractLicenses": false,
           "sourceMap": true,
           "namedChunks": true
@@ -68,10 +70,14 @@
       }
     },
     "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/angular/1-projection/jest.config.ts"
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "coverage": true
+        }
       }
     }
   }

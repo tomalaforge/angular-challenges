@@ -3,7 +3,6 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink, RouterModule } from '@angular/router';
 
 @Component({
-  standalone: true,
   imports: [RouterLink, RouterModule, ReactiveFormsModule],
   selector: 'app-root',
   template: `

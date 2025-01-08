@@ -12,7 +12,6 @@ import { RowComponent } from './ui/row.component';
 
 @Component({
   selector: 'app-list',
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     AddComponent,

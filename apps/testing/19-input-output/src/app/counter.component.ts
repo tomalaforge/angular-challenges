@@ -11,7 +11,6 @@ import { ComponentStore } from '@ngrx/component-store';
 
 @Component({
   selector: 'app-counter',
-  standalone: true,
   imports: [AsyncPipe, LetDirective],
   template: `
     <ng-container *ngrxLet="counter$ as counter">

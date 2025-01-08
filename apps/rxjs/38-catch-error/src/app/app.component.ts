@@ -6,7 +6,6 @@ import { FormsModule } from '@angular/forms';
 import { Subject, concatMap, map } from 'rxjs';
 
 @Component({
-  standalone: true,
   imports: [CommonModule, FormsModule],
   selector: 'app-root',
   template: `

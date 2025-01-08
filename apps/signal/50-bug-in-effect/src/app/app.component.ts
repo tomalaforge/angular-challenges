@@ -7,7 +7,6 @@ import {
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  standalone: true,
   imports: [FormsModule],
   selector: 'app-root',
   template: `

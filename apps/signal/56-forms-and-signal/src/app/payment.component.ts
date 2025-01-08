@@ -3,7 +3,6 @@ import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
-  standalone: true,
   imports: [RouterLink],
   template: `
     <h2 class="mb-1 w-full bg-green-700 p-2 text-white">Payment Success</h2>

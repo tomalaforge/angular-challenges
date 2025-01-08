@@ -5,7 +5,6 @@ import { User } from './user.model';
 import { Component } from '@angular/core';
 @Component({
   selector: 'sdi-user',
-  standalone: true,
   imports: [MatIconModule],
   template: `
     <mat-icon aria-hidden="false" aria-label="user icon" fontIcon="person" />

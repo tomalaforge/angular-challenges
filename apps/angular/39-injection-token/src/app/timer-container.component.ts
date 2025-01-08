@@ -3,7 +3,6 @@ import { DEFAULT_TIMER } from './data';
 import { TimerComponent } from './timer.component';
 @Component({
   selector: 'timer-container',
-  standalone: true,
   imports: [TimerComponent],
   template: `
     <div class="flex gap-2">

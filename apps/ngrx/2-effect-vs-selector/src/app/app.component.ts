@@ -15,7 +15,6 @@ import { loadUsers } from './store/user/user.actions';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
   imports: [NgFor, AsyncPipe],
   template: `
     <h1>Activity Board</h1>

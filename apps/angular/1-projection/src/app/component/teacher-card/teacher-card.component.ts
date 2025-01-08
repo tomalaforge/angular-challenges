@@ -20,7 +20,6 @@ import { CardComponent } from '../../ui/card/card.component';
       }
     `,
   ],
-  standalone: true,
   imports: [CardComponent],
 })
 export class TeacherCardComponent implements OnInit {

@@ -6,7 +6,6 @@ import { Person } from './person.model';
 
 @Component({
   selector: 'app-person-list',
-  standalone: true,
   imports: [CommonModule, NgForTrackByModule],
   template: `
     <div class="relative h-[300px] overflow-hidden">

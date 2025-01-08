@@ -69,6 +69,11 @@ Check [all 56 challenges](https://angular-challenges.vercel.app/)
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/fixedmichal"><img src="https://avatars.githubusercontent.com/u/26270192?v=4?s=100" width="100px;" alt="fixed_michal"/><br /><sub><b>fixed_michal</b></sub></a><br /><a href="https://github.com/tomalaforge/angular-challenges/issues?q=author%3Afixedmichal" title="Bug reports">🐛</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Tenessy"><img src="https://avatars.githubusercontent.com/u/65855673?v=4?s=100" width="100px;" alt="Tenessy"/><br /><sub><b>Tenessy</b></sub></a><br /><a href="https://github.com/tomalaforge/angular-challenges/issues?q=author%3ATenessy" title="Bug reports">🐛</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://enochgao.github.io/"><img src="https://avatars.githubusercontent.com/u/41459067?v=4?s=100" width="100px;" alt="Enoch Gao"/><br /><sub><b>Enoch Gao</b></sub></a><br /><a href="https://github.com/tomalaforge/angular-challenges/commits?author=EnochGao" title="Documentation">📖</a> <a href="#translation-ch-EnochGao" title="Translate in Chinese">🇨🇳</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/fpalmab"><img src="https://avatars.githubusercontent.com/u/7729812?v=4?s=100" width="100px;" alt="Francisco Palma"/><br /><sub><b>Francisco Palma</b></sub></a><br /><a href="https://github.com/tomalaforge/angular-challenges/issues?q=author%3Afpalmab" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/michalgrzegorczyk-dev"><img src="https://avatars.githubusercontent.com/u/47832176?v=4?s=100" width="100px;" alt="Michał Grzegorczyk"/><br /><sub><b>Michał Grzegorczyk</b></sub></a><br /><a href="https://github.com/tomalaforge/angular-challenges/commits?author=michalgrzegorczyk-dev" title="Documentation">📖</a></td>
+    </tr>
   </tbody>
   <tfoot>
     <tr>
