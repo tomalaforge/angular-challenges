@@ -1,17 +1,38 @@
 import { Component, OnInit } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+import {
+  FakeHttpService,
+  randStudent,
+} from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
 import { CardType } from '../../model/card.model';
 import { Student } from '../../model/student.model';
 import { CardComponent } from '../../ui/card/card.component';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-student-card',
   template: `
+    <ng-template #studentTemplate let-student>
+      <app-list-item (deleteEventEmitter)="deleteItem(student.id)">
+        <ng-container item-body>{{ student.firstName }}</ng-container>
+      </app-list-item>
+    </ng-template>
     <app-card
       [list]="students"
-      [type]="cardType"
-      customClass="bg-light-green"></app-card>
+      [templateRef]="studentTemplate"
+      customClass="bg-light-green">
+      <ng-container card-header>
+        <img src="assets/img/student.webp" width="200px" />
+      </ng-container>
+      <ng-container card-footer>
+        <button
+          style="width: 100%;"
+          class="rounded-sm border border-blue-500 bg-blue-300 p-2"
+          (click)="addItem()">
+          Add
+        </button>
+      </ng-container>
+    </app-card>
   `,
   styles: [
     `
@@ -20,7 +41,8 @@ import { CardComponent } from '../../ui/card/card.component';
       }
     `,
   ],
-  imports: [CardComponent],
+  imports: [CardComponent, ListItemComponent],
+  standalone: true,
 })
 export class StudentCardComponent implements OnInit {
   students: Student[] = [];
@@ -34,6 +56,17 @@ export class StudentCardComponent implements OnInit {
   ngOnInit(): void {
     this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
 
-    this.store.students$.subscribe((s) => (this.students = s));
+    this.store.elements$.subscribe((s) => (this.students = s));
   }
+
+  deleteItem(id: number): void {
+    this.store.deleteOne(id);
+  }
+
+  addItem(): void {
+    const element = randStudent();
+    this.store.addOne(element);
+  }
+
+  protected readonly JSON = JSON;
 }
