@@ -4,7 +4,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
-  standalone: true,
   imports: [MatButtonModule],
   selector: 'app-sensitive-action',
   templateUrl: './sensitive-action.component.html',

@@ -5,7 +5,6 @@ import { Person } from './person.model';
 
 @Component({
   selector: 'app-person-list',
-  standalone: true,
   imports: [CommonModule],
   template: `
     <div

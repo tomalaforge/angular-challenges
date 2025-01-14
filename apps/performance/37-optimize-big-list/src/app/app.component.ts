@@ -8,7 +8,6 @@ import { PersonService } from './list.service';
 import { PersonListComponent } from './person-list.component';
 
 @Component({
-  standalone: true,
   imports: [
     NgIf,
     PersonListComponent,

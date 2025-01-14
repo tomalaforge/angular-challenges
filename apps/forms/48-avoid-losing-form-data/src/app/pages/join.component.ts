@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormComponent } from '../ui/form.component';
 
 @Component({
-  standalone: true,
   imports: [FormComponent],
   template: `
     <section class="mx-auto	max-w-screen-sm">

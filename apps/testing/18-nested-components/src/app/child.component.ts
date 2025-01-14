@@ -12,7 +12,6 @@ import { HttpService } from './http.service';
 
 @Component({
   selector: 'app-input',
-  standalone: true,
   imports: [ReactiveFormsModule],
   template: `
     <input type="text" [formControl]="title" />
@@ -61,7 +60,6 @@ export class ErrorComponent {
 
 @Component({
   selector: 'app-child',
-  standalone: true,
   imports: [
     ResultComponent,
     ButtonComponent,

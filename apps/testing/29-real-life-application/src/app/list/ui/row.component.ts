@@ -10,7 +10,6 @@ import { Ticket, TicketUser, User } from '../../backend.service';
 
 @Component({
   selector: 'app-row',
-  standalone: true,
   imports: [
     RouterLink,
     ReactiveFormsModule,

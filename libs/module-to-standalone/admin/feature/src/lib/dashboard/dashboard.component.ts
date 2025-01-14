@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
       Create User
     </button>
   `,
+  standalone: false,
 })
 export class DashboardComponent {}
 

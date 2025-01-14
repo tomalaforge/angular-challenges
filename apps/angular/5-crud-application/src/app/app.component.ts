@@ -4,7 +4,6 @@ import { Component, OnInit } from '@angular/core';
 import { randText } from '@ngneat/falso';
 
 @Component({
-  standalone: true,
   imports: [CommonModule],
   selector: 'app-root',
   template: `

@@ -4,7 +4,6 @@ import { ThumbnailComponent } from './thumbnail.component';
 
 @Component({
   selector: 'blog',
-  standalone: true,
   imports: [ThumbnailComponent],
   template: `
     <div

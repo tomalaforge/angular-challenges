@@ -12,7 +12,7 @@ videoLinks:
     alt: Projection video by Arthur Lannelucq
     flag: FR
   - link: https://www.youtube.com/watch?v=yNrfvu7vTa4
-    alt: Projection video by Amos Lucian IsailaAmos Lucian Isaila
+    alt: Projection video by Amos Lucian Isaila
     flag: ES
 sidebar:
   order: 1

@@ -66,9 +66,6 @@
       "options": {
         "buildTarget": "signal-forms-and-signal:build"
       }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint"
     }
   }
 }

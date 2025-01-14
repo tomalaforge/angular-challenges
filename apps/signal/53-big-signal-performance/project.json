@@ -64,9 +64,6 @@
       "options": {
         "buildTarget": "signal-big-signal-performance:build"
       }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint"
     }
   }
 }

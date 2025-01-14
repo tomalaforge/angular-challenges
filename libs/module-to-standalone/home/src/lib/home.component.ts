@@ -20,6 +20,7 @@ import { Component, Inject } from '@angular/core';
 
     <section>LoadedToken {{ token }}</section>
   `,
+  standalone: false,
 })
 export class HomeComponent {
   constructor(

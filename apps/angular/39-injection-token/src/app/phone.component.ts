@@ -4,7 +4,6 @@ import { TimerContainerComponent } from './timer-container.component';
 
 @Component({
   selector: 'app-phone',
-  standalone: true,
   imports: [TimerContainerComponent],
   providers: [getDefaultTimerProvider(2)],
   template: `

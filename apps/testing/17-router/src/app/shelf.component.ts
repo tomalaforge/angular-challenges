@@ -6,7 +6,6 @@ import { availableBooks } from './book.model';
 
 @Component({
   selector: 'app-shelf',
-  standalone: true,
   imports: [AsyncPipe, JsonPipe, NgFor],
   template: `
     <ul>

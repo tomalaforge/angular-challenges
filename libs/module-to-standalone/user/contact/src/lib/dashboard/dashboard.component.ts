@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
       Create contact
     </button>
   `,
+  standalone: false,
 })
 export class ContactDashboardComponent {}
 
