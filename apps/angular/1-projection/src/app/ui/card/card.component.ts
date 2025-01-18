@@ -1,5 +1,6 @@
 import { NgFor } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CardListItem } from '../../model/card.model';
 import { ListItemComponent } from '../list-item/list-item.component';
 
 @Component({
@@ -9,7 +10,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
     <section>
       <app-list-item
         *ngFor="let item of list"
-        [name]="getListItemName(item)"
+        [name]="item.name"
         [id]="item.id"
         (deleteItemEvent)="handleDeleteItemEvent($event)"></app-list-item>
     </section>
@@ -25,8 +26,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
   },
 })
 export class CardComponent {
-  @Input() list: any[] | null = null;
-  @Input({ required: true }) getListItemName!: (listItem: any) => string;
+  @Input() list: CardListItem[] | null = null;
   @Output() deleteItemEvent = new EventEmitter<number>();
   @Output() addNewItemEvent = new EventEmitter<void>();
 

@@ -4,15 +4,14 @@ import {
   randStudent,
 } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
-import { Student } from '../../model/student.model';
+import { CardListItem } from '../../model/card.model';
 import { CardComponent } from '../../ui/card/card.component';
 
 @Component({
   selector: 'app-student-card',
   template: `
     <app-card
-      [list]="students"
-      [getListItemName]="getListItemName"
+      [list]="studentListItems"
       class="bg-light-green"
       (addNewItemEvent)="handleAddNewItemEvent()"
       (deleteItemEvent)="handleDeleteItemEvent($event)">
@@ -31,8 +30,7 @@ import { CardComponent } from '../../ui/card/card.component';
   imports: [CardComponent],
 })
 export class StudentCardComponent implements OnInit {
-  students: Student[] = [];
-  getListItemName = (student: Student) => student.firstName;
+  studentListItems: CardListItem[] = [];
 
   constructor(
     private http: FakeHttpService,
@@ -42,7 +40,14 @@ export class StudentCardComponent implements OnInit {
   ngOnInit(): void {
     this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
 
-    this.store.students$.subscribe((s) => (this.students = s));
+    this.store.students$.subscribe((students) => {
+      this.studentListItems = students.map((student) => {
+        return {
+          name: student.firstName,
+          id: student.id,
+        };
+      });
+    });
   }
 
   handleAddNewItemEvent() {
