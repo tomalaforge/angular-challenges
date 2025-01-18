@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+import {
+  FakeHttpService,
+  randTeacher,
+} from '../../data-access/fake-http.service';
 import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
 import { Teacher } from '../../model/teacher.model';
 import { CardComponent } from '../../ui/card/card.component';
 
@@ -10,12 +12,18 @@ import { CardComponent } from '../../ui/card/card.component';
   template: `
     <app-card
       [list]="teachers"
-      [type]="cardType"
-      customClass="bg-light-red"></app-card>
+      [getListItemName]="getListItemName"
+      class="bg-light-red"
+      (addNewItemEvent)="handleAddNewItemEvent()"
+      (deleteItemEvent)="handleDeleteItemEvent($event)">
+      <div card-img>
+        <img src="assets/img/teacher.png" width="200px" />
+      </div>
+    </app-card>
   `,
   styles: [
     `
-      ::ng-deep .bg-light-red {
+      .bg-light-red {
         background-color: rgba(250, 0, 0, 0.1);
       }
     `,
@@ -24,7 +32,7 @@ import { CardComponent } from '../../ui/card/card.component';
 })
 export class TeacherCardComponent implements OnInit {
   teachers: Teacher[] = [];
-  cardType = CardType.TEACHER;
+  getListItemName = (teacher: Teacher) => teacher.firstName;
 
   constructor(
     private http: FakeHttpService,
@@ -35,5 +43,13 @@ export class TeacherCardComponent implements OnInit {
     this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
 
     this.store.teachers$.subscribe((t) => (this.teachers = t));
+  }
+
+  handleAddNewItemEvent() {
+    this.store.addOne(randTeacher());
+  }
+
+  handleDeleteItemEvent(id: number) {
+    this.store.deleteOne(id);
   }
 }
