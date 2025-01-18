@@ -4,15 +4,14 @@ import {
   FakeHttpService,
   randomCity,
 } from '../../data-access/fake-http.service';
-import { City } from '../../model/city.model';
+import { CardListItem } from '../../model/card.model';
 import { CardComponent } from '../../ui/card/card.component';
 
 @Component({
   selector: 'app-city-card',
   template: `
     <app-card
-      [list]="cities"
-      [getListItemName]="getListItemName"
+      [list]="cityListItems"
       class="bg-light-green"
       (addNewItemEvent)="handleAddNewItemEvent()"
       (deleteItemEvent)="handleDeleteItemEvent($event)">
@@ -31,8 +30,7 @@ import { CardComponent } from '../../ui/card/card.component';
   imports: [CardComponent],
 })
 export class CityCardComponent implements OnInit {
-  cities: City[] = [];
-  getListItemName = (city: City) => city.name;
+  cityListItems: CardListItem[] = [];
 
   constructor(
     private http: FakeHttpService,
@@ -41,7 +39,14 @@ export class CityCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.http.fetchCities$.subscribe((e) => this.store.addAll(e));
-    this.store.cities$.subscribe((e) => (this.cities = e));
+    this.store.cities$.subscribe((cities) => {
+      this.cityListItems = cities.map((city) => {
+        return {
+          name: city.name,
+          id: city.id,
+        };
+      });
+    });
   }
 
   handleAddNewItemEvent() {
