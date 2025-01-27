@@ -93,15 +93,6 @@
       }
     },
     {
-      "plugin": "@nx/cypress/plugin",
-      "options": {
-        "targetName": "component-test",
-        "ciTargetName": "e2e-ci",
-        "openTargetName": "open-cypress",
-        "componentTestingTargetName": "component-test"
-      }
-    },
-    {
       "plugin": "@nx/jest/plugin",
       "options": {
         "targetName": "test"

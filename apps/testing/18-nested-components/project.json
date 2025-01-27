@@ -82,6 +82,15 @@
           "coverage": true
         }
       }
+    },
+    "component-test": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/testing/18-nested-components/cypress.config.ts",
+        "testingType": "component",
+        "skipServe": true,
+        "devServerTarget": "testing-nested-components:build"
+      }
     }
   }
 }

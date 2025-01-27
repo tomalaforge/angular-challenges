@@ -85,6 +85,15 @@
           "coverage": true
         }
       }
+    },
+    "component-test": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/testing/29-real-life-application/cypress.config.ts",
+        "testingType": "component",
+        "skipServe": true,
+        "devServerTarget": "testing-real-life-application:build"
+      }
     }
   }
 }
