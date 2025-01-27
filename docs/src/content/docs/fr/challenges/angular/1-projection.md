@@ -37,12 +37,11 @@ Bien que l'application fonctionne, l'expérience développeur est loin d'être o
 ## Contraintes
 
 - Vous <b>devez</b> refactoriser le `CardComponent` et le `ListItemComponent`.
-- La directive `NgFor` doit être déclarée et rester à l'intérieur du `CardComponent`. Vous pourriez être tenté de la déplacer dans le `ParentCardComponent` comme `TeacherCardComponent`.
-- Le composant `CardComponent` ne doit contenir aucun `NgIf` ni `NgSwitch`.
+- La boucle `@for` doit être déclarée et rester à l'intérieur du `CardComponent`. Vous pourriez être tenté de la déplacer dans le `ParentCardComponent` comme `TeacherCardComponent`.
+- Le composant `CardComponent` ne doit contenir aucune condition.
 - CSS: essayez d'éviter d'utiliser `::ng-deep`. Trouvez un meilleur moyen de gérer le style CSS.
 
 ## Challenges Bonus
 
-- Essayez de travailler avec la nouvelle syntaxe de contrôle de flux pour les boucles et les conditions (documentation [ici](https://angular.dev/guide/templates/control-flow))
 - Utilisez l'API des signals pour gérer l'état de vos composants (documentation [ici](https://angular.dev/guide/signals))
 - Pour référencer le template, utilisez une directive au lieu d'une magic string ([Qu'est-ce qui pose problème avec les magic string ?](https://softwareengineering.stackexchange.com/a/365344))
