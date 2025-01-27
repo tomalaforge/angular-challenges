@@ -3,3 +3,8 @@ export enum CardType {
   STUDENT,
   CITY,
 }
+
+export interface CardListItem {
+  name: string;
+  id: number;
+}

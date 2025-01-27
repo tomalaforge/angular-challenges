@@ -1,21 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+import {
+  FakeHttpService,
+  randTeacher,
+} from '../../data-access/fake-http.service';
 import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
-import { Teacher } from '../../model/teacher.model';
+import { CardListItem } from '../../model/card.model';
 import { CardComponent } from '../../ui/card/card.component';
 
 @Component({
   selector: 'app-teacher-card',
   template: `
     <app-card
-      [list]="teachers"
-      [type]="cardType"
-      customClass="bg-light-red"></app-card>
+      [list]="teacherListItems"
+      class="bg-light-red"
+      (addNewItemEvent)="handleAddNewItemEvent()"
+      (deleteItemEvent)="handleDeleteItemEvent($event)">
+      <div card-img>
+        <img src="assets/img/teacher.png" width="200px" />
+      </div>
+    </app-card>
   `,
   styles: [
     `
-      ::ng-deep .bg-light-red {
+      .bg-light-red {
         background-color: rgba(250, 0, 0, 0.1);
       }
     `,
@@ -23,8 +30,7 @@ import { CardComponent } from '../../ui/card/card.component';
   imports: [CardComponent],
 })
 export class TeacherCardComponent implements OnInit {
-  teachers: Teacher[] = [];
-  cardType = CardType.TEACHER;
+  teacherListItems: CardListItem[] = [];
 
   constructor(
     private http: FakeHttpService,
@@ -34,6 +40,21 @@ export class TeacherCardComponent implements OnInit {
   ngOnInit(): void {
     this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
 
-    this.store.teachers$.subscribe((t) => (this.teachers = t));
+    this.store.teachers$.subscribe((teachers) => {
+      this.teacherListItems = teachers.map((teacher) => {
+        return {
+          name: teacher.firstName,
+          id: teacher.id,
+        };
+      });
+    });
+  }
+
+  handleAddNewItemEvent() {
+    this.store.addOne(randTeacher());
+  }
+
+  handleDeleteItemEvent(id: number) {
+    this.store.deleteOne(id);
   }
 }
