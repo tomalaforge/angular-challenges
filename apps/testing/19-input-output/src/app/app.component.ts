@@ -5,7 +5,7 @@ import { CounterComponent } from './counter.component';
   imports: [CounterComponent],
   selector: 'app-root',
   template: `
-    <app-counter [initialValue]="10" (send)="log($event)"></app-counter>
+    <app-counter [initialValue]="10" (send)="log($event)" />
   `,
 })
 export class AppComponent {
