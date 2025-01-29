@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/member-ordering */
 import { randomError } from '@angular-challenges/shared/utils';
-import { Injectable } from '@angular/core';
-import { ComponentStore } from '@ngrx/component-store';
+import { computed, Injectable, signal } from '@angular/core';
 import { of } from 'rxjs';
 
 export type TopicType = 'food' | 'book' | 'sport';
@@ -31,21 +30,17 @@ const initialState: DBState = {
 };
 
 @Injectable({ providedIn: 'root' })
-export class LocalDBService extends ComponentStore<DBState> {
-  constructor() {
-    super(initialState);
-  }
+export class LocalDBService {
+  private state = signal(initialState);
 
-  infos$ = this.select((state) => state.infos);
+  infos = computed(() => this.state().infos);
 
   searchByType = (type: TopicType) =>
-    this.select((state) => state.infos.filter((i) => i.topic === type));
+    this.infos().filter((i) => i.topic === type);
 
-  deleteOne = this.updater(
-    (state, id: number): DBState => ({
-      infos: state.infos.filter((i) => i.id !== id),
-    }),
-  );
+  deleteOne = (id: number) => {
+    this.state.set({ infos: this.state().infos.filter((i) => i.id !== id) });
+  };
 
   deleteOneTopic = (id: number) =>
     randomError({

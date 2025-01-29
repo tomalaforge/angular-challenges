@@ -57,12 +57,6 @@
       "@angular-challenges/module-to-standalone/user/shell": [
         "libs/module-to-standalone/user/shell/src/index.ts"
       ],
-      "@angular-challenges/power-of-effect/backend": [
-        "libs/power-of-effect/backend/src/index.ts"
-      ],
-      "@angular-challenges/power-of-effect/model": [
-        "libs/power-of-effect/model/src/index.ts"
-      ],
       "@angular-challenges/shared/directives": [
         "libs/shared/directives/src/index.ts"
       ],
@@ -76,9 +70,6 @@
       ],
       "@angular-challenges/testing-table/model": [
         "libs/testing-table/model/src/index.ts"
-      ],
-      "@tomalaforge/ngrx-callstate-store": [
-        "libs/shared/ngrx-callstate-store/src/index.ts"
       ],
       "angular-master-dependency-injection": [
         "apps/angular/16-master-dependency-injection/src/index.ts"
