@@ -23,6 +23,7 @@ const sponsors = [
   'amosISA',
   'michalgrzegorczyk-dev',
   'zealotrahl',
+  'DzoeL123',
 ];
 
 module.exports = {
