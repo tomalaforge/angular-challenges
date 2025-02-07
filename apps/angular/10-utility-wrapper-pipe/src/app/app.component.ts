@@ -1,35 +1,42 @@
 import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
-import { PersonUtils } from './person.utils';
+import { UtilsPipe } from './pipes/utils.pipe';
+
+interface Person {
+  name: string;
+  age: number;
+}
+
+interface Activity {
+  name: string;
+  minimumAge: number;
+}
 
 @Component({
-  imports: [NgFor],
   selector: 'app-root',
+  standalone: true,
+  imports: [NgFor, UtilsPipe],
   template: `
     <div *ngFor="let activity of activities">
       {{ activity.name }} :
       <div
         *ngFor="let person of persons; let index = index; let isFirst = first">
-        {{ showName(person.name, index) }}
-        {{ isAllowed(person.age, isFirst, activity.minimumAge) }}
+        {{ 'showName' | utils: person.name : index }}
+        {{ 'isAllowed' | utils: person.age : isFirst : activity.minimumAge }}
       </div>
     </div>
   `,
 })
 export class AppComponent {
-  persons = [
+  persons: Person[] = [
     { name: 'Toto', age: 10 },
     { name: 'Jack', age: 15 },
     { name: 'John', age: 30 },
   ];
 
-  activities = [
+  activities: Activity[] = [
     { name: 'biking', minimumAge: 12 },
     { name: 'hiking', minimumAge: 25 },
     { name: 'dancing', minimumAge: 1 },
   ];
-
-  showName = PersonUtils.showName;
-
-  isAllowed = PersonUtils.isAllowed;
 }
