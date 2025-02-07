@@ -6,6 +6,11 @@ interface Person {
   age: number;
 }
 
+interface PersonContext {
+  $implicit: string; // for the name
+  age: number;
+}
+
 @Component({
   imports: [NgTemplateOutlet],
   selector: 'person',
@@ -18,10 +23,18 @@ interface Person {
 
     <ng-template #emptyRef>No Template</ng-template>
   `,
+  standalone: true,
 })
 export class PersonComponent {
   @Input() person!: Person;
 
-  @ContentChild('#personRef', { read: TemplateRef })
-  personTemplateRef!: TemplateRef<unknown>;
+  @ContentChild('personRef', { read: TemplateRef })
+  personTemplateRef!: TemplateRef<PersonContext>;
+
+  static ngTemplateContextGuard(
+    dir: PersonComponent,
+    ctx: unknown,
+  ): ctx is PersonContext {
+    return true;
+  }
 }
