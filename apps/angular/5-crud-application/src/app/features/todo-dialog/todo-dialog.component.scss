@@ -1,0 +1,73 @@
+.dialog-header {
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 50px 0 0;
+}
+
+
+.close-button {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	color: #666;
+
+	&:hover {
+		color: #0A2240;
+		background-color: rgba(10, 34, 64, 0.1);
+	}
+
+	mat-icon {
+		font-size: 20px;
+		width: 20px;
+		height: 20px;
+	}
+}
+
+.active-create-button {
+	display: flex !important;
+	justify-content: center;
+	align-items: center;
+	padding: 0 16px !important;
+	
+	mat-icon {
+		margin: 0 !important;
+		font-size: 24px !important;
+		width: 24px !important;
+		height: 24px !important;
+	}
+}
+
+mat-form-field.mat-mdc-form-field {
+	width: 100% !important;
+	.mat-mdc-text-field-wrapper {
+		height: 96px !important;
+		min-width: 400px;
+	}
+
+	.mat-mdc-form-field-infix {
+		padding: 12px 0 !important;
+	  }
+	
+	  .mat-mdc-floating-label {
+		top: 28px !important;
+	  }
+	  
+	  .mat-mdc-input-element {
+		font-size: 16px;
+	  }
+}
+
+.mat-mdc-raised-button:not(:disabled) {
+	background-color: #0A2240 !important;
+	color: white !important;
+
+	&:hover {
+		background-color: #1a3450 !important;
+	}
+}
+
+.mat-mdc-raised-button.mat-primary.mat-mdc-button-active {
+	background-color: #0A2240 !important;
+}

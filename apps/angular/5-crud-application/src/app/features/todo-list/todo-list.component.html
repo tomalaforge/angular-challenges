@@ -1,0 +1,35 @@
+<mat-card class="main-container">
+  <button mat-mini-fab color="grey" class="add-button" (click)="addNewTask()">
+    <mat-icon>add</mat-icon>
+  </button>
+  <div class="todo-list">
+    @if (service.error(); as error) {
+    <mat-card class="error-card">
+      <div class="error-content">
+        {{ error }}
+        <button mat-icon-button (click)="clearError()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </mat-card>
+    }
+
+    @if (service.loading()) {
+    <div class="loading-overlay">
+      <mat-spinner diameter="50"></mat-spinner>
+    </div>
+    }
+
+    @for (todo of pagedTodos; track trackById($index, todo)) {
+    <app-todo-item [todo]="todo"></app-todo-item>
+    } @empty {
+    <mat-card class="empty-state">
+      No todos found. Start by creating a new task!
+    </mat-card>
+    }
+  </div>
+
+  @if (service.todos().length > 0) {
+  <mat-paginator [length]="service.todos().length" [pageSize]="pageSize" (page)="changePage($event)"></mat-paginator>
+  }
+</mat-card>

@@ -8,3 +8,16 @@ body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
+
+.mat-toolbar {
+  background-color: #0A2240 !important;
+  color: white !important;
+}
+
+.mat-checkbox-checked .mat-checkbox-background {
+  background-color: #0A2240 !important;
+}
+
+.mat-spinner {
+  color: #0A2240 !important;
+}
