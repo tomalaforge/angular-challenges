@@ -54,6 +54,19 @@ export class TodoService {
       );
   }
 
+  deleteTodo(todo: Todo): Observable<Todo> {
+    this.loading.set(true);
+    return this.http.delete<Todo>(`${this.apiUrl}/${todo.id}`).pipe(
+      tap(() => {
+        this.todos.set(
+          this.todos().filter((filteredTodo) => filteredTodo.id !== todo.id),
+        );
+      }),
+      catchError((error) => this.handleError('Error deleting todo', error)),
+      finalize(() => this.loading.set(false)),
+    );
+  }
+
   private handleError(message: string, error: any): Observable<never> {
     console.error(message, error);
     this.errorMessage.set(message);
