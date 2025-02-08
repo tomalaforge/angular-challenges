@@ -9,23 +9,14 @@ import {
   ViewChild,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ThumbnailHeaderComponent } from '../blog/thumbnail-header.component';
 import { fakeTextChapters, posts } from '../data';
 import { PostHeaderComponent } from './post-header.component';
 
 @Component({
   selector: 'post',
-  imports: [
-    ThumbnailHeaderComponent,
-    NgOptimizedImage,
-    PostHeaderComponent,
-    RouterLink,
-  ],
+  imports: [NgOptimizedImage, PostHeaderComponent, RouterLink],
   template: `
     <div class="relative w-full max-w-[800px]" #postContainer>
-      <thumbnail-header
-        [date]="post().date"
-        [style]="{ 'view-transition-name': 'post-header-' + post().id }" />
       <button
         routerLink="/"
         class="absolute left-2 top-2 z-20 rounded-md border bg-white p-2">
