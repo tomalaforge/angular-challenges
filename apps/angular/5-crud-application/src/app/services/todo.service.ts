@@ -37,7 +37,7 @@ export class TodoService {
     return this.http
       .put<Todo>(
         `${this.apiUrl}/${todo.id}`,
-        { ...todo, title: randText() },
+        JSON.stringify({ ...todo, title: randText() }),
         { headers: { 'Content-type': 'application/json; charset=UTF-8' } },
       )
       .pipe(

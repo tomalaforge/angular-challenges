@@ -7,5 +7,5 @@
 </div>
 
 <div *ngFor="let todo of todos()">
-  <app-todo-item [todo]="todo" (update)="update($event)"></app-todo-item>
+  <app-todo-item [todo]="todo" (update)="update($event)" (delete)="delete($event)"></app-todo-item>
 </div>
