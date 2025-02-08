@@ -1,4 +1,4 @@
-// import React from 'react';
+import * as React from 'react';
 
 export default function ReactPost(props: {
   title?: string;
@@ -6,6 +6,7 @@ export default function ReactPost(props: {
   pictureLink?: string;
   selected?: boolean;
   handleClick: () => void;
+
 }) {
   return (
     <div className={props.selected ? 'bg-blue-100' : 'bg-white'}>

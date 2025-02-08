@@ -1,8 +1,9 @@
 {
+  "extends": "../../../tsconfig.base.json",
   "compilerOptions": {
+    "jsx": "react",
     "target": "es2022",
     "useDefineForClassFields": false,
-    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,
@@ -23,7 +24,6 @@
       "path": "./tsconfig.editor.json"
     }
   ],
-  "extends": "../../../tsconfig.base.json",
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
