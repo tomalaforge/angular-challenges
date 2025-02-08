@@ -3,6 +3,7 @@ import { Component, OnInit, Signal } from '@angular/core';
 
 import { TodoItemComponent } from '../../components/todo-item/todo-item.component';
 import { Todo } from '../../models/todo.model';
+import { TodoService } from '../../services/todo.service';
 
 @Component({
   selector: 'app-todo-list',
@@ -12,12 +13,14 @@ import { Todo } from '../../models/todo.model';
   styleUrls: ['./todo-list.component.scss'],
 })
 export class TodoListComponent implements OnInit {
-  todos: Signal<Todo[]> = this.todoStore.todos;
+  todos!: Signal<Todo[]>;
 
-  constructor(private todoStore: TodoStore) {}
+  constructor(private readonly todoService: TodoService) {}
 
   ngOnInit(): void {
     this.todos = this.todoService.todos$;
     this.todoService.getTodos().subscribe();
   }
+
+  update = (todo: Todo) => this.todoService.updateTodo(todo);
 }

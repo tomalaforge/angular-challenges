@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, Signal, signal } from '@angular/core';
+import { randText } from '@ngneat/falso';
 import { Observable, catchError, tap } from 'rxjs';
+
 import { Todo } from '../models/todo.model';
 
 @Injectable({
@@ -31,7 +33,7 @@ export class TodoService {
   updateTodo(todo: Todo): Observable<Todo> {
     return this.http.put<Todo>(
       `${this.apiUrl}/${todo.id}`,
-      { ...todo },
+      { ...todo, title: randText() },
       { headers: { 'Content-type': 'application/json; charset=UTF-8' } },
     );
   }
