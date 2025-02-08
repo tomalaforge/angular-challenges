@@ -17,6 +17,8 @@ export class TodoService {
     this._apiUrl = value;
   }
   private readonly todos = signal<Todo[]>([]);
+  private loading = signal<boolean>(false);
+  private errorMessage = signal<string | null>(null);
 
   constructor(private readonly http: HttpClient) {}
 
@@ -38,7 +40,21 @@ export class TodoService {
     );
   }
 
+  private handleError(message: string, error: any): Observable<never> {
+    console.error(message, error);
+    this.errorMessage.set(message);
+    throw error;
+  }
+
   get todos$(): Signal<Todo[]> {
     return this.todos;
+  }
+
+  get loading$(): Signal<boolean> {
+    return this.loading;
+  }
+
+  get errorMessage$(): Signal<string | null> {
+    return this.errorMessage;
   }
 }
