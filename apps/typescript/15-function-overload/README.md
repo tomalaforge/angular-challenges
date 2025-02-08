@@ -5,7 +5,7 @@
 ### Run Application
 
 ```bash
-npx nx serve typescript-function-overload`
+npx nx serve typescript-function-overload
 ```
 
 ### Documentation and Instruction
