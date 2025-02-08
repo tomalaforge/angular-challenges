@@ -1,0 +1,4 @@
+<div *ngIf="todo" class="todo-item">
+  <span>{{ todo.title }}</span>
+  <button (click)="updateTodo(todo)">Update</button>
+</div>
