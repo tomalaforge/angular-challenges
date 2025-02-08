@@ -10,7 +10,8 @@ import { Todo } from '../../models/todo.model';
   styleUrls: ['./todo-item.component.scss'],
 })
 export class TodoItemComponent {
-  @Input() todo: Todo;
+  @Input()
+  todo!: Todo;
   @Output() update = new EventEmitter<Todo>();
 
   updateTodo() {
