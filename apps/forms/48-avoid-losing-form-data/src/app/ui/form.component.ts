@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  HostListener,
+  inject,
+} from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
@@ -70,6 +75,14 @@ export class FormComponent {
     phone: '',
     message: '',
   });
+
+  @HostListener('window:beforeunload', ['$event'])
+  handleBeforeUnload(event: BeforeUnloadEvent) {
+    if (this.form.dirty) {
+      event.preventDefault();
+      event.returnValue = '';
+    }
+  }
 
   onSubmit() {
     if (this.form.valid) this.form.reset();
