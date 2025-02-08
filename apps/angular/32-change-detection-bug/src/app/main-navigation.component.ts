@@ -10,6 +10,7 @@ interface MenuItem {
 
 @Component({
   selector: 'app-nav',
+  standalone: true,
   imports: [RouterLink, RouterLinkActive, NgFor],
   template: `
     <ng-container *ngFor="let menu of menus">
@@ -37,29 +38,20 @@ export class NavigationComponent {
 }
 
 @Component({
+  standalone: true,
   imports: [NavigationComponent, NgIf, AsyncPipe],
   template: `
     <ng-container *ngIf="info$ | async as info">
-      <ng-container *ngIf="info !== null; else noInfo">
-        <app-nav [menus]="getMenu(info)" />
-      </ng-container>
+      <app-nav [menus]="menus" />
     </ng-container>
-
-    <ng-template #noInfo>
-      <app-nav [menus]="getMenu('')" />
-    </ng-template>
   `,
-  host: {},
 })
 export class MainNavigationComponent {
   private fakeBackend = inject(FakeServiceService);
-
   readonly info$ = this.fakeBackend.getInfoFromBackend();
 
-  getMenu(prop: string) {
-    return [
-      { path: '/foo', name: `Foo ${prop}` },
-      { path: '/bar', name: `Bar ${prop}` },
-    ];
-  }
+  readonly menus: MenuItem[] = [
+    { path: '/foo', name: 'Foo' },
+    { path: '/bar', name: 'Bar' },
+  ];
 }
