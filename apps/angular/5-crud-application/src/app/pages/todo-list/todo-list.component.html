@@ -1,3 +1,11 @@
+<div *ngIf="loading()" class="loading-overlay">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div *ngIf="errorMessage()" class="error-message">
+  {{ errorMessage() }}
+</div>
+
 <div *ngFor="let todo of todos()">
   <app-todo-item [todo]="todo" (update)="update($event)"></app-todo-item>
 </div>
