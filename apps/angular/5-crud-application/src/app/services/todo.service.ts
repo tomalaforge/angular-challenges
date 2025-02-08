@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, Signal, signal } from '@angular/core';
 import { randText } from '@ngneat/falso';
-import { Observable, catchError, tap } from 'rxjs';
+import { Observable, catchError, finalize, tap } from 'rxjs';
 
 import { Todo } from '../models/todo.model';
 
@@ -17,27 +17,41 @@ export class TodoService {
     this._apiUrl = value;
   }
   private readonly todos = signal<Todo[]>([]);
-  private loading = signal<boolean>(false);
-  private errorMessage = signal<string | null>(null);
+  private readonly loading = signal<boolean>(false);
+  private readonly errorMessage = signal<string | null>(null);
 
   constructor(private readonly http: HttpClient) {}
 
   getTodos(): Observable<Todo[]> {
+    this.loading.set(true);
+
     return this.http.get<Todo[]>(this.apiUrl).pipe(
       tap((data) => this.todos.set(data)),
-      catchError((error) => {
-        console.error('Error fetching todos', error);
-        throw error;
-      }),
+      catchError((error) => this.handleError('Error fetching todos', error)),
+      finalize(() => this.loading.set(false)),
     );
   }
 
   updateTodo(todo: Todo): Observable<Todo> {
-    return this.http.put<Todo>(
-      `${this.apiUrl}/${todo.id}`,
-      { ...todo, title: randText() },
-      { headers: { 'Content-type': 'application/json; charset=UTF-8' } },
-    );
+    this.loading.set(true);
+    return this.http
+      .put<Todo>(
+        `${this.apiUrl}/${todo.id}`,
+        { ...todo, title: randText() },
+        { headers: { 'Content-type': 'application/json; charset=UTF-8' } },
+      )
+      .pipe(
+        tap((updatedTodo) => {
+          this.todos.set([
+            ...this.todos().filter(
+              (filteredTodo) => filteredTodo.id !== updatedTodo.id,
+            ),
+            updatedTodo,
+          ]);
+        }),
+        catchError((error) => this.handleError('Error updating todo', error)),
+        finalize(() => this.loading.set(false)),
+      );
   }
 
   private handleError(message: string, error: any): Observable<never> {
