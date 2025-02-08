@@ -44,4 +44,21 @@ describe('TodoService', () => {
     expect(req.request.method).toBe('GET');
     req.flush(mockTodos);
   });
+
+  it('should update a todo', () => {
+    const updatedTodo: Todo = {
+      id: 1,
+      title: 'Updated Todo',
+      completed: false,
+      userId: 0,
+    };
+
+    service.updateTodo(updatedTodo).subscribe((todo) => {
+      expect(todo).toEqual(updatedTodo);
+    });
+
+    const req = httpMock.expectOne(`${apiUrl}/1`);
+    expect(req.request.method).toBe('PUT');
+    req.flush(updatedTodo);
+  });
 });
