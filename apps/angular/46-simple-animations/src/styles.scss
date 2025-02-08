@@ -3,3 +3,44 @@
 @tailwind utilities;
 
 /* You can add global styles to this file, and also import other style files */
+
+section {
+  @apply flex flex-1 flex-col gap-5;
+}
+
+.list-item {
+  @apply flex flex-row border-b px-5 pb-2;
+
+  span {
+    @apply flex-1;
+  }
+}
+
+.timeline-item {
+  @apply mb-8;
+
+  h3,
+  h4 {
+    @apply mb-2 text-xl font-bold;
+  }
+
+  p {
+    @apply leading-relaxed text-gray-600;
+  }
+}
+
+.container-wrapper {
+  @apply p-4 md:mx-20 md:my-40;
+}
+
+.content-container {
+  @apply flex flex-col gap-8 md:flex-row md:gap-12;
+}
+
+.timeline-section {
+  @apply w-full md:w-2/3;
+}
+
+.info-section {
+  @apply w-full md:w-1/3;
+}
