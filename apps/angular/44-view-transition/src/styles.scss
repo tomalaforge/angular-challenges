@@ -1,3 +1,80 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Add this to your global styles.css */
+
+::view-transition-old(*),
+::view-transition-new(*) {
+  animation: none;
+  mix-blend-mode: normal;
+  transition: transform 0.3s ease-out;
+}
+
+/* Page header transition */
+.page-header {
+  view-transition-name: page-header;
+}
+
+::view-transition-old(page-header) {
+  animation: slide-out 0.3s ease-out;
+}
+
+::view-transition-new(page-header) {
+  animation: slide-in 0.3s ease-in;
+}
+
+/* Shared transitions */
+.shared-element {
+  transform-origin: top left;
+  will-change: transform;
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95) translateY(20px);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: scale(1.05) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes slide-out {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Handle scrolling */
+html.no-scroll {
+  overflow: hidden;
+}

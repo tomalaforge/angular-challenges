@@ -15,14 +15,21 @@ import { ThumbnailHeaderComponent } from './thumbnail-header.component';
         width="960"
         height="540"
         class="rounded-t-3xl"
+        [style]="{ 'view-transition-name': 'post-image-' + post().id }"
         [priority]="post().id === '1'" />
-      <h2 class="p-3 text-3xl">{{ post().title }}</h2>
+      <h2
+        class="p-3 text-3xl"
+        [style]="{ 'view-transition-name': 'post-title-' + post().id }">
+        {{ post().title }}
+      </h2>
       <p class="p-3">{{ post().description }}</p>
-      <thumbnail-header [date]="post().date" />
+      <thumbnail-header
+        [date]="post().date"
+        [style]="{ 'view-transition-name': 'post-header-' + post().id }" />
     </a>
   `,
   host: {
-    class: 'w-full  max-w-[600px] rounded-3xl border-none shadow-lg',
+    class: 'w-full max-w-[600px] rounded-3xl border-none shadow-lg',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
