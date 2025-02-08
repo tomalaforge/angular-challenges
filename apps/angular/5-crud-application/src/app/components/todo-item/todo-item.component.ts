@@ -13,8 +13,13 @@ export class TodoItemComponent {
   @Input()
   todo!: Todo;
   @Output() update = new EventEmitter<Todo>();
+  @Output() delete = new EventEmitter<Todo>();
 
   updateTodo() {
     this.update.emit(this.todo);
+  }
+
+  deleteTodo() {
+    this.delete.emit(this.todo);
   }
 }
