@@ -48,4 +48,22 @@ describe('TodoItemComponent', () => {
 
     expect(component.update.emit).toHaveBeenCalledWith(mockTodo);
   });
+
+  it('should emit delete event on clicking delete button', () => {
+    const mockTodo: Todo = {
+      id: 1,
+      title: 'Test Todo',
+      completed: false,
+      userId: 1,
+    };
+    component.todo = mockTodo;
+    fixture.detectChanges();
+
+    jest.spyOn(component.delete, 'emit');
+
+    const button = fixture.debugElement.query(By.css('button:nth-of-type(2)'));
+    button.triggerEventHandler('click', null);
+
+    expect(component.delete.emit).toHaveBeenCalledWith(mockTodo);
+  });
 });
