@@ -85,4 +85,16 @@ describe('TodoService', () => {
     expect(getReq.request.method).toBe('GET');
     getReq.flush([]);
   });
+
+  it('should handle errors', () => {
+    service.getTodos().subscribe({
+      next: () => fail('Expected an error, but got a response'),
+      error: (error) => expect(error.status).toBe(500),
+    });
+    const req = httpMock.expectOne(apiUrl);
+    req.flush('Something went wrong', {
+      status: 500,
+      statusText: 'Server Error',
+    });
+  });
 });
