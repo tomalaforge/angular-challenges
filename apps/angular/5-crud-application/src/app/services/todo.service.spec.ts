@@ -61,4 +61,28 @@ describe('TodoService', () => {
     expect(req.request.method).toBe('PUT');
     req.flush(updatedTodo);
   });
+
+  it('should delete a todo', () => {
+    const todo: Todo = {
+      id: 1,
+      title: 'Updated Todo',
+      completed: false,
+      userId: 0,
+    };
+
+    service.deleteTodo(todo).subscribe(() => {
+      // api returns nothing because we are doing a soft delete
+      service.getTodos().subscribe((todos) => {
+        expect(todos).not.toContain(todo);
+      });
+    });
+
+    const deleteReq = httpMock.expectOne(`${apiUrl}/1`);
+    expect(deleteReq.request.method).toBe('DELETE');
+    deleteReq.flush({});
+
+    const getReq = httpMock.expectOne(apiUrl);
+    expect(getReq.request.method).toBe('GET');
+    getReq.flush([]);
+  });
 });
