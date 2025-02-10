@@ -9,36 +9,43 @@ import { FormsModule } from '@angular/forms';
 import { UserService } from './user.service';
 
 @Component({
+  standalone: true,
   imports: [FormsModule],
   selector: 'app-actions',
   template: `
-    <form class="mx-auto max-w-sm">
-      <label for="actions" class="mb-2 block text-sm font-medium text-gray-900">
-        Choose an action
-      </label>
-      <select
-        name="actions"
-        [(ngModel)]="action"
-        id="actions"
-        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500">
-        <option selected>Please select an action</option>
-        @for (action of actions; track $index) {
-          <option value="{{ action }}">{{ action }}</option>
-        }
-      </select>
+    <form class="form-container">
+      <div class="form-group">
+        <label for="actions" class="form-label">Choose an action</label>
+        <div class="select-wrapper">
+          <select
+            name="actions"
+            [(ngModel)]="action"
+            id="actions"
+            class="form-select">
+            <option selected>Please select an action</option>
+            @for (action of actions; track $index) {
+              <option value="{{ action }}">{{ action }}</option>
+            }
+          </select>
+        </div>
+      </div>
     </form>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ActionsComponent {
   private userService = inject(UserService);
-  protected action = signal(undefined);
-
+  protected action = signal<string | undefined>(undefined);
   protected actions = ['Create', 'Read', 'Update', 'Delete'];
 
   constructor() {
     effect(() => {
-      this.userService.log(this.action() ?? 'No action selected');
+      const currentAction = this.action();
+      const currentUser = this.userService.name();
+
+      if (currentAction) {
+        console.log(`${currentUser}: ${currentAction}`);
+      }
     });
   }
 }
