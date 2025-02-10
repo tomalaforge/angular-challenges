@@ -57,4 +57,17 @@ describe('TodoListComponent', () => {
     component.update(mockTodo);
     expect(todoService.updateTodo).toHaveBeenCalledWith(mockTodo);
   });
+
+  it('should call deleteTodo when an item is deleted', () => {
+    const mockTodo: Todo = {
+      id: 1,
+      title: 'Test Todo',
+      completed: false,
+      userId: 1,
+    };
+
+    jest.spyOn(todoService, 'deleteTodo').mockReturnValue(of(mockTodo));
+    component.delete(mockTodo);
+    expect(todoService.deleteTodo).toHaveBeenCalledWith(mockTodo);
+  });
 });
