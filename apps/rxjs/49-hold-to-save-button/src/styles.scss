@@ -3,12 +3,41 @@
 @tailwind utilities;
 
 progress {
-  @apply h-4 w-full rounded-full bg-gray-200;
+  @apply h-2 w-full rounded-full bg-gray-200;
+  transition: all 0.1s ease-out;
 }
+
 progress::-webkit-progress-bar {
   @apply rounded-full bg-gray-200;
 }
 
 progress::-webkit-progress-value {
   @apply rounded-full bg-indigo-600;
+  transition: all 0.1s ease-out;
+}
+
+progress::-moz-progress-bar {
+  @apply rounded-full bg-indigo-600;
+  transition: all 0.1s ease-out;
+}
+
+/* Add smooth transitions */
+.transition-transform {
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Add pulsing animation for saving state */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
