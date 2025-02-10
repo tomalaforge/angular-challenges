@@ -5,13 +5,17 @@ import { RouterOutlet } from '@angular/router';
   imports: [RouterOutlet],
   selector: 'app-root',
   template: `
-    <h1 class="text-3xl">Shop</h1>
-    <div class="w-[500px] ">
-      <router-outlet />
+    <div class="min-h-screen bg-gray-50">
+      <header class="mb-8 bg-white shadow-sm">
+        <div class="mx-auto max-w-4xl px-6 py-4">
+          <h1 class="text-3xl font-bold text-gray-900">Shop</h1>
+        </div>
+      </header>
+
+      <main class="mx-auto max-w-4xl px-6 pb-8">
+        <router-outlet />
+      </main>
     </div>
   `,
-  host: {
-    class: 'w-full flex justify-center flex-col items-center p-4 gap-10',
-  },
 })
 export class AppComponent {}
