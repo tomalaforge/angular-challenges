@@ -3,3 +3,31 @@
 @tailwind utilities;
 
 /* You can add global styles to this file, and also import other style files */
+
+@layer components {
+  .form-input {
+    @apply mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:ring-1 focus:ring-blue-500;
+  }
+
+  .form-label {
+    @apply block text-sm font-medium text-gray-700;
+  }
+
+  .form-group {
+    @apply space-y-1;
+  }
+
+  .btn-primary {
+    @apply w-full rounded-md bg-blue-600 px-4 py-2 text-white font-medium
+           hover:bg-blue-700 focus:outline-none focus:ring-2
+           focus:ring-blue-500 focus:ring-offset-2 transition-colors;
+  }
+
+  .card {
+    @apply max-w-md mx-auto bg-white p-8 rounded-lg shadow-md;
+  }
+
+  .success-box {
+    @apply mt-8 p-4 bg-green-50 rounded-md border border-green-200;
+  }
+}

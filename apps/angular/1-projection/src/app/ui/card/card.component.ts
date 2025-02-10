@@ -1,4 +1,4 @@
-import { NgOptimizedImage, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   ContentChild,
@@ -10,8 +10,6 @@ import { randStudent, randTeacher } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
 import { TeacherStore } from '../../data-access/teacher.store';
 import { CardType } from '../../model/card.model';
-import { ListItemComponent } from '../list-item/list-item.component';
-import { CardFooterDirective, CardHeaderDirective } from './card.directives';
 
 @Component({
   selector: 'app-card',
@@ -54,13 +52,7 @@ import { CardFooterDirective, CardHeaderDirective } from './card.directives';
       }
     `,
   ],
-  imports: [
-    ListItemComponent,
-    NgOptimizedImage,
-    NgTemplateOutlet,
-    CardHeaderDirective,
-    CardFooterDirective,
-  ],
+  imports: [NgTemplateOutlet],
   standalone: true,
 })
 export class CardComponent {
@@ -73,7 +65,6 @@ export class CardComponent {
 
   CardType = CardType;
 
-  // Template reference for list items
   @ContentChild('itemTemplate', { static: true })
   itemTemplate!: TemplateRef<any>;
 
