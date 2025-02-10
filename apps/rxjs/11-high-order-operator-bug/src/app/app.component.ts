@@ -4,7 +4,6 @@ import { Component, inject, input, signal } from '@angular/core';
 import { take } from 'rxjs';
 import { AppService } from './app.service';
 import { TopicType } from './localDB.service';
-
 @Component({
   selector: 'button-delete-topic',
   standalone: true,
