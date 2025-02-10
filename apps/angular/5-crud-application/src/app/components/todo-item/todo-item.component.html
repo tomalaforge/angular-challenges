@@ -1,5 +1,6 @@
-<div *ngIf="todo" class="todo-item">
+<div class="todo-item">
   <span>{{ todo.title }}</span>
-  <button (click)="updateTodo()">Update</button>
-  <button (click)="deleteTodo()">Delete</button>
+  <button (click)="update.emit(todo)" [disabled]="isProcessing">Update</button>
+  <button (click)="delete.emit(todo)" [disabled]="isProcessing">Delete</button>
+  <mat-progress-spinner *ngIf="isProcessing" diameter="20"></mat-progress-spinner>
 </div>
