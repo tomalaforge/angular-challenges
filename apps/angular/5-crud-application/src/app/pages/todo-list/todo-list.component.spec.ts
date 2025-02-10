@@ -44,4 +44,17 @@ describe('TodoListComponent', () => {
 
     expect(todoService.getTodos).toHaveBeenCalled();
   });
+
+  it('should call updateTodo when an item is updated', () => {
+    const mockTodo: Todo = {
+      id: 1,
+      title: 'Test Todo',
+      completed: false,
+      userId: 1,
+    };
+
+    jest.spyOn(todoService, 'updateTodo').mockReturnValue(of(mockTodo));
+    component.update(mockTodo);
+    expect(todoService.updateTodo).toHaveBeenCalledWith(mockTodo);
+  });
 });
