@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -13,7 +13,6 @@ import { DetailStore } from './detail.store';
     MatButtonModule,
     RouterLink,
     NgIf,
-    AsyncPipe,
     MatProgressBarModule,
     LetDirective,
   ],
