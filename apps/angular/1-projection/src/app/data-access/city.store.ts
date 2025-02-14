@@ -1,21 +1,27 @@
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { tap } from 'rxjs';
 import { City } from '../model/city.model';
+import { FakeHttpService, randomCity } from './fake-http.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CityStore {
-  private cities = signal<City[]>([]);
+  private readonly http = inject(FakeHttpService);
 
-  addAll(cities: City[]) {
-    this.cities.set(cities);
-  }
+  private _cities = signal<City[]>([]);
+  public cities = this._cities.asReadonly();
 
-  addOne(student: City) {
-    this.cities.set([...this.cities(), student]);
+  fetchCities = toSignal(
+    this.http.fetchCities$.pipe(tap((cities) => this._cities.set(cities))),
+  );
+
+  addOne() {
+    this._cities.set([...this._cities(), randomCity()]);
   }
 
   deleteOne(id: number) {
-    this.cities.set(this.cities().filter((s) => s.id !== id));
+    this._cities.set(this._cities().filter((s) => s.id !== id));
   }
 }

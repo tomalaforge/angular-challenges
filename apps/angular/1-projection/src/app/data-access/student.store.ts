@@ -1,21 +1,31 @@
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { tap } from 'rxjs';
 import { Student } from '../model/student.model';
+import { FakeHttpService, randStudent } from './fake-http.service';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class StudentStore {
-  public students = signal<Student[]>([]);
+  private readonly http = inject(FakeHttpService);
+  private readonly _students = signal<Student[]>([]);
+
+  public readonly students = this._students.asReadonly();
+
+  fetchStudents = toSignal(
+    this.http.fetchStudents$.pipe(
+      tap((students) => this._students.set(students)),
+    ),
+  );
 
   addAll(students: Student[]) {
-    this.students.set(students);
+    this._students.set(students);
   }
 
-  addOne(student: Student) {
-    this.students.set([...this.students(), student]);
+  addOne() {
+    this._students.update((students) => [...students, randStudent()]);
   }
 
   deleteOne(id: number) {
-    this.students.set(this.students().filter((s) => s.id !== id));
+    this._students.set(this._students().filter((s) => s.id !== id));
   }
 }
