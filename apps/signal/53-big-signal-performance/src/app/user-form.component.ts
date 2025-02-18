@@ -64,36 +64,30 @@ export class UserFormComponent {
   userStore = inject(UserStore);
 
   form = new FormGroup({
-    name: new FormControl(this.userStore.user().name, { nonNullable: true }),
-    street: new FormControl(this.userStore.user().address.street, {
+    name: new FormControl(this.userStore.name(), { nonNullable: true }),
+    street: new FormControl(this.userStore.street(), {
       nonNullable: true,
     }),
-    zipCode: new FormControl(this.userStore.user().address.zipCode, {
+    zipCode: new FormControl(this.userStore.zipCode(), {
       nonNullable: true,
     }),
-    city: new FormControl(this.userStore.user().address.city, {
+    city: new FormControl(this.userStore.city(), {
       nonNullable: true,
     }),
-    note: new FormControl(this.userStore.user().note, { nonNullable: true }),
-    title: new FormControl(this.userStore.user().title, { nonNullable: true }),
-    salary: new FormControl(this.userStore.user().salary, {
+    note: new FormControl(this.userStore.note(), { nonNullable: true }),
+    title: new FormControl(this.userStore.title(), { nonNullable: true }),
+    salary: new FormControl(this.userStore.salary(), {
       nonNullable: true,
     }),
   });
 
   submit() {
-    this.userStore.user.update((u) => ({
-      ...u,
-      name: this.form.getRawValue().name,
-      address: {
-        ...u.address,
-        street: this.form.getRawValue().street,
-        zipCode: this.form.getRawValue().zipCode,
-        city: this.form.getRawValue().city,
-      },
-      note: this.form.getRawValue().note,
-      title: this.form.getRawValue().title,
-      salary: this.form.getRawValue().salary,
-    }));
+    this.userStore.name.set(this.form.value.name ?? '-');
+    this.userStore.title.set(this.form.value.title ?? '_');
+    this.userStore.note.set(this.form.value.note ?? '_');
+    this.userStore.salary.set(this.form.value.salary ?? 0);
+    this.userStore.street.set(this.form.value.street ?? '_');
+    this.userStore.zipCode.set(this.form.value.zipCode ?? '_');
+    this.userStore.city.set(this.form.value.city ?? '_');
   }
 }
