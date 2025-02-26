@@ -19,10 +19,7 @@ import { ListItemDirective } from '../../ui/list-item/list-item.directive';
 @Component({
   selector: 'app-teacher-card',
   template: `
-    <app-card
-      [list]="teachers()"
-      customClass="bg-light-red"
-      (addNewItem)="addNewTeacher()">
+    <app-card [list]="teachers()" (addNewItem)="addNewTeacher()">
       <img
         ngSrc="assets/img/teacher.png"
         width="200"
@@ -40,8 +37,8 @@ import { ListItemDirective } from '../../ui/list-item/list-item.directive';
   `,
   styles: [
     `
-      ::ng-deep .bg-light-red {
-        background-color: rgba(250, 0, 0, 0.1);
+      :host {
+        --card-bg-color: rgba(250, 0, 0, 0.1);
       }
     `,
   ],

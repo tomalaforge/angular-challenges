@@ -13,8 +13,7 @@ import { ListItemDirective } from '../list-item/list-item.directive';
   selector: 'app-card',
   template: `
     <div
-      class="flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4"
-      [class]="customClass()">
+      class="custom-bg flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4">
       <ng-content />
       <section>
         @for (item of list(); track item) {
@@ -31,6 +30,11 @@ import { ListItemDirective } from '../list-item/list-item.directive';
       </button>
     </div>
   `,
+  styles: `
+    .custom-bg {
+      background: var(--card-bg-color);
+    }
+  `,
   imports: [NgTemplateOutlet],
 })
 export class CardComponent {
@@ -40,5 +44,4 @@ export class CardComponent {
 
   addNewItem = output();
   readonly list = input<any[] | null>(null);
-  readonly customClass = input('');
 }

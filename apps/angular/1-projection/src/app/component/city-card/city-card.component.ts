@@ -18,10 +18,7 @@ import { ListItemDirective } from '../../ui/list-item/list-item.directive';
 @Component({
   selector: 'app-city-card',
   template: `
-    <app-card
-      [list]="cities()"
-      customClass="bg-light-blue"
-      (addNewItem)="addNewCity()">
+    <app-card [list]="cities()" (addNewItem)="addNewCity()">
       <img ngSrc="assets/img/city.png" width="200" height="200" />
 
       <ng-template appListItem let-item>
@@ -35,8 +32,8 @@ import { ListItemDirective } from '../../ui/list-item/list-item.directive';
   `,
   styles: [
     `
-      ::ng-deep .bg-light-blue {
-        background-color: rgba(0, 42, 250, 0.1);
+      :host {
+        --card-bg-color: rgba(0, 42, 250, 0.1);
       }
     `,
   ],
