@@ -5,11 +5,11 @@ import {
   inject,
   OnInit,
 } from '@angular/core';
-import { CityStore } from '../../data-access/city.store';
 import {
   FakeHttpService,
   randomCity,
 } from '../../data-access/fake-http.service';
+import { StoreUtilsService } from '../../data-access/store-utils.service';
 import { City } from '../../model/city.model';
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
@@ -27,7 +27,7 @@ import { ListItemDirective } from '../../ui/list-item/list-item.directive';
       <ng-template appListItem let-item>
         <app-list-item
           [id]="item.id"
-          [name]="item.name"
+          [name]="item.name + ', ' + item.country"
           [type]="item.type"
           (deleteItem)="deleteCity(item.id)" />
       </ng-template>
@@ -46,23 +46,26 @@ import { ListItemDirective } from '../../ui/list-item/list-item.directive';
     ListItemDirective,
     NgOptimizedImage,
   ],
+  providers: [StoreUtilsService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CityCardComponent implements OnInit {
   private http = inject(FakeHttpService);
-  private store = inject(CityStore);
+  private storeUtil = inject<StoreUtilsService<City>>(StoreUtilsService<City>);
 
-  cities = this.store.cities;
+  cities = this.storeUtil.getState();
 
   ngOnInit(): void {
-    this.http.fetchCities$.subscribe((res: City[]) => this.store.addAll(res));
+    this.http.fetchCities$.subscribe((res: City[]) =>
+      this.storeUtil.addAll(res),
+    );
   }
 
   addNewCity(): void {
-    this.store.addOne(randomCity());
+    this.storeUtil.addOne(randomCity());
   }
 
   deleteCity(id: number): void {
-    this.store.deleteOne(id);
+    this.storeUtil.deleteOne(id, (item) => item.id);
   }
 }

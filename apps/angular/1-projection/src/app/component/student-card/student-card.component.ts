@@ -9,7 +9,7 @@ import {
   FakeHttpService,
   randStudent,
 } from '../../data-access/fake-http.service';
-import { StudentStore } from '../../data-access/student.store';
+import { StoreUtilsService } from '../../data-access/store-utils.service';
 import { Student } from '../../model/student.model';
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
@@ -46,23 +46,26 @@ import { ListItemDirective } from '../../ui/list-item/list-item.directive';
     ListItemComponent,
     ListItemDirective,
   ],
+  providers: [StoreUtilsService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StudentCardComponent implements OnInit {
-  private http = inject(FakeHttpService);
-  private store = inject(StudentStore);
+  #http = inject(FakeHttpService);
+  #storeUtil = inject<StoreUtilsService<Student>>(StoreUtilsService<Student>);
 
-  students = this.store.students;
+  students = this.#storeUtil.getState();
 
   ngOnInit(): void {
-    this.http.fetchStudents$.subscribe((s: Student[]) => this.store.addAll(s));
+    this.#http.fetchStudents$.subscribe((s: Student[]) =>
+      this.#storeUtil.addAll(s),
+    );
   }
 
   addNewStudent(): void {
-    this.store.addOne(randStudent());
+    this.#storeUtil.addOne(randStudent());
   }
 
   deleteStudent(id: number): void {
-    this.store.deleteOne(id);
+    this.#storeUtil.deleteOne(id, (student) => student.id);
   }
 }

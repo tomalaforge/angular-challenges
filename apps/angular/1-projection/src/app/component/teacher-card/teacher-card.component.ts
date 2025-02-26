@@ -1,11 +1,17 @@
 import { NgOptimizedImage } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import {
   FakeHttpService,
   randTeacher,
 } from '../../data-access/fake-http.service';
-import { TeacherStore } from '../../data-access/teacher.store';
+import { StoreUtilsService } from '../../data-access/store-utils.service';
 import { CardType } from '../../model/card.model';
+import { Teacher } from '../../model/teacher.model';
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
 import { ListItemDirective } from '../../ui/list-item/list-item.directive';
@@ -45,23 +51,25 @@ import { ListItemDirective } from '../../ui/list-item/list-item.directive';
     ListItemDirective,
     ListItemComponent,
   ],
+  providers: [StoreUtilsService],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TeacherCardComponent implements OnInit {
-  private http = inject(FakeHttpService);
-  private store = inject(TeacherStore);
+  #http = inject(FakeHttpService);
+  #storeUtil = inject<StoreUtilsService<Teacher>>(StoreUtilsService<Teacher>);
 
-  teachers = this.store.teachers;
+  teachers = this.#storeUtil.getState();
   type = CardType.TEACHER;
 
   ngOnInit(): void {
-    this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
+    this.#http.fetchTeachers$.subscribe((t) => this.#storeUtil.addAll(t));
   }
 
   addNewTeacher(): void {
-    this.store.addOne(randTeacher());
+    this.#storeUtil.addOne(randTeacher());
   }
 
   deleteTeacher(id: number): void {
-    this.store.deleteOne(id);
+    this.#storeUtil.deleteOne(id, (teacher) => teacher.id);
   }
 }
