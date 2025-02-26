@@ -17,13 +17,18 @@ import { ListItemDirective } from '../../ui/list-item/list-item.directive';
       [list]="teachers()"
       customClass="bg-light-red"
       (addNewItem)="addNewTeacher()">
-      <img ngSrc="assets/img/teacher.png" width="200" height="200" />
+      <img
+        ngSrc="assets/img/teacher.png"
+        width="200"
+        height="200"
+        priority="" />
 
       <ng-template appListItem let-item>
         <app-list-item
-          [name]="item.firstName"
+          [name]="item.firstName + ' ' + item.lastName"
           [id]="item.id"
-          [type]="item.type" />
+          [type]="item.type"
+          (deleteItem)="deleteTeacher(item.id)" />
       </ng-template>
     </app-card>
   `,
@@ -54,5 +59,9 @@ export class TeacherCardComponent implements OnInit {
 
   addNewTeacher(): void {
     this.store.addOne(randTeacher());
+  }
+
+  deleteTeacher(id: number): void {
+    this.store.deleteOne(id);
   }
 }

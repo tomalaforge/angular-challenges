@@ -10,7 +10,7 @@ import {
   randStudent,
 } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
-import { CardType } from '../../model/card.model';
+import { Student } from '../../model/student.model';
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
 import { ListItemDirective } from '../../ui/list-item/list-item.directive';
@@ -26,9 +26,10 @@ import { ListItemDirective } from '../../ui/list-item/list-item.directive';
 
       <ng-template appListItem let-item>
         <app-list-item
-          [name]="item.firstName"
+          [name]="item.firstName + ' ' + item.lastName"
           [id]="item.id"
-          [type]="item.type" />
+          [type]="item.type"
+          (deleteItem)="deleteStudent(item.id)" />
       </ng-template>
     </app-card>
   `,
@@ -52,13 +53,16 @@ export class StudentCardComponent implements OnInit {
   private store = inject(StudentStore);
 
   students = this.store.students;
-  cardType = CardType.STUDENT;
 
   ngOnInit(): void {
-    this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
+    this.http.fetchStudents$.subscribe((s: Student[]) => this.store.addAll(s));
   }
 
   addNewStudent(): void {
     this.store.addOne(randStudent());
+  }
+
+  deleteStudent(id: number): void {
+    this.store.deleteOne(id);
   }
 }
