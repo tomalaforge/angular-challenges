@@ -11,8 +11,8 @@ export class CityStore {
     this.cities.set(cities);
   }
 
-  addOne(student: City) {
-    this.cities.set([...this.cities(), student]);
+  addOne(city: City) {
+    this.cities.set([...this.cities(), city]);
   }
 
   deleteOne(id: number) {
