@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AddressComponent } from './address.component';
 import { JobComponent } from './job.component';
 import { NameComponent } from './name.component';
@@ -22,5 +22,6 @@ import { UserFormComponent } from './user-form.component';
     NoteComponent,
     UserFormComponent,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {}
