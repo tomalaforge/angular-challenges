@@ -1,23 +1,23 @@
-import { Component, signal } from '@angular/core';
-
+import { Component } from '@angular/core';
+import { PlaceholderComponent } from './placeholder.component';
+import { TopComponent } from './top.component';
 @Component({
   selector: 'app-root',
   template: `
     <div class="h-screen bg-gray-500">
-      @if (topLoaded()) {
+      @defer (on interaction(loadBtn)) {
         <app-top />
-      } @else {
+      } @placeholder {
         <app-placeholder />
         <button
-          class="rounded-sm border border-blue-500 bg-blue-300 p-2"
-          (click)="topLoaded.set(true)">
+          #loadBtn
+          class="rounded-sm border border-blue-500 bg-blue-300 p-2">
           Load Top
         </button>
       }
     </div>
   `,
-  standalone: false,
+  standalone: true,
+  imports: [PlaceholderComponent, TopComponent],
 })
-export class AppComponent {
-  topLoaded = signal(false);
-}
+export class AppComponent {}
