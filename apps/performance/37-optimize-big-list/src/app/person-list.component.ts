@@ -1,29 +1,47 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-
-import { NgForTrackByModule } from '@angular-challenges/shared/directives';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Person } from './person.model';
 
 @Component({
   selector: 'app-person-list',
-  imports: [CommonModule, NgForTrackByModule],
+  standalone: true,
+  imports: [CommonModule, ScrollingModule],
   template: `
-    <div class="relative h-[300px] overflow-hidden">
-      <div class="absolute inset-0 overflow-scroll">
-        <div
-          *ngFor="let person of persons; trackByProp: 'email'"
-          class="flex h-9 items-center justify-between border-b">
-          <h3>{{ person.name }}</h3>
-          <p>{{ person.email }}</p>
-        </div>
+    <cdk-virtual-scroll-viewport class="h-[300px] w-full" [itemSize]="36">
+      <div
+        *cdkVirtualFor="let person of persons; trackBy: trackByEmail"
+        class="flex h-9 items-center justify-between border-b px-4">
+        <h3 class="text-gray-900">{{ person.name }}</h3>
+        <p class="text-gray-600">{{ person.email }}</p>
       </div>
-    </div>
+    </cdk-virtual-scroll-viewport>
   `,
-  host: {
-    class: 'w-full flex flex-col',
-  },
+  styles: [
+    `
+      cdk-virtual-scroll-viewport {
+        &::-webkit-scrollbar {
+          width: 8px;
+        }
+        &::-webkit-scrollbar-track {
+          background: #f1f1f1;
+        }
+        &::-webkit-scrollbar-thumb {
+          background: #888;
+          border-radius: 4px;
+        }
+        &::-webkit-scrollbar-thumb:hover {
+          background: #666;
+        }
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PersonListComponent {
   @Input() persons: Person[] = [];
+
+  trackByEmail(_: number, person: Person): string {
+    return person.email;
+  }
 }

@@ -3,3 +3,42 @@
 @tailwind utilities;
 
 /* You can add global styles to this file, and also import other style files */
+
+@layer components {
+  .form-container {
+    @apply max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md;
+  }
+
+  .form-section {
+    @apply space-y-4 border-b border-gray-200 pb-6 mb-6 last:border-0 last:mb-0 last:pb-0;
+  }
+
+  .form-group {
+    @apply flex flex-col gap-2;
+  }
+
+  .form-label {
+    @apply text-sm font-medium text-gray-700;
+  }
+
+  .form-input {
+    @apply px-3 py-2 rounded-md border border-gray-300
+           focus:border-blue-500 focus:ring-1 focus:ring-blue-500
+           transition-colors duration-200;
+  }
+
+  .form-button {
+    @apply px-4 py-2 bg-blue-600 text-white rounded-md
+           hover:bg-blue-700 focus:outline-none focus:ring-2
+           focus:ring-blue-500 focus:ring-offset-2 transition-colors
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .info-card {
+    @apply bg-white p-6 rounded-lg shadow-sm border border-gray-200;
+  }
+
+  .section-title {
+    @apply text-lg font-medium text-gray-900 mb-4;
+  }
+}

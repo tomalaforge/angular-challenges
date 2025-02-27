@@ -5,8 +5,9 @@ import { UserStore } from './user.service';
 @Component({
   selector: 'note',
   template: `
-    <div cd-flash class="m-4 block border border-gray-500 p-4">
-      Note: {{ userService.user().note }}
+    <div cd-flash class="info-card">
+      <h2 class="section-title">Note</h2>
+      <div>{{ userService.note() }}</div>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
