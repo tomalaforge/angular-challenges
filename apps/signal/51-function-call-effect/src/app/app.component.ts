@@ -4,22 +4,20 @@ import { ActionsComponent } from './action.component';
 import { UserService } from './user.service';
 
 @Component({
+  standalone: true,
   imports: [FormsModule, ActionsComponent],
   selector: 'app-root',
   template: `
-    <nav class="flex w-full items-center border border-b">
-      Profile selected:
-      <form class="m-4 w-48">
-        <select
-          [(ngModel)]="userService.name"
-          name="name"
-          class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 ">
+    <nav class="nav-bar">
+      <span class="text-gray-700">Profile selected:</span>
+      <div class="select-wrapper">
+        <select [(ngModel)]="userService.name" name="name" class="form-select">
           <option selected>Please choose an user</option>
           @for (user of users; track $index) {
             <option value="{{ user }}">{{ user }}</option>
           }
         </select>
-      </form>
+      </div>
     </nav>
 
     <app-actions />
