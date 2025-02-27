@@ -2,4 +2,63 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply min-h-screen bg-gray-100 p-4;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.container {
+  @apply mx-auto flex min-h-screen max-w-lg items-center justify-center;
+}
+
+.feedback-form {
+  @apply w-full rounded-lg bg-white p-8 shadow-lg;
+
+  &-title {
+    @apply mb-6 text-center text-2xl font-bold text-gray-800;
+  }
+
+  &-control {
+    @apply mb-4 w-full rounded-md border border-gray-300 px-4 py-2 text-gray-700 transition-all;
+
+    &:focus {
+      @apply border-blue-500 outline-none ring-2 ring-blue-200;
+    }
+  }
+
+  textarea.feedback-form-control {
+    @apply min-h-[120px] resize-none;
+  }
+
+  &-submit {
+    @apply mt-4 w-full rounded-md bg-blue-600 px-6 py-3 text-white transition-colors;
+
+    &:hover:not(:disabled) {
+      @apply bg-blue-700;
+    }
+
+    &:disabled {
+      @apply cursor-not-allowed bg-gray-400;
+    }
+  }
+}
+
+.rating {
+  @apply mb-4 flex justify-center gap-2;
+
+  .star {
+    @apply h-10 w-10 cursor-pointer transition-all;
+    fill: #d1d5db;
+
+    &:hover {
+      @apply scale-110;
+      fill: #fbbf24;
+    }
+
+    &-active {
+      fill: #fbbf24;
+    }
+  }
+}
+
 /* You can add global styles to this file, and also import other style files */
