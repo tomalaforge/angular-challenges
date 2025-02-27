@@ -1,0 +1,20 @@
+<app-loading-spinner *ngIf="(loadingIds$ | async)?.length??0 > 0"></app-loading-spinner>
+
+<div *ngIf="(error$ | async) as errorMessage" class="error-message">
+  {{ errorMessage }}
+</div>
+
+<div *ngIf="(todos$ | async)?.length??0 > 0; else noTodos">
+  <app-todo-item
+    *ngFor="let todo of (todos$ | async)"
+    [todo]="todo"
+    (update)="update($event)"
+    (delete)="delete($event)"
+    [loadingIds]="(loadingIds$ | async) ?? []" 
+    [isProcessing]="isProcessing(todo.id)">
+  </app-todo-item>
+</div>
+
+<ng-template #noTodos>
+  <p>No todos found</p>
+</ng-template>
