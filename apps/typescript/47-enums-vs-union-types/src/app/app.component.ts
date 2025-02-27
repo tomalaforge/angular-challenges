@@ -1,82 +1,65 @@
 import { Component, computed, signal } from '@angular/core';
 
-enum Difficulty {
-  EASY = 'easy',
-  NORMAL = 'normal',
-}
+// Union type for Difficulty
+type Difficulty = 'easy' | 'normal';
 
-enum Direction {
-  LEFT = 'left',
-  RIGHT = 'right',
-}
+// Mapped type for Direction
+type Direction = { [K in 'left' | 'right']: K };
+const DIRECTION: Direction = {
+  left: 'left',
+  right: 'right',
+} as const;
 
 @Component({
-  imports: [],
+  standalone: true,
   selector: 'app-root',
   template: `
-    <section>
-      <div>
-        <button mat-stroked-button (click)="difficulty.set(Difficulty.EASY)">
-          Easy
-        </button>
-        <button mat-stroked-button (click)="difficulty.set(Difficulty.NORMAL)">
-          Normal
-        </button>
-      </div>
-      <p>Selected Difficulty: {{ difficultyLabel() }}</p>
-    </section>
+    <div class="container">
+      <section>
+        <div>
+          <button mat-stroked-button (click)="difficulty.set('easy')">
+            Easy
+          </button>
+          <button mat-stroked-button (click)="difficulty.set('normal')">
+            Normal
+          </button>
+        </div>
+        <p>Selected Difficulty: {{ difficultyLabel() }}</p>
+      </section>
 
-    <section>
-      <div>
-        <button mat-stroked-button (click)="direction.set(Direction.LEFT)">
-          Left
-        </button>
-        <button mat-stroked-button (click)="direction.set(Direction.RIGHT)">
-          Right
-        </button>
-      </div>
-      <p>{{ directionLabel() }}</p>
-    </section>
-  `,
-  styles: `
-    section {
-      @apply mx-auto my-5 flex w-fit flex-col items-center gap-2;
-
-      > div {
-        @apply flex w-fit gap-5;
-      }
-    }
-
-    button {
-      @apply rounded-md border px-4 py-2;
-    }
+      <section>
+        <div>
+          <button mat-stroked-button (click)="direction.set(DIRECTION.left)">
+            Left
+          </button>
+          <button mat-stroked-button (click)="direction.set(DIRECTION.right)">
+            Right
+          </button>
+        </div>
+        <p>{{ directionLabel() }}</p>
+      </section>
+    </div>
   `,
 })
 export class AppComponent {
-  readonly Difficulty = Difficulty;
-  readonly difficulty = signal<Difficulty>(Difficulty.EASY);
-
-  readonly Direction = Direction;
-  readonly direction = signal<Direction | undefined>(undefined);
+  readonly DIRECTION = DIRECTION;
+  readonly difficulty = signal<Difficulty>('easy');
+  readonly direction = signal<Direction[keyof Direction] | undefined>(
+    undefined,
+  );
 
   readonly difficultyLabel = computed<string>(() => {
-    switch (this.difficulty()) {
-      case Difficulty.EASY:
-        return Difficulty.EASY;
-      case Difficulty.NORMAL:
-        return Difficulty.NORMAL;
-    }
+    return this.difficulty();
   });
 
   readonly directionLabel = computed<string>(() => {
     const prefix = 'You chose to go';
-    switch (this.direction()) {
-      case Direction.LEFT:
-        return `${prefix} ${Direction.LEFT}`;
-      case Direction.RIGHT:
-        return `${prefix} ${Direction.RIGHT}`;
-      default:
-        return 'Choose a direction!';
+    const currentDirection = this.direction();
+
+    if (!currentDirection) {
+      return 'Choose a direction!';
     }
+
+    return `${prefix} ${currentDirection}`;
   });
 }
