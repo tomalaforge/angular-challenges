@@ -2,4 +2,51 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-8;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+}
+
+button {
+  @apply transform transition-all duration-200 hover:scale-105 active:scale-95;
+
+  &[mat-stroked-button] {
+    @apply border-2 border-indigo-500 bg-white px-6 py-2 font-medium text-indigo-600 shadow-sm
+           hover:bg-indigo-50 hover:shadow-md
+           active:bg-indigo-100;
+  }
+}
+
+section {
+  @apply rounded-xl bg-white p-8 shadow-lg;
+
+  > div {
+    @apply mb-4;
+  }
+
+  p {
+    @apply text-center font-medium text-gray-700;
+  }
+}
+
+.container {
+  @apply mx-auto max-w-2xl space-y-6 py-8;
+}
+
+/* Wrap the template content */
+app-root {
+  @apply block;
+
+  > section {
+    @apply mb-8 last:mb-0;
+
+    &:hover {
+      @apply shadow-xl;
+    }
+  }
+}
+
 /* You can add global styles to this file, and also import other style files */

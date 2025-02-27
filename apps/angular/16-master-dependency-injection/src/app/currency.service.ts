@@ -10,8 +10,8 @@ export interface Currency {
 
 export const currency: Currency[] = [
   { name: 'Euro', code: 'EUR', symbol: '€' },
-  { name: 'Dollar US', code: 'USD', symbol: 'US$' },
-  { name: 'Dollar Autralien', code: 'AUD', symbol: 'AU$' },
+  { name: 'Dollar US', code: 'USD', symbol: '$' },
+  { name: 'Dollar Autralien', code: 'AUD', symbol: '$' },
   { name: 'Livre Sterling', code: 'GBP', symbol: '£' },
   { name: 'Dollar Canadien', code: 'CAD', symbol: 'CAD' },
 ];

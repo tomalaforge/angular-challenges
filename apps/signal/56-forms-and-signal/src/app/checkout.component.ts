@@ -1,55 +1,56 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { products } from './products';
+import { OrderStateService } from './order-state.service';
 
 @Component({
   selector: 'app-dashboard',
   imports: [RouterLink],
   template: `
-    <h2 class="mb-1 w-full bg-gray-400 p-2 text-white">Checkout</h2>
-    <button
-      routerLink="/order"
-      queryParamsHandling="merge"
-      class="mb-5 text-blue-400">
-      < back to order
-    </button>
-    <section class="mb-5 flex justify-between">
-      <div class="font-bold">Your order:</div>
-      <div>
-        {{ quantity() }} x {{ product()?.name }}: {{ product()?.price }}€
+    <div class="rounded-lg bg-white p-6 shadow-md">
+      <h2 class="mb-6 text-xl font-semibold text-gray-800">Checkout</h2>
+
+      <button
+        routerLink="/order"
+        queryParamsHandling="merge"
+        class="mb-6 inline-flex items-center text-blue-600 hover:text-blue-700">
+        <span class="mr-2">←</span>
+        Back to Order
+      </button>
+
+      <!-- Order Summary -->
+      <div class="mb-8 rounded-lg bg-gray-50 p-4">
+        <h3 class="mb-4 font-medium text-gray-700">Order Summary</h3>
+        <div class="flex items-center justify-between">
+          <div class="text-gray-600">
+            {{ orderState.product()?.name }} × {{ orderState.quantity() }}
+          </div>
+          <div class="text-lg font-semibold text-blue-600">
+            {{ orderState.total() }}€
+          </div>
+        </div>
       </div>
-    </section>
 
-    <div>Billing Information</div>
-    <div>...</div>
-    <div>...</div>
-    <div>...</div>
-    <div>...</div>
-    <div>...</div>
+      <!-- Billing Information -->
+      <div class="space-y-6">
+        <h3 class="font-medium text-gray-700">Billing Information</h3>
+        <div class="rounded-lg bg-gray-50 p-4 text-gray-500">
+          Form fields would go here...
+        </div>
+      </div>
 
-    <button
-      routerLink="/payment"
-      [queryParams]="{ quantity: quantity() }"
-      queryParamsHandling="merge"
-      class="w-full rounded-full border bg-blue-500 p-2 text-white">
-      Pay
-    </button>
+      <button
+        routerLink="/payment"
+        [queryParams]="{ quantity: orderState.quantity() }"
+        queryParamsHandling="merge"
+        class="mt-8 w-full rounded-lg bg-blue-600 px-4 py-3 font-medium text-white
+               transition-colors hover:bg-blue-700 focus:outline-none
+               focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+        Proceed to Payment
+      </button>
+    </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class DashboardComponent {
-  quantity = input(1);
-  productId = input('1');
-
-  product = computed(() =>
-    products.find((product) => product.id === this.productId()),
-  );
-  totalWithVAT = computed(
-    () => this.quantity() * (this.product()?.price ?? 0) * 1.21,
-  );
+export default class CheckoutComponent {
+  protected orderState = inject(OrderStateService);
 }
