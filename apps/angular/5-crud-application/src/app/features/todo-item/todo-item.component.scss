@@ -1,0 +1,29 @@
+.todo-card {
+  .todo-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+  }
+
+  .todo-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-grow: 1;
+
+    .completed {
+      text-decoration: line-through;
+      color: #666;
+    }
+
+    mat-icon {
+      color: #0A2240 !important;
+    }
+  }
+
+  .todo-actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+} 

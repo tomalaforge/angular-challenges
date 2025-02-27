@@ -1,0 +1,18 @@
+<div class="dialog-header" >
+	<button mat-icon-button mat-dialog-close class="close-button">
+		<mat-icon>close</mat-icon>
+	</button>
+</div>
+
+<mat-dialog-content>
+	<mat-form-field appearance="outline">
+		<mat-label>new todo</mat-label>
+		<input matInput [(ngModel)]="title" required>
+	</mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+	<button mat-raised-button color="primary" [disabled]="!title" (click)="create()" class="active-create-button">
+		<mat-icon>check</mat-icon>
+	</button>
+</mat-dialog-actions>

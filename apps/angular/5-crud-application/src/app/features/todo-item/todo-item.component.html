@@ -1,0 +1,15 @@
+<mat-card class="todo-card">
+  <div class="todo-content">
+    <div class="todo-info">
+      <button mat-icon-button (click)="updateTodo()">
+        <mat-icon>{{ todo.completed ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>
+      </button>
+      <span [class.completed]="todo.completed">{{ todo.title }}</span>
+    </div>
+    <div class="todo-actions">
+      <button mat-icon-button color="gray" (click)="deleteTodo()">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+</mat-card> 
