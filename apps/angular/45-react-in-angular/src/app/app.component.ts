@@ -1,61 +1,58 @@
-import { Component, signal } from '@angular/core';
-import { PostComponent } from './react/post.component';
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { ReactWrapperDirective } from './react-wrapper.directive';
 
-type Post = { title: string; description: string };
+interface Post {
+  id: number;
+  title: string;
+  content: string;
+  pictureLink: string;
+}
 
 @Component({
-  imports: [PostComponent],
   selector: 'app-root',
+  standalone: true,
+  imports: [ReactWrapperDirective, CommonModule],
   template: `
-    <div class="flex flex-col gap-2 p-12">
-      <div class="flex gap-2">
-        @for (post of posts; track post.title) {
-          <div class="rounded-lg bg-gray-100 p-4">
-            <app-post
-              (selectPost)="selectPost(post)"
-              [post]="post"
-              [isSelected]="post.title === selectedPost()?.title"></app-post>
-          </div>
-        }
-      </div>
-      <div class="flex flex-col gap-2 border p-4">
-        <span class="text-xs font-medium">Selected Post:</span>
-        <span class="text-lg text-blue-700">
-          {{ selectedPost()?.title ?? '-' }}
-        </span>
+    <div class="container mx-auto p-4">
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div
+          *ngFor="let post of posts"
+          reactPost
+          [title]="post.title"
+          [content]="post.content"
+          [selected]="post.id === selectedId"
+          [pictureLink]="post.pictureLink"
+          (click)="selectPost(post.id)"></div>
       </div>
     </div>
   `,
-  styles: [''],
 })
 export class AppComponent {
-  readonly posts = [
+  selectedId?: number;
+
+  posts: Post[] = [
     {
-      title: 'A Deep Dive into Angular',
-      description:
-        "Explore Angular's core features, its evolution, and best practices in development for creating dynamic, efficient web applications in our comprehensive guide.",
-      pictureLink:
-        'https://images.unsplash.com/photo-1471958680802-1345a694ba6d',
+      id: 1,
+      title: 'First Post',
+      content: 'This is the first post content',
+      pictureLink: '../assets/bird.jpg',
     },
     {
-      title: 'The Perfect Combination',
-      description:
-        'Unveil the power of combining Angular & React in web development, maximizing efficiency and flexibility for building scalable, sophisticated applications.',
-      pictureLink:
-        'https://images.unsplash.com/photo-1518717202715-9fa9d099f58a',
+      id: 2,
+      title: 'Second Post',
+      content: 'This is the second post content',
+      pictureLink: '../assets/bird.jpg',
     },
     {
-      title: 'Taking Angular to the Next Level',
-      description:
-        "Discover how integrating React with Angular elevates web development, blending Angular's structure with React's UI prowess for advanced applications.",
-      pictureLink:
-        'https://images.unsplash.com/photo-1532103050105-860af53bc6aa',
+      id: 3,
+      title: 'Third Post',
+      content: 'This is the third post content',
+      pictureLink: '../assets/bird.jpg',
     },
   ];
 
-  readonly selectedPost = signal<Post | null>(null);
-
-  selectPost(post: Post) {
-    this.selectedPost.set(post);
+  selectPost(id: number) {
+    this.selectedId = id;
   }
 }

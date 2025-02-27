@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { randFirstName } from '@ngneat/falso';
 import { PersonListComponent } from './person-list.component';
 import { RandomComponent } from './random.component';
 
 @Component({
+  standalone: true,
   imports: [PersonListComponent, RandomComponent],
   selector: 'app-root',
   template: `
@@ -14,6 +15,7 @@ import { RandomComponent } from './random.component';
       <app-person-list [names]="boyList" title="Male" />
     </div>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
   girlList = randFirstName({ gender: 'female', length: 10 });
