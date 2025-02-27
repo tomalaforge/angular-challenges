@@ -1,32 +1,44 @@
 /* eslint-disable @angular-eslint/component-selector */
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { TextComponent } from './text.component';
-
-export type StaticTextType = 'normal' | 'warning' | 'error';
 
 @Component({
   selector: 'static-text',
   imports: [TextComponent],
   template: `
-    <text [font]="font" [color]="color">This is a static text</text>
+    <text>This is a static text</text>
   `,
-})
-export class TextStaticComponent {
-  @Input() set type(type: StaticTextType) {
-    switch (type) {
-      case 'error': {
-        this.font = 30;
-        this.color = 'red';
-        break;
+  styles: [
+    `
+      :host {
+        --text-font-size: 14px;
+        --text-color: #2c3e50;
+        --text-font-weight: 400;
+        display: block;
       }
-      case 'warning': {
-        this.font = 25;
-        this.color = 'orange';
-        break;
-      }
-    }
-  }
 
-  font = 10;
-  color = 'black';
-}
+      :host([type='error']) {
+        --text-font-size: 16px;
+        --text-color: #e74c3c;
+        --text-font-weight: 600;
+      }
+
+      :host([type='error']) ::ng-deep p {
+        background: rgba(231, 76, 60, 0.1);
+        border-left: 4px solid #e74c3c;
+      }
+
+      :host([type='warning']) {
+        --text-font-size: 15px;
+        --text-color: #f39c12;
+        --text-font-weight: 500;
+      }
+
+      :host([type='warning']) ::ng-deep p {
+        background: rgba(243, 156, 18, 0.1);
+        border-left: 4px solid #f39c12;
+      }
+    `,
+  ],
+})
+export class TextStaticComponent {}
