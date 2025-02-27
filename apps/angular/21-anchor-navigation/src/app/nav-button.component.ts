@@ -1,10 +1,13 @@
 /* eslint-disable @angular-eslint/component-selector */
 import { Component, Input } from '@angular/core';
+import { RouterLink } from '@angular/router';
+
 @Component({
   selector: 'nav-button',
   standalone: true,
+  imports: [RouterLink],
   template: `
-    <a [href]="href">
+    <a [routerLink]="href" [fragment]="fragment" (click)="handleClick()">
       <ng-content></ng-content>
     </a>
   `,
@@ -14,4 +17,18 @@ import { Component, Input } from '@angular/core';
 })
 export class NavButtonComponent {
   @Input() href = '';
+  fragment = '';
+
+  ngOnInit() {
+    const [path, fragment] = this.href.split('#');
+    this.href = path || '';
+    this.fragment = fragment || '';
+  }
+
+  handleClick() {
+    if (this.fragment) {
+      const element = document.getElementById(this.fragment);
+      element?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
 }
