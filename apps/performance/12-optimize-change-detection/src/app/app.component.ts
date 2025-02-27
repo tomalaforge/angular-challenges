@@ -1,45 +1,70 @@
 import { AsyncPipe, NgIf } from '@angular/common';
-import { Component, HostListener } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  NgZone,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
+  standalone: true,
   imports: [NgIf, AsyncPipe],
   selector: 'app-root',
   template: `
-    <div>Top</div>
-    <div>Middle</div>
-    <div>Bottom</div>
-    <button (click)="goToTop()" *ngIf="displayButton$ | async">Top</button>
+    <div class="fixed left-0 top-0 w-full bg-white p-4 shadow">Top</div>
+    <div class="my-[50vh] text-center">Middle</div>
+    <div class="mb-20 text-center">Bottom</div>
+
+    <button
+      *ngIf="displayButton$ | async"
+      (click)="goToTop()"
+      class="fixed bottom-4 left-4 rounded-lg bg-blue-600 px-4 py-2
+             text-white shadow-lg transition-all hover:bg-blue-700
+             focus:outline-none focus:ring-2 focus:ring-blue-500
+             focus:ring-offset-2">
+      Back to Top
+    </button>
   `,
   styles: [
     `
       :host {
-        height: 1500px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-
-        button {
-          position: fixed;
-          bottom: 1rem;
-          left: 1rem;
-          z-index: 1;
-          padding: 1rem;
-        }
+        min-height: 150vh;
+        display: block;
       }
     `,
   ],
 })
-export class AppComponent {
-  title = 'scroll-cd';
-
+export class AppComponent implements OnInit, OnDestroy {
   private displayButtonSubject = new BehaviorSubject<boolean>(false);
   displayButton$ = this.displayButtonSubject.asObservable();
 
-  @HostListener('window:scroll', ['$event'])
-  onScroll() {
-    const pos = window.pageYOffset;
-    this.displayButtonSubject.next(pos > 50);
+  private scrollHandler: () => void;
+  private lastState = false;
+
+  constructor(
+    private ngZone: NgZone,
+    private cdr: ChangeDetectorRef,
+  ) {
+    this.scrollHandler = () => {
+      const shouldShow = window.pageYOffset > 50;
+      if (shouldShow !== this.lastState) {
+        this.lastState = shouldShow;
+        this.displayButtonSubject.next(shouldShow);
+        this.cdr.detectChanges();
+      }
+    };
+  }
+
+  ngOnInit() {
+    this.ngZone.runOutsideAngular(() => {
+      window.addEventListener('scroll', this.scrollHandler, { passive: true });
+    });
+  }
+
+  ngOnDestroy() {
+    window.removeEventListener('scroll', this.scrollHandler);
   }
 
   goToTop() {

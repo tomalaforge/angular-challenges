@@ -2,29 +2,28 @@ import { Injectable, computed, signal } from '@angular/core';
 
 @Injectable()
 export class HeavyCalculationService {
-  private finalLength = 664579;
+  private worker: Worker;
   private loadingLength = signal(0);
 
-  loadingPercentage = computed(
-    () => (this.loadingLength() * 100) / this.finalLength,
+  loadingPercentage = computed(() =>
+    Math.min(Math.round(this.loadingLength()), 100),
   );
 
-  startLoading() {
-    this.randomHeavyCalculationFunction();
+  constructor() {
+    this.worker = new Worker(
+      new URL('./heavy-calculation.worker', import.meta.url),
+    );
+    this.worker.onmessage = ({ data }) => {
+      this.loadingLength.set(data);
+    };
   }
 
-  private randomHeavyCalculationFunction() {
-    for (let num = 2; num <= 10000000; num++) {
-      let randomFlag = true;
-      for (let i = 2; i <= Math.sqrt(num); i++) {
-        if (num % i === 0) {
-          randomFlag = false;
-          break;
-        }
-      }
-      if (randomFlag) {
-        this.loadingLength.update((l) => l + 1);
-      }
-    }
+  startLoading() {
+    this.loadingLength.set(0);
+    this.worker.postMessage(10000000);
+  }
+
+  ngOnDestroy() {
+    this.worker.terminate();
   }
 }

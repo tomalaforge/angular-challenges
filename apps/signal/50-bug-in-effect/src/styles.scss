@@ -3,3 +3,46 @@
 @tailwind utilities;
 
 /* You can add global styles to this file, and also import other style files */
+
+@layer components {
+  .card {
+    @apply max-w-md mx-auto bg-white p-8 rounded-lg shadow-md;
+  }
+
+  .product-header {
+    @apply flex justify-between items-center mb-6 pb-4 border-b border-gray-200;
+  }
+
+  .product-name {
+    @apply text-2xl font-bold text-gray-800;
+  }
+
+  .product-price {
+    @apply text-xl font-semibold text-blue-600;
+  }
+
+  .extras-section {
+    @apply space-y-4;
+  }
+
+  .extras-title {
+    @apply text-lg font-medium text-gray-700 mb-3;
+  }
+
+  .checkbox-group {
+    @apply flex items-center space-x-3 py-2 px-4 rounded-md hover:bg-gray-50 transition-colors;
+  }
+
+  .checkbox-input {
+    @apply w-4 h-4 text-blue-600 rounded border-gray-300
+           focus:ring-blue-500 focus:ring-2;
+  }
+
+  .checkbox-label {
+    @apply text-gray-700;
+  }
+
+  .total-extras {
+    @apply mt-6 pt-4 border-t border-gray-200 text-right text-sm text-gray-600;
+  }
+}
