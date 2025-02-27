@@ -1,5 +1,4 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, map } from 'rxjs';
+import { Injectable, computed, signal } from '@angular/core';
 
 export interface Currency {
   name: string;
@@ -17,14 +16,15 @@ export const currency: Currency[] = [
 
 @Injectable()
 export class CurrencyService {
-  private code = new BehaviorSubject('EUR');
+  private readonly codeSignal = signal('EUR');
 
-  readonly code$ = this.code.asObservable();
-  readonly symbol$ = this.code$.pipe(
-    map((code) => currency.find((c) => c.code === code)?.symbol ?? code),
+  readonly symbol = computed(
+    () =>
+      currency.find((c) => c.code === this.codeSignal())?.symbol ??
+      this.codeSignal(),
   );
 
-  public updateCode(code: string) {
-    this.code.next(code);
+  updateCode(code: string) {
+    this.codeSignal.set(code);
   }
 }
