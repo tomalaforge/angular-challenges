@@ -1,1 +1,44 @@
 /* You can add global styles to this file, and also import other style files */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 p-4;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.container {
+  @apply relative;
+
+  &::before {
+    content: '';
+    @apply absolute inset-0 -z-10 rounded-3xl bg-white/40 backdrop-blur-xl;
+  }
+}
+
+.vehicle-card {
+  @apply transition-all duration-300;
+
+  &:hover {
+    @apply -translate-y-1 shadow-lg;
+
+    h2 {
+      @apply text-indigo-700;
+    }
+  }
+
+  p {
+    @apply flex items-center gap-2;
+
+    &::before {
+      content: '•';
+      @apply text-indigo-400;
+    }
+  }
+}
+
+h1 {
+  @apply bg-gradient-to-r from-indigo-600 to-blue-500 bg-clip-text text-transparent;
+}
