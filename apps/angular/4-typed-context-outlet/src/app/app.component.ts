@@ -1,10 +1,19 @@
-import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ListComponent } from './list.component';
 import { PersonComponent } from './person.component';
 
+interface Student {
+  name: string;
+  age: number;
+}
+
+interface City {
+  name: string;
+  country: string;
+}
+
 @Component({
-  imports: [NgTemplateOutlet, PersonComponent, ListComponent],
+  imports: [PersonComponent, ListComponent],
   selector: 'app-root',
   template: `
     <person [person]="person">
@@ -26,6 +35,7 @@ import { PersonComponent } from './person.component';
     </list>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
 })
 export class AppComponent {
   person = {
@@ -33,12 +43,12 @@ export class AppComponent {
     age: 3,
   };
 
-  students = [
+  students: Student[] = [
     { name: 'toto', age: 3 },
     { name: 'titi', age: 4 },
   ];
 
-  cities = [
+  cities: City[] = [
     { name: 'Paris', country: 'France' },
     { name: 'Berlin', country: 'Germany' },
   ];

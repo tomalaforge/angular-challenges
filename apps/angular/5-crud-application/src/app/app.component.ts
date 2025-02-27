@@ -1,50 +1,56 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { randText } from '@ngneat/falso';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { TodoItemComponent } from './components/todo-item.component';
+import { TodoService } from './services/todo.service';
 
 @Component({
-  imports: [CommonModule],
   selector: 'app-root',
+  standalone: true,
+  imports: [CommonModule, TodoItemComponent, MatProgressSpinner],
   template: `
-    <div *ngFor="let todo of todos">
-      {{ todo.title }}
-      <button (click)="update(todo)">Update</button>
+    <div class="container">
+      <h1>Todo List</h1>
+
+      @if (todoService.loading()) {
+        <mat-spinner class="loader"></mat-spinner>
+      }
+
+      @if (todoService.error()) {
+        <div class="error">
+          {{ todoService.error() }}
+        </div>
+      }
+
+      @for (todo of todoService.todos(); track todo.id) {
+        <app-todo-item [todo]="todo"></app-todo-item>
+      }
     </div>
   `,
-  styles: [],
+  styles: [
+    `
+      .container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
+      .loader {
+        margin: 2rem auto;
+      }
+      .error {
+        color: #ff4444;
+        padding: 1rem;
+        border: 1px solid #ff4444;
+        border-radius: 4px;
+        margin: 1rem 0;
+      }
+    `,
+  ],
 })
 export class AppComponent implements OnInit {
-  todos!: any[];
-
-  constructor(private http: HttpClient) {}
+  constructor(public todoService: TodoService) {}
 
   ngOnInit(): void {
-    this.http
-      .get<any[]>('https://jsonplaceholder.typicode.com/todos')
-      .subscribe((todos) => {
-        this.todos = todos;
-      });
-  }
-
-  update(todo: any) {
-    this.http
-      .put<any>(
-        `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
-        JSON.stringify({
-          todo: todo.id,
-          title: randText(),
-          body: todo.body,
-          userId: todo.userId,
-        }),
-        {
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-          },
-        },
-      )
-      .subscribe((todoUpdated: any) => {
-        this.todos[todoUpdated.id - 1] = todoUpdated;
-      });
+    this.todoService.getTodos().subscribe();
   }
 }
