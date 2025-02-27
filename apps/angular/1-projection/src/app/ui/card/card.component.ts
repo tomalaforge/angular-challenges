@@ -1,51 +1,81 @@
-import { NgOptimizedImage } from '@angular/common';
-import { Component, inject, input } from '@angular/core';
+import { NgOptimizedImage, NgTemplateOutlet } from '@angular/common';
+import {
+  Component,
+  ContentChild,
+  inject,
+  input,
+  TemplateRef,
+} from '@angular/core';
 import { randStudent, randTeacher } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
 import { TeacherStore } from '../../data-access/teacher.store';
 import { CardType } from '../../model/card.model';
 import { ListItemComponent } from '../list-item/list-item.component';
+import { CardFooterDirective, CardHeaderDirective } from './card.directives';
 
 @Component({
   selector: 'app-card',
   template: `
-    <div
-      class="flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4"
-      [class]="customClass()">
-      @if (type() === CardType.TEACHER) {
-        <img ngSrc="assets/img/teacher.png" width="200" height="200" />
-      }
-      @if (type() === CardType.STUDENT) {
-        <img ngSrc="assets/img/student.webp" width="200" height="200" />
-      }
+    <div class="card" [class]="customClass()">
+      <!-- Header projection -->
+      <div class="card-header">
+        <ng-content select="[cardHeader]"></ng-content>
+      </div>
 
-      <section>
+      <!-- List section -->
+      <section class="card-content">
         @for (item of list(); track item) {
-          <app-list-item
-            [name]="item.firstName"
-            [id]="item.id"
-            [type]="type()"></app-list-item>
+          <ng-container
+            [ngTemplateOutlet]="itemTemplate"
+            [ngTemplateOutletContext]="{ $implicit: item }"></ng-container>
         }
       </section>
 
-      <button
-        class="rounded-sm border border-blue-500 bg-blue-300 p-2"
-        (click)="addNewItem()">
-        Add
-      </button>
+      <!-- Footer projection -->
+      <div class="card-footer">
+        <ng-content select="[cardFooter]"></ng-content>
+      </div>
     </div>
   `,
-  imports: [ListItemComponent, NgOptimizedImage],
+  styles: [
+    `
+      .card {
+        @apply w-full max-w-sm overflow-hidden rounded-lg border border-gray-200 shadow-md;
+        @apply bg-white transition-all duration-200 hover:shadow-lg;
+      }
+      .card-header {
+        @apply bg-gray-50 p-4;
+      }
+      .card-content {
+        @apply max-h-[300px] space-y-2 overflow-y-auto p-4;
+      }
+      .card-footer {
+        @apply border-t border-gray-100 p-4;
+      }
+    `,
+  ],
+  imports: [
+    ListItemComponent,
+    NgOptimizedImage,
+    NgTemplateOutlet,
+    CardHeaderDirective,
+    CardFooterDirective,
+  ],
+  standalone: true,
 })
 export class CardComponent {
   private teacherStore = inject(TeacherStore);
   private studentStore = inject(StudentStore);
 
-  readonly list = input<any[] | null>(null);
+  readonly list = input.required<any[]>();
   readonly type = input.required<CardType>();
   readonly customClass = input('');
 
   CardType = CardType;
+
+  // Template reference for list items
+  @ContentChild('itemTemplate', { static: true })
+  itemTemplate!: TemplateRef<any>;
 
   addNewItem() {
     const type = this.type();
