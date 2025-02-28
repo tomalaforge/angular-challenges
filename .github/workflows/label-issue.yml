@@ -2,7 +2,7 @@ name: Add Labels
 
 on:
   pull_request_target:
-    types: [ opened, edited ]
+    types: [ opened, edited, synchronize ]
 
 jobs:
   check-title:
