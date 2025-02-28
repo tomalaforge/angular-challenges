@@ -6,4 +6,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   imports: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CityCardComponent {}
+export class CityCardComponent {
+  private toto = 'toot';
+}
