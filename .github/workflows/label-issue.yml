@@ -5,6 +5,22 @@ on:
     types: [ opened, edited ]
 
 jobs:
+  check-title:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check PR title
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          echo "Checking PR Title: '$PR_TITLE'"
+          if [[ ! "$PR_TITLE" =~ ^Answer: ]]; then
+            echo "❌ PR title should start with 'Answer:[#challenge number]'"
+            echo "### ❌ PR title should start with 'Answer:[#challenge number]'" >> $GITHUB_STEP_SUMMARY
+            exit 1
+          else
+            echo "✅ PR title format is correct."
+            echo "### ✅ PR title format is correct." >> $GITHUB_STEP_SUMMARY
+          fi
   add_labels:
     runs-on: ubuntu-latest
     if: ${{ startsWith(github.event.pull_request.title, 'Answer') }}
@@ -19,11 +35,3 @@ jobs:
         uses: ./.github/github-action/
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-  wrong_labels:
-    runs-on: ubuntu-latest
-    if: ${{ !startsWith(github.event.pull_request.title, 'Answer') }}
-    steps:
-      - name: Set the value in bash
-        id: step_one
-        run: |
-          echo "::error PR title should start with Answer:[number of challenge]" >> $GITHUB_STEP_SUMMARY
