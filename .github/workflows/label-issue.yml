@@ -19,3 +19,11 @@ jobs:
         uses: ./.github/github-action/
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+  wrong_labels:
+    runs-on: ubuntu-latest
+    if: ${{ !startsWith(github.event.pull_request.title, 'Answer') }}
+    steps:
+      - name: Set the value in bash
+        id: step_one
+        run: |
+          echo "::error PR title should start with Answer:[number of challenge]" >> $GITHUB_STEP_SUMMARY
