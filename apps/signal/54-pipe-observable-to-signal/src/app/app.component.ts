@@ -24,5 +24,5 @@ import { products } from './product.model';
 })
 export class AppComponent {
   products = products;
-  displayedColumns = ['name', 'priceA', 'priceB', 'priceC'];
+  displayedColumns = ['name', 'priceA', 'priceB', 'priceC', 'prive2'];
 }
