@@ -24,7 +24,7 @@ If you would like to propose a challenge, this project is open source, so feel f
 
 ## Challenges
 
-Check [all 56 challenges](https://angular-challenges.vercel.app/)
+Check [all 57 challenges](https://angular-challenges.vercel.app/)
 
 ## Contributors ✨
 
