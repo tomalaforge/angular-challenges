@@ -5,8 +5,13 @@ import { CardComponent } from './card.component';
   imports: [CardComponent],
   selector: 'app-root',
   template: `
-    <app-card title="Titre 1" message="Message1" />
-    <app-card title="Titre 2" />
+    <app-card>
+      <h4>Title 1</h4>
+      <p>Message 1</p>
+    </app-card>
+    <app-card>
+      <h4>Title 2</h4>
+    </app-card>
   `,
   host: {
     class: 'p-4 block flex flex-col gap-1',
