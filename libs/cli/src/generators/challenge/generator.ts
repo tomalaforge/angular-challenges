@@ -64,7 +64,6 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
     addTailwind: true,
     standalone: true,
     skipTests: true,
-    projectNameAndRootFormat: 'as-provided',
   });
 
   generateFiles(tree, join(__dirname, 'files', 'app'), appDirectory, {
