@@ -4,8 +4,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'app-card',
   imports: [],
   template: `
-    <ng-content select=".title"></ng-content>
-    <ng-content select=".message">Aucun message</ng-content>
+    <ng-content select="h4"></ng-content>
+    <ng-content select="p">Aucun message</ng-content>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
