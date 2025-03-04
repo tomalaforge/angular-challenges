@@ -6,12 +6,11 @@ import { CardComponent } from './card.component';
   selector: 'app-root',
   template: `
     <app-card>
-      <div>Title 1</div>
-      <div>Message 1</div>
+      <div class="title">Title 1</div>
+      <div class="message">Message 1</div>
     </app-card>
     <app-card>
-      <div>Title 2</div>
-      <div>Aucun message</div>
+      <div class="title">Title 2</div>
     </app-card>
   `,
   host: {
