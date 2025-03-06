@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { getDefaultTimerProvider } from './data';
 import { TimerContainerComponent } from './timer-container.component';
 
 @Component({
   selector: 'app-phone',
   imports: [TimerContainerComponent],
+  providers: [getDefaultTimerProvider(2)],
   template: `
     <div class="flex gap-2">
       Phone Call Timer:
