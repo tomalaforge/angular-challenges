@@ -4,6 +4,7 @@ import {
   inject,
   input,
 } from '@angular/core';
+import { CityStore } from '../../data-access/city.store';
 import { StudentStore } from '../../data-access/student.store';
 import { TeacherStore } from '../../data-access/teacher.store';
 import { CardType } from '../../model/card.model';
@@ -24,6 +25,7 @@ import { CardType } from '../../model/card.model';
 export class ListItemComponent {
   private teacherStore = inject(TeacherStore);
   private studentStore = inject(StudentStore);
+  private cityStore = inject(CityStore);
 
   readonly id = input.required<number>();
   readonly name = input.required<string>();
@@ -35,6 +37,8 @@ export class ListItemComponent {
       this.teacherStore.deleteOne(id);
     } else if (type === CardType.STUDENT) {
       this.studentStore.deleteOne(id);
+    } else if (type === CardType.CITY) {
+      this.cityStore.deleteOne(id);
     }
   }
 }
