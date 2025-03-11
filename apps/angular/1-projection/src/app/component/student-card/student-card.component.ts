@@ -4,18 +4,31 @@ import {
   inject,
   OnInit,
 } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+import { takeUntil } from 'rxjs';
+import {
+  FakeHttpService,
+  randStudent,
+} from '../../data-access/fake-http.service';
+
 import { StudentStore } from '../../data-access/student.store';
-import { CardType } from '../../model/card.model';
 import { CardComponent } from '../../ui/card/card.component';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
+import { UnSubscribeOnDestroy } from '../abstract/unsubscribe.component';
 
 @Component({
   selector: 'app-student-card',
   template: `
     <app-card
-      [list]="students()"
-      [type]="cardType"
-      customClass="bg-light-green" />
+      [items]="students()"
+      customClass="bg-light-green"
+      (additems)="addStudent()">
+      <img src="assets/img/student.webp" width="200px" />
+      <ng-template #listTemplate let-student>
+        <app-list-item (delete)="deleteStudent(student.id)">
+          {{ student.firstName }}
+        </app-list-item>
+      </ng-template>
+    </app-card>
   `,
   styles: [
     `
@@ -24,17 +37,29 @@ import { CardComponent } from '../../ui/card/card.component';
       }
     `,
   ],
-  imports: [CardComponent],
+  imports: [CardComponent, ListItemComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class StudentCardComponent implements OnInit {
-  private http = inject(FakeHttpService);
-  private store = inject(StudentStore);
+export class StudentCardComponent
+  extends UnSubscribeOnDestroy
+  implements OnInit
+{
+  private readonly http = inject(FakeHttpService);
+  private readonly studentStore = inject(StudentStore);
 
-  students = this.store.students;
-  cardType = CardType.STUDENT;
+  students = this.studentStore.students;
 
   ngOnInit(): void {
-    this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
+    this.http.fetchStudents$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((s) => this.studentStore.addAll(s));
+  }
+
+  public addStudent(): void {
+    this.studentStore.addOne(randStudent());
+  }
+
+  public deleteStudent(id: number): void {
+    this.studentStore.deleteOne(id);
   }
 }
