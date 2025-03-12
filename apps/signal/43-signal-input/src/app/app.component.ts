@@ -3,6 +3,7 @@ import { UserComponent } from './user.component';
 
 @Component({
   imports: [UserComponent],
+  standalone: true,
   selector: 'app-root',
   template: `
     <div class="flex flex-col gap-3">
