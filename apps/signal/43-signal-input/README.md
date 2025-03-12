@@ -10,4 +10,4 @@ npx nx serve signal-signal-input
 
 ### Documentation and Instruction
 
-Challenge documentation is [here](https://angular-challenges.vercel.app/challenges/angular/43-signal-input/).
+Challenge documentation is [here](https://angular-challenges.vercel.app/challenges/signal/43-signal-input).
