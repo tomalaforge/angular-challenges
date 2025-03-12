@@ -16,6 +16,7 @@ const ageToCategory = (age: number): Category => {
 
 @Component({
   selector: 'app-user',
+  standalone: true,
   imports: [TitleCasePipe],
   template: `
     {{ fullName | titlecase }} plays tennis in the {{ category }} category!!
