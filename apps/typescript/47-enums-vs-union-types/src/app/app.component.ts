@@ -1,14 +1,12 @@
 import { Component, computed, signal } from '@angular/core';
 
-enum Difficulty {
-  EASY = 'easy',
-  NORMAL = 'normal',
-}
+type DifficultyUnion = 'EASY' | 'NORMAL';
 
-enum Direction {
-  LEFT = 'left',
-  RIGHT = 'right',
-}
+type DirectionUnion = 'LEFT' | 'RIGHT';
+
+type DirectionMap = {
+  [K in DirectionUnion]: string;
+};
 
 @Component({
   imports: [],
@@ -16,10 +14,10 @@ enum Direction {
   template: `
     <section>
       <div>
-        <button mat-stroked-button (click)="difficulty.set(Difficulty.EASY)">
+        <button mat-stroked-button (click)="difficulty.set('EASY')">
           Easy
         </button>
-        <button mat-stroked-button (click)="difficulty.set(Difficulty.NORMAL)">
+        <button mat-stroked-button (click)="difficulty.set('NORMAL')">
           Normal
         </button>
       </div>
@@ -53,28 +51,31 @@ enum Direction {
   `,
 })
 export class AppComponent {
-  readonly Difficulty = Difficulty;
-  readonly difficulty = signal<Difficulty>(Difficulty.EASY);
+  readonly difficulty = signal<DifficultyUnion>('EASY');
 
-  readonly Direction = Direction;
-  readonly direction = signal<Direction | undefined>(undefined);
+  readonly Direction: DirectionMap = {
+    LEFT: 'left',
+    RIGHT: 'right',
+  };
+
+  readonly direction = signal<string | undefined>(undefined);
 
   readonly difficultyLabel = computed<string>(() => {
     switch (this.difficulty()) {
-      case Difficulty.EASY:
-        return Difficulty.EASY;
-      case Difficulty.NORMAL:
-        return Difficulty.NORMAL;
+      case 'EASY':
+        return 'EASY';
+      case 'NORMAL':
+        return 'NORMAL';
     }
   });
 
   readonly directionLabel = computed<string>(() => {
     const prefix = 'You chose to go';
     switch (this.direction()) {
-      case Direction.LEFT:
-        return `${prefix} ${Direction.LEFT}`;
-      case Direction.RIGHT:
-        return `${prefix} ${Direction.RIGHT}`;
+      case this.Direction.LEFT:
+        return `${prefix} ${this.Direction.LEFT}`;
+      case this.Direction.RIGHT:
+        return `${prefix} ${this.Direction.RIGHT}`;
       default:
         return 'Choose a direction!';
     }
