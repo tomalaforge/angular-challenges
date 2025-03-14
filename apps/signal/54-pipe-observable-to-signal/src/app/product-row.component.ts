@@ -1,4 +1,3 @@
-import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -13,11 +12,11 @@ import { Product } from './product.model';
   selector: 'tr[product-row]',
   template: `
     <td>{{ productInfo.name }}</td>
-    <td>{{ productInfo.priceA | currency | async }}</td>
-    <td>{{ productInfo.priceB | currency | async }}</td>
-    <td>{{ productInfo.priceC | currency | async }}</td>
+    <td>{{ productInfo.priceA | currency }}</td>
+    <td>{{ productInfo.priceB | currency }}</td>
+    <td>{{ productInfo.priceC | currency }}</td>
   `,
-  imports: [AsyncPipe, CurrencyPipe],
+  imports: [CurrencyPipe],
   providers: [CurrencyService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
