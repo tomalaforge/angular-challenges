@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
-import { Subject, concatMap, map } from 'rxjs';
+import { Subject, catchError, concatMap, map } from 'rxjs';
 
 @Component({
   imports: [CommonModule, FormsModule],
@@ -43,6 +43,10 @@ export class AppComponent implements OnInit {
         concatMap((value) =>
           this.http.get(`https://jsonplaceholder.typicode.com/${value}/1`),
         ),
+        catchError((error, caught) => {
+          this.response = error;
+          return caught;
+        }),
         takeUntilDestroyed(this.destroyRef),
       )
       .subscribe({
