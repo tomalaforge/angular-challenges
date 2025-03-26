@@ -35,7 +35,7 @@
       login,
       avatar: pr.avatar,
       count: pr.count
-    })).filter((r) => r.login !== 'allcontributors[bot]').sort((a, b) => b.count - a.count);
+    })).filter((r) => r.login !== 'allcontributors[bot]' && r.login !== 'tomalaforge').sort((a, b) => b.count - a.count);
   };
 
   async function fetchGitHubUsers() {

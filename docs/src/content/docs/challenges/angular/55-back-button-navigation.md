@@ -8,7 +8,6 @@ challengeNumber: 55
 command: angular-back-button-navigation
 sidebar:
   order: 123
-  badge: New
 ---
 
 ## Information
