@@ -23,6 +23,10 @@ export const locales = {
   ru: {
     label: 'Русский',
     lang: 'ru'
+  },
+  'zh-cn': {
+    label: '简体中文',
+    lang: 'zh-CN'
   }
 };
 
@@ -51,7 +55,8 @@ export default defineConfig({
         es: 'Guías',
         fr: 'Guides',
         pt: 'Guias',
-        ru: 'Руководство'
+        ru: 'Руководство',
+        'zh-CN': '指南'
       }
     },
       {
@@ -64,7 +69,8 @@ export default defineConfig({
         es: 'Leaderboard',
         fr: 'Leaderboard',
         pt: 'Tabela de Classificação',
-        ru: 'Leaderboard'
+        ru: 'Leaderboard',
+        'zh-CN': '排行榜'
       }
     },
     {
@@ -76,7 +82,8 @@ export default defineConfig({
         es: 'Desafíos',
         fr: 'Challenges',
         pt: 'Desafios',
-        ru: 'Задачи'
+        ru: 'Задачи',
+        'zh-CN': '挑战'
       }
     }],
     head: [{

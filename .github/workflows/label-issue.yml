@@ -2,9 +2,25 @@ name: Add Labels
 
 on:
   pull_request_target:
-    types: [ opened ]
+    types: [ opened, edited, synchronize ]
 
 jobs:
+  check-title:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check PR title
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          echo "Checking PR Title: '$PR_TITLE'"
+          if [[ ! "$PR_TITLE" =~ ^Answer: ]]; then
+            echo "❌ PR title should start with 'Answer:[#challenge number]'"
+            echo "### ❌ PR title should start with 'Answer:[#challenge number]'" >> $GITHUB_STEP_SUMMARY
+            exit 1
+          else
+            echo "✅ PR title format is correct."
+            echo "### ✅ PR title format is correct." >> $GITHUB_STEP_SUMMARY
+          fi
   add_labels:
     runs-on: ubuntu-latest
     if: ${{ startsWith(github.event.pull_request.title, 'Answer') }}

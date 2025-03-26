@@ -16,6 +16,7 @@ import { Component, signal } from '@angular/core';
       }
     </div>
   `,
+  standalone: false,
 })
 export class AppComponent {
   topLoaded = signal(false);

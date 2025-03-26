@@ -1,48 +1,44 @@
 /* eslint-disable @angular-eslint/component-selector */
-import { AsyncPipe, NgFor } from '@angular/common';
-import { Component, Input, inject } from '@angular/core';
-import { BehaviorSubject, take } from 'rxjs';
+import { Component, inject, input, signal } from '@angular/core';
+import { take } from 'rxjs';
 import { AppService } from './app.service';
 import { TopicType } from './localDB.service';
 
 @Component({
-  standalone: true,
   selector: 'button-delete-topic',
-  imports: [AsyncPipe],
   template: `
-    <button (click)="deleteTopic()"><ng-content></ng-content></button>
-    <div>{{ message$$ | async }}</div>
+    <button (click)="deleteTopic()"><ng-content /></button>
+    <div>{{ message() }}</div>
   `,
 })
 export class ButtonDeleteComponent {
-  @Input() topic!: TopicType;
+  readonly topic = input.required<TopicType>();
 
-  message$$ = new BehaviorSubject<string>('');
+  message = signal('');
 
   private service = inject(AppService);
 
   deleteTopic() {
     this.service
-      .deleteOldTopics(this.topic)
+      .deleteOldTopics(this.topic())
       .pipe(take(1))
       .subscribe((result) =>
-        this.message$$.next(
+        this.message.set(
           result
-            ? `All ${this.topic} have been deleted`
-            : `Error: deletion of some ${this.topic} failed`,
+            ? `All ${this.topic()} have been deleted`
+            : `Error: deletion of some ${this.topic()} failed`,
         ),
       );
   }
 }
 
 @Component({
-  standalone: true,
-  imports: [AsyncPipe, NgFor, ButtonDeleteComponent],
+  imports: [ButtonDeleteComponent],
   selector: 'app-root',
   template: `
-    <div *ngFor="let item of all$ | async">
-      {{ item.id }} - {{ item.topic }}
-    </div>
+    @for (info of allInfo(); track info.id) {
+      <div>{{ info.id }} - {{ info.topic }}</div>
+    }
 
     <button-delete-topic topic="food">Delete Food</button-delete-topic>
     <button-delete-topic topic="sport">Delete Sport</button-delete-topic>
@@ -52,5 +48,5 @@ export class ButtonDeleteComponent {
 export class AppComponent {
   private service = inject(AppService);
 
-  all$ = this.service.getAll$;
+  allInfo = this.service.getAllInfo;
 }

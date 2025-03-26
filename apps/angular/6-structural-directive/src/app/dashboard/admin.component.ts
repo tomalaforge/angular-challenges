@@ -4,7 +4,6 @@ import { ButtonComponent } from '../button.component';
 
 @Component({
   selector: 'app-dashboard',
-  standalone: true,
   imports: [RouterLink, ButtonComponent],
   template: `
     <p>dashboard for Admin works!</p>

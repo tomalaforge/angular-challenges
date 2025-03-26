@@ -17,7 +17,6 @@ const fibonacci = (num: number): number => {
 
 @Component({
   selector: 'app-person-list',
-  standalone: true,
   imports: [
     CommonModule,
     FormsModule,

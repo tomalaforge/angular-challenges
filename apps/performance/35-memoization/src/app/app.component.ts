@@ -4,7 +4,6 @@ import { generateList } from './generateList';
 import { PersonListComponent } from './person-list.component';
 
 @Component({
-  standalone: true,
   imports: [PersonListComponent, NgIf],
   selector: 'app-root',
   template: `

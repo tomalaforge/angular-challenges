@@ -3,7 +3,6 @@ import { Component, HostListener } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
-  standalone: true,
   imports: [NgIf, AsyncPipe],
   selector: 'app-root',
   template: `

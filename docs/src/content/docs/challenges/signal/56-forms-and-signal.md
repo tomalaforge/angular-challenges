@@ -8,7 +8,6 @@ challengeNumber: 56
 command: signal-forms-and-signal
 sidebar:
   order: 211
-  badge: New
 ---
 
 ## Information

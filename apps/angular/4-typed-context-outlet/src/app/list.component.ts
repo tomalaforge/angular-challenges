@@ -9,7 +9,6 @@ import {
 
 @Component({
   selector: 'list',
-  standalone: true,
   imports: [CommonModule],
   template: `
     <div *ngFor="let item of list; index as i">

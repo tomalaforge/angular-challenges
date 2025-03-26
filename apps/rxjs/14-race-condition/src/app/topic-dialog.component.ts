@@ -18,7 +18,6 @@ import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
     </div>
   `,
   imports: [MatDialogModule, MatButtonModule, NgFor],
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TopicModalComponent {

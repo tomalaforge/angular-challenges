@@ -25,5 +25,6 @@ import { Component } from '@angular/core';
   host: {
     class: 'flex flex-col p-4 gap-3',
   },
+  standalone: false,
 })
 export class AppComponent {}

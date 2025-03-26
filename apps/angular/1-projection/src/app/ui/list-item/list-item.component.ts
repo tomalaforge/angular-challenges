@@ -1,4 +1,9 @@
-import { Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  input,
+} from '@angular/core';
 import { StudentStore } from '../../data-access/student.store';
 import { TeacherStore } from '../../data-access/teacher.store';
 import { CardType } from '../../model/card.model';
@@ -7,28 +12,28 @@ import { CardType } from '../../model/card.model';
   selector: 'app-list-item',
   template: `
     <div class="border-grey-300 flex justify-between border px-2 py-1">
-      {{ name }}
-      <button (click)="delete(id)">
+      {{ name() }}
+      <button (click)="delete(id())">
         <img class="h-5" src="assets/svg/trash.svg" />
       </button>
     </div>
   `,
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListItemComponent {
-  @Input() id!: number;
-  @Input() name!: string;
-  @Input() type!: CardType;
+  private teacherStore = inject(TeacherStore);
+  private studentStore = inject(StudentStore);
 
-  constructor(
-    private teacherStore: TeacherStore,
-    private studentStore: StudentStore,
-  ) {}
+  readonly id = input.required<number>();
+  readonly name = input.required<string>();
+  readonly type = input.required<CardType>();
 
   delete(id: number) {
-    if (this.type === CardType.TEACHER) {
+    const type = this.type();
+    if (type === CardType.TEACHER) {
       this.teacherStore.deleteOne(id);
-    } else if (this.type === CardType.STUDENT) {
+    } else if (type === CardType.STUDENT) {
       this.studentStore.deleteOne(id);
     }
   }

@@ -13,7 +13,6 @@ export const randUser = (): User => ({
 
 @Component({
   selector: 'sdi-users',
-  standalone: true,
   imports: [UserComponent, MatTableModule],
   template: `
     <h1 class="mt-4 text-xl">List of Users</h1>
