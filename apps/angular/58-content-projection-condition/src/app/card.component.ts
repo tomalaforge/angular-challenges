@@ -1,20 +1,39 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  contentChild,
+  Directive,
+  input,
+  TemplateRef,
+} from '@angular/core';
+
+@Directive({
+  selector: '[appCardTitle]',
+})
+export class CardTitleDirective {}
+
+@Directive({
+  selector: '[appCardMessage]',
+})
+export class CardMessageDirective {}
 
 @Component({
   selector: 'app-card',
   template: `
     @if (small()) {
-      <ng-content select="[title]" />
-      <ng-content select="[message]" />
+      <ng-container [ngTemplateOutlet]="cardTitle()" />
+      <ng-container [ngTemplateOutlet]="cardMessage()" />
     } @else {
       <div class="p-4">
         <div class="text-2xl">
-          <ng-content select="[title]" />
+          <ng-container [ngTemplateOutlet]="cardTitle()" />
         </div>
-        <ng-content select="[message]" />
+        <ng-container [ngTemplateOutlet]="cardMessage()" />
       </div>
     }
   `,
+  imports: [NgTemplateOutlet],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     class: 'p-4 border border-grey rounded-sm flex flex-col w-[200px]',
@@ -22,4 +41,10 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 })
 export class CardComponent {
   small = input<boolean>(false);
+  cardTitle = contentChild.required(CardTitleDirective, {
+    read: TemplateRef,
+  });
+  cardMessage = contentChild.required(CardMessageDirective, {
+    read: TemplateRef,
+  });
 }
