@@ -57,7 +57,7 @@ import {
 export class ExpandableCard {
   public isExpanded = signal(false);
 
-  expanded = output<boolean>();
+  readonly expanded = output<boolean>();
 
   toggleExpansion(): void {
     this.isExpanded.update((isExpanded) => !isExpanded);
