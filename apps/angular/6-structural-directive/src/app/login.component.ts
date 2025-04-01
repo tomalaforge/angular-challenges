@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ButtonComponent } from './button.component';
 import { InformationComponent } from './information.component';
@@ -15,6 +15,7 @@ import { UserStore } from './user.store';
 
 @Component({
   imports: [InformationComponent, RouterLink, ButtonComponent],
+  standalone: true,
   selector: 'app-login',
   template: `
     <header class="flex items-center gap-3">
@@ -36,7 +37,7 @@ import { UserStore } from './user.store';
   `,
 })
 export class LoginComponent {
-  constructor(private userStore: UserStore) {}
+  private userStore = inject(UserStore);
 
   admin() {
     this.userStore.add(admin);

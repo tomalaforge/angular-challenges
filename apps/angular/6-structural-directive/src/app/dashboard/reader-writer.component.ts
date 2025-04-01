@@ -7,9 +7,9 @@ import { ButtonComponent } from '../button.component';
   standalone: true,
   imports: [RouterLink, ButtonComponent],
   template: `
-    <p>dashboard for Admin works!</p>
+    <p>dashboard for Reader - Writer works!</p>
     <button app-button routerLink="/">Logout</button>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AdminDashboardComponent {}
+export class ReaderWriterDashboardComponent {}
