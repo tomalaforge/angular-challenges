@@ -3,6 +3,7 @@ import {
   Component,
   computed,
   input,
+  OnInit,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -44,7 +45,7 @@ import { products } from './products';
       </div>
       <button
         routerLink="/checkout"
-        [queryParams]="{ quantity: quantity() }"
+        [queryParams]="{ quantity: $quantity() }"
         queryParamsHandling="merge"
         class="w-full rounded-full border bg-blue-500 p-2 text-white">
         Checkout
@@ -53,19 +54,28 @@ import { products } from './products';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class OrderComponent {
+export default class OrderComponent implements OnInit {
   form = new FormGroup({
     quantity: new FormControl(1, { nonNullable: true }),
   });
 
+  // Query params
   productId = input('1');
+  quantity = input<string | undefined>();
+
   price = computed(
     () => products.find((p) => p.id === this.productId())?.price ?? 0,
   );
-  quantity = toSignal(this.form.controls.quantity.valueChanges, {
+  $quantity = toSignal(this.form.controls.quantity.valueChanges, {
     initialValue: this.form.getRawValue().quantity,
   });
-  totalWithoutVat = computed(() => Number(this.price()) * this.quantity());
+  totalWithoutVat = computed(() => Number(this.price()) * this.$quantity());
   vat = computed(() => this.totalWithoutVat() * 0.21);
   total = computed(() => this.totalWithoutVat() + this.vat());
+
+  ngOnInit(): void {
+    if (this.quantity()) {
+      this.form.controls.quantity.patchValue(Number(this.quantity()));
+    }
+  }
 }
