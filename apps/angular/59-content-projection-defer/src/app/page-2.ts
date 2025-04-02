@@ -2,7 +2,10 @@ import { httpResource } from '@angular/common/http';
 import {
   ChangeDetectionStrategy,
   Component,
+  inject,
+  Injector,
   ResourceStatus,
+  runInInjectionContext,
 } from '@angular/core';
 import { ExpandableCard } from './expandable-card';
 
@@ -17,15 +20,15 @@ interface Post {
   selector: 'app-page-2',
   template: `
     page2
-    <app-expandable-card>
+    <app-expandable-card (expanded)="loadPosts()">
       <div title>Load Post</div>
       <div>
-        @if (postRessource.isLoading()) {
+        @if (postResource?.isLoading()) {
           Loading...
-        } @else if (postRessource.status() === ResourceStatus.Error) {
+        } @else if (postResource?.status() === ResourceStatus.Error) {
           Error...
         } @else {
-          @for (post of postRessource.value(); track post.id) {
+          @for (post of postResource?.value() || []; track post.id) {
             <div>{{ post.title }}</div>
           }
         }
@@ -34,10 +37,20 @@ interface Post {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [ExpandableCard],
+  standalone: true,
 })
 export class Page2 {
-  public postRessource = httpResource<Post[]>(
-    'https://jsonplaceholder.typicode.com/posts',
-  );
+  private readonly injector = inject(Injector);
+  public postResource: ReturnType<typeof httpResource<Post[]>> | null = null;
   protected readonly ResourceStatus = ResourceStatus;
+
+  loadPosts() {
+    if (!this.postResource) {
+      runInInjectionContext(this.injector, () => {
+        this.postResource = httpResource<Post[]>(
+          'https://jsonplaceholder.typicode.com/posts',
+        );
+      });
+    }
+  }
 }
