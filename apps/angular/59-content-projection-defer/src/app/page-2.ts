@@ -20,12 +20,12 @@ interface Post {
     <app-expandable-card>
       <div title>Load Post</div>
       <div>
-        @if (postRessource.isLoading()) {
+        @if (postResource.isLoading()) {
           Loading...
-        } @else if (postRessource.status() === ResourceStatus.Error) {
+        } @else if (postResource.status() === ResourceStatus.Error) {
           Error...
         } @else {
-          @for (post of postRessource.value(); track post.id) {
+          @for (post of postResource.value(); track post.id) {
             <div>{{ post.title }}</div>
           }
         }
@@ -36,7 +36,7 @@ interface Post {
   imports: [ExpandableCard],
 })
 export class Page2 {
-  public postRessource = httpResource<Post[]>(
+  public postResource = httpResource<Post[]>(
     'https://jsonplaceholder.typicode.com/posts',
   );
   protected readonly ResourceStatus = ResourceStatus;
