@@ -1,8 +1,10 @@
-import { httpResource } from '@angular/common/http';
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
+  resource,
   ResourceStatus,
+  viewChild,
 } from '@angular/core';
 import { ExpandableCard } from './expandable-card';
 
@@ -20,12 +22,12 @@ interface Post {
     <app-expandable-card>
       <div title>Load Post</div>
       <div>
-        @if (postRessource.isLoading()) {
+        @if (postResource.isLoading()) {
           Loading...
-        } @else if (postRessource.status() === ResourceStatus.Error) {
+        } @else if (postResource.status() === ResourceStatus.Error) {
           Error...
         } @else {
-          @for (post of postRessource.value(); track post.id) {
+          @for (post of postResource.value(); track post.id) {
             <div>{{ post.title }}</div>
           }
         }
@@ -36,8 +38,19 @@ interface Post {
   imports: [ExpandableCard],
 })
 export class Page2 {
-  public postRessource = httpResource<Post[]>(
-    'https://jsonplaceholder.typicode.com/posts',
-  );
   protected readonly ResourceStatus = ResourceStatus;
+  private readonly URL = 'https://jsonplaceholder.typicode.com/posts';
+
+  private readonly card = viewChild.required(ExpandableCard);
+  private readonly isCardOpened = computed(() => this.card().isExpanded());
+
+  protected readonly postResource = resource<Post[], { isCardOpened: boolean }>(
+    {
+      loader: async ({ request }) =>
+        request.isCardOpened
+          ? await fetch(this.URL).then((res) => res.json())
+          : [],
+      request: () => ({ isCardOpened: this.isCardOpened() }),
+    },
+  );
 }
