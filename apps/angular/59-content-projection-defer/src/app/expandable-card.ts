@@ -1,4 +1,28 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  contentChild,
+  Directive,
+  signal,
+  TemplateRef,
+} from '@angular/core';
+
+@Directive({
+  selector: '[cardContentTemplate]',
+})
+export class CardContentTemplateDirective {
+  static ngTemplateContextGuard(
+    dir: CardContentTemplateDirective,
+    ctx: any,
+  ): ctx is CardContentTemplateContext {
+    return true;
+  }
+}
+
+type CardContentTemplateContext = {
+  $implicit: { expanded: boolean };
+};
 
 @Component({
   selector: 'app-expandable-card',
@@ -6,6 +30,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
     <button
       class="text-fg-subtle hover:bg-button-secondary-bg-hover active:bg-button-secondary-bg-active focus:outline-button-border-highlight flex w-fit items-center gap-1 py-2 focus:outline focus:outline-2 focus:outline-offset-1"
       (click)="isExpanded.set(!isExpanded())"
+      #expandContentButton
       data-cy="expandable-panel-toggle">
       @if (isExpanded()) {
         <svg
@@ -41,14 +66,29 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
       class="overflow-hidden transition-[max-height] duration-500"
       [class.max-h-0]="!isExpanded()"
       [class.max-h-[1000px]]="isExpanded()">
-      <ng-content />
+      @defer (on interaction(expandContentButton)) {
+        <ng-container
+          [ngTemplateOutlet]="cardContentTemplate()"
+          [ngTemplateOutletContext]="{
+            $implicit: { expanded: isExpanded() }
+          }"></ng-container>
+      } @placeholder {
+        <div>This is the card content placeholder</div>
+      }
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [NgTemplateOutlet],
   host: {
     class: 'flex flex-col gap-2 ',
   },
 })
 export class ExpandableCard {
   public isExpanded = signal(false);
+  public cardContentTemplate = contentChild.required<
+    CardContentTemplateDirective,
+    TemplateRef<CardContentTemplateContext>
+  >(CardContentTemplateDirective, {
+    read: TemplateRef,
+  });
 }
