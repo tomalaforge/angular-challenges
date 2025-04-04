@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ResourceStatus,
+  signal,
 } from '@angular/core';
 import { ExpandableCard } from './expandable-card';
 
@@ -17,7 +18,7 @@ interface Post {
   selector: 'app-page-2',
   template: `
     page2
-    <app-expandable-card>
+    <app-expandable-card (expanded)="triggerFetch.set($event)">
       <div title>Load Post</div>
       <div>
         @if (postResource.isLoading()) {
@@ -36,8 +37,11 @@ interface Post {
   imports: [ExpandableCard],
 })
 export class Page2 {
-  public postResource = httpResource<Post[]>(
-    'https://jsonplaceholder.typicode.com/posts',
+  protected triggerFetch = signal(false);
+  public postResource = httpResource<Post[]>(() =>
+    !this.triggerFetch()
+      ? undefined
+      : 'https://jsonplaceholder.typicode.com/posts',
   );
   protected readonly ResourceStatus = ResourceStatus;
 }

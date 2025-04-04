@@ -1,11 +1,16 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  output,
+  signal,
+} from '@angular/core';
 
 @Component({
   selector: 'app-expandable-card',
   template: `
     <button
       class="text-fg-subtle hover:bg-button-secondary-bg-hover active:bg-button-secondary-bg-active focus:outline-button-border-highlight flex w-fit items-center gap-1 py-2 focus:outline focus:outline-2 focus:outline-offset-1"
-      (click)="isExpanded.set(!isExpanded())"
+      (click)="expandedChange()"
       data-cy="expandable-panel-toggle">
       @if (isExpanded()) {
         <svg
@@ -51,4 +56,10 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 })
 export class ExpandableCard {
   public isExpanded = signal(false);
+  expanded = output<boolean>();
+
+  expandedChange = () => {
+    this.isExpanded.set(!this.isExpanded());
+    this.expanded.emit(this.isExpanded());
+  };
 }
