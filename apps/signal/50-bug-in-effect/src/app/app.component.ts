@@ -17,7 +17,6 @@ import { FormsModule } from '@angular/forms';
 
     <section>
       <p>Extras:</p>
-
       <div>
         <input type="checkbox" [(ngModel)]="drive" />
         +500 GB drive-space
@@ -40,11 +39,20 @@ export class AppComponent {
   gpu = model(false);
 
   constructor() {
-    /* 
-      Explain for your junior team mate why this bug occurs ...
-    */
     effect(() => {
-      if (this.drive() || this.ram() || this.gpu()) {
+      if (this.drive()) {
+        alert('Price increased!');
+      }
+    });
+
+    effect(() => {
+      if (this.ram()) {
+        alert('Price increased!');
+      }
+    });
+
+    effect(() => {
+      if (this.gpu()) {
         alert('Price increased!');
       }
     });
