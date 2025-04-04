@@ -2,15 +2,34 @@ import { httpResource } from '@angular/common/http';
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
+  Directive,
   ResourceStatus,
+  viewChild,
 } from '@angular/core';
-import { ExpandableCard } from './expandable-card';
+import {
+  CardContentTemplateDirective,
+  ExpandableCard,
+} from './expandable-card';
 
 interface Post {
   id: number;
   title: string;
   body: string;
   userId: number;
+}
+
+@Directive({
+  selector: '[postResource]',
+})
+export class PostResourceDirective {
+  readonly isLoading = computed(() => this.#postHttpResource.isLoading());
+  readonly status = computed(() => this.#postHttpResource.status());
+  readonly value = computed(() => this.#postHttpResource.value());
+
+  readonly #postHttpResource = httpResource<Post[]>(
+    () => 'https://jsonplaceholder.typicode.com/posts',
+  );
 }
 
 @Component({
@@ -20,24 +39,35 @@ interface Post {
     <app-expandable-card>
       <div title>Load Post</div>
       <div>
-        @if (postResource.isLoading()) {
-          Loading...
-        } @else if (postResource.status() === ResourceStatus.Error) {
-          Error...
-        } @else {
-          @for (post of postResource.value(); track post.id) {
-            <div>{{ post.title }}</div>
-          }
-        }
+        <ng-template [cardContentTemplate] let-state>
+          <div postResource>
+            @if (state.expanded) {
+              @if (postResourceDir().isLoading()) {
+                <div>Loading...</div>
+              } @else if (postResourceDir().status() === ResourceStatus.Error) {
+                <div>Error...</div>
+              } @else {
+                @for (post of postResourceDir().value(); track post.id) {
+                  <div>{{ post.title }}</div>
+                }
+              }
+            }
+          </div>
+        </ng-template>
       </div>
     </app-expandable-card>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [ExpandableCard],
+  imports: [
+    ExpandableCard,
+    PostResourceDirective,
+    CardContentTemplateDirective,
+  ],
 })
 export class Page2 {
-  public postResource = httpResource<Post[]>(
-    'https://jsonplaceholder.typicode.com/posts',
-  );
   protected readonly ResourceStatus = ResourceStatus;
+
+  protected readonly postResourceDir = viewChild.required(
+    PostResourceDirective,
+  );
 }
