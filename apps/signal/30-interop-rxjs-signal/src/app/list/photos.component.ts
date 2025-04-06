@@ -1,15 +1,13 @@
-import { NgFor, NgIf } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { RouterLinkWithHref } from '@angular/router';
-import { LetDirective } from '@ngrx/component';
-import { provideComponentStore } from '@ngrx/component-store';
-import { debounceTime, distinctUntilChanged, skipWhile, tap } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { Photo } from '../photo.model';
-import { PhotoStore } from './photos.store';
+import { PhotoStore2 } from './photos2.store';
 
 @Component({
   selector: 'app-photos',
@@ -17,10 +15,7 @@ import { PhotoStore } from './photos.store';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatProgressBarModule,
-    NgIf,
-    NgFor,
     MatInputModule,
-    LetDirective,
     RouterLinkWithHref,
   ],
   template: `
@@ -35,84 +30,67 @@ import { PhotoStore } from './photos.store';
         placeholder="find a photo" />
     </mat-form-field>
 
-    <ng-container *ngrxLet="vm$ as vm">
+    <ng-container>
       <section class="flex flex-col">
         <section class="flex items-center gap-3">
           <button
-            [disabled]="vm.page === 1"
-            [class.bg-gray-400]="vm.page === 1"
+            [disabled]="store.page() === 1"
+            [class.bg-gray-400]="store.page() === 1"
             class="rounded-md border p-3 text-xl"
-            (click)="store.previousPage()">
+            (click)="store.setPageRelative(-1)">
             <
           </button>
           <button
-            [disabled]="vm.endOfPage"
-            [class.bg-gray-400]="vm.endOfPage"
+            [disabled]="store.endOfPage()"
+            [class.bg-gray-400]="store.endOfPage()"
             class="rounded-md border p-3 text-xl"
-            (click)="store.nextPage()">
+            (click)="store.setPageRelative(1)">
             >
           </button>
-          Page :{{ vm.page }} / {{ vm.pages }}
+          Page : {{ store.page() }} / {{ store.pages() }}
         </section>
-        <mat-progress-bar
-          mode="query"
-          *ngIf="vm.loading"
-          class="mt-5"></mat-progress-bar>
-        <ul
-          class="flex flex-wrap gap-4"
-          *ngIf="vm.photos && vm.photos.length > 0; else noPhoto">
-          <li *ngFor="let photo of vm.photos; trackBy: trackById">
-            <a routerLink="detail" [queryParams]="{ photo: encode(photo) }">
-              <img
-                src="{{ photo.url_q }}"
-                alt="{{ photo.title }}"
-                class="image" />
-            </a>
-          </li>
+
+        @if (store.loading()) {
+          <mat-progress-bar mode="query" class="mt-5" />
+        }
+        <ul class="flex flex-wrap gap-4">
+          @for (photo of store.photos(); track photo.id) {
+            <li>
+              <a routerLink="detail" [queryParams]="{ photo: encode(photo) }">
+                <img
+                  src="{{ photo.url_q }}"
+                  alt="{{ photo.title }}"
+                  class="image" />
+              </a>
+            </li>
+          } @empty {
+            <div>No Photos found. Type a search word.</div>
+          }
         </ul>
-        <ng-template #noPhoto>
-          <div>No Photos found. Type a search word.</div>
-        </ng-template>
-        <footer class="text-red-500">
-          {{ vm.error }}
-        </footer>
+        <footer class="text-red-500">{{ store.error() }}</footer>
       </section>
     </ng-container>
   `,
-  providers: [provideComponentStore(PhotoStore)],
+  providers: [PhotoStore2],
   host: {
     class: 'p-5 block',
   },
 })
-export default class PhotosComponent implements OnInit {
-  store = inject(PhotoStore);
-  readonly vm$ = this.store.vm$.pipe(
-    tap(({ search }) => {
-      if (!this.formInit) {
-        this.search.setValue(search);
-        this.formInit = true;
-      }
-    }),
-  );
+export default class PhotosComponent {
+  protected readonly store = inject(PhotoStore2);
+  protected readonly search = new FormControl();
 
-  private formInit = false;
-  search = new FormControl();
+  constructor() {
+    this.search.setValue(this.store.search());
 
-  ngOnInit(): void {
-    this.store.search(
-      this.search.valueChanges.pipe(
-        skipWhile(() => !this.formInit),
-        debounceTime(300),
-        distinctUntilChanged(),
-      ),
-    );
+    this.search.valueChanges
+      .pipe(debounceTime(300), distinctUntilChanged(), takeUntilDestroyed())
+      .subscribe((searchTerm) => {
+        this.store.setSearch(searchTerm);
+      });
   }
 
-  trackById(index: number, photo: Photo) {
-    return photo.id;
-  }
-
-  encode(photo: Photo) {
+  encode(photo: Photo): string {
     return encodeURIComponent(JSON.stringify(photo));
   }
 }
