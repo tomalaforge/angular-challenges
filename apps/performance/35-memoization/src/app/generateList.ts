@@ -11,5 +11,6 @@ export function generateList() {
     });
   }
 
+  console.log(arr);
   return arr;
 }
