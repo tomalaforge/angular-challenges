@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, model } from '@angular/core';
 
 @Component({
   selector: 'app-expandable-card',
@@ -50,5 +50,5 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
   },
 })
 export class ExpandableCard {
-  public isExpanded = signal(false);
+  public isExpanded = model(false);
 }
