@@ -1,15 +1,16 @@
-import { AsyncPipe, NgIf } from '@angular/common';
-import { Component, HostListener } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { NgIf } from '@angular/common';
+import { Component, computed, inject, NgZone, signal } from '@angular/core';
+import { fromEvent } from 'rxjs';
 
 @Component({
-  imports: [NgIf, AsyncPipe],
+  standalone: true,
+  imports: [NgIf],
   selector: 'app-root',
   template: `
     <div>Top</div>
     <div>Middle</div>
     <div>Bottom</div>
-    <button (click)="goToTop()" *ngIf="displayButton$ | async">Top</button>
+    <button (click)="goToTop()" *ngIf="displayButton()">Top</button>
   `,
   styles: [
     `
@@ -31,15 +32,21 @@ import { BehaviorSubject } from 'rxjs';
   ],
 })
 export class AppComponent {
-  title = 'scroll-cd';
+  private ngZone = inject(NgZone);
 
-  private displayButtonSubject = new BehaviorSubject<boolean>(false);
-  displayButton$ = this.displayButtonSubject.asObservable();
+  private shouldDisplayButton = signal(false);
+  displayButton = computed(() => this.shouldDisplayButton());
 
-  @HostListener('window:scroll', ['$event'])
-  onScroll() {
-    const pos = window.pageYOffset;
-    this.displayButtonSubject.next(pos > 50);
+  constructor() {
+    this.ngZone.runOutsideAngular(() => {
+      fromEvent(window, 'scroll').subscribe(() => {
+        const shouldShow = window.pageYOffset > 50;
+
+        if (this.shouldDisplayButton() !== shouldShow) {
+          this.shouldDisplayButton.set(shouldShow);
+        }
+      });
+    });
   }
 
   goToTop() {
