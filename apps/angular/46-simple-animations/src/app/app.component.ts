@@ -1,8 +1,49 @@
+import {
+  animate,
+  query,
+  stagger,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 import { Component } from '@angular/core';
 
 @Component({
-  imports: [],
+  imports: [
+    // BrowserAnimationsModule
+  ],
   selector: 'app-root',
+  animations: [
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({
+          transform: 'translateX(-20%)',
+          opacity: 0,
+        }),
+        animate(
+          '500ms',
+          style({
+            opacity: 1,
+            transform: 'translateX(0%)',
+          }),
+        ),
+      ]),
+    ]),
+
+    trigger('stagger', [
+      transition(':enter', [
+        query('.list-item', [
+          style({ transform: 'translateX(-10%)', opacity: 0 }),
+          stagger(100, [
+            animate(
+              '200ms linear',
+              style({ opacity: 1, transform: 'translateX(0)' }),
+            ),
+          ]),
+        ]),
+      ]),
+    ]),
+  ],
   styles: `
     section {
       @apply flex flex-1 flex-col gap-5;
@@ -18,7 +59,7 @@ import { Component } from '@angular/core';
   `,
   template: `
     <div class="mx-20 my-40 flex gap-5">
-      <section>
+      <section @fadeIn>
         <div>
           <h3>2008</h3>
           <p>
@@ -50,7 +91,7 @@ import { Component } from '@angular/core';
         </div>
       </section>
 
-      <section>
+      <section @stagger>
         <div class="list-item">
           <span>Name:</span>
           <span>Samuel</span>
