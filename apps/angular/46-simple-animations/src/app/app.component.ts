@@ -1,6 +1,5 @@
 import {
   animate,
-  animateChild,
   query,
   stagger,
   style,
@@ -31,19 +30,17 @@ import { Component } from '@angular/core';
       ]),
     ]),
 
-    trigger('listItem', [
-      transition(':enter', [
-        style({ transform: 'translateX(-10%)', opacity: 0 }),
-        animate(
-          '200ms linear',
-          style({ transform: 'translateX(0%)', opacity: 1 }),
-        ),
-      ]),
-    ]),
-
     trigger('stagger', [
       transition(':enter', [
-        query('@listItem', stagger('100ms', animateChild())),
+        query('.list-item', [
+          style({ transform: 'translateX(-10%)', opacity: 0 }),
+          stagger(100, [
+            animate(
+              '200ms linear',
+              style({ opacity: 1, transform: 'translateX(0)' }),
+            ),
+          ]),
+        ]),
       ]),
     ]),
   ],
@@ -95,32 +92,32 @@ import { Component } from '@angular/core';
       </section>
 
       <section @stagger>
-        <div @listItem class="list-item">
+        <div class="list-item">
           <span>Name:</span>
           <span>Samuel</span>
         </div>
 
-        <div @listItem class="list-item">
+        <div class="list-item">
           <span>Age:</span>
           <span>28</span>
         </div>
 
-        <div @listItem class="list-item">
+        <div class="list-item">
           <span>Birthdate:</span>
           <span>02.11.1995</span>
         </div>
 
-        <div @listItem class="list-item">
+        <div class="list-item">
           <span>City:</span>
           <span>Berlin</span>
         </div>
 
-        <div @listItem class="list-item">
+        <div class="list-item">
           <span>Language:</span>
           <span>English</span>
         </div>
 
-        <div @listItem class="list-item">
+        <div class="list-item">
           <span>Like Pizza:</span>
           <span>Hell yeah</span>
         </div>
