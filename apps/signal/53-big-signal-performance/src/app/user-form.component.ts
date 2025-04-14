@@ -64,36 +64,40 @@ export class UserFormComponent {
   userStore = inject(UserStore);
 
   form = new FormGroup({
-    name: new FormControl(this.userStore.user().name, { nonNullable: true }),
-    street: new FormControl(this.userStore.user().address.street, {
+    name: new FormControl(this.userStore.user.name(), { nonNullable: true }),
+    street: new FormControl(this.userStore.user.address().street, {
       nonNullable: true,
     }),
-    zipCode: new FormControl(this.userStore.user().address.zipCode, {
+    zipCode: new FormControl(this.userStore.user.address().zipCode, {
       nonNullable: true,
     }),
-    city: new FormControl(this.userStore.user().address.city, {
+    city: new FormControl(this.userStore.user.address().city, {
       nonNullable: true,
     }),
-    note: new FormControl(this.userStore.user().note, { nonNullable: true }),
-    title: new FormControl(this.userStore.user().title, { nonNullable: true }),
-    salary: new FormControl(this.userStore.user().salary, {
+    note: new FormControl(this.userStore.user.note(), { nonNullable: true }),
+    title: new FormControl(this.userStore.user.title(), { nonNullable: true }),
+    salary: new FormControl(this.userStore.user.salary(), {
       nonNullable: true,
     }),
   });
 
   submit() {
-    this.userStore.user.update((u) => ({
-      ...u,
-      name: this.form.getRawValue().name,
-      address: {
-        ...u.address,
-        street: this.form.getRawValue().street,
-        zipCode: this.form.getRawValue().zipCode,
-        city: this.form.getRawValue().city,
-      },
-      note: this.form.getRawValue().note,
-      title: this.form.getRawValue().title,
-      salary: this.form.getRawValue().salary,
-    }));
+    const formValues = this.form.getRawValue();
+
+    this.userStore.user.name.set(formValues.name);
+    this.userStore.user.title.set(formValues.title);
+    this.userStore.user.salary.set(formValues.salary);
+
+    const address = {
+      street: formValues.street,
+      zipCode: formValues.zipCode,
+      city: formValues.city,
+    };
+
+    if (
+      JSON.stringify(address) !== JSON.stringify(this.userStore.user.address())
+    ) {
+      this.userStore.user.address.set(address);
+    }
   }
 }
