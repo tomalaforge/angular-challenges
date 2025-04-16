@@ -1,0 +1,82 @@
+{
+  "name": "angular-content-projection-defer",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "app",
+  "sourceRoot": "apps/angular/59-content-projection-defer/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:application",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/angular/59-content-projection-defer",
+        "index": "apps/angular/59-content-projection-defer/src/index.html",
+        "browser": "apps/angular/59-content-projection-defer/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/angular/59-content-projection-defer/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "apps/angular/59-content-projection-defer/public"
+          }
+        ],
+        "styles": ["apps/angular/59-content-projection-defer/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "4kb",
+              "maximumError": "8kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "angular-content-projection-defer:build:production"
+        },
+        "development": {
+          "buildTarget": "angular-content-projection-defer:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "angular-content-projection-defer:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "angular-content-projection-defer:build",
+        "staticFilePath": "dist/apps/angular/59-content-projection-defer/browser",
+        "spa": true
+      }
+    }
+  }
+}

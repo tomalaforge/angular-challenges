@@ -8,7 +8,6 @@ challengeNumber: 58
 command: angular-content-projection-condition
 sidebar:
   order: 124
-  badge: New
 ---
 
 ## Information

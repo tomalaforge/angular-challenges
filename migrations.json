@@ -1,28 +1,13 @@
 {
   "migrations": [
     {
-      "version": "20.3.0-beta.1",
-      "description": "Update ESLint flat config to include .cjs, .mjs, .cts, and .mts files in overrides (if needed)",
-      "implementation": "./src/migrations/update-20-3-0/add-file-extensions-to-overrides",
-      "package": "@nx/eslint",
-      "name": "add-file-extensions-to-overrides"
-    },
-    {
       "cli": "nx",
-      "version": "20.3.0-beta.2",
-      "description": "If workspace includes Module Federation projects, ensure the new @nx/module-federation package is installed.",
-      "factory": "./src/migrations/update-20-3-0/ensure-nx-module-federation-package",
+      "version": "20.5.0-beta.5",
+      "requires": { "@angular/core": ">=19.2.0" },
+      "description": "Update the @angular/cli package version to ~19.2.0.",
+      "factory": "./src/migrations/update-20-5-0/update-angular-cli",
       "package": "@nx/angular",
-      "name": "ensure-nx-module-federation-package"
-    },
-    {
-      "cli": "nx",
-      "version": "20.4.0-beta.1",
-      "requires": { "@angular/core": ">=19.1.0" },
-      "description": "Update the @angular/cli package version to ~19.1.0.",
-      "factory": "./src/migrations/update-20-4-0/update-angular-cli",
-      "package": "@nx/angular",
-      "name": "update-angular-cli-version-19-1-0"
+      "name": "update-angular-cli-version-19-2-0"
     }
   ]
 }

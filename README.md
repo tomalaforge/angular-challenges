@@ -24,7 +24,7 @@ If you would like to propose a challenge, this project is open source, so feel f
 
 ## Challenges
 
-Check [all 58 challenges](https://angular-challenges.vercel.app/)
+Check [all 59 challenges](https://angular-challenges.vercel.app/)
 
 ## Contributors ✨
 
@@ -74,6 +74,7 @@ Check [all 58 challenges](https://angular-challenges.vercel.app/)
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/fpalmab"><img src="https://avatars.githubusercontent.com/u/7729812?v=4?s=100" width="100px;" alt="Francisco Palma"/><br /><sub><b>Francisco Palma</b></sub></a><br /><a href="https://github.com/tomalaforge/angular-challenges/issues?q=author%3Afpalmab" title="Bug reports">🐛</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/michalgrzegorczyk-dev"><img src="https://avatars.githubusercontent.com/u/47832176?v=4?s=100" width="100px;" alt="Michał Grzegorczyk"/><br /><sub><b>Michał Grzegorczyk</b></sub></a><br /><a href="https://github.com/tomalaforge/angular-challenges/commits?author=michalgrzegorczyk-dev" title="Documentation">📖</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/tamim36"><img src="https://avatars.githubusercontent.com/u/42251521?v=4?s=100" width="100px;" alt="Tamim Arefin Anik"/><br /><sub><b>Tamim Arefin Anik</b></sub></a><br /><a href="https://github.com/tomalaforge/angular-challenges/issues?q=author%3Atamim36" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/WhoisBsa"><img src="https://avatars.githubusercontent.com/u/36895235?v=4?s=100" width="100px;" alt="Matheus B."/><br /><sub><b>Matheus B.</b></sub></a><br /><a href="https://github.com/tomalaforge/angular-challenges/issues?q=author%3AWhoisBsa" title="Bug reports">🐛</a></td>
     </tr>
   </tbody>
   <tfoot>
