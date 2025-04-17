@@ -26,5 +26,5 @@ Correct your application to pass the test
 
 ## Run the test
 
-HEADLESS : `npx nx component-test rxjs-race-condition`
-WATCH MODE : `npx nx component-test rxjs-race-condition --watch`
+HEADLESS : `npx nx test rxjs-race-condition`
+WATCH MODE : `npx nx test rxjs-race-condition --watch`
