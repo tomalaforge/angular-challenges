@@ -40,13 +40,25 @@ export class AppComponent {
   gpu = model(false);
 
   constructor() {
-    /* 
-      Explain for your junior team mate why this bug occurs ...
+    /*
+      It occurs because of the place of each signal triggered in the OR condition : the order of the trigger in the condition matter.
+      If the triggered one is after the one who is already set as true, it will not trigger the alert because, for the condition value didn't change.
+      Else if the triggered one is before the one who is already set as true, it will trigger the alert.
+      We must separate the condition into three effect, a condition for each effect.
+
+      Want to understand the way to do it with the computed solution. Any clue ?
     */
+
     effect(() => {
-      if (this.drive() || this.ram() || this.gpu()) {
-        alert('Price increased!');
-      }
+      this.drive() ? alert('Price increased') : undefined;
+    });
+
+    effect(() => {
+      this.ram() ? alert('Price increased') : undefined;
+    });
+
+    effect(() => {
+      this.gpu() ? alert('Price increased') : undefined;
     });
   }
 }
