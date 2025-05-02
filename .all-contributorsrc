@@ -354,6 +354,15 @@
       "contributions": [
         "bug"
       ]
+    },
+    {
+      "login": "StefH",
+      "name": "Stef Heyenrath",
+      "avatar_url": "https://avatars.githubusercontent.com/u/249938?v=4",
+      "profile": "https://sourcerer.io/stefh",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
