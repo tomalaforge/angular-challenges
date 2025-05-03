@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ResourceStatus,
+  viewChild,
 } from '@angular/core';
 import { ExpandableCard } from './expandable-card';
 
@@ -36,8 +37,13 @@ interface Post {
   imports: [ExpandableCard],
 })
 export class Page2 {
-  public postResource = httpResource<Post[]>(
-    'https://jsonplaceholder.typicode.com/posts',
-  );
+  private expandableCard = viewChild(ExpandableCard);
+
+  public postResource = httpResource<Post[]>(() => {
+    return this.expandableCard()?.isExpanded()
+      ? 'https://jsonplaceholder.typicode.com/posts'
+      : undefined;
+  });
+
   protected readonly ResourceStatus = ResourceStatus;
 }
