@@ -1,26 +1,31 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   inject,
   OnInit,
 } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+import {
+  FakeHttpService,
+  randStudent,
+} from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
-import { CardType } from '../../model/card.model';
 import { CardComponent } from '../../ui/card/card.component';
 
 @Component({
   selector: 'app-student-card',
   template: `
     <app-card
+      customClass="bg-color"
+      [imgTitle]="cardImg"
       [list]="students()"
-      [type]="cardType"
-      customClass="bg-light-green" />
+      (addNew)="addNewItem()"
+      (itemId)="deleteItem($event)" />
   `,
   styles: [
     `
-      ::ng-deep .bg-light-green {
-        background-color: rgba(0, 250, 0, 0.1);
+      :host {
+        --card-background: rgba(0, 250, 0, 0.1);
       }
     `,
   ],
@@ -28,13 +33,25 @@ import { CardComponent } from '../../ui/card/card.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StudentCardComponent implements OnInit {
-  private http = inject(FakeHttpService);
-  private store = inject(StudentStore);
+  private readonly http = inject(FakeHttpService);
+  private readonly store = inject(StudentStore);
 
-  students = this.store.students;
-  cardType = CardType.STUDENT;
+  students = computed(() => {
+    return this.store.students().map((item) => {
+      return { ...item, name: item.firstName };
+    });
+  });
+  cardImg = 'assets/img/student.webp';
 
   ngOnInit(): void {
     this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
+  }
+
+  addNewItem() {
+    this.store.addOne(randStudent());
+  }
+
+  deleteItem(id: number) {
+    this.store.deleteOne(id);
   }
 }
