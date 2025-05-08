@@ -1,8 +1,5 @@
 import { NgOptimizedImage } from '@angular/common';
-import { Component, inject, input } from '@angular/core';
-import { randStudent, randTeacher } from '../../data-access/fake-http.service';
-import { StudentStore } from '../../data-access/student.store';
-import { TeacherStore } from '../../data-access/teacher.store';
+import { Component, input, output } from '@angular/core';
 import { CardType } from '../../model/card.model';
 import { ListItemComponent } from '../list-item/list-item.component';
 
@@ -12,19 +9,14 @@ import { ListItemComponent } from '../list-item/list-item.component';
     <div
       class="flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4"
       [class]="customClass()">
-      @if (type() === CardType.TEACHER) {
-        <img ngSrc="assets/img/teacher.png" width="200" height="200" />
-      }
-      @if (type() === CardType.STUDENT) {
-        <img ngSrc="assets/img/student.webp" width="200" height="200" />
-      }
+      <img [ngSrc]="imgTitle()" width="200" height="200" priority />
 
       <section>
         @for (item of list(); track item) {
           <app-list-item
-            [name]="item.firstName"
-            [id]="item.id"
-            [type]="type()"></app-list-item>
+            (deleteEvent)="onDelete($event)"
+            [name]="item.name"
+            [id]="item.id" />
         }
       </section>
 
@@ -35,24 +27,28 @@ import { ListItemComponent } from '../list-item/list-item.component';
       </button>
     </div>
   `,
-  imports: [ListItemComponent, NgOptimizedImage],
+  styles: [
+    `
+      .bg-color {
+        background-color: var(--card-background);
+      }
+    `,
+  ],
+  imports: [NgOptimizedImage, ListItemComponent],
 })
 export class CardComponent {
-  private teacherStore = inject(TeacherStore);
-  private studentStore = inject(StudentStore);
-
   readonly list = input<any[] | null>(null);
-  readonly type = input.required<CardType>();
+  readonly type = input<CardType>();
   readonly customClass = input('');
-
-  CardType = CardType;
+  readonly imgTitle = input.required<string>();
+  readonly addNew = output<void>();
+  readonly itemId = output<number>();
 
   addNewItem() {
-    const type = this.type();
-    if (type === CardType.TEACHER) {
-      this.teacherStore.addOne(randTeacher());
-    } else if (type === CardType.STUDENT) {
-      this.studentStore.addOne(randStudent());
-    }
+    this.addNew.emit();
+  }
+
+  onDelete(id: number) {
+    this.itemId.emit(id);
   }
 }
