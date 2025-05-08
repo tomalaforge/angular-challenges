@@ -24,6 +24,7 @@ const sponsors = [
   'michalgrzegorczyk-dev',
   'zealotrahl',
   'DzoeL123',
+  'allan1989',
 ];
 
 module.exports = {
