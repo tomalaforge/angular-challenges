@@ -1,6 +1,11 @@
-import { NgOptimizedImage } from '@angular/common';
-import { Component, inject, input } from '@angular/core';
-import { randStudent, randTeacher } from '../../data-access/fake-http.service';
+import {
+  Component,
+  inject,
+  Injector,
+  input,
+  OnInit,
+  output,
+} from '@angular/core';
 import { StudentStore } from '../../data-access/student.store';
 import { TeacherStore } from '../../data-access/teacher.store';
 import { CardType } from '../../model/card.model';
@@ -12,16 +17,11 @@ import { ListItemComponent } from '../list-item/list-item.component';
     <div
       class="flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4"
       [class]="customClass()">
-      @if (type() === CardType.TEACHER) {
-        <img ngSrc="assets/img/teacher.png" width="200" height="200" />
-      }
-      @if (type() === CardType.STUDENT) {
-        <img ngSrc="assets/img/student.webp" width="200" height="200" />
-      }
-
+      <ng-content select="img"></ng-content>
       <section>
         @for (item of list(); track item) {
           <app-list-item
+            (deleteItem)="onDeleteItem($event)"
             [name]="item.firstName"
             [id]="item.id"
             [type]="type()"></app-list-item>
@@ -30,16 +30,17 @@ import { ListItemComponent } from '../list-item/list-item.component';
 
       <button
         class="rounded-sm border border-blue-500 bg-blue-300 p-2"
-        (click)="addNewItem()">
+        (click)="onAddNewItem()">
         Add
       </button>
     </div>
   `,
-  imports: [ListItemComponent, NgOptimizedImage],
+  imports: [ListItemComponent],
 })
-export class CardComponent {
+export class CardComponent implements OnInit {
   private teacherStore = inject(TeacherStore);
   private studentStore = inject(StudentStore);
+  private injector = inject(Injector);
 
   readonly list = input<any[] | null>(null);
   readonly type = input.required<CardType>();
@@ -47,12 +48,21 @@ export class CardComponent {
 
   CardType = CardType;
 
-  addNewItem() {
-    const type = this.type();
-    if (type === CardType.TEACHER) {
-      this.teacherStore.addOne(randTeacher());
-    } else if (type === CardType.STUDENT) {
-      this.studentStore.addOne(randStudent());
-    }
+  onAddNewItem() {
+    this.addNewItem.emit();
   }
+
+  onDeleteItem(id: number) {
+    console.log('id', id);
+    // Comment invoquer le store de chaque card sans faire de boucle ?
+    // Je passe le StudentStore en input mais n'arrive pas à l'invoquer
+  }
+
+  ngOnInit(): void {
+    console.log('onInit');
+  }
+
+  readonly store = input();
+
+  addNewItem = output();
 }
