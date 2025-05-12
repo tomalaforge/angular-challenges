@@ -28,28 +28,57 @@ interface Boat {
 
 type Vehicle = Bicycle | Car | Moto | Bus | Boat;
 
+export function createVehicle(type: 'bicycle'): Bicycle;
+export function createVehicle(type: 'car', fuel: Fuel): Car;
+export function createVehicle(type: 'moto', fuel: Fuel): Moto;
+export function createVehicle(type: 'boat', capacity: number): Boat;
+export function createVehicle(
+  type: 'bus',
+  capacity: number,
+  isPublicTransport: boolean,
+): Bus;
 export function createVehicle(
   type: VehicleType,
-  fuel?: Fuel,
-  capacity?: number,
+  fuelOrCapacity?: Fuel | number,
   isPublicTransport?: boolean,
 ): Vehicle {
   switch (type) {
     case 'bicycle':
       return { type };
+
     case 'car':
     case 'moto':
-      if (!fuel) throw new Error(`fuel property is missing for type ${type}`);
-      return { fuel, type };
+      if (!isFuel(fuelOrCapacity)) {
+        throw new Error(`'fuel' must be provided for type "${type}".`);
+      }
+      return { fuel: fuelOrCapacity, type };
+
     case 'boat':
-      if (!capacity)
-        throw new Error(`capacity property is missing for type boat`);
-      return { capacity, type };
+      if (typeof fuelOrCapacity !== 'number') {
+        throw new Error(`'capacity' must be a number for type "boat".`);
+      }
+      return { capacity: fuelOrCapacity, type };
+
     case 'bus':
-      if (!capacity)
-        throw new Error(`capacity property is missing for type bus`);
-      if (!isPublicTransport)
-        throw new Error(`isPublicTransport property is missing for type bus`);
-      return { capacity, isPublicTransport, type };
+      if (typeof fuelOrCapacity !== 'number') {
+        throw new Error(`'capacity' must be a number for type "bus".`);
+      }
+      if (typeof isPublicTransport !== 'boolean') {
+        throw new Error(
+          `'isPublicTransport' must be a boolean for type "bus".`,
+        );
+      }
+      return {
+        capacity: fuelOrCapacity,
+        isPublicTransport,
+        type,
+      };
   }
+}
+
+function isFuel(value: unknown): value is Fuel {
+  return (
+    typeof value === 'string' &&
+    ['diesel', 'petrol', 'electric'].includes(value)
+  );
 }
