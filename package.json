@@ -31,6 +31,7 @@
     "@ngrx/entity": "19.0.1",
     "@ngrx/operators": "19.0.1",
     "@ngrx/router-store": "19.0.1",
+    "@ngrx/signals": "^19.1.0",
     "@ngrx/store": "19.0.1",
     "@nx/angular": "20.6.4",
     "@swc/helpers": "0.5.12",

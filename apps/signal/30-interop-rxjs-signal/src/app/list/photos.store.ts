@@ -71,8 +71,8 @@ export class PhotoStore
       const savedState = JSON.parse(savedJSONState);
       this.setState({
         ...initialState,
-        search: savedState.search,
-        page: savedState.page,
+        search: savedState.search ?? '',
+        page: savedState.page ?? 1,
       });
     }
   }
