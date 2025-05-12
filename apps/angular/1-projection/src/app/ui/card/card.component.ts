@@ -1,30 +1,34 @@
+import { CommonModule, NgTemplateOutlet } from '@angular/common';
 import {
   Component,
-  inject,
-  Injector,
+  ContentChild,
   input,
-  OnInit,
   output,
+  TemplateRef,
 } from '@angular/core';
-import { StudentStore } from '../../data-access/student.store';
-import { TeacherStore } from '../../data-access/teacher.store';
 import { CardType } from '../../model/card.model';
 import { ListItemComponent } from '../list-item/list-item.component';
 
 @Component({
   selector: 'app-card',
+
   template: `
     <div
-      class="flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4"
+      class="flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4 "
       [class]="customClass()">
       <ng-content select="img"></ng-content>
       <section>
         @for (item of list(); track item) {
           <app-list-item
-            (deleteItem)="onDeleteItem($event)"
             [name]="item.firstName"
             [id]="item.id"
             [type]="type()"></app-list-item>
+          <span>{{ item.firstName }}</span>
+          <ng-container
+            [ngTemplateOutlet]="listTemplate"
+            [ngTemplateOutletContext]="{
+              item: item
+            }"></ng-container>
         }
       </section>
 
@@ -35,34 +39,22 @@ import { ListItemComponent } from '../list-item/list-item.component';
       </button>
     </div>
   `,
-  imports: [ListItemComponent],
+  imports: [ListItemComponent, NgTemplateOutlet, CommonModule],
 })
-export class CardComponent implements OnInit {
-  private teacherStore = inject(TeacherStore);
-  private studentStore = inject(StudentStore);
-  private injector = inject(Injector);
-
+export class CardComponent {
   readonly list = input<any[] | null>(null);
   readonly type = input.required<CardType>();
   readonly customClass = input('');
-
-  CardType = CardType;
+  @ContentChild('listTemplate') listTemplate!: TemplateRef<ListItemComponent>;
 
   onAddNewItem() {
     this.addNewItem.emit();
   }
 
   onDeleteItem(id: number) {
-    console.log('id', id);
-    // Comment invoquer le store de chaque card sans faire de boucle ?
-    // Je passe le StudentStore en input mais n'arrive pas à l'invoquer
+    this.deleteItem.emit(id);
   }
-
-  ngOnInit(): void {
-    console.log('onInit');
-  }
-
-  readonly store = input();
 
   addNewItem = output();
+  deleteItem = output<number>();
 }
