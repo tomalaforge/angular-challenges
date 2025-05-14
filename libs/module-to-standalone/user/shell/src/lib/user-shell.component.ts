@@ -1,8 +1,10 @@
 import { TOKEN } from '@angular-challenges/module-to-standalone/core/providers';
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'lib-user-shell',
+  imports: [RouterLink, RouterOutlet],
   template: `
     -- User Panel --
     <div class="flex items-center gap-2">
@@ -27,8 +29,7 @@ import { Component, Inject } from '@angular/core';
   host: {
     class: 'flex flex-col p-4 gap-3 border border-blue',
   },
-  standalone: false,
 })
 export class UserShellComponent {
-  constructor(@Inject(TOKEN) public token: string) {}
+  readonly token = inject(TOKEN);
 }
