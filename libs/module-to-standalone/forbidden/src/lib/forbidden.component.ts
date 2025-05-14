@@ -5,6 +5,5 @@ import { Component } from '@angular/core';
   template: `
     Forbidden component
   `,
-  standalone: false,
 })
-export class ForbiddenComponent {}
+export default class ForbiddenComponent {}

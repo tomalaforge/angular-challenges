@@ -1,36 +1,34 @@
 import { IsAuthorizedGuard } from '@angular-challenges/module-to-standalone/admin/shared';
-import { Route } from '@angular/router';
+import { provideToken } from '@angular-challenges/module-to-standalone/core/providers';
+import { Routes } from '@angular/router';
 
-export const appRoutes: Route[] = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+export const appRoutes: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: 'home' },
   {
     path: 'home',
-    loadChildren: () =>
-      import('@angular-challenges/module-to-standalone/home').then(
-        (m) => m.ModuleToStandaloneHomeModule,
-      ),
+    providers: [provideToken('main-shell-token')],
+    loadComponent: () =>
+      import('@angular-challenges/module-to-standalone/home'),
   },
   {
     path: 'admin',
-    canActivate: [IsAuthorizedGuard],
+    canMatch: [IsAuthorizedGuard],
     loadChildren: () =>
       import('@angular-challenges/module-to-standalone/admin/feature').then(
-        (m) => m.AdminFeatureModule,
+        (r) => r.adminFeatureRoutes,
       ),
   },
   {
     path: 'user',
     loadChildren: () =>
       import('@angular-challenges/module-to-standalone/user/shell').then(
-        (m) => m.UserShellModule,
+        (r) => r.userShellRoutes,
       ),
   },
 
   {
     path: 'forbidden',
-    loadChildren: () =>
-      import('@angular-challenges/module-to-standalone/forbidden').then(
-        (m) => m.ForbiddenModule,
-      ),
+    loadComponent: () =>
+      import('@angular-challenges/module-to-standalone/forbidden'),
   },
 ];
