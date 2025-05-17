@@ -1,5 +1,5 @@
 import { NgOptimizedImage } from '@angular/common';
-import { Component, inject, input } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
 import { randStudent, randTeacher } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
 import { TeacherStore } from '../../data-access/teacher.store';
@@ -24,7 +24,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
           <app-list-item
             [name]="item.firstName"
             [id]="item.id"
-            [type]="type()"></app-list-item>
+            (delete)="delete.emit($event)"></app-list-item>
         }
       </section>
 
@@ -44,6 +44,8 @@ export class CardComponent {
   readonly list = input<any[] | null>(null);
   readonly type = input.required<CardType>();
   readonly customClass = input('');
+
+  delete = output<number>();
 
   CardType = CardType;
 
