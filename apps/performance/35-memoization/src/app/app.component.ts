@@ -1,10 +1,9 @@
-import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { generateList } from './generateList';
 import { PersonListComponent } from './person-list.component';
 
 @Component({
-  imports: [PersonListComponent, NgIf],
+  imports: [PersonListComponent],
   selector: 'app-root',
   template: `
     <p>Performance is key!!</p>
@@ -14,11 +13,9 @@ import { PersonListComponent } from './person-list.component';
       Load List
     </button>
 
-    <app-person-list
-      *ngIf="loadList"
-      class="max-w-2xl"
-      [persons]="persons"
-      title="Persons" />
+    @if (loadList) {
+      <app-person-list class="max-w-2xl" [persons]="persons" title="Persons" />
+    }
   `,
 })
 export class AppComponent {
