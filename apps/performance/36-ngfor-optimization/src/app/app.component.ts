@@ -48,8 +48,8 @@ export class AppComponent implements OnInit {
     this.personService.loadPersons();
   }
 
-  handleKey(event: any) {
-    if (event.keyCode === 13) {
+  handleKey(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
       this.personService.addPerson(this.label);
       this.label = '';
     }
