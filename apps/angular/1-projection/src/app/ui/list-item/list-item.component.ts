@@ -1,12 +1,18 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { CardType } from '../../model/card.model';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  input,
+  output,
+} from '@angular/core';
 
 @Component({
   selector: 'app-list-item',
   template: `
     <div class="border-grey-300 flex justify-between border px-2 py-1">
-      <ng-content></ng-content>
-      <ng-content></ng-content>
+      <ng-content />
+      <button (click)="deleteItem.emit()">
+        <img class="h-5" src="assets/svg/trash.svg" />
+      </button>
     </div>
   `,
   imports: [],
@@ -16,5 +22,5 @@ import { CardType } from '../../model/card.model';
 export class ListItemComponent {
   readonly id = input<number>();
   readonly name = input<string>();
-  readonly type = input<CardType>();
+  deleteItem = output<void>();
 }

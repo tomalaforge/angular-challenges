@@ -4,16 +4,13 @@ import {
   Component,
   inject,
   OnInit,
-  output,
-  ViewEncapsulation,
 } from '@angular/core';
 import {
   FakeHttpService,
   randStudent,
 } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
-import { CardType } from '../../model/card.model';
-import { CardComponent } from '../../ui/card/card.component';
+import { CardComponent, CardListDirective } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
@@ -21,43 +18,40 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   template: `
     <app-card
       (addNewItem)="addNewItem()"
-      (deleteItem)="deleteItem($event)"
       [list]="students()"
-      [type]="cardType"
-      [customClass]="'green'">
+      class="bg-light-green">
       <img
-        #cardImage
+        card-header
         ngSrc="assets/img/student.webp"
         width="200"
         height="200" />
-      <ng-template #listTemplate let-item>
-        <app-list-item>
-          <!-- <span>{{ student.firstName }}</span> -->
-          <button #deleteButton (click)="deleteItem(item.id)">
-            <img class="h-5" src="assets/svg/trash.svg" />
-          </button>
+      <ng-template card-list-item let-student>
+        <app-list-item (deleteItem)="deleteItem(student.id)">
+          {{ student.firstName }}
         </app-list-item>
       </ng-template>
     </app-card>
   `,
   styles: [
     `
-      .green {
+      .bg-light-green {
         background-color: rgba(250, 0, 0, 0.1);
       }
     `,
   ],
-  imports: [CardComponent, NgOptimizedImage, ListItemComponent],
+  imports: [
+    CardComponent,
+    NgOptimizedImage,
+    CardListDirective,
+    ListItemComponent,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
 })
 export class StudentCardComponent implements OnInit {
   private readonly http = inject(FakeHttpService);
   public readonly store = inject(StudentStore);
 
   students = this.store.students;
-  cardType = CardType.STUDENT;
-  deleteFromStore = output<Event>();
 
   ngOnInit(): void {
     this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
