@@ -1,19 +1,21 @@
-import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { PersonUtils } from './person.utils';
 
 @Component({
-  imports: [NgFor],
   selector: 'app-root',
   template: `
-    <div *ngFor="let activity of activities">
+    @for (activity of activities; track activity.name) {
       {{ activity.name }} :
-      <div
-        *ngFor="let person of persons; let index = index; let isFirst = first">
+      @for (
+        person of persons;
+        track person.name;
+        let index = $index;
+        let isFirst = $first
+      ) {
         {{ showName(person.name, index) }}
         {{ isAllowed(person.age, isFirst, activity.minimumAge) }}
-      </div>
-    </div>
+      }
+    }
   `,
 })
 export class AppComponent {

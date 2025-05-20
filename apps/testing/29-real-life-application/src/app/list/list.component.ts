@@ -1,5 +1,4 @@
-import { NgFor, NgIf } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -18,8 +17,6 @@ import { RowComponent } from './ui/row.component';
     RowComponent,
     MatFormFieldModule,
     MatProgressBarModule,
-    NgIf,
-    NgFor,
     MatInputModule,
     LetDirective,
   ],
@@ -40,17 +37,17 @@ import { RowComponent } from './ui/row.component';
         [loading]="vm.loading"
         (addTicket)="ticketStore.addTicket($event)"></app-add>
 
-      <mat-progress-bar
-        mode="query"
-        *ngIf="vm.loading"
-        class="mt-5"></mat-progress-bar>
+      @if (vm.loading) {
+        <mat-progress-bar mode="query" class="mt-5"></mat-progress-bar>
+      }
       <ul class="flex max-w-3xl flex-col gap-4">
-        <app-row
-          *ngFor="let t of vm.tickets"
-          [ticket]="t"
-          [users]="vm.users"
-          (assign)="ticketStore.assignTicket($event)"
-          (closeTicket)="ticketStore.done($event)"></app-row>
+        @for (ticket of vm.tickets; track ticket.id) {
+          <app-row
+            [ticket]="ticket"
+            [users]="vm.users"
+            (assign)="ticketStore.assignTicket($event)"
+            (closeTicket)="ticketStore.done($event)"></app-row>
+        }
       </ul>
       <footer class="text-red-500">
         {{ vm.error }}

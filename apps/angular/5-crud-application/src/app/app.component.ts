@@ -7,10 +7,10 @@ import { randText } from '@ngneat/falso';
   imports: [CommonModule],
   selector: 'app-root',
   template: `
-    <div *ngFor="let todo of todos">
+    @for (todo of todos; track todo.id) {
       {{ todo.title }}
       <button (click)="update(todo)">Update</button>
-    </div>
+    }
   `,
   styles: [],
 })

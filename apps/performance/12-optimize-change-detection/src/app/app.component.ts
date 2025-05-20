@@ -1,15 +1,14 @@
-import { AsyncPipe, NgIf } from '@angular/common';
-import { Component, HostListener } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Component, HostListener, signal } from '@angular/core';
 
 @Component({
-  imports: [NgIf, AsyncPipe],
   selector: 'app-root',
   template: `
     <div>Top</div>
     <div>Middle</div>
     <div>Bottom</div>
-    <button (click)="goToTop()" *ngIf="displayButton$ | async">Top</button>
+    @if (displayButton()) {
+      <button (click)="goToTop()">Top</button>
+    }
   `,
   styles: [
     `
@@ -33,13 +32,12 @@ import { BehaviorSubject } from 'rxjs';
 export class AppComponent {
   title = 'scroll-cd';
 
-  private displayButtonSubject = new BehaviorSubject<boolean>(false);
-  displayButton$ = this.displayButtonSubject.asObservable();
+  public displayButton = signal(false);
 
   @HostListener('window:scroll', ['$event'])
   onScroll() {
-    const pos = window.pageYOffset;
-    this.displayButtonSubject.next(pos > 50);
+    const pos = window.scrollY;
+    this.displayButton.set(pos > 50);
   }
 
   goToTop() {
