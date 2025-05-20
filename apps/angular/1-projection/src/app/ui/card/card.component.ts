@@ -1,5 +1,5 @@
-import { NgOptimizedImage } from '@angular/common';
-import { Component, input, output } from '@angular/core';
+import { NgOptimizedImage, NgTemplateOutlet } from '@angular/common';
+import { Component, input, output, TemplateRef } from '@angular/core';
 import { ListItemComponent } from '../list-item/list-item.component';
 
 @Component({
@@ -11,10 +11,13 @@ import { ListItemComponent } from '../list-item/list-item.component';
       <img [ngSrc]="cardImgSrc()" width="200" height="200" priority />
       <section>
         @for (item of list(); track item) {
-          <app-list-item
-            [name]="item.firstName"
-            [id]="item.id"
-            (delete)="delete.emit($event)"></app-list-item>
+          <app-list-item [id]="item.id" (delete)="delete.emit($event)">
+            <ng-container
+              *ngTemplateOutlet="
+                nameTemplate() || defaultName;
+                context: { $implicit: item }
+              "></ng-container>
+          </app-list-item>
         }
       </section>
 
@@ -23,13 +26,18 @@ import { ListItemComponent } from '../list-item/list-item.component';
         (click)="addNewItem.emit()">
         Add
       </button>
+
+      <ng-template #defaultName let-item>
+        <span class="name">{{ item.firstName }}</span>
+      </ng-template>
     </div>
   `,
-  imports: [ListItemComponent, NgOptimizedImage],
+  imports: [ListItemComponent, NgOptimizedImage, NgTemplateOutlet],
 })
 export class CardComponent {
   readonly list = input<any[] | null>(null);
   readonly cardImgSrc = input.required<string>();
+  readonly nameTemplate = input<TemplateRef<any>>();
   readonly customClass = input('');
 
   delete = output<number>();
