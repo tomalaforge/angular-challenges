@@ -63,37 +63,33 @@ import { UserStore } from './user.service';
 export class UserFormComponent {
   userStore = inject(UserStore);
 
+  user = this.userStore.user;
+
   form = new FormGroup({
-    name: new FormControl(this.userStore.user().name, { nonNullable: true }),
-    street: new FormControl(this.userStore.user().address.street, {
+    name: new FormControl(this.user.name(), { nonNullable: true }),
+    street: new FormControl(this.user.address.street(), {
       nonNullable: true,
     }),
-    zipCode: new FormControl(this.userStore.user().address.zipCode, {
+    zipCode: new FormControl(this.user.address.zipCode(), {
       nonNullable: true,
     }),
-    city: new FormControl(this.userStore.user().address.city, {
+    city: new FormControl(this.userStore.user.address.city(), {
       nonNullable: true,
     }),
-    note: new FormControl(this.userStore.user().note, { nonNullable: true }),
-    title: new FormControl(this.userStore.user().title, { nonNullable: true }),
-    salary: new FormControl(this.userStore.user().salary, {
+    note: new FormControl(this.userStore.user.note(), { nonNullable: true }),
+    title: new FormControl(this.userStore.user.title(), { nonNullable: true }),
+    salary: new FormControl(this.userStore.user.salary(), {
       nonNullable: true,
     }),
   });
 
   submit() {
-    this.userStore.user.update((u) => ({
-      ...u,
-      name: this.form.getRawValue().name,
-      address: {
-        ...u.address,
-        street: this.form.getRawValue().street,
-        zipCode: this.form.getRawValue().zipCode,
-        city: this.form.getRawValue().city,
-      },
-      note: this.form.getRawValue().note,
-      title: this.form.getRawValue().title,
-      salary: this.form.getRawValue().salary,
-    }));
+    this.userStore.user.name.set(this.form.getRawValue().name);
+    this.userStore.user.address.street.set(this.form.getRawValue().street);
+    this.userStore.user.address.zipCode.set(this.form.getRawValue().zipCode);
+    this.userStore.user.address.city.set(this.form.getRawValue().city);
+    this.userStore.user.note.set(this.form.getRawValue().note);
+    this.userStore.user.title.set(this.form.getRawValue().title);
+    this.userStore.user.salary.set(this.form.getRawValue().salary);
   }
 }
