@@ -16,13 +16,6 @@ import { CardComponent } from '../../ui/card/card.component';
       (addNewItem)="addNewItem()"
       customClass="bg-light-red"></app-card>
   `,
-  styles: [
-    `
-      ::ng-deep .bg-light-red {
-        background-color: rgba(250, 0, 0, 0.1);
-      }
-    `,
-  ],
   imports: [CardComponent],
 })
 export class TeacherCardComponent implements OnInit {
