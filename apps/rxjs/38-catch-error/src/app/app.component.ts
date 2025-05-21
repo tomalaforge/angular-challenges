@@ -1,12 +1,12 @@
-import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { JsonPipe } from '@angular/common';
 import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { Subject, concatMap, map } from 'rxjs';
+import { FetchDataService } from './fetching-data.service';
 
 @Component({
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule, JsonPipe],
   selector: 'app-root',
   template: `
     <div class="form-container">
@@ -34,15 +34,13 @@ export class AppComponent implements OnInit {
   response: unknown;
 
   private destroyRef = inject(DestroyRef);
-  private http = inject(HttpClient);
+  private fetchingDataService = inject(FetchDataService);
 
   ngOnInit() {
     this.submit$
       .pipe(
         map(() => this.input),
-        concatMap((value) =>
-          this.http.get(`https://jsonplaceholder.typicode.com/${value}/1`),
-        ),
+        concatMap((value) => this.fetchingDataService.fetchData(value)),
         takeUntilDestroyed(this.destroyRef),
       )
       .subscribe({
