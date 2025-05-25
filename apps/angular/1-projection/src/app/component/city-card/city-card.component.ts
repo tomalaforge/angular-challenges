@@ -17,12 +17,11 @@ import { CardComponent } from '../../ui/card/card.component';
       [cardImgSrc]="'assets/img/teacher.png'"
       (delete)="delete($event)"
       (addNewItem)="addNewItem()"
-      [nameTemplate]="customName"
-      customClass="bg-light-red"></app-card>
-
-    <ng-template #customName let-item>
-      <span class="name">{{ item.name }}</span>
-    </ng-template>
+      customClass="bg-light-red">
+      <ng-template #nameTemplate let-item>
+        <span class="name">{{ item.name }}</span>
+      </ng-template>
+    </app-card>
   `,
   imports: [CardComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,

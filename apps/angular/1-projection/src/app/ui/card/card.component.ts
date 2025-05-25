@@ -1,5 +1,11 @@
 import { NgOptimizedImage, NgTemplateOutlet } from '@angular/common';
-import { Component, input, output, TemplateRef } from '@angular/core';
+import {
+  Component,
+  contentChild,
+  input,
+  output,
+  TemplateRef,
+} from '@angular/core';
 import { ListItemComponent } from '../list-item/list-item.component';
 
 @Component({
@@ -11,7 +17,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
       <img [ngSrc]="cardImgSrc()" width="200" height="200" priority />
       <section>
         @for (item of list(); track item) {
-          <app-list-item [id]="item.id" (delete)="delete.emit($event)">
+          <app-list-item [id]="item.id" (delete)="delete.emit(item.id)">
             <ng-container
               *ngTemplateOutlet="
                 nameTemplate() || defaultName;
@@ -37,9 +43,9 @@ import { ListItemComponent } from '../list-item/list-item.component';
 export class CardComponent {
   readonly list = input<any[] | null>(null);
   readonly cardImgSrc = input.required<string>();
-  readonly nameTemplate = input<TemplateRef<any>>();
   readonly customClass = input('');
 
+  nameTemplate = contentChild<TemplateRef<any>>('nameTemplate');
   delete = output<number>();
   addNewItem = output<void>();
 }
