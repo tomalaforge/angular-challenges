@@ -1,7 +1,12 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+import { Component, inject } from '@angular/core';
+import { rxResource } from '@angular/core/rxjs-interop';
+import { tap } from 'rxjs';
+import {
+  FakeHttpService,
+  randTeacher,
+} from '../../data-access/fake-http.service';
 import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
+import { Teacher } from '../../model/teacher.model';
 import { CardComponent } from '../../ui/card/card.component';
 
 @Component({
@@ -9,26 +14,29 @@ import { CardComponent } from '../../ui/card/card.component';
   template: `
     <app-card
       [list]="teachers()"
-      [type]="cardType"
+      [cardImgSrc]="'assets/img/teacher.png'"
+      (delete)="delete($event)"
+      (addNewItem)="addNewItem()"
       customClass="bg-light-red"></app-card>
   `,
-  styles: [
-    `
-      ::ng-deep .bg-light-red {
-        background-color: rgba(250, 0, 0, 0.1);
-      }
-    `,
-  ],
   imports: [CardComponent],
 })
-export class TeacherCardComponent implements OnInit {
+export class TeacherCardComponent {
   private http = inject(FakeHttpService);
   private store = inject(TeacherStore);
 
   teachers = this.store.teachers;
-  cardType = CardType.TEACHER;
 
-  ngOnInit(): void {
-    this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
+  fetchTeachers = rxResource<Teacher[], string | undefined>({
+    loader: () =>
+      this.http.fetchTeachers$.pipe(tap((t) => this.store.addAll(t))),
+  });
+
+  addNewItem() {
+    this.store.addOne(randTeacher());
+  }
+
+  delete(id: number) {
+    this.store.deleteOne(id);
   }
 }

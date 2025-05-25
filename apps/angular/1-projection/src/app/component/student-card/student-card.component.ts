@@ -1,12 +1,13 @@
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { rxResource } from '@angular/core/rxjs-interop';
+import { tap } from 'rxjs';
 import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  OnInit,
-} from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+  FakeHttpService,
+  randStudent,
+} from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
 import { CardType } from '../../model/card.model';
+import { Student } from '../../model/student.model';
 import { CardComponent } from '../../ui/card/card.component';
 
 @Component({
@@ -14,27 +15,34 @@ import { CardComponent } from '../../ui/card/card.component';
   template: `
     <app-card
       [list]="students()"
-      [type]="cardType"
+      [cardImgSrc]="'assets/img/student.webp'"
+      (delete)="delete($event)"
+      (addNewItem)="addNewItem()"
       customClass="bg-light-green" />
   `,
-  styles: [
-    `
-      ::ng-deep .bg-light-green {
-        background-color: rgba(0, 250, 0, 0.1);
-      }
-    `,
-  ],
+  styles: [],
   imports: [CardComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class StudentCardComponent implements OnInit {
+export class StudentCardComponent {
   private http = inject(FakeHttpService);
   private store = inject(StudentStore);
 
   students = this.store.students;
   cardType = CardType.STUDENT;
 
-  ngOnInit(): void {
-    this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
+  fetchStudents = rxResource<Student[], string | undefined>({
+    loader: () =>
+      this.http.fetchStudents$.pipe(
+        tap((student) => this.store.addAll(student)),
+      ),
+  });
+
+  addNewItem() {
+    this.store.addOne(randStudent());
+  }
+
+  delete(id: number) {
+    this.store.deleteOne(id);
   }
 }
