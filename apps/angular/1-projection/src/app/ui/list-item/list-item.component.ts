@@ -9,8 +9,8 @@ import {
   selector: 'app-list-item',
   template: `
     <div class="border-grey-300 flex justify-between border px-2 py-1">
-      <ng-content></ng-content>
-      <button (click)="delete.emit(id())">
+      <ng-content />
+      <button (click)="delete.emit()">
         <img class="h-5" src="assets/svg/trash.svg" />
       </button>
     </div>
@@ -21,5 +21,5 @@ import {
 export class ListItemComponent {
   readonly id = input.required<number>();
 
-  delete = output<number>();
+  delete = output<void>();
 }
