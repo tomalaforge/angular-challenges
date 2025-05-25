@@ -1,14 +1,12 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { rxResource } from '@angular/core/rxjs-interop';
+import { tap } from 'rxjs';
 import { CityStore } from '../../data-access/city.store';
 import {
   FakeHttpService,
   randomCity,
 } from '../../data-access/fake-http.service';
+import { City } from '../../model/city.model';
 import { CardComponent } from '../../ui/card/card.component';
 
 @Component({
@@ -29,15 +27,16 @@ import { CardComponent } from '../../ui/card/card.component';
   imports: [CardComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CityCardComponent implements OnInit {
+export class CityCardComponent {
   private http = inject(FakeHttpService);
   private store = inject(CityStore);
 
   cities = this.store.cities;
 
-  ngOnInit(): void {
-    this.http.fetchCities$.subscribe((t) => this.store.addAll(t));
-  }
+  fetchCities = rxResource<City[], string | undefined>({
+    loader: () =>
+      this.http.fetchCities$.pipe(tap((city) => this.store.addAll(city))),
+  });
 
   addNewItem() {
     this.store.addOne(randomCity());

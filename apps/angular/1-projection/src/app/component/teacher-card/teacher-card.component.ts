@@ -1,9 +1,12 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { rxResource } from '@angular/core/rxjs-interop';
+import { tap } from 'rxjs';
 import {
   FakeHttpService,
   randTeacher,
 } from '../../data-access/fake-http.service';
 import { TeacherStore } from '../../data-access/teacher.store';
+import { Teacher } from '../../model/teacher.model';
 import { CardComponent } from '../../ui/card/card.component';
 
 @Component({
@@ -18,15 +21,16 @@ import { CardComponent } from '../../ui/card/card.component';
   `,
   imports: [CardComponent],
 })
-export class TeacherCardComponent implements OnInit {
+export class TeacherCardComponent {
   private http = inject(FakeHttpService);
   private store = inject(TeacherStore);
 
   teachers = this.store.teachers;
 
-  ngOnInit(): void {
-    this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
-  }
+  fetchTeachers = rxResource<Teacher[], string | undefined>({
+    loader: () =>
+      this.http.fetchTeachers$.pipe(tap((t) => this.store.addAll(t))),
+  });
 
   addNewItem() {
     this.store.addOne(randTeacher());

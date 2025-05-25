@@ -1,15 +1,13 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { rxResource } from '@angular/core/rxjs-interop';
+import { tap } from 'rxjs';
 import {
   FakeHttpService,
   randStudent,
 } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
 import { CardType } from '../../model/card.model';
+import { Student } from '../../model/student.model';
 import { CardComponent } from '../../ui/card/card.component';
 
 @Component({
@@ -26,16 +24,19 @@ import { CardComponent } from '../../ui/card/card.component';
   imports: [CardComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class StudentCardComponent implements OnInit {
+export class StudentCardComponent {
   private http = inject(FakeHttpService);
   private store = inject(StudentStore);
 
   students = this.store.students;
   cardType = CardType.STUDENT;
 
-  ngOnInit(): void {
-    this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
-  }
+  fetchStudents = rxResource<Student[], string | undefined>({
+    loader: () =>
+      this.http.fetchStudents$.pipe(
+        tap((student) => this.store.addAll(student)),
+      ),
+  });
 
   addNewItem() {
     this.store.addOne(randStudent());
