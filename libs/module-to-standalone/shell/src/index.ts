@@ -1,1 +1,1 @@
-export * from './lib/main-shell.module';
+export * from './lib/main-shell.routes';

@@ -1,25 +1,16 @@
-import { Component, NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'lib-create-contact',
+  imports: [RouterLink],
   template: `
     Create Contact Form
-
     <button
       routerLink=".."
       class="ml-5 rounded-lg border bg-gray-700 p-2 text-white">
       Back
     </button>
   `,
-  standalone: false,
 })
-export class CreateContactComponent {}
-
-@NgModule({
-  imports: [
-    RouterModule.forChild([{ path: '', component: CreateContactComponent }]),
-  ],
-  declarations: [CreateContactComponent],
-})
-export class CreateContactModule {}
+export default class CreateContactComponent {}
