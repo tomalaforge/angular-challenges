@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+// import { fadeInAnimation, staggerAnimation } from './animations';
 
 @Component({
-  imports: [],
   selector: 'app-root',
+  // animations: [fadeInAnimation, staggerAnimation],
   styles: `
     section {
       @apply flex flex-1 flex-col gap-5;
@@ -15,10 +16,31 @@ import { Component } from '@angular/core';
         @apply flex-1;
       }
     }
+
+    .list .list-item {
+      transition-property: opacity, transform;
+      transition-duration: 500ms;
+      transition-delay: calc(200ms * var(--index));
+      @starting-style {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+    }
+
+    .fade-in {
+      transition-property: opacity, transform;
+      transition-duration: 500ms;
+      transition-timing-function: ease-in-out;
+      @starting-style {
+        opacity: 0;
+        transform: translateX(-100%);
+      }
+    }
   `,
   template: `
     <div class="mx-20 my-40 flex gap-5">
-      <section>
+      <!-- <section @horizontalAnimation> -->
+      <section class="fade-in">
         <div>
           <h3>2008</h3>
           <p>
@@ -50,38 +72,25 @@ import { Component } from '@angular/core';
         </div>
       </section>
 
-      <section>
-        <div class="list-item">
-          <span>Name:</span>
-          <span>Samuel</span>
-        </div>
-
-        <div class="list-item">
-          <span>Age:</span>
-          <span>28</span>
-        </div>
-
-        <div class="list-item">
-          <span>Birthdate:</span>
-          <span>02.11.1995</span>
-        </div>
-
-        <div class="list-item">
-          <span>City:</span>
-          <span>Berlin</span>
-        </div>
-
-        <div class="list-item">
-          <span>Language:</span>
-          <span>English</span>
-        </div>
-
-        <div class="list-item">
-          <span>Like Pizza:</span>
-          <span>Hell yeah</span>
-        </div>
+      <!-- <section @staggerAnimation> -->
+      <section class="list">
+        @for (item of list; track item.key; let i = $index) {
+          <div class="list-item" style="--index: {{ i }}">
+            <span>{{ item.key }}</span>
+            <span>{{ item.value }}</span>
+          </div>
+        }
       </section>
     </div>
   `,
 })
-export class AppComponent {}
+export class AppComponent {
+  readonly list: { key: string; value: string }[] = [
+    { key: 'Name', value: 'Samuel' },
+    { key: 'Age', value: '28' },
+    { key: 'Birthdate', value: '02.11.1995' },
+    { key: 'City', value: 'Berlin' },
+    { key: 'Language', value: 'English' },
+    { key: 'Like Pizza', value: 'Hell yeah' },
+  ];
+}
