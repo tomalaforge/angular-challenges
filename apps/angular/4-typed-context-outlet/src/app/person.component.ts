@@ -1,13 +1,15 @@
-import { NgTemplateOutlet } from '@angular/common';
+import { CommonModule, NgTemplateOutlet } from '@angular/common';
 import { Component, ContentChild, Input, TemplateRef } from '@angular/core';
+import { PersonDirective } from './person.directive';
+import { AppTemplateOutletDirective } from './templateOutlet.directive';
 
-interface Person {
+export interface IPerson {
   name: string;
   age: number;
 }
 
 @Component({
-  imports: [NgTemplateOutlet],
+  imports: [NgTemplateOutlet, AppTemplateOutletDirective, CommonModule],
   selector: 'person',
   template: `
     <ng-container
@@ -20,8 +22,8 @@ interface Person {
   `,
 })
 export class PersonComponent {
-  @Input() person!: Person;
+  @Input() person!: IPerson;
 
-  @ContentChild('#personRef', { read: TemplateRef })
+  @ContentChild(PersonDirective, { read: TemplateRef })
   personTemplateRef!: TemplateRef<unknown>;
 }
