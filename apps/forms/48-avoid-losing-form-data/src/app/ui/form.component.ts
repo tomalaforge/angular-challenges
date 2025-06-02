@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  output,
+} from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
@@ -63,6 +68,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 })
 export class FormComponent {
   private fb = inject(FormBuilder);
+  hasValue = output<boolean>();
 
   form = this.fb.nonNullable.group({
     name: ['', { validators: [Validators.required] }],
@@ -73,5 +79,12 @@ export class FormComponent {
 
   onSubmit() {
     if (this.form.valid) this.form.reset();
+  }
+
+  ngOnInit() {
+    this.form.valueChanges.subscribe((value) => {
+      const hasValue = Object.values(value).some((v) => v.trim());
+      this.hasValue.emit(hasValue);
+    });
   }
 }
