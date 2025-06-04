@@ -1,21 +1,8 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { City } from '../model/city.model';
+import { BaseDataAccessStore } from './_lib/base-service-data-access-store';
 
 @Injectable({
   providedIn: 'root',
 })
-export class CityStore {
-  private cities = signal<City[]>([]);
-
-  addAll(cities: City[]) {
-    this.cities.set(cities);
-  }
-
-  addOne(city: City) {
-    this.cities.set([...this.cities(), city]);
-  }
-
-  deleteOne(id: number) {
-    this.cities.set(this.cities().filter((s) => s.id !== id));
-  }
-}
+export class CityStore extends BaseDataAccessStore<City> {}

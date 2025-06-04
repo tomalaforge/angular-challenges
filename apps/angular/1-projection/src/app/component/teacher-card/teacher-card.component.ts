@@ -1,34 +1,65 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+import { NgOptimizedImage } from '@angular/common';
+import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { BaseDataAccessStore } from '../../data-access/_lib/base-service-data-access-store';
+import { randTeacher } from '../../data-access/fake-http.service';
 import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
+import { Teacher } from '../../model/teacher.model';
+import { CardActionsDirective } from '../../ui/card/card-actions.directive';
+import { CardHeaderDirective } from '../../ui/card/card-header.directive';
 import { CardComponent } from '../../ui/card/card.component';
+import { ListItemActionsDirective } from '../../ui/list-item/list-item-actions.directive';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
+import { BaseCardComponent } from '../_lib/base-card.directive';
 
 @Component({
   selector: 'app-teacher-card',
   template: `
-    <app-card
-      [list]="teachers()"
-      [type]="cardType"
-      customClass="bg-light-red"></app-card>
+    <app-card [list]="items()" [itemTpl]="itemTpl" customClass="bg-light-red">
+      <img
+        appCardHeader
+        ngSrc="assets/img/teacher.png"
+        width="200"
+        height="200"
+        alt="Teacher Icon" />
+
+      <ng-template #itemTpl let-teacher>
+        <app-list-item>
+          {{ teacher.firstName }}
+          <button
+            appListItemActions
+            (click)="removeItem(teacher.id)"
+            class="h-5 w-5">
+            <img src="assets/svg/trash.svg" alt="Delete Teacher" />
+          </button>
+        </app-list-item>
+      </ng-template>
+
+      <button
+        appCardActions
+        class="rounded-sm border border-blue-500 bg-blue-300 p-2"
+        (click)="addNewItem()">
+        Add Teacher
+      </button>
+    </app-card>
   `,
-  styles: [
-    `
-      ::ng-deep .bg-light-red {
-        background-color: rgba(250, 0, 0, 0.1);
-      }
-    `,
+  imports: [
+    CardComponent,
+    ListItemComponent,
+    CardHeaderDirective,
+    CardActionsDirective,
+    ListItemActionsDirective,
+    NgOptimizedImage,
   ],
-  imports: [CardComponent],
+  providers: [
+    {
+      provide: BaseDataAccessStore,
+      useClass: TeacherStore,
+    },
+  ],
+  standalone: true,
 })
-export class TeacherCardComponent implements OnInit {
-  private http = inject(FakeHttpService);
-  private store = inject(TeacherStore);
-
-  teachers = this.store.teachers;
-  cardType = CardType.TEACHER;
-
-  ngOnInit(): void {
-    this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
-  }
+export class TeacherCardComponent extends BaseCardComponent<Teacher> {
+  override randMethod = () => randTeacher();
+  override httpItems$: Observable<Teacher[]> = this.http.fetchTeachers$;
 }

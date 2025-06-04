@@ -1,40 +1,64 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  OnInit,
-} from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+import { NgOptimizedImage } from '@angular/common';
+import { Component } from '@angular/core';
+import { BaseDataAccessStore } from '../../data-access/_lib/base-service-data-access-store';
+import { randStudent } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
-import { CardType } from '../../model/card.model';
+import { Student } from '../../model/student.model';
+import { CardActionsDirective } from '../../ui/card/card-actions.directive';
+import { CardHeaderDirective } from '../../ui/card/card-header.directive';
 import { CardComponent } from '../../ui/card/card.component';
+import { ListItemActionsDirective } from '../../ui/list-item/list-item-actions.directive';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
+import { BaseCardComponent } from '../_lib/base-card.directive';
 
 @Component({
   selector: 'app-student-card',
   template: `
-    <app-card
-      [list]="students()"
-      [type]="cardType"
-      customClass="bg-light-green" />
+    <app-card [list]="items()" [itemTpl]="itemTpl" customClass="bg-light-blue">
+      <img
+        appCardHeader
+        ngSrc="assets/img/student.webp"
+        width="200"
+        height="200"
+        alt="Student Icon" />
+
+      <ng-template #itemTpl let-student>
+        <app-list-item>
+          {{ student.firstName }}
+          <button
+            appListItemActions
+            (click)="removeItem(student.id)"
+            class="h-5 w-5">
+            <img src="assets/svg/trash.svg" alt="Delete Student" />
+          </button>
+        </app-list-item>
+      </ng-template>
+
+      <button
+        appCardActions
+        class="rounded-sm border border-blue-500 bg-blue-300 p-2"
+        (click)="addNewItem()">
+        Add Student
+      </button>
+    </app-card>
   `,
-  styles: [
-    `
-      ::ng-deep .bg-light-green {
-        background-color: rgba(0, 250, 0, 0.1);
-      }
-    `,
+  imports: [
+    CardComponent,
+    ListItemComponent,
+    CardHeaderDirective,
+    CardActionsDirective,
+    ListItemActionsDirective,
+    NgOptimizedImage,
   ],
-  imports: [CardComponent],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {
+      provide: BaseDataAccessStore,
+      useClass: StudentStore,
+    },
+  ],
+  standalone: true,
 })
-export class StudentCardComponent implements OnInit {
-  private http = inject(FakeHttpService);
-  private store = inject(StudentStore);
-
-  students = this.store.students;
-  cardType = CardType.STUDENT;
-
-  ngOnInit(): void {
-    this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
-  }
+export class StudentCardComponent extends BaseCardComponent<Student> {
+  override randMethod = () => randStudent();
+  override httpItems$ = this.http.fetchStudents$;
 }
