@@ -2,10 +2,9 @@ import { NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
-  Input,
-  Output,
   inject,
+  input,
+  output,
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { HttpService } from './http.service';
@@ -26,12 +25,12 @@ export class InputComponent {
   selector: 'result',
   standalone: true,
   template: `
-    <p>Title is {{ title }}</p>
+    <p>Title is {{ title() }}</p>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ResultComponent {
-  @Input() title = '';
+  title = input('');
 }
 
 @Component({
@@ -43,7 +42,7 @@ export class ResultComponent {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonComponent {
-  @Output() validate = new EventEmitter();
+  validate = output();
 }
 
 @Component({
@@ -54,9 +53,7 @@ export class ButtonComponent {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ErrorComponent {
-  @Output() validate = new EventEmitter();
-}
+export class ErrorComponent {}
 
 @Component({
   selector: 'app-child',

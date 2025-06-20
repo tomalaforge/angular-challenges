@@ -1,12 +1,12 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
+
 @Component({
   selector: 'unknown-person',
-  standalone: true,
   template: `
     <div
       class="absolute inset-0 z-10 bg-black text-center text-3xl text-white"
-      [style.height.%]="100 - step">
-      @if (step !== 100) {
+      [style.height.%]="100 - step()">
+      @if (step() !== 100) {
         <div
           class="relative left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
           Who is here?
@@ -31,5 +31,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: [`unknown-person.component.css`],
 })
 export class UnknownPersonComponent {
-  @Input({ required: true }) step!: number;
+  step = input.required<number>();
 }

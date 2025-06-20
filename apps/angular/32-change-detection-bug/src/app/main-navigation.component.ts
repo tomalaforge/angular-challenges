@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FakeServiceService } from './fake.service';
 
@@ -12,7 +12,7 @@ interface MenuItem {
   selector: 'app-nav',
   imports: [RouterLink, RouterLinkActive],
   template: `
-    @for (menu of menus; track menu.path) {
+    @for (menu of menus(); track menu.path) {
       <a
         class="rounded-md border px-4 py-2"
         [routerLink]="menu.path"
@@ -33,7 +33,7 @@ interface MenuItem {
   },
 })
 export class NavigationComponent {
-  @Input() menus!: MenuItem[];
+  menus = input.required<MenuItem[]>();
 }
 
 @Component({

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 import { TitleCasePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -27,7 +27,7 @@ const fibonacci = (num: number): number => {
   ],
   template: `
     <h1 class="text-center font-semibold" title="Title">
-      {{ title | titlecase }}
+      {{ title() | titlecase }}
     </h1>
 
     <mat-form-field class="w-4/5">
@@ -39,7 +39,7 @@ const fibonacci = (num: number): number => {
     </mat-form-field>
 
     <mat-list class="flex w-full">
-      @for (person of persons; track person.name) {
+      @for (person of persons(); track person.name) {
         <mat-list-item>
           <div class="flex justify-between">
             <h3>{{ person.name }}</h3>
@@ -54,8 +54,8 @@ const fibonacci = (num: number): number => {
   },
 })
 export class PersonListComponent {
-  @Input() persons: Person[] = [];
-  @Input() title = '';
+  persons = input<Person[]>();
+  title = input('');
 
   label = '';
 

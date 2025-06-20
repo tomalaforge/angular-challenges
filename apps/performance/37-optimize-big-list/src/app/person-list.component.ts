@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { Person } from './person.model';
 
 @Component({
@@ -6,7 +6,7 @@ import { Person } from './person.model';
   template: `
     <div class="relative h-[300px] overflow-hidden">
       <div class="absolute inset-0 overflow-scroll">
-        @for (person of persons; track person.email) {
+        @for (person of persons(); track person.email) {
           <div class="flex h-9 items-center justify-between border-b">
             <h3>{{ person.name }}</h3>
             <p>{{ person.email }}</p>
@@ -21,5 +21,5 @@ import { Person } from './person.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PersonListComponent {
-  @Input() persons: Person[] = [];
+  persons = input<Person[]>();
 }

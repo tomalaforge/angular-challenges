@@ -1,10 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { Person } from './person.model';
 
 @Component({
   selector: 'app-person-list',
   template: `
-    @for (person of persons; track person.email) {
+    @for (person of persons(); track person.email) {
       <div class="flex items-center justify-between border-b">
         <h3>{{ person.name }}</h3>
         <div class="flex gap-10 py-1">
@@ -27,7 +27,7 @@ import { Person } from './person.model';
   },
 })
 export class PersonListComponent {
-  @Input() persons: Person[] = [];
-  @Output() delete = new EventEmitter<string>();
-  @Output() update = new EventEmitter<string>();
+  persons = input<Person[]>();
+  delete = output<string>();
+  update = output<string>();
 }

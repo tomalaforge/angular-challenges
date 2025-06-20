@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { randText } from '@ngneat/falso';
 
 @Component({
@@ -15,9 +15,9 @@ import { randText } from '@ngneat/falso';
   styles: [],
 })
 export class AppComponent implements OnInit {
-  todos!: any[];
+  private http = inject(HttpClient);
 
-  constructor(private http: HttpClient) {}
+  todos!: any[];
 
   ngOnInit(): void {
     this.http

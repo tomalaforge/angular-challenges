@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -45,9 +45,9 @@ import { MatInputModule } from '@angular/material/input';
   `,
 })
 export class AddComponent {
-  @Input() loading = false;
+  loading = input(false);
 
-  @Output() addTicket = new EventEmitter<string>();
+  addTicket = output<string>();
 
   form = new FormGroup({
     description: new FormControl(null, Validators.required),

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 import { CDFlashingDirective } from '@angular-challenges/shared/directives';
 import { TitleCasePipe } from '@angular/common';
@@ -20,8 +20,8 @@ import { MatListModule } from '@angular/material/list';
     TitleCasePipe,
   ],
   template: `
-    <h1 cd-flash class="text-center font-semibold" title="Title">
-      {{ title | titlecase }}
+    <h1 class="text-center font-semibold" title="Title">
+      {{ title() | titlecase }}
     </h1>
 
     <mat-form-field class="w-4/5" cd-flash>
@@ -34,10 +34,10 @@ import { MatListModule } from '@angular/material/list';
     </mat-form-field>
 
     <mat-list class="flex w-full">
-      @if (names?.length === 0) {
+      @if (names()?.length === 0) {
         <div class="empty-list-label">Empty list</div>
       }
-      @for (name of names; track name) {
+      @for (name of names(); track name) {
         <mat-list-item cd-flash class="text-orange-500">
           <div class="flex justify-between">
             <h3 title="Name">
@@ -46,7 +46,7 @@ import { MatListModule } from '@angular/material/list';
           </div>
         </mat-list-item>
       }
-      @if (names?.length !== 0) {
+      @if (names()?.length !== 0) {
         <mat-divider></mat-divider>
       }
     </mat-list>
@@ -56,14 +56,14 @@ import { MatListModule } from '@angular/material/list';
   },
 })
 export class PersonListComponent {
-  @Input() names: string[] = [];
-  @Input() title = '';
+  names = input<string[]>([]);
+  title = input('');
 
   label = '';
 
   handleKey(event: KeyboardEvent) {
     if (event.key === 'Enter') {
-      this.names?.unshift(this.label);
+      this.names()?.unshift(this.label);
       this.label = '';
     }
   }
