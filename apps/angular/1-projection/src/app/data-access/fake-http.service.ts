@@ -21,6 +21,9 @@ export const randTeacher = () => ({
   firstName: randFirstName(),
   lastName: randLastName(),
   subject: rand(subject),
+  label() {
+    return this.firstName
+  },
 });
 
 const teachers: Teacher[] = [
@@ -38,6 +41,9 @@ export const randStudent = (): Student => ({
   lastName: randLastName(),
   mainTeacher: teachers[randNumber({ max: teachers.length - 1 })],
   school: randWord(),
+  label() {
+    return this.firstName
+  },
 });
 
 const students: Student[] = [
@@ -54,6 +60,9 @@ export const randomCity = (): City => ({
   id: factoryCity(),
   name: randCity(),
   country: randCountry(),
+  label() {
+    return this.name
+  },
 });
 
 const cities = [randomCity(), randomCity(), randomCity()];

@@ -4,7 +4,7 @@ import {
   inject,
   OnInit,
 } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+import { FakeHttpService, randStudent } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
 import { CardType } from '../../model/card.model';
 import { CardComponent } from '../../ui/card/card.component';
@@ -13,9 +13,17 @@ import { CardComponent } from '../../ui/card/card.component';
   selector: 'app-student-card',
   template: `
     <app-card
-      [list]="students()"
-      [type]="cardType"
-      customClass="bg-light-green" />
+      [store]="store"
+      customClass="bg-light-green">
+      <img src="assets/img/student.webp" ngProjectAs="card-header" width="200" height="200" />
+
+      <button
+        ngProjectAs="card-footer"
+        class="rounded-sm border border-blue-500 bg-blue-300 p-2"
+        (click)="addNewItem()">
+        Add
+      </button>
+    </app-card>
   `,
   styles: [
     `
@@ -29,12 +37,15 @@ import { CardComponent } from '../../ui/card/card.component';
 })
 export class StudentCardComponent implements OnInit {
   private http = inject(FakeHttpService);
-  private store = inject(StudentStore);
+  protected store = inject(StudentStore);
 
-  students = this.store.students;
   cardType = CardType.STUDENT;
 
   ngOnInit(): void {
     this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
+  }
+
+  addNewItem() {
+    this.store.addOne(randStudent());
   }
 }
