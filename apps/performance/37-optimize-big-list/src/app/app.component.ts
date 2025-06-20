@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -9,7 +8,6 @@ import { PersonListComponent } from './person-list.component';
 
 @Component({
   imports: [
-    NgIf,
     PersonListComponent,
     FormsModule,
     MatFormFieldModule,
@@ -24,10 +22,9 @@ import { PersonListComponent } from './person-list.component';
       Load List
     </button>
 
-    <app-person-list
-      *ngIf="loadList()"
-      class="w-3/4 max-w-2xl"
-      [persons]="persons()" />
+    @if (loadList()) {
+      <app-person-list class="w-3/4 max-w-2xl" [persons]="persons()" />
+    }
   `,
   host: {
     class: 'flex items-center flex-col gap-5',

@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { createVehicle } from './vehicle.utils';
 
 @Component({
-  standalone: true,
   selector: 'app-root',
   template: ``,
 })

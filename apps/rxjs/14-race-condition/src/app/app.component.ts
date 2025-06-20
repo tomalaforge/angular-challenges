@@ -10,7 +10,6 @@ import { TopicModalComponent } from './topic-dialog.component';
 import { TopicService, TopicType } from './topic.service';
 
 @Component({
-  standalone: true,
   selector: 'app-root',
   template: `
     <button (click)="openTopicModal()">Open Topic</button>

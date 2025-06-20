@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component, input, output } from '@angular/core';
 import {
   FormControl,
@@ -17,7 +16,6 @@ import { MatInputModule } from '@angular/material/input';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    NgIf,
   ],
   template: `
     <form [formGroup]="form" #ngForm="ngForm" (ngSubmit)="submit()">
@@ -28,10 +26,12 @@ import { MatInputModule } from '@angular/material/input';
           matInput
           formControlName="description"
           placeholder="My new task" />
-        <mat-error *ngIf="form.controls.description.hasError('required')">
-          Description is
-          <strong>required</strong>
-        </mat-error>
+        @if (form.controls.description.hasError('required')) {
+          <mat-error>
+            Description is
+            <strong>required</strong>
+          </mat-error>
+        }
       </mat-form-field>
       <button
         class="ml-4"

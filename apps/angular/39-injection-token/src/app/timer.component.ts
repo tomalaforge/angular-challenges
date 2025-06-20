@@ -5,7 +5,6 @@ import { DEFAULT_TIMER } from './data';
 
 @Component({
   selector: 'timer',
-  standalone: true,
   template: `
     Timer running {{ timer() }}
   `,

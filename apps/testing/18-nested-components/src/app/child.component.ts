@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -23,7 +22,6 @@ export class InputComponent {
 
 @Component({
   selector: 'result',
-  standalone: true,
   template: `
     <p>Title is {{ title() }}</p>
   `,
@@ -35,7 +33,6 @@ export class ResultComponent {
 
 @Component({
   selector: 'app-button',
-  standalone: true,
   template: `
     <button (click)="validate.emit()">Validate</button>
   `,
@@ -47,7 +44,6 @@ export class ButtonComponent {
 
 @Component({
   selector: 'app-error',
-  standalone: true,
   template: `
     <p>Title is required !!!</p>
   `,
@@ -57,18 +53,14 @@ export class ErrorComponent {}
 
 @Component({
   selector: 'app-child',
-  imports: [
-    ResultComponent,
-    ButtonComponent,
-    InputComponent,
-    ErrorComponent,
-    NgIf,
-  ],
+  imports: [],
   template: `
-    <app-input #input></app-input>
-    <result [title]="input.title.value"></result>
-    <app-button (validate)="submit(input.title.value)"></app-button>
-    <app-error *ngIf="showError"></app-error>
+    <app-input #input />
+    <result [title]="input.title.value" />
+    <app-button (validate)="submit(input.title.value)" />
+    @if (showError) {
+      <app-error />
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component, input, output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -17,7 +16,6 @@ import { Ticket, TicketUser, User } from '../../backend.service';
     MatInputModule,
     MatButtonModule,
     MatSelectModule,
-    NgFor,
   ],
   template: `
     <li
@@ -52,9 +50,11 @@ import { Ticket, TicketUser, User } from '../../backend.service';
           <mat-form-field appearance="fill">
             <mat-label>Assign to</mat-label>
             <mat-select formControlName="assignee">
-              <mat-option *ngFor="let user of users()" [value]="user.id">
-                {{ user.name }}
-              </mat-option>
+              @for (user of users(); track user.id) {
+                <mat-option [value]="user.id">
+                  {{ user.name }}
+                </mat-option>
+              }
             </mat-select>
           </mat-form-field>
           <button mat-flat-button color="primary" type="submit">Assign</button>
