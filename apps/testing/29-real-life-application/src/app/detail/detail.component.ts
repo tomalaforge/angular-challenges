@@ -1,17 +1,17 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { RouterLink } from '@angular/router';
-import { LetDirective } from '@ngrx/component';
 import { provideComponentStore } from '@ngrx/component-store';
 import { DetailStore } from './detail.store';
 
 @Component({
   selector: 'app-detail',
-  imports: [MatButtonModule, RouterLink, MatProgressBarModule, LetDirective],
+  imports: [MatButtonModule, RouterLink, MatProgressBarModule, AsyncPipe],
   template: `
     <h2 class="mb-2 text-xl">Ticket Detail:</h2>
-    <ng-container *ngrxLet="vm$ as vm">
+    @if (vm$ | async; as vm) {
       @if (vm.loading) {
         <mat-progress-bar mode="query" class="mt-5"></mat-progress-bar>
       }
@@ -35,7 +35,7 @@ import { DetailStore } from './detail.store';
           </div>
         </section>
       }
-    </ng-container>
+    }
 
     <button
       class="mt-8"
