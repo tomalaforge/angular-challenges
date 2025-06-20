@@ -20,11 +20,11 @@ sidebar:
 
 Особенно сложно будет обрабатывать асинхронные задачи. Важно не вводить явные <b>ожидания(waits)</b> в ваши тесты, так как это приведет к ненужным задержкам. Вместо этого лучше искать элемент, который должен появиться или исчезнуть из DOM. В этом случае тест будет естественным образом ожидать правильного периода времени, так как ожидания уже реализованы в обеих библиотеках. Воспользуйтесь встроенными функциональными возможностями для создания эффективных и надежных тестов.
 
-Вы можете поиграть с этим, запустив: `npx nx serve testing-todos-list`.
+Вы можете поиграть с этим, запустив: `npx nx serve testing-real-life-application`.
 
-Чтобы запустить тесты Testing Library, вам нужно выполнить `npx nx test testing-todos-list`. Вы также можете установить [Jest Runner](https://marketplace.visualstudio.com/items?itemName=firsttris.vscode-jest-runner), чтобы выполнять тесты, нажимая на кнопку `Run` над каждым блоком `describe` или `it`.
+Чтобы запустить тесты Testing Library, вам нужно выполнить `npx nx test testing-real-life-application`. Вы также можете установить [Jest Runner](https://marketplace.visualstudio.com/items?itemName=firsttris.vscode-jest-runner), чтобы выполнять тесты, нажимая на кнопку `Run` над каждым блоком `describe` или `it`.
 
-Для тестирования с помощью Cypress вы выполните свой тест внутри `child.component.cy.ts` и выполните `npx nx component-test testing-todos-list`, чтобы запустить ваши тестовые наборы. Вы можете добавить флаг `--watch`, чтобы выполнять тесты в режиме наблюдения.
+Для тестирования с помощью Cypress вы выполните свой тест внутри `child.component.cy.ts` и выполните `npx nx component-test testing-real-life-application`, чтобы запустить ваши тестовые наборы. Вы можете добавить флаг `--watch`, чтобы выполнять тесты в режиме наблюдения.
 
 # Задание
 

@@ -23,11 +23,11 @@ In this challenge, you will write tests for the `ListComponent`, which represent
 
 Handling asynchronous tasks will be particularly challenging. It's important not to introduce any explicit <b>waits</b> in your tests, as this would introduce unnecessary delays. Instead, it's better to look for an element that needs to appear or disappear from the DOM. In this case, the test will naturally wait for the correct period of time, as the waits are already implemented within both libraries. Take advantage of these built-in functionalities to create efficient and reliable tests.
 
-You can play with it by running : `npx nx serve testing-todos-list`.
+You can play with it by running : `npx nx serve testing-real-life-application`.
 
-To run [Angular Testing Library](https://testing-library.com/) test suites, you need to run `npx nx test testing-todos-list`. You can also install [Jest Runner](https://marketplace.visualstudio.com/items?itemName=firsttris.vscode-jest-runner) to execute your test by clicking on the `Run` button above each `describe` or `it` blocks.
+To run [Angular Testing Library](https://testing-library.com/) test suites, you need to run `npx nx test testing-real-life-application`. You can also install [Jest Runner](https://marketplace.visualstudio.com/items?itemName=firsttris.vscode-jest-runner) to execute your test by clicking on the `Run` button above each `describe` or `it` blocks.
 
-For testing with Cypress, you will execute your test inside the `child.component.cy.ts` and run `npx nx component-test testing-todos-list` to execute your test suites. You can add the `--watch` flag to execute your test in watch mode.
+For testing with Cypress, you will execute your test inside the `child.component.cy.ts` and run `npx nx component-test testing-real-life-application` to execute your test suites. You can add the `--watch` flag to execute your test in watch mode.
 
 # Statement
 
