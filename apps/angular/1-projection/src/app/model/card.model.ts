@@ -3,3 +3,7 @@ export enum CardType {
   STUDENT,
   CITY,
 }
+
+export interface CardItem {
+  label(): string
+}
