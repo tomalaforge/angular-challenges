@@ -1,11 +1,7 @@
-import { NgOptimizedImage } from '@angular/common';
-import { Component, inject, input } from '@angular/core';
-import { randStudent, randTeacher, randomCity } from '../../data-access/fake-http.service';
-import { StudentStore } from '../../data-access/student.store';
-import { TeacherStore } from '../../data-access/teacher.store';
+import { Component, WritableSignal, input, signal } from '@angular/core';
 import { CardType } from '../../model/card.model';
 import { ListItemComponent } from '../list-item/list-item.component';
-import { CityStore } from '../../data-access/city.store';
+import { Store } from '../../data-access/store';
 
 @Component({
   selector: 'app-card',
@@ -13,53 +9,32 @@ import { CityStore } from '../../data-access/city.store';
     <div
       class="flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4"
       [class]="customClass()">
-      @if (type() === CardType.TEACHER) {
-        <img ngSrc="assets/img/teacher.png" width="200" height="200" />
-      }
-      @if (type() === CardType.STUDENT) {
-        <img ngSrc="assets/img/student.webp" width="200" height="200" />
-      }
-      @if (type() === CardType.CITY) {
-        <img ngSrc="assets/img/city.png" width="200" height="200" />
-      }
 
+      <ng-content select="card-header"></ng-content>
+      
       <section>
         @for (item of list(); track item) {
           <app-list-item
             [name]="item.label()"
             [id]="item.id"
-            [type]="type()"></app-list-item>
+            [store]="store()"></app-list-item>
         }
       </section>
 
-      <button
-        class="rounded-sm border border-blue-500 bg-blue-300 p-2"
-        (click)="addNewItem()">
-        Add
-      </button>
+
+      <ng-content select="card-footer"></ng-content>
     </div>
   `,
-  imports: [ListItemComponent, NgOptimizedImage],
+  imports: [ListItemComponent],
 })
 export class CardComponent {
-  private teacherStore = inject(TeacherStore);
-  private studentStore = inject(StudentStore);
-  private cityStore = inject(CityStore);
 
-  readonly list = input<any[] | null>(null);
-  readonly type = input.required<CardType>();
+  
   readonly customClass = input('');
+  readonly store = input.required<Store<any>>();
+  protected list: WritableSignal<any[]> = signal([]);
 
-  CardType = CardType;
-
-  addNewItem() {
-    const type = this.type();
-    if (type === CardType.TEACHER) {
-      this.teacherStore.addOne(randTeacher());
-    } else if (type === CardType.STUDENT) {
-      this.studentStore.addOne(randStudent());
-    } else if (type === CardType.CITY) {
-      this.cityStore.addOne(randomCity());
-    }
+  ngOnInit() {
+    this.list = this.store().getItems();
   }
 }

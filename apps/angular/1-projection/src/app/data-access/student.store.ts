@@ -1,11 +1,14 @@
 import { Injectable, signal } from '@angular/core';
 import { Student } from '../model/student.model';
+import { Store } from './store';
 
 @Injectable({
   providedIn: 'root',
 })
-export class StudentStore {
-  public students = signal<Student[]>([]);
+export class StudentStore implements Store<Student> {
+  private students = signal<Student[]>([]);
+
+  getItems = () => this.students;
 
   addAll(students: Student[]) {
     this.students.set(students);
