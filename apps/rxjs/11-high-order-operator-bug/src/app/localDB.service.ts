@@ -5,7 +5,7 @@ import { of } from 'rxjs';
 
 export type TopicType = 'food' | 'book' | 'sport';
 
-interface Info {
+export interface Info {
   id: number;
   topic: TopicType;
 }
