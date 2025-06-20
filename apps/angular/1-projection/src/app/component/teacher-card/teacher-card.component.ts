@@ -1,34 +1,52 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+import { NgOptimizedImage } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  Signal,
+} from '@angular/core';
 import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
+import { Teacher } from '../../model/teacher.model';
 import { CardComponent } from '../../ui/card/card.component';
+import { CardRowDirective } from '../../ui/card/card.directive';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-teacher-card',
   template: `
     <app-card
-      [list]="teachers()"
-      [type]="cardType"
-      customClass="bg-light-red"></app-card>
+      [items]="teacherStore.$teachers()"
+      (addNewItem)="teacherStore.addOne()"
+      class="bg-light-red">
+      <img ngSrc="assets/img/teacher.png" width="200" height="200" />
+
+      <ng-template [cardRow]="teacherStore.$teachers()" let-teacher>
+        <app-list-item (delete)="teacherStore.deleteOne(teacher.id)">
+          {{ teacher.firstName }}
+        </app-list-item>
+      </ng-template>
+    </app-card>
   `,
   styles: [
     `
-      ::ng-deep .bg-light-red {
+      .bg-light-red {
         background-color: rgba(250, 0, 0, 0.1);
       }
     `,
   ],
-  imports: [CardComponent],
+  imports: [
+    CardComponent,
+    CardRowDirective,
+    ListItemComponent,
+    NgOptimizedImage,
+  ],
+  providers: [TeacherStore],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TeacherCardComponent implements OnInit {
-  private http = inject(FakeHttpService);
-  private store = inject(TeacherStore);
+export class TeacherCardComponent {
+  readonly teacherStore = inject(TeacherStore);
 
-  teachers = this.store.teachers;
-  cardType = CardType.TEACHER;
-
-  ngOnInit(): void {
-    this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
+  get teachers(): Signal<Teacher[]> {
+    return this.teacherStore.$teachers;
   }
 }

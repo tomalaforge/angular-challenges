@@ -1,40 +1,52 @@
+import { NgOptimizedImage } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   inject,
-  OnInit,
+  Signal,
 } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
-import { CardType } from '../../model/card.model';
+import { Student } from '../../model/student.model';
 import { CardComponent } from '../../ui/card/card.component';
+import { CardRowDirective } from '../../ui/card/card.directive';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-student-card',
   template: `
     <app-card
-      [list]="students()"
-      [type]="cardType"
-      customClass="bg-light-green" />
+      [items]="students()"
+      (addNewItem)="studentStore.addOne()"
+      class="bg-light-green">
+      <img ngSrc="assets/img/student.webp" width="200" height="200" />
+
+      <ng-template [cardRow]="students()" let-student>
+        <app-list-item (delete)="studentStore.deleteOne(student.id)">
+          {{ student.firstName }}
+        </app-list-item>
+      </ng-template>
+    </app-card>
   `,
   styles: [
     `
-      ::ng-deep .bg-light-green {
+      .bg-light-green {
         background-color: rgba(0, 250, 0, 0.1);
       }
     `,
   ],
-  imports: [CardComponent],
+  imports: [
+    CardComponent,
+    CardRowDirective,
+    ListItemComponent,
+    NgOptimizedImage,
+  ],
+  providers: [StudentStore],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class StudentCardComponent implements OnInit {
-  private http = inject(FakeHttpService);
-  private store = inject(StudentStore);
+export class StudentCardComponent {
+  readonly studentStore = inject(StudentStore);
 
-  students = this.store.students;
-  cardType = CardType.STUDENT;
-
-  ngOnInit(): void {
-    this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
+  get students(): Signal<Student[]> {
+    return this.studentStore.$students;
   }
 }
