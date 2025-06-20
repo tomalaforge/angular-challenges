@@ -1,5 +1,5 @@
-import { AsyncPipe } from '@angular/common';
 import { Component, inject, input } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FakeServiceService } from './fake.service';
 
@@ -37,14 +37,12 @@ export class NavigationComponent {
 }
 
 @Component({
-  imports: [NavigationComponent, AsyncPipe],
+  imports: [NavigationComponent],
   template: `
-    @if (info$ | async; as info) {
-      @if (info !== null) {
-        <app-nav [menus]="getMenu(info)" />
-      } @else {
-        <app-nav [menus]="getMenu('')" />
-      }
+    @if (info() !== null) {
+      <app-nav [menus]="getMenu(info()!)" />
+    } @else {
+      <app-nav [menus]="getMenu('')" />
     }
   `,
   host: {},
@@ -52,7 +50,9 @@ export class NavigationComponent {
 export class MainNavigationComponent {
   private fakeBackend = inject(FakeServiceService);
 
-  readonly info$ = this.fakeBackend.getInfoFromBackend();
+  readonly info = toSignal(this.fakeBackend.getInfoFromBackend(), {
+    initialValue: null,
+  });
 
   getMenu(prop: string) {
     return [
