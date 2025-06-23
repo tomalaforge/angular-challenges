@@ -10,6 +10,7 @@ import { CardType } from '../../model/card.model';
 
 @Component({
   selector: 'app-list-item',
+  standalone: true,
   template: `
     <div class="border-grey-300 flex justify-between border px-2 py-1">
       {{ name() }}

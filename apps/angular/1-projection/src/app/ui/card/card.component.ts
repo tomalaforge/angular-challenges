@@ -1,6 +1,11 @@
-import { NgOptimizedImage } from '@angular/common';
-import { Component, inject, input } from '@angular/core';
-import { randStudent, randTeacher } from '../../data-access/fake-http.service';
+import { CommonModule } from '@angular/common';
+import { Component, inject, input, Input, TemplateRef } from '@angular/core';
+import { CityStore } from '../../data-access/city.store';
+import {
+  randomCity,
+  randStudent,
+  randTeacher,
+} from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
 import { TeacherStore } from '../../data-access/teacher.store';
 import { CardType } from '../../model/card.model';
@@ -12,12 +17,8 @@ import { ListItemComponent } from '../list-item/list-item.component';
     <div
       class="flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4"
       [class]="customClass()">
-      @if (type() === CardType.TEACHER) {
-        <img ngSrc="assets/img/teacher.png" width="200" height="200" />
-      }
-      @if (type() === CardType.STUDENT) {
-        <img ngSrc="assets/img/student.webp" width="200" height="200" />
-      }
+      <
+      <ng-container [ngTemplateOutlet]="template"></ng-container>
 
       <section>
         @for (item of list(); track item) {
@@ -27,7 +28,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
             [type]="type()"></app-list-item>
         }
       </section>
-
+      <img ngSrc="assets/img/teacher.png" width="200" height="200" />
       <button
         class="rounded-sm border border-blue-500 bg-blue-300 p-2"
         (click)="addNewItem()">
@@ -35,11 +36,15 @@ import { ListItemComponent } from '../list-item/list-item.component';
       </button>
     </div>
   `,
-  imports: [ListItemComponent, NgOptimizedImage],
+  imports: [ListItemComponent, CommonModule],
+  standalone: true,
 })
 export class CardComponent {
+  @Input() template!: TemplateRef<any>;
   private teacherStore = inject(TeacherStore);
   private studentStore = inject(StudentStore);
+  private cityStore = inject(CityStore);
+  store = input<any | null>(null);
 
   readonly list = input<any[] | null>(null);
   readonly type = input.required<CardType>();
@@ -53,6 +58,8 @@ export class CardComponent {
       this.teacherStore.addOne(randTeacher());
     } else if (type === CardType.STUDENT) {
       this.studentStore.addOne(randStudent());
+    } else if (type === CardType.CITY) {
+      this.cityStore.addOne(randomCity());
     }
   }
 }
