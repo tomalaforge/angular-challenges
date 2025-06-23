@@ -13,7 +13,7 @@ import { UserStore } from './user.service';
           class="rounded-md border border-gray-400"
           formControlName="name" />
       </div>
-      <div>
+      <div formGroupName="address">
         Address:
         <div>
           street:
@@ -64,36 +64,26 @@ export class UserFormComponent {
   userStore = inject(UserStore);
 
   form = new FormGroup({
-    name: new FormControl(this.userStore.user().name, { nonNullable: true }),
-    street: new FormControl(this.userStore.user().address.street, {
-      nonNullable: true,
+    name: new FormControl(this.userStore.name(), { nonNullable: true }),
+    address: new FormGroup({
+      street: new FormControl(this.userStore.address.street(), {
+        nonNullable: true,
+      }),
+      zipCode: new FormControl(this.userStore.address.zipCode(), {
+        nonNullable: true,
+      }),
+      city: new FormControl(this.userStore.address.city(), {
+        nonNullable: true,
+      }),
     }),
-    zipCode: new FormControl(this.userStore.user().address.zipCode, {
-      nonNullable: true,
-    }),
-    city: new FormControl(this.userStore.user().address.city, {
-      nonNullable: true,
-    }),
-    note: new FormControl(this.userStore.user().note, { nonNullable: true }),
-    title: new FormControl(this.userStore.user().title, { nonNullable: true }),
-    salary: new FormControl(this.userStore.user().salary, {
+    note: new FormControl(this.userStore.note(), { nonNullable: true }),
+    title: new FormControl(this.userStore.title(), { nonNullable: true }),
+    salary: new FormControl(this.userStore.salary(), {
       nonNullable: true,
     }),
   });
 
   submit() {
-    this.userStore.user.update((u) => ({
-      ...u,
-      name: this.form.getRawValue().name,
-      address: {
-        ...u.address,
-        street: this.form.getRawValue().street,
-        zipCode: this.form.getRawValue().zipCode,
-        city: this.form.getRawValue().city,
-      },
-      note: this.form.getRawValue().note,
-      title: this.form.getRawValue().title,
-      salary: this.form.getRawValue().salary,
-    }));
+    this.userStore.update(this.form.getRawValue());
   }
 }
