@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CityStore } from '../../data-access/city.store';
 import { FakeHttpService } from '../../data-access/fake-http.service';
 import { CardType } from '../../model/card.model';
@@ -19,8 +19,13 @@ import { CardComponent } from '../../ui/card/card.component';
   // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CityCardComponent implements OnInit {
-  private http = inject(FakeHttpService);
-  private store = inject(CityStore);
+  // private http = inject(FakeHttpService);
+  // private store = inject(CityStore);
+
+  constructor(
+    private http: FakeHttpService,
+    private store: CityStore,
+  ) {}
 
   cities = this.store.cities;
   cardType = CardType.CITY;
