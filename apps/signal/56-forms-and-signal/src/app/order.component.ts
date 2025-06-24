@@ -2,9 +2,11 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  effect,
   input,
+  model,
 } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { products } from './products';
@@ -54,17 +56,27 @@ import { products } from './products';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class OrderComponent {
+  quantity = model(1);
+
   form = new FormGroup({
-    quantity: new FormControl(1, { nonNullable: true }),
+    quantity: new FormControl(this.quantity(), { nonNullable: true }),
   });
+
+  quantityEffect = effect(() => {
+    this.form.get('quantity')?.setValue(this.quantity(), { emitEvent: false });
+  });
+
+  sub = this.form
+    .get('quantity')
+    ?.valueChanges.pipe(takeUntilDestroyed())
+    .subscribe((value) => {
+      this.quantity.set(value);
+    });
 
   productId = input('1');
   price = computed(
     () => products.find((p) => p.id === this.productId())?.price ?? 0,
   );
-  quantity = toSignal(this.form.controls.quantity.valueChanges, {
-    initialValue: this.form.getRawValue().quantity,
-  });
   totalWithoutVat = computed(() => Number(this.price()) * this.quantity());
   vat = computed(() => this.totalWithoutVat() * 0.21);
   total = computed(() => this.totalWithoutVat() + this.vat());
