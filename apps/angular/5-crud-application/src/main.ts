@@ -1,8 +1,8 @@
 import { appConfig } from './app/app.config';
+import { TodosComponent } from './app/todos.component';
 
 import { bootstrapApplication } from '@angular/platform-browser';
-import { AppComponent } from './app/app.component';
 
-bootstrapApplication(AppComponent, appConfig).catch((err) =>
+bootstrapApplication(TodosComponent, appConfig).catch((err) =>
   console.error(err),
 );
