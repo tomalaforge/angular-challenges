@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -15,7 +16,12 @@ import { CardComponent } from '../../ui/card/card.component';
     <app-card
       [list]="students()"
       [type]="cardType"
+      [template]="images"
       customClass="bg-light-green" />
+
+    <ng-template #images>
+      <img ngSrc="assets/img/student.webp" width="200" height="200" />
+    </ng-template>
   `,
   styles: [
     `
@@ -24,7 +30,8 @@ import { CardComponent } from '../../ui/card/card.component';
       }
     `,
   ],
-  imports: [CardComponent],
+  imports: [CardComponent, CommonModule],
+  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StudentCardComponent implements OnInit {
