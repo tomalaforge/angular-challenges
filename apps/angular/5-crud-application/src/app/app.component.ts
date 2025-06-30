@@ -1,10 +1,9 @@
-import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
 import { randText } from '@ngneat/falso';
 
 @Component({
-  imports: [CommonModule],
+  imports: [],
   selector: 'app-root',
   template: `
     @for (todo of todos; track todo.id) {
