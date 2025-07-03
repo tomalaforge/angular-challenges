@@ -9,18 +9,24 @@ import { StudentStore } from '../../data-access/student.store';
 import { CardComponent } from '../../ui/card/card.component';
 
 import { randStudent } from '../../data-access/fake-http.service';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-student-card',
   template: `
     <app-card
-      [list]="students()"
       img="assets/img/student.webp"
       customClass="bg-light-green"
-      (addNewItem)="addItem()"
-      (deleteItem)="deleteItem($event)" />
+      (addNewItem)="addItem()">
+      @for (item of students(); track item) {
+        <app-list-item
+          [name]="item.firstName"
+          [id]="item.id"
+          (deleteItem)="deleteItemClick($event)"></app-list-item>
+      }
+    </app-card>
   `,
-  imports: [CardComponent],
+  imports: [CardComponent, ListItemComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StudentCardComponent implements OnInit {
@@ -34,7 +40,7 @@ export class StudentCardComponent implements OnInit {
   addItem() {
     this.store.addOne(randStudent());
   }
-  deleteItem(id: number) {
+  deleteItemClick(id: number) {
     this.store.deleteOne(id);
   }
 }

@@ -5,18 +5,24 @@ import {
 } from '../../data-access/fake-http.service';
 import { TeacherStore } from '../../data-access/teacher.store';
 import { CardComponent } from '../../ui/card/card.component';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-teacher-card',
   template: `
     <app-card
-      [list]="teachers()"
       img="assets/img/teacher.png"
       customClass="bg-light-red"
-      (addNewItem)="addItem()"
-      (deleteItem)="deleteItem($event)"></app-card>
+      (addNewItem)="addItem()">
+      @for (item of teachers(); track item) {
+        <app-list-item
+          [name]="item.firstName"
+          [id]="item.id"
+          (deleteItem)="deleteItemClick($event)"></app-list-item>
+      }
+    </app-card>
   `,
-  imports: [CardComponent],
+  imports: [CardComponent, ListItemComponent],
 })
 export class TeacherCardComponent implements OnInit {
   private http = inject(FakeHttpService);
@@ -26,7 +32,7 @@ export class TeacherCardComponent implements OnInit {
   addItem() {
     this.store.addOne(randTeacher());
   }
-  deleteItem(id: number) {
+  deleteItemClick(id: number) {
     this.store.deleteOne(id);
   }
   ngOnInit(): void {

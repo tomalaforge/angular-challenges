@@ -10,18 +10,24 @@ import {
   randomCity,
 } from '../../data-access/fake-http.service';
 import { CardComponent } from '../../ui/card/card.component';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-city-card',
   template: `
     <app-card
-      [list]="cities()"
       img="assets/img/city.png"
       customClass="bg-light-purple"
-      (addNewItem)="addItem()"
-      (deleteItem)="deleteItem($event)" />
+      (addNewItem)="addItem()">
+      @for (item of cities(); track item) {
+        <app-list-item
+          [name]="item.name"
+          [id]="item.id"
+          (deleteItem)="deleteItemClick($event)"></app-list-item>
+      }
+    </app-card>
   `,
-  imports: [CardComponent],
+  imports: [CardComponent, ListItemComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CityCardComponent implements OnInit {
@@ -35,7 +41,7 @@ export class CityCardComponent implements OnInit {
   addItem() {
     this.store.addOne(randomCity());
   }
-  deleteItem(id: number) {
+  deleteItemClick(id: number) {
     this.store.deleteOne(id);
   }
 }
