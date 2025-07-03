@@ -8,7 +8,6 @@ challengeNumber: 59
 command: angular-content-projection-defer
 sidebar:
   order: 212
-  badge: New
 ---
 
 # Challenge: Deferred Loading for Expandable Card Content
