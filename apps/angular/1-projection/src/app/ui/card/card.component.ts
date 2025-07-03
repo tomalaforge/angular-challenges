@@ -1,10 +1,10 @@
 import { NgOptimizedImage } from '@angular/common';
-import { Component, inject, input } from '@angular/core';
-import { randStudent, randTeacher } from '../../data-access/fake-http.service';
-import { StudentStore } from '../../data-access/student.store';
-import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
+import { Component, input, output } from '@angular/core';
+import { City } from '../../model/city.model';
+import { Student } from '../../model/student.model';
+import { Teacher } from '../../model/teacher.model';
 import { ListItemComponent } from '../list-item/list-item.component';
+import { DisplayNamePipe } from './display-name-pipe';
 
 @Component({
   selector: 'app-card',
@@ -12,47 +12,37 @@ import { ListItemComponent } from '../list-item/list-item.component';
     <div
       class="flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4"
       [class]="customClass()">
-      @if (type() === CardType.TEACHER) {
-        <img ngSrc="assets/img/teacher.png" width="200" height="200" />
-      }
-      @if (type() === CardType.STUDENT) {
-        <img ngSrc="assets/img/student.webp" width="200" height="200" />
-      }
+      <img [ngSrc]="img()" width="200" height="200" />
 
       <section>
         @for (item of list(); track item) {
           <app-list-item
-            [name]="item.firstName"
+            [name]="item | appDisplayName"
             [id]="item.id"
-            [type]="type()"></app-list-item>
+            (deleteItem)="deleteItemClick($event)"></app-list-item>
         }
       </section>
 
       <button
         class="rounded-sm border border-blue-500 bg-blue-300 p-2"
-        (click)="addNewItem()">
+        (click)="addNewItemClick()">
         Add
       </button>
     </div>
   `,
-  imports: [ListItemComponent, NgOptimizedImage],
+  imports: [ListItemComponent, NgOptimizedImage, DisplayNamePipe],
 })
 export class CardComponent {
-  private teacherStore = inject(TeacherStore);
-  private studentStore = inject(StudentStore);
-
-  readonly list = input<any[] | null>(null);
-  readonly type = input.required<CardType>();
+  readonly list = input<Teacher[] | City[] | Student[] | null>(null);
   readonly customClass = input('');
+  readonly img = input<string>('');
+  addNewItem = output<void>();
+  deleteItem = output<number>();
 
-  CardType = CardType;
-
-  addNewItem() {
-    const type = this.type();
-    if (type === CardType.TEACHER) {
-      this.teacherStore.addOne(randTeacher());
-    } else if (type === CardType.STUDENT) {
-      this.studentStore.addOne(randStudent());
-    }
+  addNewItemClick() {
+    this.addNewItem.emit();
+  }
+  deleteItemClick(id: number) {
+    this.deleteItem.emit(id);
   }
 }
