@@ -14,17 +14,19 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
 @Component({
   selector: 'app-student-card',
   template: `
+    <ng-template #studentTemplate let-item>
+      <app-list-item
+        [name]="item.firstName"
+        [id]="item.id"
+        (deleteItem)="deleteItem($event)"></app-list-item>
+    </ng-template>
     <app-card
+      [list]="students()"
+      [itemTemplate]="studentTemplate"
       img="assets/img/student.webp"
       customClass="bg-light-green"
-      (addNewItem)="addItem()">
-      @for (item of students(); track item) {
-        <app-list-item
-          [name]="item.firstName"
-          [id]="item.id"
-          (deleteItem)="deleteItemClick($event)"></app-list-item>
-      }
-    </app-card>
+      (addNewItem)="addItem()"
+      (deleteItem)="deleteItem($event)" />
   `,
   imports: [CardComponent, ListItemComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -40,7 +42,7 @@ export class StudentCardComponent implements OnInit {
   addItem() {
     this.store.addOne(randStudent());
   }
-  deleteItemClick(id: number) {
+  deleteItem(id: number) {
     this.store.deleteOne(id);
   }
 }

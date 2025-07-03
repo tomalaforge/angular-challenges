@@ -10,17 +10,19 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
 @Component({
   selector: 'app-teacher-card',
   template: `
+    <ng-template #teacherTemplate let-item>
+      <app-list-item
+        [name]="item.firstName"
+        [id]="item.id"
+        (deleteItem)="deleteItem($event)"></app-list-item>
+    </ng-template>
     <app-card
+      [list]="teachers()"
+      [itemTemplate]="teacherTemplate"
       img="assets/img/teacher.png"
       customClass="bg-light-red"
-      (addNewItem)="addItem()">
-      @for (item of teachers(); track item) {
-        <app-list-item
-          [name]="item.firstName"
-          [id]="item.id"
-          (deleteItem)="deleteItemClick($event)"></app-list-item>
-      }
-    </app-card>
+      (addNewItem)="addItem()"
+      (deleteItem)="deleteItem($event)"></app-card>
   `,
   imports: [CardComponent, ListItemComponent],
 })
@@ -32,7 +34,7 @@ export class TeacherCardComponent implements OnInit {
   addItem() {
     this.store.addOne(randTeacher());
   }
-  deleteItemClick(id: number) {
+  deleteItem(id: number) {
     this.store.deleteOne(id);
   }
   ngOnInit(): void {

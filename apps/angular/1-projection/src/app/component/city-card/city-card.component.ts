@@ -15,17 +15,19 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
 @Component({
   selector: 'app-city-card',
   template: `
+    <ng-template #cityTemplate let-item>
+      <app-list-item
+        [name]="item.name"
+        [id]="item.id"
+        (deleteItem)="deleteItem($event)"></app-list-item>
+    </ng-template>
     <app-card
+      [list]="cities()"
+      [itemTemplate]="cityTemplate"
       img="assets/img/city.png"
       customClass="bg-light-purple"
-      (addNewItem)="addItem()">
-      @for (item of cities(); track item) {
-        <app-list-item
-          [name]="item.name"
-          [id]="item.id"
-          (deleteItem)="deleteItemClick($event)"></app-list-item>
-      }
-    </app-card>
+      (addNewItem)="addItem()"
+      (deleteItem)="deleteItem($event)" />
   `,
   imports: [CardComponent, ListItemComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -41,7 +43,7 @@ export class CityCardComponent implements OnInit {
   addItem() {
     this.store.addOne(randomCity());
   }
-  deleteItemClick(id: number) {
+  deleteItem(id: number) {
     this.store.deleteOne(id);
   }
 }
