@@ -39,14 +39,19 @@
 
         items.forEach(pr => {
           const userLogin = pr.user.login;
+          // Extract challenge number from labels
+          const challengeNumbers = pr.labels.filter(l => !isNaN(Number(l.name))).map(l => Number(l.name));
+          const challengeNumber = challengeNumbers?.[0];
+          if (!challengeNumber) return; // skip if no challenge number
           if (prCounts[userLogin]) {
-            prCounts[userLogin].count++;
-            prCounts[userLogin].challengeNumber.push(pr.labels.filter(l => !isNaN(Number(l.name))).map(l => Number(l.name))?.[0]);
+            // Only add if not already present
+            if (!prCounts[userLogin].challengeNumber.includes(challengeNumber)) {
+              prCounts[userLogin].challengeNumber.push(challengeNumber);
+            }
           } else {
             prCounts[userLogin] = {
               avatar: pr.user.avatar_url,
-              count: 1,
-              challengeNumber: [pr.labels.filter(l => !isNaN(Number(l.name))).map(l => Number(l.name))?.[0]]
+              challengeNumber: [challengeNumber]
             };
           }
         });
@@ -63,7 +68,7 @@
       users = Object.entries(prCounts).map(([login, pr]) => ({
         login,
         avatar: pr.avatar,
-        count: pr.count,
+        count: pr.challengeNumber.length, // count unique challenges only
         challengeNumber: pr.challengeNumber.sort((a, b) => a - b),
       })).filter((r) => r.login !== 'allcontributors[bot]' && r.login !== 'tomalaforge').sort((a, b) => b.count - a.count);
 
