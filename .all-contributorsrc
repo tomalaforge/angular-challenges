@@ -363,6 +363,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "mathisvester",
+      "name": "mathisvester",
+      "avatar_url": "https://avatars.githubusercontent.com/u/26164587?v=4",
+      "profile": "https://github.com/mathisvester",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
