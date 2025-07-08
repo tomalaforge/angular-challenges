@@ -1,7 +1,7 @@
 {
   "version": 2,
   "public": true,
-  "name": "doc-angular-challenges",
+  "name": "doc-angular",
   "rewrites": [
     {
       "source": "/(.*)",

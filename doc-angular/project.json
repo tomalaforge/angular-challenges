@@ -11,8 +11,8 @@
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "doc-angular/dist",
+        "index": "doc-angular/src/index1.html",
         "browser": "doc-angular/src/main.ts",
-        "polyfills": ["zone.js"],
         "tsConfig": "doc-angular/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
