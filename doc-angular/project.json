@@ -11,7 +11,7 @@
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "doc-angular/dist",
-        "index": "doc-angular/src/index1.html",
+        "index": "doc-angular/src/indexFile.html",
         "browser": "doc-angular/src/main.ts",
         "tsConfig": "doc-angular/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
