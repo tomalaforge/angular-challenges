@@ -1,7 +1,7 @@
 ---
 title: 🟢 async-redirect
 description: Challenge 60 is about using the new `redirectTo` function in Angular Router to modernize navigation logic.
-author: thomas laforge
+author: thomas-laforge
 contributors:
   - tomalaforge
 challengeNumber: 60
