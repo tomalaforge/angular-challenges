@@ -1,15 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
-  imports: [RouterModule],
   selector: 'cha-root',
   template: `
-    <div>{{ title }}</div>
     <router-outlet />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [RouterOutlet],
 })
-export class AppComponent {
-  protected title = 'doc-angular';
-}
+export class Shell {}
