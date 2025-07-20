@@ -1,0 +1,71 @@
+---
+title: Angular Performance
+prev: false
+next: false
+contributors:
+  - tomalaforge
+  - tomer953
+  - LMFinney
+description: Learn how to use the Angular Devtool chrome extension.
+noCommentSection: true
+sidebar:
+  order: 1
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+In this series of challenges about performance, you will learn how to optimize and enhance the performance of your Angular application.
+
+Before starting to resolve any challenge, I invite you to download the [Angular DevTools Chrome extension](https://chrome.google.com/webstore/detail/angular-devtools/ienfalfjdbdpebioblfackkekamfmbnh) if you haven't already done so.
+
+This extension allows you to profile your application and detect performance issues, which is very useful for understanding where performance issues can occur.
+
+## How to use it
+
+When you serve an Angular application, you can inspect a page by pressing <b>F12</b>, which will open the <b>Chrome developer tools</b>. Then navigate to the <b>Angular tab</b>. From there, you can select the <b>Profiler tab</b> as shown below.
+
+![profiler tab](../../../../assets/performance/profiler-tab.png 'Profiler tab')
+
+You can now profile your application by clicking on the record button. You can play with your application and see when change detection is triggered and which components are rerendered.
+
+:::tip[Learn more]
+You can learn more on the [documentation page](https://angular.io/guide/devtools).
+:::
+
+Now that you know how to use the <b>Angular DevTool</b>, you can choose a challenge, profile it, and resolve it.
+
+<LinkCard
+  title="🟢 Default vs OnPush"
+  description="Learn the difference between Default and OnPush change detection strategies."
+  href="/challenges/performance/34-default-vs-onpush/"
+/>
+
+<LinkCard
+  title="🟢 Memoization"
+  description="Learn the power of pure pipes."
+  href="/challenges/performance/35-memoization/"
+/>
+
+<LinkCard
+  title="🟢 NgFor Optimization"
+  description="Learn how to improve looping performance."
+  href="/challenges/performance/36-ngfor-optimization/"
+/>
+
+<LinkCard
+  title="🟠 Optimize Change Detection"
+  description="Learn how to remove zone pollution."
+  href="/challenges/performance/12-optimize-change-detection/"
+/>
+
+<LinkCard
+  title="🟠 Optimize Big List"
+  description="Learn how to handle large lists."
+  href="/challenges/performance/37-optimize-big-list/"
+/>
+
+<LinkCard
+  title="🟠 Web workers"
+  description="Learn how to offload slow calculations."
+  href="/challenges/performance/40-web-worker/"
+/>

@@ -1,0 +1,63 @@
+---
+import Default from '@astrojs/starlight/components/Hero.astro';
+import MyIcon from './MyIcon.astro';
+import { getEntry } from 'astro:content';
+import SponsorUser from './github/SponsorUser.svelte';
+
+
+
+const { lang } = Astro.props;
+const { data } = await getEntry('i18n', lang);
+---
+
+<div class="sponsor-header button-hover">
+    <p>{data['sponsors.description']}
+      <SponsorUser client:load />
+    </p>
+  <a class="action-button" href="https://github.com/sponsors/tomalaforge">
+    <div>{data['sponsors.joinButton']}</div>
+    <MyIcon name="heart" fill="none" stroke="currentColor" />
+  </a>
+</div>
+
+<Default {...Astro.props}>
+  <slot />
+</Default>
+
+
+<style>
+  .sponsor-header {
+    border: 1px solid var(--sl-color-gray-5);
+    margin-bottom: -2rem;
+    padding: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+
+  .sponsor-header p {
+    font-size: clamp(var(--sl-text-sm), calc(0.5rem + 1vw), var(--sl-text-body));
+    margin-right: 0.5rem;
+  }
+
+  .sponsor-line a {
+    display: inline-block;
+  }
+
+  .action-button {
+    display: flex !important;
+    justify-content: center;
+    gap: 0.5em;
+    align-items: center;
+    border-radius: 999rem;
+    color: var(--sl-color-white) !important;
+    line-height: 1.1875;
+    text-decoration: none;
+    font-size: var(--sl-text-sm) !important;
+    border: 1px solid;
+    padding: 0.4rem 0.8rem;
+    width: fit-content;
+  }
+</style>

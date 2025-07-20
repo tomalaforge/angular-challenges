@@ -1,0 +1,56 @@
+---
+import { Icon } from '@astrojs/starlight/components';
+import MyIcon from './MyIcon.astro';
+import type { Props } from '@astrojs/starlight/props';
+import { getEntry } from 'astro:content';
+
+const { lang } = Astro.props;
+const { data } = await getEntry('i18n', lang);
+
+---
+
+<div class="action-footer button-hover">
+  <a class="action-button" href="/subscription">
+    <div>{data['buttons.email']}</div>
+    <Icon name="email"  />
+  </a>
+
+  <a class="action-button" href="https://github.com/tomalaforge/angular-challenges">
+    <div>{data['buttons.star']}</div>
+    <Icon name="github"  />
+  </a>
+
+  <a class="action-button button-sponsor" href="https://github.com/sponsors/tomalaforge">
+    <div>{data['buttons.sponsor']}</div>
+    <MyIcon name="heart" fill="none" stroke="currentColor" color="white" />
+  </a>
+</div>
+
+<style>
+  .action-button {
+    display: flex !important;
+    justify-content: center;
+    gap: 0.5em;
+    align-items: center;
+    border-radius: 999rem;
+    color: var(--sl-color-white) !important;
+    line-height: 1.1875;
+    text-decoration: none;
+    font-size: var(--sl-text-sm) !important;
+    border: 1px solid;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .action-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    margin-bottom: 10px;
+  }
+
+  .button-sponsor {
+    background-color: red;
+    border-color: red;
+    color: white !important;
+  }
+</style>

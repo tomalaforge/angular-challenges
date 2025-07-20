@@ -1,50 +1,46 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { randText } from '@ngneat/falso';
+import { Component, inject, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AppItemComponent } from './todos/components/item.component';
+import { AppGlobalLoaderComponent } from './todos/components/loader-global.component';
+import { fetchTodos } from './todos/stores/todos.actions';
+import {
+  selectorFetchErroredGlobal,
+  selectorIsGlobalLoaderVisible,
+  selectorTodos,
+} from './todos/stores/todos.selectors';
 
 @Component({
-  imports: [CommonModule],
+  imports: [CommonModule, AppGlobalLoaderComponent, AppItemComponent],
+  providers: [],
   selector: 'app-root',
   template: `
-    <div *ngFor="let todo of todos">
-      {{ todo.title }}
-      <button (click)="update(todo)">Update</button>
-    </div>
+    @if (hasErroredGlobal()) {
+      <p>Error fetching todos</p>
+    } @else if (isGlobalLoaderVisble()) {
+      <app-global-loader />
+    } @else {
+      @for (todo of todos(); track todo.id) {
+        <app-item [todo]="todo" />
+      } @empty {
+        <p>There are no todos...</p>
+      }
+    }
   `,
   styles: [],
 })
 export class AppComponent implements OnInit {
-  todos!: any[];
-
-  constructor(private http: HttpClient) {}
+  private readonly store = inject(Store);
+  public readonly isGlobalLoaderVisble = this.store.selectSignal(
+    selectorIsGlobalLoaderVisible,
+  );
+  public readonly hasErroredGlobal = this.store.selectSignal(
+    selectorFetchErroredGlobal,
+  );
+  public readonly todos = this.store.selectSignal(selectorTodos);
 
   ngOnInit(): void {
-    this.http
-      .get<any[]>('https://jsonplaceholder.typicode.com/todos')
-      .subscribe((todos) => {
-        this.todos = todos;
-      });
-  }
-
-  update(todo: any) {
-    this.http
-      .put<any>(
-        `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
-        JSON.stringify({
-          todo: todo.id,
-          title: randText(),
-          body: todo.body,
-          userId: todo.userId,
-        }),
-        {
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-          },
-        },
-      )
-      .subscribe((todoUpdated: any) => {
-        this.todos[todoUpdated.id - 1] = todoUpdated;
-      });
+    console.log('hello');
+    this.store.dispatch(fetchTodos());
   }
 }

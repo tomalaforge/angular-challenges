@@ -1,0 +1,34 @@
+---
+import type { Props } from '@astrojs/starlight/props';
+
+const {lang, locale} = Astro.props;
+
+// Chinese needs to `zh-CN`
+// const shortLang =lang.split('-')[0];
+---
+
+<div class="separator"></div>
+
+<script src="https://giscus.app/client.js"
+        data-repo="tomalaforge/angular-challenges"
+        data-repo-id="R_kgDOIXXIfw"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOIXXIf84CSZF_"
+        data-mapping="title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang={lang}
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+<style>
+    .separator {
+        border-top: solid 1px var(--sl-color-hairline);
+        margin: 3rem 0px;
+    }
+</style>

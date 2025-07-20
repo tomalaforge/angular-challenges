@@ -1,0 +1,45 @@
+---
+import Default from '@astrojs/starlight/components/MarkdownContent.astro';
+import type { Props } from '@astrojs/starlight/props';
+import { getEntry } from 'astro:content';
+import Author from './Author.astro';
+import ChallengeFooter from './ChallengeFooter.astro';
+import CommentSection from './CommentSection.astro';
+import ContributorsFooter from './ContributorsFooter.astro';
+import AnswerNumber from './github/AnswerNumber.svelte';
+
+const { lang } = Astro.props;
+const { data } = await getEntry('i18n', lang);
+const { challengeNumber } = Astro.props.entry.data;
+const author = Astro.props.entry.data.author ? await getEntry(Astro.props.entry.data.author) : null;
+const renderCommentSection = !Astro.props.entry.data.noCommentSection;
+
+---
+
+{ challengeNumber ? <div class="header-container">
+  { author ? <Author {...author.data} {data} /> : null}
+  <AnswerNumber client:load/>
+</div> :null}
+
+<Default {...Astro.props}>
+  <slot />
+</Default>
+
+{challengeNumber ?
+<ChallengeFooter {...Astro.props}  /> : null}
+
+{ renderCommentSection &&
+<CommentSection {...Astro.props} /> }
+
+ <ContributorsFooter {...Astro.props} />
+
+<style>
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: -1rem;
+
+  }
+</style>

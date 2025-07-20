@@ -1,0 +1,20 @@
+---
+import Default from '@astrojs/starlight/components/SiteTitle.astro';
+import MyIcon from './MyIcon.astro';
+import SignUp from './github/SignUp.svelte';
+import { Icon } from '@astrojs/starlight/components';
+---
+
+<Default {...Astro.props}>
+  <slot />
+</Default>
+
+
+<SignUp client:only="svelte" >
+  <Icon name="github" slot="github"  />
+  <MyIcon name="fullStar" slot="fullStar" viewBox="0 0 16 16" fill="#e3b341"/>
+  <MyIcon name="star" slot="star" viewBox="0 0 16 16"/>
+  <MyIcon name="fork" viewBox="0 0 16 16" slot="fork"/>
+</SignUp>
+
+

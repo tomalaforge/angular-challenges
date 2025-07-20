@@ -1,0 +1,22 @@
+{
+  "name": "angular-challenges-docs",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "^0.15.1",
+    "@astrojs/svelte": "^5.2.0",
+    "@astrojs/vercel": "^7.5.0",
+    "@fontsource/ibm-plex-serif": "^5.0.8",
+    "astro": "^4.0.0",
+    "sharp": "^0.32.5",
+    "svelte": "^4.2.12",
+    "typescript": "^5.4.3"
+  }
+}

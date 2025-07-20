@@ -1,0 +1,81 @@
+---
+title: Bienvenue sur Angular Challenges
+description: Commence par résoudre ces défis et deviens un meilleur ingénieur FrontEnd Angular.
+template: splash
+noCommentSection: true
+hero:
+  tagline: Commence maintenant et deviens un expert Angular !
+  image:
+    file: ../../../assets/angular-challenge.webp
+  actions:
+    - text: C'est parti !
+      link: /guides/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Aller au dernier Challenge
+      link: /fr/challenges/angular/59-content-projection-defer/
+      icon: rocket
+    - text: Donne une étoile
+      link: https://github.com/tomalaforge/angular-challenges
+      icon: github
+      variant: secondary
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+import MyIcon from '../../../components/MyIcon.astro';
+import SubscriptionForm from '../../../components/SubscriptionForm.astro';
+
+<CardGrid>
+<Card title="59 Défis">
+    Ce répertoire rassemble 59 Défis liés à <b>Angular</b>, <b>Nx</b>, <b>RxJS</b>, <b>Ngrx</b> et <b>Typescript</b>. Ces défis portent sur des problèmes réels ou des fonctionnalités spécifiques pour améliorer vos compétences.
+</Card>
+
+<Card title="Subscribe to get notify of latest challenges">
+  <SubscriptionForm isNote={false} lang="fr" />
+</Card>
+
+<Card title="Devenir un Mainteneur OSS">
+  L'un des objectifs de ce répertoire est de rendre plus accessible les
+  contributions aux logiciels Open Source (OSS). En résolvant ces défis, vous
+  apprendrez comment commencer à contribuer à n'importe quel projet Open Source.
+</Card>
+
+<Card title="Apprendre aux Côtés des Autres">
+  Apprendre et démarrer sur un nouveau framework est toujours difficile. Cette
+  série de défis propose des cas d'utilisation réels pour appliquer ce que vous
+  avez appris. N'importe qui peut commenter ou aider.{' '}
+  <b>
+    Apprendre seul est bien, mais apprendre aux côtés des autres vous fera
+    progresser davantage et plus rapidement.
+  </b>
+</Card>
+
+<Card title="Contribuer">
+  Avez-vous un problème, un bug intéressant ou une idée ? N'hésitez pas ;{' '}
+  <b>créez vos propres challenges</b> sans perdre de temps.
+</Card>
+
+<Card title="Se Préparer pour les Entretiens">
+  Résoudre ces challenges vous préparera aux éventuels défis techniques que vous
+  pourriez rencontrer lors d'un entretien pour un rôle d'ingénieur frontend.
+</Card>
+
+<Card title="Sponsoring">
+    Ce projet est gratuit et vise à le rester le plus longtemps possible. Cependant, tout est réalisé pendant mon temps libre, y compris la création de challenges et la relecture des pull requests. <b>Le sponsoring peut me soutenir et contribuer à la croissance du projet.</b>
+</Card>
+</CardGrid>
+
+---
+
+<div class="article-footer">
+  <a href="https://github.com/sponsors/tomalaforge" alt="Sponsor link">
+    <MyIcon name="heart" size="1.2rem" color="white" />
+    Sponsoriser le Project
+  </a>
+</div>
+
+<div class="main-page-footer">
+  Créer par{' '}
+  <a href="https://github.com/tomalaforge?tab=repositories">Thomas Laforge</a> -
+  Réaliser grâce à 🌟 <a href="https://starlight.astro.build/">Starlight</a>
+</div>

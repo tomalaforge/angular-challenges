@@ -1,0 +1,97 @@
+---
+title: Bem-vindos aos Desafios Angular
+description: Comece resolvendo esses desafios e se torne um melhor desenvolvedor frontend Angular.
+template: splash
+noCommentSection: true
+hero:
+  tagline: Comece agora e vire um especialista em Angular!
+  image:
+    file: ../../../assets/angular-challenge.webp
+  actions:
+    - text: Iniciar
+      link: /pt/guides/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Ir para o desafio mais recente
+      link: /pt/challenges/angular/59-content-projection-defer/
+      icon: rocket
+    - text: Dar uma estrela
+      link: https://github.com/tomalaforge/angular-challenges
+      icon: github
+      variant: secondary
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+import MyIcon from '../../../components/MyIcon.astro';
+import SubscriptionForm from '../../../components/SubscriptionForm.astro';
+
+<CardGrid>
+  <Card title="59 Desafios">
+    Este repositório possui 59 Desafios relacionados a <b>Angular</b>, <b>Nx</b>, <b>RxJS</b>,
+    <b>Ngrx</b> e <b>Typescript</b>.
+    Esses desafios são voltados para problemas reais ou funcionalidades específicas afim de
+    melhorar suas habilidades.
+  </Card>
+
+{' '}
+
+<Card title="Inscreva-se para ser notificado do desafio mais recente">
+  <SubscriptionForm isNote={false} lang="pt" />
+</Card>
+
+{' '}
+
+<Card title="Torne-se um contribuidor OSS">
+  Um dos objetivos desse repositório é <b>diminuir a barreira</b> de entrada
+  para o Software de Código Aberto (OSS). Ao realizar esses desafios, você
+  aprenderá como começar a contruibuir em qualquer outro Projeto de Código
+  Aberto.
+</Card>
+
+{' '}
+
+<Card title="Aprenda junto com os outros">
+  Aprender e praticar um novo framework é sempre desafiador. Este conjunto de
+  desafios possui casos de uso reais para aplicarmos o que aprendemos. Qualquer
+  um pode comentar e oferecer assistência.
+  <b>
+    Aprender sozinho é legal, mas aprender junto com outras pessoas levará você
+    mais longe.
+  </b>
+</Card>
+
+{' '}
+
+<Card title="Contribua">
+  Tem algum problema, um bug interessante ou uma ideia? Não hesite;
+  <b>crie seus próprios desafios</b> sem perder tempo.
+</Card>
+
+{' '}
+
+<Card title="Prepare-se para entrevistas">
+  Completar esses desafios vai preparar você para quaisquer desafios técnicos
+  que encontrar em uma entrevista para uma vaga frontend.
+</Card>
+
+  <Card title="Patrocínio">
+    Este projeto é livre e tem o objetivo de permanecer assim o máximo possível. No entanto,
+    tudo é feito durante meu tempo livre, incluindo a criação de desafios e revisão de pull requests (PRs).
+    <b>Patrocinar pode me ajudar e contribuir para o crescimento do projeto</b>.
+  </Card>
+</CardGrid>
+
+---
+
+<div class="article-footer">
+  <a href="https://github.com/sponsors/tomalaforge" alt="Sponsor link">
+    <MyIcon name="heart" size="1.2rem" color="white" />
+    Patrocine o Projeto
+  </a>
+</div>
+
+<div class="main-page-footer">
+  Criado por{' '}
+  <a href="https://github.com/tomalaforge?tab=repositories">Thomas Laforge</a> -
+  Fornecido por 🌟 <a href="https://starlight.astro.build/">Starlight</a>
+</div>
