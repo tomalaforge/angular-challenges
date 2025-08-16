@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, InjectionToken } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { map } from 'rxjs';
+export const CURRENCY_CODE = new InjectionToken<string>('CURRENCY_CODE');
 
 export interface Currency {
   name: string;
@@ -23,7 +24,7 @@ export class CurrencyService extends ComponentStore<{ code: string }> {
     map((code) => currency.find((c) => c.code === code)?.symbol ?? code),
   );
 
-  constructor() {
-    super({ code: 'EUR' });
+  constructor(@Inject(CURRENCY_CODE) code: string) {
+    super({ code });
   }
 }
