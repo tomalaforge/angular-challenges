@@ -1,3 +1,5 @@
+import { BaseItem } from './base.model';
+
 export const subject = [
   'Sciences',
   'History',
@@ -5,10 +7,10 @@ export const subject = [
   'Maths',
   'Sport',
 ] as const;
+
 export type Subject = (typeof subject)[number];
 
-export interface Teacher {
-  id: number;
+export interface Teacher extends BaseItem {
   firstName: string;
   lastName: string;
   subject: Subject;

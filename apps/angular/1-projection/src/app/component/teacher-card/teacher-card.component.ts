@@ -1,34 +1,67 @@
+import { NgOptimizedImage } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+import {
+  FakeHttpService,
+  randTeacher,
+} from '../../data-access/fake-http.service';
 import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
-import { CardComponent } from '../../ui/card/card.component';
-
+import { CardActions } from '../../model';
+import {
+  CardComponent,
+  CardSectionDirective,
+  ListItemComponent,
+} from '../../ui';
 @Component({
   selector: 'app-teacher-card',
   template: `
     <app-card
       [list]="teachers()"
-      [type]="cardType"
-      customClass="bg-light-red"></app-card>
+      customClass="bg-light-red"
+      [cardItemTemplate]="cardItemTemplate">
+      <img
+        priority
+        cardSection="header"
+        ngSrc="assets/img/teacher.png"
+        width="200"
+        height="200" />
+
+      <ng-template #cardItemTemplate let-teacher>
+        <app-list-item
+          [name]="teacher.firstName"
+          [id]="teacher.id"
+          (deleteEvent)="onDeleteItem($event)"></app-list-item>
+      </ng-template>
+
+      <button
+        cardSection="footer"
+        class="rounded-sm border border-blue-500 bg-blue-300 p-2"
+        (click)="onAddNewItem()">
+        Add
+      </button>
+    </app-card>
   `,
-  styles: [
-    `
-      ::ng-deep .bg-light-red {
-        background-color: rgba(250, 0, 0, 0.1);
-      }
-    `,
+  imports: [
+    CardComponent,
+    NgOptimizedImage,
+    ListItemComponent,
+    CardSectionDirective,
   ],
-  imports: [CardComponent],
 })
-export class TeacherCardComponent implements OnInit {
-  private http = inject(FakeHttpService);
-  private store = inject(TeacherStore);
+export class TeacherCardComponent implements OnInit, CardActions {
+  private readonly http = inject(FakeHttpService);
+  private readonly store = inject(TeacherStore);
 
   teachers = this.store.teachers;
-  cardType = CardType.TEACHER;
 
   ngOnInit(): void {
     this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
+  }
+
+  onDeleteItem(id: number) {
+    this.store.deleteOne(id);
+  }
+
+  onAddNewItem() {
+    this.store.addOne(randTeacher());
   }
 }
