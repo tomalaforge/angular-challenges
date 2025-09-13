@@ -6,10 +6,14 @@ import { User } from './user.model';
   providedIn: 'root',
 })
 export class UserStore {
-  private user = new BehaviorSubject<User | undefined>(undefined);
+  private readonly user = new BehaviorSubject<User | undefined>(undefined);
   user$ = this.user.asObservable();
 
-  add(user: User) {
+  add(user: User | undefined) {
     this.user.next(user);
+  }
+
+  get currentUser(): User | undefined {
+    return this.user.getValue();
   }
 }
