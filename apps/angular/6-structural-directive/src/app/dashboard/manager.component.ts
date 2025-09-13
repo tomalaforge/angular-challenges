@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { MainLayoutComponent } from '../layout/main.component';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [],
+  imports: [MainLayoutComponent],
   template: `
-    <p>dashboard for Manager works!</p>
-    <button app-button routerLink="/">Logout</button>
+    <app-main>dashboard for Manager works!</app-main>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
