@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ButtonComponent } from './button.component';
 import { InformationComponent } from './information.component';
@@ -30,33 +30,41 @@ import { UserStore } from './user.store';
 
     <app-information />
 
-    <button app-button class="mt-10" routerLink="enter">
+    <button app-button class="mt-10" [routerLink]="path()">
       Enter application
     </button>
   `,
 })
 export class LoginComponent {
   private readonly userStore = inject(UserStore);
+  path = signal<string>('enter');
 
   admin() {
     this.userStore.add(admin);
+    this.path.update(() => 'enter');
   }
   manager() {
     this.userStore.add(manager);
+    this.path.update(() => 'manager');
   }
   reader() {
     this.userStore.add(reader);
+    this.path.update(() => 'reader');
   }
   writer() {
     this.userStore.add(writer);
+    this.path.update(() => 'writer');
   }
   readerWriter() {
     this.userStore.add(readerAndWriter);
+    this.path.update(() => 'reader-writer');
   }
   client() {
     this.userStore.add(client);
+    this.path.update(() => 'client');
   }
   everyone() {
     this.userStore.add(everyone);
+    this.path.update(() => 'everyone');
   }
 }
