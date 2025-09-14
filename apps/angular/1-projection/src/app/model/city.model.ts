@@ -1,5 +1,5 @@
-export interface City {
-  id: number;
+import { Item } from './item.model';
+export interface City extends Item {
   name: string;
   country: string;
 }
