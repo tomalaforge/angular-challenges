@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 import { CDFlashingDirective } from '@angular-challenges/shared/directives';
 import { TitleCasePipe } from '@angular/common';
@@ -7,6 +7,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
+import { ListComponent } from './list.component';
 
 @Component({
   selector: 'app-person-list',
@@ -18,6 +19,7 @@ import { MatListModule } from '@angular/material/list';
     MatChipsModule,
     CDFlashingDirective,
     TitleCasePipe,
+    ListComponent
   ],
   template: `
     <h1 cd-flash class="text-center font-semibold" title="Title">
@@ -33,27 +35,12 @@ import { MatListModule } from '@angular/material/list';
         (keydown)="handleKey($event)" />
     </mat-form-field>
 
-    <mat-list class="flex w-full">
-      @if (names?.length === 0) {
-        <div class="empty-list-label">Empty list</div>
-      }
-      @for (name of names; track name) {
-        <mat-list-item cd-flash class="text-orange-500">
-          <div class="flex justify-between">
-            <h3 title="Name">
-              {{ name }}
-            </h3>
-          </div>
-        </mat-list-item>
-      }
-      @if (names?.length !== 0) {
-        <mat-divider></mat-divider>
-      }
-    </mat-list>
+    <list-component [names]="names">
   `,
   host: {
     class: 'w-full flex flex-col items-center',
   },
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PersonListComponent {
   @Input() names: string[] = [];
@@ -63,7 +50,7 @@ export class PersonListComponent {
 
   handleKey(event: KeyboardEvent) {
     if (event.key === 'Enter') {
-      this.names?.unshift(this.label);
+      this.names = [this.label, ...this.names]
       this.label = '';
     }
   }
