@@ -3,7 +3,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 // NOTE : this is just the dialog content, you need to implement dialog logic
 
 @Component({
-  standalone: true,
   template: `
     <div role="alert" class="rounded-xl border border-gray-100 bg-white p-5">
       <h3 class="block text-xl font-medium text-red-600">

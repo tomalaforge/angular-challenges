@@ -62,7 +62,6 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
     e2eTestRunner: E2eTestRunner.None,
     linter: Linter.EsLint,
     addTailwind: true,
-    standalone: true,
     skipTests: true,
   });
 

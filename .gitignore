@@ -44,3 +44,5 @@ TODO.md
 .nx/workspace-data
 
 .cursorrules
+.cursor/rules/nx-rules.mdc
+.github/instructions/nx.instructions.md

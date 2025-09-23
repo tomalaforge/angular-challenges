@@ -3,7 +3,6 @@ import { Directive, DoCheck, ElementRef, NgZone } from '@angular/core';
 
 @Directive({
   selector: '[cd-flash]',
-  standalone: true,
 })
 export class CDFlashingDirective implements DoCheck {
   constructor(

@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 import { CDFlashingDirective } from '@angular-challenges/shared/directives';
-import { CommonModule } from '@angular/common';
+import { TitleCasePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -11,17 +11,17 @@ import { MatListModule } from '@angular/material/list';
 @Component({
   selector: 'app-person-list',
   imports: [
-    CommonModule,
     FormsModule,
     MatListModule,
     MatFormFieldModule,
     MatInputModule,
     MatChipsModule,
     CDFlashingDirective,
+    TitleCasePipe,
   ],
   template: `
-    <h1 cd-flash class="text-center font-semibold" title="Title">
-      {{ title | titlecase }}
+    <h1 class="text-center font-semibold" title="Title">
+      {{ title() | titlecase }}
     </h1>
 
     <mat-form-field class="w-4/5" cd-flash>
@@ -34,18 +34,21 @@ import { MatListModule } from '@angular/material/list';
     </mat-form-field>
 
     <mat-list class="flex w-full">
-      <div *ngIf="names?.length === 0" class="empty-list-label">Empty list</div>
-      <mat-list-item
-        *ngFor="let name of names"
-        cd-flash
-        class="text-orange-500">
-        <div MatListItemLine class="flex justify-between">
-          <h3 title="Name">
-            {{ name }}
-          </h3>
-        </div>
-      </mat-list-item>
-      <mat-divider *ngIf="names?.length !== 0"></mat-divider>
+      @if (names()?.length === 0) {
+        <div class="empty-list-label">Empty list</div>
+      }
+      @for (name of names(); track name) {
+        <mat-list-item cd-flash class="text-orange-500">
+          <div class="flex justify-between">
+            <h3 title="Name">
+              {{ name }}
+            </h3>
+          </div>
+        </mat-list-item>
+      }
+      @if (names()?.length !== 0) {
+        <mat-divider></mat-divider>
+      }
     </mat-list>
   `,
   host: {
@@ -53,14 +56,14 @@ import { MatListModule } from '@angular/material/list';
   },
 })
 export class PersonListComponent {
-  @Input() names: string[] = [];
-  @Input() title = '';
+  names = input<string[]>([]);
+  title = input('');
 
   label = '';
 
   handleKey(event: KeyboardEvent) {
     if (event.key === 'Enter') {
-      this.names?.unshift(this.label);
+      this.names()?.unshift(this.label);
       this.label = '';
     }
   }

@@ -1,5 +1,4 @@
-import { NgIf } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -17,7 +16,6 @@ import { MatInputModule } from '@angular/material/input';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    NgIf,
   ],
   template: `
     <form [formGroup]="form" #ngForm="ngForm" (ngSubmit)="submit()">
@@ -28,10 +26,12 @@ import { MatInputModule } from '@angular/material/input';
           matInput
           formControlName="description"
           placeholder="My new task" />
-        <mat-error *ngIf="form.controls.description.hasError('required')">
-          Description is
-          <strong>required</strong>
-        </mat-error>
+        @if (form.controls.description.hasError('required')) {
+          <mat-error>
+            Description is
+            <strong>required</strong>
+          </mat-error>
+        }
       </mat-form-field>
       <button
         class="ml-4"
@@ -45,9 +45,9 @@ import { MatInputModule } from '@angular/material/input';
   `,
 })
 export class AddComponent {
-  @Input() loading = false;
+  loading = input(false);
 
-  @Output() addTicket = new EventEmitter<string>();
+  addTicket = output<string>();
 
   form = new FormGroup({
     description: new FormControl(null, Validators.required),

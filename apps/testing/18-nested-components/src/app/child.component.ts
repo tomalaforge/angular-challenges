@@ -1,11 +1,9 @@
-import { NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
-  Input,
-  Output,
   inject,
+  input,
+  output,
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { HttpService } from './http.service';
@@ -24,54 +22,45 @@ export class InputComponent {
 
 @Component({
   selector: 'result',
-  standalone: true,
   template: `
-    <p>Title is {{ title }}</p>
+    <p>Title is {{ title() }}</p>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ResultComponent {
-  @Input() title = '';
+  title = input('');
 }
 
 @Component({
   selector: 'app-button',
-  standalone: true,
   template: `
     <button (click)="validate.emit()">Validate</button>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonComponent {
-  @Output() validate = new EventEmitter();
+  validate = output();
 }
 
 @Component({
   selector: 'app-error',
-  standalone: true,
   template: `
     <p>Title is required !!!</p>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ErrorComponent {
-  @Output() validate = new EventEmitter();
-}
+export class ErrorComponent {}
 
 @Component({
   selector: 'app-child',
-  imports: [
-    ResultComponent,
-    ButtonComponent,
-    InputComponent,
-    ErrorComponent,
-    NgIf,
-  ],
+  imports: [],
   template: `
-    <app-input #input></app-input>
-    <result [title]="input.title.value"></result>
-    <app-button (validate)="submit(input.title.value)"></app-button>
-    <app-error *ngIf="showError"></app-error>
+    <app-input #input />
+    <result [title]="input.title.value" />
+    <app-button (validate)="submit(input.title.value)" />
+    @if (showError) {
+      <app-error />
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

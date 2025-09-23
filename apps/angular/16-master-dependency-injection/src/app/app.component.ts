@@ -1,6 +1,6 @@
 import { TableComponent } from '@angular-challenges/shared/ui';
-import { AsyncPipe, NgFor } from '@angular/common';
-import { Component, Directive } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Directive } from '@angular/core';
 import { CurrencyPipe } from './currency.pipe';
 import { CurrencyService } from './currency.service';
 import { Product, products } from './product.model';
@@ -11,7 +11,6 @@ interface ProductContext {
 
 @Directive({
   selector: 'ng-template[product]',
-  standalone: true,
 })
 export class ProductDirective {
   static ngTemplateContextGuard(
@@ -23,16 +22,18 @@ export class ProductDirective {
 }
 
 @Component({
-  imports: [TableComponent, CurrencyPipe, AsyncPipe, NgFor, ProductDirective],
+  imports: [TableComponent, CurrencyPipe, AsyncPipe, ProductDirective],
   providers: [CurrencyService],
   selector: 'app-root',
   template: `
     <table [items]="products">
       <ng-template #header>
         <tr>
-          <th *ngFor="let col of displayedColumns">
-            {{ col }}
-          </th>
+          @for (col of displayedColumns; track $index) {
+            <th>
+              {{ col }}
+            </th>
+          }
         </tr>
       </ng-template>
       <ng-template #body product let-product>
@@ -45,6 +46,7 @@ export class ProductDirective {
       </ng-template>
     </table>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
   products = products;

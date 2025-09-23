@@ -2,16 +2,15 @@
 import { BtnDisabledDirective } from '@angular-challenges/decoupling/brain';
 import {
   Directive,
-  ElementRef,
-  Renderer2,
   effect,
+  ElementRef,
   inject,
+  Renderer2,
   signal,
 } from '@angular/core';
 
 @Directive({
   selector: 'button[hlm]',
-  standalone: true,
   host: {
     class:
       'border border-black p-4 rounded-md bg-white data-[state=disabled]:bg-gray-400 data-[state=disabled]:text-white',

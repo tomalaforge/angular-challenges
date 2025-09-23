@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
-  standalone: true,
   selector: 'app-rating-control',
   templateUrl: 'rating-control.component.html',
   styleUrls: ['rating-control.component.scss'],

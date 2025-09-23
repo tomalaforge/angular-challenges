@@ -1,11 +1,7 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {
-  ComponentStore,
-  OnStateInit,
-  tapResponse,
-} from '@ngrx/component-store';
-import { concatLatestFrom } from '@ngrx/effects';
+import { ComponentStore, OnStateInit } from '@ngrx/component-store';
+import { concatLatestFrom, tapResponse } from '@ngrx/operators';
 import { pipe } from 'rxjs';
 import { map, mergeMap, tap } from 'rxjs/operators';
 import { PARAM_TICKET_ID } from '../app.route';
@@ -27,6 +23,9 @@ export class DetailStore
   extends ComponentStore<TicketState>
   implements OnStateInit
 {
+  private readonly backend = inject(BackendService);
+  private readonly route = inject(ActivatedRoute);
+
   readonly ticket$ = this.select((state) => state.ticket);
   readonly loading$ = this.select((state) => state.loading);
   readonly error$ = this.select((state) => state.error);
@@ -36,10 +35,7 @@ export class DetailStore
     loading: this.loading$,
   });
 
-  constructor(
-    private backend: BackendService,
-    private route: ActivatedRoute,
-  ) {
+  constructor() {
     super(initialState);
   }
 

@@ -1,10 +1,9 @@
-import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ListComponent } from './list.component';
 import { PersonComponent } from './person.component';
 
 @Component({
-  imports: [NgTemplateOutlet, PersonComponent, ListComponent],
+  imports: [PersonComponent, ListComponent],
   selector: 'app-root',
   template: `
     <person [person]="person">

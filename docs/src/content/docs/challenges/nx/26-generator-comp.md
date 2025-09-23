@@ -39,7 +39,6 @@ Below are the end result of your generator for a `UserComponent` associated with
 ```ts
 @Component({
   selector: 'app-user',
-  standalone: true,
   imports: [LetDirective],
   providers: [provideComponentStore(UserStore)],
   template: `

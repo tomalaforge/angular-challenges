@@ -1,5 +1,4 @@
-import { NgFor } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -17,28 +16,29 @@ import { Ticket, TicketUser, User } from '../../backend.service';
     MatInputModule,
     MatButtonModule,
     MatSelectModule,
-    NgFor,
   ],
   template: `
     <li
       class="flex flex-grow items-center justify-between gap-5"
-      [class.bg-green-200]="ticket.completed">
-      <button [routerLink]="['/detail', ticket.id]" class="flex flex-col gap-2">
+      [class.bg-green-200]="ticket().completed">
+      <button
+        [routerLink]="['/detail', ticket().id]"
+        class="flex flex-col gap-2">
         <div>
           <span class="font-bold">Ticket:</span>
-          {{ ticket.id }}
+          {{ ticket().id }}
         </div>
         <div>
           <span class="font-bold">Description:</span>
-          {{ ticket.description }}
+          {{ ticket().description }}
         </div>
         <div>
           <span class="font-bold">Assignee:</span>
-          {{ $any(ticket).assignee }}
+          {{ $any(ticket()).assignee }}
         </div>
         <div>
           <span class="font-bold">Done:</span>
-          {{ ticket.completed }}
+          {{ ticket().completed }}
         </div>
       </button>
       <div class="flex flex-col">
@@ -50,15 +50,17 @@ import { Ticket, TicketUser, User } from '../../backend.service';
           <mat-form-field appearance="fill">
             <mat-label>Assign to</mat-label>
             <mat-select formControlName="assignee">
-              <mat-option *ngFor="let user of users" [value]="user.id">
-                {{ user.name }}
-              </mat-option>
+              @for (user of users(); track user.id) {
+                <mat-option [value]="user.id">
+                  {{ user.name }}
+                </mat-option>
+              }
             </mat-select>
           </mat-form-field>
           <button mat-flat-button color="primary" type="submit">Assign</button>
         </form>
         <button
-          (click)="closeTicket.emit(ticket.id)"
+          (click)="closeTicket.emit(ticket().id)"
           mat-flat-button
           color="primary"
           type="button">
@@ -72,11 +74,11 @@ import { Ticket, TicketUser, User } from '../../backend.service';
   },
 })
 export class RowComponent {
-  @Input() ticket!: TicketUser | Ticket;
-  @Input() users!: User[];
+  ticket = input.required<TicketUser | Ticket>();
+  users = input.required<User[]>();
 
-  @Output() assign = new EventEmitter<{ userId: number; ticketId: number }>();
-  @Output() closeTicket = new EventEmitter<number>();
+  assign = output<{ userId: number; ticketId: number }>();
+  closeTicket = output<number>();
 
   form = new FormGroup({
     assignee: new FormControl(0, { nonNullable: true }),
@@ -84,7 +86,7 @@ export class RowComponent {
 
   submit() {
     this.assign.emit({
-      ticketId: this.ticket.id,
+      ticketId: this.ticket().id,
       userId: this.form.getRawValue().assignee,
     });
   }

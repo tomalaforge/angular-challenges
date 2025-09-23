@@ -1,48 +1,41 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { RouterLink } from '@angular/router';
-import { LetDirective } from '@ngrx/component';
 import { provideComponentStore } from '@ngrx/component-store';
 import { DetailStore } from './detail.store';
 
 @Component({
   selector: 'app-detail',
-  imports: [
-    MatButtonModule,
-    RouterLink,
-    NgIf,
-    AsyncPipe,
-    MatProgressBarModule,
-    LetDirective,
-  ],
+  imports: [MatButtonModule, RouterLink, MatProgressBarModule, AsyncPipe],
   template: `
     <h2 class="mb-2 text-xl">Ticket Detail:</h2>
-    <ng-container *ngrxLet="vm$ as vm">
-      <mat-progress-bar
-        mode="query"
-        *ngIf="vm.loading"
-        class="mt-5"></mat-progress-bar>
-      <section *ngIf="vm.ticket as ticket" class="flex flex-col gap-4">
-        <div>
-          <span class="font-bold">Ticket:</span>
-          {{ ticket.id }}
-        </div>
-        <div>
-          <span class="font-bold">Description:</span>
-          {{ ticket.description }}
-        </div>
-        <div>
-          <span class="font-bold">AssigneeId:</span>
-          {{ ticket.assigneeId }}
-        </div>
-        <div>
-          <span class="font-bold">Is done:</span>
-          {{ ticket.completed }}
-        </div>
-      </section>
-    </ng-container>
+    @if (vm$ | async; as vm) {
+      @if (vm.loading) {
+        <mat-progress-bar mode="query" class="mt-5"></mat-progress-bar>
+      }
+      @if (vm.ticket) {
+        <section class="flex flex-col gap-4">
+          <div>
+            <span class="font-bold">Ticket:</span>
+            {{ vm.ticket.id }}
+          </div>
+          <div>
+            <span class="font-bold">Description:</span>
+            {{ vm.ticket.description }}
+          </div>
+          <div>
+            <span class="font-bold">AssigneeId:</span>
+            {{ vm.ticket.assigneeId }}
+          </div>
+          <div>
+            <span class="font-bold">Is done:</span>
+            {{ vm.ticket.completed }}
+          </div>
+        </section>
+      }
+    }
 
     <button
       class="mt-8"

@@ -18,7 +18,6 @@ import { CardType } from '../../model/card.model';
       </button>
     </div>
   `,
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListItemComponent {
