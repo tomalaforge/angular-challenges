@@ -6,7 +6,7 @@ import { UserStore } from './user.service';
   selector: 'name',
   template: `
     <div cd-flash class="m-4 block border border-gray-500 p-4">
-      Name: {{ userService.user().name }}
+      Name: {{ userService.userName() }}
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

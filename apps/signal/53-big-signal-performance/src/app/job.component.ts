@@ -7,8 +7,8 @@ import { UserStore } from './user.service';
   template: `
     <div cd-flash class="m-4 block border border-gray-500 p-4">
       Job:
-      <div>title: {{ userService.user().title }}</div>
-      <div>salary: {{ userService.user().salary }}</div>
+      <div>title: {{ userService.userTitle() }}</div>
+      <div>salary: {{ userService.userSalary() }}</div>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

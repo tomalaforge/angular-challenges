@@ -6,7 +6,7 @@ import { UserStore } from './user.service';
   selector: 'note',
   template: `
     <div cd-flash class="m-4 block border border-gray-500 p-4">
-      Note: {{ userService.user().note }}
+      Note: {{ userService.userNote() }}
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
