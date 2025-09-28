@@ -1,4 +1,3 @@
-import { NgOptimizedImage } from '@angular/common';
 import { Component, inject, input } from '@angular/core';
 import { randStudent, randTeacher } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
@@ -12,12 +11,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
     <div
       class="flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4"
       [class]="customClass()">
-      @if (type() === CardType.TEACHER) {
-        <img ngSrc="assets/img/teacher.png" width="200" height="200" />
-      }
-      @if (type() === CardType.STUDENT) {
-        <img ngSrc="assets/img/student.webp" width="200" height="200" />
-      }
+      <ng-content select="[slot=image]"></ng-content>
 
       <section>
         @for (item of list(); track item) {
@@ -35,7 +29,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
       </button>
     </div>
   `,
-  imports: [ListItemComponent, NgOptimizedImage],
+  imports: [ListItemComponent],
 })
 export class CardComponent {
   private teacherStore = inject(TeacherStore);
