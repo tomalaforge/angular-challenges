@@ -4,50 +4,67 @@ import {
   Component,
   inject,
   OnInit,
+  ViewEncapsulation,
 } from '@angular/core';
 import {
   FakeHttpService,
   randStudent,
 } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
-import { CardType } from '../../model/card.model';
 import { CardComponent } from '../../ui/card/card.component';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-student-card',
   template: `
-    <app-card
-      [list]="students()"
-      [type]="cardType"
-      customClass="bg-light-green">
+    <app-card [list]="students()" customClass="bg-light-green">
       <img
-        slot="image"
+        card-image
         ngSrc="assets/img/student.webp"
         width="200"
         height="200" />
+
+      <ng-template #listItem let-student>
+        <app-list-item
+          [name]="student.firstName"
+          [id]="student.id"
+          (delete)="deleteStudent($event)" />
+      </ng-template>
+
       <button
-        slot="addItem"
+        card-actions
         class="rounded-sm border border-blue-500 bg-blue-300 p-2"
-        (click)="addStudent()">
+        (click)="addNewStudent()">
         Add
       </button>
     </app-card>
   `,
-  imports: [CardComponent, NgOptimizedImage],
+  styles: [
+    `
+      .bg-light-green {
+        background-color: rgba(0, 250, 0, 0.1);
+      }
+    `,
+  ],
+  imports: [CardComponent, ListItemComponent, NgOptimizedImage],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class StudentCardComponent implements OnInit {
   private http = inject(FakeHttpService);
-  private studentStore = inject(StudentStore);
+  private store = inject(StudentStore);
 
-  students = this.studentStore.students;
-  cardType = CardType.STUDENT;
+  students = this.store.students;
 
   ngOnInit(): void {
-    this.http.fetchStudents$.subscribe((s) => this.studentStore.addAll(s));
+    this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
   }
 
-  addStudent() {
-    this.studentStore.addOne(randStudent());
+  addNewStudent() {
+    this.store.addOne(randStudent());
+  }
+
+  deleteStudent(id: number) {
+    this.store.deleteOne(id);
   }
 }
