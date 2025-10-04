@@ -1,6 +1,12 @@
 /* eslint-disable @angular-eslint/directive-selector */
 /* eslint-disable @angular-eslint/no-host-metadata-property */
-import { Directive, signal, WritableSignal } from '@angular/core';
+import {
+  Directive,
+  effect,
+  output,
+  signal,
+  WritableSignal,
+} from '@angular/core';
 
 export type ButtonState = 'enabled' | 'disabled';
 
@@ -11,9 +17,19 @@ export type ButtonState = 'enabled' | 'disabled';
   },
 })
 export class BtnDisabledDirective {
-  state: WritableSignal<ButtonState> = signal('enabled');
+  readonly state: WritableSignal<ButtonState> = signal('enabled');
+  readonly stateChanged = output<ButtonState>();
+
+  constructor() {
+    effect(this.onStateChange);
+  }
 
   toggleState() {
     this.state.set(this.state() === 'enabled' ? 'disabled' : 'enabled');
   }
+
+  private onStateChange = () => {
+    const state = this.state();
+    this.stateChanged.emit(state);
+  };
 }
