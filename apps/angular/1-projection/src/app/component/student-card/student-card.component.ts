@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, computed, inject } from '@angular/core';
 import {
   FakeHttpService,
   randStudent,
@@ -11,7 +11,7 @@ import { CardComponent } from '../../ui/card/card.component';
   selector: 'app-student-card',
   template: `
     <app-card
-      [list]="studentListItems"
+      [list]="studentListItems()"
       class="bg-light-green"
       (addNewItemEvent)="handleAddNewItemEvent()"
       (deleteItemEvent)="handleDeleteItemEvent($event)">
@@ -30,24 +30,20 @@ import { CardComponent } from '../../ui/card/card.component';
   imports: [CardComponent],
 })
 export class StudentCardComponent implements OnInit {
-  studentListItems: CardListItem[] = [];
+  private http = inject(FakeHttpService);
+  private store = inject(StudentStore);
 
-  constructor(
-    private http: FakeHttpService,
-    private store: StudentStore,
-  ) {}
+  students = this.store.students;
+
+  studentListItems = computed<CardListItem[]>(() =>
+    this.store.students().map((student) => ({
+      name: student.firstName,
+      id: student.id,
+    })),
+  );
 
   ngOnInit(): void {
     this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
-
-    this.store.students$.subscribe((students) => {
-      this.studentListItems = students.map((student) => {
-        return {
-          name: student.firstName,
-          id: student.id,
-        };
-      });
-    });
   }
 
   handleAddNewItemEvent() {
