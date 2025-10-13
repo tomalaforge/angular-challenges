@@ -12,4 +12,5 @@ export interface Teacher {
   firstName: string;
   lastName: string;
   subject: Subject;
+  picture?: string;
 }

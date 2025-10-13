@@ -1,8 +1,5 @@
-import { NgOptimizedImage } from '@angular/common';
-import { Component, inject, input } from '@angular/core';
-import { randStudent, randTeacher } from '../../data-access/fake-http.service';
-import { StudentStore } from '../../data-access/student.store';
-import { TeacherStore } from '../../data-access/teacher.store';
+import { NgTemplateOutlet } from '@angular/common';
+import { Component, input } from '@angular/core';
 import { CardType } from '../../model/card.model';
 import { ListItemComponent } from '../list-item/list-item.component';
 
@@ -12,19 +9,25 @@ import { ListItemComponent } from '../list-item/list-item.component';
     <div
       class="flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4"
       [class]="customClass()">
-      @if (type() === CardType.TEACHER) {
-        <img ngSrc="assets/img/teacher.png" width="200" height="200" />
-      }
-      @if (type() === CardType.STUDENT) {
-        <img ngSrc="assets/img/student.webp" width="200" height="200" />
-      }
-
+      <img
+        [src]="getImageByType()"
+        [alt]="type()"
+        class="h-32 w-full rounded-md object-cover" />
       <section>
-        @for (item of list(); track item) {
+        <!-- On crée le template ici -->
+        <ng-template #cardTemplate let-item>
           <app-list-item
-            [name]="item.firstName"
+            [name]="getDisplayName(item)"
             [id]="item.id"
             [type]="type()"></app-list-item>
+        </ng-template>
+        <!-- On assigne le template aux éléments de la liste -->
+        @for (item of list(); track item.id) {
+          <ng-container
+            *ngTemplateOutlet="
+              cardTemplate;
+              context: { $implicit: item }
+            "></ng-container>
         }
       </section>
 
@@ -35,24 +38,31 @@ import { ListItemComponent } from '../list-item/list-item.component';
       </button>
     </div>
   `,
-  imports: [ListItemComponent, NgOptimizedImage],
+  imports: [ListItemComponent, NgTemplateOutlet],
 })
 export class CardComponent {
-  private teacherStore = inject(TeacherStore);
-  private studentStore = inject(StudentStore);
-
   readonly list = input<any[] | null>(null);
   readonly type = input.required<CardType>();
   readonly customClass = input('');
+  readonly onAdd = input.required<() => void>();
 
-  CardType = CardType;
+  private readonly imageMap: Record<CardType, string> = {
+    [CardType.CITY]: 'assets/img/city.png',
+    [CardType.TEACHER]: 'assets/img/teacher.png',
+    [CardType.STUDENT]: 'assets/img/student.webp',
+  };
+
+  getImageByType(): string {
+    return this.imageMap[this.type()] ?? 'assets/default.png';
+  }
 
   addNewItem() {
-    const type = this.type();
-    if (type === CardType.TEACHER) {
-      this.teacherStore.addOne(randTeacher());
-    } else if (type === CardType.STUDENT) {
-      this.studentStore.addOne(randStudent());
-    }
+    this.onAdd()();
+  }
+
+  getDisplayName(item: any): string {
+    // Pour les villes : utilise 'name'
+    // Pour teachers/students : utilise 'firstName'
+    return item.name ?? item.firstName ?? 'Unknown';
   }
 }
