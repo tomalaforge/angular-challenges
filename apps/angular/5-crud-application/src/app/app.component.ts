@@ -1,49 +1,38 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, inject, OnInit } from '@angular/core';
-import { randText } from '@ngneat/falso';
+import { Component, inject } from '@angular/core';
+import { TodoComponent } from './components/todo/todo.component';
+import { LoaderComponent } from './shared/ui/loader.component';
+import { TodoStore } from './store/todo.store';
+import { Todo } from './todo';
 
 @Component({
-  imports: [],
+  imports: [LoaderComponent, TodoComponent],
   selector: 'app-root',
   template: `
-    @for (todo of todos; track todo.id) {
-      {{ todo.title }}
-      <button (click)="update(todo)">Update</button>
+    <app-loader></app-loader>
+    @for (todo of todos(); track todo.id) {
+      <app-todo
+        [todo]="todo"
+        [isProccessing]="isProcessing(todo.id)"
+        (onUpdate)="update($event)"
+        (onRemove)="remove($event)" />
     }
   `,
   styles: [],
 })
-export class AppComponent implements OnInit {
-  private http = inject(HttpClient);
+export class AppComponent {
+  readonly store = inject(TodoStore);
 
-  todos!: any[];
+  todos = this.store.todos;
 
-  ngOnInit(): void {
-    this.http
-      .get<any[]>('https://jsonplaceholder.typicode.com/todos')
-      .subscribe((todos) => {
-        this.todos = todos;
-      });
+  update(todo: Todo): void {
+    this.store.updateTodo(todo);
   }
 
-  update(todo: any) {
-    this.http
-      .put<any>(
-        `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
-        JSON.stringify({
-          todo: todo.id,
-          title: randText(),
-          body: todo.body,
-          userId: todo.userId,
-        }),
-        {
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-          },
-        },
-      )
-      .subscribe((todoUpdated: any) => {
-        this.todos[todoUpdated.id - 1] = todoUpdated;
-      });
+  remove(id: number): void {
+    this.store.removeTodo(id);
+  }
+
+  isProcessing(id: number) {
+    return this.store.isProcessing()(id);
   }
 }

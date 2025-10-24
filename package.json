@@ -29,6 +29,7 @@
     "@ngneat/falso": "7.2.0",
     "@ngrx/component-store": "19.0.1",
     "@ngrx/operators": "19.0.1",
+    "@ngrx/signals": "^20.1.0",
     "@nx/angular": "21.2.1",
     "@swc/helpers": "0.5.12",
     "@tanstack/angular-query-experimental": "5.81.5",
