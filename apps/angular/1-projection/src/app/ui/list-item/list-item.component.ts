@@ -11,7 +11,7 @@ import { CardType } from '../../model/card.model';
   template: `
     <div class="border-grey-300 flex justify-between border px-2 py-1">
       {{ name() }}
-      <button (click)="delete(id())">
+      <button (click)="delete()">
         <img class="h-5" src="assets/svg/trash.svg" />
       </button>
     </div>
@@ -23,9 +23,9 @@ export class ListItemComponent {
   readonly name = input.required<string>();
   readonly type = input.required<CardType>();
 
-  readonly onDeleteItem = output<number>();
+  readonly onDeleteItem = output<void>();
 
-  delete(id: number) {
-    this.onDeleteItem.emit(id);
+  delete() {
+    this.onDeleteItem.emit();
   }
 }

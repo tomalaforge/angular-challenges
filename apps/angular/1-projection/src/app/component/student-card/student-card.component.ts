@@ -1,17 +1,10 @@
 import { NgOptimizedImage } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  OnInit,
-} from '@angular/core';
-import {
-  FakeHttpService,
-  randStudent,
-} from '../../data-access/fake-http.service';
-import { Store } from '../../data-access/store';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { randStudent } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
 import { CardType } from '../../model/card.model';
+import { Student } from '../../model/student.model';
+import { CardItemDirective } from '../../ui/card/card-item-context.directive';
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
@@ -19,20 +12,19 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   selector: 'app-student-card',
   template: `
     <app-card
-      [list]="students()"
+      [list]="students.value()"
       class="bg-light-green"
-      [itemTemplate]="itemTemplate"
       (onAddNewItem)="addNewItem()">
       <img ngSrc="assets/img/student.webp" width="200" height="200" />
-    </app-card>
 
-    <ng-template #itemTemplate let-item>
-      <app-list-item
-        [name]="item.firstName"
-        [id]="item.id"
-        [type]="cardType"
-        (onDeleteItem)="deleteStudent($event)"></app-list-item>
-    </ng-template>
+      <ng-template [appCardItem]="_studentType" #itemTemplate let-item>
+        <app-list-item
+          [name]="item.firstName"
+          [id]="item.id"
+          [type]="cardType"
+          (onDeleteItem)="deleteStudent(item.id)"></app-list-item>
+      </ng-template>
+    </app-card>
   `,
   styles: [
     `
@@ -41,20 +33,20 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
       }
     `,
   ],
-  imports: [CardComponent, NgOptimizedImage, ListItemComponent],
+  imports: [
+    CardComponent,
+    NgOptimizedImage,
+    ListItemComponent,
+    CardItemDirective,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [{ provide: Store, useExisting: StudentStore }],
 })
-export class StudentCardComponent implements OnInit {
-  private http = inject(FakeHttpService);
+export class StudentCardComponent {
   private store = inject(StudentStore);
+  readonly _studentType!: Student;
 
   students = this.store.students;
   cardType = CardType.STUDENT;
-
-  ngOnInit(): void {
-    this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
-  }
 
   addNewItem() {
     this.store.addOne(randStudent());

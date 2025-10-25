@@ -1,5 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, input, output, TemplateRef } from '@angular/core';
+import { Component, contentChild, input, output } from '@angular/core';
+import { CardItemDirective } from './card-item-context.directive';
 
 @Component({
   selector: 'app-card',
@@ -9,8 +10,10 @@ import { Component, input, output, TemplateRef } from '@angular/core';
     <section>
       @for (item of list(); track item) {
         <ng-container
-          [ngTemplateOutlet]="itemTemplate()"
-          [ngTemplateOutletContext]="{ $implicit: item }"></ng-container>
+          *ngTemplateOutlet="
+            itemTemplate().tpl;
+            context: { $implicit: item }
+          "></ng-container>
       }
     </section>
 
@@ -27,7 +30,7 @@ import { Component, input, output, TemplateRef } from '@angular/core';
 })
 export class CardComponent<T> {
   readonly list = input<T[] | null>(null);
-  readonly itemTemplate = input<TemplateRef<any> | null>(null);
+  readonly itemTemplate = contentChild.required(CardItemDirective<T>);
   onAddNewItem = output();
 
   addNewItem() {
