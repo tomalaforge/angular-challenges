@@ -3,12 +3,12 @@ import { RouterLink } from '@angular/router';
 import { ButtonComponent } from '../button.component';
 
 @Component({
-  selector: 'app-dashboard',
   imports: [RouterLink, ButtonComponent],
   template: `
     <p>dashboard for Admin works!</p>
     <button app-button routerLink="/">Logout</button>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { hostID: crypto.randomUUID().toString() },
 })
-export class AdminDashboardComponent {}
+export default class AdminDashboardComponent {}
