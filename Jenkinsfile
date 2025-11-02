@@ -11,8 +11,10 @@ pipeline {
     stage("test"){
         steps{
           echo 'testing application'
-          def test = 2+2>3 ?'cool':'not cool'
-          echo test
+          script {
+            def test = 2+2>3 ?'cool':'not cool'
+            echo test
+          }
         }
       }
     stage("deploy"){
