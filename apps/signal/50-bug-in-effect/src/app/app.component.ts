@@ -44,12 +44,25 @@ export class AppComponent {
       Explain for your junior team mate why this bug occurs ...
     */
     effect(() => {
-      console.log('Effect ran');
       const drive = this.drive();
+
+      if (drive) {
+        alert('Price increased!');
+      }
+    });
+
+    effect(() => {
       const ram = this.ram();
+
+      if (ram) {
+        alert('Price increased!');
+      }
+    });
+
+    effect(() => {
       const gpu = this.gpu();
 
-      if (drive || ram || gpu) {
+      if (gpu) {
         alert('Price increased!');
       }
     });
