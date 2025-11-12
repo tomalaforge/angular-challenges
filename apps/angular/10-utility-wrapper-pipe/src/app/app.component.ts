@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { PersonUtils } from './person.utils';
+import { UtilityPipe } from './pipes/utility-pipe';
 
 @Component({
   selector: 'app-root',
+  imports: [UtilityPipe],
   template: `
     @for (activity of activities; track activity.name) {
       {{ activity.name }} :
@@ -12,8 +13,11 @@ import { PersonUtils } from './person.utils';
         let index = $index;
         let isFirst = $first
       ) {
-        {{ showName(person.name, index) }}
-        {{ isAllowed(person.age, isFirst, activity.minimumAge) }}
+        {{ 'PersonUtils.showName' | utility: person.name : index }}
+        {{
+          'PersonUtils.isAllowed'
+            | utility: person.age : isFirst : activity.minimumAge
+        }}
       }
     }
   `,
@@ -30,8 +34,4 @@ export class AppComponent {
     { name: 'hiking', minimumAge: 25 },
     { name: 'dancing', minimumAge: 1 },
   ];
-
-  showName = PersonUtils.showName;
-
-  isAllowed = PersonUtils.isAllowed;
 }
