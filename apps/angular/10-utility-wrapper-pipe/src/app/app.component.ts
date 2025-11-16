@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { PersonUtils } from './person.utils';
+import { WrapperUtilsPipe } from './wrapper-utils.pipe';
 
 @Component({
   selector: 'app-root',
+  imports: [WrapperUtilsPipe],
   template: `
     @for (activity of activities; track activity.name) {
       {{ activity.name }} :
@@ -12,8 +13,9 @@ import { PersonUtils } from './person.utils';
         let index = $index;
         let isFirst = $first
       ) {
-        {{ showName(person.name, index) }}
-        {{ isAllowed(person.age, isFirst, activity.minimumAge) }}
+        {{ 'showName' | wrappFn: person.name : index }}
+        {{ 'isAllowed' | wrappFn: person.age : isFirst : activity.minimumAge }}
+        <hr />
       }
     }
   `,
@@ -30,8 +32,4 @@ export class AppComponent {
     { name: 'hiking', minimumAge: 25 },
     { name: 'dancing', minimumAge: 1 },
   ];
-
-  showName = PersonUtils.showName;
-
-  isAllowed = PersonUtils.isAllowed;
 }
