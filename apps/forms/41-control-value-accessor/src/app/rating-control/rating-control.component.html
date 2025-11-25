@@ -5,7 +5,7 @@
   </symbol>
 </svg>
 <div class="rating">
-  @for (item of [].constructor(5); track item) {
+  @for (item of [].constructor(5); track $index) {
     <svg
       class="star"
       [class.star-active]="isStarActive($index, value)"
