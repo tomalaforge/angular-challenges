@@ -1,49 +1,31 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, inject, OnInit } from '@angular/core';
-import { randText } from '@ngneat/falso';
+import { NgFor } from '@angular/common';
+import { Component, OnInit, inject } from '@angular/core';
+import { TodoService } from '../services/todo.service';
 
 @Component({
-  imports: [],
   selector: 'app-root',
+  standalone: true,
+  imports: [NgFor],
   template: `
-    @for (todo of todos; track todo.id) {
+    <div *ngFor="let todo of todoService.todoList()">
       {{ todo.title }}
       <button (click)="update(todo)">Update</button>
-    }
+      <button (click)="delete(todo.id)">Delete</button>
+    </div>
   `,
-  styles: [],
 })
 export class AppComponent implements OnInit {
-  private http = inject(HttpClient);
-
-  todos!: any[];
+  todoService = inject(TodoService);
 
   ngOnInit(): void {
-    this.http
-      .get<any[]>('https://jsonplaceholder.typicode.com/todos')
-      .subscribe((todos) => {
-        this.todos = todos;
-      });
+    this.todoService.loadTodos().subscribe();
   }
 
-  update(todo: any) {
-    this.http
-      .put<any>(
-        `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
-        JSON.stringify({
-          todo: todo.id,
-          title: randText(),
-          body: todo.body,
-          userId: todo.userId,
-        }),
-        {
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-          },
-        },
-      )
-      .subscribe((todoUpdated: any) => {
-        this.todos[todoUpdated.id - 1] = todoUpdated;
-      });
+  update(todo: { id: number; title: string; completed: boolean }) {
+    this.todoService.update(todo).subscribe();
+  }
+
+  delete(id: number) {
+    this.todoService.delete(id).subscribe();
   }
 }
