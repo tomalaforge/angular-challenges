@@ -1,58 +1,48 @@
-import { NgOptimizedImage } from '@angular/common';
-import { Component, inject, input } from '@angular/core';
-import { randStudent, randTeacher } from '../../data-access/fake-http.service';
-import { StudentStore } from '../../data-access/student.store';
-import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
-import { ListItemComponent } from '../list-item/list-item.component';
+import { NgTemplateOutlet } from '@angular/common';
+import {
+  Component,
+  ContentChild,
+  Directive,
+  input,
+  output,
+  TemplateRef,
+} from '@angular/core';
+
+@Directive({
+  selector: '[itemRef]',
+  standalone: true,
+})
+export class ItemRefDirective {}
 
 @Component({
   selector: 'app-card',
   template: `
-    <div
-      class="flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4"
-      [class]="customClass()">
-      @if (type() === CardType.TEACHER) {
-        <img ngSrc="assets/img/teacher.png" width="200" height="200" />
+    <ng-content select="img"></ng-content>
+    <section>
+      @for (item of list(); track item.id) {
+        <ng-template
+          [ngTemplateOutlet]="itemRef"
+          [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
       }
-      @if (type() === CardType.STUDENT) {
-        <img ngSrc="assets/img/student.webp" width="200" height="200" />
-      }
-
-      <section>
-        @for (item of list(); track item) {
-          <app-list-item
-            [name]="item.firstName"
-            [id]="item.id"
-            [type]="type()"></app-list-item>
-        }
-      </section>
-
-      <button
-        class="rounded-sm border border-blue-500 bg-blue-300 p-2"
-        (click)="addNewItem()">
-        Add
-      </button>
-    </div>
+    </section>
+    <button
+      class="rounded-sm border border-blue-500 bg-blue-300 p-2"
+      (click)="addNewItem.emit()">
+      Add
+    </button>
   `,
-  imports: [ListItemComponent, NgOptimizedImage],
+  host: {
+    class: 'flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4',
+  },
+  imports: [NgTemplateOutlet],
 })
 export class CardComponent {
-  private teacherStore = inject(TeacherStore);
-  private studentStore = inject(StudentStore);
-
+  addNewItem = output<void>();
   readonly list = input<any[] | null>(null);
-  readonly type = input.required<CardType>();
-  readonly customClass = input('');
 
-  CardType = CardType;
-
-  addNewItem() {
-    const type = this.type();
-    if (type === CardType.TEACHER) {
-      this.teacherStore.addOne(randTeacher());
-    } else if (type === CardType.STUDENT) {
-      this.studentStore.addOne(randStudent());
-    }
-  }
+  // [For My Ref] we can leverage on ng-content and template to reduce duplication and better code managment with reusability without changing much
+  // Using ContentChild to get the template reference from projected content read as TemplateRef without it doesnt give TemplateRef
+  @ContentChild(ItemRefDirective, { read: TemplateRef }) itemRef!: TemplateRef<{
+    $implicit: any;
+  }>;
 }
