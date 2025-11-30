@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { interval } from 'rxjs';
 import { DEFAULT_TIMER } from './data';
@@ -10,5 +10,6 @@ import { DEFAULT_TIMER } from './data';
   `,
 })
 export class TimerComponent {
-  timer = toSignal(interval(DEFAULT_TIMER));
+  defaultTimer = inject(DEFAULT_TIMER);
+  timer = toSignal(interval(this.defaultTimer));
 }
