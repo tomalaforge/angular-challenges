@@ -15,15 +15,8 @@ import { CardComponent } from '../../ui/card/card.component';
     <app-card
       [list]="students()"
       [type]="cardType"
-      customClass="bg-light-green" />
+      backgroundColor="rgba(0, 250, 0, 0.1)" />
   `,
-  styles: [
-    `
-      ::ng-deep .bg-light-green {
-        background-color: rgba(0, 250, 0, 0.1);
-      }
-    `,
-  ],
   imports: [CardComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
