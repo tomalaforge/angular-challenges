@@ -7,33 +7,31 @@ import { CardListItemDirective } from './card-list-item.directive';
 @Component({
   selector: 'app-card',
   template: `
-    <div
-      class="flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4"
-      [class]="customClass()">
-      @if (imageTemplate) {
-        <ng-container *ngTemplateOutlet="imageTemplate.templateRef" />
-      }
+    @if (imageTemplate) {
+      <ng-container *ngTemplateOutlet="imageTemplate.templateRef" />
+    }
 
-      <section>
-        @for (item of list(); track trackByFn(item)) {
-          <ng-container
-            *ngTemplateOutlet="
-              listItemTemplate?.templateRef;
-              context: { $implicit: item }
-            " />
-        }
-      </section>
-
-      @if (actionsTemplate) {
-        <ng-container *ngTemplateOutlet="actionsTemplate.templateRef" />
+    <section>
+      @for (item of list(); track trackByFn(item)) {
+        <ng-container
+          *ngTemplateOutlet="
+            listItemTemplate?.templateRef;
+            context: { $implicit: item }
+          " />
       }
-    </div>
+    </section>
+
+    @if (actionsTemplate) {
+      <ng-container *ngTemplateOutlet="actionsTemplate.templateRef" />
+    }
   `,
+  host: {
+    class: 'flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4',
+  },
   imports: [NgTemplateOutlet],
 })
 export class CardComponent<T extends { id: number | string }> {
   readonly list = input<T[] | null>(null);
-  readonly customClass = input('');
 
   @ContentChild(CardImageDirective) imageTemplate?: CardImageDirective;
   @ContentChild(CardListItemDirective) listItemTemplate?: CardListItemDirective;

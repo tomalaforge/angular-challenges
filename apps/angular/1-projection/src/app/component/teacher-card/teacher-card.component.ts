@@ -14,7 +14,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
 @Component({
   selector: 'app-teacher-card',
   template: `
-    <app-card [list]="teachers()" customClass="bg-light-red">
+    <app-card [list]="teachers()" class="bg-light-red">
       <ng-template cardImage>
         <img
           ngSrc="assets/img/teacher.png"
@@ -40,7 +40,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
   `,
   styles: [
     `
-      ::ng-deep .bg-light-red {
+      .bg-light-red {
         background-color: rgba(250, 0, 0, 0.1);
       }
     `,

@@ -28,7 +28,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
     CardActionsDirective,
   ],
   template: `
-    <app-card [list]="cities()" customClass="bg-light-blue">
+    <app-card [list]="cities()" class="bg-light-blue">
       <ng-template cardImage>
         <img ngSrc="assets/img/city.png" width="200" height="200" alt="City" />
       </ng-template>
@@ -49,7 +49,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
     </app-card>
   `,
   styles: `
-    ::ng-deep .bg-light-blue {
+    .bg-light-blue {
       background-color: rgba(0, 0, 250, 0.1);
     }
   `,
