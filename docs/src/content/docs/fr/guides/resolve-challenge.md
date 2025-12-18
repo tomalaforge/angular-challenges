@@ -27,6 +27,12 @@ Si vous installez `nx` globalement sur votre ordinateur, vous éviterez de préf
 Pour installer `nx` globalement, exécutez
 
 ```bash
+pnpm add -g nx
+```
+
+or
+
+```bash
 npm i -g nx
 ```
 

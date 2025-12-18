@@ -28,6 +28,12 @@ npx nx serve <ИМЯ_ПРИЛОЖЕНИЯ>
 Чтобы установить `nx` глобально, выполните
 
 ```bash
+pnpm add -g nx
+```
+
+or
+
+```bash
 npm i -g nx
 ```
 

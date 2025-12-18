@@ -13,10 +13,10 @@ sidebar:
   </summary>
 
 La plupart du temps, ce problème survient parce que vos node_modules sont obsolètes et que vous devez les mettre à jour
-en exécutant `npm ci`.
+en exécutant `pnpm i --frozen-lockfile`.
 
 Si le processus d'installation échoue, vous pouvez résoudre ce problème en supprimant votre dossier node_modules en
-utilisant la commande `rm -rf node_modules` ou `npx npkill`, puis en relançant `npm ci`.
+utilisant la commande `rm -rf node_modules` ou `npx npkill`, puis en relançant `pnpm i --frozen-lockfile`.
 
 Si le problème persiste, veuillez signaler le
 problème [ici](https://github.com/tomalaforge/angular-challenges/issues/new).

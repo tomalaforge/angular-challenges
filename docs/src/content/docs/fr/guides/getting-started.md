@@ -42,7 +42,7 @@ Ouvrez le projet dans n'importe quel IDE de votre choix.
 ## Installez toutes les dépendances
 
 ```bash
-npm ci
+pnpm i --frozen-lockfile
 ```
 
 ## Choisissez un challenge

@@ -25,8 +25,8 @@ Neste desafio temos uma simples aplicação e um componente React `ReactPost` em
 Para brincar com o componente React, você deve começar instalando as dependências do React.
 
 ```bash
-npm i --save react react-dom
-npm i --save-dev @types/react @types/react-dom
+pnpm add react react-dom
+pnpm add -D @types/react @types/react-dom
 ```
 
 ## Restrições

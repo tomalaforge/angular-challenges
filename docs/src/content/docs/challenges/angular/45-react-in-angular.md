@@ -29,8 +29,8 @@ In this challenge, we have a simple application and a React component `ReactPost
 In order to play with the React component, you should start by installing the React dependencies.
 
 ```bash
-npm i --save react react-dom
-npm i --save-dev @types/react @types/react-dom
+pnpm add react react-dom
+pnpm add -D @types/react @types/react-dom
 ```
 
 ## Constraints

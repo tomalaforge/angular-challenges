@@ -44,7 +44,7 @@ git clone https://github.com/[YOUR_GITHUB_NAME]/angular-challenges.git
 ## Установите все зависимости
 
 ```bash
-npm ci
+pnpm i --frozen-lockfile
 ```
 
 ## Выберите задачу

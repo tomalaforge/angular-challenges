@@ -46,7 +46,7 @@ git clone https://github.com/[YOUR_GITHUB_NAME]/angular-challenges.git
 ## 安装所有依赖项
 
 ```bash
-npm ci
+pnpm i --frozen-lockfile
 ```
 
 ## 选择一个挑战

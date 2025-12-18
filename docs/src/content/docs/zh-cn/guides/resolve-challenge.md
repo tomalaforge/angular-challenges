@@ -30,6 +30,12 @@ npx nx serve <APPLICATION_NAME>
 要全局安装 `nx` ，使用
 
 ```bash
+pnpm add -g nx
+```
+
+or
+
+```bash
 npm i -g nx
 ```
 

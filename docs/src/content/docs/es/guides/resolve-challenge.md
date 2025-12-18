@@ -28,10 +28,14 @@ Si `nx` está instalado globalmente en tu dispositivo, puedes omitir el uso de `
 Para instalar `nx` globalmente, ejecuta
 
 ```bash
-npm i -g nx
+pnpm add -g nx
 ```
 
-:::
+or
+
+```bash
+npm i -g nx
+```
 
 ## Crear una Rama de Git
 

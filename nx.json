@@ -57,9 +57,6 @@
     ],
     "sharedGlobals": []
   },
-  "cli": {
-    "packageManager": "npm"
-  },
   "generators": {
     "@nx/angular:application": {
       "e2eTestRunner": "none",

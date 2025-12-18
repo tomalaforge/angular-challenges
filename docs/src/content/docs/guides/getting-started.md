@@ -45,7 +45,7 @@ Open the project in any IDE of your choice.
 ## Install all dependencies
 
 ```bash
-npm ci
+pnpm i --frozen-lockfile
 ```
 
 ## Choose a challenge

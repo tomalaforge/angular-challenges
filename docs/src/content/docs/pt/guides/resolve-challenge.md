@@ -27,6 +27,12 @@ Se `nx` está instalado globalmente no seu dispositivo, você pode pular o uso d
 Para instalar `nx` globalmente, execute:
 
 ```bash
+pnpm add -g nx
+```
+
+or
+
+```bash
 npm i -g nx
 ```
 

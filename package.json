@@ -8,9 +8,11 @@
     "build": "nx build",
     "test": "nx test",
     "prepare": "husky install",
-    "doc:dev": "cd docs && npm run dev"
+    "doc:dev": "cd docs && pnpm exec pnpm run dev",
+    "preinstall": "npx only-allow pnpm"
   },
   "private": true,
+  "packageManager": "pnpm@10.23.0",
   "dependencies": {
     "@actions/core": "^1.10.1",
     "@actions/github": "^6.0.0",

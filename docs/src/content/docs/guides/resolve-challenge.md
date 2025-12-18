@@ -24,9 +24,15 @@ If you are unsure of your `APPLICATION_NAME`, open the README.md file. The `serv
 :::
 
 :::note
-If `nx` is installed globally on your device, you can skip using `npx`.
+If `nx` is installed globally on your device, you can skip using `pnpm exec`.
 
 To install `nx` globally, run
+
+```bash
+pnpm add -g nx
+```
+
+or
 
 ```bash
 npm i -g nx
