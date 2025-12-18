@@ -96,8 +96,7 @@ To continue providing valuable feedback and reviews, <a href="https://github.com
 
 <ul>
 <li>$5 per review</li>
-<li>$25 for lifetime reviews</li>
-<li>Create a challenge/Contribute for lifetime reviews</li>
+<li>$30 for lifetime reviews</li>
 </ul>
 
 :::note
