@@ -11,6 +11,9 @@
     "doc:dev": "cd docs && pnpm exec pnpm run dev",
     "preinstall": "npx only-allow pnpm"
   },
+  "engines": {
+    "node": ">=20.19.6"
+  },
   "private": true,
   "packageManager": "pnpm@10.23.0",
   "dependencies": {

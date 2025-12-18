@@ -6,6 +6,11 @@
 
 <br>
 
+> [!WARNING]
+> This project now uses **pnpm** as its package manager. Please make sure you have pnpm installed before running any commands. You can install it globally with `npm install -g pnpm` or follow the [official installation guide](https://pnpm.io/installation).
+
+<br>
+
 ## Intro
 
 This project has been created with three purposes:
