@@ -10,15 +10,14 @@
       "executor": "@nx/angular:ng-packagr-lite",
       "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
       "options": {
-        "project": "libs/module-to-standalone/user/shell/ng-package.json"
+        "project": "libs/module-to-standalone/user/shell/ng-package.json",
+        "tsConfig": "libs/module-to-standalone/user/shell/tsconfig.lib.json"
       },
       "configurations": {
         "production": {
           "tsConfig": "libs/module-to-standalone/user/shell/tsconfig.lib.prod.json"
         },
-        "development": {
-          "tsConfig": "libs/module-to-standalone/user/shell/tsconfig.lib.json"
-        }
+        "development": {}
       },
       "defaultConfiguration": "production"
     },

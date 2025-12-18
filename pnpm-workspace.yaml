@@ -1,9 +1,3 @@
 packages:
   - 'apps/*'
 
-# https://pnpm.io/settings#minimumreleaseage
-# To reduce the risk of installing compromised packages shortly after their release,
-# we require a minimum age before allowing installation.
-# The age is specified in minutes.
-# We set it to 3 days (4320 minutes) to take weekends into account.
-minimumReleaseAge: 4320

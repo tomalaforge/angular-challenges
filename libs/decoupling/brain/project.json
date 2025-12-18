@@ -10,15 +10,14 @@
       "executor": "@nx/angular:ng-packagr-lite",
       "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
       "options": {
-        "project": "libs/decoupling/brain/ng-package.json"
+        "project": "libs/decoupling/brain/ng-package.json",
+        "tsConfig": "libs/decoupling/brain/tsconfig.lib.json"
       },
       "configurations": {
         "production": {
           "tsConfig": "libs/decoupling/brain/tsconfig.lib.prod.json"
         },
-        "development": {
-          "tsConfig": "libs/decoupling/brain/tsconfig.lib.json"
-        }
+        "development": {}
       },
       "defaultConfiguration": "production"
     },

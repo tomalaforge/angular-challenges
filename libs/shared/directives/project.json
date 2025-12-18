@@ -10,15 +10,14 @@
       "executor": "@nx/angular:ng-packagr-lite",
       "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
       "options": {
-        "project": "libs/shared/directives/ng-package.json"
+        "project": "libs/shared/directives/ng-package.json",
+        "tsConfig": "libs/shared/directives/tsconfig.lib.json"
       },
       "configurations": {
         "production": {
           "tsConfig": "libs/shared/directives/tsconfig.lib.prod.json"
         },
-        "development": {
-          "tsConfig": "libs/shared/directives/tsconfig.lib.json"
-        }
+        "development": {}
       },
       "defaultConfiguration": "production"
     },

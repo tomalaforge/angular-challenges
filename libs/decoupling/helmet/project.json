@@ -10,15 +10,14 @@
       "executor": "@nx/angular:ng-packagr-lite",
       "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
       "options": {
-        "project": "libs/decoupling/helmet/ng-package.json"
+        "project": "libs/decoupling/helmet/ng-package.json",
+        "tsConfig": "libs/decoupling/helmet/tsconfig.lib.json"
       },
       "configurations": {
         "production": {
           "tsConfig": "libs/decoupling/helmet/tsconfig.lib.prod.json"
         },
-        "development": {
-          "tsConfig": "libs/decoupling/helmet/tsconfig.lib.json"
-        }
+        "development": {}
       },
       "defaultConfiguration": "production"
     },
