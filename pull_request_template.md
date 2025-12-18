@@ -1,14 +1,17 @@
-## Checklist for challenge submission
+✅ Challenge Submission Checklist
 
-- [ ] Start your PR message with Answer:${challenge_number}
+Start your PR title with: Answer:${challenge_number}
 
-## Warning:
+⚠️ Important Notice
 
-- If you want feedback or review, you must support the project on GitHub:
-  - [$5 per review](https://github.com/sponsors/tomalaforge)
-  - [$30 for lifetime reviews and questions](https://github.com/sponsors/tomalaforge)
-  - [$100 for lifetime reviews and questions + 45 minutes video call](https://github.com/sponsors/tomalaforge)
-  - Create one of more challenges
-  - Have many valuable contributions to the project
+If you would like personal feedback or a detailed review, please support the project on GitHub:
 
-Alternatively, you can still submit your PR to join the list of answered challenges or to be reviewed by a community member. 🔥
+- $5 — Review per PR
+- $30 — Lifetime access to reviews and Q&A
+- $100 — Lifetime access to reviews and Q&A + a 45-minute video call
+  👉 https://github.com/sponsors/tomalaforge
+
+You can also submit a PR without sponsorship to:
+
+- Be listed among the answered challenges, or
+- Receive a review from a community member. 🔥
