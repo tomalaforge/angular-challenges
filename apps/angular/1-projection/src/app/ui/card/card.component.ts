@@ -1,58 +1,43 @@
-import { NgOptimizedImage } from '@angular/common';
-import { Component, inject, input } from '@angular/core';
-import { randStudent, randTeacher } from '../../data-access/fake-http.service';
-import { StudentStore } from '../../data-access/student.store';
-import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
-import { ListItemComponent } from '../list-item/list-item.component';
+import { NgTemplateOutlet } from '@angular/common';
+import { Component, ContentChild, input } from '@angular/core';
+import { CardActionsDirective } from './card-actions.directive';
+import { CardImageDirective } from './card-image.directive';
+import { CardListItemDirective } from './card-list-item.directive';
 
 @Component({
   selector: 'app-card',
   template: `
-    <div
-      class="flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4"
-      [class]="customClass()">
-      @if (type() === CardType.TEACHER) {
-        <img ngSrc="assets/img/teacher.png" width="200" height="200" />
-      }
-      @if (type() === CardType.STUDENT) {
-        <img ngSrc="assets/img/student.webp" width="200" height="200" />
-      }
-
-      <section>
-        @for (item of list(); track item) {
-          <app-list-item
-            [name]="item.firstName"
-            [id]="item.id"
-            [type]="type()"></app-list-item>
-        }
-      </section>
-
-      <button
-        class="rounded-sm border border-blue-500 bg-blue-300 p-2"
-        (click)="addNewItem()">
-        Add
-      </button>
-    </div>
-  `,
-  imports: [ListItemComponent, NgOptimizedImage],
-})
-export class CardComponent {
-  private teacherStore = inject(TeacherStore);
-  private studentStore = inject(StudentStore);
-
-  readonly list = input<any[] | null>(null);
-  readonly type = input.required<CardType>();
-  readonly customClass = input('');
-
-  CardType = CardType;
-
-  addNewItem() {
-    const type = this.type();
-    if (type === CardType.TEACHER) {
-      this.teacherStore.addOne(randTeacher());
-    } else if (type === CardType.STUDENT) {
-      this.studentStore.addOne(randStudent());
+    @if (imageTemplate) {
+      <ng-container *ngTemplateOutlet="imageTemplate.templateRef" />
     }
+
+    <section>
+      @for (item of list(); track trackByFn(item)) {
+        <ng-container
+          *ngTemplateOutlet="
+            listItemTemplate?.templateRef;
+            context: { $implicit: item }
+          " />
+      }
+    </section>
+
+    @if (actionsTemplate) {
+      <ng-container *ngTemplateOutlet="actionsTemplate.templateRef" />
+    }
+  `,
+  host: {
+    class: 'flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4',
+  },
+  imports: [NgTemplateOutlet],
+})
+export class CardComponent<T extends { id: number | string }> {
+  readonly list = input<T[] | null>(null);
+
+  @ContentChild(CardImageDirective) imageTemplate?: CardImageDirective;
+  @ContentChild(CardListItemDirective) listItemTemplate?: CardListItemDirective;
+  @ContentChild(CardActionsDirective) actionsTemplate?: CardActionsDirective;
+
+  protected trackByFn(item: T): number | string {
+    return item.id;
   }
 }
