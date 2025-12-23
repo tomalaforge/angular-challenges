@@ -1,21 +1,17 @@
 import { Component } from '@angular/core';
-import { randFirstName } from '@ngneat/falso';
-import { PersonListComponent } from './person-list.component';
+import { PersonComponent } from './person.component';
 import { RandomComponent } from './random.component';
 
 @Component({
-  imports: [PersonListComponent, RandomComponent],
+  imports: [RandomComponent, PersonComponent],
   selector: 'app-root',
   template: `
     <app-random />
 
     <div class="flex">
-      <app-person-list [names]="girlList" title="Female" />
-      <app-person-list [names]="boyList" title="Male" />
+      <app-person gender="female" title="Female"></app-person>
+      <app-person gender="male" title="Male"></app-person>
     </div>
   `,
 })
-export class AppComponent {
-  girlList = randFirstName({ gender: 'female', length: 10 });
-  boyList = randFirstName({ gender: 'male', length: 10 });
-}
+export class AppComponent {}
