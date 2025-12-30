@@ -1,5 +1,10 @@
 import { CDFlashingDirective } from '@angular-challenges/shared/directives';
-import { ChangeDetectionStrategy, Component, output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  model,
+  output,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -28,13 +33,13 @@ import { MatInputModule } from '@angular/material/input';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PersonFormComponent {
-  label = '';
+  label = model('');
   addLabel = output<string>();
 
   handleKey(event: KeyboardEvent) {
     if (event.key === 'Enter') {
-      this.addLabel.emit(this.label);
-      this.label = '';
+      this.addLabel.emit(this.label());
+      this.label.set('');
     }
   }
 }

@@ -7,11 +7,7 @@ export class PersonService {
   list = this._list.asReadonly();
 
   initList(gender: 'male' | 'female') {
-    if (gender === 'male') {
-      this._list.set(randFirstName({ gender: 'male', length: 10 }));
-    } else {
-      this._list.set(randFirstName({ gender: 'female', length: 10 }));
-    }
+    this._list.set(randFirstName({ gender, length: 10 }));
   }
 
   add(name: string) {

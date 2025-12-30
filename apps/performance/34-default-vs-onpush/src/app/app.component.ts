@@ -9,8 +9,8 @@ import { RandomComponent } from './random.component';
     <app-random />
 
     <div class="flex">
-      <app-person gender="female" title="Female"></app-person>
-      <app-person gender="male" title="Male"></app-person>
+      <app-person gender="female"></app-person>
+      <app-person gender="male"></app-person>
     </div>
   `,
 })
