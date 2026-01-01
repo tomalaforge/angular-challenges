@@ -19,9 +19,6 @@ import { MatListModule } from '@angular/material/list';
   ],
   template: `
     <mat-list class="flex w-full">
-      @if (names().length === 0) {
-        <div class="empty-list-label">Empty list</div>
-      }
       @for (name of names(); track name) {
         <mat-list-item cd-flash class="text-orange-500">
           <div class="flex justify-between">
@@ -30,9 +27,9 @@ import { MatListModule } from '@angular/material/list';
             </h3>
           </div>
         </mat-list-item>
-      }
-      @if (names().length !== 0) {
         <mat-divider></mat-divider>
+      } @empty {
+        <div class="empty-list-label">Empty list</div>
       }
     </mat-list>
   `,
