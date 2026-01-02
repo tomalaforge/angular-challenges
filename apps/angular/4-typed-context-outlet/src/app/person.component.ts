@@ -1,5 +1,34 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, contentChild, input, TemplateRef } from '@angular/core';
+import {
+  Component,
+  contentChild,
+  Directive,
+  input,
+  Signal,
+  TemplateRef,
+} from '@angular/core';
+
+interface PersonContext {
+  readonly $implicit: string;
+  readonly age: number;
+}
+
+export interface Person {
+  readonly name: string;
+  readonly age: number;
+}
+
+@Directive({
+  selector: 'ng-template[person]',
+})
+export class PersonDirective {
+  static ngTemplateContextGuard(
+    dir: PersonDirective,
+    ctx: unknown,
+  ): ctx is PersonContext {
+    return true;
+  }
+}
 
 @Component({
   imports: [NgTemplateOutlet],
@@ -15,7 +44,9 @@ import { Component, contentChild, input, TemplateRef } from '@angular/core';
   `,
 })
 export class PersonComponent {
-  person = input.required<{ name: string; age: number }>();
-
-  personTemplateRef = contentChild('personRef', { read: TemplateRef });
+  readonly person = input.required<Person>();
+  protected readonly personTemplateRef: Signal<TemplateRef<PersonContext>> =
+    contentChild.required(PersonDirective, {
+      read: TemplateRef,
+    });
 }

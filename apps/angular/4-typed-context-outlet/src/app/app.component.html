@@ -1,0 +1,56 @@
+<div class="person-section">
+  <person [person]="person">
+    <!-- Specify ="age" because otherwise it will be treated as string -->
+    <ng-template person let-name let-age="age">
+      <!-- Example simply doesn't work because it does not exist on number/string -->
+      <!-- {{ name }}: {{ age.itIsOkToBeDifferent() }} -->
+      <!-- In VS Code LSP works better than in JetBrains IDE, because VS Code shows types in template binding -->
+      <div class="person-card">
+        <div class="person-icon">👤</div>
+        <div class="person-data">
+          <div class="person-label">Profile</div>
+          <div class="person-name">{{ name }}</div>
+          <div class="person-age">Age: <span class="age-value">{{ age }}</span></div>
+        </div>
+      </div>
+    </ng-template>
+  </person>
+</div>
+
+
+<div class="students-section">
+  <h3>Students</h3>
+  <list [list]="students">
+    <ng-container *list="students as student; index as i">
+      <div class="student-card">
+        <div class="student-avatar">{{ student.name.charAt(0).toUpperCase() }}</div>
+        <div class="student-info">
+          <div class="student-name">{{ student.name }}</div>
+          <div class="student-age">{{ student.age }} years old</div>
+        </div>
+        <div class="student-badge">#{{ i + 1 }}</div>
+      </div>
+    </ng-container>
+  </list>
+</div>
+
+<div class="cities-section">
+  <h3>Cities Around the World</h3>
+  <list [list]="cities">
+    <ng-template [list]="cities" let-city let-i="index">
+      <div class="city-row">
+        <div class="city-flag">🏙️</div>
+        <div class="city-details">
+          <div class="city-name">{{ city.name }}</div>
+          <div class="city-country">{{ city.country }}</div>
+          <div class="city-meta">
+            <span class="city-continent">{{ city.continent }}</span> •
+            <span class="city-population">{{ city.population.toLocaleString() }} people</span> •
+            <span class="city-language">{{ city.language }}</span>
+          </div>
+        </div>
+        <div class="city-position">{{ i + 1 }}</div>
+      </div>
+    </ng-template>
+  </list>
+</div>
