@@ -46,7 +46,9 @@ import { MatSliderModule } from '@angular/material/slider';
         </section>
 
         <section class="flex items-center">
-          <mat-checkbox [(ngModel)]="disabled">Disabled</mat-checkbox>
+          <mat-checkbox [(ngModel)]="disabled" data-testid="disable-checkbox">
+            Disabled
+          </mat-checkbox>
         </section>
       </mat-card-content>
     </mat-card>
@@ -54,10 +56,11 @@ import { MatSliderModule } from '@angular/material/slider';
     <mat-card class="flex">
       <mat-card-content>
         <div class="flex gap-10">
-          <button mat-mini-fab (click)="back()">
+          <button mat-mini-fab (click)="back()" data-testid="arrow-back-btn">
             <mat-icon>arrow_back_ios</mat-icon>
           </button>
           <mat-slider
+            data-testid="mat-slider"
             class="m-4"
             [disabled]="disabled"
             [max]="max"
@@ -65,9 +68,15 @@ import { MatSliderModule } from '@angular/material/slider';
             [step]="step"
             [discrete]="thumbLabel"
             [showTickMarks]="showTicks">
-            <input matSliderThumb [(ngModel)]="value" />
+            <input
+              matSliderThumb
+              [(ngModel)]="value"
+              data-testid="mat-slider-input" />
           </mat-slider>
-          <button mat-mini-fab (click)="forward()">
+          <button
+            mat-mini-fab
+            (click)="forward()"
+            data-testid="arrow-forward-btn">
             <mat-icon>arrow_forward_ios</mat-icon>
           </button>
         </div>
