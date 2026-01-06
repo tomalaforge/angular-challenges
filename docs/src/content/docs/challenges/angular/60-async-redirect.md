@@ -8,7 +8,6 @@ challengeNumber: 60
 command: angular-async-redirect
 sidebar:
   order: 23
-  badge: New
 ---
 
 ## Statement
