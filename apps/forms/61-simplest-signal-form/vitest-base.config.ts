@@ -5,9 +5,9 @@ const teardown = process.env['TEARDOWN'] !== 'false';
 
 export default defineConfig({
   test: {
-    // setupFiles: [
-    //   'apps/forms/61-simplest-signal-form/src/test-setup/no-teardown.ts',
-    // ],
+    setupFiles: [
+      'apps/forms/61-simplest-signal-form/src/test-setup/no-teardown.ts',
+    ],
     testTimeout: 3_000,
     browser: {
       enabled: true,
