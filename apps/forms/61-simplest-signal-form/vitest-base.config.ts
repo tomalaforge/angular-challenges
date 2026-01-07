@@ -8,10 +8,14 @@ export default defineConfig({
     setupFiles: [
       'apps/forms/61-simplest-signal-form/src/test-setup/no-teardown.ts',
     ],
-    testTimeout: 3_000,
+    // testTimeout: 3_000,
     browser: {
       enabled: true,
-      provider: playwright(),
+      provider: playwright({
+        launchOptions: {
+          args: ['--remote-debugging-port=9222'],
+        },
+      }),
       instances: [{ browser: 'chromium' }],
     },
   },

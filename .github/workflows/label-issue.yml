@@ -28,8 +28,13 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
       - name: Install dependencies
-        run: npm i @actions/core @actions/github
+        run: pnpm add @actions/core @actions/github
 
       - name: Add labels
         uses: ./.github/github-action/
