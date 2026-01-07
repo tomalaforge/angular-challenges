@@ -7,7 +7,7 @@ contributors:
 challengeNumber: 41
 command: forms-control-value-accessor
 sidebar:
-  order: 1
+  order: 101
 ---
 
 ## Informação
