@@ -18,9 +18,6 @@
   "references": [
     {
       "path": "./tsconfig.app.json"
-    },
-    {
-      "path": "./tsconfig.editor.json"
     }
   ],
   "extends": "../../../tsconfig.base.json",

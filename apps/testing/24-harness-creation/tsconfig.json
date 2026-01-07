@@ -19,9 +19,6 @@
       "path": "./tsconfig.app.json"
     },
     {
-      "path": "./tsconfig.editor.json"
-    },
-    {
       "path": "./tsconfig.spec.json"
     }
   ],

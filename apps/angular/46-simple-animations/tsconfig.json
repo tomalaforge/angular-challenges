@@ -21,9 +21,6 @@
     },
     {
       "path": "./tsconfig.spec.json"
-    },
-    {
-      "path": "./tsconfig.editor.json"
     }
   ],
   "extends": "../../../tsconfig.base.json",
