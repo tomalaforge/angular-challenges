@@ -38,7 +38,9 @@ import { availableBooks } from './book.model';
         [formControl]="searchBook"
         required />
       @if (searchBook.errors) {
-        <div class="error">Search criteria is required!</div>
+        <div class="error" data-testid="search-error-msg">
+          Search criteria is required!
+        </div>
       }
     </div>
     <button
