@@ -52,7 +52,7 @@ After completing the challenge, your form should:
 You can run tests in watch mode to refactor using Test-Driven Development (TDD):
 
 ```bash
-nx test forms-simplest-signal-form --watch
+nx test forms-simplest-signal-form
 ```
 
 This will re-run tests automatically as you make changes, helping you ensure all tests continue to pass during your refactoring.
