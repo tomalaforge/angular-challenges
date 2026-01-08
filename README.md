@@ -83,6 +83,9 @@ Check [all 61 challenges](https://angular-challenges.vercel.app/)
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/mathisvester"><img src="https://avatars.githubusercontent.com/u/26164587?v=4?s=100" width="100px;" alt="mathisvester"/><br /><sub><b>mathisvester</b></sub></a><br /><a href="https://github.com/tomalaforge/angular-challenges/issues?q=author%3Amathisvester" title="Bug reports">🐛</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Banderstadt"><img src="https://avatars.githubusercontent.com/u/24597998?v=4?s=100" width="100px;" alt="Vasyl Zadorozhnyi"/><br /><sub><b>Vasyl Zadorozhnyi</b></sub></a><br /><a href="https://github.com/tomalaforge/angular-challenges/issues?q=author%3ABanderstadt" title="Bug reports">🐛</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/bertandfrogs"><img src="https://avatars.githubusercontent.com/u/25539891?v=4?s=100" width="100px;" alt="Sarah Smalley"/><br /><sub><b>Sarah Smalley</b></sub></a><br /><a href="https://github.com/tomalaforge/angular-challenges/issues?q=author%3Abertandfrogs" title="Bug reports">🐛</a></td>
+    </tr>
   </tbody>
   <tfoot>
     <tr>
