@@ -372,6 +372,15 @@
       "contributions": [
         "bug"
       ]
+    },
+    {
+      "login": "bertandfrogs",
+      "name": "Sarah Smalley",
+      "avatar_url": "https://avatars.githubusercontent.com/u/25539891?v=4",
+      "profile": "https://github.com/bertandfrogs",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
