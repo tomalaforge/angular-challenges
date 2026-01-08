@@ -329,15 +329,6 @@
       ]
     },
     {
-      "login": "michalgrzegorczyk-dev",
-      "name": "Michał Grzegorczyk",
-      "avatar_url": "https://avatars.githubusercontent.com/u/47832176?v=4",
-      "profile": "https://github.com/michalgrzegorczyk-dev",
-      "contributions": [
-        "doc"
-      ]
-    },
-    {
       "login": "tamim36",
       "name": "Tamim Arefin Anik",
       "avatar_url": "https://avatars.githubusercontent.com/u/42251521?v=4",
@@ -369,6 +360,15 @@
       "name": "mathisvester",
       "avatar_url": "https://avatars.githubusercontent.com/u/26164587?v=4",
       "profile": "https://github.com/mathisvester",
+      "contributions": [
+        "bug"
+      ]
+    },
+    {
+      "login": "Banderstadt",
+      "name": "Vasyl Zadorozhnyi",
+      "avatar_url": "https://avatars.githubusercontent.com/u/24597998?v=4",
+      "profile": "https://github.com/Banderstadt",
       "contributions": [
         "bug"
       ]
