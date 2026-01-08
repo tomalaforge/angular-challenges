@@ -19,9 +19,6 @@
       "path": "./tsconfig.app.json"
     }
   ],
-      "path": "./tsconfig.editor.json"
-    }
-  ],
   "extends": "../../../tsconfig.base.json",
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
