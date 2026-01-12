@@ -8,7 +8,6 @@ challengeNumber: 61
 command: forms-simplest-signal-form
 sidebar:
   order: 24
-  badge: New
 ---
 
 ## Information
