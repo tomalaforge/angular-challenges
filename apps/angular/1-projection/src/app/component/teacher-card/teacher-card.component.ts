@@ -11,10 +11,10 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
 @Component({
   selector: 'app-teacher-card',
   template: `
-    <ng-template #configurableList let-itemName="itemName" let-itemId="itemId">
+    <ng-template #configurableList let-item>
       <app-list-item>
-        <span>{{ itemName }}</span>
-        <button (click)="delete(itemId)">
+        <span>{{ item.firstName }}</span>
+        <button (click)="delete(item.id)">
           <img class="h-5" src="assets/svg/trash.svg" />
         </button>
       </app-list-item>

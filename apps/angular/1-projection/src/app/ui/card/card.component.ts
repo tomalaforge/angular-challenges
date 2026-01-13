@@ -14,7 +14,7 @@ import { Component, input, TemplateRef } from '@angular/core';
           <ng-container
             *ngTemplateOutlet="
               cardContent();
-              context: { itemName: item.firstName, itemId: item.id }
+              context: { $implicit: item }
             "></ng-container>
         }
       </section>
