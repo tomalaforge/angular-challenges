@@ -1,21 +1,23 @@
 import { JsonPipe } from '@angular/common';
-import { Component, signal, WritableSignal } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { Component, signal } from '@angular/core';
+import { Field, form, max, min, required } from '@angular/forms/signals';
+
+interface FormData {
+  name: string;
+  lastname: string;
+  age: number;
+  note: string;
+}
 
 @Component({
   selector: 'app-root',
-  imports: [ReactiveFormsModule, JsonPipe],
+  imports: [JsonPipe, Field],
   template: `
     <div class="min-h-screen bg-gray-100 px-4 py-12 sm:px-6 lg:px-8">
       <div class="mx-auto max-w-md rounded-lg bg-white p-8 shadow-md">
         <h1 class="mb-6 text-3xl font-bold text-gray-900">Simple Form</h1>
 
-        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-6">
+        <form (submit)="onSubmit()" class="space-y-6">
           <div>
             <label
               for="name"
@@ -26,14 +28,18 @@ import {
             <input
               id="name"
               type="text"
-              formControlName="name"
+              [field]="form.name"
               placeholder="Enter your name"
               class="w-full rounded-md border border-gray-300 px-4 py-2 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
               [class.border-red-500]="
-                form.controls.name.invalid && !form.controls.name.untouched
+                form.name().invalid() && form.name().touched()
               " />
-            @if (form.controls.name.invalid && !form.controls.name.untouched) {
-              <p class="mt-1 text-sm text-red-600">Name is required</p>
+            @if (form.name().invalid() && form.name().touched()) {
+              <p class="mt-1 text-sm text-red-600">
+                @for (error of form.name().errors(); track error) {
+                  {{ error.message }}
+                }
+              </p>
             }
           </div>
 
@@ -46,7 +52,7 @@ import {
             <input
               id="lastname"
               type="text"
-              formControlName="lastname"
+              [field]="form.lastname"
               placeholder="Enter your last name"
               class="w-full rounded-md border border-gray-300 px-4 py-2 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500" />
           </div>
@@ -60,21 +66,16 @@ import {
             <input
               id="age"
               type="number"
-              formControlName="age"
+              [field]="form.age"
               placeholder="Enter your age (1-99)"
-              min="1"
-              max="99"
               class="w-full rounded-md border border-gray-300 px-4 py-2 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
               [class.border-red-500]="
-                form.controls.age.invalid && !form.controls.age.untouched
+                form.age().invalid() && form.age().touched()
               " />
-            @if (form.controls.age.invalid && !form.controls.age.untouched) {
+            @if (form.age().invalid() && form.age().touched()) {
               <p class="mt-1 text-sm text-red-600">
-                @if (form.controls.age.hasError('min')) {
-                  Age must be at least 1
-                }
-                @if (form.controls.age.hasError('max')) {
-                  Age must be at most 99
+                @for (error of form.age().errors(); track error) {
+                  {{ error.message }}
                 }
               </p>
             }
@@ -89,7 +90,7 @@ import {
             <input
               id="note"
               type="text"
-              formControlName="note"
+              [field]="form.note"
               placeholder="Enter a note"
               class="w-full rounded-md border border-gray-300 px-4 py-2 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500" />
           </div>
@@ -97,7 +98,7 @@ import {
           <div class="flex gap-4">
             <button
               type="submit"
-              [disabled]="form.invalid"
+              [disabled]="form().invalid()"
               class="flex-1 rounded-md bg-blue-600 px-4 py-2 font-medium text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-400">
               Submit
             </button>
@@ -126,35 +127,37 @@ import {
   `,
 })
 export class AppComponent {
-  form = new FormGroup({
-    name: new FormControl('', {
-      validators: Validators.required,
-      nonNullable: true,
-    }),
-    lastname: new FormControl('', { nonNullable: true }),
-    age: new FormControl<number | null>(null, [
-      Validators.min(1),
-      Validators.max(99),
-    ]),
-    note: new FormControl('', { nonNullable: true }),
+  // we cannot use null for initial value of number field because null is not supported by native input[type="number"]
+  // https://github.com/angular/angular/issues/65454
+  formModel = signal<FormData>({
+    name: '',
+    lastname: '',
+    age: NaN,
+    note: '',
   });
 
-  submittedData: WritableSignal<{
-    name: string;
-    lastname: string;
-    age: number | null;
-    note: string;
-  } | null> = signal(null);
+  form = form<FormData>(this.formModel, (path) => {
+    required(path.name, { message: 'Name is required' });
+    min(path.age, 1, { message: 'Age must be at least 1' });
+    max(path.age, 99, { message: 'Age must be at most 99' });
+  });
+
+  submittedData = signal<FormData | null>(null);
 
   onSubmit(): void {
-    if (this.form.valid) {
-      this.submittedData.set(this.form.getRawValue());
-      console.log('Form submitted:', this.submittedData);
+    if (this.form().valid()) {
+      this.submittedData.set(this.formModel());
+      console.log('Form submitted:', this.submittedData());
     }
   }
 
   onReset(): void {
-    this.form.reset();
+    this.formModel.set({
+      name: '',
+      lastname: '',
+      age: NaN,
+      note: '',
+    });
     this.submittedData.set(null);
   }
 }
