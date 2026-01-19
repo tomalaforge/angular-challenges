@@ -4,7 +4,7 @@ import {
   UnitTestRunner,
 } from '@nx/angular/generators';
 import { formatFiles, generateFiles, Tree, updateJson } from '@nx/devkit';
-import { Linter } from '@nx/eslint';
+import { LinterType } from '@nx/js/src/generators/library/schema';
 import { join } from 'path';
 import { langMapper } from './files/lang-mapper';
 import { Schema } from './schema';
@@ -58,9 +58,11 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
     inlineStyle: true,
     inlineTemplate: true,
     prefix: 'app',
-    unitTestRunner: options.addTest ? UnitTestRunner.Jest : UnitTestRunner.None,
+    unitTestRunner: options.addTest
+      ? UnitTestRunner.VitestAngular
+      : UnitTestRunner.None,
     e2eTestRunner: E2eTestRunner.None,
-    linter: Linter.EsLint,
+    linter: LinterType.EsLint,
     addTailwind: true,
     skipTests: true,
   });
