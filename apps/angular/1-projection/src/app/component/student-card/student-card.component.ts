@@ -16,7 +16,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
 @Component({
   selector: 'app-student-card',
   template: `
-    <app-card [list]="students()" class="">
+    <app-card [list]="students()" class="bg-light-green">
       <img ngSrc="assets/img/student.webp" width="200" height="200" />
       <ng-template #rowRef let-student>
         <app-list-item>
