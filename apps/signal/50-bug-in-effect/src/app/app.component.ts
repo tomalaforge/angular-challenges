@@ -1,7 +1,9 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   effect,
+  linkedSignal,
   model,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -38,13 +40,31 @@ export class AppComponent {
   drive = model(false);
   ram = model(false);
   gpu = model(false);
-
+  // How many active checkboxes we currently have
+  countActive = computed<number>(() => {
+    let count = 0;
+    if (this.drive()) {
+      count += 1;
+    }
+    if (this.ram()) {
+      count += 1;
+    }
+    if (this.gpu()) {
+      count += 1;
+    }
+    return count;
+  });
+  // If we have more checkboxes than before we should show the alert
+  showAlert = linkedSignal<number, boolean>({
+    source: this.countActive,
+    computation: (sourceValue, previous) => {
+      return this.countActive() > (previous?.source || 0);
+    },
+  });
   constructor() {
-    /* 
-      Explain for your junior team mate why this bug occurs ...
-    */
     effect(() => {
-      if (this.drive() || this.ram() || this.gpu()) {
+      // on each countActive change we check if showAlert is true
+      if (this.countActive() > 0 && this.showAlert()) {
         alert('Price increased!');
       }
     });
