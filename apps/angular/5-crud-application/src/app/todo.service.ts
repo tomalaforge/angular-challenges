@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { randText } from '@ngneat/falso';
-import { todo } from './app.model';
+import { todo } from './todo.model';
 
 @Injectable({
   providedIn: 'root', // Makes the service a singleton available throughout the app
@@ -27,6 +27,12 @@ export class ServiceApp {
           'Content-type': 'application/json; charset=UTF-8',
         },
       },
+    );
+  }
+
+  deleteTodo(todo: todo) {
+    return this.http.delete(
+      `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
     );
   }
 }

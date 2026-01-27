@@ -1,20 +1,21 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { todo } from './app.model';
-import { ServiceApp } from './app.service';
+import { todo } from './todo.model';
+import { ServiceApp } from './todo.service';
 
 @Component({
   imports: [],
-  selector: 'app-root',
+  selector: 'app-todo',
   template: `
     @for (todo of todos(); track todo.id) {
       {{ todo.title }}
       <button (click)="update(todo)">Update</button>
+      <button (click)="delete(todo)">Delete</button>
     }
   `,
   styles: [],
 })
-export class AppComponent implements OnInit {
+export class TodoComponent implements OnInit {
   dataStore = inject(ServiceApp);
   todos = signal<todo[]>([]);
 
@@ -28,6 +29,12 @@ export class AppComponent implements OnInit {
       this.todos.update((todos) =>
         todos.map((t) => (t.id === todoUpdated.id ? todoUpdated : t)),
       );
+    });
+  }
+
+  delete(todo: todo) {
+    this.dataStore.deleteTodo(todo).subscribe(() => {
+      this.todos.update((todos) => todos.filter((t) => t.id !== todo.id));
     });
   }
 }
