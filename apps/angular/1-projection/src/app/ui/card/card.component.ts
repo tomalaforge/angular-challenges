@@ -1,58 +1,50 @@
-import { NgOptimizedImage } from '@angular/common';
-import { Component, inject, input } from '@angular/core';
-import { randStudent, randTeacher } from '../../data-access/fake-http.service';
-import { StudentStore } from '../../data-access/student.store';
-import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
-import { ListItemComponent } from '../list-item/list-item.component';
+import { NgTemplateOutlet } from '@angular/common';
+import {
+  Component,
+  contentChild,
+  input,
+  output,
+  TemplateRef,
+} from '@angular/core';
+import { CardItemDirective } from '../../card-item';
 
 @Component({
   selector: 'app-card',
+  standalone: true,
   template: `
     <div
       class="flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4"
       [class]="customClass()">
-      @if (type() === CardType.TEACHER) {
-        <img ngSrc="assets/img/teacher.png" width="200" height="200" />
-      }
-      @if (type() === CardType.STUDENT) {
-        <img ngSrc="assets/img/student.webp" width="200" height="200" />
-      }
+      <ng-content></ng-content>
 
       <section>
-        @for (item of list(); track item) {
-          <app-list-item
-            [name]="item.firstName"
-            [id]="item.id"
-            [type]="type()"></app-list-item>
+        @for (item of list(); track item.id) {
+          <ng-container
+            *ngTemplateOutlet="
+              itemTemplate();
+              context: { $implicit: item }
+            "></ng-container>
         }
       </section>
 
       <button
         class="rounded-sm border border-blue-500 bg-blue-300 p-2"
-        (click)="addNewItem()">
+        (click)="onAddClicked()">
         Add
       </button>
     </div>
   `,
-  imports: [ListItemComponent, NgOptimizedImage],
+  imports: [NgTemplateOutlet],
 })
 export class CardComponent {
-  private teacherStore = inject(TeacherStore);
-  private studentStore = inject(StudentStore);
-
-  readonly list = input<any[] | null>(null);
-  readonly type = input.required<CardType>();
+  readonly list = input<any[]>();
+  readonly itemTemplate = contentChild.required(CardItemDirective, {
+    read: TemplateRef,
+  });
   readonly customClass = input('');
 
-  CardType = CardType;
-
-  addNewItem() {
-    const type = this.type();
-    if (type === CardType.TEACHER) {
-      this.teacherStore.addOne(randTeacher());
-    } else if (type === CardType.STUDENT) {
-      this.studentStore.addOne(randStudent());
-    }
+  addClicked = output<void>();
+  onAddClicked() {
+    this.addClicked.emit();
   }
 }
