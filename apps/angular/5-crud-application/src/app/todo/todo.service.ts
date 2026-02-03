@@ -6,7 +6,7 @@ import { todo } from './todo.model';
 @Injectable({
   providedIn: 'root', // Makes the service a singleton available throughout the app
 })
-export class ServiceApp {
+export class ServiceTodo {
   private http = inject(HttpClient);
 
   getTodos() {
@@ -31,6 +31,7 @@ export class ServiceApp {
   }
 
   deleteTodo(todo: todo) {
+    this.http.delete('https://jsonplaceholder.typicode.com/WRONG_URL'); // To demonstrate error handling
     return this.http.delete(
       `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
     );

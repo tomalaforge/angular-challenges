@@ -2,7 +2,7 @@ import { provideZoneChangeDetection } from '@angular/core';
 import { appConfig } from './app/app.config';
 
 import { bootstrapApplication } from '@angular/platform-browser';
-import { TodoComponent } from './app/todo.component';
+import { TodoComponent } from './app/todo/todo.component';
 
 bootstrapApplication(TodoComponent, {
   ...appConfig,
