@@ -51,3 +51,4 @@ package-lock.json
 npm-shrinkwrap.json
 
 __screenshots__/
+.idea/
