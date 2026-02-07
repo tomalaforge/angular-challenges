@@ -4,11 +4,13 @@ import { firstValueFrom, map, of, Subject } from 'rxjs';
 import { todo } from '../todo/todo.model';
 import { TodoComponent } from './todo.component';
 import { ServiceTodo } from './todo.service';
+import { TodoStore } from './todo.store';
 
 describe('TodoComponent', () => {
   let fixture: ComponentFixture<TodoComponent>;
   let component: TodoComponent;
   let todosSubject: Subject<todo[]>;
+  let store: TodoStore;
 
   // Mock data for todos
   const todosMock: todo[] = [
@@ -35,6 +37,8 @@ describe('TodoComponent', () => {
 
     fixture = TestBed.createComponent(TodoComponent);
     component = fixture.componentInstance;
+    // inject the store after TestBed
+    store = TestBed.inject(TodoStore);
   });
   // ---- Test 1: spinner is shown while loading ----
   it('should show spinner while loading', () => {
@@ -52,7 +56,7 @@ describe('TodoComponent', () => {
     fixture.detectChanges();
 
     const todosLength = await firstValueFrom(
-      component.todos$.pipe(map((todos) => todos.length)),
+      store.todos$.pipe(map((todos) => todos.length)),
     );
     expect(todosLength).toBe(2);
 
@@ -68,18 +72,16 @@ describe('TodoComponent', () => {
     await fixture.whenStable();
     fixture.detectChanges();
 
-    const firstTodo = (await firstValueFrom(component.todos$))[0];
+    const firstTodo = (await firstValueFrom(store.todos$))[0];
     component.delete(firstTodo);
     fixture.detectChanges();
 
     const todosLength = await firstValueFrom(
-      component.todos$.pipe(map((todos) => todos.length)),
+      store.todos$.pipe(map((todos) => todos.length)),
     );
     expect(todosLength).toBe(1);
     expect(
-      (await firstValueFrom(component.todos$)).find(
-        (t) => t.id === firstTodo.id,
-      ),
+      (await firstValueFrom(store.todos$)).find((t) => t.id === firstTodo.id),
     ).toBeUndefined();
     expect(serviceMock.deleteTodo).toHaveBeenCalledWith(firstTodo);
   });
