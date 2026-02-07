@@ -1,5 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
+import { catchError, EMPTY } from 'rxjs';
 import { switchMap } from 'rxjs/internal/operators/switchMap';
 import { tap } from 'rxjs/internal/operators/tap';
 import { todo } from './todo.model';
@@ -14,6 +15,8 @@ export class TodoStore extends ComponentStore<TodoState> {
     super({
       todos: [],
       isLoading: true,
+      processingIds: new Set<number>(),
+      errors: {},
     });
   }
 
@@ -22,6 +25,14 @@ export class TodoStore extends ComponentStore<TodoState> {
   // selectors
   readonly todos$ = this.select((state) => state.todos);
   readonly isLoading$ = this.select((state) => state.isLoading);
+  readonly processingIds$ = this.select((state) => state.processingIds);
+  readonly isTodoProcessing$ = (id: number) =>
+    this.select(this.processingIds$, (ids) => ids.has(id));
+  readonly todoError$ = (id: number) =>
+    this.select(
+      this.select((state) => state.errors),
+      (errors) => errors[id],
+    );
 
   // updaters
   readonly setLoading = this.updater<boolean>((state, isLoading) => ({
@@ -33,6 +44,24 @@ export class TodoStore extends ComponentStore<TodoState> {
     ...state,
     todos,
   }));
+
+  readonly addProcessingId = this.updater<number>((state, id) => ({
+    ...state,
+    processingIds: new Set(state.processingIds).add(id),
+  }));
+
+  readonly removeProcessingId = this.updater<number>((state, id) => {
+    const ids = new Set(state.processingIds);
+    ids.delete(id);
+    return { ...state, processingIds: ids };
+  });
+
+  readonly setTodoError = this.updater<{ id: number; error: string | null }>(
+    (state, { id, error }) => ({
+      ...state,
+      errors: { ...state.errors, [id]: error },
+    }),
+  );
 
   // effects
   readonly loadTodos = this.effect<void>((trigger$) =>
@@ -51,14 +80,22 @@ export class TodoStore extends ComponentStore<TodoState> {
 
   readonly updateTodo = this.effect<todo>((todo$) =>
     todo$.pipe(
-      tap(() => this.setLoading(true)),
+      tap((todo) => {
+        this.addProcessingId(todo.id);
+        this.setTodoError({ id: todo.id, error: null });
+      }),
       switchMap((todo) =>
         this.service.updateTodo(todo).pipe(
           tap((updated) => {
             this.setTodos(
               this.get().todos.map((t) => (t.id === updated.id ? updated : t)),
             );
-            this.setLoading(false);
+            this.removeProcessingId(todo.id);
+          }),
+          catchError((err) => {
+            this.setTodoError({ id: todo.id, error: 'Update failed' });
+            this.removeProcessingId(todo.id);
+            return EMPTY;
           }),
         ),
       ),
@@ -67,12 +104,20 @@ export class TodoStore extends ComponentStore<TodoState> {
 
   readonly deleteTodo = this.effect<todo>((todo$) =>
     todo$.pipe(
-      tap(() => this.setLoading(true)),
+      tap((todo) => {
+        this.addProcessingId(todo.id);
+        this.setTodoError({ id: todo.id, error: null });
+      }),
       switchMap((todo) =>
         this.service.deleteTodo(todo).pipe(
           tap(() => {
             this.setTodos(this.get().todos.filter((t) => t.id !== todo.id));
-            this.setLoading(false);
+            this.removeProcessingId(todo.id);
+          }),
+          catchError((err) => {
+            this.setTodoError({ id: todo.id, error: 'Delete failed' });
+            this.removeProcessingId(todo.id);
+            return EMPTY;
           }),
         ),
       ),

@@ -8,3 +8,9 @@ body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
+
+app-todo {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}

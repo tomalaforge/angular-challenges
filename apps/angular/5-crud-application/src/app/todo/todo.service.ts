@@ -31,7 +31,6 @@ export class ServiceTodo {
   }
 
   deleteTodo(todo: todo) {
-    this.http.delete('https://jsonplaceholder.typicode.com/WRONG_URL'); // To demonstrate error handling
     return this.http.delete(
       `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
     );
