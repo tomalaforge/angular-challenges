@@ -1,4 +1,4 @@
-import { computed, effect } from '@angular/core';
+import { computed, effect, inject } from '@angular/core';
 import {
   patchState,
   signalStore,
@@ -7,7 +7,9 @@ import {
   withMethods,
   withState,
 } from '@ngrx/signals';
+import { EMPTY, Subject, catchError, mergeMap, tap } from 'rxjs';
 import { Photo } from '../photo.model';
+import { PhotoService } from '../photos.service';
 
 export interface PhotoState {
   photos: Photo[];
@@ -60,9 +62,55 @@ export const PhotoSignalStore = signalStore(
             search: JSON.parse(savedJSONState).search,
             page: JSON.parse(savedJSONState).page,
           });
-      effect(() => {
-        console.log('search/page', store.search(), store.page());
+      const photoService = inject(PhotoService);
+      const querySearch = computed<{ search: string; page: number }>(() => ({
+        search: store.search(),
+        page: store.page(),
+      }));
+      const querySearchSubject$ = new Subject<{
+        search: string;
+        page: number;
+      }>();
+
+      const sub = querySearchSubject$
+        .pipe(
+          tap(() => patchState(store, { loading: true, error: '' })),
+          mergeMap(({ search, page }) => {
+            if (!search) {
+              patchState(store, {
+                photos: [],
+                pages: 1,
+                loading: false,
+              });
+              return EMPTY;
+            }
+            return photoService.searchPublicPhotos(search, page).pipe(
+              catchError((error) => {
+                patchState(store, { loading: false, error: 'error' });
+                return EMPTY;
+              }),
+            );
+          }),
+        )
+        .subscribe(({ photos }) => {
+          patchState(store, {
+            pages: photos.pages,
+            photos: photos.photo,
+            loading: false,
+          });
+          localStorage.setItem(
+            PHOTO_STATE_KEY,
+            JSON.stringify({ search: store.search(), page: store.page() }),
+          );
+        });
+
+      const ref = effect(() => querySearchSubject$.next(querySearch()), {
+        allowSignalWrites: true,
       });
+      return () => {
+        ref.destroy();
+        sub.unsubscribe();
+      };
     },
   }),
 );
