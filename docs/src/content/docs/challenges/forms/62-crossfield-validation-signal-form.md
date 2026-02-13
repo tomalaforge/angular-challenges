@@ -8,12 +8,12 @@ challengeNumber: 62
 command: forms-crossfield-validation-signal-form
 sidebar:
   order: 25
-  badge: New
 ---
 
 ## Information
 
 Crossfield validation is a common requirement in forms where the validity of one field depends on the value of another field. For example:
+
 - Password confirmation must match the password field
 - End date must be after start date
 - Conditional required fields based on another field's value
@@ -37,6 +37,7 @@ The 🔗 symbol indicates fields with crossfield validation that depend on other
 ### Current Implementation
 
 The form currently uses:
+
 - `FormGroup` to group form controls
 - `FormControl` for individual fields
 - `Validators` for basic validation rules
@@ -89,4 +90,3 @@ This will re-run tests automatically as you make changes, helping you ensure all
 - The password confirmation must update its validation when the password changes
 - The end date must update its validation when the start date changes
 - All existing tests must pass
-
