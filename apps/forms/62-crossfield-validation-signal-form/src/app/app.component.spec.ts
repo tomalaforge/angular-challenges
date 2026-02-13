@@ -8,7 +8,7 @@ describe('AppComponent', () => {
   });
 
   describe('When component is rendered', () => {
-    it('Then should display the form title', async () => {
+    it.only('Then should display the form title', async () => {
       const heading = page.getByRole('heading', {
         name: /registration form/i,
       });

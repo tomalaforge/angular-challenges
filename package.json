@@ -6,10 +6,11 @@
     "ng": "nx",
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test",
+    "test": "nx test forms-crossfield-validation-signal-form --ui --watch",
     "prepare": "husky install",
     "doc:dev": "cd docs && pnpm exec pnpm run dev",
-    "preinstall": "npx only-allow pnpm"
+    "preinstall": "npx only-allow pnpm",
+    "postinstall": "playwright install chromium"
   },
   "engines": {
     "node": ">=20.19.6"
@@ -44,6 +45,7 @@
     "zone.js": "0.16.0"
   },
   "devDependencies": {
+    "@analogjs/vite-plugin-angular": "^2.2.3",
     "@analogjs/vitest-angular": "^2.2.3",
     "@angular-devkit/build-angular": "21.1.0",
     "@angular-devkit/core": "21.1.0",
@@ -67,6 +69,7 @@
     "@nx/jest": "22.3.1",
     "@nx/js": "22.3.1",
     "@nx/plugin": "22.3.1",
+    "@nx/vite": "22.3.1",
     "@nx/web": "22.3.1",
     "@nx/workspace": "22.3.1",
     "@schematics/angular": "21.1.0",
@@ -84,8 +87,9 @@
     "@typescript-eslint/eslint-plugin": "7.16.1",
     "@typescript-eslint/parser": "7.16.1",
     "@typescript-eslint/utils": "^7.16.0",
-    "@vitest/browser-playwright": "^4.0.16",
-    "@vitest/browser-preview": "^4.0.16",
+    "@vitest/browser-playwright": "4.0.18",
+    "@vitest/browser-preview": "4.0.18",
+    "@vitest/ui": "4.0.18",
     "all-contributors-cli": "^6.26.1",
     "autoprefixer": "^10.4.0",
     "cypress": "15.8.1",
@@ -98,11 +102,13 @@
     "jest-environment-jsdom": "30.0.5",
     "jest-preset-angular": "16.0.0",
     "jest-util": "~30.0.0",
+    "jiti": "2.4.2",
     "jsdom": "^27.1.0",
     "jsonc-eslint-parser": "^2.1.0",
     "lint-staged": "^13.0.3",
     "ng-packagr": "21.0.1",
     "nx": "22.3.1",
+    "playwright": "1.58.2",
     "postcss": "^8.4.5",
     "postcss-import": "~14.1.0",
     "postcss-preset-env": "~7.5.0",
@@ -114,7 +120,8 @@
     "ts-jest": "29.4.6",
     "ts-node": "10.9.1",
     "typescript": "5.9.3",
-    "vitest": "^4.0.8"
+    "vite": "7.3.1",
+    "vitest": "4.0.18"
   },
   "overrides": {
     "chokidar": "4.0.1",
