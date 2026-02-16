@@ -1,26 +1,26 @@
 {
-  "name": "forms-custom-foms",
+  "name": "forms-custom-forms",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "app",
-  "sourceRoot": "apps/forms/63-custom-foms/src",
+  "sourceRoot": "apps/forms/63-custom-forms/src",
   "tags": [],
   "targets": {
     "build": {
       "executor": "@angular/build:application",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/forms/63-custom-foms",
-        "browser": "apps/forms/63-custom-foms/src/main.ts",
-        "tsConfig": "apps/forms/63-custom-foms/tsconfig.app.json",
+        "outputPath": "dist/apps/forms/63-custom-forms",
+        "browser": "apps/forms/63-custom-forms/src/main.ts",
+        "tsConfig": "apps/forms/63-custom-forms/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
           {
             "glob": "**/*",
-            "input": "apps/forms/63-custom-foms/public"
+            "input": "apps/forms/63-custom-forms/public"
           }
         ],
-        "styles": ["apps/forms/63-custom-foms/src/styles.scss"]
+        "styles": ["apps/forms/63-custom-forms/src/styles.scss"]
       },
       "configurations": {
         "production": {
@@ -51,10 +51,10 @@
       "executor": "@angular/build:dev-server",
       "configurations": {
         "production": {
-          "buildTarget": "forms-custom-foms:build:production"
+          "buildTarget": "forms-custom-forms:build:production"
         },
         "development": {
-          "buildTarget": "forms-custom-foms:build:development"
+          "buildTarget": "forms-custom-forms:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -66,8 +66,8 @@
       "continuous": true,
       "executor": "@nx/web:file-server",
       "options": {
-        "buildTarget": "forms-custom-foms:build",
-        "staticFilePath": "dist/apps/forms/63-custom-foms/browser",
+        "buildTarget": "forms-custom-forms:build",
+        "staticFilePath": "dist/apps/forms/63-custom-forms/browser",
         "spa": true
       }
     }

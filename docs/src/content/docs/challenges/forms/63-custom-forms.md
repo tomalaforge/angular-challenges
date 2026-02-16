@@ -5,7 +5,7 @@ author: thomas-laforge
 contributors:
   - tomalaforge
 challengeNumber: 63
-command: forms-custom-foms
+command: forms-custom-forms
 sidebar:
   order: 125
   badge: New

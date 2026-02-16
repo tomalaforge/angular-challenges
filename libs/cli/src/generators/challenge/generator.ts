@@ -164,7 +164,7 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
     );
 
     tree.write(
-      `./docs/src/content/docs/${lang === 'en' ? '' : lang}/index.mdx`,
+      `./docs/src/content/docs/${lang === 'en' ? '' : `${lang}/`}index.mdx`,
       replacedLink,
     );
   }
