@@ -1,2 +1,6 @@
-import '@testing-library/jest-dom';
-import 'jest-preset-angular/setup-jest';
+import '@angular/compiler';
+import { setupTestBed } from '@analogjs/vitest-angular/setup-testbed';
+
+setupTestBed({
+  browserMode: true, // Enables visual test preview
+});

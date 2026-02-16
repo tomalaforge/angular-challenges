@@ -3,11 +3,8 @@ import { page, userEvent } from 'vitest/browser';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
-  let fixture: ReturnType<typeof TestBed.createComponent<AppComponent>>;
-
   beforeEach(async () => {
-    fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
+    TestBed.createComponent(AppComponent);
   });
 
   describe('When component is rendered', () => {
@@ -45,60 +42,74 @@ describe('AppComponent', () => {
 
   describe('Given billing toggle', () => {
     it('Then billing fields hide when same-as-shipping is checked', async () => {
-      await expect
-        .element(page.getByTestId('billing-fields'))
-        .toBeInTheDocument();
+      const billingFields = page.getByTestId('billing-fields');
 
-      await userEvent.click(
-        page.getByLabelText(/Billing address same as shipping/i),
+      await expect.element(billingFields).toBeInTheDocument();
+
+      const billingCheckbox = page.getByLabelText(
+        /Billing address same as shipping/i,
       );
-      fixture.detectChanges();
+      await userEvent.click(billingCheckbox);
 
-      expect(
-        fixture.nativeElement.querySelector('[data-testid="billing-fields"]'),
-      ).toBeNull();
-      expect(fixture.componentInstance.billing.disabled).toBe(true);
+      await expect.element(billingFields).not.toBeInTheDocument();
+      await expect.element(billingCheckbox).toBeChecked();
     });
 
     it('Then shipping values are copied into billing when locked', async () => {
-      await userEvent.type(page.getByLabelText('Street'), '12 Flower Street');
-      await userEvent.type(page.getByLabelText('ZIP code'), '75001');
-      await userEvent.type(page.getByLabelText('City'), 'Paris');
-
-      await userEvent.click(
-        page.getByLabelText(/Billing address same as shipping/i),
+      const shippingFields = page.getByTestId('shipping-fields');
+      await userEvent.type(
+        shippingFields.getByLabelText('Street'),
+        '12 Flower Street',
       );
-      fixture.detectChanges();
+      await userEvent.type(shippingFields.getByLabelText('ZIP code'), '75001');
+      await userEvent.type(shippingFields.getByLabelText('City'), 'Paris');
 
-      expect(fixture.componentInstance.billing.getRawValue()).toEqual(
-        fixture.componentInstance.shipping.getRawValue(),
+      const billingCheckbox = page.getByLabelText(
+        /Billing address same as shipping/i,
       );
+      await userEvent.click(billingCheckbox);
+      await userEvent.click(billingCheckbox);
+
+      const billingFields = page.getByTestId('billing-fields');
+      await expect.element(billingFields).toBeInTheDocument();
+      await expect
+        .element(billingFields.getByLabelText('Street'))
+        .toHaveValue('12 Flower Street');
+      await expect
+        .element(billingFields.getByLabelText('ZIP code'))
+        .toHaveValue('75001');
+      await expect
+        .element(billingFields.getByLabelText('City'))
+        .toHaveValue('Paris');
     });
 
     it('Then billing fields become editable again when unchecked', async () => {
-      const checkbox = page.getByLabelText(/Billing address same as shipping/i);
-      await userEvent.click(checkbox);
-      await userEvent.click(checkbox);
-      fixture.detectChanges();
+      const billingCheckbox = page.getByLabelText(
+        /Billing address same as shipping/i,
+      );
+      await userEvent.click(billingCheckbox);
+      await userEvent.click(billingCheckbox);
 
+      const billingFields = page.getByTestId('billing-fields');
+
+      await expect.element(billingFields).toBeInTheDocument();
       await expect
-        .element(page.getByTestId('billing-fields'))
-        .toBeInTheDocument();
-      expect(fixture.componentInstance.billing.enabled).toBe(true);
+        .element(billingFields.getByLabelText('Street'))
+        .toBeEnabled();
+      await expect
+        .element(billingFields.getByLabelText('ZIP code'))
+        .toBeEnabled();
+      await expect.element(billingFields.getByLabelText('City')).toBeEnabled();
     });
   });
 
   describe('Given validation', () => {
     it('Then marks all fields as required after submitting an empty form', async () => {
       await userEvent.click(page.getByRole('button', { name: /submit/i }));
-      fixture.detectChanges();
 
-      const requiredErrors = Array.from<HTMLElement>(
-        fixture.nativeElement.querySelectorAll(
-          '.hint',
-        ) as NodeListOf<HTMLElement>,
-      ).filter((el) => el.textContent?.includes('This field is required'));
-      expect(requiredErrors.length).toBe(8);
+      const errorMessages = page.getByText('Field is required');
+
+      expect(errorMessages).toHaveLength(8);
     });
   });
 
@@ -106,16 +117,23 @@ describe('AppComponent', () => {
     it('Then form is valid and status displays ready', async () => {
       await userEvent.type(page.getByLabelText('Last name'), 'Doe');
       await userEvent.type(page.getByLabelText('First name'), 'John');
-      await userEvent.type(page.getByLabelText('Street'), '12 Flower Street');
-      await userEvent.type(page.getByLabelText('ZIP code'), '75001');
-      await userEvent.type(page.getByLabelText('City'), 'Paris');
 
-      await userEvent.click(
-        page.getByLabelText(/Billing address same as shipping/i),
+      const shippingFields = page.getByTestId('shipping-fields');
+      await userEvent.type(
+        shippingFields.getByLabelText('Street'),
+        '12 Flower Street',
       );
-      fixture.detectChanges();
+      await userEvent.type(shippingFields.getByLabelText('ZIP code'), '75001');
+      await userEvent.type(shippingFields.getByLabelText('City'), 'Paris');
 
-      expect(fixture.componentInstance.form.valid).toBe(true);
+      const billingCheckbox = page.getByLabelText(
+        /Billing address same as shipping/i,
+      );
+      await userEvent.click(billingCheckbox);
+
+      await expect
+        .element(page.getByRole('button', { name: /submit/i }))
+        .toBeEnabled();
       await expect
         .element(page.getByText(/Ready to submit/i))
         .toBeInTheDocument();

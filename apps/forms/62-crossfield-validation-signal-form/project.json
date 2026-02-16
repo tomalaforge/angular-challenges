@@ -64,15 +64,6 @@
     "lint": {
       "executor": "@nx/eslint:lint"
     },
-    "ng-test": {
-      "executor": "@angular/build:unit-test",
-      "options": {
-        "runnerConfig": "apps/forms/62-crossfield-validation-signal-form/vitest-base.config.ts"
-      }
-    },
-    "test": {
-      "executor": "@analogjs/vitest-angular:test"
-    },
     "serve-static": {
       "continuous": true,
       "executor": "@nx/web:file-server",

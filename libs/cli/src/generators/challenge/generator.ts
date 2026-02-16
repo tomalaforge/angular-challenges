@@ -57,9 +57,7 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
     inlineStyle: true,
     inlineTemplate: true,
     prefix: 'app',
-    unitTestRunner: options.addTest
-      ? UnitTestRunner.VitestAngular
-      : UnitTestRunner.None,
+    unitTestRunner: UnitTestRunner.None,
     e2eTestRunner: E2eTestRunner.None,
     linter: 'eslint',
     addTailwind: true,
@@ -114,6 +112,19 @@ export async function challengeGenerator(tree: Tree, options: Schema) {
   if (options.addTest) {
     generateFiles(tree, join(__dirname, 'files', 'test'), appDirectory, {
       tmpl: '',
+    });
+    updateJson(tree, join(appDirectory, 'tsconfig.json'), (json) => {
+      const references = json.references ?? [];
+      const hasSpecReference = references.some(
+        (ref: any) => ref.path === './tsconfig.spec.json',
+      );
+
+      if (!hasSpecReference) {
+        references.push({ path: './tsconfig.spec.json' });
+      }
+
+      json.references = references;
+      return json;
     });
   }
 
