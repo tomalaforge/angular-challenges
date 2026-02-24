@@ -8,7 +8,6 @@ challengeNumber: 63
 command: forms-child-forms
 sidebar:
   order: 125
-  badge: New
 ---
 
 ## Information
