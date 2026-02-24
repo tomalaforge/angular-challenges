@@ -1,26 +1,26 @@
 {
-  "name": "forms-custom-forms",
+  "name": "forms-child-forms",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "app",
-  "sourceRoot": "apps/forms/63-custom-forms/src",
+  "sourceRoot": "apps/forms/63-child-forms/src",
   "tags": [],
   "targets": {
     "build": {
       "executor": "@angular/build:application",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/forms/63-custom-forms",
-        "browser": "apps/forms/63-custom-forms/src/main.ts",
-        "tsConfig": "apps/forms/63-custom-forms/tsconfig.app.json",
+        "outputPath": "dist/apps/forms/63-child-forms",
+        "browser": "apps/forms/63-child-forms/src/main.ts",
+        "tsConfig": "apps/forms/63-child-forms/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
           {
             "glob": "**/*",
-            "input": "apps/forms/63-custom-forms/public"
+            "input": "apps/forms/63-child-forms/public"
           }
         ],
-        "styles": ["apps/forms/63-custom-forms/src/styles.scss"]
+        "styles": ["apps/forms/63-child-forms/src/styles.scss"]
       },
       "configurations": {
         "production": {
@@ -67,7 +67,7 @@
       "executor": "@nx/web:file-server",
       "options": {
         "buildTarget": "forms-custom-forms:build",
-        "staticFilePath": "dist/apps/forms/63-custom-forms/browser",
+        "staticFilePath": "dist/apps/forms/63-child-forms/browser",
         "spa": true
       }
     }

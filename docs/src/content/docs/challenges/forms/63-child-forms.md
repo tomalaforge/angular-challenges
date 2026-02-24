@@ -1,11 +1,11 @@
 ---
-title: 🟠 Custom Forms
+title: 🟠 Child Forms
 description: Refactor the checkout form to Signal-based forms with reusable address component and shared validators
 author: thomas-laforge
 contributors:
   - tomalaforge
 challengeNumber: 63
-command: forms-custom-forms
+command: forms-child-forms
 sidebar:
   order: 125
   badge: New
@@ -57,7 +57,7 @@ Refactor the form to **Signal-based forms** and extract reusable pieces:
 You can run tests in watch mode to refactor using Test-Driven Development (TDD):
 
 ```bash
-nx test forms-custom-form
+nx test forms-child-form
 ```
 
 This will re-run tests automatically as you make changes, helping you ensure all functionality works correctly during your migration.

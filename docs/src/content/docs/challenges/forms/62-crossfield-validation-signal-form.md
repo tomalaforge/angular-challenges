@@ -1,6 +1,6 @@
 ---
-title: 🟢 Crossfield Validation with Reactive Forms
-description: Challenge 62 is about implementing crossfield validation using Angular Reactive Forms where one field's validation depends on another field's value
+title: 🟢 Crossfield Validation with Signal Forms
+description: Challenge 62 is about implementing crossfield validation using Angular Signal Forms where one field's validation depends on another field's value
 author: thomas-laforge
 contributors:
   - tomalaforge
@@ -18,7 +18,7 @@ Crossfield validation is a common requirement in forms where the validity of one
 - End date must be after start date
 - Conditional required fields based on another field's value
 
-Angular Reactive Forms provides powerful tools to implement crossfield validation using custom validators. This challenge will teach you how to create custom validators that access multiple form controls and update validation dynamically.
+Angular Signal Forms provides powerful tools to implement crossfield validation using custom validators. This challenge will teach you how to create custom validators that access multiple form controls and update validation dynamically.
 
 You can learn more about form validation in the [Angular Forms documentation](https://angular.dev/guide/forms/reactive-forms#validating-form-input).
 
