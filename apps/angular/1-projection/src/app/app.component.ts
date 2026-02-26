@@ -7,6 +7,7 @@ import { TeacherCardComponent } from './component/teacher-card/teacher-card.comp
   selector: 'app-root',
   template: `
     <div class="grid grid-cols-3 gap-3">
+      <!--los componentes ya tienen dentro la configuracion para usar todos el card sin condiciones if-->
       <app-teacher-card />
       <app-student-card />
       <app-city-card />
