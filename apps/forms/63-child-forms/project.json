@@ -51,10 +51,10 @@
       "executor": "@angular/build:dev-server",
       "configurations": {
         "production": {
-          "buildTarget": "forms-custom-forms:build:production"
+          "buildTarget": "forms-child-forms:build:production"
         },
         "development": {
-          "buildTarget": "forms-custom-forms:build:development"
+          "buildTarget": "forms-child-forms:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -66,7 +66,7 @@
       "continuous": true,
       "executor": "@nx/web:file-server",
       "options": {
-        "buildTarget": "forms-custom-forms:build",
+        "buildTarget": "forms-child-forms:build",
         "staticFilePath": "dist/apps/forms/63-child-forms/browser",
         "spa": true
       }
