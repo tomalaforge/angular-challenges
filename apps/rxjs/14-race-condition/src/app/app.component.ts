@@ -1,38 +1,29 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  OnInit,
-} from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { take } from 'rxjs';
 import { TopicModalComponent } from './topic-dialog.component';
 import { TopicService, TopicType } from './topic.service';
 
 @Component({
   selector: 'app-root',
   template: `
-    <button (click)="openTopicModal()">Open Topic</button>
+    @if (topics$ | async; as topics) {
+      <button (click)="openTopicModal(topics)">Open Topic</button>
+    }
   `,
+  imports: [AsyncPipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'rxjs-race-condition';
   dialog = inject(MatDialog);
   topicService = inject(TopicService);
-  topics: TopicType[] = [];
+  topics$ = this.topicService.fakeGetHttpTopic();
 
-  ngOnInit(): void {
-    this.topicService
-      .fakeGetHttpTopic()
-      .pipe(take(1))
-      .subscribe((topics) => (this.topics = topics));
-  }
-
-  openTopicModal() {
+  openTopicModal(topics: TopicType[]) {
     this.dialog.open(TopicModalComponent, {
       data: {
-        topics: this.topics,
+        topics,
       },
     });
   }
