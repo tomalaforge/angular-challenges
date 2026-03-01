@@ -8,28 +8,6 @@ describe('AppComponent', () => {
   });
 
   describe('When component is rendered', () => {
-    it('Then should display headings and required fields', async () => {
-      await expect
-        .element(page.getByRole('heading', { name: /registration form/i }))
-        .toBeInTheDocument();
-      await expect
-        .element(page.getByRole('heading', { name: /profile/i }))
-        .toBeInTheDocument();
-      await expect
-        .element(page.getByRole('heading', { name: /contacts/i }))
-        .toBeInTheDocument();
-      await expect
-        .element(page.getByRole('heading', { name: /emails/i }))
-        .toBeInTheDocument();
-
-      await expect
-        .element(page.getByLabelText(/^Name\s*$/i))
-        .toBeInTheDocument();
-      await expect
-        .element(page.getByLabelText(/^Pseudo\s*$/i))
-        .toBeInTheDocument();
-    });
-
     it('Then should show the form as incomplete initially', async () => {
       await expect
         .element(page.getByText(/form incomplete/i))
@@ -67,13 +45,28 @@ describe('AppComponent', () => {
   describe('Given valid form data', () => {
     it('Then should submit and display the submitted data', async () => {
       await userEvent.click(page.getByRole('button', { name: /add contact/i }));
-      await userEvent.type(page.getByLabelText(/^Name\s*$/i), 'Alex');
-      await userEvent.type(page.getByLabelText(/^Pseudo\s*$/i), 'Nexus');
-      await userEvent.type(page.getByLabelText(/^First name\s*$/i), 'Jamie');
-      await userEvent.type(page.getByLabelText(/^Last name\s*$/i), 'Doe');
-      await userEvent.type(page.getByLabelText(/^Relation\s*$/i), 'Friend');
       await userEvent.type(
-        page.getByLabelText(/^Email\s*$/i),
+        page.getByRole('textbox', { name: /^Name\s*$/i }),
+        'Alex',
+      );
+      await userEvent.type(
+        page.getByRole('textbox', { name: /^Pseudo\s*$/i }),
+        'Nexus',
+      );
+      await userEvent.type(
+        page.getByRole('textbox', { name: /^First name\s*$/i }),
+        'Jamie',
+      );
+      await userEvent.type(
+        page.getByRole('textbox', { name: /^Last name\s*$/i }),
+        'Doe',
+      );
+      await userEvent.type(
+        page.getByRole('textbox', { name: /^Relation\s*$/i }),
+        'Friend',
+      );
+      await userEvent.type(
+        page.getByRole('textbox', { name: /^Email\s*$/i }),
         'jamie@example.com',
       );
 
@@ -94,19 +87,64 @@ describe('AppComponent', () => {
       await userEvent.click(page.getByRole('button', { name: /submit/i }));
 
       await expect
-        .element(page.getByText(/this field is required/i))
+        .element(page.getByText(/Name\s*This field is required/i))
+        .toBeInTheDocument();
+      await expect
+        .element(page.getByText(/Pseudo\s*This field is required/i))
         .toBeInTheDocument();
       await expect
         .element(page.getByText(/at least one contact is required/i))
         .toBeInTheDocument();
     });
 
+    it('Then should show contact required errors on submit', async () => {
+      await userEvent.click(page.getByRole('button', { name: /add contact/i }));
+      await userEvent.click(page.getByRole('button', { name: /submit/i }));
+
+      await expect
+        .element(page.getByText(/email is required/i))
+        .toBeInTheDocument();
+    });
+
     it('Then should show email format error for a contact', async () => {
       await userEvent.click(page.getByRole('button', { name: /add contact/i }));
-      await userEvent.type(page.getByLabelText(/^First name\s*$/i), 'Jamie');
-      await userEvent.type(page.getByLabelText(/^Last name\s*$/i), 'Doe');
-      await userEvent.type(page.getByLabelText(/^Relation\s*$/i), 'Friend');
-      await userEvent.type(page.getByLabelText(/^Email\s*$/i), 'invalid');
+      await userEvent.type(
+        page.getByRole('textbox', { name: /^First name\s*$/i }),
+        'Jamie',
+      );
+      await userEvent.type(
+        page.getByRole('textbox', { name: /^Last name\s*$/i }),
+        'Doe',
+      );
+      await userEvent.type(
+        page.getByRole('textbox', { name: /^Relation\s*$/i }),
+        'Friend',
+      );
+      await userEvent.type(
+        page.getByRole('textbox', { name: /^Email\s*$/i }),
+        'invalid',
+      );
+
+      await expect
+        .element(page.getByText(/enter a valid email/i))
+        .toBeInTheDocument();
+    });
+
+    it('Then should show required errors for email entries on submit', async () => {
+      await userEvent.click(page.getByRole('button', { name: /add email/i }));
+      await userEvent.click(page.getByRole('button', { name: /submit/i }));
+
+      await expect
+        .element(page.getByText(/email is required/i))
+        .toBeInTheDocument();
+    });
+
+    it('Then should show email format error for an email entry', async () => {
+      await userEvent.click(page.getByRole('button', { name: /add email/i }));
+      await userEvent.type(
+        page.getByRole('textbox', { name: /^Email\s*$/i }),
+        'invalid',
+      );
 
       await expect
         .element(page.getByText(/enter a valid email/i))

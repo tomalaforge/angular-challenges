@@ -13,7 +13,7 @@ sidebar:
 
 ## Information
 
-Dynamic forms often need repeating groups, like adding multiple contacts or social links. Angular Reactive Forms provides `FormArray` to manage these collections while keeping validation and structure predictable.
+You already built a registration form with Reactive Forms (FormGroup / FormControl / FormArray). Now you will refactor it to **Signal-based forms** while keeping the UX, validations, and dynamic add/remove behavior.
 
 You can learn more about Signal-based forms in the [Angular documentation](https://angular.dev/guide/forms/signals-based-forms).
 
@@ -28,14 +28,14 @@ The application contains a single-page registration form with:
   - Last name (required)
   - Relation (required)
   - Email (required, valid email)
-- **Network links** (FormArray)
-  - Network name (required)
-  - Handle (required)
+- **Emails** (FormArray)
+  - Type (required)
+  - Email (required, valid email)
 
 Current behavior:
 
-- Users can add or remove contacts and network links.
-- Submit is disabled until the form is valid.
+- Users can add or remove contacts and emails.
+- Submit marks all controls as touched and blocks submission when the form is invalid.
 - Validation errors appear when fields are touched/dirty or after submitting.
 - Submitted data is displayed as JSON after a successful submission.
 
@@ -49,7 +49,7 @@ After completing the challenge, your form should:
 
 - Use Signal-based forms instead of `FormGroup`, `FormControl`, and `FormArray`.
 - Keep the same validation rules for all fields.
-- Preserve add/remove behavior for contacts and network links.
+- Preserve add/remove behavior for contacts and emails.
 - Keep the submit gating and submitted data preview.
 - Pass all existing tests.
 
