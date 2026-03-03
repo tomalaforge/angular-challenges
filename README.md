@@ -85,6 +85,7 @@ Check [all 64 challenges](https://angular-challenges.vercel.app/)
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/bertandfrogs"><img src="https://avatars.githubusercontent.com/u/25539891?v=4?s=100" width="100px;" alt="Sarah Smalley"/><br /><sub><b>Sarah Smalley</b></sub></a><br /><a href="https://github.com/tomalaforge/angular-challenges/issues?q=author%3Abertandfrogs" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Mimo-07"><img src="https://avatars.githubusercontent.com/u/59221049?v=4?s=100" width="100px;" alt="Mimo-07"/><br /><sub><b>Mimo-07</b></sub></a><br /><a href="https://github.com/tomalaforge/angular-challenges/issues?q=author%3AMimo-07" title="Bug reports">🐛</a></td>
     </tr>
   </tbody>
   <tfoot>
