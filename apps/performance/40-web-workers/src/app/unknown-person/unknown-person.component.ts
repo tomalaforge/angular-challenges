@@ -1,6 +1,7 @@
 import { Component, input } from '@angular/core';
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'unknown-person',
   template: `
     <div

@@ -10,6 +10,7 @@ interface ProductContext {
 }
 
 @Directive({
+  // eslint-disable-next-line @angular-eslint/directive-selector
   selector: 'ng-template[product]',
 })
 export class ProductDirective {

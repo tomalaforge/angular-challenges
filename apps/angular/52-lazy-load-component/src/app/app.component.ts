@@ -1,4 +1,6 @@
 import { Component, signal } from '@angular/core';
+import { PlaceholderComponent } from './placeholder.component';
+import { TopComponent } from './top.component';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +18,7 @@ import { Component, signal } from '@angular/core';
       }
     </div>
   `,
-  standalone: false,
+  imports: [TopComponent, PlaceholderComponent],
 })
 export class AppComponent {
   topLoaded = signal(false);

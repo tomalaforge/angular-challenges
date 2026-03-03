@@ -1,5 +1,4 @@
 /* eslint-disable @angular-eslint/directive-selector */
-/* eslint-disable @angular-eslint/no-host-metadata-property */
 import { Directive, signal, WritableSignal } from '@angular/core';
 
 export type ButtonState = 'enabled' | 'disabled';

@@ -1,5 +1,5 @@
 import { TOKEN } from '@angular-challenges/module-to-standalone/core/providers';
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 @Component({
   selector: 'lib-user-shell',
@@ -30,5 +30,5 @@ import { Component, Inject } from '@angular/core';
   standalone: false,
 })
 export class UserShellComponent {
-  constructor(@Inject(TOKEN) public token: string) {}
+  public token = inject(TOKEN);
 }

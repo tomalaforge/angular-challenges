@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'list',
   template: `
     @for (item of list(); track $index) {

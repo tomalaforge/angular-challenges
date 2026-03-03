@@ -35,6 +35,6 @@ export class UserComponent implements OnChanges {
 
   ngOnChanges(): void {
     this.fullName = `${this.name} ${this.lastName ?? ''}`;
-    this.category = ageToCategory(Number(this.age) ?? 0);
+    this.category = ageToCategory(Number(this.age));
   }
 }

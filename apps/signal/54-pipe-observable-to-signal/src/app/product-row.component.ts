@@ -10,6 +10,7 @@ import { CurrencyService } from './currency.service';
 import { Product } from './product.model';
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'tr[product-row]',
   template: `
     <td>{{ productInfo.name }}</td>

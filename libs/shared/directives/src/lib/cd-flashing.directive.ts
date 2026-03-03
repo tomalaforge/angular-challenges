@@ -1,14 +1,12 @@
-/* eslint-disable @angular-eslint/directive-selector */
-import { Directive, DoCheck, ElementRef, NgZone } from '@angular/core';
+import { Directive, DoCheck, ElementRef, inject, NgZone } from '@angular/core';
 
 @Directive({
+  // eslint-disable-next-line @angular-eslint/directive-selector
   selector: '[cd-flash]',
 })
 export class CDFlashingDirective implements DoCheck {
-  constructor(
-    private elementRef: ElementRef,
-    private zone: NgZone,
-  ) {}
+  private readonly elementRef = inject(ElementRef);
+  private readonly zone = inject(NgZone);
 
   ngDoCheck(): void {
     this.cdRan();

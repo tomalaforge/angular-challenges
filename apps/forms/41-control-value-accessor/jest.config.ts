@@ -1,4 +1,3 @@
-/* eslint-disable */
 module.exports = {
   displayName: 'forms-control-value-accessor',
   preset: '../../../jest.preset.js',

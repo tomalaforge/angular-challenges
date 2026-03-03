@@ -9,7 +9,12 @@
     <svg
       class="star"
       [class.star-active]="isStarActive($index, value)"
-      (click)="setRating($index)">
+      (click)="setRating($index)"
+      (keydown.enter)="setRating($index)"
+      (keydown.space)="setRating($index)"
+      role="button"
+      tabindex="0"
+      aria-label="Set rating to {{ $index + 1 }}">
       <use xlink:href="#star"></use>
     </svg>
   }

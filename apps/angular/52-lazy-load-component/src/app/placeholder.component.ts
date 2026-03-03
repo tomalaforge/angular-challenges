@@ -13,6 +13,5 @@ import { Component } from '@angular/core';
       height: 50%;
     }
   `,
-  standalone: false,
 })
 export class PlaceholderComponent {}

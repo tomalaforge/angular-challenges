@@ -3,6 +3,7 @@ import { Component, contentChild, input, TemplateRef } from '@angular/core';
 
 @Component({
   imports: [NgTemplateOutlet],
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'person',
   template: `
     <ng-container

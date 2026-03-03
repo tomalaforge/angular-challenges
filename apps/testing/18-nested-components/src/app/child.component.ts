@@ -21,6 +21,7 @@ export class InputComponent {
 }
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'result',
   template: `
     <p>Title is {{ title() }}</p>
