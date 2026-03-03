@@ -1,1 +1,209 @@
 /* You can add global styles to this file, and also import other style files */
+
+.person-section {
+  background: linear-gradient(to right, #f093fb 0%, #f5576c 100%);
+  padding: 20px 28px;
+  margin: 20px 0;
+  border-radius: 16px;
+  box-shadow: 0 8px 16px rgba(245, 87, 108, 0.3);
+  position: relative;
+  overflow: hidden;
+
+  .person-card {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 20px 24px;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    min-width: 300px;
+
+    .person-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2em;
+      box-shadow: 0 4px 8px rgba(245, 87, 108, 0.3);
+    }
+
+    .person-data {
+      .person-label {
+        font-size: 0.75em;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #999;
+        margin-bottom: 4px;
+        font-weight: 600;
+      }
+
+      .person-name {
+        font-size: 1.4em;
+        font-weight: bold;
+        color: #f5576c;
+        margin-bottom: 6px;
+      }
+
+      .person-age {
+        font-size: 1.1em;
+        color: #666;
+
+        .age-value {
+          font-weight: bold;
+          color: #f093fb;
+        }
+      }
+    }
+  }
+}
+
+.students-section {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 24px;
+  margin: 20px 0;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  h3 {
+    margin: 0 0 16px 0;
+    color: white;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .student-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    margin: 12px 0;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .student-avatar {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2em;
+    flex-shrink: 0;
+  }
+
+  .student-info {
+    flex: 1;
+
+    .student-name {
+      font-size: 1.1em;
+      font-weight: bold;
+      color: #667eea;
+      margin-bottom: 4px;
+    }
+
+    .student-age {
+      color: #666;
+      font-size: 0.95em;
+    }
+  }
+
+  .student-badge {
+    background-color: #667eea;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: bold;
+  }
+}
+
+.cities-section {
+  background-color: #fff;
+  padding: 24px;
+  margin: 20px 0;
+  border: 2px solid #e0e0e0;
+  border-radius: 4px;
+
+  h3 {
+    margin: 0 0 16px 0;
+    color: #333;
+    font-family: 'Georgia', serif;
+    font-size: 1.8em;
+    font-weight: normal;
+    border-bottom: 3px solid #ff6b6b;
+    padding-bottom: 8px;
+  }
+
+  .city-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 16px;
+    margin: 8px 0;
+    background-color: #f9f9f9;
+    border-left: 4px solid #ff6b6b;
+
+    .city-flag {
+      font-size: 2em;
+    }
+
+    .city-details {
+      .city-name {
+        font-size: 1.2em;
+        font-weight: 600;
+        color: #ff6b6b;
+        margin-bottom: 2px;
+      }
+
+      .city-country {
+        color: #888;
+        font-size: 0.9em;
+        font-style: italic;
+        margin-bottom: 4px;
+      }
+
+      .city-meta {
+        font-size: 0.85em;
+        color: #666;
+
+        .city-continent {
+          font-weight: 600;
+        }
+
+        .city-population {
+          color: #ff6b6b;
+        }
+
+        .city-language {
+          font-style: italic;
+        }
+      }
+    }
+
+    .city-position {
+      background-color: #ff6b6b;
+      color: white;
+      width: 32px;
+      height: 32px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.9em;
+    }
+  }
+}
