@@ -1,7 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+import {
+  FakeHttpService,
+  randTeacher,
+} from '../../data-access/fake-http.service';
 import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
 import { CardComponent } from '../../ui/card/card.component';
 
 @Component({
@@ -9,8 +11,17 @@ import { CardComponent } from '../../ui/card/card.component';
   template: `
     <app-card
       [list]="teachers()"
-      [type]="cardType"
-      customClass="bg-light-red"></app-card>
+      [itemTemplateRef]="listItemTemplate"
+      (itemAdded)="addItem()"
+      customClass="bg-light-red">
+      <img src="assets/img/teacher.png" card-image width="200" height="200" />
+    </app-card>
+    <ng-template #listItemTemplate let-item>
+      {{ item.firstName }}
+      <button (click)="onItemDeleted(item)">
+        <img class="h-5" src="assets/svg/trash.svg" />
+      </button>
+    </ng-template>
   `,
   styles: [
     `
@@ -26,9 +37,14 @@ export class TeacherCardComponent implements OnInit {
   private store = inject(TeacherStore);
 
   teachers = this.store.teachers;
-  cardType = CardType.TEACHER;
 
   ngOnInit(): void {
     this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
+  }
+  onItemDeleted(item: any) {
+    this.store.deleteOne(item.id);
+  }
+  addItem() {
+    this.store.addOne(randTeacher());
   }
 }
