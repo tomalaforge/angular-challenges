@@ -1,30 +1,55 @@
+import { NgOptimizedImage } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   inject,
   OnInit,
+  ViewEncapsulation,
 } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+import {
+  FakeHttpService,
+  randStudent,
+} from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
-import { CardType } from '../../model/card.model';
-import { CardComponent } from '../../ui/card/card.component';
+import {
+  CardAction,
+  CardActionType,
+  CardComponent,
+} from '../../ui/card/card.component';
+import { CardListItemTemplateDirective } from '../../ui/list-item/list-item-template.directive';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-student-card',
   template: `
     <app-card
       [list]="students()"
-      [type]="cardType"
-      customClass="bg-light-green" />
+      customClass="bg-light-green"
+      (actions)="cardActions($event)">
+      <img ngSrc="assets/img/student.webp" width="200" height="200" alt="" />
+
+      <ng-template cardListItem let-item let-onDeleteAction="onDeleteAction">
+        <app-list-item
+          [name]="item.firstName"
+          [id]="item.id"
+          (deleteEvent)="onDeleteAction(item.id)" />
+      </ng-template>
+    </app-card>
   `,
   styles: [
     `
-      ::ng-deep .bg-light-green {
+      .bg-light-green {
         background-color: rgba(0, 250, 0, 0.1);
       }
     `,
   ],
-  imports: [CardComponent],
+  encapsulation: ViewEncapsulation.None,
+  imports: [
+    CardComponent,
+    CardListItemTemplateDirective,
+    ListItemComponent,
+    NgOptimizedImage,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StudentCardComponent implements OnInit {
@@ -32,9 +57,21 @@ export class StudentCardComponent implements OnInit {
   private store = inject(StudentStore);
 
   students = this.store.students;
-  cardType = CardType.STUDENT;
 
   ngOnInit(): void {
     this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
+  }
+
+  cardActions(action: CardAction) {
+    switch (action.type) {
+      case CardActionType.ADD:
+        this.store.addOne(randStudent());
+        break;
+      case CardActionType.DELETE:
+        this.store.deleteOne(action.payload.id);
+        break;
+      default:
+        console.log('Unknown');
+    }
   }
 }
