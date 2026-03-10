@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { Router, Routes } from '@angular/router';
-import { distinctUntilChanged, map } from 'rxjs';
+import { map } from 'rxjs';
 import { AdminPage } from './admin-page';
 import { App } from './app';
 import { Dashboard } from './dashboard';
@@ -14,7 +14,6 @@ const redirectTo = () => {
   return inject(UserProfileService)
     .getProfile()
     .pipe(
-      distinctUntilChanged(),
       map((profile) =>
         profile === 'admin'
           ? router.createUrlTree(['/admin'])
