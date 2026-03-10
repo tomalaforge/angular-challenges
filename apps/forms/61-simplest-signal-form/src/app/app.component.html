@@ -2,7 +2,7 @@
   <div class="mx-auto max-w-md rounded-lg bg-white p-8 shadow-md">
     <h1 class="mb-6 text-3xl font-bold text-gray-900">Simple Form</h1>
 
-    <form class="space-y-6" (ngSubmit)="onSubmit($event)" novalidate>
+    <form class="space-y-6" [formRoot]="userForm">
       <div>
         <label for="name" class="mb-2 block text-sm font-medium text-gray-700">
           Name
@@ -73,7 +73,6 @@
       <div class="flex gap-4">
         <button
           type="submit"
-          (click)="onSubmit($event)"
           [disabled]="userForm().invalid()"
           class="flex-1 rounded-md bg-blue-600 px-4 py-2 font-medium text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-400">
           Submit
