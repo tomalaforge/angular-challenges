@@ -1,0 +1,175 @@
+<div class="min-h-screen bg-gray-100 px-4 py-12 sm:px-6 lg:px-8">
+  <div class="mx-auto max-w-md rounded-lg bg-white p-8 shadow-md">
+    <h1 class="mb-6 text-3xl font-bold text-gray-900">Registration Form</h1>
+    <p class="mb-6 text-sm text-gray-600">
+      This form demonstrates cross field validation with reactive forms
+    </p>
+
+    <form [formRoot]="registrationForm" class="space-y-6">
+      <div>
+        @let email = registrationForm.email();
+        <label for="email" class="mb-2 block text-sm font-medium text-gray-700">
+          Email
+          <span class="text-red-500">*</span>
+        </label>
+        <input
+          id="email"
+          type="email"
+          [formField]="registrationForm.email"
+          placeholder="Enter your email"
+          class="w-full rounded-md border border-gray-300 px-4 py-2 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+          [class.border-red-500]="email.invalid() && email.touched()" />
+        @if (email.invalid() && email.touched()) {
+          @for (error of email.errors(); track error) {
+            <p class="mt-1 text-sm text-red-600">{{ error.message }}</p>
+          }
+        }
+      </div>
+
+      <div>
+        @let password = registrationForm.password();
+        <label
+          for="password"
+          class="mb-2 block text-sm font-medium text-gray-700">
+          Password
+          <span class="text-red-500">*</span>
+        </label>
+        <input
+          id="password"
+          type="password"
+          [formField]="registrationForm.password"
+          placeholder="Enter your password"
+          class="w-full rounded-md border border-gray-300 px-4 py-2 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+          [class.border-red-500]="password.invalid() && password.touched()" />
+        @if (password.invalid() && password.touched()) {
+          @for (error of password.errors(); track error) {
+            <p class="mt-1 text-sm text-red-600">{{ error.message }}</p>
+          }
+        }
+      </div>
+
+      <div>
+        @let confirmPassword = registrationForm.confirmPassword();
+        <label
+          for="confirmPassword"
+          class="mb-2 block text-sm font-medium text-gray-700">
+          Confirm Password
+          <span class="text-red-500">*</span>
+        </label>
+        <input
+          id="confirmPassword"
+          type="password"
+          [formField]="registrationForm.confirmPassword"
+          placeholder="Confirm your password"
+          class="w-full rounded-md border border-gray-300 px-4 py-2 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+          [class.border-red-500]="
+            confirmPassword.invalid() && confirmPassword.touched()
+          " />
+        @if (confirmPassword.invalid() && confirmPassword.touched()) {
+          @for (error of confirmPassword.errors(); track error) {
+            <p class="mt-1 text-sm text-red-600">{{ error.message }}</p>
+          }
+        }
+      </div>
+
+      <div>
+        @let startDate = registrationForm.startDate();
+        <label
+          for="startDate"
+          class="mb-2 block text-sm font-medium text-gray-700">
+          Start Date
+          <span class="text-red-500">*</span>
+        </label>
+        <input
+          id="startDate"
+          type="date"
+          [formField]="registrationForm.startDate"
+          class="w-full rounded-md border border-gray-300 px-4 py-2 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+          [class.border-red-500]="startDate.invalid() && startDate.touched()" />
+        @if (startDate.invalid() && startDate.touched()) {
+          @for (error of startDate.errors(); track error) {
+            <p class="mt-1 text-sm text-red-600">{{ error.message }}</p>
+          }
+        }
+      </div>
+
+      <div>
+        @let endDate = registrationForm.endDate();
+        <label
+          for="endDate"
+          class="mb-2 block text-sm font-medium text-gray-700">
+          End Date
+          <span class="text-red-500">*</span>
+        </label>
+        <input
+          id="endDate"
+          type="date"
+          [formField]="registrationForm.endDate"
+          class="w-full rounded-md border border-gray-300 px-4 py-2 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+          [class.border-red-500]="endDate.invalid() && endDate.touched()" />
+        @if (endDate.invalid() && endDate.touched()) {
+          @for (error of endDate.errors(); track error) {
+            <p class="mt-1 text-sm text-red-600">{{ error.message }}</p>
+          }
+        }
+      </div>
+
+      <div class="flex gap-4">
+        <button
+          type="submit"
+          [disabled]="registrationForm().invalid()"
+          class="flex-1 rounded-md bg-blue-600 px-4 py-2 font-medium text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-400">
+          Submit
+        </button>
+        <button
+          type="button"
+          (click)="onReset()"
+          class="flex-1 rounded-md bg-gray-300 px-4 py-2 font-medium text-gray-700 transition hover:bg-gray-400">
+          Reset
+        </button>
+      </div>
+    </form>
+
+    <div class="mt-8 rounded-md bg-gray-50 p-4">
+      @let form = registrationForm();
+      <h2 class="mb-2 text-lg font-semibold text-gray-900">Form Status</h2>
+      <div class="space-y-2 text-sm">
+        <div class="flex justify-between">
+          <span class="font-medium text-gray-700">Valid:</span>
+          <span
+            [class.text-green-600]="form.valid()"
+            [class.text-red-600]="form.invalid()">
+            {{ form.valid() ? 'Yes' : 'No' }}
+          </span>
+        </div>
+        <div class="flex justify-between">
+          <span class="font-medium text-gray-700">Touched:</span>
+          <span>{{ form.touched() ? 'Yes' : 'No' }}</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="font-medium text-gray-700">Dirty:</span>
+          <span>{{ form.dirty() ? 'Yes' : 'No' }}</span>
+        </div>
+      </div>
+      <div class="mt-4">
+        <h3 class="mb-2 font-medium text-gray-700">Form Value:</h3>
+        <pre
+          class="overflow-x-auto rounded bg-gray-800 p-3 text-xs text-gray-100"
+          >{{ form.value() | json }}</pre
+        >
+      </div>
+    </div>
+
+    @if (isSubmitted()) {
+      <div class="mt-6 rounded-md border border-green-300 bg-green-50 p-4">
+        <h2 class="mb-2 text-lg font-semibold text-green-900">
+          Form Submitted Successfully!
+        </h2>
+        <pre
+          class="overflow-x-auto rounded bg-green-800 p-3 text-xs text-green-100"
+          >{{ registrationForm().value() | json }}</pre
+        >
+      </div>
+    }
+  </div>
+</div>
