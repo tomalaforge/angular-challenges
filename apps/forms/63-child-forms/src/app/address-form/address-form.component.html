@@ -1,0 +1,30 @@
+<div class="grid gap-4 sm:grid-cols-2" data-testid="shipping-fields">
+  <label
+    class="flex flex-col gap-1 text-sm font-medium text-slate-700 sm:col-span-2">
+    Street
+    <input
+      class="input"
+      type="text"
+      [formField]="form().street"
+      aria-required="true" />
+    <app-validation [fieldState]="form().street()" />
+  </label>
+  <label class="flex flex-col gap-1 text-sm font-medium text-slate-700">
+    ZIP code
+    <input
+      class="input"
+      type="text"
+      [formField]="form().zipcode"
+      aria-required="true" />
+    <app-validation [fieldState]="form().zipcode()" />
+  </label>
+  <label class="flex flex-col gap-1 text-sm font-medium text-slate-700">
+    City
+    <input
+      class="input"
+      type="text"
+      [formField]="form().city"
+      aria-required="true" />
+    <app-validation [fieldState]="form().city()" />
+  </label>
+</div>

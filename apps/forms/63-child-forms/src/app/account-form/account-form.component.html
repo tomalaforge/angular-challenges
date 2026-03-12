@@ -1,0 +1,20 @@
+<div class="grid gap-4 sm:grid-cols-2">
+  <label class="flex flex-col gap-1 text-sm font-medium text-slate-700">
+    Last name
+    <input
+      class="input"
+      type="text"
+      [formField]="form().lastName"
+      aria-required="true" />
+    <app-validation [fieldState]="form().lastName()" />
+  </label>
+  <label class="flex flex-col gap-1 text-sm font-medium text-slate-700">
+    First name
+    <input
+      class="input"
+      type="text"
+      [formField]="form().firstName"
+      aria-required="true" />
+    <app-validation [fieldState]="form().firstName()" />
+  </label>
+</div>
