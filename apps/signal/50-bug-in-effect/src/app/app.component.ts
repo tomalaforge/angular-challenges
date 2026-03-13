@@ -40,11 +40,20 @@ export class AppComponent {
   gpu = model(false);
 
   constructor() {
-    /* 
-      Explain for your junior team mate why this bug occurs ...
+    /*
+      if we use `if (this.drive() || this.ram() || this.gpu())`,
+      when the drive is selected, this `this.drive()` will be evaluated to true,
+      and the short circuit will happen. So the rest this.ram() || this.gpu() in the `if` statement
+      is not evaluated. And Angular will understand that this effect only depends on the `drive` signal.
+      That's why when we select the second checkbox again, there's nothing happens.
+      The rule of thumbs is always express the signal dependency explicitly.
     */
     effect(() => {
-      if (this.drive() || this.ram() || this.gpu()) {
+      const drive = this.drive();
+      const ram = this.ram();
+      const gpu = this.gpu();
+
+      if (drive || ram || gpu) {
         alert('Price increased!');
       }
     });
