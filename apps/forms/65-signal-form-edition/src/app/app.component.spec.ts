@@ -1,0 +1,16 @@
+import { TestBed } from '@angular/core/testing';
+import { page } from 'vitest/browser';
+import { AppComponent } from './app.component';
+
+describe('AppComponent', () => {
+  beforeEach(async () => {
+    TestBed.createComponent(AppComponent);
+  });
+
+  test('...', async () => {
+    const heading = page.getByRole('heading', {
+      name: /registration form/i,
+    });
+    await expect.element(heading).toBeInTheDocument();
+  });
+});

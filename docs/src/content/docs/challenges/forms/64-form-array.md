@@ -8,7 +8,6 @@ challengeNumber: 64
 command: forms-form-array
 sidebar:
   order: 126
-  badge: New
 ---
 
 ## Information
