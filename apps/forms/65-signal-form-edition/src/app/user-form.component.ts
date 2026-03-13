@@ -32,10 +32,13 @@ import { FakeBackendService } from './fake-backend.service';
       } @else {
         <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="space-y-4">
           <div>
-            <label class="block text-sm font-medium text-gray-700">
+            <label
+              for="firstname"
+              class="block text-sm font-medium text-gray-700">
               Firstname
             </label>
             <input
+              id="firstname"
               type="text"
               formControlName="firstname"
               class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" />
@@ -47,10 +50,13 @@ import { FakeBackendService } from './fake-backend.service';
             }
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700">
+            <label
+              for="lastname"
+              class="block text-sm font-medium text-gray-700">
               Lastname
             </label>
             <input
+              id="lastname"
               type="text"
               formControlName="lastname"
               class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" />
@@ -62,8 +68,11 @@ import { FakeBackendService } from './fake-backend.service';
             }
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700">Age</label>
+            <label for="age" class="block text-sm font-medium text-gray-700">
+              Age
+            </label>
             <input
+              id="age"
               type="number"
               formControlName="age"
               class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" />
@@ -72,8 +81,11 @@ import { FakeBackendService } from './fake-backend.service';
             }
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700">Grade</label>
+            <label for="grade" class="block text-sm font-medium text-gray-700">
+              Grade
+            </label>
             <input
+              id="grade"
               type="number"
               formControlName="grade"
               class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" />
