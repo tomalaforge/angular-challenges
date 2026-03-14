@@ -1,7 +1,6 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  effect,
   inject,
   signal,
 } from '@angular/core';
@@ -18,7 +17,8 @@ import { UserService } from './user.service';
       </label>
       <select
         name="actions"
-        [(ngModel)]="action"
+        [ngModel]="action"
+        (ngModelChange)="logMessage($event)"
         id="actions"
         class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500">
         <option selected>Please select an action</option>
@@ -36,9 +36,7 @@ export class ActionsComponent {
 
   protected actions = ['Create', 'Read', 'Update', 'Delete'];
 
-  constructor() {
-    effect(() => {
-      this.userService.log(this.action() ?? 'No action selected');
-    });
+  logMessage(action: string | undefined) {
+    this.userService.log(action ?? 'No action selected');
   }
 }
