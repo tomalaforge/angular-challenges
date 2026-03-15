@@ -1,44 +1,51 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ListComponent } from './list.component';
-import { PersonComponent } from './person.component';
+import { ListComponent, ListDirective } from './list.component';
+import { Person, PersonComponent, PersonDirective } from './person.component';
+
+interface Student {
+  readonly name: string;
+  readonly age: number;
+}
+
+interface City {
+  readonly name: string;
+  readonly country: string;
+  readonly population: number;
+  readonly continent: string;
+  readonly language: string;
+}
 
 @Component({
-  imports: [PersonComponent, ListComponent],
+  imports: [PersonComponent, ListComponent, PersonDirective, ListDirective],
   selector: 'app-root',
-  template: `
-    <person [person]="person">
-      <ng-template #personRef let-name let-age="age">
-        {{ name }}: {{ age }}
-      </ng-template>
-    </person>
-
-    <list [list]="students">
-      <ng-template #listRef let-student let-i="index">
-        {{ student.name }}: {{ student.age }} - {{ i }}
-      </ng-template>
-    </list>
-
-    <list [list]="cities">
-      <ng-template #listRef let-city let-i="index">
-        {{ city.name }}: {{ city.country }} - {{ i }}
-      </ng-template>
-    </list>
-  `,
+  templateUrl: './app.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-  person = {
+  person: Person = {
     name: 'toto',
     age: 3,
   };
 
-  students = [
+  students: Student[] = [
     { name: 'toto', age: 3 },
     { name: 'titi', age: 4 },
   ];
 
-  cities = [
-    { name: 'Paris', country: 'France' },
-    { name: 'Berlin', country: 'Germany' },
+  cities: City[] = [
+    {
+      name: 'Paris',
+      country: 'France',
+      population: 2161000,
+      continent: 'Europe',
+      language: 'French',
+    },
+    {
+      name: 'Berlin',
+      country: 'Germany',
+      population: 3645000,
+      continent: 'Europe',
+      language: 'German',
+    },
   ];
 }
