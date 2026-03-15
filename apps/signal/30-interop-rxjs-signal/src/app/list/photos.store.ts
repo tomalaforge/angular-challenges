@@ -1,135 +1,107 @@
-import { inject, Injectable } from '@angular/core';
-import {
-  ComponentStore,
-  OnStateInit,
-  OnStoreInit,
-} from '@ngrx/component-store';
+import { inject } from '@angular/core';
 import { tapResponse } from '@ngrx/operators';
-import { pipe } from 'rxjs';
-import { filter, mergeMap, tap } from 'rxjs/operators';
+import {
+  patchState,
+  signalStore,
+  withComputed,
+  withHooks,
+  withMethods,
+  withState,
+} from '@ngrx/signals';
+import { rxMethod } from '@ngrx/signals/rxjs-interop';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  pipe,
+  switchMap,
+  tap,
+} from 'rxjs';
 import { Photo } from '../photo.model';
 import { PhotoService } from '../photos.service';
+import {
+  setError,
+  setLoading,
+  withRequestStatus,
+} from '../store-feature/with-request-status.feature';
+import { withSearchAndPaging } from '../store-feature/with-search-and-paging.feature';
 
-const PHOTO_STATE_KEY = 'photo_search';
+export const PHOTO_STATE_KEY = 'photo_search';
 
-export interface PhotoState {
+export interface PhotoStoreState {
   photos: Photo[];
-  search: string;
-  page: number;
   pages: number;
-  loading: boolean;
-  error: unknown;
 }
 
-const initialState: PhotoState = {
+const initialState: PhotoStoreState = {
   photos: [],
-  search: '',
-  page: 1,
   pages: 1,
-  loading: false,
-  error: '',
 };
 
-@Injectable()
-export class PhotoStore
-  extends ComponentStore<PhotoState>
-  implements OnStoreInit, OnStateInit
-{
-  private photoService = inject(PhotoService);
+export const PhotosStore = signalStore(
+  withState(initialState),
+  withRequestStatus(),
+  withSearchAndPaging(),
+  withComputed(({ page, pages }) => ({
+    endOfPage: () => page() === pages(),
+  })),
+  withMethods((store) => {
+    const photoService = inject(PhotoService);
 
-  private readonly photos$ = this.select((s) => s.photos);
-  private readonly search$ = this.select((s) => s.search);
-  private readonly page$ = this.select((s) => s.page);
-  private readonly pages$ = this.select((s) => s.pages);
-  private readonly error$ = this.select((s) => s.error);
-  private readonly loading$ = this.select((s) => s.loading);
+    return {
+      loadPhoto: rxMethod<{ search: string; page: number }>(
+        pipe(
+          filter(({ search }) => search.length >= 3),
+          debounceTime(300),
+          distinctUntilChanged(),
+          tap(() => patchState(store, setLoading(true))),
+          switchMap(({ search, page }) => {
+            return photoService.searchPublicPhotos(search, page).pipe(
+              tapResponse({
+                next({ photos: { photo, pages } }) {
+                  patchState(
+                    store,
+                    {
+                      photos: photo,
+                      pages,
+                    },
+                    setLoading(false),
+                  );
 
-  private readonly endOfPage$ = this.select(
-    this.page$,
-    this.pages$,
-    (page, pages) => page === pages,
-  );
-
-  readonly vm$ = this.select(
-    {
-      photos: this.photos$,
-      search: this.search$,
-      page: this.page$,
-      pages: this.pages$,
-      endOfPage: this.endOfPage$,
-      loading: this.loading$,
-      error: this.error$,
-    },
-    { debounce: true },
-  );
-
-  ngrxOnStoreInit() {
-    const savedJSONState = localStorage.getItem(PHOTO_STATE_KEY);
-    if (savedJSONState === null) {
-      this.setState(initialState);
-    } else {
-      const savedState = JSON.parse(savedJSONState);
-      this.setState({
-        ...initialState,
-        search: savedState.search,
-        page: savedState.page,
-      });
-    }
-  }
-
-  ngrxOnStateInit() {
-    this.searchPhotos(
-      this.select({
-        search: this.search$,
-        page: this.page$,
-      }),
-    );
-  }
-
-  readonly search = this.updater(
-    (state, search: string): PhotoState => ({
-      ...state,
-      search,
-      page: 1,
-    }),
-  );
-
-  readonly nextPage = this.updater(
-    (state): PhotoState => ({
-      ...state,
-      page: state.page + 1,
-    }),
-  );
-
-  readonly previousPage = this.updater(
-    (state): PhotoState => ({
-      ...state,
-      page: state.page - 1,
-    }),
-  );
-
-  readonly searchPhotos = this.effect<{ search: string; page: number }>(
-    pipe(
-      filter(({ search }) => search.length >= 3),
-      tap(() => this.patchState({ loading: true, error: '' })),
-      mergeMap(({ search, page }) =>
-        this.photoService.searchPublicPhotos(search, page).pipe(
-          tapResponse(
-            ({ photos: { photo, pages } }) => {
-              this.patchState({
-                loading: false,
-                photos: photo,
-                pages,
-              });
-              localStorage.setItem(
-                PHOTO_STATE_KEY,
-                JSON.stringify({ search, page }),
-              );
-            },
-            (error: unknown) => this.patchState({ error, loading: false }),
-          ),
+                  localStorage.setItem(
+                    PHOTO_STATE_KEY,
+                    JSON.stringify({ search, page }),
+                  );
+                },
+                error(error) {
+                  patchState(store, setError(error));
+                },
+              }),
+            );
+          }),
         ),
       ),
-    ),
-  );
-}
+    };
+  }),
+  withHooks((store) => {
+    return {
+      onInit() {
+        const savedJSONState = localStorage.getItem(PHOTO_STATE_KEY);
+
+        if (savedJSONState !== null) {
+          const { search, page }: { search: string; page: number } =
+            JSON.parse(savedJSONState);
+          patchState(store, {
+            search,
+            page,
+          });
+        }
+
+        store.loadPhoto(() => ({
+          search: store.search(),
+          page: store.page(),
+        }));
+      },
+    };
+  }),
+);
