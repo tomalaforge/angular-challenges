@@ -51,7 +51,7 @@ import { PhotosStore } from './photos.store';
       @if (store.loading()) {
         <mat-progress-bar mode="query" class="mt-5"></mat-progress-bar>
       }
-      @let photos = store.photos();
+      @let photos = store.data();
       @if (photos && photos.length > 0) {
         <ul class="flex flex-wrap gap-4">
           @for (photo of photos; track photo.id; let i = $index) {

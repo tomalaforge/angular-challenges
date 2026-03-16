@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
-import { Observable } from 'rxjs';
+import { inject, Injectable } from '@angular/core';
+import { map, Observable } from 'rxjs';
 import { Photo } from './photo.model';
 
 export interface FlickrAPIResponse {
@@ -21,10 +21,9 @@ export class PhotoService {
   public searchPublicPhotos(
     searchTerm: string,
     page: number,
-  ): Observable<FlickrAPIResponse> {
-    return this.http.get<FlickrAPIResponse>(
-      'https://www.flickr.com/services/rest/',
-      {
+  ): Observable<{ data: Photo[]; pages: number }> {
+    return this.http
+      .get<FlickrAPIResponse>('https://www.flickr.com/services/rest/', {
         params: {
           tags: searchTerm,
           method: 'flickr.photos.search',
@@ -37,7 +36,11 @@ export class PhotoService {
           extras: 'tags,date_taken,owner_name,url_q,url_m',
           api_key: 'c3050d39a5bb308d9921bef0e15c437d',
         },
-      },
-    );
+      })
+      .pipe(
+        map(({ photos: { pages, photo } }) => {
+          return { pages, data: photo };
+        }),
+      );
   }
 }

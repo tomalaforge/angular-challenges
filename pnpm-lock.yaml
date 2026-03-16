@@ -14,6 +14,9 @@ importers:
       '@actions/github':
         specifier: ^6.0.0
         version: 6.0.1
+      '@angular-architects/ngrx-toolkit':
+        specifier: ^21.0.1
+        version: 21.0.1(@angular/common@21.2.2(@angular/core@21.2.2(@angular/compiler@21.2.2)(rxjs@7.8.1)(zone.js@0.16.0))(rxjs@7.8.1))(@angular/core@21.2.2(@angular/compiler@21.2.2)(rxjs@7.8.1)(zone.js@0.16.0))(@ngrx/signals@21.0.1(@angular/core@21.2.2(@angular/compiler@21.2.2)(rxjs@7.8.1)(zone.js@0.16.0))(rxjs@7.8.1))(rxjs@7.8.1)
       '@angular/animations':
         specifier: 21.2.2
         version: 21.2.2(@angular/core@21.2.2(@angular/compiler@21.2.2)(rxjs@7.8.1)(zone.js@0.16.0))
@@ -423,6 +426,18 @@ packages:
       '@analogjs/vite-plugin-angular': '*'
       '@angular-devkit/architect': '>=0.1500.0 < 0.2200.0'
       vitest: ^1.3.1 || ^2.0.0 || ^3.0.0 || ^4.0.0
+
+  '@angular-architects/ngrx-toolkit@21.0.1':
+    resolution: {integrity: sha512-mbwNxO+HIhf5ocUdgj7ywrSCpLLzgAg+whktDDhBoVQfLdlTZKoI6NRuOAjxTksaaok85Wv6+nHGBRuJLDIjsQ==}
+    peerDependencies:
+      '@angular/common': ^21.0.0
+      '@angular/core': ^21.0.0
+      '@ngrx/signals': ^21.0.0
+      '@ngrx/store': ^21.0.0
+      rxjs: ^7.0.0
+    peerDependenciesMeta:
+      '@ngrx/store':
+        optional: true
 
   '@angular-devkit/architect@0.2101.0':
     resolution: {integrity: sha512-vnNAzWXwSRGTHk2K7woIQsj7WDYZp69Z3DBdlxkK0H08ymkJ/ELbhN0/AnIJNNtYCqEb57AH7Ro98n422beDuw==}
@@ -11038,6 +11053,14 @@ snapshots:
       '@analogjs/vite-plugin-angular': 2.2.3(@angular-devkit/build-angular@21.2.1(386d95a370c890281d2b9d80ebd5c0b8))(@angular/build@21.2.1(f121eb784b53549425fd2a9bdcef924d))
       '@angular-devkit/architect': 0.2102.1(chokidar@5.0.0)
       vitest: 4.1.0-beta.4(@types/node@18.16.9)(@vitest/browser-playwright@4.1.0-beta.4)(jsdom@27.4.0)(vite@7.3.1(@types/node@18.16.9)(jiti@2.4.2)(less@4.5.1)(sass-embedded@1.96.0)(sass@1.97.1)(stylus@0.64.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
+
+  '@angular-architects/ngrx-toolkit@21.0.1(@angular/common@21.2.2(@angular/core@21.2.2(@angular/compiler@21.2.2)(rxjs@7.8.1)(zone.js@0.16.0))(rxjs@7.8.1))(@angular/core@21.2.2(@angular/compiler@21.2.2)(rxjs@7.8.1)(zone.js@0.16.0))(@ngrx/signals@21.0.1(@angular/core@21.2.2(@angular/compiler@21.2.2)(rxjs@7.8.1)(zone.js@0.16.0))(rxjs@7.8.1))(rxjs@7.8.1)':
+    dependencies:
+      '@angular/common': 21.2.2(@angular/core@21.2.2(@angular/compiler@21.2.2)(rxjs@7.8.1)(zone.js@0.16.0))(rxjs@7.8.1)
+      '@angular/core': 21.2.2(@angular/compiler@21.2.2)(rxjs@7.8.1)(zone.js@0.16.0)
+      '@ngrx/signals': 21.0.1(@angular/core@21.2.2(@angular/compiler@21.2.2)(rxjs@7.8.1)(zone.js@0.16.0))(rxjs@7.8.1)
+      rxjs: 7.8.1
+      tslib: 2.8.1
 
   '@angular-devkit/architect@0.2101.0(chokidar@5.0.0)':
     dependencies:
