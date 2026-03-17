@@ -3,24 +3,24 @@ import {
   Component,
   computed,
   input,
+  linkedSignal,
 } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { products } from './products';
 
 @Component({
   selector: 'app-order',
-  imports: [RouterLink, ReactiveFormsModule],
+  imports: [RouterLink, FormsModule],
   template: `
     <h2 class="mb-5 w-full bg-gray-400 p-2 text-white">Order</h2>
     <section class="flex flex-col gap-5">
-      <form class="flex items-center justify-between gap-5" [formGroup]="form">
+      <div class="flex items-center justify-between gap-5">
         <label for="countries" class="mb-2 block text-nowrap text-gray-900">
           Select a quantity
         </label>
         <select
-          formControlName="quantity"
+          [(ngModel)]="selectedQuantity"
           id="countries"
           class="block w-32 rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500">
           <option value="1">1</option>
@@ -29,7 +29,7 @@ import { products } from './products';
           <option value="4">4</option>
           <option value="5">5</option>
         </select>
-      </form>
+      </div>
       <div class="flex justify-between">
         <div>SubTotal</div>
         <div>{{ totalWithoutVat() }} €</div>
@@ -44,7 +44,7 @@ import { products } from './products';
       </div>
       <button
         routerLink="/checkout"
-        [queryParams]="{ quantity: quantity() }"
+        [queryParams]="{ quantity: selectedQuantity() }"
         queryParamsHandling="merge"
         class="w-full rounded-full border bg-blue-500 p-2 text-white">
         Checkout
@@ -54,18 +54,18 @@ import { products } from './products';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class OrderComponent {
-  form = new FormGroup({
-    quantity: new FormControl(1, { nonNullable: true }),
-  });
-
+  quantity = input('1');
   productId = input('1');
+
+  selectedQuantity = linkedSignal(() => {
+    return this.quantity() ?? 1;
+  });
   price = computed(
     () => products.find((p) => p.id === this.productId())?.price ?? 0,
   );
-  quantity = toSignal(this.form.controls.quantity.valueChanges, {
-    initialValue: this.form.getRawValue().quantity,
-  });
-  totalWithoutVat = computed(() => Number(this.price()) * this.quantity());
+  totalWithoutVat = computed(
+    () => Number(this.price()) * Number(this.selectedQuantity()),
+  );
   vat = computed(() => this.totalWithoutVat() * 0.21);
   total = computed(() => this.totalWithoutVat() + this.vat());
 }
