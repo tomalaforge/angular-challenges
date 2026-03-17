@@ -1,0 +1,100 @@
+<main class="min-h-screen bg-slate-50 text-slate-900">
+  <div class="mx-auto max-w-5xl px-6 py-12">
+    <h1 class="mb-6 text-3xl font-semibold">Registration form</h1>
+
+    <form
+      [formRoot]="registrationForm"
+      class="space-y-8 rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+      <section class="space-y-4">
+        <h2 class="text-xl font-semibold">Profile</h2>
+        <div class="grid gap-4 sm:grid-cols-2">
+          <label class="flex flex-col gap-1 text-sm font-medium text-slate-700">
+            Name
+            <input
+              class="input"
+              type="text"
+              [formField]="registrationForm.name"
+              aria-required="true" />
+            <app-validation
+              [fieldState]="registrationForm.name()"></app-validation>
+          </label>
+          <label class="flex flex-col gap-1 text-sm font-medium text-slate-700">
+            Pseudo
+            <input
+              class="input"
+              type="text"
+              [formField]="registrationForm.pseudo"
+              aria-required="true" />
+            <app-validation
+              [fieldState]="registrationForm.pseudo()"></app-validation>
+          </label>
+        </div>
+      </section>
+
+      <section class="space-y-4">
+        <div class="flex items-center justify-between gap-4">
+          <h2 class="text-xl font-semibold">Contacts</h2>
+          <button type="button" (click)="addContact()" class="btn-secondary">
+            Add contact
+          </button>
+        </div>
+
+        <div class="space-y-4">
+          @for (contact of registrationForm().value().contacts; track $index) {
+            <app-contact-form-with-input-form
+              [contactForm]="registrationForm.contacts[$index]"
+              [index]="$index"
+              (remove)="removeContact($index)" />
+          }
+        </div>
+        @let contacts = registrationForm.contacts();
+        @if (contacts.invalid() && (contacts.touched() || contacts.dirty())) {
+          <p class="hint">At least one contact is required.</p>
+        }
+      </section>
+
+      <section class="space-y-4">
+        <div class="flex items-center justify-between gap-4">
+          <h2 class="text-xl font-semibold">Emails</h2>
+          <button type="button" (click)="addEmail()" class="btn-secondary">
+            Add email
+          </button>
+        </div>
+
+        <div class="space-y-4">
+          @for (email of registrationForm().value().emails; track $index) {
+            <app-email-form-with-input-form
+              [emailForm]="registrationForm.emails[$index]"
+              [index]="$index"
+              (remove)="removeEmail($index)" />
+          }
+        </div>
+      </section>
+
+      <div
+        class="flex flex-wrap items-center justify-between gap-4 border-t border-slate-200 pt-4">
+        <div class="text-sm text-slate-600">
+          <span [class.text-rose-600]="registrationForm().invalid()">
+            {{
+              registrationForm().invalid()
+                ? 'Form incomplete'
+                : 'Ready to submit'
+            }}
+          </span>
+        </div>
+        <button type="submit" class="btn-primary">Submit</button>
+      </div>
+    </form>
+
+    @if (submittedData()) {
+      <section
+        class="mt-6 rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+        <h3 class="mb-2 text-lg font-semibold">Submitted data</h3>
+        <pre
+          class="overflow-x-auto rounded bg-slate-900 p-4 text-sm text-slate-100"
+          >{{ submittedData() | json }}</pre
+        >
+      </section>
+    }
+  </div>
+</main>

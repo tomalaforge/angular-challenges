@@ -1,0 +1,75 @@
+<div
+  class="rounded-lg border border-slate-200 bg-slate-50/40 p-4"
+  data-testid="contact-item">
+  <div class="flex items-center justify-between gap-4">
+    <h3 class="text-sm font-semibold text-slate-700">
+      Contact {{ index() + 1 }}
+    </h3>
+    <button
+      type="button"
+      class="btn-danger"
+      aria-label="Remove contact {{ index() + 1 }}"
+      (click)="remove.emit()">
+      Remove
+    </button>
+  </div>
+
+  <div class="mt-4 grid gap-4 sm:grid-cols-2">
+    <label class="flex flex-col gap-1 text-sm font-medium text-slate-700">
+      First name
+      <input
+        class="input"
+        type="text"
+        [value]="value().firstname"
+        (input)="value.set({ ...value(), firstname: $event.target.value }); setModelDirty('firstname')"
+        (blur)="setModelTouched('firstname')"
+        aria-required="true" />
+      <app-validation
+        [fieldState]="fieldTree().firstname()"
+        [touched]="modelTouched().firstname"
+        [dirty]="modelDirty().firstname" />
+    </label>
+    <label class="flex flex-col gap-1 text-sm font-medium text-slate-700">
+      Last name
+      <input
+        class="input"
+        type="text"
+        [value]="value().lastname"
+        (input)="value.set({ ...value(), lastname: $event.target.value }); setModelDirty('lastname')"
+        (blur)="setModelTouched('lastname')"
+        aria-required="true" />
+      <app-validation
+        [fieldState]="fieldTree().lastname()"
+        [touched]="modelTouched().lastname"
+        [dirty]="modelDirty().lastname" />
+    </label>
+    <label class="flex flex-col gap-1 text-sm font-medium text-slate-700">
+      Relation
+      <input
+        class="input"
+        type="text"
+        [value]="value().relation"
+        (input)="value.set({ ...value(), relation: $event.target.value }); setModelDirty('relation')"
+        (blur)="setModelTouched('relation')"
+        aria-required="true" />
+      <app-validation
+        [fieldState]="fieldTree().relation()"
+        [touched]="modelTouched().relation"
+        [dirty]="modelDirty().relation" />
+    </label>
+    <label class="flex flex-col gap-1 text-sm font-medium text-slate-700">
+      Email
+      <input
+        class="input"
+        type="email"
+        [value]="value().email"
+        (input)="value.set({ ...value(), email: $event.target.value }); setModelDirty('email')"
+        (blur)="setModelTouched('email')"
+        aria-required="true" />
+      <app-validation
+        [fieldState]="fieldTree().email()"
+        [touched]="modelTouched().email"
+        [dirty]="modelDirty().email" />
+    </label>
+  </div>
+</div>
