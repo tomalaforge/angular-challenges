@@ -23,16 +23,6 @@ import {
 import { EmailFormWithInputFormComponent } from './email-form/email-form.component';
 import { emailSchema, initialEmailValue } from './email-form/email-form.model';
 
-type RegistrationValue = {
-  name: string;
-  pseudo: string;
-  contacts: Array<ContactValue>;
-  emails: Array<{
-    type: string;
-    email: string;
-  }>;
-};
-
 type RegistrationData = {
   name: string;
   pseudo: string;
@@ -95,7 +85,7 @@ export default class SimpleRegistrationFormComponent {
     },
   );
 
-  submittedData: WritableSignal<RegistrationValue | null> = signal(null);
+  submittedData: WritableSignal<RegistrationData | null> = signal(null);
 
   addContact(): void {
     this._registrationModel.update((value) => ({
