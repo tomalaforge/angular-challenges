@@ -1,10 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { page, userEvent } from 'vitest/browser';
-import { AppComponent } from './app.component';
+import RegistrationFormWithFormValueControlComponent from './registration-form-with-form-value-control.component';
 
-describe('AppComponent', () => {
+describe('RegistrationFormWithFormValueControlComponent', () => {
   beforeEach(async () => {
-    TestBed.createComponent(AppComponent);
+    TestBed.createComponent(RegistrationFormWithFormValueControlComponent);
   });
 
   describe('When component is rendered', () => {

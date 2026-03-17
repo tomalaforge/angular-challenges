@@ -1,0 +1,7 @@
+<span class="hint">
+  @if (showError()) {
+    @for (error of fieldState().errors(); track error) {
+      <span class="error">{{ error.message }}</span>
+    }
+  }
+</span>

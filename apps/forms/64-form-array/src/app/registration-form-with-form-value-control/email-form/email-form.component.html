@@ -1,0 +1,49 @@
+<div
+  class="rounded-lg border border-slate-200 bg-slate-50/40 p-4"
+  data-testid="email-item">
+  <div class="flex items-center justify-between gap-4">
+    <h3 class="text-sm font-semibold text-slate-700">
+      Email {{ index() + 1 }}
+    </h3>
+    <button
+      type="button"
+      class="btn-danger"
+      aria-label="Remove email {{ index() + 1 }}"
+      (click)="remove.emit()">
+      Remove
+    </button>
+  </div>
+
+  <div class="mt-4 grid gap-4 sm:grid-cols-2">
+    <label class="flex flex-col gap-1 text-sm font-medium text-slate-700">
+      Type
+      <select
+        class="input"
+        [value]="value().type"
+        (input)="onEmailTypeChange($event.target); setModelDirty('type')"
+        (blur)="setModelTouched('type')">
+        <option value="personal">Personal</option>
+        <option value="professional">Professional</option>
+        <option value="other">Other</option>
+      </select>
+      <app-validation
+        [fieldState]="fieldTree().type()"
+        [touched]="modelTouched().type"
+        [dirty]="modelDirty().type" />
+    </label>
+    <label class="flex flex-col gap-1 text-sm font-medium text-slate-700">
+      Email
+      <input
+        class="input"
+        type="email"
+        [value]="value().email"
+        (input)="value.set({ ...value(), email: $event.target.value }); setModelDirty('email')"
+        (blur)="setModelTouched('email')"
+        aria-required="true" />
+      <app-validation
+        [fieldState]="fieldTree().email()"
+        [touched]="modelTouched().email"
+        [dirty]="modelDirty().email" />
+    </label>
+  </div>
+</div>
