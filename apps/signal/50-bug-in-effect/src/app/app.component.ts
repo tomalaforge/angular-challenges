@@ -3,6 +3,7 @@ import {
   Component,
   effect,
   model,
+  signal,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -39,14 +40,20 @@ export class AppComponent {
   ram = model(false);
   gpu = model(false);
 
+  noOfModelsSelected = signal(0);
+
   constructor() {
     /* 
       Explain for your junior team mate why this bug occurs ...
     */
     effect(() => {
-      if (this.drive() || this.ram() || this.gpu()) {
+      const models = [this.drive(), this.ram(), this.gpu()];
+      const currentNoSelected = models.filter((model) => model).length;
+      const shouldFireAlert = currentNoSelected > this.noOfModelsSelected();
+      if (shouldFireAlert) {
         alert('Price increased!');
       }
+      this.noOfModelsSelected.set(currentNoSelected);
     });
   }
 }
