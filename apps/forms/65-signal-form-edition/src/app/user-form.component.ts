@@ -1,10 +1,9 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  effect,
   inject,
   input,
-  signal,
+  linkedSignal,
 } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { form, FormField, min, required, submit } from '@angular/forms/signals';
@@ -134,11 +133,22 @@ export class UserFormComponent {
     defaultValue: undefined,
   });
 
-  userModel = signal<Omit<User, 'id'>>({
-    firstname: '',
-    lastname: '',
-    age: 0,
-    grade: 0,
+  userModel = linkedSignal<Omit<User, 'id'>>(() => {
+    const hasValue = this.userResource.hasValue();
+    const user = this.userResource.value();
+
+    if (hasValue && user) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { id, ...rest } = user;
+      return rest;
+    } else {
+      return {
+        firstname: '',
+        lastname: '',
+        age: 0,
+        grade: 0,
+      };
+    }
   });
 
   userSignalForm = form(this.userModel, (schemePath) => {
@@ -148,17 +158,6 @@ export class UserFormComponent {
     min(schemePath.age, 0, { message: 'Age must be positive' });
     required(schemePath.grade);
   });
-
-  constructor() {
-    effect(() => {
-      const userValue = this.userResource.value();
-      if (userValue) {
-        this.userModel.set(userValue);
-      } else {
-        this.userModel.set({ firstname: '', lastname: '', age: 0, grade: 0 });
-      }
-    });
-  }
 
   onSubmit(event: Event): void {
     event.preventDefault();
