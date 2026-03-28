@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   effect,
   model,
   signal,
@@ -36,24 +37,28 @@ import { FormsModule } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-  drive = model(false);
-  ram = model(false);
-  gpu = model(false);
+  protected readonly drive = model(false);
+  protected readonly ram = model(false);
+  protected readonly gpu = model(false);
 
-  noOfModelsSelected = signal(0);
+  private readonly currentNoSelected = signal(0);
+
+  private readonly noOfModelsSelected = computed(
+    () =>
+      [this.drive(), this.ram(), this.gpu()].filter((model) => model).length,
+  );
+
+  private prev = this.currentNoSelected();
 
   constructor() {
-    /* 
-      Explain for your junior team mate why this bug occurs ...
-    */
     effect(() => {
-      const models = [this.drive(), this.ram(), this.gpu()];
-      const currentNoSelected = models.filter((model) => model).length;
-      const shouldFireAlert = currentNoSelected > this.noOfModelsSelected();
+      const valueNow = this.noOfModelsSelected();
+      const shouldFireAlert = valueNow > this.prev;
       if (shouldFireAlert) {
         alert('Price increased!');
       }
-      this.noOfModelsSelected.set(currentNoSelected);
+      this.prev = valueNow;
+      this.currentNoSelected.set(valueNow);
     });
   }
 }
