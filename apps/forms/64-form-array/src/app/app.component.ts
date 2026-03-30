@@ -1,104 +1,98 @@
 import { JsonPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormField } from '@angular/forms/signals';
 import {
-  ChangeDetectionStrategy,
-  Component,
-  signal,
-  WritableSignal,
-} from '@angular/core';
-import {
-  AbstractControl,
-  FormArray,
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+  cEmail,
+  cMinLength,
+  cRequired,
+  insertForm,
+  insertFormAttributes,
+  insertFormSubmit,
+  insertNoopTypingAnchor,
+  insertSelectFormTree,
+  mutation,
+  state,
+  ValidatedFormValue,
+} from '@craft-ng/core';
 import { ContactFormComponent } from './contact-form.component';
 
-type ContactFormGroup = FormGroup<{
-  firstname: FormControl<string>;
-  lastname: FormControl<string>;
-  relation: FormControl<string>;
-  email: FormControl<string>;
-}>;
-
-type EmailFormGroup = FormGroup<{
-  type: FormControl<string>;
-  email: FormControl<string>;
-}>;
-
-type RegistrationForm = {
-  name: FormControl<string>;
-  pseudo: FormControl<string>;
-  contacts: FormArray<ContactFormGroup>;
-  emails: FormArray<EmailFormGroup>;
+type Contact = {
+  firstname: string;
+  lastname: string;
+  relation: string;
+  email: string;
 };
 
-type RegistrationValue = {
+type Email = {
+  type: string;
+  email: string;
+};
+
+type Registration = {
   name: string;
   pseudo: string;
-  contacts: Array<{
-    firstname: string;
-    lastname: string;
-    relation: string;
-    email: string;
-  }>;
-  emails: Array<{
-    type: string;
-    email: string;
-  }>;
+  contacts: Contact[];
+  emails: Email[];
 };
 
-export const minLengthArray = (min: number) => {
-  return (c: AbstractControl) => {
-    if (c.value.length >= min) return null;
-
-    return { MinLengthArray: true };
-  };
-};
+// 😅 I may add some helpers
+export type ContactField = ReturnType<
+  ReturnType<
+    ReturnType<
+      ReturnType<
+        InstanceType<typeof AppComponent>['registration']['form']
+      >['selectContacts']
+    >
+  >['items']
+>[number];
 
 @Component({
   selector: 'app-root',
-  imports: [ReactiveFormsModule, JsonPipe, ContactFormComponent],
+  imports: [ReactiveFormsModule, JsonPipe, ContactFormComponent, FormField],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <main class="min-h-screen bg-slate-50 text-slate-900">
       <div class="mx-auto max-w-5xl px-6 py-12">
         <h1 class="mb-6 text-3xl font-semibold">Registration form</h1>
+        @let form = registration.form();
         <form
-          [formGroup]="form"
-          (ngSubmit)="onSubmit()"
           class="space-y-8 rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
           <section class="space-y-4">
             <h2 class="text-xl font-semibold">Profile</h2>
             <div class="grid gap-4 sm:grid-cols-2">
+              @let nameField = form.selectName();
               <label
                 class="flex flex-col gap-1 text-sm font-medium text-slate-700">
                 Name
-                <input
-                  class="input"
-                  type="text"
-                  formControlName="name"
-                  required
-                  aria-required="true" />
+                <input class="input" type="text" [formField]="nameField" />
                 <span class="hint">
-                  @if (showError(form.controls.name)) {
-                    This field is required
+                  @for( exception of nameField().visibleExceptions().list; track exception.code) {
+                    @switch(exception.code) {
+                      @case('required') {
+                        Name is required
+                      }
+                      @default never;
+                    }
                   }
                 </span>
               </label>
+              @let pseudoField = form.selectPseudo();
               <label
                 class="flex flex-col gap-1 text-sm font-medium text-slate-700">
                 Pseudo
                 <input
                   class="input"
                   type="text"
-                  formControlName="pseudo"
-                  required
-                  aria-required="true" />
+                  [formField]="pseudoField" />
                 <span class="hint">
-                  @if (showError(form.controls.pseudo)) {
-                    This field is required
+                  @for( exception of pseudoField().visibleExceptions().list; track exception.code) {
+                    @switch(exception.code) {
+                      @case('required') {
+                        This field is required
+                      }
+                      @default never;
+                    }
                   }
                 </span>
               </label>
@@ -106,40 +100,47 @@ export const minLengthArray = (min: number) => {
           </section>
 
           <section class="space-y-4">
+            @let contacts = form.selectContacts();
             <div class="flex items-center justify-between gap-4">
               <h2 class="text-xl font-semibold">Contacts</h2>
               <button
                 type="button"
-                (click)="addContact()"
+                (click)="contacts().add()"
                 class="btn-secondary">
                 Add contact
               </button>
             </div>
 
-            <div formArrayName="contacts" class="space-y-4">
-              @for (contact of contacts.controls; track $index) {
+            <div  class="space-y-4">
+              @for (contact of contacts().items(); track $index) {
                 <app-contact-form
-                  [group]="contact"
+                  [field]="contact"
                   [index]="$index"
-                  (remove)="removeContact($index)"></app-contact-form>
+                  (remove)="contacts().remove($index)"></app-contact-form>
               }
             </div>
-
-            @if (contacts.invalid && (contacts.touched || contacts.dirty)) {
-              <p class="hint">At least one contact is required.</p>
+            @for( exception of contacts().visibleExceptions().list; track exception.code) {
+              @let code = exception.code;
+              @switch(code) {
+                @case('minLength') {
+                  <p class="hint">At least one contact is required.</p>
+                }
+                @default never;
+              }
             }
           </section>
 
           <section class="space-y-4">
+             @let emails = form.selectEmails();
             <div class="flex items-center justify-between gap-4">
               <h2 class="text-xl font-semibold">Emails</h2>
-              <button type="button" (click)="addEmail()" class="btn-secondary">
+              <button type="button" (click)="emails().add()" class="btn-secondary">
                 Add email
               </button>
             </div>
 
-            <div formArrayName="emails" class="space-y-4">
-              @for (email of emails.controls; track $index) {
+            <div class="space-y-4">
+              @for (email of emails().items(); track $index) {
                 <div
                   class="rounded-lg border border-slate-200 bg-slate-50/40 p-4"
                   data-testid="email-item">
@@ -151,47 +152,51 @@ export const minLengthArray = (min: number) => {
                       type="button"
                       class="btn-danger"
                       aria-label="Remove email {{ $index + 1 }}"
-                      (click)="removeEmail($index)">
+                      (click)="emails().remove($index)">
                       Remove
                     </button>
                   </div>
 
                   <div
-                    class="mt-4 grid gap-4 sm:grid-cols-2"
-                    [formGroupName]="$index">
+                    class="mt-4 grid gap-4 sm:grid-cols-2">
+                    @let relativeField = email().selectType();
                     <label
                       class="flex flex-col gap-1 text-sm font-medium text-slate-700">
                       Type
-                      <select class="input" formControlName="type">
+                      <select class="input" [formField]="relativeField">
                         <option value="personal">Personal</option>
                         <option value="professional">Professional</option>
                         <option value="other">Other</option>
                       </select>
-                      <span class="hint">
-                        @if (showError(email.controls.type)) {
-                          This field is required
+                      @for(exceptions of relativeField().visibleExceptions().list; track exceptions.code) {
+                        @switch(exceptions.code) {
+                          @case('required') {
+                            <span class="hint">This field is required</span>
+                          }
+                          @default never;
                         }
-                      </span>
+                      }
                     </label>
+                    @let emailField = email().selectEmail();
                     <label
                       class="flex flex-col gap-1 text-sm font-medium text-slate-700">
                       Email
                       <input
                         class="input"
                         type="email"
-                        formControlName="email"
-                        required
-                        aria-required="true" />
-                      <span class="hint">
-                        @if (showError(email.controls.email)) {
-                          @if (email.controls.email.hasError('required')) {
-                            Email is required
-                          }
-                          @if (email.controls.email.hasError('email')) {
-                            Enter a valid email
+                        [formField]="emailField" />
+                        @for(exceptions of emailField().visibleExceptions().list; track exceptions.code) {
+                          @let code= exceptions.code;
+                          @switch(code) {
+                            @case('required') {
+                              <span class="hint">Email is required</span>
+                            }
+                            @case('email') {
+                              <span class="hint">Enter a valid email</span>
+                            }
+                            @default never;
                           }
                         }
-                      </span>
                     </label>
                   </div>
                 </div>
@@ -202,21 +207,21 @@ export const minLengthArray = (min: number) => {
           <div
             class="flex flex-wrap items-center justify-between gap-4 border-t border-slate-200 pt-4">
             <div class="text-sm text-slate-600">
-              <span [class.text-rose-600]="form.invalid">
-                {{ form.invalid ? 'Form incomplete' : 'Ready to submit' }}
+              <span [class.text-rose-600]="registration.form().invalid()">
+                {{ registration.form().invalid() ? 'Form incomplete' : 'Ready to submit' }}
               </span>
             </div>
-            <button type="submit" class="btn-primary">Submit</button>
+            <button type='button' (click)="registration.form().submit()" class="btn-primary">Submit</button>
           </div>
         </form>
 
-        @if (submittedData()) {
+        @if (save.safeValue()) {
           <section
             class="mt-6 rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
             <h3 class="mb-2 text-lg font-semibold">Submitted data</h3>
             <pre
               class="overflow-x-auto rounded bg-slate-900 p-4 text-sm text-slate-100"
-              >{{ submittedData() | json }}</pre
+              >{{ save.safeValue() | json }}</pre
             >
           </section>
         }
@@ -246,87 +251,104 @@ export const minLengthArray = (min: number) => {
   ],
 })
 export class AppComponent {
-  readonly contacts = new FormArray<ContactFormGroup>([], {
-    validators: [minLengthArray(1)],
+  protected readonly save = mutation({
+    method: (registration: ValidatedFormValue<Registration>) => registration,
+    loader: async ({ params: registration }) => registration,
   });
 
-  readonly emails = new FormArray<EmailFormGroup>([]);
-
-  readonly form = new FormGroup<RegistrationForm>({
-    name: new FormControl('', {
-      nonNullable: true,
-      validators: [Validators.required],
-    }),
-    pseudo: new FormControl('', {
-      nonNullable: true,
-      validators: [Validators.required],
-    }),
-    contacts: this.contacts,
-    emails: this.emails,
-  });
-
-  submittedData: WritableSignal<RegistrationValue | null> = signal(null);
-
-  addContact(): void {
-    this.contacts.push(this.createContactGroup());
-  }
-
-  removeContact(index: number): void {
-    this.contacts.removeAt(index);
-  }
-
-  addEmail(): void {
-    this.emails.push(this.createEmailFormGroup());
-  }
-
-  removeEmail(index: number): void {
-    this.emails.removeAt(index);
-  }
-
-  onSubmit(): void {
-    this.form.markAllAsTouched();
-    if (this.form.invalid) {
-      return;
-    }
-
-    this.submittedData.set(this.form.getRawValue());
-  }
-
-  showError(control: FormControl<string>): boolean {
-    return control.invalid && (control.touched || control.dirty);
-  }
-
-  private createContactGroup(): ContactFormGroup {
-    return new FormGroup({
-      firstname: new FormControl('', {
-        nonNullable: true,
-        validators: [Validators.required],
-      }),
-      lastname: new FormControl('', {
-        nonNullable: true,
-        validators: [Validators.required],
-      }),
-      relation: new FormControl('', {
-        nonNullable: true,
-        validators: [Validators.required],
-      }),
-      email: new FormControl('', {
-        nonNullable: true,
-        validators: [Validators.required, Validators.email],
-      }),
-    });
-  }
-
-  private createEmailFormGroup(): EmailFormGroup {
-    return new FormGroup({
-      type: new FormControl('personal', {
-        nonNullable: true,
-        validators: [Validators.required],
-      }),
-      email: new FormControl('', {
-        nonNullable: true,
-        validators: [Validators.required, Validators.email],
-      }),
-    });
-  }
+  readonly registration = state(
+    {
+      name: '',
+      pseudo: '',
+      contacts: [],
+      emails: [],
+    } satisfies Registration as Registration,
+    insertForm(
+      insertFormSubmit(this.save),
+      insertSelectFormTree(
+        'name',
+        insertNoopTypingAnchor,
+        insertFormAttributes(() => ({ validators: [cRequired()] })),
+      ),
+      insertSelectFormTree(
+        'pseudo',
+        insertNoopTypingAnchor,
+        insertFormAttributes(() => ({ validators: [cRequired()] })),
+      ),
+      insertSelectFormTree(
+        'contacts',
+        insertNoopTypingAnchor,
+        ({ update }) => ({
+          add: () =>
+            update((contacts) => [
+              ...contacts,
+              { firstname: '', lastname: '', relation: '', email: '' },
+            ]),
+          remove: (index: number) =>
+            update((contacts) => contacts.filter((_, i) => i !== index)),
+        }),
+        insertFormAttributes(() => ({
+          validators: [cMinLength({ minLength: 1 })],
+        })),
+        insertSelectFormTree(
+          'contact',
+          insertSelectFormTree(
+            'firstname',
+            insertNoopTypingAnchor,
+            insertFormAttributes(() => ({
+              validators: [cRequired()],
+            })),
+          ),
+          insertSelectFormTree(
+            'lastname',
+            insertNoopTypingAnchor,
+            insertFormAttributes(() => ({
+              validators: [cRequired()],
+            })),
+          ),
+          insertSelectFormTree(
+            'email',
+            insertNoopTypingAnchor,
+            insertFormAttributes(() => ({
+              validators: [cRequired(), cEmail()],
+            })),
+          ),
+          insertSelectFormTree(
+            'relation',
+            insertNoopTypingAnchor,
+            insertFormAttributes(() => ({
+              validators: [cRequired()],
+            })),
+          ),
+        ),
+      ),
+      insertSelectFormTree(
+        'emails',
+        ({ update }) => ({
+          add: () =>
+            update((emails) => [...emails, { email: '', type: 'personal' }]),
+          remove: (index: number) =>
+            update((contacts) => contacts.filter((_, i) => i !== index)),
+        }),
+        insertSelectFormTree(
+          'email',
+          insertNoopTypingAnchor,
+          insertSelectFormTree(
+            'email',
+            insertNoopTypingAnchor,
+            insertFormAttributes(() => ({
+              validators: [cRequired(), cEmail()],
+            })),
+          ),
+          insertSelectFormTree(
+            'type',
+            insertNoopTypingAnchor,
+            insertFormAttributes(() => ({
+              validators: [cRequired()],
+            })),
+          ),
+        ),
+      ),
+    ),
+  );
 }

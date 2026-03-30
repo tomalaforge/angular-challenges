@@ -1,21 +1,13 @@
 import { Component, input, output } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-
-type ContactFormGroup = FormGroup<{
-  firstname: FormControl<string>;
-  lastname: FormControl<string>;
-  relation: FormControl<string>;
-  email: FormControl<string>;
-}>;
-
+import { FormField } from '@angular/forms/signals';
+import { ContactField } from './app.component';
 @Component({
   selector: 'app-contact-form',
-  imports: [ReactiveFormsModule],
+  imports: [FormField],
   template: `
     <div
       class="rounded-lg border border-slate-200 bg-slate-50/40 p-4"
-      data-testid="contact-item"
-      [formGroup]="group()">
+      data-testid="contact-item">
       <div class="flex items-center justify-between gap-4">
         <h3 class="text-sm font-semibold text-slate-700">
           Contact {{ index() + 1 }}
@@ -30,63 +22,87 @@ type ContactFormGroup = FormGroup<{
       </div>
 
       <div class="mt-4 grid gap-4 sm:grid-cols-2">
+        @let firstNameField = this.field()().selectFirstname();
         <label class="flex flex-col gap-1 text-sm font-medium text-slate-700">
           First name
-          <input
-            class="input"
-            type="text"
-            formControlName="firstname"
-            required
-            aria-required="true" />
-          <span class="hint">
-            @if (showError(group().controls.firstname)) {
-              This field is required
-            }
-          </span>
+          <input class="input" type="text" [formField]="firstNameField" />
+          @for (
+            exception of firstNameField().visibleExceptions().list;
+            track exception.code
+          ) {
+            <span class="hint">
+              @switch (exception.code) {
+                @case('required') {
+                  First name is required
+                }
+                @default never;
+              }
+            </span>
+          }
         </label>
+        @let lastNameField = this.field()().selectLastname();
         <label class="flex flex-col gap-1 text-sm font-medium text-slate-700">
           Last name
           <input
             class="input"
             type="text"
-            formControlName="lastname"
-            required
-            aria-required="true" />
+            [formField]="lastNameField" />
           <span class="hint">
-            @if (showError(group().controls.lastname)) {
-              This field is required
+            @for (
+              exception of lastNameField().visibleExceptions().list;
+              track exception.code
+            ) {
+              @switch (exception.code) {
+                @case('required') {
+                  Last name is required
+                }
+                @default never;
+              }
             }
           </span>
         </label>
+        @let relationField = this.field()().selectRelation();
         <label class="flex flex-col gap-1 text-sm font-medium text-slate-700">
           Relation
           <input
             class="input"
             type="text"
-            formControlName="relation"
-            required
-            aria-required="true" />
+            [formField]="relationField" />
           <span class="hint">
-            @if (showError(group().controls.relation)) {
-              This field is required
+            @for (
+              exception of relationField().visibleExceptions().list;
+              track exception.code
+            ) {
+              @switch (exception.code) {
+                @case('required') {
+                  Relation is required
+                }
+                @default never;
+              }
             }
           </span>
         </label>
+        @let emailField = this.field()().selectEmail();
         <label class="flex flex-col gap-1 text-sm font-medium text-slate-700">
           Email
           <input
             class="input"
             type="email"
-            formControlName="email"
-            required
-            aria-required="true" />
+            [formField]="emailField" />
           <span class="hint">
-            @if (showError(group().controls.email)) {
-              @if (group().controls.email.hasError('required')) {
-                Email is required
-              }
-              @if (group().controls.email.hasError('email')) {
-                Enter a valid email
+            @for (
+              exception of emailField().visibleExceptions().list;
+              track exception.code
+            ) {
+              @let code = exception.code;
+              @switch (code) {
+                @case('required') {
+                  Email is required
+                }
+                @case('email') {
+                  Enter a valid email
+                }
+                @default never;
               }
             }
           </span>
@@ -96,11 +112,7 @@ type ContactFormGroup = FormGroup<{
   `,
 })
 export class ContactFormComponent {
-  group = input.required<ContactFormGroup>();
+  field = input.required<ContactField>();
   index = input(0);
   remove = output<void>();
-
-  showError(control: FormControl<string>): boolean {
-    return control.invalid && (control.touched || control.dirty);
-  }
 }
