@@ -1,16 +1,10 @@
 import { TestBed } from '@angular/core/testing';
-import { provideRouter } from '@angular/router';
-import { page, userEvent } from 'vitest/browser';
-import { AdminComponent } from './admin.component';
-import { AdminGuard } from './admin.guard';
-import { AuthGuard } from './auth.guard';
-import { AuthService } from './auth.service';
-import { DashboardComponent } from './dashboard.component';
-import { HomeComponent } from './home.component';
-import { routes } from './app.routes';
+import { Router, provideRouter } from '@angular/router';
 import { AppComponent } from './app.component';
+import { AuthService } from './auth.service';
+import { routes } from './app.routes';
 
-describe('Auth Guards', () => {
+describe('Functional Auth Guards', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [provideRouter(routes)],
@@ -18,43 +12,43 @@ describe('Auth Guards', () => {
     TestBed.createComponent(AppComponent);
   });
 
-  describe('AuthGuard', () => {
-    it('Then should redirect to / when not logged in', async () => {
-      const guard = TestBed.inject(AuthGuard);
-      const result = guard.canActivate();
-      expect(result).toBeFalsy();
+  describe('authGuard', () => {
+    it('should redirect to / when not logged in', async () => {
+      const router = TestBed.inject(Router);
+      await router.navigate(['/dashboard']);
+      expect(router.url).toBe('/');
     });
 
-    it('Then should allow access when logged in', async () => {
+    it('should allow navigation when logged in', async () => {
       const authService = TestBed.inject(AuthService);
+      const router = TestBed.inject(Router);
       authService.login('user');
-      const guard = TestBed.inject(AuthGuard);
-      const result = guard.canActivate();
-      expect(result).toBe(true);
+      await router.navigate(['/dashboard']);
+      expect(router.url).toBe('/dashboard');
     });
   });
 
-  describe('AdminGuard', () => {
-    it('Then should redirect to / when not logged in', async () => {
-      const guard = TestBed.inject(AdminGuard);
-      const result = guard.canActivate();
-      expect(result).toBeFalsy();
+  describe('adminGuard', () => {
+    it('should redirect to / when not logged in', async () => {
+      const router = TestBed.inject(Router);
+      await router.navigate(['/admin']);
+      expect(router.url).toBe('/');
     });
 
-    it('Then should redirect to / when logged in as user', async () => {
+    it('should redirect to / when logged in as user', async () => {
       const authService = TestBed.inject(AuthService);
+      const router = TestBed.inject(Router);
       authService.login('user');
-      const guard = TestBed.inject(AdminGuard);
-      const result = guard.canActivate();
-      expect(result).toBeFalsy();
+      await router.navigate(['/admin']);
+      expect(router.url).toBe('/');
     });
 
-    it('Then should allow access when logged in as admin', async () => {
+    it('should allow navigation when logged in as admin', async () => {
       const authService = TestBed.inject(AuthService);
+      const router = TestBed.inject(Router);
       authService.login('admin');
-      const guard = TestBed.inject(AdminGuard);
-      const result = guard.canActivate();
-      expect(result).toBe(true);
+      await router.navigate(['/admin']);
+      expect(router.url).toBe('/admin');
     });
   });
 });

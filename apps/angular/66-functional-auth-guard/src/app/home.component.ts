@@ -11,7 +11,7 @@ import { AuthService } from './auth.service';
       <p class="text-gray-600">
         Status:
         <span class="font-semibold">
-          {{ authService.isLoggedIn ? 'Logged in as ' + authService.role : 'Not logged in' }}
+          {{ authService.isLoggedIn() ? 'Logged in as ' + authService.role() : 'Not logged in' }}
         </span>
       </p>
 
