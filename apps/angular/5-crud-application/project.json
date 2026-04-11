@@ -56,6 +56,10 @@
     },
     "serve": {
       "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "buildTarget": "angular-crud-application:build:development",
+        "proxyConfig": "apps/angular/5-crud-application/proxy.conf.json"
+      },
       "configurations": {
         "production": {
           "buildTarget": "angular-crud-application:build:production"

@@ -1,49 +1,50 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { randText } from '@ngneat/falso';
+import { Todo } from './todo.model';
+import { TodoService } from './todo.service';
 
 @Component({
-  imports: [],
+  imports: [MatProgressSpinnerModule],
   selector: 'app-root',
   template: `
-    @for (todo of todos; track todo.id) {
-      {{ todo.title }}
-      <button (click)="update(todo)">Update</button>
+    @if (loadingState()) {
+      <
+      <mat-spinner />
+    } @else if (errorState()) {
+      <p>{{ errorState() }}</p>
+    } @else {
+      <p>Todo List:</p>
+      <ul>
+        @for (todo of todoList(); track todo.id) {
+          <li>
+            {{ todo.title }}
+            <button (click)="update(todo)">Update</button>
+            <button (click)="delete(todo.id)">delete</button>
+          </li>
+        }
+      </ul>
     }
   `,
   styles: [],
 })
-export class AppComponent implements OnInit {
-  private http = inject(HttpClient);
-
-  todos!: any[];
+export class AppComponent {
+  private readonly todoService = inject(TodoService);
+  readonly todos = this.todoService.todos;
+  protected readonly todoList = computed(() => this.todoService.todos() || []);
+  loadingState = this.todoService.loadingState;
+  errorState = this.todoService.errorState;
 
   ngOnInit(): void {
-    this.http
-      .get<any[]>('https://jsonplaceholder.typicode.com/todos')
-      .subscribe((todos) => {
-        this.todos = todos;
-      });
+    this.todoService.loadTodos();
   }
 
-  update(todo: any) {
-    this.http
-      .put<any>(
-        `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
-        JSON.stringify({
-          todo: todo.id,
-          title: randText(),
-          body: todo.body,
-          userId: todo.userId,
-        }),
-        {
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-          },
-        },
-      )
-      .subscribe((todoUpdated: any) => {
-        this.todos[todoUpdated.id - 1] = todoUpdated;
-      });
+  update(todo: Todo): void {
+    const updatedTodo = { ...todo, title: randText() };
+    this.todoService.updateTodo(updatedTodo);
+  }
+
+  delete(id: number): void {
+    this.todoService.deleteTodo(id);
   }
 }
