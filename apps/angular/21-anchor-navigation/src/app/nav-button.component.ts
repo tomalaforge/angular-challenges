@@ -1,10 +1,12 @@
 /* eslint-disable @angular-eslint/component-selector */
-import { Component, input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
+import { RouterLinkWithHref } from '@angular/router';
 
 @Component({
   selector: 'nav-button',
+  imports: [RouterLinkWithHref],
   template: `
-    <a [href]="href()">
+    <a [routerLink]="link()" [fragment]="fragment()">
       <ng-content />
     </a>
   `,
@@ -14,4 +16,9 @@ import { Component, input } from '@angular/core';
 })
 export class NavButtonComponent {
   href = input('');
+  isAnchor = computed(() =>
+    this.href().startsWith('#') ? this.href().substring(1) : '',
+  );
+  link = computed(() => (this.isAnchor() ? [] : this.href()));
+  fragment = computed(() => (this.isAnchor() ? this.isAnchor() : undefined));
 }
