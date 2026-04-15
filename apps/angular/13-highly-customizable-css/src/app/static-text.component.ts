@@ -1,5 +1,5 @@
 /* eslint-disable @angular-eslint/component-selector */
-import { Component, computed, input } from '@angular/core';
+import { Component } from '@angular/core';
 import { TextComponent } from './text.component';
 
 export type StaticTextType = 'normal' | 'warning' | 'error';
@@ -8,31 +8,25 @@ export type StaticTextType = 'normal' | 'warning' | 'error';
   selector: 'static-text',
   imports: [TextComponent],
   template: `
-    <text [font]="font()" [color]="color()">This is a static text</text>
+    <text>This is a static text</text>
   `,
+  styles: [
+    `
+      :host-context(.error) {
+        --font: 30px;
+        --color: red;
+      }
+
+      :host-context(.warning) {
+        --font: 25px;
+        --color: orange;
+      }
+
+      :host-context(.normal) {
+        --font: 10px;
+        --color: black;
+      }
+    `,
+  ],
 })
-export class TextStaticComponent {
-  type = input<StaticTextType>('normal');
-
-  font = computed(() => {
-    switch (this.type()) {
-      case 'error':
-        return 30;
-      case 'warning':
-        return 25;
-      default:
-        return 10;
-    }
-  });
-
-  color = computed(() => {
-    switch (this.type()) {
-      case 'error':
-        return 'red';
-      case 'warning':
-        return 'orange';
-      default:
-        return 'black';
-    }
-  });
-}
+export class TextStaticComponent {}
