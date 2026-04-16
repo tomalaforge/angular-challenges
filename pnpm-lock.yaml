@@ -59,6 +59,9 @@ importers:
       '@ngrx/operators':
         specifier: 21.0.0
         version: 21.0.0(rxjs@7.8.1)
+      '@ngrx/signals':
+        specifier: ^21.1.0
+        version: 21.1.0(@angular/core@21.2.2(@angular/compiler@21.2.2)(rxjs@7.8.1)(zone.js@0.16.0))(rxjs@7.8.1)
       '@nx/angular':
         specifier: 22.5.4
         version: 22.5.4(e67ad03a342ea0802320eab6abde917d)
@@ -3090,6 +3093,15 @@ packages:
 
   '@ngrx/schematics@19.0.1':
     resolution: {integrity: sha512-kH91X7zewB8niOeemk8NgbjnnW0crwqTl8gG2zZAySW3Q0yGnoPpVAc4Yxezm1/bKsLGLILvEAzzlQGKBrigVg==}
+
+  '@ngrx/signals@21.1.0':
+    resolution: {integrity: sha512-eDGaBs6sssEZe2cLGwDdRnfTwyx9TKD+zpLW8yDov6acWzyi0nW5qxUWjpMRwmIU1i+o0t5MMpQaF/rFMmtHSg==}
+    peerDependencies:
+      '@angular/core': ^21.0.0
+      rxjs: ^6.5.3 || ^7.4.0
+    peerDependenciesMeta:
+      rxjs:
+        optional: true
 
   '@ngtools/webpack@21.2.1':
     resolution: {integrity: sha512-HGRGTDmyo3IuxxEAVK9/QK2Nd/nwWIh/zcd2x6nmCxC7tdB0fwIhEZhWnUDyLP2QnDaEPeR4NnZCGTN89SWhGg==}
@@ -14708,6 +14720,13 @@ snapshots:
       tslib: 2.8.1
 
   '@ngrx/schematics@19.0.1': {}
+
+  '@ngrx/signals@21.1.0(@angular/core@21.2.2(@angular/compiler@21.2.2)(rxjs@7.8.1)(zone.js@0.16.0))(rxjs@7.8.1)':
+    dependencies:
+      '@angular/core': 21.2.2(@angular/compiler@21.2.2)(rxjs@7.8.1)(zone.js@0.16.0)
+      tslib: 2.8.1
+    optionalDependencies:
+      rxjs: 7.8.1
 
   '@ngtools/webpack@21.2.1(@angular/compiler-cli@21.2.2(@angular/compiler@21.2.2)(typescript@5.9.3))(typescript@5.9.3)(webpack@5.105.2(@swc/core@1.15.8(@swc/helpers@0.5.19)))':
     dependencies:

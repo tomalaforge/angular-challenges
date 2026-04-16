@@ -1,9 +1,9 @@
-import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  effect,
   inject,
-  Input,
+  input,
 } from '@angular/core';
 import { CurrencyPipe } from './currency.pipe';
 import { CurrencyService } from './currency.service';
@@ -13,22 +13,23 @@ import { Product } from './product.model';
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'tr[product-row]',
   template: `
-    <td>{{ productInfo.name }}</td>
-    <td>{{ productInfo.priceA | currency | async }}</td>
-    <td>{{ productInfo.priceB | currency | async }}</td>
-    <td>{{ productInfo.priceC | currency | async }}</td>
+    <td>{{ productInfo().name }}</td>
+    <td>{{ productInfo().priceA | currency }}</td>
+    <td>{{ productInfo().priceB | currency }}</td>
+    <td>{{ productInfo().priceC | currency }}</td>
   `,
-  imports: [AsyncPipe, CurrencyPipe],
+  imports: [CurrencyPipe],
   providers: [CurrencyService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductRowComponent {
-  protected productInfo!: Product;
-
-  @Input({ required: true }) set product(product: Product) {
-    this.currencyService.updateCode(product.currencyCode);
-    this.productInfo = product;
-  }
-
+  productInfo = input.required<Product>({ alias: 'product' });
   currencyService = inject(CurrencyService);
+
+  constructor() {
+    effect(() => {
+      const product = this.productInfo();
+      this.currencyService.updateCode(product.currencyCode);
+    });
+  }
 }
