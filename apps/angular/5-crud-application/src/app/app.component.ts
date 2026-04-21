@@ -1,49 +1,50 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
-import { randText } from '@ngneat/falso';
+
+import { FakeHttpService } from './data-access/fake-http.service';
+import { TODO } from './model/todo.model';
 
 @Component({
   imports: [],
   selector: 'app-root',
   template: `
-    @for (todo of todos; track todo.id) {
-      {{ todo.title }}
-      <button (click)="update(todo)">Update</button>
-    }
+    <div class="table-design"></div>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Update</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (todo of todos(); track todo.id) {
+          <tr>
+            <td>{{ todo.title }}</td>
+            <td>
+              <button (click)="update(todo)">Update</button>
+            </td>
+            <td>
+              <button (click)="delete(todo)">Delete</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
   `,
-  styles: [],
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  private http = inject(HttpClient);
-
-  todos!: any[];
+  fakehttpService = inject(FakeHttpService);
+  readonly todos = this.fakehttpService.todoSignal;
 
   ngOnInit(): void {
-    this.http
-      .get<any[]>('https://jsonplaceholder.typicode.com/todos')
-      .subscribe((todos) => {
-        this.todos = todos;
-      });
+    this.fakehttpService.getAllTodos();
   }
 
-  update(todo: any) {
-    this.http
-      .put<any>(
-        `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
-        JSON.stringify({
-          todo: todo.id,
-          title: randText(),
-          body: todo.body,
-          userId: todo.userId,
-        }),
-        {
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-          },
-        },
-      )
-      .subscribe((todoUpdated: any) => {
-        this.todos[todoUpdated.id - 1] = todoUpdated;
-      });
+  update(todo: TODO) {
+    this.fakehttpService.updateTodo(todo);
+  }
+  delete(todo: TODO) {
+    this.fakehttpService.deleteTodo(todo);
   }
 }
