@@ -14,6 +14,7 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
+    "ignoreDeprecations": "6.0",
     "paths": {
       "@angular-challenges/cli": ["libs/cli/src/index.ts"],
       "@angular-challenges/custom-plugin": ["libs/custom-plugin/src/index.ts"],
