@@ -1,106 +1,35 @@
 import { Component, input, output } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-
-type ContactFormGroup = FormGroup<{
-  firstname: FormControl<string>;
-  lastname: FormControl<string>;
-  relation: FormControl<string>;
-  email: FormControl<string>;
-}>;
+import { FieldTree, FormField } from '@angular/forms/signals';
+import { ContactModel } from './registration.model';
+import { ValidationMessageComponent } from './validation-message.component';
 
 @Component({
   selector: 'app-contact-form',
-  imports: [ReactiveFormsModule],
-  template: `
-    <div
-      class="rounded-lg border border-slate-200 bg-slate-50/40 p-4"
-      data-testid="contact-item"
-      [formGroup]="group()">
-      <div class="flex items-center justify-between gap-4">
-        <h3 class="text-sm font-semibold text-slate-700">
-          Contact {{ index() + 1 }}
-        </h3>
-        <button
-          type="button"
-          class="btn-danger"
-          aria-label="Remove contact {{ index() + 1 }}"
-          (click)="remove.emit()">
-          Remove
-        </button>
-      </div>
+  imports: [FormField, ValidationMessageComponent],
+  templateUrl: './contact-form.component.html',
+  styles: `
+    @reference "tailwindcss";
 
-      <div class="mt-4 grid gap-4 sm:grid-cols-2">
-        <label class="flex flex-col gap-1 text-sm font-medium text-slate-700">
-          First name
-          <input
-            class="input"
-            type="text"
-            formControlName="firstname"
-            required
-            aria-required="true" />
-          <span class="hint">
-            @if (showError(group().controls.firstname)) {
-              This field is required
-            }
-          </span>
-        </label>
-        <label class="flex flex-col gap-1 text-sm font-medium text-slate-700">
-          Last name
-          <input
-            class="input"
-            type="text"
-            formControlName="lastname"
-            required
-            aria-required="true" />
-          <span class="hint">
-            @if (showError(group().controls.lastname)) {
-              This field is required
-            }
-          </span>
-        </label>
-        <label class="flex flex-col gap-1 text-sm font-medium text-slate-700">
-          Relation
-          <input
-            class="input"
-            type="text"
-            formControlName="relation"
-            required
-            aria-required="true" />
-          <span class="hint">
-            @if (showError(group().controls.relation)) {
-              This field is required
-            }
-          </span>
-        </label>
-        <label class="flex flex-col gap-1 text-sm font-medium text-slate-700">
-          Email
-          <input
-            class="input"
-            type="email"
-            formControlName="email"
-            required
-            aria-required="true" />
-          <span class="hint">
-            @if (showError(group().controls.email)) {
-              @if (group().controls.email.hasError('required')) {
-                Email is required
-              }
-              @if (group().controls.email.hasError('email')) {
-                Enter a valid email
-              }
-            }
-          </span>
-        </label>
-      </div>
-    </div>
+    .input {
+      @apply w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm shadow-sm transition outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200;
+    }
+    .hint {
+      @apply text-xs text-rose-600;
+    }
+    .btn-primary {
+      @apply rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:bg-slate-300;
+    }
+    .btn-secondary {
+      @apply rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-indigo-200 hover:text-indigo-600;
+    }
+    .btn-danger {
+      @apply rounded-lg border border-rose-200 bg-white px-3 py-1.5 text-xs font-semibold text-rose-600 shadow-sm transition hover:border-rose-300 hover:text-rose-700;
+    }
   `,
 })
 export class ContactFormComponent {
-  group = input.required<ContactFormGroup>();
+  formField = input.required<FieldTree<ContactModel>>();
   index = input(0);
-  remove = output<void>();
 
-  showError(control: FormControl<string>): boolean {
-    return control.invalid && (control.touched || control.dirty);
-  }
+  remove = output<void>();
 }
