@@ -1,0 +1,30 @@
+<div class="grid gap-4 sm:grid-cols-2" data-testid="billing-fields">
+  <label
+    class="flex flex-col gap-1 text-sm font-medium text-slate-700 sm:col-span-2">
+    Street
+    <input
+      class="input"
+      type="text"
+      [formField]="fieldTree().street"
+      aria-required="true" />
+    <app-validation-message [fieldState]="fieldTree().street()" />
+  </label>
+  <label class="flex flex-col gap-1 text-sm font-medium text-slate-700">
+    ZIP code
+    <input
+      class="input"
+      type="text"
+      [formField]="fieldTree().zipcode"
+      aria-required="true" />
+    <app-validation-message [fieldState]="fieldTree().zipcode()" />
+  </label>
+  <label class="flex flex-col gap-1 text-sm font-medium text-slate-700">
+    City
+    <input
+      class="input"
+      type="text"
+      [formField]="fieldTree().city"
+      aria-required="true" />
+    <app-validation-message [fieldState]="fieldTree().city()" />
+  </label>
+</div>

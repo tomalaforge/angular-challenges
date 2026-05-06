@@ -1,0 +1,80 @@
+<main class="min-h-screen bg-slate-50 text-slate-900">
+  <div class="mx-auto max-w-4xl px-6 py-12">
+    <h1 class="mb-6 text-3xl font-semibold">Order</h1>
+    <form
+      [formRoot]="checkoutForm"
+      class="space-y-8 rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+      <section class="space-y-4">
+        <h2 class="text-xl font-semibold">Information</h2>
+        <div class="grid gap-4 sm:grid-cols-2">
+          <label class="flex flex-col gap-1 text-sm font-medium text-slate-700">
+            Last name
+            <input
+              class="input"
+              type="text"
+              [formField]="checkoutForm.lastName"
+              aria-required="true" />
+            <app-validation-message [fieldState]="checkoutForm.lastName()" />
+          </label>
+          <label class="flex flex-col gap-1 text-sm font-medium text-slate-700">
+            First name
+            <input
+              class="input"
+              type="text"
+              [formField]="checkoutForm.firstName"
+              aria-required="true" />
+            <app-validation-message [fieldState]="checkoutForm.firstName()" />
+          </label>
+        </div>
+      </section>
+
+      <section class="space-y-4">
+        <h2 class="text-xl font-semibold">Shipping address</h2>
+        <app-address-form [fieldTree]="checkoutForm.shipping" />
+      </section>
+
+      <section class="space-y-4">
+        <div class="flex items-center justify-between gap-4">
+          <h2 class="text-xl font-semibold">Billing address</h2>
+          <label
+            class="flex items-center gap-2 text-sm font-medium text-slate-700">
+            <input
+              type="checkbox"
+              class="h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
+              [formField]="checkoutForm.sameAsShipping" />
+            Billing address same as shipping
+          </label>
+        </div>
+
+        @if (!checkoutForm.billing().hidden()) {
+          <app-address-form [fieldTree]="checkoutForm.billing" />
+        }
+      </section>
+
+      <div
+        class="flex items-center justify-between border-t border-slate-200 pt-4">
+        <div class="text-sm text-slate-600">
+          <span [class.text-rose-600]="checkoutForm().invalid()">
+            {{
+              checkoutForm().invalid() ? 'Form incomplete' : 'Ready to submit'
+            }}
+          </span>
+        </div>
+        <button
+          type="submit"
+          class="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:bg-slate-300">
+          Submit
+        </button>
+      </div>
+    </form>
+
+    <section
+      class="mt-6 rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+      <h3 class="mb-2 text-lg font-semibold">Preview</h3>
+      <pre
+        class="overflow-x-auto rounded bg-slate-900 p-4 text-sm text-slate-100"
+        >{{ checkoutForm().value() | json }}</pre
+      >
+    </section>
+  </div>
+</main>
