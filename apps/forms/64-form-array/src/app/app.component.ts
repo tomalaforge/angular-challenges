@@ -1,10 +1,10 @@
 import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FormField } from '@angular/forms/signals';
 import {
   cEmail,
   cMinLength,
+  CraftFieldDirective,
   cRequired,
   insertForm,
   insertFormAttributes,
@@ -14,6 +14,7 @@ import {
   mutation,
   state,
   ValidatedFormValue,
+  type TargetFormField,
 } from '@craft-ng/core';
 import { ContactFormComponent } from './contact-form.component';
 
@@ -36,26 +37,25 @@ type Registration = {
   emails: Email[];
 };
 
-// 😅 I may add some helpers
-export type ContactField = ReturnType<
-  ReturnType<
-    ReturnType<
-      ReturnType<
-        InstanceType<typeof AppComponent>['registration']['form']
-      >['selectContacts']
-    >
-  >['items']
->[number];
+export type ContactFormTree = TargetFormField<
+  InstanceType<typeof AppComponent>['registration']['form'],
+  'selectContacts.selectContact'
+>;
 
 @Component({
   selector: 'app-root',
-  imports: [ReactiveFormsModule, JsonPipe, ContactFormComponent, FormField],
+  imports: [
+    ReactiveFormsModule,
+    JsonPipe,
+    ContactFormComponent,
+    CraftFieldDirective,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <main class="min-h-screen bg-slate-50 text-slate-900">
       <div class="mx-auto max-w-5xl px-6 py-12">
         <h1 class="mb-6 text-3xl font-semibold">Registration form</h1>
-        @let form = registration.form();
+        @let form = registration.form;
         <form
           class="space-y-8 rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
           <section class="space-y-4">
@@ -65,17 +65,17 @@ export type ContactField = ReturnType<
               <label
                 class="flex flex-col gap-1 text-sm font-medium text-slate-700">
                 Name
-                <input class="input" type="text" [formField]="nameField" />
-                <span class="hint">
-                  @for( exception of nameField().visibleExceptions().list; track exception.code) {
+                <input class="input" type="text" [craftField]="nameField" />
+                @if(nameField.visibleFirstLeftFailedValidation(); as exception) {
+                  <span class="hint">
                     @switch(exception.code) {
                       @case('required') {
                         Name is required
                       }
                       @default never;
                     }
-                  }
-                </span>
+                  </span>
+                }
               </label>
               @let pseudoField = form.selectPseudo();
               <label
@@ -84,9 +84,9 @@ export type ContactField = ReturnType<
                 <input
                   class="input"
                   type="text"
-                  [formField]="pseudoField" />
+                  [craftField]="pseudoField" />
                 <span class="hint">
-                  @for( exception of pseudoField().visibleExceptions().list; track exception.code) {
+                  @for( exception of pseudoField.visibleExceptions().list; track exception.code) {
                     @switch(exception.code) {
                       @case('required') {
                         This field is required
@@ -105,21 +105,21 @@ export type ContactField = ReturnType<
               <h2 class="text-xl font-semibold">Contacts</h2>
               <button
                 type="button"
-                (click)="contacts().add()"
+                (click)="contacts.add()"
                 class="btn-secondary">
                 Add contact
               </button>
             </div>
 
             <div  class="space-y-4">
-              @for (contact of contacts().items(); track $index) {
+              @for (contact of contacts.items(); track $index) {
                 <app-contact-form
                   [field]="contact"
                   [index]="$index"
-                  (remove)="contacts().remove($index)"></app-contact-form>
+                  (remove)="contacts.remove($index)"></app-contact-form>
               }
             </div>
-            @for( exception of contacts().visibleExceptions().list; track exception.code) {
+            @for( exception of contacts.visibleExceptions().list; track exception.code) {
               @let code = exception.code;
               @switch(code) {
                 @case('minLength') {
@@ -134,13 +134,13 @@ export type ContactField = ReturnType<
              @let emails = form.selectEmails();
             <div class="flex items-center justify-between gap-4">
               <h2 class="text-xl font-semibold">Emails</h2>
-              <button type="button" (click)="emails().add()" class="btn-secondary">
+              <button type="button" (click)="emails.add()" class="btn-secondary">
                 Add email
               </button>
             </div>
 
             <div class="space-y-4">
-              @for (email of emails().items(); track $index) {
+              @for (email of emails.items(); track $index) {
                 <div
                   class="rounded-lg border border-slate-200 bg-slate-50/40 p-4"
                   data-testid="email-item">
@@ -152,23 +152,23 @@ export type ContactField = ReturnType<
                       type="button"
                       class="btn-danger"
                       aria-label="Remove email {{ $index + 1 }}"
-                      (click)="emails().remove($index)">
+                      (click)="emails.remove($index)">
                       Remove
                     </button>
                   </div>
 
                   <div
                     class="mt-4 grid gap-4 sm:grid-cols-2">
-                    @let relativeField = email().selectType();
+                    @let relativeField = email.selectType();
                     <label
                       class="flex flex-col gap-1 text-sm font-medium text-slate-700">
                       Type
-                      <select class="input" [formField]="relativeField">
+                      <select class="input" [craftField]="relativeField">
                         <option value="personal">Personal</option>
                         <option value="professional">Professional</option>
                         <option value="other">Other</option>
                       </select>
-                      @for(exceptions of relativeField().visibleExceptions().list; track exceptions.code) {
+                      @for(exceptions of relativeField.visibleExceptions().list; track exceptions.code) {
                         @switch(exceptions.code) {
                           @case('required') {
                             <span class="hint">This field is required</span>
@@ -177,15 +177,15 @@ export type ContactField = ReturnType<
                         }
                       }
                     </label>
-                    @let emailField = email().selectEmail();
+                    @let emailField = email.selectEmail();
                     <label
                       class="flex flex-col gap-1 text-sm font-medium text-slate-700">
                       Email
                       <input
                         class="input"
                         type="email"
-                        [formField]="emailField" />
-                        @for(exceptions of emailField().visibleExceptions().list; track exceptions.code) {
+                        [craftField]="emailField" />
+                        @for(exceptions of emailField.visibleExceptions().list; track exceptions.code) {
                           @let code= exceptions.code;
                           @switch(code) {
                             @case('required') {
@@ -207,15 +207,15 @@ export type ContactField = ReturnType<
           <div
             class="flex flex-wrap items-center justify-between gap-4 border-t border-slate-200 pt-4">
             <div class="text-sm text-slate-600">
-              <span [class.text-rose-600]="registration.form().invalid()">
-                {{ registration.form().invalid() ? 'Form incomplete' : 'Ready to submit' }}
+              <span [class.text-rose-600]="registration.form.invalid()">
+                {{ registration.form.invalid() ? 'Form incomplete' : 'Ready to submit' }}
               </span>
             </div>
-            <button type='button' (click)="registration.form().submit()" class="btn-primary">Submit</button>
+            <button type='button' (click)="registration.form.submit()" class="btn-primary">Submit</button>
           </div>
         </form>
 
-        @if (save.safeValue()) {
+        @if (save.hasValue()) {
           <section
             class="mt-6 rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
             <h3 class="mb-2 text-lg font-semibold">Submitted data</h3>
