@@ -1,5 +1,9 @@
+import { NgOptimizedImage } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+import {
+  FakeHttpService,
+  randTeacher,
+} from '../../data-access/fake-http.service';
 import { TeacherStore } from '../../data-access/teacher.store';
 import { CardType } from '../../model/card.model';
 import { CardComponent } from '../../ui/card/card.component';
@@ -7,10 +11,19 @@ import { CardComponent } from '../../ui/card/card.component';
 @Component({
   selector: 'app-teacher-card',
   template: `
-    <app-card
-      [list]="teachers()"
-      [type]="cardType"
-      customClass="bg-light-red"></app-card>
+    <app-card [list]="teachers()" [type]="cardType" customClass="bg-light-red">
+      <div card-header class="flex flex-col items-center">
+        <img ngSrc="assets/img/teacher.png" width="200" height="200" alt="" />
+      </div>
+
+      <div card-action>
+        <button
+          class="rounded-sm border border-blue-500 bg-blue-300 p-2"
+          (click)="addNew()">
+          Add
+        </button>
+      </div>
+    </app-card>
   `,
   styles: [
     `
@@ -19,9 +32,11 @@ import { CardComponent } from '../../ui/card/card.component';
       }
     `,
   ],
-  imports: [CardComponent],
+  imports: [CardComponent, NgOptimizedImage],
 })
 export class TeacherCardComponent implements OnInit {
+  private readonly teacherStore = inject(TeacherStore);
+
   private http = inject(FakeHttpService);
   private store = inject(TeacherStore);
 
@@ -30,5 +45,9 @@ export class TeacherCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
+  }
+
+  addNew(): void {
+    this.teacherStore.addOne(randTeacher());
   }
 }
