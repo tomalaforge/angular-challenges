@@ -1,33 +1,33 @@
-import { Component, input } from '@angular/core';
-import { CardType } from '../../model/card.model';
-import { ListItemComponent } from '../list-item/list-item.component';
+import { NgTemplateOutlet } from '@angular/common';
+import { Component, ContentChild, input, TemplateRef } from '@angular/core';
 
 @Component({
   selector: 'app-card',
   template: `
     <div
       class="flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4"
+      style="background-color: var(--card-bg, transparent)"
       [class]="customClass()">
       <ng-content select="[card-header]"></ng-content>
 
       <section>
         @for (item of list(); track item) {
-          <app-list-item
-            [name]="item.firstName"
-            [id]="item.id"
-            [type]="type()"></app-list-item>
+          <ng-container
+            *ngTemplateOutlet="
+              itemTemplate;
+              context: { $implicit: item }
+            "></ng-container>
         }
       </section>
 
       <ng-content select="[card-action]"></ng-content>
     </div>
   `,
-  imports: [ListItemComponent],
+  imports: [NgTemplateOutlet],
 })
 export class CardComponent {
   readonly list = input<any[] | null>(null);
-  readonly type = input.required<CardType>();
   readonly customClass = input('');
 
-  CardType = CardType;
+  @ContentChild('itemTemplate') itemTemplate!: TemplateRef<any>;
 }
