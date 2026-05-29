@@ -30,7 +30,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
       <section>
         @for (item of list(); track item) {
           <app-list-item
-            [name]="item.firstName"
+            [name]="getItemName(item)"
             [id]="item.id"
             [type]="type()"></app-list-item>
         }
@@ -65,5 +65,12 @@ export class CardComponent {
     } else {
       this.cityStore.addOne(randomCity());
     }
+  }
+
+  getItemName(item: any) {
+    if (this.type() === CardType.CITY) {
+      return item.name;
+    }
+    return item.firstName;
   }
 }
