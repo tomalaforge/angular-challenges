@@ -91,7 +91,7 @@ async function rewriteFile(tree: Tree, file: string) {
 
 > author: thomas-laforge
 
-### Run Application
+### Как запускать
 
 \`\`\`bash
 npx nx serve ${command}

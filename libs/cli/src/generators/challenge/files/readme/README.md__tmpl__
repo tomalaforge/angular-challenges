@@ -2,7 +2,7 @@
 
 > author: thomas-laforge
 
-### Run Application
+### Как запускать
 
 ```bash
 npx nx serve <%= appProjectName %>
