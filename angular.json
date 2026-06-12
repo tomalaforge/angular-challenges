@@ -2,7 +2,8 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "cli": {
-    "packageManager": "npm"
+    "packageManager": "npm",
+    "analytics": false
   },
   "projects": {
     "angular-simple-animations": {
@@ -915,6 +916,202 @@
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
             "buildTarget": "angular-master-dependency-injection:build"
+          }
+        }
+      }
+    },
+    "angular-service-abstraction": {
+      "projectType": "application",
+      "root": "lessons/dependency-injection/tasks/service-abstraction",
+      "sourceRoot": "lessons/dependency-injection/tasks/service-abstraction/src",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/lessons/dependency-injection/tasks/service-abstraction",
+            "index": "lessons/dependency-injection/tasks/service-abstraction/src/index.html",
+            "main": "lessons/dependency-injection/tasks/service-abstraction/src/main.ts",
+            "polyfills": ["zone.js"],
+            "tsConfig": "lessons/dependency-injection/tasks/service-abstraction/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "lessons/dependency-injection/tasks/service-abstraction/src/favicon.ico",
+              "lessons/dependency-injection/tasks/service-abstraction/src/assets"
+            ],
+            "styles": [
+              "lessons/dependency-injection/tasks/service-abstraction/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                { "type": "initial", "maximumWarning": "500kb", "maximumError": "1mb" },
+                { "type": "anyComponentStyle", "maximumWarning": "2kb", "maximumError": "4kb" }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": { "buildTarget": "angular-service-abstraction:build:production" },
+            "development": { "buildTarget": "angular-service-abstraction:build:development" }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": { "buildTarget": "angular-service-abstraction:build" }
+        }
+      }
+    },
+    "angular-view-providers": {
+      "projectType": "application",
+      "root": "lessons/dependency-injection/tasks/view-providers",
+      "sourceRoot": "lessons/dependency-injection/tasks/view-providers/src",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/lessons/dependency-injection/tasks/view-providers",
+            "index": "lessons/dependency-injection/tasks/view-providers/src/index.html",
+            "main": "lessons/dependency-injection/tasks/view-providers/src/main.ts",
+            "polyfills": ["zone.js"],
+            "tsConfig": "lessons/dependency-injection/tasks/view-providers/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "lessons/dependency-injection/tasks/view-providers/src/favicon.ico",
+              "lessons/dependency-injection/tasks/view-providers/src/assets"
+            ],
+            "styles": [
+              "lessons/dependency-injection/tasks/view-providers/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "angular-view-providers:build:production"
+            },
+            "development": {
+              "buildTarget": "angular-view-providers:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "buildTarget": "angular-view-providers:build"
+          }
+        }
+      }
+    },
+    "angular-app-initializer": {
+      "projectType": "application",
+      "root": "lessons/dependency-injection/tasks/app-initializer",
+      "sourceRoot": "lessons/dependency-injection/tasks/app-initializer/src",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/lessons/dependency-injection/tasks/app-initializer",
+            "index": "lessons/dependency-injection/tasks/app-initializer/src/index.html",
+            "main": "lessons/dependency-injection/tasks/app-initializer/src/main.ts",
+            "polyfills": ["zone.js"],
+            "tsConfig": "lessons/dependency-injection/tasks/app-initializer/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "lessons/dependency-injection/tasks/app-initializer/src/favicon.ico",
+              "lessons/dependency-injection/tasks/app-initializer/src/assets"
+            ],
+            "styles": [
+              "lessons/dependency-injection/tasks/app-initializer/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "angular-app-initializer:build:production"
+            },
+            "development": {
+              "buildTarget": "angular-app-initializer:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "buildTarget": "angular-app-initializer:build"
           }
         }
       }
