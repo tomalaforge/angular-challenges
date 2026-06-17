@@ -1,6 +1,11 @@
-import { NgOptimizedImage } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, inject, input } from '@angular/core';
-import { randStudent, randTeacher } from '../../data-access/fake-http.service';
+import { CityStore } from '../../data-access/city.store';
+import {
+  randStudent,
+  randTeacher,
+  randomCity,
+} from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
 import { TeacherStore } from '../../data-access/teacher.store';
 import { CardType } from '../../model/card.model';
@@ -18,11 +23,14 @@ import { ListItemComponent } from '../list-item/list-item.component';
       @if (type() === CardType.STUDENT) {
         <img ngSrc="assets/img/student.webp" width="200" height="200" alt="" />
       }
+      @if (type() === CardType.CITY) {
+        <img ngSrc="assets/img/city.png" width="200" height="200" alt="" />
+      }
 
       <section>
         @for (item of list(); track item) {
           <app-list-item
-            [name]="item.firstName"
+            [name]="item?.firstName || item?.name"
             [id]="item.id"
             [type]="type()"></app-list-item>
         }
@@ -35,11 +43,12 @@ import { ListItemComponent } from '../list-item/list-item.component';
       </button>
     </div>
   `,
-  imports: [ListItemComponent, NgOptimizedImage],
+  imports: [ListItemComponent, NgOptimizedImage, CommonModule],
 })
 export class CardComponent {
   private teacherStore = inject(TeacherStore);
   private studentStore = inject(StudentStore);
+  private cityStore = inject(CityStore);
 
   readonly list = input<any[] | null>(null);
   readonly type = input.required<CardType>();
@@ -53,6 +62,8 @@ export class CardComponent {
       this.teacherStore.addOne(randTeacher());
     } else if (type === CardType.STUDENT) {
       this.studentStore.addOne(randStudent());
+    } else if (type === CardType.CITY) {
+      this.cityStore.addOne(randomCity());
     }
   }
 }
