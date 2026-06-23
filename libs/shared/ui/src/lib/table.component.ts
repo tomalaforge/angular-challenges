@@ -1,9 +1,10 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, contentChild, input, TemplateRef } from '@angular/core';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'table',
-  imports: [],
+  imports: [NgTemplateOutlet],
   template: `
     <thead>
       <ng-container *ngTemplateOutlet="headerTemplate()"></ng-container>
