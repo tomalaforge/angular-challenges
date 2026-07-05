@@ -1,0 +1,48 @@
+<div class="pipes-container">
+  <h2 (click)="updateArray()">Зачем нужны Пайпы</h2>
+  <div class="pipe-section">
+    @for (item of array(); track $index){
+      <p><strong>Кастомный uppercase:</strong> {{ toUppercase('привет') }}</p>
+<!--      <p><strong>Uppercase из коробки:</strong> {{ 'привет' | toUpperCase }}</p>-->
+    }
+  </div>
+
+  <h2>Встроенные пайпы Angular</h2>
+  <div class="pipe-section">
+    <h3>Date Pipe</h3>
+    <p><strong>Исходная дата:</strong> {{ currentDate }}</p>
+    <p><strong>Формат 'dd/MM/yyyy':</strong> {{ currentDate | date:'dd/MM/yyyy' }}</p>
+    <p><strong>Формат 'fullDate':</strong> {{ currentDate | date:'fullDate' }}</p>
+    <p><strong>Формат 'shortTime':</strong> {{ currentDate | date:'shortTime' }}</p>
+  </div>
+
+  <div class="pipe-section">
+    <h3>Uppercase & Lowercase Pipes</h3>
+    <p><strong>Исходный текст:</strong> {{ sampleText }}</p>
+    <p><strong>Uppercase:</strong> {{ sampleText | uppercase }}</p>
+    <p><strong>Lowercase:</strong> {{ sampleText | lowercase }}</p>
+  </div>
+
+  <div class="pipe-section">
+    <h3>Currency Pipe</h3>
+    <p><strong>Исходное число:</strong> {{ price }}</p>
+    <p><strong>USD (по умолчанию):</strong> {{ price | currency }}</p>
+    <p><strong>EUR с символом:</strong> {{ price | currency:'EUR':'symbol' }}</p>
+    <p><strong>RUB с кодом:</strong> {{ price | currency:'RUB':'code' }}</p>
+  </div>
+
+  <div class="pipe-section">
+    <h3>Percent Pipe</h3>
+    <p><strong>Исходное число:</strong> {{ rating }}</p>
+    <p><strong>Процент (по умолчанию):</strong> {{ rating | percent }}</p>
+    <p><strong>С 2 знаками:</strong> {{ rating | percent:'1.2-2' }}</p>
+    <p><strong>Дробные доли:</strong> {{ ratingSmall | percent:'1.1-3' }}</p>
+  </div>
+
+  <div class="pipe-section">
+    <h3>Цепочки пайпов (Chaining)</h3>
+    <p><strong>Дата → uppercase:</strong> {{ currentDate | date:'fullDate' | uppercase }}</p>
+    <p><strong>Текст → uppercase → lowercase:</strong> {{ sampleText | uppercase | lowercase }}</p>
+    <p><strong>Число → валюта → lowercase:</strong> {{ price | currency:'USD':'code' | lowercase }}</p>
+  </div>
+</div>

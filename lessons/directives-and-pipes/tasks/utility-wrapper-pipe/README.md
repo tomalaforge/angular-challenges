@@ -6,44 +6,27 @@
 npm run serve:angular-utility-wrapper-pipe
 ```
 
-### Documentation and Instruction
+## Информация
 
----
-title: 🔴 Utility Wrapper Pipe
-description: Challenge 10 is about creating a pipe to wrap utilities
-author: thomas-laforge
-contributors:
-  - tomalaforge
-  - tomer953
-  - svenson95
-  - LMFinney
-challengeNumber: 10
-command: angular-utility-wrapper-pipe
-sidebar:
-  order: 202
----
+Это третье испытание про `@Pipe()` из трех, цель этой серии испытаний - освоить работу с **pipes** в Angular.
 
-## Information
+Пайпы - удобный способ трансформации данных в вашем шаблоне. Разница между вызовом функции и пайпом заключается в том, что результат, возвращаемый чистыми пайпами, кэшируется. Таким образом, они не будут пересчитываться при каждом цикле обнаружения изменений, если их входные значения не изменились.
 
-This is the third of three `@Pipe()` challenges. The goal of this series is to master **pipes** in Angular.
+Pipes разработаны так, чтобы быть эффективными и оптимизированными для производительности. Они используют механизмы обнаружения изменений, чтобы пересчитывать значение только в случае изменения входных данных, минимизируя ненужные вычисления и улучшая производительность рендеринга.
 
-Pipes are a very powerful way to transform data in your template. The difference between calling a function and a pipe is that pure pipes are memoized. So, they won't be recalculated every change detection cycle if their inputs haven't changed.
+По умолчанию пайпы чистые, но вы должны знать, что установка `pure` в false может привести к неэффективности, поскольку это увеличивает количество перерисовок.
 
-Pipes are designed to be efficient and optimized for performance. They use change detection mechanisms to only recalculate the value if the input changes, to minimize unnecessary calculations and improve rendering performance.
-
-By default, a pipe is pure. You should be aware that setting `pure` to false is prone to be inefficient, because it increases the amount of rerenders.
-
-:::note
-A **pure** pipe is only called when the value changes.\
-A **impure** pipe is called every change detection cycle.
+:::note[Примечание]
+**Чистые** пайп вызывается только когда изменяется входное значение.\
+**Нечистый** пайп вызывается на каждый цикл обнаружения изменений.
 :::
 
-There are some useful predefined pipes like the DatePipe, UpperCasePipe and CurrencyPipe. To learn more about pipes in Angular, check the API documentation [here](https://angular.dev/guide/pipes).
+Существуют несколько полезных предопределенных пайпов, таких как DatePipe, UpperCasePipe и CurrencyPipe. Чтобы узнать больше о пайпах в Angular, ознакомьтесь с документацией API [здесь](https://angular.dev/guide/pipes).
 
-## Statement
+## Пояснение
 
-In this exercise, you want to access utils functions. Currently, you cannot access them directly from your template. The goal is to create a specific pipe for this utils file, where you will need to pass the name of the function you want to call and the needed arguments.
+В этом упражнении вы хотите получить доступ к функциям утилит. В настоящий момент вы не можете получить доступ к ним непосредственно из вашего шаблона. Цель состоит в том, чтобы создать специальный пайп для файла утилит, в котором вам нужно будет передать имя функции, которую вы хотите вызвать, и необходимые аргументы.
 
-## Constraints
+## Ограничение
 
-- Must be strongly typed
+- Пайп должен быть типизирован.

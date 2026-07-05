@@ -1,0 +1,22 @@
+<div>
+  <h2>Поиск пользователей</h2>
+  <input
+    type="text"
+    [(ngModel)]="searchTerm"
+    placeholder="Введите имя, email или город..."
+  >
+
+  @let filteredUsers = (users | filterByProperties: searchTerm : ['name', 'email', 'city']);
+
+  <ul>
+    @for (user of filteredUsers; track user.id) {
+      <li [highlightSearch]="searchTerm">
+        <strong>{{ user.name }}</strong> ({{ user.email }}) — {{ user.city }}
+      </li>
+    }
+  </ul>
+
+  @if (filteredUsers.length === 0) {
+    <div>Ничего не найдено</div>
+  }
+</div>

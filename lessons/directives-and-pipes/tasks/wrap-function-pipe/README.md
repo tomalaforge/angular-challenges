@@ -6,47 +6,27 @@
 npm run serve:angular-wrap-function-pipe
 ```
 
-### Documentation and Instruction
+## Информация
 
----
-title: 🟠 Wrap Function Pipe
-description: Challenge 9 is about creating a pipe to wrap component fonctions
-author: thomas-laforge
-contributors:
-  - tomalaforge
-  - tomer953
-  - kabrunko-dev
-  - svenson95
-  - LMFinney
-challengeNumber: 9
-command: angular-wrap-function-pipe
-blogLink: https://medium.com/ngconf/boost-your-apps-performance-by-wrapping-your-functions-inside-a-pipe-7e889a901d1d
-sidebar:
-  order: 103
----
+Это второе испытание про `@Pipe()` из трех, цель этой серии испытаний - освоить работу с **pipes** в Angular.
 
-## Information
+Пайпы - удобный способ трансформации данных в вашем шаблоне. Разница между вызовом функции и пайпом заключается в том, что результат, возвращаемый чистыми пайпами, кэшируется. Таким образом, они не будут пересчитываться при каждом цикле обнаружения изменений, если их входные значения не изменились.
 
-This is the second of three `@Pipe()` challenges. The goal of this series is to master **pipes** in Angular.
+Pipes разработаны так, чтобы быть эффективными и оптимизированными для производительности. Они используют механизмы обнаружения изменений, чтобы пересчитывать значение только в случае изменения входных данных, минимизируя ненужные вычисления и улучшая производительность рендеринга.
 
-Pipes are a very powerful way to transform data in your template. The difference between calling a function and a pipe is that pure pipes are memoized. So, they won't be recalculated every change detection cycle if their inputs haven't changed.
+По умолчанию пайпы чистые, но вы должны знать, что установка `pure` в false может привести к неэффективности, поскольку это увеличивает количество перерисовок.
 
-Pipes are designed to be efficient and optimized for performance. They use change detection mechanisms to only recalculate the value if the input changes, to minimize unnecessary calculations and improve rendering performance.
-
-By default, a pipe is pure. You should be aware that setting `pure` to false is prone to be inefficient, because it increases the amount of rerenders.
-
-:::note
-A **pure** pipe is only called when the value changes.\
-A **impure** pipe is called every change detection cycle.
+:::note[Примечание]
+**Чистые** пайп вызывается только когда изменяется входное значение.\
+**Нечистый** пайп вызывается на каждый цикл обнаружения изменений.
 :::
 
-There are some useful predefined pipes like the DatePipe, UpperCasePipe and CurrencyPipe. To learn more about pipes in Angular, check the API documentation [here](https://angular.dev/guide/pipes).
+Существуют несколько полезных предопределенных пайпов, таких как DatePipe, UpperCasePipe и CurrencyPipe. Чтобы узнать больше о пайпах в Angular, ознакомьтесь с документацией API [здесь](https://angular.dev/guide/pipes).
 
-## Statement
+## Пояснение
 
-In this exercise, you are calling multiple functions inside your template. You can create a specific pipe for each of the functions, but this will be too cumbersome.
-The goal is to create a `wrapFn` pipe to wrap your callback function through a pipe. Your function MUST remain inside your component. **`WrapFn` must be highly reusable.**
+В этом упражнении вы вызываете несколько функций в вашем шаблоне. Вы можете создать специальный пайп для каждой функции, но это будет слишком громоздко. Цель - создать пайп `wrapFn`, который будет обертывать вашу функцию обратного вызова через пайп. Ваша функция ДОЛЖНА оставаться внутри компонента. **`WrapFn` должен быть высоко переиспользуемым.**
 
-## Constraints
+## Ограничение
 
-- Must be strongly typed
+- Пайп должен быть типизирован.

@@ -6,20 +6,6 @@
 npm run serve:angular-pure-pipe
 ```
 
-## Документация
----
-title: 🟢Чистый пайп
-description: Испытание 8 про создание чистого пайпа
-author: thomas-laforge
-contributors:
-  - stillst
-challengeNumber: 8
-command: angular-pure-pipe
-blogLink: https://medium.com/ngconf/deep-dive-into-angular-pipes-c040588cd15d
-sidebar:
-  order: 3
----
-
 ## Информация
 
 Это первое испытание про `@Pipe()` из трех, цель этой серии испытаний - освоить работу с **pipes** в Angular.

@@ -1,0 +1,21 @@
+<!--<div>-->
+<!--  <h1 [ngStyle]="{ color: textColor() }">ngStyle</h1>-->
+<!--  <button (click)="setTextColor('blue')">Синий</button>-->
+<!--  <button (click)="setTextColor('red')">Красный</button>-->
+<!--</div>-->
+<!--<div>-->
+<!--  <h1 [ngClass]="className()">ngClass</h1>-->
+<!--  <button (click)="setClassName('title')">title</button>-->
+<!--  <button (click)="setClassName('text')">text</button>-->
+<!--</div>-->
+
+<div>
+  <h1 [style.color]="textColor()">ngStyle</h1>
+  <button (click)="setTextColor('blue')">Синий</button>
+  <button (click)="setTextColor('red')">Красный</button>
+</div>
+<div>
+  <h1 [class]="className()">ngClass</h1>
+  <button (click)="setClassName('title')">title</button>
+  <button (click)="setClassName('text')">text</button>
+</div>

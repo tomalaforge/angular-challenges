@@ -1,0 +1,18 @@
+.disgusting {
+  background-color: #f00;
+}
+
+.normal {
+  background-color: #ff0;
+}
+
+.perfect {
+  background-color: #0f0;
+}
+
+.pending { background: #fff3cd; border-left: 4px solid #ffc107; }
+.shipped { background: #cfe2ff; border-left: 4px solid #0d6efd; }
+.delivered { background: #d1e7dd; border-left: 4px solid #198754; }
+.cancelled { background: #f8d7da; border-left: 4px solid #dc3545; }
+.unknown { background: #e2e3e5; border-left: 4px solid #6c757d; }
+.status { padding: 15px; margin: 10px 0; border-radius: 8px; }

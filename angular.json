@@ -2,7 +2,8 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "cli": {
-    "packageManager": "npm"
+    "packageManager": "npm",
+    "analytics": "2ac42bd7-4e13-4464-9de8-d760a9117b21"
   },
   "projects": {
     "angular-simple-animations": {
@@ -1195,6 +1196,70 @@
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
             "buildTarget": "angular-wrap-function-pipe:build"
+          }
+        }
+      }
+    },
+    "directives-and-pipes-lecture": {
+      "projectType": "application",
+      "root": "lessons/directives-and-pipes/lecture",
+      "sourceRoot": "lessons/directives-and-pipes/lecture/src",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "outputPath": "dist/lessons/directives-and-pipes/lecture",
+            "index": "lessons/directives-and-pipes/lecture/src/index.html",
+            "browser": "lessons/directives-and-pipes/lecture/src/main.ts",
+            "polyfills": ["zone.js"],
+            "tsConfig": "lessons/directives-and-pipes/lecture/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "lessons/directives-and-pipes/lecture/src/favicon.ico",
+              "lessons/directives-and-pipes/lecture/src/assets"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kb",
+                  "maximumError": "8kb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "directives-and-pipes-lecture:build:production"
+            },
+            "development": {
+              "buildTarget": "directives-and-pipes-lecture:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "buildTarget": "directives-and-pipes-lecture:build"
           }
         }
       }

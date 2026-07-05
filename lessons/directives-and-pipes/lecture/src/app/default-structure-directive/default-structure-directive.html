@@ -1,0 +1,70 @@
+<h1>If</h1>
+
+@if (showSmile()) {
+  <p>🤡</p>
+}
+
+<!--@if (showSmile()) {-->
+<!--  <p>🤡</p>-->
+<!--} @else {-->
+<!--  <p>нет клоунов</p>-->
+<!--}-->
+
+<button (click)="toggleShowSmile(true)">Показать смайлик</button>
+<button (click)="toggleShowSmile(false)">Скрыть смайлик</button>
+
+<hr>
+<h1>For</h1>
+
+<div *ngFor="let student of students; trackBy: trackByFn; let isLast = last; let isFirst = first">
+  <h2 [class.disgusting]="isLast" [class.perfect]="isFirst" [class.normal]="!isFirst && !isLast">{{ student.name }}: {{ student.grade }}</h2>
+</div>
+
+<!--@for(student of students; track student.id) {-->
+<!--  <h2 [class.disgusting]="$last" [class.perfect]="$first" [class.normal]="!$first && !$last">{{ student.name }}: {{ student.grade }}</h2>-->
+<!--}-->
+
+<hr>
+
+<h1>Switch</h1>
+
+<div class="container">
+  <h2>📦 Статус заказа #12345</h2>
+  <button (click)="changeOrderStatus('pending')">pending</button>
+  <button (click)="changeOrderStatus('shipped')">shipped</button>
+  <button (click)="changeOrderStatus('delivered')">delivered</button>
+  <button (click)="changeOrderStatus('cancelled')">cancelled</button>
+  <button (click)="changeOrderStatus('')">default</button>
+  <!-- Базовый @switch -->
+  @switch (orderStatus()) {
+    @case ('pending') {
+      <div class="status pending">
+        ⏳ Статус: Ожидает обработки
+        <button>Отменить заказ</button>
+      </div>
+    }
+    @case ('shipped') {
+      <div class="status shipped">
+        🚚 Статус: Отправлен
+        <span>Трек-номер: ABC123</span>
+      </div>
+    }
+    @case ('delivered') {
+      <div class="status delivered">
+        ✅ Статус: Доставлен
+        <span>Спасибо за покупку!</span>
+      </div>
+    }
+    @case ('cancelled') {
+      <div class="status cancelled">
+        ❌ Статус: Отменён
+        <span>Возврат средств в течение 3 дней</span>
+      </div>
+    }
+    @default {
+      <div class="status unknown">
+        ❓ Неизвестный статус заказа
+      </div>
+    }
+  }
+</div>

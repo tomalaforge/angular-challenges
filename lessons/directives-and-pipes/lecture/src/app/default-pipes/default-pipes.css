@@ -1,0 +1,36 @@
+.pipes-container {
+  font-family: Arial, sans-serif;
+  max-width: 800px;
+  margin: 20px;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+}
+
+.pipe-section {
+  background: white;
+  margin: 15px 0;
+  padding: 15px;
+  border-left: 4px solid #42a5f5;
+  border-radius: 4px;
+}
+
+h2 {
+  color: #1976d2;
+  margin-top: 0;
+}
+
+h3 {
+  color: #333;
+  margin-top: 0;
+  font-size: 1.2em;
+}
+
+p {
+  margin: 8px 0;
+  line-height: 1.4;
+}
+
+strong {
+  color: #1976d2;
+}

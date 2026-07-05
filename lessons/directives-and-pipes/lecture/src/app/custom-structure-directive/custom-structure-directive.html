@@ -1,0 +1,10 @@
+<h1>Кастомная структурная директива</h1>
+<input
+  type="number"
+  [(ngModel)]="starCount"
+  min="0"
+  max="5"
+>
+
+<!--<span *appRepeat="starCount">⭐</span>-->
+<ng-template [appRepeat]="starCount">⭐</ng-template>
