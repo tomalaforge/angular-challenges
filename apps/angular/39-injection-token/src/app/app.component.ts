@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
@@ -15,6 +15,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
     </div>
     <router-outlet />
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   host: {
     class: 'p-10 flex flex-col',
   },

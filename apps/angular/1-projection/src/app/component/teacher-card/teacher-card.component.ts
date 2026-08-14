@@ -1,4 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { FakeHttpService } from '../../data-access/fake-http.service';
 import { TeacherStore } from '../../data-access/teacher.store';
 import { CardType } from '../../model/card.model';
@@ -19,6 +24,7 @@ import { CardComponent } from '../../ui/card/card.component';
       }
     `,
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [CardComponent],
 })
 export class TeacherCardComponent implements OnInit {

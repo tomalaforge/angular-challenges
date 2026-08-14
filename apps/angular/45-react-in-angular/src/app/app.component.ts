@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { PostComponent } from './react/post.component';
 
 type Post = { title: string; description: string };
@@ -26,6 +26,7 @@ type Post = { title: string; description: string };
       </div>
     </div>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: [''],
 })
 export class AppComponent {

@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -9,7 +9,7 @@ import { Component, input } from '@angular/core';
       [style.height.%]="100 - step()">
       @if (step() !== 100) {
         <div
-          class="relative left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+          class="relative top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
           Who is here?
         </div>
       }
@@ -29,6 +29,7 @@ import { Component, input } from '@angular/core';
       </div>
     </div>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: [`unknown-person.component.css`],
 })
 export class UnknownPersonComponent {

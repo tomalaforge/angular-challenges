@@ -1,4 +1,9 @@
-import { Component, input, output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  input,
+  output,
+} from '@angular/core';
 import { Person } from './person.model';
 
 @Component({
@@ -22,6 +27,7 @@ import { Person } from './person.model';
       </div>
     }
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   host: {
     class: 'w-full flex flex-col',
   },

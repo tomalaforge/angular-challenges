@@ -1,4 +1,9 @@
-import { Component, inject, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  input,
+} from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FakeServiceService } from './fake.service';
@@ -27,6 +32,7 @@ interface MenuItem {
       @apply bg-gray-600 text-white;
     }
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   host: {
     class: 'flex flex-col p-2 gap-2',
   },
@@ -44,6 +50,7 @@ export class NavigationComponent {
       <app-nav [menus]="getMenu('')" />
     }
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   host: {},
 })
 export class MainNavigationComponent {

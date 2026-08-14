@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { DEFAULT_TIMER } from './data';
 import { TimerComponent } from './timer.component';
 @Component({
@@ -11,6 +11,7 @@ import { TimerComponent } from './timer.component';
     </div>
     <timer />
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   host: {
     class: 'border rounded-md flex p-4 gap-10',
   },

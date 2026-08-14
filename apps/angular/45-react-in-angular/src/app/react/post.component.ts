@@ -1,4 +1,10 @@
-import { Component, EventEmitter, input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  input,
+  Output,
+} from '@angular/core';
 
 type Post = { title: string; description: string; pictureLink: string };
 
@@ -7,6 +13,7 @@ type Post = { title: string; description: string; pictureLink: string };
   template: `
     <div></div>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: [''],
 })
 export class PostComponent {

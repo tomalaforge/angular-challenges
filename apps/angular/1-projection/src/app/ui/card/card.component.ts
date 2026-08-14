@@ -1,5 +1,10 @@
 import { NgOptimizedImage } from '@angular/common';
-import { Component, inject, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  input,
+} from '@angular/core';
 import { randStudent, randTeacher } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
 import { TeacherStore } from '../../data-access/teacher.store';
@@ -35,6 +40,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
       </button>
     </div>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [ListItemComponent, NgOptimizedImage],
 })
 export class CardComponent {

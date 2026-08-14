@@ -1,10 +1,17 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, contentChild, input, TemplateRef } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  contentChild,
+  input,
+  TemplateRef,
+} from '@angular/core';
 
 @Component({
   imports: [NgTemplateOutlet],
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'person',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <ng-container
       *ngTemplateOutlet="

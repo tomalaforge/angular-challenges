@@ -1,11 +1,18 @@
 /* eslint-disable @angular-eslint/component-selector */
-import { Component, inject, input, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
 import { take } from 'rxjs';
 import { AppService } from './app.service';
 import { TopicType } from './localDB.service';
 
 @Component({
   selector: 'button-delete-topic',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <button (click)="deleteTopic()"><ng-content /></button>
     <div>{{ message() }}</div>
@@ -35,6 +42,7 @@ export class ButtonDeleteComponent {
 @Component({
   imports: [ButtonDeleteComponent],
   selector: 'app-root',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     @for (info of allInfo(); track info.id) {
       <div>{{ info.id }} - {{ info.topic }}</div>

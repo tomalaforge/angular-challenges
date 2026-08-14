@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { PlaceholderComponent } from './placeholder.component';
 import { TopComponent } from './top.component';
 
@@ -18,6 +18,7 @@ import { TopComponent } from './top.component';
       }
     </div>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [TopComponent, PlaceholderComponent],
 })
 export class AppComponent {

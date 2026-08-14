@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -26,6 +26,7 @@ import { PersonListComponent } from './person-list.component';
       <app-person-list class="w-3/4 max-w-2xl" [persons]="persons()" />
     }
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   host: {
     class: 'flex items-center flex-col gap-5',
   },

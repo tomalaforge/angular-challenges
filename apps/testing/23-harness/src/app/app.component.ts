@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ChildComponent } from './child.component';
 
 @Component({
@@ -7,6 +7,7 @@ import { ChildComponent } from './child.component';
   template: `
     <app-child />
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: [''],
 })
 export class AppComponent {}

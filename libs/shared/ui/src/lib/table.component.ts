@@ -1,9 +1,16 @@
-import { Component, contentChild, input, TemplateRef } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  contentChild,
+  input,
+  TemplateRef,
+} from '@angular/core';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'table',
   imports: [],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <thead>
       <ng-container *ngTemplateOutlet="headerTemplate()"></ng-container>

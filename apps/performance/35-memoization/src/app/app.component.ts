@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { generateList } from './generateList';
 import { PersonListComponent } from './person-list.component';
 
 @Component({
   imports: [PersonListComponent],
   selector: 'app-root',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <p>Performance is key!!</p>
     <button

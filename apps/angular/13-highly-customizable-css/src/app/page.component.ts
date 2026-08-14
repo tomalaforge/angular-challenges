@@ -1,11 +1,12 @@
 /* eslint-disable @angular-eslint/component-selector */
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { TextStaticComponent } from './static-text.component';
 import { TextComponent } from './text.component';
 
 @Component({
   selector: 'page',
   imports: [TextStaticComponent, TextComponent],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <static-text></static-text>
     <static-text type="error"></static-text>

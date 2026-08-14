@@ -1,4 +1,9 @@
-import { Component, input, output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  input,
+  output,
+} from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 type ContactFormGroup = FormGroup<{
@@ -11,6 +16,7 @@ type ContactFormGroup = FormGroup<{
 @Component({
   selector: 'app-contact-form',
   imports: [ReactiveFormsModule],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <div
       class="rounded-lg border border-slate-200 bg-slate-50/40 p-4"

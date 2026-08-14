@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { SliderComponent } from './slider.component';
 
 @Component({
@@ -19,6 +19,7 @@ import { SliderComponent } from './slider.component';
       [disabled]="slider1Value() < 20"
       (valueChange)="slider2Value.set($event)" />
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: [''],
 })
 export class AppComponent {

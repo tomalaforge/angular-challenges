@@ -1,5 +1,5 @@
 import { NgOptimizedImage } from '@angular/common';
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
   selector: 'thumbnail-header',
@@ -19,6 +19,7 @@ import { Component, input } from '@angular/core';
     </div>
     <img ngSrc="assets/angular.webp" alt="" width="50" height="50" />
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   host: {
     class: 'flex w-full px-4 py-5 gap-4 justify-between',
   },

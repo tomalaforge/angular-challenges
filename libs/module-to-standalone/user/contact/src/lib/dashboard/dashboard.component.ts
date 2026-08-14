@@ -1,4 +1,4 @@
-import { Component, NgModule } from '@angular/core';
+import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
       Create contact
     </button>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class ContactDashboardComponent {}

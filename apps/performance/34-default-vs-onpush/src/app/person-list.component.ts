@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 import { CDFlashingDirective } from '@angular-challenges/shared/directives';
 import { TitleCasePipe } from '@angular/common';
@@ -51,6 +51,7 @@ import { MatListModule } from '@angular/material/list';
       }
     </mat-list>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   host: {
     class: 'w-full flex flex-col items-center',
   },

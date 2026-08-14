@@ -1,4 +1,9 @@
-import { Component, computed, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  signal,
+} from '@angular/core';
 
 enum Difficulty {
   EASY = 'easy',
@@ -38,6 +43,7 @@ enum Direction {
       <p>{{ directionLabel() }}</p>
     </section>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: `
     @reference "tailwindcss";
 

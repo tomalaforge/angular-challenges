@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { UserComponent } from './user.component';
 
 @Component({
@@ -6,18 +6,18 @@ import { UserComponent } from './user.component';
   selector: 'app-root',
   template: `
     <div class="flex flex-col gap-3">
-      <div class="flex gap-2 ">
+      <div class="flex gap-2">
         Name:
         <input #name class="border" />
         @if (showUser && !name.value) {
           <div class="text-sm text-red-500">name required</div>
         }
       </div>
-      <div class="flex gap-2 ">
+      <div class="flex gap-2">
         LastName:
         <input #lastName class="border" />
       </div>
-      <div class="flex gap-2 ">
+      <div class="flex gap-2">
         Age:
         <input type="number" #age class="border" />
       </div>
@@ -34,6 +34,7 @@ import { UserComponent } from './user.component';
         [age]="age.value" />
     }
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   host: {
     class: 'p-10 block flex flex-col gap-10',
   },
