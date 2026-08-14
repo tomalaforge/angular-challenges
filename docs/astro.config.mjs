@@ -120,5 +120,5 @@ export default defineConfig({
     locales
   }), svelte()],
   output: "hybrid",
-  adapter: vercel({ nodeVersion: '22.x' })
+  adapter: vercel({ nodeVersion: '22.x', imageService: true })
 });
