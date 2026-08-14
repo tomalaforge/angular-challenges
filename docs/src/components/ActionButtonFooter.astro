@@ -2,26 +2,24 @@
 import { Icon } from '@astrojs/starlight/components';
 import MyIcon from './MyIcon.astro';
 import type { Props } from '@astrojs/starlight/props';
-import { getEntry } from 'astro:content';
 
-const { lang } = Astro.props;
-const { data } = await getEntry('i18n', lang);
+const t = Astro.locals.t;
 
 ---
 
 <div class="action-footer button-hover">
   <a class="action-button" href="/subscription">
-    <div>{data['buttons.email']}</div>
+    <div>{t('buttons.email')}</div>
     <Icon name="email"  />
   </a>
 
   <a class="action-button" href="https://github.com/tomalaforge/angular-challenges">
-    <div>{data['buttons.star']}</div>
+    <div>{t('buttons.star')}</div>
     <Icon name="github"  />
   </a>
 
   <a class="action-button button-sponsor" href="https://github.com/sponsors/tomalaforge">
-    <div>{data['buttons.sponsor']}</div>
+    <div>{t('buttons.sponsor')}</div>
     <MyIcon name="heart" fill="none" stroke="currentColor" color="white" />
   </a>
 </div>

@@ -10,11 +10,12 @@ interface Props {
   labels?: Record<string, string>;
 }
 
-const { name, twitter, linkedin, github, youtube, data } = Astro.props;
+const { name, twitter, linkedin, github, youtube } = Astro.props;
+const t = Astro.locals.t;
 ---
 
 <p class="author">
-  {data['author.createdBy']} {name}
+  {t('author.createdBy')} {name}
   {twitter && <a href={twitter}>
     <Icon class="icon" name="twitter" size="0.75rem" />
   </a>}

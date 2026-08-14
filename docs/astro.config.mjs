@@ -1,7 +1,7 @@
 import starlight from '@astrojs/starlight';
 import { defineConfig } from 'astro/config';
 import svelte from '@astrojs/svelte';
-import vercel from '@astrojs/vercel/serverless';
+import vercel from '@astrojs/vercel';
 
 export const locales = {
   root: {
@@ -40,17 +40,15 @@ export default defineConfig({
       alt: 'angular challenges logo'
     },
     favicon: './angular-challenge.ico',
-    social: {
-      github: 'https://github.com/tomalaforge/angular-challenges',
-      linkedin: 'https://www.linkedin.com/in/thomas-laforge-2b05a945/',
-      twitter: 'https://twitter.com/laforge_toma'
-    },
+    social: [
+      { icon: 'github', label: 'GitHub', href: 'https://github.com/tomalaforge/angular-challenges' },
+      { icon: 'linkedin', label: 'LinkedIn', href: 'https://www.linkedin.com/in/thomas-laforge-2b05a945/' },
+      { icon: 'x.com', label: 'X (Twitter)', href: 'https://twitter.com/laforge_toma' }
+    ],
     customCss: ['./src/styles/custom-css.css'],
     sidebar: [{
       label: 'Guides',
-      autogenerate: {
-        directory: 'guides'
-      },
+      items: [{ autogenerate: { directory: 'guides' } }],
       translations: {
         es: 'Guías',
         fr: 'Guides',
@@ -59,12 +57,9 @@ export default defineConfig({
         'zh-CN': '指南'
       }
     },
-      {
+    {
       label: 'Leaderboard',
-      autogenerate: {
-        directory: 'leaderboard',
-        collapsed: true
-      },
+      items: [{ autogenerate: { directory: 'leaderboard', collapsed: true } }],
       translations: {
         es: 'Leaderboard',
         fr: 'Leaderboard',
@@ -75,9 +70,7 @@ export default defineConfig({
     },
     {
       label: 'Challenges',
-      autogenerate: {
-        directory: 'challenges'
-      },
+      items: [{ autogenerate: { directory: 'challenges' } }],
       translations: {
         es: 'Desafíos',
         fr: 'Challenges',
@@ -119,6 +112,6 @@ export default defineConfig({
     defaultLocale: 'root',
     locales
   }), svelte()],
-  output: "hybrid",
+  output: "server",
   adapter: vercel({ imageService: true })
 });

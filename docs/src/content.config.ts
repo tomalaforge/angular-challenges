@@ -1,8 +1,10 @@
-import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 import { defineCollection, reference, z } from 'astro:content';
+import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
+import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
+import { glob } from 'astro/loaders';
 
 const authors = defineCollection({
-  type: 'data',
+  loader: glob({ pattern: '**/*.{json,yaml}', base: './src/content/authors' }),
   schema: z.object({
     name: z.string(),
     twitter: z.string().url().optional(),
@@ -13,30 +15,30 @@ const authors = defineCollection({
 });
 
 const docs = defineCollection({
-  schema: (ctx) =>
-    docsSchema({
-      extend: z.object({
-        noCommentSection: z.boolean().optional().default(false),
-        challengeNumber: z.union([z.number(), z.boolean()]).default(false),
-        author: reference('authors').optional(),
-        contributors: z.array(z.string()).optional(),
-        command: z.string().optional(),
-        blogLink: z.string().optional(),
-        videoLinks: z
-          .array(
-            z.object({
-              link: z.string(),
-              alt: z.string(),
-              flag: z.enum(['FR', 'ES']).optional(),
-            }),
-          )
-          .optional(),
-      }),
-    })(ctx),
+  loader: docsLoader(),
+  schema: docsSchema({
+    extend: z.object({
+      noCommentSection: z.boolean().optional().default(false),
+      challengeNumber: z.union([z.number(), z.boolean()]).default(false),
+      author: reference('authors').optional(),
+      contributors: z.array(z.string()).optional(),
+      command: z.string().optional(),
+      blogLink: z.string().optional(),
+      videoLinks: z
+        .array(
+          z.object({
+            link: z.string(),
+            alt: z.string(),
+            flag: z.enum(['FR', 'ES']).optional(),
+          }),
+        )
+        .optional(),
+    }),
+  }),
 });
 
 const i18n = defineCollection({
-  type: 'data',
+  loader: i18nLoader(),
   schema: i18nSchema({
     extend: z
       .object({
@@ -71,7 +73,7 @@ const i18n = defineCollection({
 });
 
 export const collections = {
-  docs: docs,
-  i18n: i18n,
-  authors: authors,
+  docs,
+  i18n,
+  authors,
 };

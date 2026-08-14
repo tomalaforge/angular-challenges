@@ -1,16 +1,13 @@
 ---
-import { getEntry } from 'astro:content';
-
-const contributors = Astro.props.entry.data.contributors ?? [];
-const { lang } = Astro.props;
-const { data } = await getEntry('i18n', lang);
+const contributors = Astro.props.entry?.data?.contributors ?? [];
+const t = Astro.locals.t;
 ---
 
 
 {contributors.length === 0 ? null :
 <div class="wrapper card">
-  <h3>{data['contributor.title']}</h3>
-  <p>{data['contributor.subtitle']}</p>
+  <h3>{t('contributor.title')}</h3>
+  <p>{t('contributor.subtitle')}</p>
   <ul class="list">
     {contributors.map((contributor: string) => (
       <li key={`contributor-${contributor}`} class="contributor">

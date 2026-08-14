@@ -1,21 +1,17 @@
 ---
 import Default from '@astrojs/starlight/components/Hero.astro';
 import MyIcon from './MyIcon.astro';
-import { getEntry } from 'astro:content';
 import SponsorUser from './github/SponsorUser.svelte';
 
-
-
-const { lang } = Astro.props;
-const { data } = await getEntry('i18n', lang);
+const t = Astro.locals.t;
 ---
 
 <div class="sponsor-header button-hover">
-    <p>{data['sponsors.description']}
+    <p>{t('sponsors.description')}
       <SponsorUser client:load />
     </p>
   <a class="action-button" href="https://github.com/sponsors/tomalaforge">
-    <div>{data['sponsors.joinButton']}</div>
+    <div>{t('sponsors.joinButton')}</div>
     <MyIcon name="heart" fill="none" stroke="currentColor" />
   </a>
 </div>
