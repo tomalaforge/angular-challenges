@@ -13,7 +13,7 @@
     "postinstall": "playwright install chromium"
   },
   "engines": {
-    "node": ">=20.19.6"
+    "node": ">=24.0.0"
   },
   "private": true,
   "packageManager": "pnpm@10.23.0",
