@@ -1,7 +1,7 @@
 ---
 title: 🟠 Back-Button-Navigation
 description: Challenge 55 is about overriding browser back button navigation
-author: Ioannis-Tsironis
+author: ioannis-tsironis
 contributors:
   - tsironis13
 challengeNumber: 55

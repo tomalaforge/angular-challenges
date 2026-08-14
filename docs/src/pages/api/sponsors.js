@@ -27,10 +27,13 @@ export async function GET() {
   const { GITHUB_TOKEN } = import.meta.env;
 
   if (!GITHUB_TOKEN) {
-    return new Response(JSON.stringify({ error: 'GITHUB_TOKEN not configured' }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    return new Response(
+      JSON.stringify({ error: 'GITHUB_TOKEN not configured' }),
+      {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' },
+      },
+    );
   }
 
   try {

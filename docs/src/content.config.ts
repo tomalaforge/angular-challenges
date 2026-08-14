@@ -1,7 +1,7 @@
-import { defineCollection, reference, z } from 'astro:content';
 import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
 import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 import { glob } from 'astro/loaders';
+import { defineCollection, reference, z } from 'astro:content';
 
 const authors = defineCollection({
   loader: glob({ pattern: '**/*.{json,yaml}', base: './src/content/authors' }),

@@ -1,20 +1,268 @@
 {
   "migrations": [
     {
-      "version": "22.3.2-beta.0",
-      "requires": { "@angular/build": ">=21.0.0" },
-      "description": "Create AI Instructions to help migrate users workspaces past breaking changes for Vitest 4.",
-      "implementation": "./src/migrations/update-22-1-0/create-ai-instructions-for-vitest-4",
-      "package": "@nx/vitest",
-      "name": "update-22-3-2"
+      "version": "23.0.0-beta.10",
+      "requires": {
+        "jest": ">=30.0.0"
+      },
+      "description": "Update the Jest snapshot guide link in `.snap` files from the legacy `https://goo.gl/fbAQLP` URL to `https://jestjs.io/docs/snapshot-testing`, which Jest v30 now requires.",
+      "implementation": "./dist/src/migrations/update-23-0-0/update-snapshot-guide-link",
+      "documentation": "./dist/src/migrations/update-23-0-0/update-snapshot-guide-link.md",
+      "package": "@nx/jest",
+      "name": "update-snapshot-guide-link"
     },
     {
-      "version": "22.3.2-beta.0",
-      "requires": { "jest": ">=30.0.0" },
-      "description": "Replace removed matcher aliases in Jest v30 with their corresponding matcher",
-      "implementation": "./src/migrations/update-21-3-0/replace-removed-matcher-aliases",
+      "version": "23.0.0-beta.16",
+      "description": "Rewrites `@nx/jest/src/*` subpath imports now that the `./src/*` subpath is no longer exposed by `@nx/jest`'s exports map. Named imports/exports of public symbols are routed to `@nx/jest` and the rest to the new `@nx/jest/internal` entry; `require`, dynamic `import` and `jest.mock` calls reference the whole module and are routed to `@nx/jest/internal`.",
+      "implementation": "./dist/src/migrations/update-23-0-0/rewrite-internal-subpath-imports",
       "package": "@nx/jest",
-      "name": "replace-removed-matcher-aliases-v22-3"
+      "name": "rewrite-jest-internal-subpath-imports"
+    },
+    {
+      "version": "23.0.0-beta.16",
+      "description": "Replaces the removed `jestProjectGenerator` export from `@nx/jest` with its replacement `configurationGenerator`.",
+      "implementation": "./dist/src/migrations/update-23-0-0/rewrite-jest-project-generator",
+      "package": "@nx/jest",
+      "name": "rewrite-jest-project-generator"
+    },
+    {
+      "version": "23.0.0-beta.22",
+      "description": "Migrate the deprecated `setupFile` option of the `@nx/jest:jest` executor: push the file path into `setupFilesAfterEnv` in the project's Jest config and remove the option from `project.json` and `nx.json` target defaults.",
+      "implementation": "./dist/src/migrations/update-23-0-0/migrate-jest-executor-setup-file",
+      "documentation": "./dist/src/migrations/update-23-0-0/migrate-jest-executor-setup-file.md",
+      "package": "@nx/jest",
+      "name": "migrate-jest-executor-setup-file"
+    },
+    {
+      "version": "23.0.0-beta.22",
+      "description": "Migrate the deprecated `skipSetupFile` option of the `@nx/jest:configuration` generator stored as a default in `nx.json` or per-project `project.json` to `setupFile: 'none'` (when `true`) or remove it (when `false`).",
+      "implementation": "./dist/src/migrations/update-23-0-0/migrate-jest-configuration-skip-setup-file",
+      "documentation": "./dist/src/migrations/update-23-0-0/migrate-jest-configuration-skip-setup-file.md",
+      "package": "@nx/jest",
+      "name": "migrate-jest-configuration-skip-setup-file"
+    },
+    {
+      "version": "23.0.0-beta.24",
+      "description": "Rename imports of `createNodesV2` from `@nx/jest/plugin` to the canonical `createNodes` export.",
+      "implementation": "./dist/src/migrations/update-23-0-0/migrate-create-nodes-v2-to-create-nodes",
+      "documentation": "./dist/src/migrations/update-23-0-0/migrate-create-nodes-v2-to-create-nodes.md",
+      "package": "@nx/jest",
+      "name": "update-23-0-0-migrate-create-nodes-v2-import"
+    },
+    {
+      "version": "23.1.0-beta.4",
+      "requires": {
+        "ts-jest": ">=29.2.0"
+      },
+      "description": "Set `isolatedModules: true` in `tsconfig.spec.json` for ts-jest projects on TypeScript < 6 (ts-jest 29.2+ forces `moduleResolution: node10` on the CommonJS path, which ignores package `exports` maps and breaks resolution of exports-only workspace libraries), then verify the workspace still typechecks and remedy any failures the change surfaced.",
+      "implementation": "./dist/src/migrations/update-23-1-0/set-ts-jest-isolated-modules",
+      "prompt": "tools/ai-migrations/@nx/jest/23.1.1/verify-typecheck.md",
+      "documentation": "./dist/src/migrations/update-23-1-0/set-ts-jest-isolated-modules.md",
+      "package": "@nx/jest",
+      "name": "set-ts-jest-isolated-modules"
+    },
+    {
+      "version": "23.0.0-beta.14",
+      "description": "Rewrites `@nx/js/src/*` subpath imports to the new `@nx/js/internal` entry. The `./src/*` wildcard has been removed from `@nx/js`'s exports map; `@nx/js/src/release/version-actions` is preserved as a non-wildcard entry for back-compat with existing nx.json release configs. If a rewritten import resolves to a symbol that lives on the public `@nx/js` entry (e.g. `libraryGenerator`, `extractTsConfigBase`, `resolvePathsBaseUrl`), change the specifier to `@nx/js`.",
+      "factory": "./dist/src/migrations/update-23-0-0/rewrite-internal-subpath-imports",
+      "package": "@nx/js",
+      "name": "23-0-0-rewrite-internal-subpath-imports"
+    },
+    {
+      "version": "23.0.0-beta.24",
+      "description": "Rename imports of `createNodesV2` from `@nx/js/typescript` to the canonical `createNodes` export.",
+      "implementation": "./dist/src/migrations/update-23-0-0/migrate-create-nodes-v2-to-create-nodes",
+      "documentation": "./dist/src/migrations/update-23-0-0/migrate-create-nodes-v2-to-create-nodes.md",
+      "package": "@nx/js",
+      "name": "update-23-0-0-migrate-create-nodes-v2-import"
+    },
+    {
+      "version": "23.0.0-beta.25",
+      "description": "Rewrites `@nx/web/src/*` subpath imports now that the `./src/*` subpath is no longer exposed by `@nx/web`'s exports map. Named imports/exports of public symbols are routed to `@nx/web` and the rest to the new `@nx/web/internal` entry; `require`, dynamic `import` and `jest.mock` calls reference the whole module and are routed to `@nx/web/internal`.",
+      "implementation": "./dist/src/migrations/update-23-0-0/rewrite-internal-subpath-imports",
+      "package": "@nx/web",
+      "name": "rewrite-web-internal-subpath-imports"
+    },
+    {
+      "version": "22.6.0-beta.11",
+      "description": "Prefix reportsDirectory with {projectRoot} to maintain correct resolution after workspace-root-relative behavior change.",
+      "implementation": "./dist/src/migrations/update-22-6-0/prefix-reports-directory-with-project-root",
+      "documentation": "./dist/src/migrations/update-22-6-0/prefix-reports-directory-with-project-root.md",
+      "package": "@nx/vitest",
+      "name": "update-22-6-0-prefix-reports-directory"
+    },
+    {
+      "version": "23.0.0-beta.24",
+      "description": "Rename imports of `createNodesV2` from `@nx/vitest` to the canonical `createNodes` export.",
+      "implementation": "./dist/src/migrations/update-23-0-0/migrate-create-nodes-v2-to-create-nodes",
+      "documentation": "./dist/src/migrations/update-23-0-0/migrate-create-nodes-v2-to-create-nodes.md",
+      "package": "@nx/vitest",
+      "name": "update-23-0-0-migrate-create-nodes-v2-import"
+    },
+    {
+      "version": "23.0.0-beta.6",
+      "description": "Rewrite imports from `@nx/devkit/src/...` to `@nx/devkit` (for public symbols) or `@nx/devkit/internal` (for the rest), since deep imports are no longer reachable through the package's `exports` map.",
+      "implementation": "./dist/src/migrations/update-23-0-0/update-deep-imports",
+      "documentation": "./dist/src/migrations/update-23-0-0/update-deep-imports.md",
+      "package": "@nx/devkit",
+      "name": "update-devkit-deep-imports"
+    },
+    {
+      "version": "23.0.0-beta.24",
+      "description": "Rename deprecated CreateNodes `V2` type imports (CreateNodesV2, CreateNodesContextV2, CreateNodesResultV2, CreateNodesFunctionV2, NxPluginV2) from `@nx/devkit` to their canonical names.",
+      "implementation": "./dist/src/migrations/update-23-0-0/rename-create-nodes-v2-types",
+      "documentation": "./dist/src/migrations/update-23-0-0/rename-create-nodes-v2-types.md",
+      "package": "@nx/devkit",
+      "name": "update-23-0-0-rename-create-nodes-v2-types"
+    },
+    {
+      "version": "22.7.0-beta.12",
+      "description": "Add missing inputs to @nx/eslint:lint executor target defaults",
+      "implementation": "./dist/src/migrations/update-21-6-0/update-executor-lint-inputs",
+      "package": "@nx/eslint",
+      "name": "update-executor-lint-inputs"
+    },
+    {
+      "version": "23.0.0-beta.17",
+      "description": "Rewrites `@nx/eslint/src/*` subpath imports now that the `./src/*` subpath is no longer exposed by `@nx/eslint`'s exports map. Named imports/exports of public symbols are routed to `@nx/eslint` and the rest to the new `@nx/eslint/internal` entry; `require`, dynamic `import` and `jest.mock` calls reference the whole module and are routed to `@nx/eslint/internal`.",
+      "implementation": "./dist/src/migrations/update-23-0-0/rewrite-internal-subpath-imports",
+      "package": "@nx/eslint",
+      "name": "rewrite-eslint-internal-subpath-imports"
+    },
+    {
+      "version": "23.0.0-beta.24",
+      "description": "Rename imports of `createNodesV2` from `@nx/eslint/plugin` to the canonical `createNodes` export.",
+      "implementation": "./dist/src/migrations/update-23-0-0/migrate-create-nodes-v2-to-create-nodes",
+      "documentation": "./dist/src/migrations/update-23-0-0/migrate-create-nodes-v2-to-create-nodes.md",
+      "package": "@nx/eslint",
+      "name": "update-23-0-0-migrate-create-nodes-v2-import"
+    },
+    {
+      "version": "23.1.0-beta.0",
+      "requires": {
+        "eslint": ">=9.0.0"
+      },
+      "description": "Convert remaining ESLint configs to flat config for ESLint v9 and keep the workspace lint-passing, disabling rules whose preset defaults changed.",
+      "implementation": "./dist/src/migrations/update-23-1-0/convert-to-flat-config",
+      "prompt": "tools/ai-migrations/@nx/eslint/23.1.1/convert-to-flat-config.md",
+      "package": "@nx/eslint",
+      "name": "update-23-1-0-convert-to-flat-config"
+    },
+    {
+      "version": "23.1.0-beta.5",
+      "description": "Handle typescript-eslint rules removed in v8 in ESLint flat configs, since referencing a removed rule stops the config from loading. Deletes the removed formatting/extension rules (e.g. @typescript-eslint/no-extra-semi) and rewrites the safe 1:1 renames (no-throw-literal -> only-throw-error, no-useless-template-literals -> no-unnecessary-template-expression) to preserve enforcement.",
+      "implementation": "./dist/src/migrations/update-23-1-0/remove-removed-typescript-eslint-extension-rules",
+      "package": "@nx/eslint",
+      "name": "update-23-1-0-remove-removed-typescript-eslint-extension-rules"
+    },
+    {
+      "version": "23.1.0-beta.5",
+      "description": "Migrate the removed @typescript-eslint/ban-types rule to its v8 successors (no-empty-object-type, no-unsafe-function-type, no-wrapper-object-types), whose options do not map 1:1 - so it is driven by an AI prompt rather than a deterministic codemod.",
+      "prompt": "tools/ai-migrations/@nx/eslint/23.1.1/migrate-ban-types-rule.md",
+      "package": "@nx/eslint",
+      "name": "update-23-1-0-migrate-ban-types-rule"
+    },
+    {
+      "version": "23.0.0-beta.10",
+      "description": "Rewrites imports of `@nx/workspace/src/utilities/typescript/compilation` to `@nx/js/internal`, where the module now lives.",
+      "implementation": "./dist/src/migrations/update-23-0-0/move-typescript-compilation-import",
+      "package": "@nx/workspace",
+      "name": "23-0-0-move-typescript-compilation-import"
+    },
+    {
+      "version": "23.0.0-beta.0",
+      "description": "Update the @nx/angular/module-federation import to use @nx/module-federation/angular.",
+      "factory": "./dist/src/migrations/update-23-0-0/migrate-with-mf-import-to-new-package",
+      "documentation": "./dist/src/migrations/update-23-0-0/migrate-with-mf-import-to-new-package.md",
+      "package": "@nx/angular",
+      "name": "update-23-0-0-update-with-module-federation-import"
+    },
+    {
+      "version": "23.0.0-beta.7",
+      "description": "Split @nx/angular:ngrx generator defaults in nx.json across the @nx/angular:ngrx-root-store and @nx/angular:ngrx-feature-store generators.",
+      "factory": "./dist/src/migrations/update-23-0-0/migrate-ngrx-generator-defaults",
+      "documentation": "./dist/src/migrations/update-23-0-0/migrate-ngrx-generator-defaults.md",
+      "package": "@nx/angular",
+      "name": "update-23-0-0-migrate-ngrx-generator-defaults"
+    },
+    {
+      "version": "23.0.0-beta.24",
+      "description": "Rename imports of `createNodesV2` from `@nx/angular/plugin` to the canonical `createNodes` export.",
+      "implementation": "./dist/src/migrations/update-23-0-0/migrate-create-nodes-v2-to-create-nodes",
+      "documentation": "./dist/src/migrations/update-23-0-0/migrate-create-nodes-v2-to-create-nodes.md",
+      "package": "@nx/angular",
+      "name": "update-23-0-0-migrate-create-nodes-v2-import"
+    },
+    {
+      "version": "23.0.0-beta.25",
+      "description": "Rewrites the now-removed deep `@nx/angular/src/utils`, `@nx/angular/src/generators/utils` and `@nx/angular/src/generators/move/move-impl` subpath imports to the new `@nx/angular/internal` entry. The executor/builder/generator schema and impl subpaths remain available and are left untouched.",
+      "implementation": "./dist/src/migrations/update-23-0-0/rewrite-internal-subpath-imports",
+      "package": "@nx/angular",
+      "name": "rewrite-angular-internal-subpath-imports"
+    },
+    {
+      "version": "23.0.0-beta.10",
+      "description": "Safety net: ensure any remaining @nx/vite:test executor usages are swapped to @nx/vitest:test and @nx/vitest is installed.",
+      "implementation": "./dist/src/migrations/update-23-0-0/ensure-vitest-package-migration",
+      "documentation": "./dist/src/migrations/update-23-0-0/ensure-vitest-package-migration.md",
+      "package": "@nx/vite",
+      "name": "ensure-vitest-package-migration-23"
+    },
+    {
+      "version": "23.0.0-beta.22",
+      "requires": {
+        "vitest": ">=3.0.0"
+      },
+      "description": "Migrate workspaces past breaking changes for Vitest 3.",
+      "implementation": "./dist/src/migrations/update-23-0-0/migrate-to-vitest-3",
+      "prompt": "tools/ai-migrations/@nx/vite/23.1.1/ai-instructions-for-vitest-3.md",
+      "package": "@nx/vite",
+      "name": "migrate-to-vitest-3"
+    },
+    {
+      "version": "23.0.0-beta.22",
+      "requires": {
+        "vitest": ">=4.0.0"
+      },
+      "description": "Migrate workspaces past breaking changes for Vitest 4.",
+      "implementation": "./dist/src/migrations/update-23-0-0/migrate-to-vitest-4",
+      "prompt": "tools/ai-migrations/@nx/vite/23.1.1/ai-instructions-for-vitest-4.md",
+      "package": "@nx/vite",
+      "name": "migrate-to-vitest-4"
+    },
+    {
+      "version": "23.0.0-beta.24",
+      "description": "Rename imports of `createNodesV2` from `@nx/vite/plugin` to the canonical `createNodes` export.",
+      "implementation": "./dist/src/migrations/update-23-0-0/migrate-create-nodes-v2-to-create-nodes",
+      "documentation": "./dist/src/migrations/update-23-0-0/migrate-create-nodes-v2-to-create-nodes.md",
+      "package": "@nx/vite",
+      "name": "update-23-0-0-migrate-create-nodes-v2-import"
+    },
+    {
+      "version": "23.0.0-beta.19",
+      "description": "Rewrites imports from `@nx/cypress/src/*` to either the public `@nx/cypress` entry (for re-exported symbols) or `@nx/cypress/internal` (for everything else). The `./src/*` wildcard was removed from the package's exports map.",
+      "implementation": "./dist/src/migrations/update-23-0-0/rewrite-internal-subpath-imports",
+      "package": "@nx/cypress",
+      "name": "rewrite-internal-subpath-imports"
+    },
+    {
+      "version": "23.0.0-beta.24",
+      "description": "Rename imports of `createNodesV2` from `@nx/cypress/plugin` to the canonical `createNodes` export.",
+      "implementation": "./dist/src/migrations/update-23-0-0/migrate-create-nodes-v2-to-create-nodes",
+      "documentation": "./dist/src/migrations/update-23-0-0/migrate-create-nodes-v2-to-create-nodes.md",
+      "package": "@nx/cypress",
+      "name": "update-23-0-0-migrate-create-nodes-v2-import"
+    },
+    {
+      "version": "23.1.0-beta.6",
+      "requires": {
+        "cypress": ">=14.0.0"
+      },
+      "description": "Set `justInTimeCompile: false` in webpack component testing Cypress configs on Cypress 14+, where it defaults to true and can intermittently run 0 tests in CI.",
+      "implementation": "./dist/src/migrations/update-23-1-0/disable-webpack-ct-just-in-time-compile",
+      "documentation": "./dist/src/migrations/update-23-1-0/disable-webpack-ct-just-in-time-compile.md",
+      "package": "@nx/cypress",
+      "name": "disable-webpack-ct-just-in-time-compile"
     }
   ]
 }
