@@ -8,16 +8,15 @@ import CommentSection from './CommentSection.astro';
 import ContributorsFooter from './ContributorsFooter.astro';
 import AnswerNumber from './github/AnswerNumber.svelte';
 
-const { lang } = Astro.props;
-const { data } = await getEntry('i18n', lang);
-const { challengeNumber } = Astro.props.entry.data;
-const author = Astro.props.entry.data.author ? await getEntry(Astro.props.entry.data.author) : null;
-const renderCommentSection = !Astro.props.entry.data.noCommentSection;
+const entryData = Astro.props.entry?.data ?? {};
+const { challengeNumber } = entryData;
+const author = entryData.author ? await getEntry(entryData.author) : null;
+const renderCommentSection = !entryData.noCommentSection;
 
 ---
 
 { challengeNumber ? <div class="header-container">
-  { author ? <Author {...author.data} {data} /> : null}
+  { author ? <Author {...author.data} /> : null}
   <AnswerNumber client:load/>
 </div> :null}
 

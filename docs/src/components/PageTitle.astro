@@ -1,10 +1,8 @@
 ---
-import { getEntry } from 'astro:content';
 import type { Props } from '@astrojs/starlight/props';
 import Default from '@astrojs/starlight/components/PageTitle.astro';
-const { challengeNumber } = Astro.props.entry.data;
-const { lang } = Astro.props;
-const { data } = await getEntry('i18n', lang);
+const { challengeNumber } = Astro.props.entry?.data ?? {};
+const t = Astro.locals.t;
 ---
 
 <div class="page-title-content">
@@ -12,7 +10,7 @@ const { data } = await getEntry('i18n', lang);
     <slot />
   </Default>
   {challengeNumber &&
-    <div class="chip">{data['page.title.challenge']} #{challengeNumber}</div>}
+    <div class="chip">{t('page.title.challenge')} #{challengeNumber}</div>}
 </div>
 
 <style>

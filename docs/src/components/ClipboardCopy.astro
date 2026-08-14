@@ -1,8 +1,6 @@
 ---
-import { getEntry } from "astro:content";
-
-const { copyText, lang } = Astro.props;
-const { data } = await getEntry('i18n', lang);
+const { copyText } = Astro.props;
+const t = Astro.locals.t;
 ---
 
 <span class="copy-container">
@@ -36,7 +34,7 @@ const { data } = await getEntry('i18n', lang);
     ></path></svg
   >
   <span class="tooltipText triangle">
-    {data['buttons.clipboardCopy']}
+    {t('buttons.clipboardCopy')}
   </span>
 </span>
 
