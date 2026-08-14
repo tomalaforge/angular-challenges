@@ -1,5 +1,5 @@
 import { NgOptimizedImage } from '@angular/common';
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
   selector: 'post-header',
@@ -17,11 +17,12 @@ import { Component, input } from '@angular/core';
         alt=""
         width="30"
         height="30"
-        class="absolute -bottom-2 -right-2" />
+        class="absolute -right-2 -bottom-2" />
     </div>
     <span class="text-md mt-2 font-bold uppercase">Thomas Laforge</span>
     <span class="text-sm">{{ date() }}</span>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   host: {
     class: 'flex flex-col justify-center items-center',
   },

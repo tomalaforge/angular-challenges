@@ -1,4 +1,9 @@
-import { Component, OnInit, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -34,6 +39,7 @@ import { PersonListComponent } from './person-list.component';
       (delete)="personService.deletePerson($event)"
       (update)="personService.updatePerson($event)" />
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   host: {
     class: 'flex items-center flex-col gap-5',
   },

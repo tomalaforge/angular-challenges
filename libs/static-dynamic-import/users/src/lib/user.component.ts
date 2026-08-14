@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { User } from './user.model';
 
@@ -9,6 +9,7 @@ import { User } from './user.model';
     <mat-icon aria-hidden="false" aria-label="user icon" fontIcon="person" />
     <div>{{ user().name }} {{ user().lastName }}</div>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   host: {
     class: 'flex',
   },

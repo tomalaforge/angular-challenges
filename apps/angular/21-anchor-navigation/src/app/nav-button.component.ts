@@ -1,5 +1,5 @@
 /* eslint-disable @angular-eslint/component-selector */
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
   selector: 'nav-button',
@@ -8,6 +8,7 @@ import { Component, input } from '@angular/core';
       <ng-content />
     </a>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   host: {
     class: 'block w-fit border border-red-500 rounded-md p-4 m-2',
   },

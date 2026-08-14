@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -21,6 +21,7 @@ import { ProfilConfirmationDialog } from './profil-confirmation.dialog';
   host: {
     class: 'p-4 block flex gap-4 items-center',
   },
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <mat-form-field appearance="fill">
       <mat-label>Name</mat-label>

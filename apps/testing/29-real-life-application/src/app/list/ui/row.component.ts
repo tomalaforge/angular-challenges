@@ -1,4 +1,9 @@
-import { Component, input, output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  input,
+  output,
+} from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -69,6 +74,7 @@ import { Ticket, TicketUser, User } from '../../backend.service';
       </div>
     </li>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   host: {
     class: 'p-4 border border-blue-500 rounded flex',
   },

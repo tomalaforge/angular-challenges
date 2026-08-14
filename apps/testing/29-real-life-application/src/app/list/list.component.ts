@@ -1,5 +1,10 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -55,6 +60,7 @@ import { RowComponent } from './ui/row.component';
     }
   `,
   providers: [provideComponentStore(TicketStore)],
+  changeDetection: ChangeDetectionStrategy.Eager,
   host: {
     class: 'p-5 block',
   },

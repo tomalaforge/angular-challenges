@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { MatTableModule } from '@angular/material/table';
 import { randCountry, randFirstName, randLastName } from '@ngneat/falso';
@@ -31,6 +31,7 @@ export const randUser = (): User => ({
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   host: {
     class: 'flex flex-col',
   },

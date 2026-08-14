@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   imports: [],
   selector: 'app-root',
   styles: `
-@reference "tailwindcss";
+    @reference "tailwindcss";
 
     section {
       @apply flex flex-1 flex-col gap-5;
@@ -18,6 +18,7 @@ import { Component } from '@angular/core';
       }
     }
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <div class="mx-20 my-40 flex gap-5">
       <section>

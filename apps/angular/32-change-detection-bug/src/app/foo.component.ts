@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-foo',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     Foo Component
   `,

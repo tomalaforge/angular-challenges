@@ -1,5 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { randText } from '@ngneat/falso';
 
 @Component({
@@ -11,6 +16,7 @@ import { randText } from '@ngneat/falso';
       <button (click)="update(todo)">Update</button>
     }
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: [],
 })
 export class AppComponent implements OnInit {

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { HeavyCalculationService } from './heavy-calculation.service';
 import { UnknownPersonComponent } from './unknown-person/unknown-person.component';
 
@@ -15,6 +15,7 @@ import { UnknownPersonComponent } from './unknown-person/unknown-person.componen
     </button>
     <div class="p-1 text-white">Progress: {{ loadingPercentage() }}%</div>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   host: {
     class: `flex flex-col h-screen w-screen bg-[#1f75c0]`,
   },

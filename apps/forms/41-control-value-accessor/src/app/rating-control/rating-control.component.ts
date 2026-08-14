@@ -1,8 +1,14 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Output,
+} from '@angular/core';
 
 @Component({
   selector: 'app-rating-control',
   templateUrl: 'rating-control.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['rating-control.component.css'],
 })
 export class RatingControlComponent {

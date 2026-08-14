@@ -1,10 +1,11 @@
 /* eslint-disable @angular-eslint/component-class-suffix */
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   imports: [MatButtonModule, MatDialogModule],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <h1 mat-dialog-title>Error</h1>
     <div mat-dialog-content>

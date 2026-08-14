@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { randFirstName } from '@ngneat/falso';
 import { PersonListComponent } from './person-list.component';
 import { RandomComponent } from './random.component';
@@ -6,6 +6,7 @@ import { RandomComponent } from './random.component';
 @Component({
   imports: [PersonListComponent, RandomComponent],
   selector: 'app-root',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <app-random />
 

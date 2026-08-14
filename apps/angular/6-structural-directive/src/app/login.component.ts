@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ButtonComponent } from './button.component';
 import { InformationComponent } from './information.component';
@@ -16,6 +16,7 @@ import { UserStore } from './user.store';
 @Component({
   imports: [InformationComponent, RouterLink, ButtonComponent],
   selector: 'app-login',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <header class="flex items-center gap-3">
       Log as :

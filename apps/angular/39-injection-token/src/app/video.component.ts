@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { TimerContainerComponent } from './timer-container.component';
 
 @Component({
   selector: 'app-video',
   imports: [TimerContainerComponent],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <div class="flex gap-2">
       Video Call Timer:

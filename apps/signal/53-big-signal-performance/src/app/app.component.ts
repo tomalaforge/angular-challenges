@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AddressComponent } from './address.component';
 import { JobComponent } from './job.component';
 import { NameComponent } from './name.component';
@@ -15,6 +15,7 @@ import { UserFormComponent } from './user-form.component';
     <user-form />
   `,
   styles: [''],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     JobComponent,
     NameComponent,

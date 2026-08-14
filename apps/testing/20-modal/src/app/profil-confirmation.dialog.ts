@@ -1,10 +1,11 @@
 /* eslint-disable @angular-eslint/component-class-suffix */
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   imports: [MatButtonModule, MatDialogModule],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <h1 mat-dialog-title>Profil</h1>
     <div mat-dialog-content>Name: {{ data.name }}</div>

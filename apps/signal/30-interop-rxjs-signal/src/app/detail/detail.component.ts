@@ -1,5 +1,9 @@
 import { DatePipe } from '@angular/common';
-import { Component, Input as RouterInput } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input as RouterInput,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Photo } from '../photo.model';
 
@@ -31,6 +35,7 @@ import { Photo } from '../photo.model';
       Back
     </button>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   host: {
     class: 'p-5 block',
   },

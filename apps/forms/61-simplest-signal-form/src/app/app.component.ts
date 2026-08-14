@@ -1,5 +1,10 @@
 import { JsonPipe } from '@angular/common';
-import { Component, signal, WritableSignal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  signal,
+  WritableSignal,
+} from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -10,6 +15,7 @@ import {
 @Component({
   selector: 'app-root',
   imports: [ReactiveFormsModule, JsonPipe],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <div class="min-h-screen bg-gray-100 px-4 py-12 sm:px-6 lg:px-8">
       <div class="mx-auto max-w-md rounded-lg bg-white p-8 shadow-md">
@@ -28,7 +34,7 @@ import {
               type="text"
               formControlName="name"
               placeholder="Enter your name"
-              class="w-full rounded-md border border-gray-300 px-4 py-2 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+              class="w-full rounded-md border border-gray-300 px-4 py-2 transition outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
               [class.border-red-500]="
                 form.controls.name.invalid && !form.controls.name.untouched
               " />
@@ -48,7 +54,7 @@ import {
               type="text"
               formControlName="lastname"
               placeholder="Enter your last name"
-              class="w-full rounded-md border border-gray-300 px-4 py-2 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500" />
+              class="w-full rounded-md border border-gray-300 px-4 py-2 transition outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500" />
           </div>
 
           <div>
@@ -64,7 +70,7 @@ import {
               placeholder="Enter your age (1-99)"
               min="1"
               max="99"
-              class="w-full rounded-md border border-gray-300 px-4 py-2 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+              class="w-full rounded-md border border-gray-300 px-4 py-2 transition outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
               [class.border-red-500]="
                 form.controls.age.invalid && !form.controls.age.untouched
               " />
@@ -91,7 +97,7 @@ import {
               type="text"
               formControlName="note"
               placeholder="Enter a note"
-              class="w-full rounded-md border border-gray-300 px-4 py-2 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500" />
+              class="w-full rounded-md border border-gray-300 px-4 py-2 transition outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500" />
           </div>
 
           <div class="flex gap-4">

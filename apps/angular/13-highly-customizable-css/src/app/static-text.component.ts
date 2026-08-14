@@ -1,5 +1,10 @@
 /* eslint-disable @angular-eslint/component-selector */
-import { Component, computed, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+} from '@angular/core';
 import { TextComponent } from './text.component';
 
 export type StaticTextType = 'normal' | 'warning' | 'error';
@@ -7,6 +12,7 @@ export type StaticTextType = 'normal' | 'warning' | 'error';
 @Component({
   selector: 'static-text',
   imports: [TextComponent],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <text [font]="font()" [color]="color()">This is a static text</text>
   `,

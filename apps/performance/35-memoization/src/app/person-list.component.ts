@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 import { TitleCasePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -49,6 +49,7 @@ const fibonacci = (num: number): number => {
       }
     </mat-list>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   host: {
     class: 'w-full flex flex-col items-center',
   },

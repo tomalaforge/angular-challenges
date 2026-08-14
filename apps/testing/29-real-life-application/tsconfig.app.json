@@ -17,5 +17,13 @@
     "**/*.cy.js",
     "**/*.cy.tsx",
     "**/*.cy.jsx"
-  ]
+  ],
+  "angularCompilerOptions": {
+    "extendedDiagnostics": {
+      "checks": {
+        "nullishCoalescingNotNullable": "suppress",
+        "optionalChainNotNullable": "suppress"
+      }
+    }
+  }
 }

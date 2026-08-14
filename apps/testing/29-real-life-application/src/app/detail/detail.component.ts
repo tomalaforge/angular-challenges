@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { RouterLink } from '@angular/router';
@@ -47,6 +47,7 @@ import { DetailStore } from './detail.store';
     </button>
   `,
   providers: [provideComponentStore(DetailStore)],
+  changeDetection: ChangeDetectionStrategy.Eager,
   host: {
     class: 'p-5 block',
   },
