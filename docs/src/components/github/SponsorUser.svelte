@@ -1,15 +1,13 @@
 <script>
   import { onMount } from 'svelte';
 
-
   let sponsors = [];
 
   onMount(async () => {
-    const sponsorFetch = await fetch('https://ghs.vercel.app/v2/sponsors/tomalaforge');
-    const data = await sponsorFetch.json();
-    sponsors = data.sponsors.current;
+    const response = await fetch('/api/sponsors');
+    const data = await response.json();
+    sponsors = data.sponsors ?? [];
   });
-
 </script>
 
 {#each sponsors as { username, avatar }}
