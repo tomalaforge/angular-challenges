@@ -70,8 +70,13 @@ export class SolutionDiff {
     return [...this.parsedFiles()];
   });
 
-  protected readonly loading = computed(
-    () => this.metaResource.isLoading() || this.filesResource.isLoading(),
+  /**
+   * Both resources are disabled during SSR, so neither reports "loading" there.
+   * The template branches on this instead: it stays false until both responses
+   * arrive, which keeps the server HTML from rendering an empty diff.
+   */
+  protected readonly loaded = computed(
+    () => this.metaResource.status() === 'resolved' && this.filesResource.status() === 'resolved',
   );
 
   protected readonly failed = computed(

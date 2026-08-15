@@ -3,12 +3,7 @@
     ← All solutions for {{ doc().title }}
   </a>
 
-  @if (loading()) {
-    <div class="mt-6 space-y-3">
-      <div class="h-16 animate-pulse rounded-lg border border-neutral-800 bg-neutral-900"></div>
-      <div class="h-96 animate-pulse rounded-lg border border-neutral-800 bg-neutral-900"></div>
-    </div>
-  } @else if (failed()) {
+  @if (failed()) {
     <div class="mt-6 rounded-lg border border-red-900 bg-red-950/40 p-4 text-sm">
       Could not load this pull request from GitHub right now.
       <a
@@ -17,6 +12,11 @@
         Open it on GitHub
       </a>
       or try again later.
+    </div>
+  } @else if (!loaded()) {
+    <div class="mt-6 space-y-3">
+      <div class="h-16 animate-pulse rounded-lg border border-neutral-800 bg-neutral-900"></div>
+      <div class="h-96 animate-pulse rounded-lg border border-neutral-800 bg-neutral-900"></div>
     </div>
   } @else {
     <!-- PR header -->

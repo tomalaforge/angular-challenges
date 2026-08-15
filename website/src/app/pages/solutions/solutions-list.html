@@ -8,17 +8,17 @@
     the full diff without leaving the site.
   </p>
 
-  @if (solutionsResource.isLoading()) {
-    <div class="space-y-3">
-      @for (i of [1, 2, 3, 4]; track i) {
-        <div class="h-20 animate-pulse rounded-lg border border-neutral-800 bg-neutral-900"></div>
-      }
-    </div>
-  } @else if (solutionsResource.error()) {
+  @if (solutionsResource.error()) {
     <div class="rounded-lg border border-red-900 bg-red-950/40 p-4 text-sm">
       Could not load the solutions from GitHub right now.
       <a [href]="githubSearchUrl()" class="text-pink-500 hover:underline">View them on GitHub</a>
       or try again later.
+    </div>
+  } @else if (!loaded()) {
+    <div class="space-y-3">
+      @for (i of [1, 2, 3, 4]; track i) {
+        <div class="h-20 animate-pulse rounded-lg border border-neutral-800 bg-neutral-900"></div>
+      }
     </div>
   } @else if (solutions().length === 0) {
     <div class="rounded-lg border border-neutral-800 p-6 text-center text-neutral-400">

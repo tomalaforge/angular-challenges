@@ -22,9 +22,14 @@ export class SolutionsList {
     this.isBrowser ? `/api/challenges/${this.doc().challengeNumber}/solutions` : undefined,
   );
 
-  protected readonly solutions = computed(
-    () => this.solutionsResource.value()?.solutions ?? [],
-  );
+  protected readonly solutions = computed(() => this.solutionsResource.value()?.solutions ?? []);
+
+  /**
+   * The resource is disabled during SSR, so it never reports "loading" there.
+   * Templates branch on this instead: it stays false until a response arrives,
+   * which keeps the server HTML from claiming that no solution exists.
+   */
+  protected readonly loaded = computed(() => this.solutionsResource.status() === 'resolved');
 
   protected readonly githubSearchUrl = computed(
     () =>

@@ -51,7 +51,10 @@ This allows you to create an animation for this element only.
 Lastly, if the same element is present in both views, you can automate the transition by assigning the same **transition name**.
 
 :::danger
-Remember, you can have only ONE UNIQUE `view-transition-name` per page.
+Remember, a page can use as many different `view-transition-name` values as you need, but
+each name must identify only ONE rendered element per view. The same name is what pairs the
+old and the new instance of an element; if two elements share it in the same view, the
+transition is aborted.
 :::
 
 ## Statement

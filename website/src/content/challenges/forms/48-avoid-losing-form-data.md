@@ -26,15 +26,16 @@ Here's the feature expressed as a user story with a functional expectation:
 
 ## Acceptance Criteria
 
-1. If one of the form fields is not empty and the user tries to navigate to a different route or page, or wants to reload the page, show an alert dialog to _avoid losing form data_.
-2. The content of `dialog.component.ts` must be used for your alert.
-3. The appearance and behavior of the alert dialog box must comply with W3C conventions, see [alert dialog pattern](https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/).
-4. Maximize the use of the new concepts and syntax in the latest version of Angular.
+1. If one of the form fields is not empty and the user tries to navigate to a **different route inside the app**, show your own alert dialog to _avoid losing form data_.
+2. If the user reloads the page, closes the tab, or leaves the document, the browser's native confirmation prompt must be triggered instead — a custom dialog cannot be rendered at that point.
+3. The content of `dialog.component.ts` must be used for the in-app alert.
+4. The appearance and behavior of the alert dialog box must comply with W3C conventions, see [alert dialog pattern](https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/).
+5. Maximize the use of the new concepts and syntax in the latest version of Angular.
 
 <details>
     <summary>Tips 🤫 (if you really need it and after careful consideration)</summary>
     <ul>
     <li>Use the <a href="https://material.angular.io/cdk/">Material CDK</a> Dialog or Overlay - don't forget to add <code>@import '@angular/cdk/overlay-prebuilt.css'</code> in <code>styles.css</code></li>
-    <li>Use the <a href="https://angular.io/api/router/CanDeactivate">CanDeactivate</a> guard in the new functional approach.</li>
+    <li>Use the <a href="https://angular.dev/guide/routing/route-guards">CanDeactivate</a> guard in the new functional approach for in-app navigation, and the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/beforeunload_event">beforeunload</a> event for reloads and tab closes.</li>
     </ul>
 </details>

@@ -6,10 +6,56 @@ const REPO_FIRST_YEAR = 2022;
 const EXCLUDED_USERS = new Set(['allcontributors[bot]', 'tomalaforge']);
 const GITHUB_API = 'https://api.github.com';
 
-/** Tiny in-memory TTL cache — enough to stay far below GitHub rate limits. */
-const cache = new Map<string, { expires: number; status: number; data: unknown }>();
+interface CacheEntry {
+  expires: number;
+  status: number;
+  data: unknown;
+}
 
-async function github(path: string, ttlSeconds: number): Promise<{ status: number; data: unknown }> {
+/** Tiny in-memory TTL cache — enough to stay far below GitHub rate limits. */
+const cache = new Map<string, CacheEntry>();
+/** Per-PR paths would otherwise make the cache grow without bound on a warm instance. */
+const CACHE_MAX_ENTRIES = 500;
+const REQUEST_TIMEOUT_MS = 10_000;
+const RATE_LIMIT_RETRIES = 2;
+
+/** Writes an entry, evicting the least recently written ones once the cap is reached. */
+function setCache(key: string, entry: CacheEntry): void {
+  cache.delete(key);
+  cache.set(key, entry);
+  while (cache.size > CACHE_MAX_ENTRIES) {
+    const oldest = cache.keys().next();
+    if (oldest.done) {
+      break;
+    }
+    cache.delete(oldest.value);
+  }
+}
+
+function delay(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+/** Retry-After / X-RateLimit-Reset aware backoff, capped so a request never hangs a page. */
+function retryDelayMs(response: Response, attempt: number): number {
+  const retryAfter = Number(response.headers.get('retry-after'));
+  if (Number.isFinite(retryAfter) && retryAfter > 0) {
+    return Math.min(retryAfter * 1000, 10_000);
+  }
+  return Math.min(1000 * 2 ** attempt, 8000);
+}
+
+async function githubFetch(path: string, headers: Record<string, string>): Promise<Response> {
+  return fetch(`${GITHUB_API}${path}`, {
+    headers,
+    signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+  });
+}
+
+async function github(
+  path: string,
+  ttlSeconds: number,
+): Promise<{ status: number; data: unknown }> {
   const cached = cache.get(path);
   if (cached && cached.expires > Date.now()) {
     return cached;
@@ -23,11 +69,31 @@ async function github(path: string, ttlSeconds: number): Promise<{ status: numbe
   if (token) {
     headers['Authorization'] = `Bearer ${token}`;
   }
-  const response = await fetch(`${GITHUB_API}${path}`, { headers });
-  const data = await response.json();
+
+  let response: Response;
+  try {
+    response = await githubFetch(path, headers);
+    // 403/429 are GitHub's primary and secondary rate limits: back off and retry.
+    for (let attempt = 0; attempt < RATE_LIMIT_RETRIES; attempt++) {
+      if (response.status !== 403 && response.status !== 429) {
+        break;
+      }
+      await delay(retryDelayMs(response, attempt));
+      response = await githubFetch(path, headers);
+    }
+  } catch (error) {
+    if (cached) {
+      // Serve stale data instead of surfacing a network or timeout error.
+      return cached;
+    }
+    console.error('GitHub request failed', path, error);
+    return { status: 503, data: { error: 'github request failed' } };
+  }
+
+  const data = await response.json().catch(() => null);
   const entry = { status: response.status, data, expires: Date.now() + ttlSeconds * 1000 };
   if (response.ok) {
-    cache.set(path, entry);
+    setCache(path, entry);
   } else if (cached) {
     // Serve stale data instead of surfacing a rate-limit error.
     return cached;
@@ -63,8 +129,14 @@ async function mapLimit<T, R>(
  * query at 1000 results (10 pages), so the query is additionally partitioned
  * per creation year; each year's page 1 reveals via total_count how many more
  * pages need fetching.
+ *
+ * A failing page marks the result `partial` rather than discarding every page
+ * already fetched; `null` is only returned when no page at all could be read.
  */
-async function searchAllIssues(baseQuery: string, ttlSeconds: number): Promise<any[] | null> {
+async function searchAllIssues(
+  baseQuery: string,
+  ttlSeconds: number,
+): Promise<{ items: any[]; partial: boolean } | null> {
   const currentYear = new Date().getFullYear();
   const years = Array.from(
     { length: currentYear - REPO_FIRST_YEAR + 1 },
@@ -81,10 +153,14 @@ async function searchAllIssues(baseQuery: string, ttlSeconds: number): Promise<a
 
   const items: any[] = [];
   const remaining: string[] = [];
+  let partial = false;
+  let succeeded = 0;
   for (const [index, { status, data }] of firstPages.entries()) {
     if (status !== 200) {
-      return null;
+      partial = true;
+      continue;
     }
+    succeeded++;
     const { items: batch = [], total_count: total = 0 } = data as {
       items: any[];
       total_count: number;
@@ -96,14 +172,19 @@ async function searchAllIssues(baseQuery: string, ttlSeconds: number): Promise<a
     }
   }
 
+  if (succeeded === 0) {
+    return null;
+  }
+
   const restPages = await mapLimit(remaining, 4, (url) => github(url, ttlSeconds));
   for (const { status, data } of restPages) {
     if (status !== 200) {
-      return null;
+      partial = true;
+      continue;
     }
     items.push(...((data as { items: any[] }).items ?? []));
   }
-  return items;
+  return { items, partial };
 }
 
 interface LeaderboardEntry {
@@ -172,19 +253,16 @@ githubApi.post('/pulls/:number/react', async (req, res) => {
     res.status(400).json({ error: 'invalid PR number' });
     return;
   }
-  const response = await fetch(
-    `https://api.github.com/repos/${REPO}/issues/${number}/reactions`,
-    {
-      method: 'POST',
-      headers: {
-        Accept: 'application/vnd.github+json',
-        Authorization: `Bearer ${token}`,
-        'User-Agent': 'angular-challenges-website',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ content: '+1' }),
+  const response = await fetch(`https://api.github.com/repos/${REPO}/issues/${number}/reactions`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/vnd.github+json',
+      Authorization: `Bearer ${token}`,
+      'User-Agent': 'angular-challenges-website',
+      'Content-Type': 'application/json',
     },
-  );
+    body: JSON.stringify({ content: '+1' }),
+  });
   if (!response.ok) {
     res.status(response.status).json({ error: 'reaction failed' });
     return;
@@ -198,13 +276,15 @@ const BOARD_QUERIES: Record<string, string> = {
   commit: 'no:label',
 };
 
-async function buildLeaderboard(board: string): Promise<LeaderboardEntry[] | null> {
-  const items = await searchAllIssues(BOARD_QUERIES[board], 1800);
-  if (!items) {
+async function buildLeaderboard(
+  board: string,
+): Promise<{ entries: LeaderboardEntry[]; partial: boolean } | null> {
+  const result = await searchAllIssues(BOARD_QUERIES[board], 1800);
+  if (!result) {
     return null;
   }
   const counts = new Map<string, { avatar: string; values: Set<string | number> }>();
-  for (const item of items) {
+  for (const item of result.items) {
     if (board === 'answers') {
       const challenge = item.labels
         ?.map((l: GithubLabel) => Number(l.name))
@@ -216,7 +296,7 @@ async function buildLeaderboard(board: string): Promise<LeaderboardEntry[] | nul
       accumulate(counts, item, item.number);
     }
   }
-  return toLeaderboard(counts);
+  return { entries: toLeaderboard(counts), partial: result.partial };
 }
 
 /**
@@ -226,16 +306,22 @@ async function buildLeaderboard(board: string): Promise<LeaderboardEntry[] | nul
 const boardCache = new Map<string, { expires: number; entries: LeaderboardEntry[] }>();
 const boardRefreshing = new Map<string, Promise<LeaderboardEntry[] | null>>();
 const BOARD_TTL_MS = 30 * 60 * 1000;
+/** A board built from an incomplete page set is cached briefly, then retried. */
+const BOARD_PARTIAL_TTL_MS = 5 * 60 * 1000;
 
 function refreshBoard(board: string): Promise<LeaderboardEntry[] | null> {
   let inflight = boardRefreshing.get(board);
   if (!inflight) {
     inflight = buildLeaderboard(board)
-      .then((entries) => {
-        if (entries) {
-          boardCache.set(board, { expires: Date.now() + BOARD_TTL_MS, entries });
+      .then((result) => {
+        if (!result) {
+          return null;
         }
-        return entries;
+        boardCache.set(board, {
+          expires: Date.now() + (result.partial ? BOARD_PARTIAL_TTL_MS : BOARD_TTL_MS),
+          entries: result.entries,
+        });
+        return result.entries;
       })
       .finally(() => boardRefreshing.delete(board));
     boardRefreshing.set(board, inflight);
@@ -335,7 +421,7 @@ githubApi.get('/sponsors', async (_req, res) => {
         .filter(Boolean)
         .map((s: any) => ({ login: s.login, avatar: s.avatarUrl })) ?? [];
     const payload = { sponsors };
-    cache.set('sponsors', { expires: Date.now() + 900_000, status: 200, data: payload });
+    setCache('sponsors', { expires: Date.now() + 900_000, status: 200, data: payload });
     res.set('Cache-Control', 'public, s-maxage=900, stale-while-revalidate=86400');
     res.json(payload);
   } catch {

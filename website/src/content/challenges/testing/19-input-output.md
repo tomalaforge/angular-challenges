@@ -22,7 +22,7 @@ You can play with it by running : `npx nx serve testing-input-output`.
 
 The file named `counter.component.spec.ts` will let you test your application using [Angular Testing Library](https://testing-library.com/) . To run the test suites, you need to run `npx nx test testing-input-output`. You can also install [Jest Runner](https://marketplace.visualstudio.com/items?itemName=firsttris.vscode-jest-runner) to execute your test by clicking on the `Run` button above each `describe` or `it` blocks.
 
-For testing with Cypress, you will execute your test inside the `child.component.cy.ts` and run `npx nx component-test testing-input-output` to execute your test suites. You can add the `--watch` flag to execute your test in watch mode.
+For testing with Cypress, you will execute your test inside the `counter.component.cy.ts` and run `npx nx component-test testing-input-output` to execute your test suites. You can add the `--watch` flag to execute your test in watch mode.
 
 # Statement
 

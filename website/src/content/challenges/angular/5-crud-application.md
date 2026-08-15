@@ -36,8 +36,10 @@ What you will need to do:
 // Avoid this
 this.todos[todoUpdated.id - 1] = todoUpdated;
 
-// Prefer something like this, but need to be improved because we still want the same order
-this.todos = [...this.todos.filter((t) => t.id !== todoUpdated.id), todoUpdated];
+// Prefer something like this: an immutable update that keeps the original order
+this.todoList.update((todos) =>
+  todos.map((todo) => (todo.id === todoUpdated.id ? todoUpdated : todo)),
+);
 ```
 
 ### Step 2: Improve

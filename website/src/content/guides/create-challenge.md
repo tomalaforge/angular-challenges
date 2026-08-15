@@ -38,7 +38,7 @@ Alternatively, you may utilize your IDE's [Nx Console extension](https://nx.dev/
 
 - <b>challengeDifficulty</b>: The difficulty you think your challenge has. There are three difficulty levels : 🟢 easy / 🟠 medium / 🔴 hard
 
-- <b>docRepository</b>: The category of your Challenge is Nx, Angular, Angular Performance, Rxjs, NgRx, Typescript, Forms or Signals.
+- <b>category</b>: The category of your challenge. It matches one of the folders under `website/src/content/challenges`: `angular`, `forms`, `nx`, `performance`, `rxjs`, `signal`, `testing` or `typescript`.
 
 #### optional parameters
 
@@ -49,7 +49,14 @@ Alternatively, you may utilize your IDE's [Nx Console extension](https://nx.dev/
 ### What is created?
 
 - The generator will create all the files needed to have a new working application. All these files will be created inside `apps/${directory}/${name}`.
-- A Markdown file with minimal setup will be created inside `docs/src/content/docs/challenges/${docRepository}`.
+- A Markdown file with minimal setup will be created inside `docs/src/content/docs/challenges/${category}`.
+
+:::caution
+The generator still writes to the legacy `docs/` folder. This website reads its challenges from
+`website/src/content/challenges/${category}/`, so move (or copy) the generated Markdown file there —
+otherwise `website/tools/generate-content.mjs` will not pick it up and your challenge will not appear
+on the site. The author file follows the same rule: `website/src/content/authors/${author}.json`.
+:::
 
 ## Challenge Creation
 

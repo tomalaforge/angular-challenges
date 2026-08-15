@@ -54,4 +54,9 @@ If your branch doesn't have any conflicts, a success message will be shown.
 
 Finally, push your work back to GitHub:
 
-- git push -f
+- git push --force-with-lease origin [your branch]
+
+:::note
+`--force-with-lease` is safer than `-f`: it refuses to push if someone else has added commits to
+the remote branch since your last fetch, instead of silently overwriting their work.
+:::
