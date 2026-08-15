@@ -1,0 +1,28 @@
+{
+  "name": "angular-challenges",
+  "version": "0.1.0",
+  "description": "Start and submit Angular Challenges (https://angular-challenges.vercel.app) from your terminal: fork, clone, install, branch, serve and open a PR.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "angular-challenges": "./index.mjs"
+  },
+  "files": [
+    "index.mjs",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomalaforge/angular-challenges.git",
+    "directory": "cli"
+  },
+  "keywords": [
+    "angular",
+    "challenges",
+    "training",
+    "cli"
+  ]
+}

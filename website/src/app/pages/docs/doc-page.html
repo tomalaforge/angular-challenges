@@ -27,9 +27,10 @@
         <h1 class="text-3xl font-bold tracking-tight text-neutral-900 sm:text-4xl dark:text-white">{{ doc().title }}</h1>
 
         <div class="mt-6 flex flex-wrap items-center gap-2.5">
+          <app-try-challenge [doc]="doc()" />
           <a
             [routerLink]="doc().url + '/solutions'"
-            class="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-pink-600 to-fuchsia-600 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-pink-950/40 transition hover:brightness-110">
+            class="inline-flex items-center gap-2 rounded-lg border border-neutral-300 bg-black/[0.02] px-4 py-2 text-sm font-medium text-neutral-700 transition hover:border-neutral-400 hover:text-neutral-900 dark:border-neutral-700/80 dark:bg-white/[0.03] dark:text-neutral-300 dark:hover:border-neutral-500 dark:hover:text-white">
             <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6" />
             </svg>

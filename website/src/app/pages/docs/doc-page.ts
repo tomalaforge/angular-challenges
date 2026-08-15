@@ -4,10 +4,11 @@ import { Meta, Title } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
 import { Doc } from '../../doc.model';
 import { Comments } from '../../shared/comments';
+import { TryChallenge } from './try-challenge';
 
 @Component({
   selector: 'app-doc-page',
-  imports: [RouterLink, Comments],
+  imports: [RouterLink, Comments, TryChallenge],
   templateUrl: './doc-page.html',
 })
 export class DocPage {

@@ -1,0 +1,11 @@
+{
+  "name": "Angular Challenges",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:22",
+  "postCreateCommand": "corepack enable pnpm && pnpm install",
+  "forwardPorts": [4200],
+  "customizations": {
+    "vscode": {
+      "extensions": ["angular.ng-template", "nrwl.angular-console"]
+    }
+  }
+}
