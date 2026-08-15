@@ -52,8 +52,9 @@
             Browse solutions
           </a>
           @if (doc().hasStarter) {
+            <!-- Hard navigation: the editor route needs COOP/COEP headers on its document. -->
             <a
-              [routerLink]="doc().url + '/editor'"
+              [href]="doc().url + '/editor'"
               class="inline-flex items-center gap-2 rounded-lg border border-neutral-300 bg-black/[0.02] px-4 py-2 text-sm font-medium text-neutral-700 transition hover:border-neutral-400 hover:text-neutral-900 dark:border-neutral-700/80 dark:bg-white/[0.03] dark:text-neutral-300 dark:hover:border-neutral-500 dark:hover:text-white"
             >
               <svg

@@ -196,9 +196,82 @@ function renderDocument(raw) {
 // (challenges/:category/:slug/editor) loads its source files as a lazy module.
 
 const STARTER_EXTENSIONS = new Set(['.ts', '.html', '.css', '.scss', '.json', '.md', '.svg']);
-const STARTER_EXCLUDED = new Set(['test-setup.ts', 'polyfills.ts', 'favicon.ico', '.gitkeep']);
+const STARTER_EXCLUDED = new Set(['polyfills.ts', 'favicon.ico', '.gitkeep']);
+const ASSET_EXTENSIONS = new Set(['.png', '.webp', '.jpg', '.jpeg', '.gif', '.ico', '.svg']);
+const ASSET_MAX_BYTES = 300_000;
 
-function collectStarterFiles(category, challengeNumber) {
+/** Dependency versions of the challenge workspace, for the synthesized project. */
+const ROOT_PACKAGE = JSON.parse(readFileSync(join(APPS_DIR, '..', 'package.json'), 'utf8'));
+const ROOT_VERSIONS = { ...ROOT_PACKAGE.devDependencies, ...ROOT_PACKAGE.dependencies };
+
+/** Packages every synthesized project gets, regardless of what the code imports. */
+const BASE_DEPENDENCIES = [
+  '@angular/common',
+  '@angular/compiler',
+  '@angular/core',
+  '@angular/forms',
+  '@angular/platform-browser',
+  '@angular/router',
+  'rxjs',
+  'tslib',
+  'zone.js',
+];
+const BASE_DEV_DEPENDENCIES = [
+  '@angular/build',
+  '@angular/cli',
+  '@angular/compiler-cli',
+  'typescript',
+];
+const JEST_DEV_DEPENDENCIES = [
+  'jest',
+  'jest-environment-jsdom',
+  'jest-preset-angular',
+  '@types/jest',
+];
+const VITEST_DEV_DEPENDENCIES = [
+  'vitest',
+  'vite',
+  'jsdom',
+  '@analogjs/vite-plugin-angular',
+  '@analogjs/vitest-angular',
+];
+
+/** `@scope/pkg/deep` -> `@scope/pkg`, `rxjs/operators` -> `rxjs`. */
+function packageName(specifier) {
+  const segments = specifier.split('/');
+  return specifier.startsWith('@') ? segments.slice(0, 2).join('/') : segments[0];
+}
+
+/** Bare import specifiers found in the given source files. */
+function detectImports(files) {
+  const packages = new Set();
+  const importRe = /(?:from\s+|import\s*\(\s*|^\s*import\s+)['"]([^'".][^'"]*)['"]/gm;
+  for (const file of files) {
+    if (!/\.(ts|mjs|js)$/.test(file.path)) {
+      continue;
+    }
+    for (const match of file.content.matchAll(importRe)) {
+      packages.add(packageName(match[1]));
+    }
+  }
+  return packages;
+}
+
+function resolveVersions(names) {
+  const versions = {};
+  const missing = [];
+  for (const name of names) {
+    const version = ROOT_VERSIONS[name];
+    if (version) {
+      versions[name] = version;
+    } else {
+      missing.push(name);
+    }
+  }
+  return { versions, missing };
+}
+
+function collectStarter(category, challengeNumber) {
   let appDir;
   try {
     appDir = readdirSync(join(APPS_DIR, category)).find((dir) =>
@@ -212,19 +285,24 @@ function collectStarterFiles(category, challengeNumber) {
   }
 
   const files = [];
-  const walk = (relative) => {
+  const walk = (relative, inAssets) => {
     for (const entry of readdirSync(join(APPS_DIR, category, appDir, relative), {
       withFileTypes: true,
     })) {
       const path = `${relative}/${entry.name}`;
+      const extension = entry.name.slice(entry.name.lastIndexOf('.'));
       if (entry.isDirectory()) {
-        if (entry.name !== 'assets') {
-          walk(path);
+        walk(path, inAssets || entry.name === 'assets' || entry.name === 'public');
+      } else if (STARTER_EXCLUDED.has(entry.name)) {
+        continue;
+      } else if (inAssets && ASSET_EXTENSIONS.has(extension)) {
+        // Images etc. ship base64-encoded so the preview renders faithfully;
+        // they are hidden from the editor and never part of a submission.
+        const buffer = readFileSync(join(APPS_DIR, category, appDir, path));
+        if (buffer.length <= ASSET_MAX_BYTES) {
+          files.push({ path, content: buffer.toString('base64'), base64: true });
         }
-      } else if (
-        STARTER_EXTENSIONS.has(entry.name.slice(entry.name.lastIndexOf('.'))) &&
-        !STARTER_EXCLUDED.has(entry.name)
-      ) {
+      } else if (!inAssets && STARTER_EXTENSIONS.has(extension)) {
         files.push({
           path,
           content: readFileSync(join(APPS_DIR, category, appDir, path), 'utf8'),
@@ -232,7 +310,10 @@ function collectStarterFiles(category, challengeNumber) {
       }
     }
   };
-  walk('src');
+  walk('src', false);
+  if (files.length === 0) {
+    return undefined;
+  }
 
   // App code first, then root files (main.ts, index.html, …), each group alphabetical.
   files.sort((a, b) => {
@@ -240,7 +321,45 @@ function collectStarterFiles(category, challengeNumber) {
     const bInApp = b.path.startsWith('src/app/');
     return aInApp === bInApp ? a.path.localeCompare(b.path) : aInApp ? -1 : 1;
   });
-  return files.length > 0 ? files : undefined;
+
+  const appFiles = readdirSync(join(APPS_DIR, category, appDir));
+  const runner = appFiles.some((f) => f.startsWith('vitest.config.'))
+    ? 'vitest'
+    : appFiles.some((f) => f.startsWith('jest.config.'))
+      ? 'jest'
+      : null;
+  const hasTests = runner !== null && files.some((f) => /\.spec\.ts$/.test(f.path));
+
+  const imported = detectImports(files);
+  const runnerPackages =
+    runner === 'jest' && hasTests
+      ? JEST_DEV_DEPENDENCIES
+      : runner === 'vitest' && hasTests
+        ? VITEST_DEV_DEPENDENCIES
+        : [];
+  const dependencies = resolveVersions(
+    new Set([...BASE_DEPENDENCIES, ...[...imported].filter((p) => !p.startsWith('@types/'))]),
+  );
+  const devDependencies = resolveVersions(new Set([...BASE_DEV_DEPENDENCIES, ...runnerPackages]));
+
+  // Imports that don't map to a workspace dependency (e.g. monorepo libs)
+  // can't be installed standalone: the editor still works, running doesn't.
+  const canInstall = dependencies.missing.length === 0;
+  if (!canInstall) {
+    console.warn(
+      `Starter ${category}/${appDir} is not runnable — unresolved imports: ${dependencies.missing.join(', ')}`,
+    );
+  }
+
+  return {
+    appPath: `apps/${category}/${appDir}`,
+    runnable: canInstall && files.some((f) => f.path === 'src/main.ts'),
+    hasTests: hasTests && canInstall,
+    runner: hasTests && canInstall ? runner : null,
+    dependencies: dependencies.versions,
+    devDependencies: devDependencies.versions,
+    files,
+  };
 }
 
 function tsModule(doc, outFile) {
@@ -310,22 +429,20 @@ for (const category of categories) {
     const url = isIndex ? `/challenges/${category}` : `/challenges/${category}/${slug}`;
     const { title, difficulty } = parseTitle(data.title);
 
-    const starterFiles =
-      !isIndex && data.challengeNumber
-        ? collectStarterFiles(category, data.challengeNumber)
-        : undefined;
-    if (starterFiles) {
+    const starter =
+      !isIndex && data.challengeNumber ? collectStarter(category, data.challengeNumber) : undefined;
+    if (starter) {
       mkdirSync(join(OUT_DIR, 'starter', category), { recursive: true });
       writeFileSync(
         join(OUT_DIR, 'starter', category, `${slug}.ts`),
         `// Generated by tools/generate-content.mjs — do not edit.
-import { StarterFile } from '../../../doc.model';
+import { ChallengeStarter } from '../../../doc.model';
 
-export const files: StarterFile[] = ${JSON.stringify(starterFiles, null, 2)};
+export const starter: ChallengeStarter = ${JSON.stringify(starter, null, 2)};
 `,
       );
       starterMapEntries.push(
-        `  '${url}': () => import('./starter/${category}/${slug}').then((m) => m.files),`,
+        `  '${url}': () => import('./starter/${category}/${slug}').then((m) => m.starter),`,
       );
     }
 
@@ -345,7 +462,7 @@ export const files: StarterFile[] = ${JSON.stringify(starterFiles, null, 2)};
       blogLink: data.blogLink,
       videoLinks: data.videoLinks ?? [],
       noComments: data.noCommentSection === true,
-      hasStarter: Boolean(starterFiles),
+      hasStarter: Boolean(starter),
       html,
       toc,
     };
@@ -387,9 +504,9 @@ ${mapEntries.join('\n')}
 writeFileSync(
   join(OUT_DIR, 'starter-map.ts'),
   `// Generated by tools/generate-content.mjs — do not edit.
-import { StarterFile } from '../doc.model';
+import { ChallengeStarter } from '../doc.model';
 
-export const STARTER_MAP: Record<string, () => Promise<StarterFile[]>> = {
+export const STARTER_MAP: Record<string, () => Promise<ChallengeStarter>> = {
 ${starterMapEntries.join('\n')}
 };
 `,

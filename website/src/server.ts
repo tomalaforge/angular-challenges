@@ -30,6 +30,19 @@ const angularApp = new AngularNodeAppEngine({
  */
 
 /**
+ * The in-browser editor runs challenges in a WebContainer, which needs
+ * cross-origin isolation. Scoped to the editor route (and reached via hard
+ * navigation) so third-party embeds elsewhere keep working.
+ */
+app.use((req, res, next) => {
+  if (/^\/challenges\/[^/]+\/[^/]+\/editor\/?$/.test(req.path)) {
+    res.set('Cross-Origin-Opener-Policy', 'same-origin');
+    res.set('Cross-Origin-Embedder-Policy', 'credentialless');
+  }
+  next();
+});
+
+/**
  * JSON API backed by the GitHub REST API (cached server-side).
  */
 app.use('/api', githubApi);
@@ -56,9 +69,7 @@ app.use(
 app.use((req, res, next) => {
   angularApp
     .handle(req)
-    .then((response) =>
-      response ? writeResponseToNodeResponse(response, res) : next(),
-    )
+    .then((response) => (response ? writeResponseToNodeResponse(response, res) : next()))
     .catch(next);
 });
 
