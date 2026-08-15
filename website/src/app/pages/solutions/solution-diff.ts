@@ -5,6 +5,7 @@ import {
   effect,
   inject,
   input,
+  linkedSignal,
   signal,
   untracked,
 } from '@angular/core';
@@ -36,11 +37,19 @@ export class SolutionDiff {
   protected readonly theme = inject(Theme);
   protected readonly isDark = computed(() => this.theme.current() === 'dark');
 
-  protected readonly reaction = signal<'idle' | 'saving' | 'done' | 'error'>('idle');
-
   /** Provided by the route resolver / router input binding. */
   readonly doc = input.required<Doc>();
   readonly pr = input.required<string>();
+
+  /**
+   * The component is reused when only `:pr` changes, so the reaction state is
+   * derived from `pr()` — it falls back to 'idle' for every new PR instead of
+   * keeping the previous one's 'done' (which would leave the button disabled).
+   */
+  protected readonly reaction = linkedSignal<string, 'idle' | 'saving' | 'done' | 'error'>({
+    source: this.pr,
+    computation: () => 'idle',
+  });
 
   /** 'split' on desktop, toggleable; unified is friendlier on mobile. */
   protected readonly mode = signal<'split' | 'unified'>(
@@ -125,10 +134,18 @@ export class SolutionDiff {
       location.href = this.auth.signInUrl();
       return;
     }
+    const pr = this.pr();
     this.reaction.set('saving');
-    this.http.post(`/api/pulls/${this.pr()}/react`, {}).subscribe({
-      next: () => this.reaction.set('done'),
-      error: () => this.reaction.set('error'),
+    this.http.post(`/api/pulls/${pr}/react`, {}).subscribe({
+      // A response that lands after navigating to another PR must not touch its state.
+      next: () => this.settle(pr, 'done'),
+      error: () => this.settle(pr, 'error'),
     });
+  }
+
+  private settle(pr: string, state: 'done' | 'error'): void {
+    if (this.pr() === pr) {
+      this.reaction.set(state);
+    }
   }
 }

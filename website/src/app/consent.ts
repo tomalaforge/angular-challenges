@@ -122,15 +122,24 @@ export class Consent {
   }
 
   private clearAnalyticsCookies(): void {
-    const domain = location.hostname;
+    const labels = location.hostname.split('.');
+    // "www.example.com" -> ["www.example.com", "example.com"]: the tag writes on
+    // the registrable domain, which is not always the exact host.
+    const domains = labels
+      .map((_, index) => labels.slice(index).join('.'))
+      .filter((domain) => domain.includes('.'));
+    // Analytics (_ga, _gid) plus the AdSense cookies a previous "accept" allowed.
+    const scopes = [
+      '',
+      ...domains.flatMap((domain) => [`; domain=${domain}`, `; domain=.${domain}`]),
+    ];
+
     for (const cookie of this.document.cookie.split(';')) {
       const name = cookie.split('=')[0].trim();
-      if (!name.startsWith('_ga') && !name.startsWith('_gid')) {
+      if (!/^(_ga|_gid|_gac|_gcl|__gads)/.test(name)) {
         continue;
       }
-      // The tag may have written the cookie on either the exact host or the
-      // registrable domain, so expire both.
-      for (const scope of ['', `; domain=${domain}`, `; domain=.${domain}`]) {
+      for (const scope of scopes) {
         this.document.cookie = `${name}=; Path=/; Max-Age=0${scope}`;
       }
     }

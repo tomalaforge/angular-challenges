@@ -52,10 +52,11 @@ Alternatively, you may utilize your IDE's [Nx Console extension](https://nx.dev/
 - A Markdown file with minimal setup will be created inside `docs/src/content/docs/challenges/${category}`.
 
 :::caution
-The generator still writes to the legacy `docs/` folder. This website reads its challenges from
-`website/src/content/challenges/${category}/`, so move (or copy) the generated Markdown file there —
-otherwise `website/tools/generate-content.mjs` will not pick it up and your challenge will not appear
-on the site. The author file follows the same rule: `website/src/content/authors/${author}.json`.
+The generator still writes to the legacy `docs/` folder, which is still built today — so **copy**,
+don't move, the generated Markdown file to `website/src/content/challenges/${category}/` and keep
+both copies in sync until the legacy site is retired. Without that copy,
+`website/tools/generate-content.mjs` will not pick it up and your challenge will not appear on this
+site. The author file follows the same rule: `website/src/content/authors/${author}.json`.
 :::
 
 ## Challenge Creation

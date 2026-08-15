@@ -225,13 +225,20 @@ githubApi.get('/me', async (req, res) => {
     res.status(401).json({ error: 'not signed in' });
     return;
   }
-  const response = await fetch('https://api.github.com/user', {
-    headers: {
-      Accept: 'application/vnd.github+json',
-      Authorization: `Bearer ${token}`,
-      'User-Agent': 'angular-challenges-website',
-    },
-  });
+  let response: Response;
+  try {
+    response = await fetch(`${GITHUB_API}/user`, {
+      headers: {
+        Accept: 'application/vnd.github+json',
+        Authorization: `Bearer ${token}`,
+        'User-Agent': 'angular-challenges-website',
+      },
+      signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+    });
+  } catch {
+    res.status(503).json({ error: 'github request failed' });
+    return;
+  }
   if (!response.ok) {
     res.status(401).json({ error: 'invalid token' });
     return;
@@ -253,16 +260,23 @@ githubApi.post('/pulls/:number/react', async (req, res) => {
     res.status(400).json({ error: 'invalid PR number' });
     return;
   }
-  const response = await fetch(`https://api.github.com/repos/${REPO}/issues/${number}/reactions`, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/vnd.github+json',
-      Authorization: `Bearer ${token}`,
-      'User-Agent': 'angular-challenges-website',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ content: '+1' }),
-  });
+  let response: Response;
+  try {
+    response = await fetch(`${GITHUB_API}/repos/${REPO}/issues/${number}/reactions`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/vnd.github+json',
+        Authorization: `Bearer ${token}`,
+        'User-Agent': 'angular-challenges-website',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ content: '+1' }),
+      signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+    });
+  } catch {
+    res.status(503).json({ error: 'github request failed' });
+    return;
+  }
   if (!response.ok) {
     res.status(response.status).json({ error: 'reaction failed' });
     return;
@@ -408,6 +422,7 @@ githubApi.get('/sponsors', async (_req, res) => {
         'User-Agent': 'angular-challenges-website',
       },
       body: JSON.stringify({ query }),
+      signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
     });
     const data = (await response.json()) as any;
     if (data?.errors) {
