@@ -36,8 +36,15 @@ export interface Doc {
   blogLink?: string;
   videoLinks?: VideoLink[];
   noComments?: boolean;
+  hasStarter?: boolean;
   html: string;
   toc: TocEntry[];
+}
+
+/** One source file of a challenge's starter app, shown in the in-browser editor. */
+export interface StarterFile {
+  path: string;
+  content: string;
 }
 
 export interface NavItem {
