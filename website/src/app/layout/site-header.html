@@ -1,0 +1,99 @@
+<header class="sticky top-0 z-40 border-b border-neutral-200 bg-white/90 backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/90">
+  <div class="flex h-14 items-center gap-3 px-4 sm:px-6">
+    <button
+      type="button"
+      aria-label="Toggle navigation"
+      class="rounded p-1.5 text-neutral-600 hover:bg-neutral-100 lg:hidden dark:text-neutral-300 dark:hover:bg-neutral-800"
+      (click)="menuToggled.emit()">
+      <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+    <a routerLink="/" class="flex items-center gap-2.5">
+      <img src="/angular-challenge.webp" alt="" class="h-7 w-7" />
+      <span class="hidden font-semibold tracking-tight min-[480px]:inline">Angular Challenges</span>
+    </a>
+    <div class="ml-auto flex items-center gap-2 text-sm text-neutral-500 sm:gap-4 dark:text-neutral-400">
+      @if (auth.me(); as me) {
+        <div class="flex items-center gap-2">
+          <img [src]="me.avatar" [alt]="me.login" class="h-6 w-6 rounded-full" />
+          <a [href]="auth.signOutUrl()" class="hidden hover:text-neutral-900 sm:inline dark:hover:text-white">Sign out</a>
+        </div>
+      } @else if (!auth.pending()) {
+        <a
+          [href]="auth.signInUrl()"
+          class="inline-flex h-8 items-center rounded-lg border border-neutral-300 px-2.5 text-xs font-medium text-neutral-700 transition hover:border-neutral-400 hover:text-neutral-900 dark:border-neutral-700/80 dark:text-neutral-200 dark:hover:border-neutral-500 dark:hover:text-white">
+          Sign in<span class="hidden sm:inline">&nbsp;with GitHub</span>
+        </a>
+      }
+      <a
+        href="https://github.com/sponsors/tomalaforge"
+        target="_blank"
+        rel="noopener"
+        class="group inline-flex h-8 items-center gap-1.5 rounded-lg border border-pink-300 bg-pink-50 px-2.5 text-xs font-medium text-pink-700 transition hover:border-pink-500 hover:bg-pink-100 hover:text-pink-800 dark:border-pink-800/60 dark:bg-pink-950/30 dark:text-pink-300 dark:hover:border-pink-600 dark:hover:bg-pink-950/60 dark:hover:text-pink-200">
+        <svg
+          viewBox="0 0 16 16"
+          class="h-3.5 w-3.5 fill-pink-500 transition group-hover:scale-110">
+          <path
+            d="m8 14.25.345.666a.75.75 0 0 1-.69 0l-.008-.004-.018-.01a7.152 7.152 0 0 1-.31-.17 22.055 22.055 0 0 1-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.066 22.066 0 0 1-3.744 2.584l-.018.01-.006.003h-.002Z" />
+        </svg>
+        <span class="hidden sm:inline">Sponsor</span>
+      </a>
+      <a
+        href="https://github.com/tomalaforge/angular-challenges"
+        target="_blank"
+        rel="noopener"
+        aria-label="Star the repository on GitHub"
+        class="group inline-flex h-8 items-center overflow-hidden rounded-lg border border-neutral-300 text-xs font-medium text-neutral-700 transition hover:border-neutral-400 hover:text-neutral-900 dark:border-neutral-700/80 dark:text-neutral-300 dark:hover:border-neutral-500 dark:hover:text-white">
+        <span class="inline-flex h-full items-center gap-1.5 px-2.5">
+          <svg viewBox="0 0 16 16" class="h-3.5 w-3.5 fill-current">
+            <path
+              d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z" />
+          </svg>
+          <span class="hidden sm:inline">Star</span>
+        </span>
+        @if (stars(); as count) {
+          <span
+            class="inline-flex h-full items-center border-l border-neutral-300 bg-black/[0.03] px-2 tabular-nums text-neutral-700 dark:border-neutral-700/80 dark:bg-white/[0.04] dark:text-neutral-200">
+            {{ count }}
+          </span>
+        }
+      </a>
+      <a href="https://www.linkedin.com/in/thomas-laforge-2b05a945/" aria-label="LinkedIn" class="hidden hover:text-neutral-900 md:inline dark:hover:text-white">
+        <svg viewBox="0 0 24 24" class="h-5 w-5 fill-current">
+          <path
+            d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.55V9h3.57v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.72C24 .77 23.2 0 22.22 0Z" />
+        </svg>
+      </a>
+      <a href="https://twitter.com/laforge_toma" aria-label="X (Twitter)" class="hidden hover:text-neutral-900 md:inline dark:hover:text-white">
+        <svg viewBox="0 0 24 24" class="h-5 w-5 fill-current">
+          <path
+            d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.66l-5.21-6.82L5 21.75H1.68l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23Zm-1.16 17.52h1.83L7.08 4.13H5.12l11.96 15.64Z" />
+        </svg>
+      </a>
+      <button
+        type="button"
+        (click)="theme.toggle()"
+        [attr.aria-label]="theme.current() === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
+        class="rounded p-1.5 transition hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-neutral-800 dark:hover:text-white">
+        @if (theme.current() === 'dark') {
+          <!-- Sun -->
+          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="4" />
+            <path
+              stroke-linecap="round"
+              d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+          </svg>
+        } @else {
+          <!-- Moon -->
+          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" />
+          </svg>
+        }
+      </button>
+    </div>
+  </div>
+</header>

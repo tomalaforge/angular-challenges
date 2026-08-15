@@ -1,0 +1,213 @@
+<div class="relative min-h-screen overflow-hidden">
+  <div
+    class="pointer-events-none absolute -top-40 left-1/2 h-130 w-225 -translate-x-1/2 rounded-full bg-pink-600/10 blur-3xl dark:bg-pink-600/20"
+    aria-hidden="true"></div>
+  <div
+    class="pointer-events-none absolute top-40 -right-40 h-96 w-96 rounded-full bg-violet-600/5 blur-3xl dark:bg-violet-600/10"
+    aria-hidden="true"></div>
+
+  <app-site-header />
+
+  <!-- Sponsors banner -->
+  <div class="relative z-10 border-b border-neutral-200/60 bg-neutral-100/40 dark:border-neutral-800/60 dark:bg-neutral-900/40">
+    <div
+      class="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-2.5 text-sm text-neutral-700 sm:px-6 dark:text-neutral-300">
+      <div class="flex flex-wrap items-center gap-3">
+        <span>This project is sustained by its sponsors</span>
+        @if (sponsors().length > 0) {
+          <span class="flex -space-x-1.5">
+            @for (sponsor of sponsors(); track sponsor.login) {
+              <a [href]="'https://github.com/' + sponsor.login" [title]="sponsor.login">
+                <img [src]="sponsor.avatar" [alt]="sponsor.login" class="h-6 w-6 rounded-full ring-2 ring-white dark:ring-neutral-950" />
+              </a>
+            }
+          </span>
+        }
+      </div>
+      <a
+        href="https://github.com/sponsors/tomalaforge"
+        target="_blank"
+        rel="noopener"
+        class="inline-flex h-8 items-center gap-1.5 rounded-lg border border-pink-300 bg-pink-50 px-2.5 text-xs font-medium text-pink-700 transition hover:border-pink-500 hover:bg-pink-100 hover:text-pink-800 dark:border-pink-800/60 dark:bg-pink-950/30 dark:text-pink-300 dark:hover:border-pink-600 dark:hover:bg-pink-950/60 dark:hover:text-pink-200">
+        <svg viewBox="0 0 16 16" class="h-3.5 w-3.5 fill-pink-500">
+          <path
+            d="m8 14.25.345.666a.75.75 0 0 1-.69 0l-.008-.004-.018-.01a7.152 7.152 0 0 1-.31-.17 22.055 22.055 0 0 1-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.066 22.066 0 0 1-3.744 2.584l-.018.01-.006.003h-.002Z" />
+        </svg>
+        Become a sponsor
+      </a>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <main class="relative z-10 mx-auto w-full max-w-6xl px-4 sm:px-6">
+    <section class="flex flex-col items-center py-14 text-center sm:py-24">
+      <img src="/angular-challenge.webp" alt="" class="mb-8 h-24 w-24 drop-shadow-[0_0_35px_rgba(236,72,153,0.35)]" />
+      <p
+        class="mb-6 inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-black/[0.02] px-3.5 py-1.5 text-xs font-medium text-neutral-700 dark:border-neutral-800 dark:bg-white/[0.03] dark:text-neutral-300">
+        <span class="h-1.5 w-1.5 rounded-full bg-emerald-500" aria-hidden="true"></span>
+        Free &amp; open source — {{ challengeCount }}+ challenges and counting
+      </p>
+      <h1 class="max-w-3xl text-4xl font-bold tracking-tight text-balance sm:text-6xl">
+        Start now and become an
+        <span class="bg-gradient-to-r from-pink-500 to-violet-500 bg-clip-text text-transparent">Angular Expert</span>
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg text-pretty text-neutral-600 dark:text-neutral-400">
+        Real-world challenges on Angular, Nx, RxJS, NgRx and TypeScript.
+        Solve them, browse community solutions and climb the leaderboard.
+      </p>
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-3">
+        <a
+          routerLink="/guides/getting-started"
+          class="inline-flex h-11 items-center gap-2 rounded-lg bg-gradient-to-r from-pink-600 to-fuchsia-600 px-5 text-sm font-semibold text-white shadow-lg shadow-pink-950/40 transition hover:brightness-110">
+          Get started
+          <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" />
+          </svg>
+        </a>
+        @if (latestChallengeUrl) {
+          <a
+            [routerLink]="latestChallengeUrl"
+            class="inline-flex h-11 items-center gap-2 rounded-lg border border-neutral-300 bg-black/[0.02] px-5 text-sm font-medium text-neutral-800 transition hover:border-neutral-400 hover:text-neutral-900 dark:border-neutral-700/80 dark:bg-white/[0.03] dark:text-neutral-200 dark:hover:border-neutral-500 dark:hover:text-white">
+            <svg viewBox="0 0 24 24" class="h-4 w-4 text-pink-500" fill="none" stroke="currentColor" stroke-width="2">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M13 2 3 14h9l-1 8 10-12h-9l1-8Z" />
+            </svg>
+            Latest challenge
+          </a>
+        }
+        <a
+          href="https://github.com/tomalaforge/angular-challenges"
+          target="_blank"
+          rel="noopener"
+          class="inline-flex h-11 items-center gap-2 rounded-lg border border-neutral-300 bg-black/[0.02] px-5 text-sm font-medium text-neutral-800 transition hover:border-neutral-400 hover:text-neutral-900 dark:border-neutral-700/80 dark:bg-white/[0.03] dark:text-neutral-200 dark:hover:border-neutral-500 dark:hover:text-white">
+          <svg viewBox="0 0 24 24" class="h-4 w-4 text-amber-500 dark:text-amber-400" fill="currentColor">
+            <path
+              d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2Z" />
+          </svg>
+          Star on GitHub
+        </a>
+      </div>
+
+      <!-- Stats strip -->
+      <dl
+        class="mt-12 grid w-full max-w-md grid-cols-3 divide-x divide-neutral-200 rounded-2xl border border-neutral-200 bg-neutral-100/40 sm:mt-16 sm:w-auto sm:max-w-none dark:divide-neutral-800 dark:border-neutral-800 dark:bg-neutral-900/40">
+        <div class="px-3 py-4 sm:px-12 sm:py-5">
+          <dd class="text-2xl font-bold tabular-nums sm:text-3xl">{{ challengeCount }}</dd>
+          <dt class="mt-1 text-xs text-neutral-500 sm:text-sm">Challenges</dt>
+        </div>
+        <div class="px-3 py-4 sm:px-12 sm:py-5">
+          <dd class="text-2xl font-bold tabular-nums sm:text-3xl">
+            {{ statsResource.value()?.stars ?? '—' }}
+          </dd>
+          <dt class="mt-1 text-xs text-neutral-500 sm:text-sm">GitHub stars</dt>
+        </div>
+        <div class="px-3 py-4 sm:px-12 sm:py-5">
+          <dd class="text-2xl font-bold tabular-nums sm:text-3xl">
+            {{ statsResource.value()?.forks ?? '—' }}
+          </dd>
+          <dt class="mt-1 text-xs text-neutral-500 sm:text-sm">Forks</dt>
+        </div>
+      </dl>
+    </section>
+
+    <!-- Cards -->
+    <section class="grid gap-4 pb-20 sm:grid-cols-2 lg:grid-cols-3">
+      @for (card of cards; track card.title) {
+        <div
+          class="group rounded-xl border border-neutral-200 bg-neutral-100/40 p-6 transition hover:border-neutral-300 hover:bg-neutral-100/70 dark:border-neutral-800 dark:bg-neutral-900/40 dark:hover:border-neutral-700 dark:hover:bg-neutral-900/70">
+          <div
+            class="mb-4 inline-flex h-9 w-9 items-center justify-center rounded-lg bg-pink-600/10 text-pink-500 ring-1 ring-pink-600/25 ring-inset transition group-hover:bg-pink-600/20">
+            <svg viewBox="0 0 24 24" class="h-4.5 w-4.5" fill="none" stroke="currentColor" stroke-width="2">
+              @switch (card.icon) {
+                @case ('zap') {
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13 2 3 14h9l-1 8 10-12h-9l1-8Z" />
+                }
+                @case ('code') {
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m16 18 6-6-6-6M8 6l-6 6 6 6" />
+                }
+                @case ('branch') {
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M6 3v12m0 0a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm12-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm0 0a9 9 0 0 1-9 9" />
+                }
+                @case ('users') {
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2m20 0v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75M13 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z" />
+                }
+                @case ('plus') {
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v8m-4-4h8m6 0a10 10 0 1 1-20 0 10 10 0 0 1 20 0Z" />
+                }
+                @case ('briefcase') {
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2m-4 0h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Z" />
+                }
+              }
+            </svg>
+          </div>
+          <h2 class="mb-2 font-semibold text-neutral-900 dark:text-neutral-100">{{ card.title }}</h2>
+          <p class="text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">{{ card.body }}</p>
+        </div>
+      }
+    </section>
+
+    <!-- Newsletter -->
+    <section class="relative mx-auto mb-20 max-w-2xl overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-100/40 px-6 py-10 text-center sm:px-12 dark:border-neutral-800 dark:bg-neutral-900/40">
+      <div
+        class="pointer-events-none absolute -top-20 left-1/2 h-40 w-80 -translate-x-1/2 rounded-full bg-pink-600/15 blur-3xl"
+        aria-hidden="true"></div>
+      <h2 class="mb-2 text-xl font-semibold">Never miss a new challenge</h2>
+      <p class="mb-6 text-sm text-neutral-600 dark:text-neutral-400">
+        Subscribe to get notified when a new challenge lands.
+      </p>
+      <div class="sp-form-outer sp-force-hide">
+        <div
+          id="sp-form-232070"
+          sp-id="232070"
+          sp-hash="55b64e0209886940495b216b7a9a04ac634ac0dbd809c542ab00e6228035f8c4"
+          sp-lang="en"
+          class="sp-form sp-form-regular sp-form-embed sp-form-horizontal">
+          <form novalidate="" class="sp-element-container">
+            <div class="sp-field" sp-id="sp-76dfa588-3af2-4619-b685-835cf8c62ef0">
+              <input
+                type="email"
+                sp-type="email"
+                name="sform[email]"
+                class="sp-form-control w-full rounded-lg border border-neutral-300 bg-white/60 px-4 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 focus:border-pink-600 focus:outline-none dark:border-neutral-700 dark:bg-neutral-950/60 dark:text-neutral-100 dark:placeholder-neutral-500"
+                placeholder="your@email.com"
+                autocomplete="on"
+                required="required" />
+            </div>
+            <div class="sp-field sp-button-container mt-3" sp-id="sp-82642eda-e68f-4b7a-a2b8-69e9d9bb5c99">
+              <button
+                id="sp-82642eda-e68f-4b7a-a2b8-69e9d9bb5c99"
+                class="sp-button inline-flex h-10 items-center rounded-lg bg-gradient-to-r from-pink-600 to-fuchsia-600 px-6 text-sm font-semibold text-white shadow-lg shadow-pink-950/40 transition hover:brightness-110">
+                Subscribe
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="relative z-10 border-t border-neutral-200 dark:border-neutral-800">
+    <div
+      class="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-4 px-4 py-8 text-sm text-neutral-500 sm:px-6">
+      <p>Built by <a href="https://github.com/tomalaforge" class="text-neutral-700 hover:text-pink-500 dark:text-neutral-300">Thomas Laforge</a> and the community · MIT</p>
+      <nav class="flex flex-wrap gap-x-5 gap-y-2">
+        <a routerLink="/guides/getting-started" class="hover:text-neutral-800 dark:hover:text-neutral-200">Guides</a>
+        <a routerLink="/leaderboard/answers" class="hover:text-neutral-800 dark:hover:text-neutral-200">Leaderboard</a>
+        <a href="https://github.com/tomalaforge/angular-challenges" class="hover:text-neutral-800 dark:hover:text-neutral-200">GitHub</a>
+        <button type="button" (click)="consent.reopen()" class="hover:text-neutral-800 dark:hover:text-neutral-200">Cookie settings</button>
+      </nav>
+    </div>
+  </footer>
+</div>

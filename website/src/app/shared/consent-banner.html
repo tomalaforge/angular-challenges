@@ -1,0 +1,56 @@
+@if (consent.bannerVisible()) {
+  <!--
+    Scrim: dims the page so the banner stands out. `pointer-events-none` keeps the
+    site usable while the choice is pending, which is what aria-modal="false" claims.
+  -->
+  <div
+    class="pointer-events-none fixed inset-0 z-40 bg-black/60 backdrop-blur-[2px]"
+    aria-hidden="true"></div>
+
+  <div
+    role="dialog"
+    aria-modal="false"
+    aria-labelledby="consent-title"
+    aria-describedby="consent-description"
+    class="pointer-events-none fixed inset-x-0 bottom-0 z-50 p-4 sm:p-6">
+    <div
+      class="pointer-events-auto mx-auto flex w-full max-w-3xl flex-col gap-5 rounded-2xl border border-neutral-300 bg-white p-6 shadow-2xl shadow-black/30 ring-1 ring-pink-600/30 sm:flex-row sm:items-center dark:border-neutral-700 dark:bg-neutral-900 dark:shadow-black/70">
+      <span
+        class="hidden h-11 w-11 shrink-0 items-center justify-center rounded-full bg-pink-600/15 text-2xl sm:flex"
+        aria-hidden="true">
+        🍪
+      </span>
+      <div class="min-w-0 flex-1">
+        <p id="consent-title" class="text-base font-semibold text-neutral-900 dark:text-neutral-50">
+          We'd like to use cookies
+        </p>
+        <p id="consent-description" class="mt-1 text-sm text-neutral-700 dark:text-neutral-300">
+          Google Analytics and Google AdSense help us understand how the site is used and keep it
+          free. Nothing is loaded until you accept, and you can change your mind at any time from
+          the "Cookie settings" link.
+          <a
+            href="https://policies.google.com/technologies/partner-sites"
+            target="_blank"
+            rel="noopener"
+            class="font-medium text-pink-600 hover:underline dark:text-pink-400">
+            How Google uses this data
+          </a>
+        </p>
+      </div>
+      <div class="flex shrink-0 gap-3">
+        <button
+          type="button"
+          (click)="consent.reject()"
+          class="flex-1 rounded-lg border border-neutral-300 px-5 py-2.5 text-sm font-semibold text-neutral-700 transition hover:border-neutral-500 hover:bg-neutral-100 hover:text-neutral-900 sm:flex-none dark:border-neutral-600 dark:text-neutral-200 dark:hover:border-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-white">
+          Reject
+        </button>
+        <button
+          type="button"
+          (click)="consent.accept()"
+          class="flex-1 rounded-lg bg-pink-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-pink-600/25 transition hover:bg-pink-500 sm:flex-none">
+          Accept
+        </button>
+      </div>
+    </div>
+  </div>
+}

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="utf-8">
+  <title>Angular Challenges</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Become a better Angular engineer by solving real-world challenges. Browse community solutions, compare approaches and climb the leaderboard.">
+  <link rel="icon" type="image/x-icon" href="angular-challenge.ico">
+  <!--
+    Applies the saved (or OS-preferred) theme before first paint so the page
+    never flashes the wrong mode. Kept in sync with src/app/theme.ts.
+  -->
+  <script>
+    try {
+      var theme = localStorage.getItem('ac-theme');
+      var dark = theme ? theme === 'dark' : !matchMedia('(prefers-color-scheme: light)').matches;
+      document.documentElement.classList.toggle('dark', dark);
+    } catch (e) {}
+  </script>
+  <!--
+    Consent Mode v2 defaults, set before anything else runs. Neither Google Analytics
+    nor AdSense is loaded from here: src/app/consent.ts injects them only after the
+    visitor accepts, and flips these signals to granted at the same time.
+  -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    window.gtag = gtag;
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+      personalization_storage: 'denied',
+      functionality_storage: 'granted',
+      security_storage: 'granted'
+    });
+  </script>
+</head>
+<body class="bg-white text-neutral-900 antialiased dark:bg-neutral-950 dark:text-neutral-100">
+  <app-root></app-root>
+</body>
+</html>

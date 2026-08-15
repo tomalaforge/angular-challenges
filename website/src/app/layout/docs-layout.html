@@ -1,0 +1,131 @@
+<app-site-header (menuToggled)="menuOpen.set(!menuOpen())" />
+
+<div class="mx-auto flex w-full max-w-screen-2xl">
+  <!-- Sidebar -->
+  <nav
+    class="fixed inset-y-0 top-14 left-0 z-30 w-72 max-w-[85vw] shrink-0 overflow-y-auto border-r border-neutral-200 bg-white px-4 py-6 lg:sticky lg:top-14 lg:block lg:h-[calc(100vh-3.5rem)] lg:max-w-none dark:border-neutral-800 dark:bg-neutral-950"
+    [class.hidden]="!menuOpen()">
+    <div class="relative mb-4">
+      <input
+        type="search"
+        placeholder="Search…"
+        [value]="query()"
+        (input)="query.set($any($event.target).value)"
+        class="w-full rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-sm placeholder-neutral-400 focus:border-pink-600 focus:outline-none dark:border-neutral-800 dark:bg-neutral-900 dark:placeholder-neutral-500" />
+      @if (searchResults().length > 0) {
+        <ul
+          class="absolute z-10 mt-1 w-full rounded-lg border border-neutral-200 bg-white py-1 shadow-xl dark:border-neutral-800 dark:bg-neutral-900">
+          @for (result of searchResults(); track result.url) {
+            <li>
+              <a
+                [routerLink]="result.url"
+                (click)="closeMenu()"
+                class="block px-3 py-1.5 text-sm text-neutral-700 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-800">
+                {{ result.title }}
+              </a>
+            </li>
+          }
+        </ul>
+      }
+    </div>
+
+    <p class="mb-2 text-sm font-semibold text-neutral-800 dark:text-neutral-200">Guides</p>
+    <ul class="mb-6 space-y-0.5">
+      @for (guide of manifest.guides; track guide.url) {
+        <li>
+          <a
+            [routerLink]="guide.url"
+            routerLinkActive="!text-pink-500 bg-neutral-100 dark:bg-neutral-900"
+            (click)="closeMenu()"
+            class="block rounded px-2 py-1 text-sm text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-400 dark:hover:bg-neutral-900 dark:hover:text-neutral-200">
+            {{ guide.title }}
+          </a>
+        </li>
+      }
+    </ul>
+
+    <p class="mb-2 text-sm font-semibold text-neutral-800 dark:text-neutral-200">Leaderboard</p>
+    <ul class="mb-6 space-y-0.5">
+      @for (
+        board of [
+          { url: '/leaderboard/answers', title: 'Challenges answered' },
+          { url: '/leaderboard/challenges', title: 'Challenges created' },
+          { url: '/leaderboard/commit', title: 'Contributions' },
+        ];
+        track board.url
+      ) {
+        <li>
+          <a
+            [routerLink]="board.url"
+            routerLinkActive="!text-pink-500 bg-neutral-100 dark:bg-neutral-900"
+            (click)="closeMenu()"
+            class="block rounded px-2 py-1 text-sm text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-400 dark:hover:bg-neutral-900 dark:hover:text-neutral-200">
+            {{ board.title }}
+          </a>
+        </li>
+      }
+    </ul>
+
+    <p class="mb-2 text-sm font-semibold text-neutral-800 dark:text-neutral-200">Challenges</p>
+    @for (group of manifest.challenges; track group.category) {
+      <details class="group mb-1" [open]="isCategoryOpen(group.category)">
+        <summary
+          class="flex cursor-pointer items-center justify-between rounded px-2 py-1 text-sm font-medium text-neutral-700 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-900">
+          {{ group.label }}
+          <svg
+            viewBox="0 0 24 24"
+            class="h-4 w-4 text-neutral-400 transition-transform group-open:rotate-90 dark:text-neutral-500"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m9 5 7 7-7 7" />
+          </svg>
+        </summary>
+        <ul class="mt-0.5 mb-2 ml-2 space-y-0.5 border-l border-neutral-200 pl-2 dark:border-neutral-800">
+          @for (item of group.items; track item.url) {
+            <li>
+              <a
+                [routerLink]="item.url"
+                routerLinkActive="!text-pink-500 bg-neutral-100 dark:bg-neutral-900"
+                [routerLinkActiveOptions]="{ exact: true }"
+                (click)="closeMenu()"
+                class="flex items-center gap-2 rounded px-2 py-1 text-sm text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-400 dark:hover:bg-neutral-900 dark:hover:text-neutral-200">
+                @if (item.difficulty; as difficulty) {
+                  <span
+                    class="h-1.5 w-1.5 shrink-0 rounded-full"
+                    [class.bg-emerald-500]="difficulty === 'easy'"
+                    [class.bg-amber-500]="difficulty === 'medium'"
+                    [class.bg-rose-500]="difficulty === 'hard'"
+                    [title]="difficulty"
+                    aria-hidden="true"></span>
+                }
+                <span class="truncate">{{ item.title }}</span>
+              </a>
+            </li>
+          }
+        </ul>
+      </details>
+    }
+
+    <div class="mt-6 border-t border-neutral-200 pt-4 dark:border-neutral-800">
+      <button
+        type="button"
+        (click)="consent.reopen()"
+        class="rounded px-2 py-1 text-sm text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300">
+        Cookie settings
+      </button>
+    </div>
+  </nav>
+
+  @if (menuOpen()) {
+    <div
+      class="fixed inset-0 top-14 z-20 bg-black/60 lg:hidden"
+      (click)="closeMenu()"
+      aria-hidden="true"></div>
+  }
+
+  <!-- Content -->
+  <main class="min-w-0 flex-1">
+    <router-outlet />
+  </main>
+</div>
