@@ -2,7 +2,8 @@
 /**
  * angular-challenges — try a challenge with one command.
  *
- *   npx angular-challenges start <number>   fork + clone + install + branch + open IDE + serve
+ *   npx angular-challenges start <number> [--dir <path>]
+ *                                           fork + clone + install + branch + open IDE + serve
  *   npx angular-challenges submit           push your answer branch and open the PR page
  *
  * Zero dependencies; needs git and Node >= 20. Uses the GitHub CLI (gh) when
@@ -10,6 +11,7 @@
  */
 import { spawnSync } from 'node:child_process';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import { homedir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { createInterface } from 'node:readline/promises';
 
@@ -51,11 +53,15 @@ function openInBrowser(url) {
   info(`Opened ${dim(url)}`);
 }
 
-async function ask(question) {
+async function ask(question, fallback = '') {
+  // Piped/CI runs have no one to answer — take the default instead of hanging.
+  if (!process.stdin.isTTY) {
+    return fallback;
+  }
   const rl = createInterface({ input: process.stdin, output: process.stdout });
   const answer = (await rl.question(`  ${question}`)).trim();
   rl.close();
-  return answer;
+  return answer || fallback;
 }
 
 async function forkExists(login) {
@@ -102,6 +108,52 @@ function findExistingClone() {
   return null;
 }
 
+function expandHome(path) {
+  return path === '~' || path.startsWith('~/') ? join(homedir(), path.slice(1)) : path;
+}
+
+function isRepoClone(dir) {
+  if (!existsSync(join(dir, '.git'))) {
+    return false;
+  }
+  const origin = capture('git', ['remote', 'get-url', 'origin'], { cwd: dir }) ?? '';
+  return origin.includes(`/${REPO_NAME}`);
+}
+
+function isEmptyDir(dir) {
+  try {
+    return readdirSync(dir).length === 0;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Where the clone should live. A folder the user names is used as-is when it is
+ * empty (or already the repo); otherwise we create `<folder>/angular-challenges`.
+ */
+async function chooseCloneDir(preset) {
+  const suggestion = resolve(REPO_NAME);
+  while (true) {
+    const answer = preset ?? (await ask(`Where should I clone it? [${dim(suggestion)}] `));
+    preset = undefined;
+    const target = answer ? resolve(expandHome(answer)) : suggestion;
+
+    if (!existsSync(target) || isEmptyDir(target) || isRepoClone(target)) {
+      return target;
+    }
+    const nested = join(target, REPO_NAME);
+    if (!existsSync(nested) || isEmptyDir(nested) || isRepoClone(nested)) {
+      info(`${dim(target)} is not empty — using ${dim(nested)}.`);
+      return nested;
+    }
+    console.log(red(`  ${nested} already exists and is not an angular-challenges clone.`));
+    if (!process.stdin.isTTY) {
+      process.exit(1);
+    }
+  }
+}
+
 function findChallengeApp(repoDir, number) {
   const appsDir = join(repoDir, 'apps');
   for (const category of readdirSync(appsDir)) {
@@ -142,9 +194,9 @@ function openEditor(repoDir, challengePath) {
   info(dim('No editor CLI found (code/cursor/windsurf/webstorm/idea) — open the folder manually.'));
 }
 
-async function start(number) {
+async function start(number, dir) {
   if (!Number.isInteger(number) || number <= 0) {
-    console.error(red('Usage: npx angular-challenges start <challenge-number>'));
+    console.error(red('Usage: npx angular-challenges start <challenge-number> [--dir <path>]'));
     process.exit(1);
   }
   if (!has('git')) {
@@ -178,11 +230,11 @@ async function start(number) {
   }
 
   step('Clone');
-  let repoDir = findExistingClone();
-  if (repoDir) {
+  let repoDir = dir ? resolve(expandHome(dir)) : findExistingClone();
+  if (repoDir && isRepoClone(repoDir)) {
     info(`Reusing existing clone at ${dim(repoDir)}.`);
   } else {
-    repoDir = resolve(REPO_NAME);
+    repoDir = await chooseCloneDir(dir);
     run('git', ['clone', `https://github.com/${login}/${REPO_NAME}.git`, repoDir]);
   }
   const git = (args, options = {}) => run('git', args, { cwd: repoDir, ...options });
@@ -284,10 +336,22 @@ ${green('✓ Almost there!')} Review the diff and click ${bold('Create pull requ
 `);
 }
 
-const [command, argument] = process.argv.slice(2);
+const argv = process.argv.slice(2);
+const dirFlag = argv.findIndex((a) => a === '--dir' || a.startsWith('--dir='));
+let dir;
+if (dirFlag !== -1) {
+  const [flag, inline] = argv[dirFlag].split('=');
+  dir = inline ?? argv[dirFlag + 1];
+  argv.splice(dirFlag, inline ? 1 : 2);
+  if (!dir) {
+    console.error(red(`${flag} needs a path.`));
+    process.exit(1);
+  }
+}
+const [command, argument] = argv;
 switch (command) {
   case 'start':
-    await start(Number(argument));
+    await start(Number(argument), dir);
     break;
   case 'submit':
     await submit();
@@ -298,6 +362,8 @@ ${bold('angular-challenges')} — solve challenges from ${WEBSITE}
 
   ${bold('npx angular-challenges start <number>')}   fork, clone, install, branch, serve
   ${bold('npx angular-challenges submit')}           push your answer and open the PR page
+
+  ${dim('--dir <path>   where to clone (skips the question; default ./angular-challenges)')}
 `);
     process.exit(command ? 1 : 0);
 }
