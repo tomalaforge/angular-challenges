@@ -1,4 +1,4 @@
-<div class="mx-auto max-w-3xl px-6 py-8 lg:px-10">
+<div class="mx-auto max-w-3xl px-4 py-8 sm:px-6 lg:px-10">
   <h1 class="mb-2 text-3xl font-bold tracking-tight">{{ config().title }}</h1>
   <p class="mb-8 text-neutral-600 dark:text-neutral-400">
     {{ config().intro }}
@@ -28,9 +28,9 @@
         <li [id]="entry.login">
           <a
             [href]="'https://github.com/tomalaforge/angular-challenges/pulls?q=is%3Apr+author%3A' + entry.login"
-            class="flex items-center gap-4 rounded-lg border px-4 py-2.5 transition hover:border-pink-600/60 hover:bg-neutral-100/60 dark:hover:bg-neutral-900/60"
+            class="flex items-center gap-3 rounded-lg border px-3 py-2.5 transition hover:border-pink-600/60 hover:bg-neutral-100/60 sm:gap-4 sm:px-4 dark:hover:bg-neutral-900/60"
             [class]="$index < 3 ? 'border-amber-500/40' : 'border-neutral-200 dark:border-neutral-800'">
-            <span class="w-10 text-center text-sm text-neutral-500">
+            <span class="w-8 text-center text-sm text-neutral-500 sm:w-10">
               {{ medal($index) ?? '#' + ($index + 1) }}
             </span>
             <img [src]="entry.avatar" alt="" class="h-8 w-8 rounded-full" />

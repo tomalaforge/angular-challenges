@@ -7,6 +7,18 @@
 
 /* --- Markdown document styling ------------------------------------------ */
 
+/* Mobile safety: long tokens (npx commands, file paths, URLs) must never
+   force the page wider than the viewport, and wide tables scroll in place. */
+.doc-prose {
+  overflow-wrap: break-word;
+}
+
+.doc-prose table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
 /* Inline code: drop the literal backticks Tailwind Typography renders and
    style it as a highlighted chip instead. */
 .doc-prose :where(code):not(:where(pre code))::before,

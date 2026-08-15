@@ -38,7 +38,7 @@
             <span class="text-red-600 dark:text-red-500">−{{ m.deletions }}</span>
           </p>
         </div>
-        <div class="flex items-center gap-2">
+        <div class="flex flex-wrap items-center gap-2">
           <button
             type="button"
             (click)="react()"
@@ -52,7 +52,7 @@
               @default { 👍 Helpful }
             }
           </button>
-          <div class="hidden overflow-hidden rounded-lg border border-neutral-300 text-sm sm:flex dark:border-neutral-700">
+          <div class="flex overflow-hidden rounded-lg border border-neutral-300 text-sm dark:border-neutral-700">
             <button
               type="button"
               (click)="mode.set('split')"

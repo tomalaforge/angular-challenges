@@ -1,4 +1,4 @@
-<div class="flex gap-10 px-6 py-8 lg:px-10">
+<div class="flex gap-10 px-4 py-8 sm:px-6 lg:px-10">
   <article class="min-w-0 max-w-3xl flex-1">
     @if (doc().collection === 'challenges' && doc().challengeNumber) {
       <header
@@ -86,7 +86,7 @@
           </p>
           <p class="mt-2 flex flex-wrap items-center gap-2">
             Run this challenge locally:
-            <code class="rounded bg-neutral-200 px-2 py-1 dark:bg-neutral-900">{{ command }}</code>
+            <code class="rounded bg-neutral-200 px-2 py-1 break-all dark:bg-neutral-900">{{ command }}</code>
             <button
               type="button"
               (click)="copyCommand()"

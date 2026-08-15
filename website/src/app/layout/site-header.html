@@ -11,9 +11,9 @@
     </button>
     <a routerLink="/" class="flex items-center gap-2.5">
       <img src="/angular-challenge.webp" alt="" class="h-7 w-7" />
-      <span class="font-semibold tracking-tight">Angular Challenges</span>
+      <span class="hidden font-semibold tracking-tight min-[480px]:inline">Angular Challenges</span>
     </a>
-    <div class="ml-auto flex items-center gap-4 text-sm text-neutral-500 dark:text-neutral-400">
+    <div class="ml-auto flex items-center gap-2 text-sm text-neutral-500 sm:gap-4 dark:text-neutral-400">
       @if (auth.me(); as me) {
         <div class="flex items-center gap-2">
           <img [src]="me.avatar" [alt]="me.login" class="h-6 w-6 rounded-full" />
@@ -23,7 +23,7 @@
         <a
           [href]="auth.signInUrl()"
           class="inline-flex h-8 items-center rounded-lg border border-neutral-300 px-2.5 text-xs font-medium text-neutral-700 transition hover:border-neutral-400 hover:text-neutral-900 dark:border-neutral-700/80 dark:text-neutral-200 dark:hover:border-neutral-500 dark:hover:text-white">
-          Sign in with GitHub
+          Sign in<span class="hidden sm:inline">&nbsp;with GitHub</span>
         </a>
       }
       <a
@@ -59,13 +59,13 @@
           </span>
         }
       </a>
-      <a href="https://www.linkedin.com/in/thomas-laforge-2b05a945/" aria-label="LinkedIn" class="hover:text-neutral-900 dark:hover:text-white">
+      <a href="https://www.linkedin.com/in/thomas-laforge-2b05a945/" aria-label="LinkedIn" class="hidden hover:text-neutral-900 md:inline dark:hover:text-white">
         <svg viewBox="0 0 24 24" class="h-5 w-5 fill-current">
           <path
             d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.55V9h3.57v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.72C24 .77 23.2 0 22.22 0Z" />
         </svg>
       </a>
-      <a href="https://twitter.com/laforge_toma" aria-label="X (Twitter)" class="hover:text-neutral-900 dark:hover:text-white">
+      <a href="https://twitter.com/laforge_toma" aria-label="X (Twitter)" class="hidden hover:text-neutral-900 md:inline dark:hover:text-white">
         <svg viewBox="0 0 24 24" class="h-5 w-5 fill-current">
           <path
             d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.66l-5.21-6.82L5 21.75H1.68l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23Zm-1.16 17.52h1.83L7.08 4.13H5.12l11.96 15.64Z" />

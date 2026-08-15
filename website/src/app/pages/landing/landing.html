@@ -11,8 +11,8 @@
   <!-- Sponsors banner -->
   <div class="relative z-10 border-b border-neutral-200/60 bg-neutral-100/40 dark:border-neutral-800/60 dark:bg-neutral-900/40">
     <div
-      class="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3 px-6 py-2.5 text-sm text-neutral-700 dark:text-neutral-300">
-      <div class="flex items-center gap-3">
+      class="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-2.5 text-sm text-neutral-700 sm:px-6 dark:text-neutral-300">
+      <div class="flex flex-wrap items-center gap-3">
         <span>This project is sustained by its sponsors</span>
         @if (sponsors().length > 0) {
           <span class="flex -space-x-1.5">
@@ -39,15 +39,15 @@
   </div>
 
   <!-- Hero -->
-  <main class="relative z-10 mx-auto w-full max-w-6xl px-6">
-    <section class="flex flex-col items-center py-20 text-center sm:py-24">
+  <main class="relative z-10 mx-auto w-full max-w-6xl px-4 sm:px-6">
+    <section class="flex flex-col items-center py-14 text-center sm:py-24">
       <img src="/angular-challenge.webp" alt="" class="mb-8 h-24 w-24 drop-shadow-[0_0_35px_rgba(236,72,153,0.35)]" />
       <p
         class="mb-6 inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-black/[0.02] px-3.5 py-1.5 text-xs font-medium text-neutral-700 dark:border-neutral-800 dark:bg-white/[0.03] dark:text-neutral-300">
         <span class="h-1.5 w-1.5 rounded-full bg-emerald-500" aria-hidden="true"></span>
         Free &amp; open source — {{ challengeCount }}+ challenges and counting
       </p>
-      <h1 class="max-w-3xl text-5xl font-bold tracking-tight text-balance sm:text-6xl">
+      <h1 class="max-w-3xl text-4xl font-bold tracking-tight text-balance sm:text-6xl">
         Start now and become an
         <span class="bg-gradient-to-r from-pink-500 to-violet-500 bg-clip-text text-transparent">Angular Expert</span>
       </h1>
@@ -92,22 +92,22 @@
 
       <!-- Stats strip -->
       <dl
-        class="mt-16 grid grid-cols-3 divide-x divide-neutral-200 rounded-2xl border border-neutral-200 bg-neutral-100/40 dark:divide-neutral-800 dark:border-neutral-800 dark:bg-neutral-900/40">
-        <div class="px-8 py-5 sm:px-12">
-          <dd class="text-3xl font-bold tabular-nums">{{ challengeCount }}</dd>
-          <dt class="mt-1 text-sm text-neutral-500">Challenges</dt>
+        class="mt-12 grid w-full max-w-md grid-cols-3 divide-x divide-neutral-200 rounded-2xl border border-neutral-200 bg-neutral-100/40 sm:mt-16 sm:w-auto sm:max-w-none dark:divide-neutral-800 dark:border-neutral-800 dark:bg-neutral-900/40">
+        <div class="px-3 py-4 sm:px-12 sm:py-5">
+          <dd class="text-2xl font-bold tabular-nums sm:text-3xl">{{ challengeCount }}</dd>
+          <dt class="mt-1 text-xs text-neutral-500 sm:text-sm">Challenges</dt>
         </div>
-        <div class="px-8 py-5 sm:px-12">
-          <dd class="text-3xl font-bold tabular-nums">
+        <div class="px-3 py-4 sm:px-12 sm:py-5">
+          <dd class="text-2xl font-bold tabular-nums sm:text-3xl">
             {{ statsResource.value()?.stars ?? '—' }}
           </dd>
-          <dt class="mt-1 text-sm text-neutral-500">GitHub stars</dt>
+          <dt class="mt-1 text-xs text-neutral-500 sm:text-sm">GitHub stars</dt>
         </div>
-        <div class="px-8 py-5 sm:px-12">
-          <dd class="text-3xl font-bold tabular-nums">
+        <div class="px-3 py-4 sm:px-12 sm:py-5">
+          <dd class="text-2xl font-bold tabular-nums sm:text-3xl">
             {{ statsResource.value()?.forks ?? '—' }}
           </dd>
-          <dt class="mt-1 text-sm text-neutral-500">Forks</dt>
+          <dt class="mt-1 text-xs text-neutral-500 sm:text-sm">Forks</dt>
         </div>
       </dl>
     </section>
@@ -200,9 +200,9 @@
   <!-- Footer -->
   <footer class="relative z-10 border-t border-neutral-200 dark:border-neutral-800">
     <div
-      class="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-8 text-sm text-neutral-500">
+      class="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-4 px-4 py-8 text-sm text-neutral-500 sm:px-6">
       <p>Built by <a href="https://github.com/tomalaforge" class="text-neutral-700 hover:text-pink-500 dark:text-neutral-300">Thomas Laforge</a> and the community · MIT</p>
-      <nav class="flex gap-5">
+      <nav class="flex flex-wrap gap-x-5 gap-y-2">
         <a routerLink="/guides/getting-started" class="hover:text-neutral-800 dark:hover:text-neutral-200">Guides</a>
         <a routerLink="/leaderboard/answers" class="hover:text-neutral-800 dark:hover:text-neutral-200">Leaderboard</a>
         <a href="https://github.com/tomalaforge/angular-challenges" class="hover:text-neutral-800 dark:hover:text-neutral-200">GitHub</a>

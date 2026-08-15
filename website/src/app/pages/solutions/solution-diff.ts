@@ -43,7 +43,9 @@ export class SolutionDiff {
   readonly pr = input.required<string>();
 
   /** 'split' on desktop, toggleable; unified is friendlier on mobile. */
-  protected readonly mode = signal<'split' | 'unified'>('split');
+  protected readonly mode = signal<'split' | 'unified'>(
+    this.isBrowser && window.matchMedia('(max-width: 639px)').matches ? 'unified' : 'split',
+  );
 
   protected readonly metaResource = httpResource<PullMeta>(() =>
     this.isBrowser ? `/api/pulls/${this.pr()}` : undefined,
