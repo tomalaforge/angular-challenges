@@ -1,0 +1,51 @@
+{
+  "name": "angular-challenges-website",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "pnpm generate && ng serve",
+    "generate": "node tools/generate-content.mjs",
+    "build": "pnpm generate && ng build",
+    "watch": "ng build --watch --configuration development",
+    "deploy": "vercel pull --yes --environment=production && vercel build --prod && vercel deploy --prebuilt --prod --yes",
+    "test": "ng test",
+    "serve:ssr:angular-challenges-website": "node dist/angular-challenges-website/server/server.mjs"
+  },
+  "private": true,
+  "packageManager": "pnpm@10.23.0",
+  "dependencies": {
+    "@angular/common": "^22.1.0",
+    "@angular/compiler": "^22.1.0",
+    "@angular/core": "^22.1.0",
+    "@angular/forms": "^22.1.0",
+    "@angular/platform-browser": "^22.1.0",
+    "@angular/platform-server": "^22.1.0",
+    "@angular/router": "^22.1.0",
+    "@angular/ssr": "^22.1.4",
+    "@shikijs/langs": "4.4.3",
+    "@shikijs/themes": "4.4.3",
+    "@tailwindcss/postcss": "^4.3.3",
+    "express": "^5.1.0",
+    "postcss": "^8.5.26",
+    "rxjs": "~7.8.0",
+    "tailwindcss": "^4.3.3",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@angular/build": "^22.1.4",
+    "@angular/cli": "^22.1.4",
+    "@angular/compiler-cli": "^22.1.0",
+    "@tailwindcss/typography": "^0.5.20",
+    "@types/express": "^5.0.1",
+    "@types/node": "^20.17.19",
+    "github-slugger": "^2.0.0",
+    "gray-matter": "^4.0.3",
+    "jsdom": "^28.0.0",
+    "marked": "^18.0.9",
+    "playwright": "^1.62.1",
+    "prettier": "^3.8.1",
+    "shiki": "^4.4.3",
+    "typescript": "~6.0.2",
+    "vitest": "^4.0.8"
+  }
+}

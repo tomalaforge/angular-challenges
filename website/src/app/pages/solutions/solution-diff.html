@@ -1,0 +1,161 @@
+<div class="px-4 py-8 sm:px-6 lg:px-10">
+  <a [routerLink]="['..']" class="text-sm text-neutral-400 hover:text-pink-500">
+    ← All solutions for {{ doc().title }}
+  </a>
+
+  @if (loading()) {
+    <div class="mt-6 space-y-3">
+      <div class="h-16 animate-pulse rounded-lg border border-neutral-800 bg-neutral-900"></div>
+      <div class="h-96 animate-pulse rounded-lg border border-neutral-800 bg-neutral-900"></div>
+    </div>
+  } @else if (failed()) {
+    <div class="mt-6 rounded-lg border border-red-900 bg-red-950/40 p-4 text-sm">
+      Could not load this pull request from GitHub right now.
+      <a
+        [href]="'https://github.com/tomalaforge/angular-challenges/pull/' + pr()"
+        class="text-pink-500 hover:underline">
+        Open it on GitHub
+      </a>
+      or try again later.
+    </div>
+  } @else {
+    <!-- PR header -->
+    @if (meta(); as m) {
+      <div class="mt-4 mb-6 flex flex-wrap items-center gap-4">
+        <img [src]="m.avatar" alt="" class="h-10 w-10 rounded-full" />
+        <div class="min-w-0 flex-1">
+          <h1 class="truncate text-xl font-semibold">{{ m.title }}</h1>
+          <p class="text-sm text-neutral-400">
+            #{{ m.number }} by <span class="text-neutral-200">{{ m.login }}</span>
+            ·
+            @if (m.merged) {
+              <span class="text-purple-400">merged</span>
+            } @else {
+              <span [class]="m.state === 'open' ? 'text-green-400' : 'text-red-400'">{{ m.state }}</span>
+            }
+            · {{ m.changedFiles }} files
+            <span class="text-green-500">+{{ m.additions }}</span>
+            <span class="text-red-500">−{{ m.deletions }}</span>
+          </p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button
+            type="button"
+            (click)="react()"
+            [disabled]="reaction() === 'saving' || reaction() === 'done'"
+            [title]="auth.me() ? 'This solution helped me' : 'Sign in with GitHub to react'"
+            class="rounded-lg border border-neutral-700 px-3 py-1.5 text-sm text-neutral-300 hover:border-neutral-500 disabled:opacity-60">
+            @switch (reaction()) {
+              @case ('done') { 👍 Thanks! }
+              @case ('saving') { 👍 … }
+              @case ('error') { 👍 Failed — try on GitHub }
+              @default { 👍 Helpful }
+            }
+          </button>
+          <div class="hidden overflow-hidden rounded-lg border border-neutral-700 text-sm sm:flex">
+            <button
+              type="button"
+              (click)="mode.set('split')"
+              [class]="mode() === 'split' ? 'bg-neutral-800 text-white' : 'text-neutral-400 hover:text-white'"
+              class="px-3 py-1.5">
+              Split
+            </button>
+            <button
+              type="button"
+              (click)="mode.set('unified')"
+              [class]="mode() === 'unified' ? 'bg-neutral-800 text-white' : 'text-neutral-400 hover:text-white'"
+              class="px-3 py-1.5">
+              Unified
+            </button>
+          </div>
+          <a
+            [href]="m.htmlUrl"
+            class="rounded-lg border border-neutral-700 px-3 py-1.5 text-sm text-neutral-300 hover:border-neutral-500">
+            View on GitHub
+          </a>
+        </div>
+      </div>
+    }
+
+    <!-- Files -->
+    <div class="space-y-6">
+      @for (file of files(); track file.filename) {
+        <section class="overflow-hidden rounded-lg border border-neutral-800">
+          <header
+            class="flex items-center gap-3 border-b border-neutral-800 bg-neutral-900 px-4 py-2 text-sm">
+            <code class="min-w-0 flex-1 truncate text-neutral-200">
+              @if (file.previousFilename) {
+                <span class="text-neutral-500">{{ file.previousFilename }} → </span>
+              }
+              {{ file.filename }}
+            </code>
+            @if (file.status === 'added') {
+              <span class="rounded bg-green-600/20 px-1.5 py-0.5 text-xs text-green-400">added</span>
+            } @else if (file.status === 'removed') {
+              <span class="rounded bg-red-600/20 px-1.5 py-0.5 text-xs text-red-400">removed</span>
+            }
+            <span class="shrink-0 text-xs">
+              <span class="text-green-500">+{{ file.additions }}</span>
+              <span class="ml-1 text-red-500">−{{ file.deletions }}</span>
+            </span>
+          </header>
+
+          @if (!file.patch) {
+            <p class="p-4 text-sm text-neutral-400">
+              No text diff available for this file (binary or too large) —
+              <a [href]="file.blobUrl" class="text-pink-500 hover:underline">view it on GitHub</a>.
+            </p>
+          } @else {
+            <div class="overflow-x-auto font-mono text-xs leading-5">
+              <table class="w-full border-collapse">
+                <tbody>
+                  @for (hunk of file.hunks; track $index) {
+                    @if (hunk.skipped > 0) {
+                      <tr class="bg-neutral-900/80 text-neutral-500">
+                        <td colspan="4" class="px-4 py-1 select-none">⋯ {{ hunk.skipped }} unmodified lines</td>
+                      </tr>
+                    }
+                    @if (mode() === 'split') {
+                      @for (row of hunk.rows; track $index) {
+                        <tr>
+                          <td class="w-10 border-r border-neutral-800/60 px-2 text-right text-neutral-600 select-none"
+                              [class]="row.left?.type === 'del' ? 'bg-red-950/60' : ''">
+                            {{ row.left?.oldNum }}
+                          </td>
+                          <td class="w-[calc(50%-2.5rem)] px-2 whitespace-pre-wrap"
+                              [class]="row.left?.type === 'del' ? 'bg-red-950/40' : !row.left ? 'bg-neutral-900/40' : ''">@if (row.left; as l) {@if (l.tokens) {@for (t of l.tokens; track $index) {<span [style.color]="t.color">{{ t.text }}</span>}} @else {<span>{{ l.text }}</span>}}</td>
+                          <td class="w-10 border-x border-neutral-800/60 px-2 text-right text-neutral-600 select-none"
+                              [class]="row.right?.type === 'add' ? 'bg-green-950/60' : ''">
+                            {{ row.right?.newNum }}
+                          </td>
+                          <td class="w-[calc(50%-2.5rem)] px-2 whitespace-pre-wrap"
+                              [class]="row.right?.type === 'add' ? 'bg-green-950/40' : !row.right ? 'bg-neutral-900/40' : ''">@if (row.right; as l) {@if (l.tokens) {@for (t of l.tokens; track $index) {<span [style.color]="t.color">{{ t.text }}</span>}} @else {<span>{{ l.text }}</span>}}</td>
+                        </tr>
+                      }
+                    } @else {
+                      @for (line of hunk.lines; track $index) {
+                        <tr
+                          [class]="line.type === 'add' ? 'bg-green-950/40' : line.type === 'del' ? 'bg-red-950/40' : ''">
+                          <td class="w-10 px-2 text-right text-neutral-600 select-none">{{ line.oldNum }}</td>
+                          <td class="w-10 border-r border-neutral-800/60 px-2 text-right text-neutral-600 select-none">
+                            {{ line.newNum }}
+                          </td>
+                          <td class="w-4 px-1 text-center select-none"
+                              [class.text-green-500]="line.type === 'add'"
+                              [class.text-red-500]="line.type === 'del'">
+                            {{ line.type === 'add' ? '+' : line.type === 'del' ? '−' : '' }}
+                          </td>
+                          <td class="px-2 whitespace-pre-wrap">@if (line.tokens) {@for (t of line.tokens; track $index) {<span [style.color]="t.color">{{ t.text }}</span>}} @else {<span>{{ line.text }}</span>}</td>
+                        </tr>
+                      }
+                    }
+                  }
+                </tbody>
+              </table>
+            </div>
+          }
+        </section>
+      }
+    </div>
+  }
+</div>

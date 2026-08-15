@@ -1,0 +1,74 @@
+---
+title: Testing
+prev: false
+next: false
+contributors:
+  - tomalaforge
+  - LMFinney
+description: Introduction to testing challenges.
+noCommentSection: true
+sidebar:
+  order: 1
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+Testing is a crucial step in building scalable, maintainable, and trustworthy applications.
+Testing should never be avoided, even in the face of short deadlines or strong pressure from the product team.
+Nowadays, there are numerous awesome tools available that make it easy to test your code and provide a great developer experience.
+
+In this series of testing exercises, we will learn and master [Angular Testing Library](https://testing-library.com/docs/) and [Cypress Component Testing](https://docs.cypress.io/guides/component-testing/angular/overview) that simplifies DOM manipulation for testing any Angular component.
+
+The benefits of using <b>Angular Testing Library</b> or <b>Cypress Component Testing</b> are to test your component as a black box. You will only interact with what the user can do on the UI. However, the difference with end-to-end tests is that the backend is mocked, which makes the tests faster and more maintainable.
+The goal is to mock as little as possible to test your component at a higher level than unit testing, which will make refactoring easier.
+Within a real application, integration tests are the tests you will write the most. Learning how to write them will make your application more robust and more maintainable.
+
+Here is a series of 8 challenges that you can take in any order.
+
+<LinkCard
+  title="🟢 Harness"
+  description="Learn how to test using Angular CDK Component harnesses"
+  href="/challenges/testing/23-harness/"
+/>
+
+<LinkCard
+  title="🟢 Checkbox"
+  description="Learn how to debug your tests using [Angular Testing Library](https://testing-library.com/)  on a simple checkbox application"
+  href="/challenges/testing/28-checkbox/"
+/>
+
+<LinkCard
+  title="🟠 Router"
+  description="Learn how to test the routed components"
+  href="/challenges/testing/17-router/"
+/>
+
+<LinkCard
+  title="🟠 Nested Components"
+  description="Learn how to test nested components"
+  href="/challenges/testing/18-nested-components/"
+/>
+
+<LinkCard
+  title="🟠 Input Output"
+  description="Learn how to test inputs and outputs"
+  href="/challenges/testing/19-input-output/"
+/>
+
+<LinkCard
+  title="🟠 Modal"
+  description="Learn how to test a modal component"
+  href="/challenges/testing/20-modal/"
+/>
+
+<LinkCard
+  title="🟠 Harness Creation"
+  description="Learn how to create harness on your own components"
+  href="/challenges/testing/24-harness-creation/"
+/>
+
+<LinkCard
+  title="🔴 Real-life Application"
+  description="Learn how to write a series of test for a real-life applications"
+  href="/challenges/testing/29-real-life-application/"
+/>

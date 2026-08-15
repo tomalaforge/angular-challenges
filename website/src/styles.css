@@ -1,0 +1,167 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+/* --- Markdown document styling ------------------------------------------ */
+
+/* Inline code: drop the literal backticks Tailwind Typography renders and
+   style it as a highlighted chip instead. */
+.doc-prose :where(code):not(:where(pre code))::before,
+.doc-prose :where(code):not(:where(pre code))::after {
+  content: none;
+}
+
+.doc-prose :where(code):not(:where(pre code)) {
+  background: color-mix(in srgb, var(--color-neutral-800) 70%, transparent);
+  border: 1px solid var(--color-neutral-700);
+  border-radius: 0.375rem;
+  padding: 0.125rem 0.375rem;
+  font-size: 0.85em;
+  font-weight: 500;
+  color: var(--color-neutral-100);
+}
+
+.doc-prose pre.shiki {
+  border-radius: 0.5rem;
+  padding: 1rem;
+  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  border: 1px solid var(--color-neutral-800);
+}
+
+.doc-prose .doc-aside {
+  border: 1px solid;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin: 1.25rem 0;
+}
+
+.doc-prose .doc-aside__title {
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+}
+
+.doc-prose .doc-aside__content > :first-child {
+  margin-top: 0;
+}
+.doc-prose .doc-aside__content > :last-child {
+  margin-bottom: 0;
+}
+
+.doc-prose .doc-aside--note {
+  border-color: var(--color-blue-800);
+  background: color-mix(in srgb, var(--color-blue-950) 40%, transparent);
+}
+.doc-prose .doc-aside--tip {
+  border-color: var(--color-violet-800);
+  background: color-mix(in srgb, var(--color-violet-950) 40%, transparent);
+}
+.doc-prose .doc-aside--caution {
+  border-color: var(--color-amber-800);
+  background: color-mix(in srgb, var(--color-amber-950) 40%, transparent);
+}
+.doc-prose .doc-aside--danger {
+  border-color: var(--color-red-800);
+  background: color-mix(in srgb, var(--color-red-950) 40%, transparent);
+}
+
+.doc-prose a.doc-linkcard {
+  display: block;
+  border: 1px solid var(--color-neutral-800);
+  border-radius: 0.5rem;
+  padding: 1rem 1.25rem;
+  margin: 0.75rem 0;
+  text-decoration: none;
+  transition: border-color 150ms;
+}
+.doc-prose a.doc-linkcard:hover {
+  border-color: var(--color-pink-600);
+}
+.doc-prose a.doc-linkcard strong {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+.doc-prose a.doc-linkcard span {
+  color: var(--color-neutral-400);
+  font-size: 0.875rem;
+}
+
+/* GitHub-style button hints used inside guide texts */
+.doc-prose .github-success-btn,
+.doc-prose .github-neutral-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  border-radius: 0.375rem;
+  padding: 0.125rem 0.5rem;
+  font-size: 0.8125rem;
+  vertical-align: middle;
+}
+.doc-prose .github-success-btn {
+  background: #238636;
+  color: #fff;
+}
+.doc-prose .github-neutral-btn {
+  background: #21262d;
+  border: 1px solid #363b42;
+  color: #c9d1d9;
+}
+.doc-prose .github-neutral-btn svg {
+  fill: currentColor;
+}
+
+.doc-prose details {
+  border: 1px solid var(--color-neutral-800);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  margin: 1.25rem 0;
+}
+.doc-prose details summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* --- SendPulse newsletter form ------------------------------------------- */
+/* The embed script injects its own stylesheet; force it back on-brand. */
+
+.sp-form-outer .sp-form {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.sp-form .sp-form-control {
+  background: color-mix(in srgb, var(--color-neutral-950) 60%, transparent) !important;
+  border: 1px solid var(--color-neutral-700) !important;
+  border-radius: 0.5rem !important;
+  color: var(--color-neutral-100) !important;
+  font-size: 0.875rem !important;
+  height: 2.5rem !important;
+}
+
+.sp-form .sp-form-control::placeholder {
+  color: var(--color-neutral-500) !important;
+}
+
+.sp-form .sp-form-control:focus {
+  border-color: var(--color-pink-600) !important;
+  outline: none !important;
+}
+
+.sp-form .sp-button {
+  background: linear-gradient(to right, var(--color-pink-600), var(--color-fuchsia-600)) !important;
+  border: none !important;
+  border-radius: 0.5rem !important;
+  color: #fff !important;
+  font-weight: 600 !important;
+  font-size: 0.875rem !important;
+  font-family: inherit !important;
+  height: 2.5rem !important;
+  padding: 0 1.5rem !important;
+}
+
+.sp-form .sp-button:hover {
+  filter: brightness(1.1);
+}

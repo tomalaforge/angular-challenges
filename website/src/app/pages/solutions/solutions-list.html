@@ -1,0 +1,78 @@
+<div class="mx-auto max-w-4xl px-6 py-8 lg:px-10">
+  <a [routerLink]="doc().url" class="text-sm text-neutral-400 hover:text-pink-500">
+    ← {{ doc().title }}
+  </a>
+  <h1 class="mt-2 mb-1 text-3xl font-bold tracking-tight">Community solutions</h1>
+  <p class="mb-8 text-neutral-400">
+    Every pull request submitted for challenge #{{ doc().challengeNumber }} — click one to read
+    the full diff without leaving the site.
+  </p>
+
+  @if (solutionsResource.isLoading()) {
+    <div class="space-y-3">
+      @for (i of [1, 2, 3, 4]; track i) {
+        <div class="h-20 animate-pulse rounded-lg border border-neutral-800 bg-neutral-900"></div>
+      }
+    </div>
+  } @else if (solutionsResource.error()) {
+    <div class="rounded-lg border border-red-900 bg-red-950/40 p-4 text-sm">
+      Could not load the solutions from GitHub right now.
+      <a [href]="githubSearchUrl()" class="text-pink-500 hover:underline">View them on GitHub</a>
+      or try again later.
+    </div>
+  } @else if (solutions().length === 0) {
+    <div class="rounded-lg border border-neutral-800 p-6 text-center text-neutral-400">
+      No solution submitted yet — be the first!
+      <a routerLink="/guides/resolve-challenge" class="text-pink-500 hover:underline">
+        How to submit yours
+      </a>
+    </div>
+  } @else {
+    <ul class="space-y-3">
+      @for (solution of solutions(); track solution.number) {
+        <li>
+          <a
+            [routerLink]="[solution.number]"
+            class="flex items-center gap-4 rounded-lg border border-neutral-800 p-4 transition hover:border-pink-600/60 hover:bg-neutral-900/60">
+            <img [src]="solution.avatar" alt="" class="h-10 w-10 rounded-full" />
+            <div class="min-w-0 flex-1">
+              <p class="flex flex-wrap items-center gap-2">
+                <span class="font-medium text-neutral-100">{{ solution.login }}</span>
+                @if (solution.isAuthor) {
+                  <span class="rounded-full bg-violet-600/20 px-2 py-0.5 text-xs font-medium text-violet-400">
+                    challenge author
+                  </span>
+                }
+                @if (solution.merged) {
+                  <span class="rounded-full bg-purple-600/20 px-2 py-0.5 text-xs font-medium text-purple-400">
+                    merged
+                  </span>
+                } @else if (solution.state === 'open') {
+                  <span class="rounded-full bg-green-600/20 px-2 py-0.5 text-xs font-medium text-green-400">
+                    open
+                  </span>
+                }
+              </p>
+              <p class="truncate text-sm text-neutral-400">
+                #{{ solution.number }} · {{ solution.title }}
+              </p>
+            </div>
+            <div class="flex shrink-0 items-center gap-4 text-sm text-neutral-400">
+              @if (solution.thumbsUp > 0) {
+                <span title="Thumbs up">👍 {{ solution.thumbsUp }}</span>
+              }
+              @if (solution.comments > 0) {
+                <span title="Comments">💬 {{ solution.comments }}</span>
+              }
+              <span class="hidden sm:inline">{{ solution.createdAt | date: 'MMM d, y' }}</span>
+            </div>
+          </a>
+        </li>
+      }
+    </ul>
+    <p class="mt-6 text-sm text-neutral-500">
+      Also available
+      <a [href]="githubSearchUrl()" class="text-pink-500 hover:underline">on GitHub</a>.
+    </p>
+  }
+</div>
