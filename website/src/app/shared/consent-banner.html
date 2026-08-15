@@ -1,0 +1,41 @@
+@if (consent.bannerVisible()) {
+  <div
+    role="dialog"
+    aria-modal="false"
+    aria-labelledby="consent-title"
+    aria-describedby="consent-description"
+    class="fixed inset-x-0 bottom-0 z-50 border-t border-neutral-800 bg-neutral-950/95 backdrop-blur">
+    <div
+      class="mx-auto flex w-full max-w-4xl flex-col gap-4 px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
+      <div class="text-sm text-neutral-300">
+        <p id="consent-title" class="font-medium text-neutral-100">We'd like to use cookies</p>
+        <p id="consent-description" class="mt-1 text-neutral-400">
+          Google Analytics and Google AdSense help us understand how the site is used and keep it
+          free. Nothing is loaded until you accept, and you can change your mind at any time from
+          the "Cookie settings" link.
+          <a
+            href="https://policies.google.com/technologies/partner-sites"
+            target="_blank"
+            rel="noopener"
+            class="text-pink-500 hover:underline">
+            How Google uses this data
+          </a>
+        </p>
+      </div>
+      <div class="flex shrink-0 gap-3">
+        <button
+          type="button"
+          (click)="consent.reject()"
+          class="rounded-lg border border-neutral-700 px-4 py-2 text-sm font-medium text-neutral-300 transition hover:border-neutral-500 hover:text-neutral-100">
+          Reject
+        </button>
+        <button
+          type="button"
+          (click)="consent.accept()"
+          class="rounded-lg bg-pink-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-pink-500">
+          Accept
+        </button>
+      </div>
+    </div>
+  </div>
+}

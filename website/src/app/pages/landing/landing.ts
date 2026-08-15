@@ -9,6 +9,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { httpResource } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
 import { MANIFEST } from '../../generated/manifest';
+import { Consent } from '../../consent';
 import { SiteHeader } from '../../layout/site-header';
 
 interface Sponsor {
@@ -23,6 +24,8 @@ interface Sponsor {
 })
 export class Landing {
   private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
+
+  protected readonly consent = inject(Consent);
 
   protected readonly challengeCount = MANIFEST.challenges
     .flatMap((g) => g.items)

@@ -3,6 +3,7 @@ import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } fro
 import { toSignal } from '@angular/core/rxjs-interop';
 import { filter, map } from 'rxjs';
 import { MANIFEST } from '../generated/manifest';
+import { Consent } from '../consent';
 import { SiteHeader } from './site-header';
 
 @Component({
@@ -13,6 +14,7 @@ import { SiteHeader } from './site-header';
 export class DocsLayout {
   private readonly router = inject(Router);
 
+  protected readonly consent = inject(Consent);
   protected readonly manifest = MANIFEST;
   protected readonly menuOpen = signal(false);
   protected readonly query = signal('');
