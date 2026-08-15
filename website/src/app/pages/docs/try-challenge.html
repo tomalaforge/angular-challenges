@@ -75,66 +75,36 @@
         </p>
       </section>
 
-      <!-- 2. IDE -->
+      <!-- 2. Manual -->
       <section class="mb-5">
         <h3 class="mb-2 text-sm font-semibold text-neutral-900 dark:text-white">
-          <span class="mr-1 text-pink-500">2.</span> Clone with your IDE
+          <span class="mr-1 text-pink-500">2.</span> Manual setup
         </h3>
-        @if (auth.me(); as me) {
-          @switch (fork().kind) {
-            @case ('done') {
-              <p class="mb-2 text-xs text-emerald-600 dark:text-emerald-400">
-                ✓ Fork ready: {{ targetRepo() }} — pick your IDE, it will clone and open it.
-              </p>
-            }
-            @case ('error') {
-              <p class="mb-2 text-xs text-rose-600 dark:text-rose-400">
-                Forking failed — try again or fork manually on GitHub.
-              </p>
-            }
-            @default {
-              <button
-                type="button"
-                (click)="createFork()"
-                [disabled]="fork().kind === 'forking'"
-                class="mb-2 rounded-lg border border-neutral-300 px-3 py-1.5 text-xs font-semibold text-neutral-700 transition hover:border-neutral-400 disabled:opacity-50 dark:border-neutral-700/80 dark:text-neutral-300 dark:hover:border-neutral-500"
-              >
-                {{ fork().kind === 'forking' ? 'Forking…' : 'Fork to @' + me.login + ' first' }}
-              </button>
-            }
-          }
-        } @else {
-          <p class="mb-2 text-xs text-neutral-500 dark:text-neutral-400">
-            <a [href]="auth.signInUrl()" class="text-pink-500 hover:underline"
-              >Sign in with GitHub</a
-            >
-            to fork first — otherwise you clone the main repo and cannot push your answer.
-          </p>
-        }
+        <p class="mb-2 text-xs text-neutral-500 dark:text-neutral-400">
+          Prefer doing each step yourself? These two guides walk you from fork to pull request:
+        </p>
         <div class="flex flex-wrap gap-2">
           <a
-            [href]="vscodeUrl()"
+            routerLink="/guides/getting-started"
+            (click)="open.set(false)"
             class="rounded-lg border border-neutral-300 px-3 py-1.5 text-xs font-medium text-neutral-700 transition hover:border-neutral-400 hover:text-neutral-900 dark:border-neutral-700/80 dark:text-neutral-300 dark:hover:border-neutral-500 dark:hover:text-white"
-            >VS Code</a
+            >Getting Started</a
           >
           <a
-            [href]="cursorUrl()"
+            routerLink="/guides/resolve-challenge"
+            (click)="open.set(false)"
             class="rounded-lg border border-neutral-300 px-3 py-1.5 text-xs font-medium text-neutral-700 transition hover:border-neutral-400 hover:text-neutral-900 dark:border-neutral-700/80 dark:text-neutral-300 dark:hover:border-neutral-500 dark:hover:text-white"
-            >Cursor</a
-          >
-          <a
-            [href]="jetbrainsUrl()"
-            class="rounded-lg border border-neutral-300 px-3 py-1.5 text-xs font-medium text-neutral-700 transition hover:border-neutral-400 hover:text-neutral-900 dark:border-neutral-700/80 dark:text-neutral-300 dark:hover:border-neutral-500 dark:hover:text-white"
-            >JetBrains</a
+            >Resolve a Challenge</a
           >
         </div>
-        <p class="mt-1.5 text-xs text-neutral-500 dark:text-neutral-400">
-          Then run
-          <code class="rounded bg-neutral-100 px-1 dark:bg-neutral-900">pnpm install</code> and
-          <code class="rounded bg-neutral-100 px-1 dark:bg-neutral-900">{{
-            doc().command ? 'npx nx serve ' + doc().command : 'the serve command from the doc'
-          }}</code>
-        </p>
+        @if (doc().command; as command) {
+          <p class="mt-1.5 text-xs text-neutral-500 dark:text-neutral-400">
+            This challenge runs with
+            <code class="rounded bg-neutral-100 px-1 dark:bg-neutral-900"
+              >npx nx serve {{ command }}</code
+            >
+          </p>
+        }
       </section>
 
       <!-- 3. Cloud -->
@@ -143,7 +113,7 @@
           <span class="mr-1 text-pink-500">3.</span> No setup — in the cloud
         </h3>
         <a
-          [href]="codespacesUrl()"
+          [href]="codespacesUrl"
           target="_blank"
           rel="noopener"
           class="inline-flex items-center gap-2 rounded-lg border border-neutral-300 px-3 py-1.5 text-xs font-medium text-neutral-700 transition hover:border-neutral-400 hover:text-neutral-900 dark:border-neutral-700/80 dark:text-neutral-300 dark:hover:border-neutral-500 dark:hover:text-white"
@@ -159,18 +129,6 @@
           A cloud VS Code with everything installed — free for 60h/month on personal accounts.
         </p>
       </section>
-
-      <div
-        class="mt-5 border-t border-neutral-200 pt-3 text-xs text-neutral-500 dark:border-neutral-800 dark:text-neutral-400"
-      >
-        Stuck on the process? Read the
-        <a href="/guides/getting-started" class="text-pink-500 hover:underline">Getting Started</a>
-        and
-        <a href="/guides/resolve-challenge" class="text-pink-500 hover:underline"
-          >Resolve a Challenge</a
-        >
-        guides.
-      </div>
     </div>
   </div>
 }

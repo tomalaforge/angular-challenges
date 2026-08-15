@@ -193,6 +193,22 @@ async function start(number) {
 
   step(`Branch answer-${number}`);
   const branch = `answer-${number}`;
+  const currentBranch = capture('git', ['branch', '--show-current'], { cwd: repoDir });
+  if (currentBranch !== branch) {
+    // Uncommitted work would silently ride along to the new branch.
+    const dirty = capture('git', ['status', '--porcelain'], { cwd: repoDir });
+    if (dirty) {
+      console.log(red(`  You have uncommitted changes on "${currentBranch}":`));
+      console.log(dim(dirty.split('\n').slice(0, 8).map((l) => `    ${l}`).join('\n')));
+      const answer = await ask('Commit them to the current branch first? [Y/n] ');
+      if (answer.toLowerCase() !== 'n') {
+        run('git', ['add', '-A'], { cwd: repoDir });
+        run('git', ['commit', '-m', `wip: ${currentBranch}`], { cwd: repoDir });
+      } else {
+        info(dim('Continuing — the changes will follow you to the new branch.'));
+      }
+    }
+  }
   const exists = capture('git', ['rev-parse', '--verify', branch], { cwd: repoDir });
   if (exists) {
     git(['switch', branch]);
@@ -239,6 +255,18 @@ async function submit() {
     process.exit(1);
   }
   const number = match[1];
+
+  const dirty = capture('git', ['status', '--porcelain'], { cwd: repoDir });
+  if (dirty) {
+    step('Commit');
+    const answer = await ask(
+      `Commit all changes as "feat: answer challenge #${number}"? [Y/n] `,
+    );
+    if (answer.toLowerCase() !== 'n') {
+      run('git', ['add', '-A'], { cwd: repoDir });
+      run('git', ['commit', '-m', `feat: answer challenge #${number}`], { cwd: repoDir });
+    }
+  }
 
   step(`Push ${branch}`);
   run('git', ['push', '-u', 'origin', branch], { cwd: repoDir });

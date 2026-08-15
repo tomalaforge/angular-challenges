@@ -270,53 +270,6 @@ githubApi.post('/pulls/:number/react', async (req, res) => {
   res.status(201).json({ ok: true });
 });
 
-/**
- * Forks the repo to the signed-in user's account (idempotent) so IDE deep
- * links and Codespaces can target a repository the user can push to.
- */
-githubApi.post('/fork', async (req, res) => {
-  const token = readAuthCookie(req);
-  if (!token) {
-    res.status(401).json({ error: 'not signed in' });
-    return;
-  }
-  const headers = {
-    Accept: 'application/vnd.github+json',
-    Authorization: `Bearer ${token}`,
-    'X-GitHub-Api-Version': '2022-11-28',
-    'User-Agent': 'angular-challenges-website',
-    'Content-Type': 'application/json',
-  };
-  try {
-    const response = await fetch(`${GITHUB_API}/repos/${REPO}/forks`, {
-      method: 'POST',
-      headers,
-      body: '{}',
-      signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
-    });
-    const fork = (await response.json().catch(() => null)) as any;
-    if ((response.status !== 202 && response.status !== 200) || !fork?.full_name) {
-      res.status(502).json({ error: 'fork failed' });
-      return;
-    }
-    // A fresh fork is created asynchronously; wait briefly until it resolves.
-    for (let attempt = 0; attempt < 5; attempt++) {
-      const check = await fetch(`${GITHUB_API}/repos/${fork.full_name}`, {
-        headers,
-        signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
-      });
-      if (check.ok) {
-        break;
-      }
-      await delay(1500);
-    }
-    res.set('Cache-Control', 'private, no-store');
-    res.json({ fullName: fork.full_name, htmlUrl: fork.html_url });
-  } catch {
-    res.status(502).json({ error: 'fork failed' });
-  }
-});
-
 const BOARD_QUERIES: Record<string, string> = {
   answers: 'label:"answer"',
   challenges: 'label:"challenge-creation"',
