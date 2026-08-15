@@ -8,11 +8,6 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/landing/landing').then((m) => m.Landing),
   },
   {
-    // Full-viewport page, outside the docs layout (no sidebar).
-    path: 'challenges/:category/:slug/editor',
-    loadComponent: () => import('./pages/editor/editor-page').then((m) => m.EditorPage),
-  },
-  {
     path: '',
     loadComponent: () => import('./layout/docs-layout').then((m) => m.DocsLayout),
     children: [
@@ -40,7 +35,8 @@ export const routes: Routes = [
       {
         path: 'challenges/:category/:slug/solutions/:pr',
         resolve: { doc: docResolver },
-        loadComponent: () => import('./pages/solutions/solution-diff').then((m) => m.SolutionDiff),
+        loadComponent: () =>
+          import('./pages/solutions/solution-diff').then((m) => m.SolutionDiff),
       },
       {
         path: 'leaderboard/:board',

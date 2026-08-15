@@ -2,96 +2,50 @@
   <article class="min-w-0 max-w-3xl flex-1">
     @if (doc().collection === 'challenges' && doc().challengeNumber) {
       <header
-        class="relative mb-10 overflow-hidden rounded-2xl border border-neutral-200 bg-gradient-to-br from-neutral-100 via-white to-white p-6 sm:p-8 dark:border-neutral-800 dark:from-neutral-900 dark:via-neutral-950 dark:to-neutral-950"
-      >
+        class="relative mb-10 overflow-hidden rounded-2xl border border-neutral-200 bg-gradient-to-br from-neutral-100 via-white to-white p-6 sm:p-8 dark:border-neutral-800 dark:from-neutral-900 dark:via-neutral-950 dark:to-neutral-950">
         <div
           class="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-pink-600/10 blur-3xl"
-          aria-hidden="true"
-        ></div>
+          aria-hidden="true"></div>
 
         <div class="mb-3 flex flex-wrap items-center gap-2 text-xs font-medium">
-          <span
-            class="rounded-md bg-neutral-200/80 px-2 py-1 text-neutral-700 dark:bg-neutral-800/80 dark:text-neutral-300"
-          >
+          <span class="rounded-md bg-neutral-200/80 px-2 py-1 text-neutral-700 dark:bg-neutral-800/80 dark:text-neutral-300">
             {{ doc().categoryLabel }}
           </span>
-          <span
-            class="rounded-md bg-neutral-200/80 px-2 py-1 text-neutral-700 dark:bg-neutral-800/80 dark:text-neutral-300"
-          >
+          <span class="rounded-md bg-neutral-200/80 px-2 py-1 text-neutral-700 dark:bg-neutral-800/80 dark:text-neutral-300">
             Challenge #{{ doc().challengeNumber }}
           </span>
           @if (doc().difficulty; as difficulty) {
             <span
               class="inline-flex items-center gap-1.5 rounded-md px-2 py-1 capitalize"
-              [class]="difficultyClasses[difficulty]"
-            >
+              [class]="difficultyClasses[difficulty]">
               <span class="h-1.5 w-1.5 rounded-full bg-current" aria-hidden="true"></span>
               {{ difficulty }}
             </span>
           }
         </div>
 
-        <h1 class="text-3xl font-bold tracking-tight text-neutral-900 sm:text-4xl dark:text-white">
-          {{ doc().title }}
-        </h1>
+        <h1 class="text-3xl font-bold tracking-tight text-neutral-900 sm:text-4xl dark:text-white">{{ doc().title }}</h1>
 
         <div class="mt-6 flex flex-wrap items-center gap-2.5">
           <a
             [routerLink]="doc().url + '/solutions'"
-            class="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-pink-600 to-fuchsia-600 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-pink-950/40 transition hover:brightness-110"
-          >
-            <svg
-              viewBox="0 0 24 24"
-              class="h-4 w-4"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
+            class="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-pink-600 to-fuchsia-600 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-pink-950/40 transition hover:brightness-110">
+            <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6" />
             </svg>
             Browse solutions
           </a>
-          @if (doc().hasStarter) {
-            <!-- Hard navigation: the editor route needs COOP/COEP headers on its document. -->
-            <a
-              [href]="doc().url + '/editor'"
-              class="inline-flex items-center gap-2 rounded-lg border border-neutral-300 bg-black/[0.02] px-4 py-2 text-sm font-medium text-neutral-700 transition hover:border-neutral-400 hover:text-neutral-900 dark:border-neutral-700/80 dark:bg-white/[0.03] dark:text-neutral-300 dark:hover:border-neutral-500 dark:hover:text-white"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                class="h-4 w-4"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="m8 9-4 3 4 3m8-6 4 3-4 3m-3-9-2 12"
-                />
-              </svg>
-              Solve in editor
-            </a>
-          }
           @if (doc().blogLink; as blog) {
             <a
               [href]="blog"
               target="_blank"
               rel="noopener"
-              class="inline-flex items-center gap-2 rounded-lg border border-neutral-300 bg-black/[0.02] px-4 py-2 text-sm font-medium text-neutral-700 transition hover:border-neutral-400 hover:text-neutral-900 dark:border-neutral-700/80 dark:bg-white/[0.03] dark:text-neutral-300 dark:hover:border-neutral-500 dark:hover:text-white"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                class="h-4 w-4"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
+              class="inline-flex items-center gap-2 rounded-lg border border-neutral-300 bg-black/[0.02] px-4 py-2 text-sm font-medium text-neutral-700 transition hover:border-neutral-400 hover:text-neutral-900 dark:border-neutral-700/80 dark:bg-white/[0.03] dark:text-neutral-300 dark:hover:border-neutral-500 dark:hover:text-white">
+              <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  d="M12 6.25c-1.5-1.25-3.5-1.75-6-1.75v13c2.5 0 4.5.5 6 1.75 1.5-1.25 3.5-1.75 6-1.75v-13c-2.5 0-4.5.5-6 1.75Zm0 0v13"
-                />
+                  d="M12 6.25c-1.5-1.25-3.5-1.75-6-1.75v13c2.5 0 4.5.5 6 1.75 1.5-1.25 3.5-1.75 6-1.75v-13c-2.5 0-4.5.5-6 1.75Zm0 0v13" />
               </svg>
               Blog post
             </a>
@@ -102,8 +56,7 @@
               target="_blank"
               rel="noopener"
               [title]="video.alt ?? 'Video solution'"
-              class="inline-flex items-center gap-2 rounded-lg border border-neutral-300 bg-black/[0.02] px-4 py-2 text-sm font-medium text-neutral-700 transition hover:border-neutral-400 hover:text-neutral-900 dark:border-neutral-700/80 dark:bg-white/[0.03] dark:text-neutral-300 dark:hover:border-neutral-500 dark:hover:text-white"
-            >
+              class="inline-flex items-center gap-2 rounded-lg border border-neutral-300 bg-black/[0.02] px-4 py-2 text-sm font-medium text-neutral-700 transition hover:border-neutral-400 hover:text-neutral-900 dark:border-neutral-700/80 dark:bg-white/[0.03] dark:text-neutral-300 dark:hover:border-neutral-500 dark:hover:text-white">
               <svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor">
                 <path d="M8 5.5v13l11-6.5-11-6.5Z" />
               </svg>
@@ -119,10 +72,7 @@
       <h1 class="mb-6 text-3xl font-bold tracking-tight">{{ doc().title }}</h1>
     }
 
-    <div
-      class="doc-prose prose max-w-none prose-headings:scroll-mt-20 dark:prose-invert"
-      [innerHTML]="html()"
-    ></div>
+    <div class="doc-prose prose max-w-none prose-headings:scroll-mt-20 dark:prose-invert" [innerHTML]="html()"></div>
 
     @if (npxCommand(); as command) {
       <aside class="doc-aside doc-aside--note doc-prose mt-10">
@@ -130,9 +80,7 @@
         <div class="doc-aside__content text-sm text-neutral-700 dark:text-neutral-300">
           <p>
             New here? Read the
-            <a routerLink="/guides/getting-started" class="text-pink-500 hover:underline"
-              >Getting Started</a
-            >
+            <a routerLink="/guides/getting-started" class="text-pink-500 hover:underline">Getting Started</a>
             guide first.
           </p>
           <p class="mt-2 flex flex-wrap items-center gap-2">
@@ -141,16 +89,13 @@
             <button
               type="button"
               (click)="copyCommand()"
-              class="rounded border border-neutral-300 px-2 py-1 text-xs text-neutral-700 hover:border-neutral-500 dark:border-neutral-700 dark:text-neutral-300"
-            >
+              class="rounded border border-neutral-300 px-2 py-1 text-xs text-neutral-700 hover:border-neutral-500 dark:border-neutral-700 dark:text-neutral-300">
               {{ copied() ? 'Copied!' : 'Copy' }}
             </button>
           </p>
           <p class="mt-2">
             Start your PR title with <b>Answer:{{ doc().challengeNumber }}</b> —
-            <a routerLink="/guides/resolve-challenge" class="text-pink-500 hover:underline"
-              >how to get a review</a
-            >.
+            <a routerLink="/guides/resolve-challenge" class="text-pink-500 hover:underline">how to get a review</a>.
           </p>
         </div>
       </aside>
@@ -158,9 +103,7 @@
 
     @if (doc().author || doc().contributors.length > 0) {
       <footer class="mt-10 border-t border-neutral-200 pt-6 dark:border-neutral-800">
-        <div
-          class="flex flex-wrap items-center gap-6 text-sm text-neutral-600 dark:text-neutral-400"
-        >
+        <div class="flex flex-wrap items-center gap-6 text-sm text-neutral-600 dark:text-neutral-400">
           @if (doc().author; as author) {
             <div class="flex items-center gap-2">
               <span>Author:</span>
@@ -169,8 +112,7 @@
                   [href]="'https://github.com/' + login"
                   target="_blank"
                   rel="noopener"
-                  class="flex items-center gap-1.5 text-neutral-800 hover:text-pink-500 dark:text-neutral-200"
-                >
+                  class="flex items-center gap-1.5 text-neutral-800 hover:text-pink-500 dark:text-neutral-200">
                   <img [src]="avatar(login)" alt="" class="h-6 w-6 rounded-full" />
                   {{ author.name }}
                 </a>
@@ -188,8 +130,7 @@
                     <img
                       [src]="avatar(contributor)"
                       [alt]="contributor"
-                      class="h-6 w-6 rounded-full ring-2 ring-white dark:ring-neutral-950"
-                    />
+                      class="h-6 w-6 rounded-full ring-2 ring-white dark:ring-neutral-950" />
                   </a>
                 }
               </div>
@@ -207,11 +148,7 @@
   <!-- Table of contents -->
   @if (doc().toc.length > 0) {
     <aside class="sticky top-20 hidden h-fit w-56 shrink-0 xl:block">
-      <p
-        class="mb-2 text-xs font-semibold tracking-wider text-neutral-500 uppercase dark:text-neutral-400"
-      >
-        On this page
-      </p>
+      <p class="mb-2 text-xs font-semibold tracking-wider text-neutral-500 uppercase dark:text-neutral-400">On this page</p>
       <ul class="space-y-1 border-l border-neutral-200 text-sm dark:border-neutral-800">
         @for (entry of doc().toc; track entry.id) {
           <li>
@@ -219,8 +156,7 @@
               [href]="doc().url + '#' + entry.id"
               class="block border-l-2 border-transparent py-0.5 text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
               [class.pl-3]="entry.depth === 2"
-              [class.pl-6]="entry.depth === 3"
-            >
+              [class.pl-6]="entry.depth === 3">
               {{ entry.text }}
             </a>
           </li>

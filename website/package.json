@@ -25,7 +25,6 @@
     "@shikijs/langs": "4.4.3",
     "@shikijs/themes": "4.4.3",
     "@tailwindcss/postcss": "^4.3.3",
-    "@webcontainer/api": "^1.6.4",
     "express": "^5.1.0",
     "postcss": "^8.5.26",
     "rxjs": "~7.8.0",

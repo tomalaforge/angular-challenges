@@ -12,7 +12,6 @@ import GithubSlugger from 'github-slugger';
 
 const CONTENT_DIR = new URL('../src/content', import.meta.url).pathname;
 const OUT_DIR = new URL('../src/app/generated', import.meta.url).pathname;
-const APPS_DIR = new URL('../../apps', import.meta.url).pathname;
 
 const CATEGORY_LABELS = {
   angular: 'Angular',
@@ -75,19 +74,8 @@ function resolveAuthor(slug) {
 }
 
 const SHIKI_LANGS = [
-  'typescript',
-  'javascript',
-  'html',
-  'css',
-  'json',
-  'bash',
-  'shell',
-  'yaml',
-  'diff',
-  'angular-html',
-  'angular-ts',
-  'jsx',
-  'tsx',
+  'typescript', 'javascript', 'html', 'css', 'json', 'bash', 'shell',
+  'yaml', 'diff', 'angular-html', 'angular-ts', 'jsx', 'tsx',
 ];
 
 /** Light colors inline, dark colors in `--shiki-dark*` vars (see styles.css). */
@@ -117,15 +105,11 @@ const marked = new Marked({
       return `<h${depth} id="${id}">${text}</h${depth}>\n`;
     },
     code({ text, lang }) {
-      const language = SHIKI_LANGS.includes(lang)
-        ? lang
-        : lang === 'ts'
-          ? 'typescript'
-          : lang === 'js'
-            ? 'javascript'
-            : lang === 'sh'
-              ? 'shell'
-              : 'text';
+      const language = SHIKI_LANGS.includes(lang) ? lang
+        : lang === 'ts' ? 'typescript'
+        : lang === 'js' ? 'javascript'
+        : lang === 'sh' ? 'shell'
+        : 'text';
       return highlighter.codeToHtml(text, {
         lang: language === 'text' ? 'text' : language,
         themes: SHIKI_THEMES,
@@ -191,177 +175,6 @@ function renderDocument(raw) {
   return { data, html, toc };
 }
 
-// --- Starter code -----------------------------------------------------------
-// Each challenge app lives in apps/<category>/<number>-<name>. The editor page
-// (challenges/:category/:slug/editor) loads its source files as a lazy module.
-
-const STARTER_EXTENSIONS = new Set(['.ts', '.html', '.css', '.scss', '.json', '.md', '.svg']);
-const STARTER_EXCLUDED = new Set(['polyfills.ts', 'favicon.ico', '.gitkeep']);
-const ASSET_EXTENSIONS = new Set(['.png', '.webp', '.jpg', '.jpeg', '.gif', '.ico', '.svg']);
-const ASSET_MAX_BYTES = 300_000;
-
-/** Dependency versions of the challenge workspace, for the synthesized project. */
-const ROOT_PACKAGE = JSON.parse(readFileSync(join(APPS_DIR, '..', 'package.json'), 'utf8'));
-const ROOT_VERSIONS = { ...ROOT_PACKAGE.devDependencies, ...ROOT_PACKAGE.dependencies };
-
-/** Packages every synthesized project gets, regardless of what the code imports. */
-const BASE_DEPENDENCIES = [
-  '@angular/common',
-  '@angular/compiler',
-  '@angular/core',
-  '@angular/forms',
-  '@angular/platform-browser',
-  '@angular/router',
-  'rxjs',
-  'tslib',
-  'zone.js',
-];
-const BASE_DEV_DEPENDENCIES = [
-  '@angular/build',
-  '@angular/cli',
-  '@angular/compiler-cli',
-  'typescript',
-];
-const JEST_DEV_DEPENDENCIES = [
-  'jest',
-  'jest-environment-jsdom',
-  'jest-preset-angular',
-  '@types/jest',
-];
-const VITEST_DEV_DEPENDENCIES = [
-  'vitest',
-  'vite',
-  'jsdom',
-  '@analogjs/vite-plugin-angular',
-  '@analogjs/vitest-angular',
-];
-
-/** `@scope/pkg/deep` -> `@scope/pkg`, `rxjs/operators` -> `rxjs`. */
-function packageName(specifier) {
-  const segments = specifier.split('/');
-  return specifier.startsWith('@') ? segments.slice(0, 2).join('/') : segments[0];
-}
-
-/** Bare import specifiers found in the given source files. */
-function detectImports(files) {
-  const packages = new Set();
-  const importRe = /(?:from\s+|import\s*\(\s*|^\s*import\s+)['"]([^'".][^'"]*)['"]/gm;
-  for (const file of files) {
-    if (!/\.(ts|mjs|js)$/.test(file.path)) {
-      continue;
-    }
-    for (const match of file.content.matchAll(importRe)) {
-      packages.add(packageName(match[1]));
-    }
-  }
-  return packages;
-}
-
-function resolveVersions(names) {
-  const versions = {};
-  const missing = [];
-  for (const name of names) {
-    const version = ROOT_VERSIONS[name];
-    if (version) {
-      versions[name] = version;
-    } else {
-      missing.push(name);
-    }
-  }
-  return { versions, missing };
-}
-
-function collectStarter(category, challengeNumber) {
-  let appDir;
-  try {
-    appDir = readdirSync(join(APPS_DIR, category)).find((dir) =>
-      dir.startsWith(`${challengeNumber}-`),
-    );
-  } catch {
-    return undefined;
-  }
-  if (!appDir) {
-    return undefined;
-  }
-
-  const files = [];
-  const walk = (relative, inAssets) => {
-    for (const entry of readdirSync(join(APPS_DIR, category, appDir, relative), {
-      withFileTypes: true,
-    })) {
-      const path = `${relative}/${entry.name}`;
-      const extension = entry.name.slice(entry.name.lastIndexOf('.'));
-      if (entry.isDirectory()) {
-        walk(path, inAssets || entry.name === 'assets' || entry.name === 'public');
-      } else if (STARTER_EXCLUDED.has(entry.name)) {
-        continue;
-      } else if (inAssets && ASSET_EXTENSIONS.has(extension)) {
-        // Images etc. ship base64-encoded so the preview renders faithfully;
-        // they are hidden from the editor and never part of a submission.
-        const buffer = readFileSync(join(APPS_DIR, category, appDir, path));
-        if (buffer.length <= ASSET_MAX_BYTES) {
-          files.push({ path, content: buffer.toString('base64'), base64: true });
-        }
-      } else if (!inAssets && STARTER_EXTENSIONS.has(extension)) {
-        files.push({
-          path,
-          content: readFileSync(join(APPS_DIR, category, appDir, path), 'utf8'),
-        });
-      }
-    }
-  };
-  walk('src', false);
-  if (files.length === 0) {
-    return undefined;
-  }
-
-  // App code first, then root files (main.ts, index.html, …), each group alphabetical.
-  files.sort((a, b) => {
-    const aInApp = a.path.startsWith('src/app/');
-    const bInApp = b.path.startsWith('src/app/');
-    return aInApp === bInApp ? a.path.localeCompare(b.path) : aInApp ? -1 : 1;
-  });
-
-  const appFiles = readdirSync(join(APPS_DIR, category, appDir));
-  const runner = appFiles.some((f) => f.startsWith('vitest.config.'))
-    ? 'vitest'
-    : appFiles.some((f) => f.startsWith('jest.config.'))
-      ? 'jest'
-      : null;
-  const hasTests = runner !== null && files.some((f) => /\.spec\.ts$/.test(f.path));
-
-  const imported = detectImports(files);
-  const runnerPackages =
-    runner === 'jest' && hasTests
-      ? JEST_DEV_DEPENDENCIES
-      : runner === 'vitest' && hasTests
-        ? VITEST_DEV_DEPENDENCIES
-        : [];
-  const dependencies = resolveVersions(
-    new Set([...BASE_DEPENDENCIES, ...[...imported].filter((p) => !p.startsWith('@types/'))]),
-  );
-  const devDependencies = resolveVersions(new Set([...BASE_DEV_DEPENDENCIES, ...runnerPackages]));
-
-  // Imports that don't map to a workspace dependency (e.g. monorepo libs)
-  // can't be installed standalone: the editor still works, running doesn't.
-  const canInstall = dependencies.missing.length === 0;
-  if (!canInstall) {
-    console.warn(
-      `Starter ${category}/${appDir} is not runnable — unresolved imports: ${dependencies.missing.join(', ')}`,
-    );
-  }
-
-  return {
-    appPath: `apps/${category}/${appDir}`,
-    runnable: canInstall && files.some((f) => f.path === 'src/main.ts'),
-    hasTests: hasTests && canInstall,
-    runner: hasTests && canInstall ? runner : null,
-    dependencies: dependencies.versions,
-    devDependencies: devDependencies.versions,
-    files,
-  };
-}
-
 function tsModule(doc, outFile) {
   const depth = outFile.split('/').length;
   const modelPath = '../'.repeat(depth) + 'doc.model';
@@ -376,7 +189,6 @@ rmSync(OUT_DIR, { recursive: true, force: true });
 mkdirSync(join(OUT_DIR, 'content', 'guides'), { recursive: true });
 
 const mapEntries = [];
-const starterMapEntries = [];
 const manifest = { guides: [], challenges: [] };
 
 function emit(doc, outFile) {
@@ -428,24 +240,6 @@ for (const category of categories) {
     const slug = isIndex ? '' : basename(file).replace(/\.mdx?$/, '');
     const url = isIndex ? `/challenges/${category}` : `/challenges/${category}/${slug}`;
     const { title, difficulty } = parseTitle(data.title);
-
-    const starter =
-      !isIndex && data.challengeNumber ? collectStarter(category, data.challengeNumber) : undefined;
-    if (starter) {
-      mkdirSync(join(OUT_DIR, 'starter', category), { recursive: true });
-      writeFileSync(
-        join(OUT_DIR, 'starter', category, `${slug}.ts`),
-        `// Generated by tools/generate-content.mjs — do not edit.
-import { ChallengeStarter } from '../../../doc.model';
-
-export const starter: ChallengeStarter = ${JSON.stringify(starter, null, 2)};
-`,
-      );
-      starterMapEntries.push(
-        `  '${url}': () => import('./starter/${category}/${slug}').then((m) => m.starter),`,
-      );
-    }
-
     const doc = {
       collection: 'challenges',
       category,
@@ -462,7 +256,6 @@ export const starter: ChallengeStarter = ${JSON.stringify(starter, null, 2)};
       blogLink: data.blogLink,
       videoLinks: data.videoLinks ?? [],
       noComments: data.noCommentSection === true,
-      hasStarter: Boolean(starter),
       html,
       toc,
     };
@@ -501,19 +294,7 @@ ${mapEntries.join('\n')}
 `,
 );
 
-writeFileSync(
-  join(OUT_DIR, 'starter-map.ts'),
-  `// Generated by tools/generate-content.mjs — do not edit.
-import { ChallengeStarter } from '../doc.model';
-
-export const STARTER_MAP: Record<string, () => Promise<ChallengeStarter>> = {
-${starterMapEntries.join('\n')}
-};
-`,
-);
-
 console.log(
   `Generated ${mapEntries.length} documents, ` +
-    `${manifest.guides.length} guides, ${manifest.challenges.length} challenge categories, ` +
-    `${starterMapEntries.length} starter code bundles.`,
+  `${manifest.guides.length} guides, ${manifest.challenges.length} challenge categories.`,
 );

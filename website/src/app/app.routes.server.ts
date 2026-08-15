@@ -34,11 +34,6 @@ export const serverRoutes: ServerRoute[] = [
     },
   },
   {
-    // Monaco only runs in the browser; render the shell on the server.
-    path: 'challenges/:category/:slug/editor',
-    renderMode: RenderMode.Server,
-  },
-  {
     path: '**',
     renderMode: RenderMode.Server,
   },
