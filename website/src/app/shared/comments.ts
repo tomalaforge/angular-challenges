@@ -8,18 +8,20 @@ import {
   viewChild,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { Theme } from '../theme';
 
 /** giscus comment thread — same repo/category config as the previous docs site. */
 @Component({
   selector: 'app-comments',
   template: `
-    <div class="mt-10 border-t border-neutral-800 pt-8">
+    <div class="mt-10 border-t border-neutral-200 pt-8 dark:border-neutral-800">
       <div #host></div>
     </div>
   `,
 })
 export class Comments {
   private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
+  private readonly theme = inject(Theme);
   private readonly host = viewChild.required<ElementRef<HTMLElement>>('host');
 
   /** Changing term reloads the thread (component instance is reused across routes). */
@@ -48,7 +50,7 @@ export class Comments {
         'data-reactions-enabled': '1',
         'data-emit-metadata': '0',
         'data-input-position': 'bottom',
-        'data-theme': 'preferred_color_scheme',
+        'data-theme': this.theme.current(),
         'data-lang': 'en',
         'data-loading': 'lazy',
       };

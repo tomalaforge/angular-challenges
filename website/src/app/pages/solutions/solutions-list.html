@@ -1,15 +1,15 @@
 <div class="mx-auto max-w-4xl px-6 py-8 lg:px-10">
-  <a [routerLink]="doc().url" class="text-sm text-neutral-400 hover:text-pink-500">
+  <a [routerLink]="doc().url" class="text-sm text-neutral-600 hover:text-pink-500 dark:text-neutral-400">
     ← {{ doc().title }}
   </a>
   <h1 class="mt-2 mb-1 text-3xl font-bold tracking-tight">Community solutions</h1>
-  <p class="mb-8 text-neutral-400">
+  <p class="mb-8 text-neutral-600 dark:text-neutral-400">
     Every pull request submitted for challenge #{{ doc().challengeNumber }} — click one to read
     the full diff without leaving the site.
   </p>
 
   @if (solutionsResource.error()) {
-    <div class="rounded-lg border border-red-900 bg-red-950/40 p-4 text-sm">
+    <div class="rounded-lg border border-red-200 bg-red-50 p-4 text-sm dark:border-red-900 dark:bg-red-950/40">
       Could not load the solutions from GitHub right now.
       <a [href]="githubSearchUrl()" class="text-pink-500 hover:underline">View them on GitHub</a>
       or try again later.
@@ -17,11 +17,11 @@
   } @else if (!loaded()) {
     <div class="space-y-3">
       @for (i of [1, 2, 3, 4]; track i) {
-        <div class="h-20 animate-pulse rounded-lg border border-neutral-800 bg-neutral-900"></div>
+        <div class="h-20 animate-pulse rounded-lg border border-neutral-200 bg-neutral-100 dark:border-neutral-800 dark:bg-neutral-900"></div>
       }
     </div>
   } @else if (solutions().length === 0) {
-    <div class="rounded-lg border border-neutral-800 p-6 text-center text-neutral-400">
+    <div class="rounded-lg border border-neutral-200 p-6 text-center text-neutral-600 dark:border-neutral-800 dark:text-neutral-400">
       No solution submitted yet — be the first!
       <a routerLink="/guides/resolve-challenge" class="text-pink-500 hover:underline">
         How to submit yours
@@ -33,31 +33,31 @@
         <li>
           <a
             [routerLink]="[solution.number]"
-            class="flex items-center gap-4 rounded-lg border border-neutral-800 p-4 transition hover:border-pink-600/60 hover:bg-neutral-900/60">
+            class="flex items-center gap-4 rounded-lg border border-neutral-200 p-4 transition hover:border-pink-600/60 hover:bg-neutral-100/60 dark:border-neutral-800 dark:hover:bg-neutral-900/60">
             <img [src]="solution.avatar" alt="" class="h-10 w-10 rounded-full" />
             <div class="min-w-0 flex-1">
               <p class="flex flex-wrap items-center gap-2">
-                <span class="font-medium text-neutral-100">{{ solution.login }}</span>
+                <span class="font-medium text-neutral-900 dark:text-neutral-100">{{ solution.login }}</span>
                 @if (solution.isAuthor) {
-                  <span class="rounded-full bg-violet-600/20 px-2 py-0.5 text-xs font-medium text-violet-400">
+                  <span class="rounded-full bg-violet-600/15 px-2 py-0.5 text-xs font-medium text-violet-700 dark:bg-violet-600/20 dark:text-violet-400">
                     challenge author
                   </span>
                 }
                 @if (solution.merged) {
-                  <span class="rounded-full bg-purple-600/20 px-2 py-0.5 text-xs font-medium text-purple-400">
+                  <span class="rounded-full bg-purple-600/15 px-2 py-0.5 text-xs font-medium text-purple-700 dark:bg-purple-600/20 dark:text-purple-400">
                     merged
                   </span>
                 } @else if (solution.state === 'open') {
-                  <span class="rounded-full bg-green-600/20 px-2 py-0.5 text-xs font-medium text-green-400">
+                  <span class="rounded-full bg-green-600/15 px-2 py-0.5 text-xs font-medium text-green-700 dark:bg-green-600/20 dark:text-green-400">
                     open
                   </span>
                 }
               </p>
-              <p class="truncate text-sm text-neutral-400">
+              <p class="truncate text-sm text-neutral-600 dark:text-neutral-400">
                 #{{ solution.number }} · {{ solution.title }}
               </p>
             </div>
-            <div class="flex shrink-0 items-center gap-4 text-sm text-neutral-400">
+            <div class="flex shrink-0 items-center gap-4 text-sm text-neutral-600 dark:text-neutral-400">
               @if (solution.thumbsUp > 0) {
                 <span title="Thumbs up">👍 {{ solution.thumbsUp }}</span>
               }

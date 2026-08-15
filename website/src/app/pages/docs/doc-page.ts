@@ -29,9 +29,10 @@ export class DocPage {
   protected readonly copied = signal(false);
 
   protected readonly difficultyClasses: Record<string, string> = {
-    easy: 'bg-emerald-500/10 text-emerald-400 ring-1 ring-inset ring-emerald-500/30',
-    medium: 'bg-amber-500/10 text-amber-400 ring-1 ring-inset ring-amber-500/30',
-    hard: 'bg-rose-500/10 text-rose-400 ring-1 ring-inset ring-rose-500/30',
+    easy: 'bg-emerald-500/10 text-emerald-700 ring-1 ring-inset ring-emerald-500/30 dark:text-emerald-400',
+    medium:
+      'bg-amber-500/10 text-amber-700 ring-1 ring-inset ring-amber-500/30 dark:text-amber-400',
+    hard: 'bg-rose-500/10 text-rose-700 ring-1 ring-inset ring-rose-500/30 dark:text-rose-400',
   };
 
   protected videoFlag(flag?: string): string | null {

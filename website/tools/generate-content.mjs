@@ -78,8 +78,14 @@ const SHIKI_LANGS = [
   'yaml', 'diff', 'angular-html', 'angular-ts', 'jsx', 'tsx',
 ];
 
+/** Light colors inline, dark colors in `--shiki-dark*` vars (see styles.css). */
+const SHIKI_THEMES = {
+  light: 'github-light-default',
+  dark: 'github-dark-default',
+};
+
 const highlighter = await createHighlighter({
-  themes: ['github-dark-default'],
+  themes: Object.values(SHIKI_THEMES),
   langs: SHIKI_LANGS,
 });
 
@@ -106,7 +112,7 @@ const marked = new Marked({
         : 'text';
       return highlighter.codeToHtml(text, {
         lang: language === 'text' ? 'text' : language,
-        theme: 'github-dark-default',
+        themes: SHIKI_THEMES,
       });
     },
   },

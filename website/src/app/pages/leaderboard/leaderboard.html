@@ -1,6 +1,6 @@
 <div class="mx-auto max-w-3xl px-6 py-8 lg:px-10">
   <h1 class="mb-2 text-3xl font-bold tracking-tight">{{ config().title }}</h1>
-  <p class="mb-8 text-neutral-400">
+  <p class="mb-8 text-neutral-600 dark:text-neutral-400">
     {{ config().intro }}
     <a [routerLink]="config().link" class="text-pink-500 hover:underline">guide</a>.
   </p>
@@ -15,11 +15,11 @@
   @if (boardResource.isLoading()) {
     <div class="space-y-2">
       @for (i of [1, 2, 3, 4, 5, 6, 7, 8]; track i) {
-        <div class="h-14 animate-pulse rounded-lg border border-neutral-800 bg-neutral-900"></div>
+        <div class="h-14 animate-pulse rounded-lg border border-neutral-200 bg-neutral-100 dark:border-neutral-800 dark:bg-neutral-900"></div>
       }
     </div>
   } @else if (boardResource.error()) {
-    <div class="rounded-lg border border-red-900 bg-red-950/40 p-4 text-sm">
+    <div class="rounded-lg border border-red-200 bg-red-50 p-4 text-sm dark:border-red-900 dark:bg-red-950/40">
       Could not load the leaderboard from GitHub right now — please try again in a few minutes.
     </div>
   } @else {
@@ -28,14 +28,14 @@
         <li [id]="entry.login">
           <a
             [href]="'https://github.com/tomalaforge/angular-challenges/pulls?q=is%3Apr+author%3A' + entry.login"
-            class="flex items-center gap-4 rounded-lg border px-4 py-2.5 transition hover:border-pink-600/60 hover:bg-neutral-900/60"
-            [class]="$index < 3 ? 'border-amber-500/40' : 'border-neutral-800'">
+            class="flex items-center gap-4 rounded-lg border px-4 py-2.5 transition hover:border-pink-600/60 hover:bg-neutral-100/60 dark:hover:bg-neutral-900/60"
+            [class]="$index < 3 ? 'border-amber-500/40' : 'border-neutral-200 dark:border-neutral-800'">
             <span class="w-10 text-center text-sm text-neutral-500">
               {{ medal($index) ?? '#' + ($index + 1) }}
             </span>
             <img [src]="entry.avatar" alt="" class="h-8 w-8 rounded-full" />
-            <span class="min-w-0 flex-1 truncate font-medium text-neutral-100">{{ entry.login }}</span>
-            <span class="shrink-0 text-sm text-neutral-400">
+            <span class="min-w-0 flex-1 truncate font-medium text-neutral-900 dark:text-neutral-100">{{ entry.login }}</span>
+            <span class="shrink-0 text-sm text-neutral-600 dark:text-neutral-400">
               {{ entry.count }} {{ config().unit }}
             </span>
           </a>

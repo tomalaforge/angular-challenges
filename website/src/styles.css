@@ -1,6 +1,10 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
 
+/* Dark mode is driven by the `.dark` class on <html> (see src/app/theme.ts),
+   not by the OS preference alone. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* --- Markdown document styling ------------------------------------------ */
 
 /* Inline code: drop the literal backticks Tailwind Typography renders and
@@ -11,12 +15,18 @@
 }
 
 .doc-prose :where(code):not(:where(pre code)) {
-  background: color-mix(in srgb, var(--color-neutral-800) 70%, transparent);
-  border: 1px solid var(--color-neutral-700);
+  background: color-mix(in srgb, var(--color-neutral-200) 70%, transparent);
+  border: 1px solid var(--color-neutral-300);
   border-radius: 0.375rem;
   padding: 0.125rem 0.375rem;
   font-size: 0.85em;
   font-weight: 500;
+  color: var(--color-neutral-800);
+}
+
+.dark .doc-prose :where(code):not(:where(pre code)) {
+  background: color-mix(in srgb, var(--color-neutral-800) 70%, transparent);
+  border-color: var(--color-neutral-700);
   color: var(--color-neutral-100);
 }
 
@@ -26,7 +36,22 @@
   overflow-x: auto;
   font-size: 0.875rem;
   line-height: 1.6;
-  border: 1px solid var(--color-neutral-800);
+  border: 1px solid var(--color-neutral-200);
+}
+
+.dark .doc-prose pre.shiki {
+  border-color: var(--color-neutral-800);
+}
+
+/* Shiki dual-theme output: light colors are inline, dark colors live in
+   `--shiki-dark*` custom properties (see tools/generate-content.mjs). */
+.dark .shiki,
+.dark .shiki span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
 }
 
 .doc-prose .doc-aside {
@@ -49,30 +74,50 @@
 }
 
 .doc-prose .doc-aside--note {
+  border-color: var(--color-blue-200);
+  background: color-mix(in srgb, var(--color-blue-50) 60%, transparent);
+}
+.doc-prose .doc-aside--tip {
+  border-color: var(--color-violet-200);
+  background: color-mix(in srgb, var(--color-violet-50) 60%, transparent);
+}
+.doc-prose .doc-aside--caution {
+  border-color: var(--color-amber-200);
+  background: color-mix(in srgb, var(--color-amber-50) 60%, transparent);
+}
+.doc-prose .doc-aside--danger {
+  border-color: var(--color-red-200);
+  background: color-mix(in srgb, var(--color-red-50) 60%, transparent);
+}
+
+.dark .doc-prose .doc-aside--note {
   border-color: var(--color-blue-800);
   background: color-mix(in srgb, var(--color-blue-950) 40%, transparent);
 }
-.doc-prose .doc-aside--tip {
+.dark .doc-prose .doc-aside--tip {
   border-color: var(--color-violet-800);
   background: color-mix(in srgb, var(--color-violet-950) 40%, transparent);
 }
-.doc-prose .doc-aside--caution {
+.dark .doc-prose .doc-aside--caution {
   border-color: var(--color-amber-800);
   background: color-mix(in srgb, var(--color-amber-950) 40%, transparent);
 }
-.doc-prose .doc-aside--danger {
+.dark .doc-prose .doc-aside--danger {
   border-color: var(--color-red-800);
   background: color-mix(in srgb, var(--color-red-950) 40%, transparent);
 }
 
 .doc-prose a.doc-linkcard {
   display: block;
-  border: 1px solid var(--color-neutral-800);
+  border: 1px solid var(--color-neutral-200);
   border-radius: 0.5rem;
   padding: 1rem 1.25rem;
   margin: 0.75rem 0;
   text-decoration: none;
   transition: border-color 150ms;
+}
+.dark .doc-prose a.doc-linkcard {
+  border-color: var(--color-neutral-800);
 }
 .doc-prose a.doc-linkcard:hover {
   border-color: var(--color-pink-600);
@@ -82,8 +127,11 @@
   margin-bottom: 0.25rem;
 }
 .doc-prose a.doc-linkcard span {
-  color: var(--color-neutral-400);
+  color: var(--color-neutral-500);
   font-size: 0.875rem;
+}
+.dark .doc-prose a.doc-linkcard span {
+  color: var(--color-neutral-400);
 }
 
 /* GitHub-style button hints used inside guide texts */
@@ -102,8 +150,13 @@
   color: #fff;
 }
 .doc-prose .github-neutral-btn {
+  background: #f6f8fa;
+  border: 1px solid #d1d9e0;
+  color: #25292e;
+}
+.dark .doc-prose .github-neutral-btn {
   background: #21262d;
-  border: 1px solid #363b42;
+  border-color: #363b42;
   color: #c9d1d9;
 }
 .doc-prose .github-neutral-btn svg {
@@ -111,10 +164,13 @@
 }
 
 .doc-prose details {
-  border: 1px solid var(--color-neutral-800);
+  border: 1px solid var(--color-neutral-200);
   border-radius: 0.5rem;
   padding: 0.75rem 1rem;
   margin: 1.25rem 0;
+}
+.dark .doc-prose details {
+  border-color: var(--color-neutral-800);
 }
 .doc-prose details summary {
   cursor: pointer;
@@ -133,15 +189,25 @@
 }
 
 .sp-form .sp-form-control {
-  background: color-mix(in srgb, var(--color-neutral-950) 60%, transparent) !important;
-  border: 1px solid var(--color-neutral-700) !important;
+  background: color-mix(in srgb, var(--color-white) 60%, transparent) !important;
+  border: 1px solid var(--color-neutral-300) !important;
   border-radius: 0.5rem !important;
-  color: var(--color-neutral-100) !important;
+  color: var(--color-neutral-900) !important;
   font-size: 0.875rem !important;
   height: 2.5rem !important;
 }
 
+.dark .sp-form .sp-form-control {
+  background: color-mix(in srgb, var(--color-neutral-950) 60%, transparent) !important;
+  border-color: var(--color-neutral-700) !important;
+  color: var(--color-neutral-100) !important;
+}
+
 .sp-form .sp-form-control::placeholder {
+  color: var(--color-neutral-400) !important;
+}
+
+.dark .sp-form .sp-form-control::placeholder {
   color: var(--color-neutral-500) !important;
 }
 

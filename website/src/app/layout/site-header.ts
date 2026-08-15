@@ -3,6 +3,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { httpResource } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
 import { Auth } from '../auth';
+import { Theme } from '../theme';
 
 @Component({
   selector: 'app-site-header',
@@ -12,6 +13,7 @@ import { Auth } from '../auth';
 export class SiteHeader {
   readonly menuToggled = output<void>();
   protected readonly auth = inject(Auth);
+  protected readonly theme = inject(Theme);
 
   private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 

@@ -8,6 +8,17 @@
   <meta name="description" content="Become a better Angular engineer by solving real-world challenges. Browse community solutions, compare approaches and climb the leaderboard.">
   <link rel="icon" type="image/x-icon" href="angular-challenge.ico">
   <!--
+    Applies the saved (or OS-preferred) theme before first paint so the page
+    never flashes the wrong mode. Kept in sync with src/app/theme.ts.
+  -->
+  <script>
+    try {
+      var theme = localStorage.getItem('ac-theme');
+      var dark = theme ? theme === 'dark' : !matchMedia('(prefers-color-scheme: light)').matches;
+      document.documentElement.classList.toggle('dark', dark);
+    } catch (e) {}
+  </script>
+  <!--
     Consent Mode v2 defaults, set before anything else runs. Neither Google Analytics
     nor AdSense is loaded from here: src/app/consent.ts injects them only after the
     visitor accepts, and flips these signals to granted at the same time.
@@ -27,7 +38,7 @@
     });
   </script>
 </head>
-<body class="bg-neutral-950 text-neutral-100 antialiased">
+<body class="bg-white text-neutral-900 antialiased dark:bg-neutral-950 dark:text-neutral-100">
   <app-root></app-root>
 </body>
 </html>

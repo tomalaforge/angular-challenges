@@ -13,6 +13,7 @@ import { HttpClient, httpResource } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
 import { Auth } from '../../auth';
+import { Theme } from '../../theme';
 import { Doc } from '../../doc.model';
 import { PullFile, PullMeta } from './solution.model';
 import { Hunk, parsePatch } from './diff-parser';
@@ -32,6 +33,8 @@ export class SolutionDiff {
   private readonly title = inject(Title);
   private readonly http = inject(HttpClient);
   protected readonly auth = inject(Auth);
+  protected readonly theme = inject(Theme);
+  protected readonly isDark = computed(() => this.theme.current() === 'dark');
 
   protected readonly reaction = signal<'idle' | 'saving' | 'done' | 'error'>('idle');
 

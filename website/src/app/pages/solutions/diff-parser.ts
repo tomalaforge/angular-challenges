@@ -4,7 +4,7 @@ export interface DiffLine {
   newNum: number | null;
   text: string;
   /** Syntax-highlighting tokens, attached asynchronously by diff-highlighter. */
-  tokens?: { text: string; color?: string }[];
+  tokens?: { text: string; light?: string; dark?: string }[];
 }
 
 /** One visual row of a split (side-by-side) diff. */

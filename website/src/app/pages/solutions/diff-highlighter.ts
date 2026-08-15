@@ -1,8 +1,11 @@
 import type { HighlighterCore } from 'shiki/core';
 import { DiffLine, Hunk } from './diff-parser';
 
-/** Same theme as the build-time markdown highlighting (tools/generate-content.mjs). */
-const THEME = 'github-dark-default';
+/** Same themes as the build-time markdown highlighting (tools/generate-content.mjs). */
+const THEMES = {
+  light: 'github-light-default',
+  dark: 'github-dark-default',
+} as const;
 
 /** Languages a solution diff can realistically contain. */
 export type DiffLanguage =
@@ -34,7 +37,10 @@ async function getHighlighter(): Promise<HighlighterCore> {
       import('shiki/engine/javascript'),
     ]);
     return createHighlighterCore({
-      themes: [import('@shikijs/themes/github-dark-default')],
+      themes: [
+        import('@shikijs/themes/github-light-default'),
+        import('@shikijs/themes/github-dark-default'),
+      ],
       langs: [
         import('@shikijs/langs/angular-ts'),
         import('@shikijs/langs/angular-html'),
@@ -82,8 +88,12 @@ function highlightSide(highlighter: HighlighterCore, lang: DiffLanguage, lines: 
     return;
   }
   const code = lines.map((line) => line.text).join('\n');
-  const tokens = highlighter.codeToTokensBase(code, { lang, theme: THEME });
+  const tokens = highlighter.codeToTokensWithThemes(code, { lang, themes: THEMES });
   lines.forEach((line, i) => {
-    line.tokens = (tokens[i] ?? []).map((token) => ({ text: token.content, color: token.color }));
+    line.tokens = (tokens[i] ?? []).map((token) => ({
+      text: token.content,
+      light: token.variants['light']?.color,
+      dark: token.variants['dark']?.color,
+    }));
   });
 }
