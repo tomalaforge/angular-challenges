@@ -5,7 +5,7 @@
   "license": "MIT",
   "type": "module",
   "bin": {
-    "angular-challenges": "./index.mjs"
+    "angular-challenges": "index.mjs"
   },
   "files": [
     "index.mjs",
