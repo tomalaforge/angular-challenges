@@ -16,6 +16,6 @@ describe(AppComponent.name, () => {
     cy.mount(AppComponent);
 
     cy.get('button').click();
-    cy.get('ul li').should('have.length', '3');
+    cy.get('ul li', { timeout: 2000 }).should('have.length', 3);
   });
 });

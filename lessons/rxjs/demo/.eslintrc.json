@@ -1,9 +1,13 @@
 {
   "root": true,
-  "ignorePatterns": ["!**/*"],
+  "ignorePatterns": ["projects/**/*", "dist/**", "node_modules/**"],
   "overrides": [
     {
       "files": ["*.ts"],
+      "parserOptions": {
+        "project": ["tsconfig.app.json", "tsconfig.spec.json"],
+        "createDefaultProgram": true
+      },
       "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
@@ -18,7 +22,9 @@
         "@angular-eslint/component-selector": [
           "error",
           { "type": "element", "prefix": "app", "style": "kebab-case" }
-        ]
+        ],
+        "@typescript-eslint/no-explicit-any": "warn",
+        "@typescript-eslint/explicit-function-return-type": "off"
       }
     },
     {

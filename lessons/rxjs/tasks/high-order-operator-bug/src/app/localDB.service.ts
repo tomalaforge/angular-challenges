@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/member-ordering */
-import { randomError } from '@angular-challenges/shared/utils';
 import { computed, Injectable, signal } from '@angular/core';
 import { of } from 'rxjs';
 
@@ -42,12 +41,12 @@ export class LocalDBService {
     this.state.set({ infos: this.state().infos.filter((i) => i.id !== id) });
   };
 
-  deleteOneTopic = (id: number) =>
-    randomError({
-      success: () => {
-        this.deleteOne(id);
-        return of(true);
-      },
-      error: () => of(false),
-    });
+  deleteOneTopic = (id: number) => {
+    if (id === 6) {
+      return of(false);
+    }
+
+    this.deleteOne(id);
+    return of(true);
+  };
 }

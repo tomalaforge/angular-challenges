@@ -81,6 +81,7 @@
     "@angular/language-service": "20.0.6",
     "@commitlint/cli": "^17.2.0",
     "@commitlint/config-conventional": "^17.2.0",
+    "@cypress/angular": "^4.1.0",
     "@cypress/webpack-dev-server": "3.8.0",
     "@hirez_io/observer-spy": "^2.2.0",
     "@ngrx/schematics": "19.0.1",

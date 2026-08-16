@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.angular/
+out-tsc/
+coverage/
+*.log
+.DS_Store
+.idea/
+.vscode/

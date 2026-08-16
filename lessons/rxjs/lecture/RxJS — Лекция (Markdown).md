@@ -48,11 +48,11 @@ UI — это множество событий во времени, а не о�
 | | Promise | Observable |
 |---|---------|------------|
 | Количество значений | одно | много |
-| Отмена | нет | есть |
-| Выполнение | сразу (eager) | ленивое (lazy) |
-| Композиция | ограничена | pipe + operators |
+| Отмена | сам Promise не отменяется; для операции можно использовать `AbortController` | есть через `unsubscribe()` |
+| Выполнение | уже созданный Promise начинает работу сразу | cold Observable обычно начинает работу при `subscribe()` |
+| Композиция | ограничена | `pipe` + operators |
 
-> Запомни: Promise стартует сразу. Observable стартует только при `subscribe()`.
+> Запомни: подписка запускает cold Observable, но не делает ленивым уже созданный Promise. Для отложенного создания Promise используй `defer(() => from(...))`.
 
 ---
 
@@ -92,9 +92,9 @@ Observable, Observer, Subscription, pipe, operators
 
 ---
 
-## Observable — ленивый поток
+## Observable — описание потока
 
-Observable — это рецепт. Он ничего не делает, пока вы не подпишетесь.
+Cold Observable обычно является рецептом: он создаёт работу для каждого подписчика и ничего не делает до `subscribe()`. Но это не свойство любого источника — `from(promise)` получает уже запущенный Promise, а `Subject` может быть горячим источником.
 
 ```
 1. Создание:  const stream$ = of(1, 2, 3);         — ничего не произошло
@@ -137,14 +137,38 @@ stream$.subscribe({
 
 ---
 
+## Subject и BehaviorSubject
+
+`Subject` одновременно является Observable и Observer: компонент может отправить в него событие через `next()`, а подписчики получат это событие.
+
+```typescript
+import { BehaviorSubject, Subject } from 'rxjs';
+
+const submit$ = new Subject<void>();
+submit$.subscribe(() => console.log('submitted'));
+submit$.next();
+```
+
+`BehaviorSubject` дополнительно хранит последнее значение и сразу отдаёт его новому подписчику:
+
+```typescript
+const page$ = new BehaviorSubject(1);
+page$.subscribe(page => console.log(page)); // 1
+page$.next(2);
+```
+
+`Subject` и `BehaviorSubject` — горячие источники: значение получает только активный подписчик. Для состояния в новых Angular-компонентах часто удобнее использовать `signal`, но Subject полезен как мост событий и для `takeUntil`.
+
+---
+
 ## Subscription и очистка
 
-Подписка — это ресурс. Незакрытая подписка = утечка памяти.
+Подписка — это ресурс. Особенно опасна подписка на долгоживущий Observable (`interval`, `fromEvent`, WebSocket, `valueChanges`), если её жизненный цикл не связан с компонентом.
 
 ```
 subscribe()         → Начинается приём значений
 unsubscribe()       → Приём останавливается, ресурсы освобождаются
-забыли отписаться    → Утечка памяти, зомби-коллбэки
+нет очистки         → Возможны утечки памяти и вызовы после уничтожения компонента
 ```
 
 ```typescript
@@ -282,10 +306,11 @@ subscribe #2 → factory() вызывается снова → новый Observ
 ```typescript
 import { defer, of } from 'rxjs';
 
-const time$ = defer(() => of(Date.now()));
+let requestNumber = 0;
+const request$ = defer(() => of(++requestNumber));
 
-time$.subscribe(v => log(v)); // 1698765432000
-time$.subscribe(v => log(v)); // 1698765432100 (другое!)
+request$.subscribe(v => log(v)); // 1
+request$.subscribe(v => log(v)); // 2 — фабрика вызвана снова
 ```
 
 Angular: HTTP-запрос, который нужно повторять с актуальными параметрами при каждой подписке.
@@ -305,8 +330,8 @@ Angular: HTTP-запрос, который нужно повторять с ак
 ```typescript
 import { throwError } from 'rxjs';
 
-throwError(() => 'Boom').subscribe({
-  error: e => console.log(e) // 'Boom'
+throwError(() => new Error('Boom')).subscribe({
+  error: e => console.log(e.message) // 'Boom'
 });
 ```
 
@@ -525,7 +550,15 @@ from(['a', 'a', 'b', 'b', 'a']).pipe(
 
 Angular: Фильтр `form.valueChanges`: не запускать логику, если значение не изменилось.
 
-> Запомни: `distinctUntilChanged` сравнивает с предыдущим. Для объектов нужен компаратор.
+По умолчанию значения сравниваются через `===`. Для объектов сравнивайте нужное поле:
+
+```typescript
+results$.pipe(
+  distinctUntilChanged((previous, current) => previous.id === current.id)
+);
+```
+
+> Запомни: `distinctUntilChanged` сравнивает с предыдущим значением. Для объектов нужен явный компаратор или `distinctUntilKeyChanged`.
 
 ---
 
@@ -542,12 +575,15 @@ output:  ----------------(rxjs)------------|
 ```
 
 ```typescript
-import { fromEvent, debounceTime } from 'rxjs';
+import { fromEvent, debounceTime, distinctUntilChanged, map } from 'rxjs';
 
-fromEvent(input, 'input').pipe(
-  debounceTime(300)
+fromEvent<InputEvent>(input, 'input').pipe(
+  map(event => (event.target as HTMLInputElement).value),
+  debounceTime(300),
+  distinctUntilChanged(),
 ).subscribe(term => search(term));
 // запрос только после паузы 300мс
+// В компоненте Angular добавьте takeUntilDestroyed() или используйте valueChanges.
 ```
 
 Angular: Живой поиск: не отправлять запрос на каждый символ, ждать окончания ввода.
@@ -836,7 +872,10 @@ ngOnInit() {
   ).subscribe(data => this.data = data);
 }
 
-ngOnDestroy() { this.destroy$.next(); }
+ngOnDestroy() {
+  this.destroy$.next();
+  this.destroy$.complete();
+}
 ```
 
 Angular: Классический паттерн Angular: `takeUntil(destroy$)` + `ngOnDestroy` для безопасной отписки.
@@ -847,13 +886,16 @@ Angular: Классический паттерн Angular: `takeUntil(destroy$)` 
 
 ## shareReplay()
 
-Кэширует и переотправляет последние N значений новым подписчикам. Превращает cold Observable в warm.
+Разделяет одну подписку на источник и переотправляет последние N значений новым подписчикам. Для cold Observable это позволяет не создавать отдельную работу для каждого подписчика.
 
 | | Поведение |
 |---|---|
 | Без shareReplay | Каждый subscribe → новый HTTP-запрос. N подписчиков = N запросов. |
-| С shareReplay(1) | Первый subscribe → запрос. Остальные получают кэшированный результат. |
-| Warm Observable | После первого подписчика — данные готовы для всех остальных мгновенно. |
+| С `shareReplay({ bufferSize: 1, ... })` | Один результат сохраняется и отдаётся новым подписчикам. |
+| `refCount: true` | Источник отключается, когда подписчиков не осталось. Для завершившегося HTTP результат обычно остаётся в replay-кэше. |
+| `refCount: false` | Источник продолжает работать без подписчиков. Для бесконечных потоков это может удерживать ресурсы. |
+
+`shareReplay` — не универсальный «вечный кэш». Для live-источников заранее решите, когда кэш должен сбрасываться и кто владеет подпиской.
 
 ```typescript
 import { shareReplay } from 'rxjs';
@@ -1009,9 +1051,24 @@ export class MyComponent {
 }
 ```
 
-Angular: `takeUntilDestroyed()` — самый короткий путь к безопасной подписке в Angular 16+.
+Angular: `takeUntilDestroyed()` — короткий путь к безопасной подписке в Angular 16+.
 
-> Запомни: Если можно AsyncPipe — используйте AsyncPipe. Если нельзя — `takeUntilDestroyed()`.
+Вызов без аргумента требует injection context: например, инициализации поля или конструктора. В `ngOnInit` и других обычных методах передайте `DestroyRef` явно:
+
+```typescript
+import { DestroyRef, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+
+private readonly destroyRef = inject(DestroyRef);
+
+ngOnInit() {
+  this.api.getData().pipe(
+    takeUntilDestroyed(this.destroyRef),
+  ).subscribe();
+}
+```
+
+> Запомни: Если можно AsyncPipe — используйте AsyncPipe. Если нельзя — `takeUntilDestroyed()` с подходящим injection context.
 
 ---
 
@@ -1139,11 +1196,18 @@ Angular: Загрузка страницы: параллельные HTTP-зап
 
 > Запомни: `combineLatest` — для живых потоков. `forkJoin` — для завершающихся (HTTP).
 
+Особые случаи:
+
+- `combineLatest` не эмитит, пока каждый источник не отправит хотя бы одно значение;
+- если источник бесконечный, комбинация обычно не завершится сама — используйте `takeUntil` или `take`;
+- `forkJoin` ждёт `complete` всех источников и не подходит для `interval` или WebSocket;
+- ошибка одного источника завершает весь `forkJoin`, а источник без единого значения может привести к завершению без результата.
+
 ---
 
 ## Обработка ошибок без поломки UI
 
-`catchError` — перехват ошибки и возврат альтернативного потока. Поток не умирает.
+`catchError` перехватывает ошибку и должен вернуть новый Observable. Он заменяет текущий поток, а не «оживляет» уже завершившийся источник. Положение оператора особенно важно внутри higher-order оператора.
 
 ```
 http$:  --------(data)----X
@@ -1152,15 +1216,37 @@ safe$:  ---------([])-----|
 ```
 
 ```typescript
+import { catchError, finalize, of, retry, startWith, throwError } from 'rxjs';
+
 this.http.get<User[]>('/api/users').pipe(
-  catchError(() => of([])),        // запасное значение — пустой массив
-  startWith([])                     // начальное состояние
+  catchError(() => of([])),        // fallback — пустой массив
+  startWith([]),                   // начальное состояние
 ).subscribe(users => this.users = users);
 ```
 
-Angular: HTTP-запрос упал — показать пустой список вместо красного экрана ошибки.
+Если ошибку нужно передать дальше после логирования, верните `throwError`:
 
-> Запомни: `catchError` должен вернуть Observable. `of([])` — безопасное запасное значение.
+```typescript
+this.http.get<User[]>('/api/users').pipe(
+  catchError(error => {
+    console.error('Cannot load users', error);
+    return throwError(() => error);
+  }),
+);
+```
+
+`retry` повторяет подписку на источник, а `finalize` выполняется при успехе, ошибке или отмене:
+
+```typescript
+this.http.get<Data>('/api/data').pipe(
+  retry({ count: 2, delay: 1000 }),
+  finalize(() => this.loading = false),
+);
+```
+
+Angular: HTTP-запрос упал — показать fallback или передать ошибку в слой UI. Для долгоживущего внешнего потока помещайте `catchError` внутрь `switchMap`/`concatMap`, если после ошибки нужно принимать следующие события.
+
+> Запомни: `catchError` должен вернуть Observable. `of([])` заменяет ошибку значением, `throwError` пробрасывает её дальше.
 
 ---
 
@@ -1253,6 +1339,30 @@ this.api.getLive().pipe(
 ```
 
 Типичная ошибка: Сохранять `Subscription` в свойстве и отписываться в `ngOnDestroy` — работает, но много служебного кода. Легко забыть.
+
+---
+
+## Тестирование RxJS-потоков
+
+Для тестов используйте детерминированные Observable, а не реальные задержки и случайные ответы сервера. Проверяйте не только финальное значение, но и количество подписок, отмену и продолжение внешнего потока после ошибки.
+
+```typescript
+import { map } from 'rxjs';
+import { TestScheduler } from 'rxjs/testing';
+
+const scheduler = new TestScheduler((actual, expected) => {
+  expect(actual).toEqual(expected);
+});
+
+scheduler.run(({ cold, expectObservable }) => {
+  const source$ = cold<string>('-a-b|');
+
+  expectObservable(source$.pipe(map(value => value.toUpperCase())))
+    .toBe('-x-y|', { x: 'A', y: 'B' });
+});
+```
+
+Для Angular-компонентов дополнительно используйте mock-сервисы и `fakeAsync`/`tick`, а не реальные HTTP-запросы.
 
 ---
 
