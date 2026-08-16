@@ -9,6 +9,8 @@ import matter from 'gray-matter';
 import { Marked } from 'marked';
 import { createHighlighter } from 'shiki';
 import GithubSlugger from 'github-slugger';
+import createDOMPurify from 'dompurify';
+import { JSDOM } from 'jsdom';
 
 const CONTENT_DIR = new URL('../src/content', import.meta.url).pathname;
 const OUT_DIR = new URL('../src/app/generated', import.meta.url).pathname;
@@ -74,8 +76,19 @@ function resolveAuthor(slug) {
 }
 
 const SHIKI_LANGS = [
-  'typescript', 'javascript', 'html', 'css', 'json', 'bash', 'shell',
-  'yaml', 'diff', 'angular-html', 'angular-ts', 'jsx', 'tsx',
+  'typescript',
+  'javascript',
+  'html',
+  'css',
+  'json',
+  'bash',
+  'shell',
+  'yaml',
+  'diff',
+  'angular-html',
+  'angular-ts',
+  'jsx',
+  'tsx',
 ];
 
 /** Light colors inline, dark colors in `--shiki-dark*` vars (see styles.css). */
@@ -88,6 +101,20 @@ const highlighter = await createHighlighter({
   themes: Object.values(SHIKI_THEMES),
   langs: SHIKI_LANGS,
 });
+
+/**
+ * The rendered HTML is injected with `bypassSecurityTrustHtml` (doc-page.ts), so
+ * Angular's sanitizer never sees it. marked passes raw HTML through untouched,
+ * which would let a `<script>` or `onerror=` in a contributed markdown file run
+ * on every visitor's browser. Sanitize here instead: DOMPurify strips scripts,
+ * event handlers and javascript: URLs while keeping the tags the docs rely on
+ * (details/summary, video, svg, shiki's inline styles, heading ids, classes).
+ */
+const DOMPurify = createDOMPurify(new JSDOM('').window);
+
+function sanitizeHtml(html) {
+  return DOMPurify.sanitize(html);
+}
 
 /** Per-document state collected by the renderer. */
 let toc = [];
@@ -105,11 +132,15 @@ const marked = new Marked({
       return `<h${depth} id="${id}">${text}</h${depth}>\n`;
     },
     code({ text, lang }) {
-      const language = SHIKI_LANGS.includes(lang) ? lang
-        : lang === 'ts' ? 'typescript'
-        : lang === 'js' ? 'javascript'
-        : lang === 'sh' ? 'shell'
-        : 'text';
+      const language = SHIKI_LANGS.includes(lang)
+        ? lang
+        : lang === 'ts'
+          ? 'typescript'
+          : lang === 'js'
+            ? 'javascript'
+            : lang === 'sh'
+              ? 'shell'
+              : 'text';
       return highlighter.codeToHtml(text, {
         lang: language === 'text' ? 'text' : language,
         themes: SHIKI_THEMES,
@@ -172,7 +203,7 @@ function renderDocument(raw) {
   html = html.replace(/(?:<p>)?%%ASIDE_(\d+)%%(?:<\/p>)?/g, (_, i) =>
     renderAside(asides[Number(i)]),
   );
-  return { data, html, toc };
+  return { data, html: sanitizeHtml(html), toc };
 }
 
 function tsModule(doc, outFile) {
@@ -296,5 +327,5 @@ ${mapEntries.join('\n')}
 
 console.log(
   `Generated ${mapEntries.length} documents, ` +
-  `${manifest.guides.length} guides, ${manifest.challenges.length} challenge categories.`,
+    `${manifest.guides.length} guides, ${manifest.challenges.length} challenge categories.`,
 );
