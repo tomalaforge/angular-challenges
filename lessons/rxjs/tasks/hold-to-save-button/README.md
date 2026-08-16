@@ -1,57 +1,107 @@
-# Hold to send button
+# Hold to save button
 
-### Как запускать
+В этом задании мы реализуем кнопку, которая «срабатывает» только если её удерживать заданное время. Это типичный UX-паттерн для критичных действий (например, «Удалить аккаунт»): случайный клик не должен приводить к действию.
+
+## 0. Запуск приложения
+
+Перейди в папку задачи и выполни команду:
 
 ```bash
+npm install
 npm run serve:rxjs-hold-to-save-button
 ```
 
-### Documentation and Instruction
+После запуска откроется приложение с кнопкой **Hold me** и прогресс-баром под ней.
 
----
-title: 🟠 Hold to save button
-description: You're tasked with implementing Lucie's button design, requiring holding it for a set time to save, taking over from Sacha; functionalities include configuring duration, countdown initiation on "mousedown", progress bar reset on "mouseleave" or "mouseup", reflecting remaining time, and simulating save request on hold completion, using RxJS operators and ensuring declarative code.
-author: timothy-alcaide
-contributors:
-  - alcaidio
-  - LMFinney
-challengeNumber: 49
-command: rxjs-hold-to-save-button
-sidebar:
-  order: 19
----
+## 1. Посмотри на заготовку
 
-## Context
+Открой `src/app/app.component.ts`. Сейчас там:
 
-As a member of the development team, you have to respond to a specific request from the UX designer, 👩🏻‍🎨 Lucie, who has designed a button that must be held down for X amount of time to save a save request.
+- кнопка без обработчиков событий;
+- `<progress [value]="20" [max]="100">` — статичная полоска прогресса;
+- метод `onSend()`, который просто пишет в консоль `'Save it!'`.
 
-Sacha 👶🏼 the trainee has already integrated the design but doesn't know how to perform the "holdable" functionality.
+Никакой реактивной логики пока нет. Наша цель — реализовать её с помощью RxJS.
 
-So you're going to take over from him.
+## 2. Пойми требования
 
-## Functional expectation
+UX-дизайнер Люси прислала такой прототип поведения:
 
-> "As a user, I would like to save something by holding down the button for a certain amount of time."
+> «Как пользователь, я хочу сохранять что-то, удерживая кнопку в течение определённого времени».
 
-Here is the prototype made by Lucie:
+Acceptance criteria:
 
-![prototype gif](../../../../assets/rxjs/49/prototype.gif)
+1. Должна быть возможность задать длительность удержания в миллисекундах.
+2. По событию `mousedown` на кнопке начинается отсчёт.
+3. По событиям `mouseleave` или `mouseup` прогресс-бар сбрасывается в 0.
+4. Прогресс-бар отражает оставшееся время (от полного до 0).
+5. Когда удержание завершено (прошло заданное время), имитируется «сохранение» — например, `console.log` или `alert`.
+6. Логика должна быть максимально декларативной и построенной на RxJS-операторах.
 
-## Acceptance Criteria
+## 3. Сделай директиву
 
-1. We should be able to configure a maintenance duration in milliseconds.
-2. Pressing and holding the button triggers the countdown on the `mousedown` event.
-3. On `mouseleave` or `mouseup` events, the progress bar is reset to 0.
-4. The progress bar representing the remaining relative time should reflect the remaining time.
-5. Simulates a backend request when the hold time is over (console log or alert).
-6. You must maximize the use of RxJS operators and be as declarative as possible.
+Создай новый файл `src/app/holdable.directive.ts` и опиши в нём директиву `HoldableDirective`:
 
-<details>
-    <summary>Tips 🤫 (if you really need it and after careful consideration)</summary>
-    <ul>
-      <li>Create the `HoldableDirective`</li>
-      <li>Use `TemplateRef` and `fromEvent` from RxJS to catch events or `@HostListener`</li>
-      <li>Perhaps the following RxJS operators can help you: interval, takeUntil, switchMap, takeWhile/retry...</li>
-    </ul>
-</details>
+1. Пометь класс декоратором `@Directive` с селектором по атрибуту, например `[appHoldable]`.
+2. Через DI получи `ElementRef` (или используй `@HostListener`, если тебе так удобнее).
+3. Сделай `input()` (или сеттер) для длительности удержания — например, `holdTime`.
+4. Сделай `output()` (или `EventEmitter`) с результатом — например, `holdTimeEnd`, который срабатывает, когда удержание успешно завершилось.
 
+События, которые нужно слушать:
+
+- `mousedown` — начало удержания
+- `mouseup` — отмена
+- `mouseleave` — отмена
+
+Собери из них поток `hold$` с помощью `fromEvent` и подходящих операторов (`switchMap`, `takeUntil`, `interval`, `takeWhile`, `startWith` и т.д.).
+
+## 4. Запусти обратный отсчёт
+
+Когда начинается удержание, нужно:
+
+1. Сразу же поставить прогресс-бар в максимальное значение.
+2. Тикать таймером (например, каждые 10–50 мс).
+3. Каждый тик уменьшать значение прогресс-бара.
+4. Когда время вышло — вызвать `holdTimeEnd.emit()` (или эквивалент).
+
+В шаблоне (`app.component.html` или прямо в `template` у `AppComponent`) свяжи `progress` с текущим значением из потока.
+
+## 5. Сделай сброс
+
+Если пользователь отпустил кнопку раньше времени (`mouseup` или `mouseleave`):
+
+1. Обнули прогресс-бар.
+2. Отмени отсчёт (`takeUntil` отлично подходит).
+
+## 6. Завяжи всё на кнопку
+
+В шаблоне:
+
+- Добавь на кнопку свою директиву с нужной длительностью:
+
+  ```html
+  <button appHoldable [holdTime]="2000" (holdTimeEnd)="onSend()">Hold me</button>
+  ```
+
+- Привяжи `<progress [value]="...">` к значению из потока (например, через `signal` или `toSignal`).
+
+## 7. Проверь решение
+
+Сценарий проверки:
+
+1. Зажми кнопку мышкой и держи.
+2. Прогресс-бар должен начать уменьшаться.
+3. Когда дойдёт до 0 — в консоли должно появиться `'Save it!'`.
+4. Отпусти кнопку раньше времени — прогресс-бар должен вернуться к 0, сообщения в консоли быть не должно.
+5. Уведи курсор с кнопки во время удержания — то же самое: отмена и сброс.
+
+## 8. Подсказки 🤫
+
+- Сделай `HoldableDirective` отдельной директивой.
+- Используй `TemplateRef` и `fromEvent` из RxJS или `@HostListener` — что тебе ближе.
+- Возможно пригодятся операторы: `interval`, `takeUntil`, `switchMap`, `takeWhile`, `startWith`, `map`, `scan`.
+
+## Ограничения
+
+- Не используй `setTimeout`/`setInterval` напрямую в логике удержания — всё должно быть через RxJS-потоки.
+- Код должен быть максимально декларативным: операторы RxJS вместо ручного управления состоянием.
