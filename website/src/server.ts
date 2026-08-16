@@ -8,6 +8,7 @@ import express from 'express';
 import { join } from 'node:path';
 import { githubApi } from './server/github-api';
 import { authRoutes } from './server/auth';
+import { SECURITY_HEADERS } from './server/security-headers';
 
 const browserDistFolder = join(import.meta.dirname, '../browser');
 
@@ -18,16 +19,15 @@ const angularApp = new AngularNodeAppEngine({
 });
 
 /**
- * Example Express Rest API endpoints can be defined here.
- * Uncomment and define endpoints as necessary.
- *
- * Example:
- * ```ts
- * app.get('/api/{*splat}', (req, res) => {
- *   // Handle API request
- * });
- * ```
+ * Security headers on every SSR response. Static/prerendered files served by
+ * the Vercel CDN get the same set from the `headers` block in vercel.json.
  */
+app.use((req, res, next) => {
+  for (const [name, value] of Object.entries(SECURITY_HEADERS)) {
+    res.setHeader(name, value);
+  }
+  next();
+});
 
 /**
  * JSON API backed by the GitHub REST API (cached server-side).
@@ -56,9 +56,7 @@ app.use(
 app.use((req, res, next) => {
   angularApp
     .handle(req)
-    .then((response) =>
-      response ? writeResponseToNodeResponse(response, res) : next(),
-    )
+    .then((response) => (response ? writeResponseToNodeResponse(response, res) : next()))
     .catch(next);
 });
 

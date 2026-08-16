@@ -38,6 +38,7 @@
     "@tailwindcss/typography": "^0.5.20",
     "@types/express": "^5.0.1",
     "@types/node": "^20.17.19",
+    "dompurify": "^3.4.13",
     "github-slugger": "^2.0.0",
     "gray-matter": "^4.0.3",
     "jsdom": "^28.0.0",

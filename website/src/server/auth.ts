@@ -28,10 +28,20 @@ export function readAuthCookie(req: Request): string | null {
  * forwarded headers are client-supplied and must not decide the OAuth `redirect_uri`
  * nor whether cookies get the `Secure` attribute.
  */
+let warnedMissingOrigin = false;
+
 function siteOrigin(req: Request): string {
   const configured = process.env['SITE_ORIGIN'];
   if (configured) {
     return configured.replace(/\/+$/, '');
+  }
+  if (!warnedMissingOrigin && process.env['NODE_ENV'] === 'production') {
+    warnedMissingOrigin = true;
+    console.warn(
+      'SITE_ORIGIN is not set: falling back to client-supplied x-forwarded-* headers ' +
+        'to build the OAuth redirect_uri and decide the Secure cookie flag. ' +
+        'Set SITE_ORIGIN in production.',
+    );
   }
   const forwardedHost = String(req.headers['x-forwarded-host'] ?? '')
     .split(',')[0]
@@ -57,7 +67,9 @@ function safeEqual(a: string, b: string): boolean {
 
 /** Only same-site paths are allowed as post-login redirect targets. */
 function safePath(value: unknown): string {
-  const path = String(value ?? '/');
+  // Browsers treat `\` as `/` in the Location header, so `/\evil.com` would
+  // become a protocol-relative redirect to evil.com. Normalize before checking.
+  const path = String(value ?? '/').replace(/\\/g, '/');
   return path.startsWith('/') && !path.startsWith('//') ? path : '/';
 }
 
