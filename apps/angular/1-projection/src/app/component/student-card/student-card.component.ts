@@ -1,40 +1,55 @@
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  OnInit,
-} from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+  FakeHttpService,
+  randStudent,
+} from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
-import { CardType } from '../../model/card.model';
+import { CardRowDirective } from '../../ui/card/card-row.directive';
 import { CardComponent } from '../../ui/card/card.component';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
 @Component({
   selector: 'app-student-card',
   template: `
     <app-card
-      [list]="students()"
-      [type]="cardType"
-      customClass="bg-light-green" />
+      class="bg-light-green"
+      [items]="students()"
+      (addNew)="handleAddNew()">
+      <img src="assets/img/student.webp" alt="student" width="200px" />
+
+      <ng-template [cardRow]="students()" let-student>
+        <app-list-item (delete)="handleDelete(student.id)">
+          {{ student.firstName }}
+        </app-list-item>
+      </ng-template>
+    </app-card>
   `,
   styles: [
     `
-      ::ng-deep .bg-light-green {
+      .bg-light-green {
         background-color: rgba(0, 250, 0, 0.1);
       }
     `,
   ],
-  imports: [CardComponent],
+  imports: [CardComponent, CardRowDirective, ListItemComponent],
+  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class StudentCardComponent implements OnInit {
+export class StudentCardComponent {
   private http = inject(FakeHttpService);
   private store = inject(StudentStore);
 
   students = this.store.students;
-  cardType = CardType.STUDENT;
 
-  ngOnInit(): void {
-    this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
+  constructor() {
+    this.http.fetchStudents$.subscribe(this.store.addAll);
+  }
+
+  handleAddNew(): void {
+    this.store.addOne(randStudent());
+  }
+
+  handleDelete(id: number): void {
+    this.store.deleteOne(id);
   }
 }
