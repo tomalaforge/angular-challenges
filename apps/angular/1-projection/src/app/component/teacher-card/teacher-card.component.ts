@@ -1,40 +1,61 @@
+import { NgOptimizedImage } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   inject,
   OnInit,
+  WritableSignal,
 } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+import {
+  FakeHttpService,
+  randTeacher,
+} from '../../data-access/fake-http.service';
 import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
 import { CardComponent } from '../../ui/card/card.component';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
+import { Teacher } from './../../model/teacher.model';
 
 @Component({
   selector: 'app-teacher-card',
   template: `
     <app-card
       [list]="teachers()"
-      [type]="cardType"
-      customClass="bg-light-red"></app-card>
+      [template]="listItem"
+      (addNewItem)="addNewItem()"
+      customClass="bg-light-red">
+      <img
+        card-header
+        ngSrc="assets/img/teacher.png"
+        width="200"
+        height="200"
+        alt="" />
+    </app-card>
+
+    <ng-template #listItem let-item>
+      <app-list-item
+        [name]="item.firstName"
+        [id]="item.id"
+        (deleteItem)="deleteItem($event)" />
+    </ng-template>
   `,
-  styles: [
-    `
-      ::ng-deep .bg-light-red {
-        background-color: rgba(250, 0, 0, 0.1);
-      }
-    `,
-  ],
   changeDetection: ChangeDetectionStrategy.Eager,
-  imports: [CardComponent],
+  imports: [CardComponent, NgOptimizedImage, ListItemComponent],
 })
 export class TeacherCardComponent implements OnInit {
-  private http = inject(FakeHttpService);
-  private store = inject(TeacherStore);
+  private http: FakeHttpService = inject(FakeHttpService);
+  private store: TeacherStore = inject(TeacherStore);
 
-  teachers = this.store.teachers;
-  cardType = CardType.TEACHER;
+  protected teachers: WritableSignal<Teacher[]> = this.store.teachers;
 
   ngOnInit(): void {
     this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
+  }
+
+  public addNewItem(): void {
+    this.store.addOne(randTeacher());
+  }
+
+  public deleteItem(id: number): void {
+    this.store.deleteOne(id);
   }
 }
