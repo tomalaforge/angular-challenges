@@ -8,7 +8,7 @@ import { ITodo } from './app.interface';
 export class TodosHttpService {
   private http: HttpClient = inject(HttpClient);
 
-  private host: string = 'https://jsonplaceholder.typicode.com/todos';
+  private host = 'https://jsonplaceholder.typicode.com/todos';
 
   public getAll(): Observable<ITodo[]> {
     return this.http.get<ITodo[]>(this.host);
@@ -29,7 +29,7 @@ export class TodosHttpService {
     );
   }
 
-  public delete(id: number): Observable<Object> {
+  public delete(id: number): Observable<unknown> {
     return this.http.delete(`${this.host}/${id}`);
   }
 }
