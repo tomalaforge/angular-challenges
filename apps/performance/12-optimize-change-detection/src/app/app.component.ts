@@ -1,9 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  HostListener,
+  inject,
+  NgZone,
   signal,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { fromEvent } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +18,8 @@ import {
       <button (click)="goToTop()">Top</button>
     }
   `,
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
   styles: [
     `
       :host {
@@ -36,14 +40,19 @@ import {
   ],
 })
 export class AppComponent {
-  title = 'scroll-cd';
+  private ngZone = inject(NgZone);
 
   public displayButton = signal(false);
 
-  @HostListener('window:scroll')
-  onScroll() {
-    const pos = window.scrollY;
-    this.displayButton.set(pos > 50);
+  constructor() {
+    this.ngZone.runOutsideAngular(() => {
+      fromEvent(window, 'scroll')
+        .pipe(takeUntilDestroyed())
+        .subscribe(() => {
+          const pos = window.scrollY;
+          this.displayButton.set(pos > 50);
+        });
+    });
   }
 
   goToTop() {
