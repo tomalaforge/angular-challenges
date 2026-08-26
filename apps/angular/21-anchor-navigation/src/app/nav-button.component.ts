@@ -14,7 +14,7 @@ import { RouterLink } from '@angular/router';
       <ng-content />
     </a>
   `,
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterLink],
   host: {
     class: 'block w-fit border border-red-500 rounded-md p-4 m-2',
