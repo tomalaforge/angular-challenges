@@ -1,5 +1,6 @@
 <div class="flex gap-10 px-4 py-8 sm:px-6 lg:px-10">
-  <article class="min-w-0 max-w-3xl flex-1">
+  <article class="min-w-0 flex-1">
+    <div class="max-w-3xl">
     @if (doc().collection === 'challenges' && doc().challengeNumber) {
       <header
         class="relative mb-10 overflow-hidden rounded-2xl border border-neutral-200 bg-gradient-to-br from-neutral-100 via-white to-white p-6 sm:p-8 dark:border-neutral-800 dark:from-neutral-900 dark:via-neutral-950 dark:to-neutral-950">
@@ -140,6 +141,8 @@
         </div>
       </footer>
     }
+
+    </div>
 
     @if (!doc().noComments) {
       <app-comments [term]="doc().title + ' | Angular Challenges'" />
