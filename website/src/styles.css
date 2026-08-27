@@ -245,6 +245,7 @@
   font-family: inherit !important;
   height: 2.5rem !important;
   padding: 0 1.5rem !important;
+  cursor: pointer;
 }
 
 .sp-form .sp-button:hover {
