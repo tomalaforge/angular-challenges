@@ -189,6 +189,13 @@
   font-weight: 600;
 }
 
+/* --- Giscus comments ------------------------------------------------------- */
+/* The giscus script hard-codes width: 300px on the injected iframe; override. */
+.giscus,
+.giscus-frame {
+  width: 100% !important;
+}
+
 /* --- SendPulse newsletter form ------------------------------------------- */
 /* The embed script injects its own stylesheet; force it back on-brand. */
 
