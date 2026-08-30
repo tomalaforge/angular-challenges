@@ -157,6 +157,23 @@
       }
     </section>
 
+    <!-- Contributors -->
+    @if (contributors().length > 0) {
+      <section class="mb-16 flex flex-wrap items-center justify-center gap-3 text-sm text-neutral-600 dark:text-neutral-400">
+        <span class="font-medium">Contributors:</span>
+        <span class="flex flex-wrap -space-x-2">
+          @for (contributor of contributors(); track contributor.login) {
+            <a [href]="'https://github.com/' + contributor.login" [title]="contributor.login" target="_blank" rel="noopener">
+              <img
+                [src]="contributor.avatar"
+                [alt]="contributor.login"
+                class="relative h-8 w-8 rounded-full ring-2 ring-white transition hover:z-10 hover:scale-110 dark:ring-neutral-950" />
+            </a>
+          }
+        </span>
+      </section>
+    }
+
     <!-- Newsletter -->
     <section class="relative mx-auto mb-20 max-w-2xl overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-100/40 px-6 py-10 text-center sm:px-12 dark:border-neutral-800 dark:bg-neutral-900/40">
       <div

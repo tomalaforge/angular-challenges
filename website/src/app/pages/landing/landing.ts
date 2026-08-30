@@ -12,7 +12,7 @@ import { MANIFEST } from '../../generated/manifest';
 import { Consent } from '../../consent';
 import { SiteHeader } from '../../layout/site-header';
 
-interface Sponsor {
+interface GithubUser {
   login: string;
   avatar: string;
 }
@@ -40,12 +40,20 @@ export class Landing {
     this.isBrowser ? '/api/stats' : undefined,
   );
 
-  protected readonly sponsorsResource = httpResource<{ sponsors: Sponsor[] }>(() =>
+  protected readonly sponsorsResource = httpResource<{ sponsors: GithubUser[] }>(() =>
     this.isBrowser ? '/api/sponsors' : undefined,
   );
 
   protected readonly sponsors = computed(
     () => this.sponsorsResource.value()?.sponsors ?? [],
+  );
+
+  protected readonly contributorsResource = httpResource<{ contributors: GithubUser[] }>(() =>
+    this.isBrowser ? '/api/contributors' : undefined,
+  );
+
+  protected readonly contributors = computed(
+    () => this.contributorsResource.value()?.contributors ?? [],
   );
 
   protected readonly cards = [
