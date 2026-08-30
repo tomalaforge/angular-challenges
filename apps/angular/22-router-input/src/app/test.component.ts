@@ -17,5 +17,5 @@ import {
 export default class TestComponent {
   public testId: InputSignal<string> = input<string>('');
   public permission: InputSignal<string> = input<string>('');
-  public user: InputSignal<string> = input<string>('');
+  public user: InputSignal<string | undefined> = input<string | undefined>('');
 }
