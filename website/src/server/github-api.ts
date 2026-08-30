@@ -371,6 +371,20 @@ githubApi.get('/leaderboard/:board', async (req, res) => {
   res.json({ entries });
 });
 
+/** All repository contributors for the landing page. */
+githubApi.get('/contributors', async (_req, res) => {
+  const { status, data } = await github(`/repos/${REPO}/contributors?per_page=100`, 3600);
+  if (status !== 200) {
+    res.status(503).json({ error: 'github request failed' });
+    return;
+  }
+  const contributors = (data as any[])
+    .filter((u) => !EXCLUDED_USERS.has(u.login) && u.type === 'User')
+    .map((u) => ({ login: u.login, avatar: u.avatar_url }));
+  res.set('Cache-Control', 'public, s-maxage=3600, stale-while-revalidate=86400');
+  res.json({ contributors });
+});
+
 /** Repository stats for the landing page. */
 githubApi.get('/stats', async (_req, res) => {
   const { status, data } = await github(`/repos/${REPO}`, 900);
