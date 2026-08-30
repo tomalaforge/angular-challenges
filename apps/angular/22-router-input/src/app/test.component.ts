@@ -7,7 +7,7 @@ import {
 
 @Component({
   selector: 'app-subscription',
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div>TestId: {{ testId() }}</div>
     <div>Permission: {{ permission() }}</div>
