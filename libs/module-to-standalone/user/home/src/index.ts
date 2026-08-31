@@ -1,1 +1,3 @@
-export * from './lib/home.module';
+import { UserHomeComponent } from './lib/home.component';
+
+export default UserHomeComponent;

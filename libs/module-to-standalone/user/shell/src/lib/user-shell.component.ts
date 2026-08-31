@@ -1,5 +1,6 @@
 import { TOKEN } from '@angular-challenges/module-to-standalone/core/providers';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'lib-user-shell',
@@ -27,8 +28,9 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
   host: {
     class: 'flex flex-col p-4 gap-3 border border-blue',
   },
-  changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [RouterLink, RouterOutlet],
 })
 export class UserShellComponent {
   public token = inject(TOKEN);

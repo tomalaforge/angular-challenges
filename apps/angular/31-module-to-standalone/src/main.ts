@@ -1,9 +1,10 @@
-import { provideZoneChangeDetection } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { AppModule } from './app/app.module';
+import { importProvidersFrom } from '@angular/core';
 
-platformBrowserDynamic()
-  .bootstrapModule(AppModule, {
-    applicationProviders: [provideZoneChangeDetection()],
-  })
-  .catch((err) => console.error(err));
+import appRoutes from '@angular-challenges/module-to-standalone/shell';
+import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
+import { provideRouter } from '@angular/router';
+import { AppComponent } from './app/app.component';
+
+bootstrapApplication(AppComponent, {
+  providers: [importProvidersFrom(BrowserModule), provideRouter(appRoutes)],
+}).catch((err) => console.error(err));

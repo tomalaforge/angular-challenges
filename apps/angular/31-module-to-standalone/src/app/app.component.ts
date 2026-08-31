@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -26,6 +27,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     class: 'flex flex-col p-4 gap-3',
   },
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  imports: [RouterLink, RouterOutlet],
 })
 export class AppComponent {}

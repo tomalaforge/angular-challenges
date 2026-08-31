@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'lib-contact-dashboard',
@@ -12,15 +12,7 @@ import { RouterModule } from '@angular/router';
       Create contact
     </button>
   `,
-  changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [RouterLink],
 })
-export class ContactDashboardComponent {}
-
-@NgModule({
-  imports: [
-    RouterModule.forChild([{ path: '', component: ContactDashboardComponent }]),
-  ],
-  declarations: [ContactDashboardComponent],
-})
-export class ContactDashboardModule {}
+export default class ContactDashboardComponent {}
