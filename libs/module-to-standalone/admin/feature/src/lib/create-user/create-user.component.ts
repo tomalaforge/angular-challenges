@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'lib-create-user',
@@ -12,15 +12,7 @@ import { RouterModule } from '@angular/router';
       Back
     </button>
   `,
-  changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [RouterLink],
 })
-export class CreateUserComponent {}
-
-@NgModule({
-  imports: [
-    RouterModule.forChild([{ path: '', component: CreateUserComponent }]),
-  ],
-  declarations: [CreateUserComponent],
-})
-export class CreateUserModule {}
+export default class CreateUserComponent {}
