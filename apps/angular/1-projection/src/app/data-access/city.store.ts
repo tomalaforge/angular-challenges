@@ -5,7 +5,7 @@ import { City } from '../model/city.model';
   providedIn: 'root',
 })
 export class CityStore {
-  private cities = signal<City[]>([]);
+  public cities = signal<City[]>([]);
 
   addAll(cities: City[]) {
     this.cities.set(cities);
