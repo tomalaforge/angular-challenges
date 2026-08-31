@@ -6,14 +6,14 @@
     class="pointer-events-none absolute top-40 -right-40 h-96 w-96 rounded-full bg-violet-600/5 blur-3xl dark:bg-violet-600/10"
     aria-hidden="true"></div>
 
-  <app-site-header />
+  <app-site-header [showMenu]="false" />
 
   <!-- Sponsors banner -->
   <div class="relative z-10 border-b border-neutral-200/60 bg-neutral-100/40 dark:border-neutral-800/60 dark:bg-neutral-900/40">
     <div
-      class="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-2.5 text-sm text-neutral-700 sm:px-6 dark:text-neutral-300">
-      <div class="flex flex-wrap items-center gap-3">
-        <span>This project is sustained by its sponsors</span>
+      class="mx-auto flex w-full max-w-6xl items-center justify-between gap-3 px-4 py-2.5 text-sm text-neutral-700 sm:px-6 dark:text-neutral-300">
+      <div class="flex min-w-0 items-center gap-3">
+        <span class="truncate"><span class="sm:hidden">Sustained by sponsors</span><span class="hidden sm:inline">This project is sustained by its sponsors</span></span>
         @if (sponsors().length > 0) {
           <span class="flex -space-x-1.5">
             @for (sponsor of sponsors(); track sponsor.login) {

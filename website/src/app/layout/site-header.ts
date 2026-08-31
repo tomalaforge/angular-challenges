@@ -1,4 +1,4 @@
-import { Component, PLATFORM_ID, computed, inject, output } from '@angular/core';
+import { Component, PLATFORM_ID, computed, inject, input, output } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { httpResource } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
@@ -11,6 +11,7 @@ import { Theme } from '../theme';
   templateUrl: './site-header.html',
 })
 export class SiteHeader {
+  readonly showMenu = input(true);
   readonly menuToggled = output<void>();
   protected readonly auth = inject(Auth);
   protected readonly theme = inject(Theme);
