@@ -1,55 +1,46 @@
-import { HttpClient } from '@angular/common/http';
 import {
   ChangeDetectionStrategy,
   Component,
   inject,
   OnInit,
 } from '@angular/core';
-import { randText } from '@ngneat/falso';
+import { TodoStore } from './todo.store';
 
 @Component({
   imports: [],
   selector: 'app-root',
   template: `
-    @for (todo of todos; track todo.id) {
+    @if (todoStore.isLoading()) {
+      <div class="loading-state">Loading...</div>
+    }
+    @for (todo of todoStore.todos(); track todo.id) {
       {{ todo.title }}
-      <button (click)="update(todo)">Update</button>
+      <button (click)="todoStore.updateTodo(todo)">Update</button>
+      <button (click)="todoStore.deleteOne(todo.id)">Delete</button>
+      <br />
     }
   `,
   changeDetection: ChangeDetectionStrategy.Eager,
-  styles: [],
+  styles: `
+    .loading-state {
+      display: flex;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.4);
+      justify-content: center;
+      align-items: center;
+      font-weight: 700;
+      font-size: 46px;
+    }
+  `,
 })
 export class AppComponent implements OnInit {
-  private http = inject(HttpClient);
-
-  todos!: any[];
+  public todoStore: TodoStore = inject(TodoStore);
 
   ngOnInit(): void {
-    this.http
-      .get<any[]>('https://jsonplaceholder.typicode.com/todos')
-      .subscribe((todos) => {
-        this.todos = todos;
-      });
-  }
-
-  update(todo: any) {
-    this.http
-      .put<any>(
-        `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
-        JSON.stringify({
-          todo: todo.id,
-          title: randText(),
-          body: todo.body,
-          userId: todo.userId,
-        }),
-        {
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-          },
-        },
-      )
-      .subscribe((todoUpdated: any) => {
-        this.todos[todoUpdated.id - 1] = todoUpdated;
-      });
+    this.todoStore.getAll();
   }
 }
