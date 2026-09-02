@@ -1,3 +1,11 @@
+import {
+  animate,
+  query,
+  stagger,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
@@ -18,10 +26,35 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
       }
     }
   `,
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('slideIn', [
+      transition(':enter', [
+        query('div', [
+          style({ transform: 'translateX(-100vw)' }),
+          stagger(250, [
+            animate('1000ms ease-in', style({ transform: 'translateX(0%)' })),
+          ]),
+        ]),
+      ]),
+    ]),
+    trigger('stagger', [
+      transition(':enter', [
+        query('.list-item', [
+          style({ opacity: 0, transform: 'translateY(100px)' }),
+          stagger(500, [
+            animate(
+              '500ms cubic-bezier(0.35, 0, 0.25, 1)',
+              style({ opacity: 1, transform: 'none' }),
+            ),
+          ]),
+        ]),
+      ]),
+    ]),
+  ],
   template: `
     <div class="mx-20 my-40 flex gap-5">
-      <section>
+      <section @slideIn>
         <div>
           <h3>2008</h3>
           <p>
@@ -53,7 +86,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
         </div>
       </section>
 
-      <section>
+      <section @stagger>
         <div class="list-item">
           <span>Name:</span>
           <span>Samuel</span>
