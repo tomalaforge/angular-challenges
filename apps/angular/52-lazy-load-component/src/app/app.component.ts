@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { PlaceholderComponent } from './placeholder.component';
 import { TopComponent } from './top.component';
 
@@ -6,21 +6,19 @@ import { TopComponent } from './top.component';
   selector: 'app-root',
   template: `
     <div class="h-screen bg-gray-500">
-      @if (topLoaded()) {
+      @defer (on interaction(button)) {
         <app-top />
-      } @else {
+      } @placeholder {
         <app-placeholder />
         <button
           class="rounded-sm border border-blue-500 bg-blue-300 p-2"
-          (click)="topLoaded.set(true)">
+          #button>
           Load Top
         </button>
       }
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [TopComponent, PlaceholderComponent],
 })
-export class AppComponent {
-  topLoaded = signal(false);
-}
+export class AppComponent {}
