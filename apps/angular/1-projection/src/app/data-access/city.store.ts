@@ -1,3 +1,4 @@
+// city.store.ts
 import { Injectable, signal } from '@angular/core';
 import { City } from '../model/city.model';
 
@@ -5,17 +6,18 @@ import { City } from '../model/city.model';
   providedIn: 'root',
 })
 export class CityStore {
-  private cities = signal<City[]>([]);
+  readonly #cities = signal<City[]>([]);
+  readonly cities = this.#cities.asReadonly();
 
   addAll(cities: City[]) {
-    this.cities.set(cities);
+    this.#cities.set(cities);
   }
 
   addOne(city: City) {
-    this.cities.set([...this.cities(), city]);
+    this.#cities.set([...this.#cities(), city]);
   }
 
   deleteOne(id: number) {
-    this.cities.set(this.cities().filter((s) => s.id !== id));
+    this.#cities.set(this.#cities().filter((s) => s.id !== id));
   }
 }

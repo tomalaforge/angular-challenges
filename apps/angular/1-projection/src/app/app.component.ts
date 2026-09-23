@@ -1,3 +1,4 @@
+// app.component.ts
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CityCardComponent } from './component/city-card/city-card.component';
 import { StudentCardComponent } from './component/student-card/student-card.component';
