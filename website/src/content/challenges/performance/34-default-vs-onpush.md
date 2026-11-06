@@ -12,11 +12,15 @@ sidebar:
 
 ## Information
 
-In this challenge, we will explore the differences and impacts of using `ChangeDetectionStrategy.Default` versus `ChangeDetectionStrategy.OnPush`.
+In this challenge, we will explore the differences and impacts of using `ChangeDetectionStrategy.Eager` (called `Default` before Angular 22) versus `ChangeDetectionStrategy.OnPush`.
 
-You can read the [Angular documentation](https://angular.dev/best-practices/skipping-subtrees) to learn more about the differences between these strategies.
+You can read the [Angular documentation](https://angular.dev/best-practices/skipping-subtrees) to learn more about the differences between these strategies. To see which components Angular checks, skips or only traverses under each strategy before you profile, you can also try this [interactive change detection visualizer](https://frontendatlas.com/angular/trivia/angular-change-detection-strategies).
 
-In this challenge, all components start with the `Default` strategy. When you type letters inside the input field, you will notice that all components are highlighted in orange.
+:::note
+Since Angular 22, a component without a `changeDetection` setting uses `OnPush`, and the old `Default` strategy is called `Eager` (`ChangeDetectionStrategy.Default` is deprecated). The components in this challenge set `ChangeDetectionStrategy.Eager` explicitly, so you start from the old behavior.
+:::
+
+In this challenge, all components start with the `Eager` strategy. When you type letters inside the input field, you will notice that all components are highlighted in orange.
 
 :::note
 I added color highlighting to each component and each row to provide a better visualization of when a component is rerendered.
