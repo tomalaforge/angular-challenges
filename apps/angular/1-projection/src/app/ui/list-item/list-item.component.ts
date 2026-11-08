@@ -1,39 +1,36 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  inject,
   input,
 } from '@angular/core';
 import { StudentStore } from '../../data-access/student.store';
 import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
+import { CityStore } from '../../data-access/city.store';
+import { NgTemplateOutlet } from '@angular/common';
 
 @Component({
   selector: 'app-list-item',
   template: `
     <div class="flex justify-between border border-gray-300 px-2 py-1">
       {{ name() }}
-      <button (click)="delete(id())">
-        <img class="h-5" src="assets/svg/trash.svg" alt="trash" />
-      </button>
+      <ng-container *ngTemplateOutlet="deleteButton;context:{$implicit: store()}"></ng-container>
+      <ng-template #deleteButton let-service>
+        <button (click)="delete(service, id())">
+          <img class="h-5" src="assets/svg/trash.svg" alt="trash" />
+        </button>
+      </ng-template>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [NgTemplateOutlet]
 })
 export class ListItemComponent {
-  private teacherStore = inject(TeacherStore);
-  private studentStore = inject(StudentStore);
 
   readonly id = input.required<number>();
   readonly name = input.required<string>();
-  readonly type = input.required<CardType>();
+  readonly store = input.required<TeacherStore | StudentStore | CityStore>();
 
-  delete(id: number) {
-    const type = this.type();
-    if (type === CardType.TEACHER) {
-      this.teacherStore.deleteOne(id);
-    } else if (type === CardType.STUDENT) {
-      this.studentStore.deleteOne(id);
-    }
+  delete(service: TeacherStore | StudentStore | CityStore, id: number) {
+    service.deleteOne(id);
   }
 }
