@@ -4,21 +4,18 @@ import {
   effect,
   inject,
   input,
+  signal,
 } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { form, FormField, min, required } from '@angular/forms/signals';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { FakeBackendService } from './fake-backend.service';
+import { User } from './user.model';
 
 @Component({
   selector: 'app-user-form',
-  imports: [ReactiveFormsModule],
+  imports: [FormField],
   template: `
     <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
       <h2 class="mb-4 text-xl font-semibold text-gray-800">
@@ -30,7 +27,7 @@ import { FakeBackendService } from './fake-backend.service';
             class="h-8 w-8 animate-spin rounded-full border-4 border-indigo-500 border-t-transparent"></div>
         </div>
       } @else {
-        <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="space-y-4">
+        <form (submit)="onSubmit($event)" class="space-y-4">
           <div>
             <label
               for="firstname"
@@ -40,11 +37,10 @@ import { FakeBackendService } from './fake-backend.service';
             <input
               id="firstname"
               type="text"
-              formControlName="firstname"
-              class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" />
+              [formField]="userForm.firstname"
+              class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none sm:text-sm" />
             @if (
-              userForm.get('firstname')?.invalid &&
-              userForm.get('firstname')?.touched
+              userForm.firstname().invalid() && userForm.firstname().touched()
             ) {
               <p class="mt-1 text-xs text-red-500">Firstname is required</p>
             }
@@ -58,11 +54,10 @@ import { FakeBackendService } from './fake-backend.service';
             <input
               id="lastname"
               type="text"
-              formControlName="lastname"
-              class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" />
+              [formField]="userForm.lastname"
+              class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none sm:text-sm" />
             @if (
-              userForm.get('lastname')?.invalid &&
-              userForm.get('lastname')?.touched
+              userForm.lastname().invalid() && userForm.lastname().touched()
             ) {
               <p class="mt-1 text-xs text-red-500">Lastname is required</p>
             }
@@ -74,9 +69,9 @@ import { FakeBackendService } from './fake-backend.service';
             <input
               id="age"
               type="number"
-              formControlName="age"
-              class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" />
-            @if (userForm.get('age')?.invalid && userForm.get('age')?.touched) {
+              [formField]="userForm.age"
+              class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none sm:text-sm" />
+            @if (userForm.age().invalid() && userForm.age().touched()) {
               <p class="mt-1 text-xs text-red-500">Age must be positive</p>
             }
           </div>
@@ -87,20 +82,20 @@ import { FakeBackendService } from './fake-backend.service';
             <input
               id="grade"
               type="number"
-              formControlName="grade"
-              class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" />
+              [formField]="userForm.grade"
+              class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none sm:text-sm" />
           </div>
           <div class="flex justify-end space-x-3 pt-4">
             <button
               type="button"
               (click)="onCancel()"
-              class="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+              class="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none">
               Cancel
             </button>
             <button
               type="submit"
-              [disabled]="userForm.invalid"
-              class="rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50">
+              [disabled]="userForm().invalid()"
+              class="rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none disabled:opacity-50">
               {{ id() ? 'Update' : 'Add' }}
             </button>
           </div>
@@ -124,45 +119,53 @@ export class UserFormComponent {
     defaultValue: undefined,
   });
 
-  userForm = new FormGroup({
-    firstname: new FormControl('', {
-      nonNullable: true,
-      validators: [Validators.required],
-    }),
-    lastname: new FormControl('', {
-      nonNullable: true,
-      validators: [Validators.required],
-    }),
-    age: new FormControl(0, {
-      nonNullable: true,
-      validators: [Validators.required, Validators.min(0)],
-    }),
-    grade: new FormControl(0, {
-      nonNullable: true,
-      validators: [Validators.required],
-    }),
+  private userModel = signal<Omit<User, 'id'>>({
+    firstname: '',
+    lastname: '',
+    age: 0,
+    grade: 0,
+  });
+
+  userForm = form(this.userModel, (schemaPath) => {
+    required(schemaPath.firstname);
+    required(schemaPath.lastname);
+    required(schemaPath.age);
+    min(schemaPath.age, 0);
+    required(schemaPath.grade);
   });
 
   constructor() {
     effect(() => {
       const userValue = this.userResource.value();
       if (userValue) {
-        this.userForm.patchValue(userValue);
+        this.userForm().reset({
+          firstname: userValue.firstname,
+          lastname: userValue.lastname,
+          age: userValue.age,
+          grade: userValue.grade,
+        });
       } else {
-        this.userForm.reset({ firstname: '', lastname: '', age: 0, grade: 0 });
+        this.userForm().reset({
+          firstname: '',
+          lastname: '',
+          age: 0,
+          grade: 0,
+        });
       }
     });
   }
 
-  onSubmit(): void {
-    if (this.userForm.valid) {
+  onSubmit(event: Event): void {
+    event.preventDefault();
+    if (this.userForm().valid()) {
       const userValue = this.userResource.value();
+      const formValue = this.userForm().value();
       const obs = userValue
         ? this.backend.updateUser({
-            ...this.userForm.getRawValue(),
+            ...formValue,
             id: userValue.id,
           })
-        : this.backend.addUser(this.userForm.getRawValue());
+        : this.backend.addUser(formValue);
 
       obs.subscribe(() => {
         this.router.navigate(['/']);

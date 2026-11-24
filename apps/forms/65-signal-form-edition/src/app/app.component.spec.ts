@@ -51,6 +51,39 @@ describe('AppComponent', () => {
         .element(page.getByText('Antigravity AI'))
         .toBeInTheDocument();
     });
+
+    it('Then should validate required fields and minimum age', async () => {
+      const addButton = page.getByRole('button', { name: /add user/i }).first();
+      await addButton.click();
+
+      const submitButton = page.getByRole('button', { name: /^add$/i });
+      await expect.element(submitButton).toBeDisabled();
+
+      const firstnameInput = page.getByLabelText(/firstname/i);
+      const lastnameInput = page.getByLabelText(/lastname/i);
+      const ageInput = page.getByLabelText(/age/i);
+
+      await firstnameInput.click();
+      await lastnameInput.click();
+      await expect
+        .element(page.getByText('Firstname is required'))
+        .toBeInTheDocument();
+
+      await ageInput.fill('-1');
+      await firstnameInput.click();
+      await expect
+        .element(page.getByText('Lastname is required'))
+        .toBeInTheDocument();
+      await expect
+        .element(page.getByText('Age must be positive'))
+        .toBeInTheDocument();
+      await expect.element(submitButton).toBeDisabled();
+
+      await firstnameInput.fill('Valid');
+      await lastnameInput.fill('User');
+      await ageInput.fill('20');
+      await expect.element(submitButton).toBeEnabled();
+    });
   });
 
   describe('Given a user wants to edit an existing user', () => {
